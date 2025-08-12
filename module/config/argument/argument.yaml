@@ -1,0 +1,169 @@
+# --------------------
+# Define arguments.
+# --------------------
+
+# ==================== Alas ====================
+
+Scheduler:
+  Enable:
+    type: checkbox
+    value: false
+    option: [ true, false ]
+  NextRun: 2020-01-01 00:00:00
+  Command: Alas
+  ServerUpdate:
+    value: 05:00
+    display: hide
+Emulator:
+  Serial:
+    value: auto
+    valuetype: str
+  GameClient:
+    value: android
+    option: [ android]
+  PackageName:
+    value: auto
+    option: [ auto, ]
+  GameLanguage:
+    value: auto
+    option: [ auto, cn ]
+  ScreenshotMethod:
+    value: auto
+    option: [
+      auto,
+      ADB,
+      ADB_nc,
+      uiautomator2,
+      aScreenCap,
+      aScreenCap_nc,
+      DroidCast,
+      DroidCast_raw,
+      scrcpy,
+      nemu_ipc,
+      ldopengl,
+    ]
+  ControlMethod:
+    value: MaaTouch
+    option: [ minitouch, MaaTouch ]
+  AdbRestart: false
+EmulatorInfo:
+  Emulator:
+    value: auto
+    option: [
+      auto,
+      NoxPlayer,
+      NoxPlayer64,
+      BlueStacks4,
+      BlueStacks5,
+      BlueStacks4HyperV,
+      BlueStacks5HyperV,
+      LDPlayer3,
+      LDPlayer4,
+      LDPlayer9,
+      MuMuPlayer,
+      MuMuPlayerX,
+      MuMuPlayer12,
+      MEmuPlayer,
+    ]
+  name:
+    value: null
+    type: textarea
+  path:
+    value: null
+    type: textarea
+Error:
+  Restart:
+    value: game
+    option: [ game, game_emulator ]
+  SaveError: true
+  ScreenshotLength: 1
+  OnePushConfig:
+    type: textarea
+    mode: yaml
+    value: 'provider: null'
+Optimization:
+  ScreenshotInterval: 0.3
+  CombatScreenshotInterval: 1.0
+  WhenTaskQueueEmpty:
+    value: goto_main
+    option: [ stay_there, goto_main, close_game, close_emulator ]
+
+# ==================== Daily ====================
+
+Freebies:
+  FriendGifts:
+    type: checkbox
+    value: true
+  DailyShare:
+    type: checkbox
+    value: true
+  MailReward:
+    type: checkbox
+    value: true
+ZhaoCai:
+  ZhaoCaiFree:
+    type: checkbox
+    value:  true
+Organization:
+  OrganizationPray:
+    type: checkbox
+    value:  true
+DailyReward:
+  Weekly:
+    type: checkbox
+    value: true
+SquadRaid:
+  SquadRaidBenefit:
+    type: checkbox
+    value: true
+  SquadRaidFight:
+    type: select
+    value: SquadHelp
+    option: [SquadHelp]
+SurvivalTrail:
+  SurvivalTrialResetTimes:
+    type: input
+    value:  0
+TiLi:
+  TiLiRemain:
+    type: input
+    value:  0
+  LevelRestrictions:
+    type: input
+    value:  72
+  DungeonFirst:
+    type: checkbox
+    value: true
+TiLiStorage:
+  Dungeon:
+    stored: StoredDungeon
+    display: hide
+CultivationRoad:
+  ClearRedDot:
+    type: checkbox
+    value:  true
+Duel:
+  VictoryNumber:
+    type: input
+    value: 0
+
+ItemStorage:
+  Credit:
+    stored: StoredInt
+    order: 7
+    color: "#ab7cf2"
+    display: display
+  StallerJade:
+    stored: StoredInt
+    order: 8
+    color: "#fc8f8b"
+    display: display
+
+
+# ==================== Rogue ====================
+
+
+
+# ==================== Tool ====================
+
+

@@ -1,0 +1,83 @@
+# --------------------
+# Define argument group of tasks.
+# --------------------
+
+# ==================== Alas ====================
+
+Alas:
+  menu: 'list'
+  page: 'setting'
+  tasks:
+    Alas:
+      - Emulator
+      - EmulatorInfo
+      - Error
+      - Optimization
+    Restart:
+      - Scheduler
+
+# ==================== Daily ====================
+
+Daily:
+  menu: 'collapse'
+  page: 'setting'
+  tasks:
+    Duel:
+      - Scheduler
+      - Duel
+    FengRao:
+      - Scheduler
+      - FengRao
+    SquadRaid:
+      - Scheduler
+      - SquadRaid
+    Organization:
+      - Scheduler
+      - Organization
+    SurvivalTrail:
+      - Scheduler
+      - SurvivalTrail
+    TiLi:
+      - Scheduler
+      - TiLi
+      - TiLiStorage
+    Mission:
+      - Scheduler
+    Freebies:
+      - Scheduler
+      - Freebies
+    ZhaoCai:
+      - Scheduler
+      - ZhaoCai
+    DailyReward:
+      - Scheduler
+      - DailyReward
+    DataUpdate:
+      - Scheduler
+      - ItemStorage
+
+
+
+
+
+
+# ==================== Weekly ====================
+Weekly:
+  menu: 'collapse'
+  page: 'setting'
+  tasks:
+    CultivationRoad:
+      - Scheduler
+      - CultivationRoad
+    Akatsuki:
+      - Scheduler
+      - Akatsuki
+
+
+
+
+
+# ==================== Tool ====================
+
+
+

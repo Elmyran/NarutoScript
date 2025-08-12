@@ -1,0 +1,35 @@
+{
+  "Alas": {
+    "menu": "list",
+    "page": "setting",
+    "tasks": [
+      "Alas",
+      "Restart"
+    ]
+  },
+  "Daily": {
+    "menu": "collapse",
+    "page": "setting",
+    "tasks": [
+      "Duel",
+      "FengRao",
+      "SquadRaid",
+      "Organization",
+      "SurvivalTrail",
+      "TiLi",
+      "Mission",
+      "Freebies",
+      "ZhaoCai",
+      "DailyReward",
+      "DataUpdate"
+    ]
+  },
+  "Weekly": {
+    "menu": "collapse",
+    "page": "setting",
+    "tasks": [
+      "CultivationRoad",
+      "Akatsuki"
+    ]
+  }
+}

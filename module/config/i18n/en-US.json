@@ -1,0 +1,470 @@
+{
+  "Menu": {
+    "Alas": {
+      "name": "NS",
+      "help": ""
+    },
+    "Daily": {
+      "name": "Daily",
+      "help": ""
+    },
+    "Weekly": {
+      "name": "Menu.Weekly.name",
+      "help": "Menu.Weekly.help"
+    }
+  },
+  "Task": {
+    "Alas": {
+      "name": "NS Settings",
+      "help": ""
+    },
+    "Restart": {
+      "name": "Error Handling",
+      "help": ""
+    },
+    "Duel": {
+      "name": "Task.Duel.name",
+      "help": "Task.Duel.help"
+    },
+    "FengRao": {
+      "name": "Task.FengRao.name",
+      "help": "Task.FengRao.help"
+    },
+    "SquadRaid": {
+      "name": "Task.SquadRaid.name",
+      "help": "Task.SquadRaid.help"
+    },
+    "Organization": {
+      "name": "Task.Organization.name",
+      "help": "Task.Organization.help"
+    },
+    "SurvivalTrail": {
+      "name": "Task.SurvivalTrail.name",
+      "help": "Task.SurvivalTrail.help"
+    },
+    "TiLi": {
+      "name": "Task.TiLi.name",
+      "help": "Task.TiLi.help"
+    },
+    "Mission": {
+      "name": "Task.Mission.name",
+      "help": "Task.Mission.help"
+    },
+    "Freebies": {
+      "name": "Freebies",
+      "help": ""
+    },
+    "ZhaoCai": {
+      "name": "Task.ZhaoCai.name",
+      "help": "Task.ZhaoCai.help"
+    },
+    "DailyReward": {
+      "name": "Task.DailyReward.name",
+      "help": "Task.DailyReward.help"
+    },
+    "DataUpdate": {
+      "name": "Task.DataUpdate.name",
+      "help": "Task.DataUpdate.help"
+    },
+    "CultivationRoad": {
+      "name": "Task.CultivationRoad.name",
+      "help": "Task.CultivationRoad.help"
+    },
+    "Akatsuki": {
+      "name": "Task.Akatsuki.name",
+      "help": "Task.Akatsuki.help"
+    }
+  },
+  "Scheduler": {
+    "_info": {
+      "name": "Scheduler",
+      "help": ""
+    },
+    "Enable": {
+      "name": "Enable Task",
+      "help": "Join this task to scheduler.",
+      "True": "Enabled",
+      "False": "False"
+    },
+    "NextRun": {
+      "name": "Next Run",
+      "help": "Updated automatically after completing the task to set next scheduled run, typically not manually modified\nHowever you can force immediate scheduling if you clear this text field"
+    },
+    "Command": {
+      "name": "Command",
+      "help": ""
+    },
+    "ServerUpdate": {
+      "name": "Server Update",
+      "help": "Series of server refresh time(s) as to when this task will next run, this is automatically converted to respective time zone, generally do not need to modify"
+    }
+  },
+  "Emulator": {
+    "_info": {
+      "name": "Emulator Settings",
+      "help": ""
+    },
+    "Serial": {
+      "name": "Serial",
+      "help": "Common emulator Serial can be queried in the list below\nUse \"auto\" to auto-detect emulators, but if multiple emulators are running or use emulators that do not support auto-detect, \"auto\" cannot be used and serial must be filled in manually\nDefault serial for select emulators:\n- BlueStacks 127.0.0.1:5555\n- BlueStacks4 Hyper-V use \"bluestacks4-hyperv\", \"bluestacks4-hyperv-2\" for multi instance, and so on\n- BlueStacks5 Hyper-V use \"bluestacks5-hyperv\", \"bluestacks5-hyperv-1\" for multi instance, and so on\n- NoxPlayer 127.0.0.1:62001\n- NoxPlayer64bit 127.0.0.1:59865\n- MuMuPlayer/MuMuPlayer X 127.0.0.1:7555\n- MuMuPlayer12 127.0.0.1:16384\n- MemuPlayer 127.0.0.1:21503\n- LDPlayer emulator-5554 or 127.0.0.1:5555\n- WSA use \"wsa-0\" to make the game run in the background, which needs to be controlled or closed by third-party software\nIf there are multiple emulator instances running, the default is reserved for one of them and the others will use different serials to avoid conflicts\nOpen console.bat and run `adb devices` to find them or follow the emulator's official tutorial"
+    },
+    "GameClient": {
+      "name": "Game Client",
+      "help": "When using cloud, you will be automatically queued to log in. Cloud game is available in CN only",
+      "android": "Android client"
+    },
+    "PackageName": {
+      "name": "Game Server",
+      "help": "Can't distinguish different regions of oversea servers, please select the server manually.",
+      "auto": "Auto-detect",
+      "CN-Official": "[CN]-Official"
+    },
+    "GameLanguage": {
+      "name": "In-game Text Language",
+      "help": "Currently, only Simplified Chinese and English are supported. Please set the text language in game to one of them.",
+      "auto": "Auto-detect",
+      "cn": "简体中文"
+    },
+    "ScreenshotMethod": {
+      "name": "Screenshot Method",
+      "help": "When using auto-select, a benchmark will be performed and automatically changed to the fastest screenshot method.\nGeneral speed: DroidCast_raw >> aScreenCap_nc > ADB_nc >>> aScreenCap > uiautomator2 ~= ADB.\nRun Tools - Performance Test to find the fastest method.",
+      "auto": "Auto-select the fastest",
+      "ADB": "ADB ",
+      "ADB_nc": "ADB_nc",
+      "uiautomator2": "uiautomator2",
+      "aScreenCap": "aScreenCap",
+      "aScreenCap_nc": "aScreenCap_nc",
+      "DroidCast": "DroidCast",
+      "DroidCast_raw": "DroidCast_raw",
+      "scrcpy": "scrcpy",
+      "nemu_ipc": "nemu_ipc",
+      "ldopengl": "ldopengl"
+    },
+    "ControlMethod": {
+      "name": "Control Method",
+      "help": "Speed: MaaTouch = minitouch >>> uiautomator2 ~= ADB\nMaaTouch is recommended",
+      "minitouch": "minitouch",
+      "MaaTouch": "MaaTouch"
+    },
+    "AdbRestart": {
+      "name": "Try to restart adb when no device found",
+      "help": ""
+    }
+  },
+  "EmulatorInfo": {
+    "_info": {
+      "name": "Emulator Settings",
+      "help": "The following values are auto-filled according to \"Serial\", if you don’t understand, please don't modify them"
+    },
+    "Emulator": {
+      "name": "Emulator Type",
+      "help": "",
+      "auto": "Auto-detect",
+      "NoxPlayer": "Nox Player",
+      "NoxPlayer64": "Nox Player 64bit",
+      "BlueStacks4": "BlueStacks 4",
+      "BlueStacks5": "BlueStacks 5",
+      "BlueStacks4HyperV": "BlueStacks 4 Hyper-V",
+      "BlueStacks5HyperV": "BlueStacks 5 Hyper-V",
+      "LDPlayer3": "LD Player 3",
+      "LDPlayer4": "LD Player 4",
+      "LDPlayer9": "LD Player 9",
+      "MuMuPlayer": "MuMu Player",
+      "MuMuPlayerX": "MuMu Player X",
+      "MuMuPlayer12": "MuMu Player 12",
+      "MEmuPlayer": "MEmu Player"
+    },
+    "name": {
+      "name": "Emulator Instance Name",
+      "help": ""
+    },
+    "path": {
+      "name": "Emulator Installation Path",
+      "help": ""
+    }
+  },
+  "Error": {
+    "_info": {
+      "name": "Debug Settings",
+      "help": ""
+    },
+    "Restart": {
+      "name": "Restart Game on Error",
+      "help": "",
+      "game": "Restart game",
+      "game_emulator": "Restart emulator and game"
+    },
+    "SaveError": {
+      "name": "Record Exception",
+      "help": "Records exception and log into directory for review or sharing"
+    },
+    "ScreenshotLength": {
+      "name": "Record Screenshot(s)",
+      "help": "Number of screenshots saved when exception occurs"
+    },
+    "OnePushConfig": {
+      "name": "Error notify config",
+      "help": "When Alas cannot handle exception, send a message through Onepush. Configuration document: \nhttps://github.com/LmeSzinc/AzurLaneAutoScript/wiki/Onepush-configuration-%5BEN%5D"
+    }
+  },
+  "Optimization": {
+    "_info": {
+      "name": "Optimization Settings",
+      "help": ""
+    },
+    "ScreenshotInterval": {
+      "name": "Take Screenshots Every X Second(s)",
+      "help": "Minimum interval between 2 screenshots, limited in 0.1 ~ 0.3, can help reduce CPU on high-end PCs"
+    },
+    "CombatScreenshotInterval": {
+      "name": "Take Screenshots Every X Second(s) In Combat",
+      "help": "Minimum interval between 2 screenshots, limited in 0.1 ~ 1.0, can help reduce CPU during battle"
+    },
+    "WhenTaskQueueEmpty": {
+      "name": "When Task Queue is Empty",
+      "help": "Close AL when there are no pending tasks, can help reduce CPU",
+      "stay_there": "Stay There",
+      "goto_main": "Goto Main Page",
+      "close_game": "Close Game",
+      "close_emulator": "Close Emulator"
+    }
+  },
+  "Freebies": {
+    "_info": {
+      "name": "Freebies Reward Settings",
+      "help": ""
+    },
+    "FriendGifts": {
+      "name": "Freebies.FriendGifts.name",
+      "help": "Freebies.FriendGifts.help"
+    },
+    "DailyShare": {
+      "name": "Freebies.DailyShare.name",
+      "help": "Freebies.DailyShare.help"
+    },
+    "MailReward": {
+      "name": "Receive mail rewards",
+      "help": ""
+    }
+  },
+  "ZhaoCai": {
+    "_info": {
+      "name": "ZhaoCai._info.name",
+      "help": "ZhaoCai._info.help"
+    },
+    "ZhaoCaiFree": {
+      "name": "ZhaoCai.ZhaoCaiFree.name",
+      "help": "ZhaoCai.ZhaoCaiFree.help"
+    }
+  },
+  "Organization": {
+    "_info": {
+      "name": "Organization._info.name",
+      "help": "Organization._info.help"
+    },
+    "OrganizationPray": {
+      "name": "Organization.OrganizationPray.name",
+      "help": "Organization.OrganizationPray.help"
+    }
+  },
+  "DailyReward": {
+    "_info": {
+      "name": "DailyReward._info.name",
+      "help": "DailyReward._info.help"
+    },
+    "Weekly": {
+      "name": "DailyReward.Weekly.name",
+      "help": "DailyReward.Weekly.help"
+    }
+  },
+  "SquadRaid": {
+    "_info": {
+      "name": "SquadRaid._info.name",
+      "help": "SquadRaid._info.help"
+    },
+    "SquadRaidBenefit": {
+      "name": "SquadRaid.SquadRaidBenefit.name",
+      "help": "SquadRaid.SquadRaidBenefit.help"
+    },
+    "SquadRaidFight": {
+      "name": "SquadRaid.SquadRaidFight.name",
+      "help": "SquadRaid.SquadRaidFight.help",
+      "SquadHelp": "SquadHelp"
+    }
+  },
+  "SurvivalTrail": {
+    "_info": {
+      "name": "SurvivalTrail._info.name",
+      "help": "SurvivalTrail._info.help"
+    },
+    "SurvivalTrialResetTimes": {
+      "name": "SurvivalTrail.SurvivalTrialResetTimes.name",
+      "help": "SurvivalTrail.SurvivalTrialResetTimes.help"
+    }
+  },
+  "TiLi": {
+    "_info": {
+      "name": "TiLi._info.name",
+      "help": "TiLi._info.help"
+    },
+    "TiLiRemain": {
+      "name": "TiLi.TiLiRemain.name",
+      "help": "TiLi.TiLiRemain.help"
+    },
+    "LevelRestrictions": {
+      "name": "TiLi.LevelRestrictions.name",
+      "help": "TiLi.LevelRestrictions.help"
+    },
+    "DungeonFirst": {
+      "name": "TiLi.DungeonFirst.name",
+      "help": "TiLi.DungeonFirst.help"
+    }
+  },
+  "TiLiStorage": {
+    "_info": {
+      "name": "TiLiStorage._info.name",
+      "help": "TiLiStorage._info.help"
+    },
+    "Dungeon": {
+      "name": "TiLiStorage.Dungeon.name",
+      "help": "TiLiStorage.Dungeon.help"
+    }
+  },
+  "CultivationRoad": {
+    "_info": {
+      "name": "CultivationRoad._info.name",
+      "help": "CultivationRoad._info.help"
+    },
+    "ClearRedDot": {
+      "name": "CultivationRoad.ClearRedDot.name",
+      "help": "CultivationRoad.ClearRedDot.help"
+    }
+  },
+  "Duel": {
+    "_info": {
+      "name": "Duel._info.name",
+      "help": "Duel._info.help"
+    },
+    "VictoryNumber": {
+      "name": "Duel.VictoryNumber.name",
+      "help": "Duel.VictoryNumber.help"
+    }
+  },
+  "ItemStorage": {
+    "_info": {
+      "name": "ItemStorage._info.name",
+      "help": "ItemStorage._info.help"
+    },
+    "Credit": {
+      "name": "ItemStorage.Credit.name",
+      "help": "ItemStorage.Credit.help"
+    },
+    "StallerJade": {
+      "name": "ItemStorage.StallerJade.name",
+      "help": "ItemStorage.StallerJade.help"
+    }
+  },
+  "Gui": {
+    "Aside": {
+      "Install": "Install",
+      "Home": "Home",
+      "Develop": "Develop",
+      "Performance": "Perf.",
+      "Setting": "Settings",
+      "AddAlas": "Add"
+    },
+    "Button": {
+      "Start": "Start",
+      "Stop": "Stop",
+      "ScrollON": "Auto Scroll ON",
+      "ScrollOFF": "Auto Scroll OFF",
+      "ClearLog": "Clear Log",
+      "Setting": "Setting",
+      "CheckUpdate": "Check update",
+      "ClickToUpdate": "Click to update",
+      "RetryUpdate": "Retry update",
+      "CancelUpdate": "Cancel update"
+    },
+    "Toast": {
+      "DisableTranslateMode": "Click here to disable translate mode",
+      "ConfigSaved": "Config saved",
+      "AlasIsRunning": "Scheduler is already running",
+      "ClickToUpdate": "New update available, click here to update"
+    },
+    "Status": {
+      "Running": "Running",
+      "Inactive": "Inactive",
+      "Warning": "Warning",
+      "Updating": "Waiting Update"
+    },
+    "MenuAlas": {
+      "Overview": "Overview",
+      "Log": "Logs"
+    },
+    "MenuDevelop": {
+      "HomePage": "Home",
+      "Translate": "Translate",
+      "Update": "Updater",
+      "Remote": "Remote access",
+      "Utils": "Utils"
+    },
+    "Overview": {
+      "Scheduler": "Scheduler",
+      "Log": "Log",
+      "Running": "Running",
+      "Pending": "Pending",
+      "Waiting": "Waiting",
+      "NoTask": "No Task"
+    },
+    "Dashboard": {
+      "NoData": "no data",
+      "TimeError": "time error",
+      "JustNow": "just now",
+      "MinutesAgo": "{time}min ago",
+      "HoursAgo": "{time}h ago",
+      "DaysAgo": "{time}d ago",
+      "LongTimeAgo": "long time ago",
+      "EtaDays": "ETA {time}d"
+    },
+    "AddAlas": {
+      "PopupTitle": "Add new config",
+      "NewName": "New name",
+      "CopyFrom": "Copy from existing config",
+      "Confirm": "Add",
+      "FileExist": "A config with the same name exists, please choose another one",
+      "InvalidChar": "Config name cannot contain any of the following characters: .\\/:*?\"<>|",
+      "InvalidPrefixTemplate": "Config name cannot start with 'template'"
+    },
+    "Update": {
+      "UpToDate": "Latest version",
+      "HaveUpdate": "A new version is available",
+      "UpdateStart": "Start update",
+      "UpdateWait": "Waiting for all alas complete current task",
+      "UpdateRun": "Updating",
+      "UpdateSuccess": "Update succeeded, restarting",
+      "UpdateFailed": "Update failed. Logs can be found in ./log/*_gui.txt",
+      "UpdateChecking": "Checking for updates",
+      "UpdateCancel": "Update canceled, restarting Alas",
+      "UpdateFinish": "Update succeeded, please restart manually",
+      "Local": "Local",
+      "Upstream": "Upstream",
+      "Author": "Author",
+      "Time": "Commit time",
+      "Message": "Commit message",
+      "DisabledWarn": "Updater module is disabled. You need to manually restart Alas to update",
+      "DetailedHistory": "Detailed Commit History"
+    },
+    "Remote": {
+      "Running": "Remote access on",
+      "NotRunning": "Not running, server disconnected or offline",
+      "NotEnable": "Disabled, set webui password in deploy.yaml and enable remote access",
+      "EntryPoint": "Entry point:",
+      "ConfigureHint": "Configuration tutorial:",
+      "SSHNotInstall": "No SSH command in your system. Please refer to the tutorial to download or install one"
+    },
+    "Text": {
+      "InvalidFeedBack": "Invalid format. Example: {0}",
+      "Clear": "Clear"
+    }
+  }
+}

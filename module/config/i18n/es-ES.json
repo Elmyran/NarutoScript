@@ -1,0 +1,470 @@
+{
+  "Menu": {
+    "Alas": {
+      "name": "NS",
+      "help": ""
+    },
+    "Daily": {
+      "name": "Diario",
+      "help": ""
+    },
+    "Weekly": {
+      "name": "Menu.Weekly.name",
+      "help": "Menu.Weekly.help"
+    }
+  },
+  "Task": {
+    "Alas": {
+      "name": "Ajustes de NS",
+      "help": ""
+    },
+    "Restart": {
+      "name": "Gestión de errores",
+      "help": ""
+    },
+    "Duel": {
+      "name": "Task.Duel.name",
+      "help": "Task.Duel.help"
+    },
+    "FengRao": {
+      "name": "Task.FengRao.name",
+      "help": "Task.FengRao.help"
+    },
+    "SquadRaid": {
+      "name": "Task.SquadRaid.name",
+      "help": "Task.SquadRaid.help"
+    },
+    "Organization": {
+      "name": "Task.Organization.name",
+      "help": "Task.Organization.help"
+    },
+    "SurvivalTrail": {
+      "name": "Task.SurvivalTrail.name",
+      "help": "Task.SurvivalTrail.help"
+    },
+    "TiLi": {
+      "name": "Task.TiLi.name",
+      "help": "Task.TiLi.help"
+    },
+    "Mission": {
+      "name": "Task.Mission.name",
+      "help": "Task.Mission.help"
+    },
+    "Freebies": {
+      "name": "Freebies",
+      "help": ""
+    },
+    "ZhaoCai": {
+      "name": "Task.ZhaoCai.name",
+      "help": "Task.ZhaoCai.help"
+    },
+    "DailyReward": {
+      "name": "Task.DailyReward.name",
+      "help": "Task.DailyReward.help"
+    },
+    "DataUpdate": {
+      "name": "Task.DataUpdate.name",
+      "help": "Task.DataUpdate.help"
+    },
+    "CultivationRoad": {
+      "name": "Task.CultivationRoad.name",
+      "help": "Task.CultivationRoad.help"
+    },
+    "Akatsuki": {
+      "name": "Task.Akatsuki.name",
+      "help": "Task.Akatsuki.help"
+    }
+  },
+  "Scheduler": {
+    "_info": {
+      "name": "Planificador",
+      "help": ""
+    },
+    "Enable": {
+      "name": "Activar tarea",
+      "help": "Añadir tarea al Planificador.",
+      "True": "Activado",
+      "False": "Falso"
+    },
+    "NextRun": {
+      "name": "Siguiente ejecución",
+      "help": "Se actualiza automáticamente a la siguiente vez que hay que ejecutar la tarea, normalmente no se modifica manualmente.\nSin embargo, puedes forzar la ejecución dejando este campo en blanco."
+    },
+    "Command": {
+      "name": "Comando",
+      "help": ""
+    },
+    "ServerUpdate": {
+      "name": "Actualización de servidor",
+      "help": "Conjunto de horas a las que se actualiza el servidor (se resetea). Se convierte automáticamente a la zona horaria, y no es necesario modificarlo manualmente."
+    }
+  },
+  "Emulator": {
+    "_info": {
+      "name": "Ajustes de emulador",
+      "help": ""
+    },
+    "Serial": {
+      "name": "Serial",
+      "help": "Los serial de emuladores comunes pueden ser consultados aquí:\nUsa \"auto\" para detectar automáticamente el emulador, pero si hay varios ejecutando a la vez o no se puede detectar de forma automática, \"auto\" no podrá ser usado y tendrás que ajustarlo manualmente.\nSerial comunes de algunos emuladores:\n- BlueStacks 127.0.0.1:5555\n- BlueStacks4 Hyper-V usa \"bluestacks4-hyperv\", \"bluestacks4-hyperv-2\" para multi-instancia, etc...\n- BlueStacks5 Hyper-V usa \"bluestacks5-hyperv\", \"bluestacks5-hyperv-1\" para multi-instancia, etc...\n- NoxPlayer 127.0.0.1:62001\n- NoxPlayer64bit 127.0.0.1:59865\n- MuMuPlayer/MuMuPlayer X 127.0.0.1:7555\n- MuMuPlayer12 127.0.0.1:16384\n- MemuPlayer 127.0.0.1:21503\n- LDPlayer emulator-5554 or 127.0.0.1:5555\n- WSA usa \"wsa-0\" para ejecutar el juego en segundo plano, que será cerrado/controlado por software externo.\nSi hay varias instancias ejecutándose a la vez, se usará la predeterminada para la primera y las demás se reajustarán.\nAbre console.bat y ejecuta `adb devices` para encontrarlas o usa la guía oficial del emulador."
+    },
+    "GameClient": {
+      "name": "Cliente del juego",
+      "help": "Al usar la nube, automáticamente se pondrá en cola para iniciar sesión. El juego en la nube está disponible solo en CN",
+      "android": "Cliente Android"
+    },
+    "PackageName": {
+      "name": "Región del juego",
+      "help": "No es posible detectar regiones que no sean de China, por tanto, ajústalo manualmente si se da la situación.",
+      "auto": "Detectar automaticamente",
+      "CN-Official": "[CN]-Oficial"
+    },
+    "GameLanguage": {
+      "name": "Idioma dentro del juego",
+      "help": "En la actualidad, solo funcionan el Chino simplificado y el inglés.",
+      "auto": "Detectar automaticamente",
+      "cn": "Chino simplificado"
+    },
+    "ScreenshotMethod": {
+      "name": "Método de captura",
+      "help": "Cuando seleccionas detectar auto, se ejecutará una prueba para determinar el método más rápido.\nNormalmente, el orden es: DroidCast_raw >> aScreenCap_nc > ADB_nc >>> aScreenCap > uiautomator2 ~= ADB.\nEjecuta Herramientas - Prueba de rendimiento para encontrar el método más rápido.",
+      "auto": "Detectar auto. el más rápido",
+      "ADB": "ADB ",
+      "ADB_nc": "ADB_nc",
+      "uiautomator2": "uiautomator2",
+      "aScreenCap": "aScreenCap",
+      "aScreenCap_nc": "aScreenCap_nc",
+      "DroidCast": "DroidCast",
+      "DroidCast_raw": "DroidCast_raw",
+      "scrcpy": "scrcpy",
+      "nemu_ipc": "nemu_ipc",
+      "ldopengl": "ldopengl"
+    },
+    "ControlMethod": {
+      "name": "Método de control",
+      "help": "Velocidad: MaaTouch = minitouch >>> uiautomator2 ~= ADB\nMaaTouch es el recomendado.",
+      "minitouch": "minitouch",
+      "MaaTouch": "MaaTouch"
+    },
+    "AdbRestart": {
+      "name": "Intentar reiniciar el ADB cuando no se encuentre ninguno.",
+      "help": ""
+    }
+  },
+  "EmulatorInfo": {
+    "_info": {
+      "name": "Ajustes de emulador",
+      "help": "Los siguientes ajustes son rellenados de manera automática de acuerdo al \"Serial\", si no lo entiendes, por favor no los modifiques."
+    },
+    "Emulator": {
+      "name": "Tipo de emulador",
+      "help": "",
+      "auto": "Detectar automáticamente",
+      "NoxPlayer": "Nox Player",
+      "NoxPlayer64": "Nox Player 64bit",
+      "BlueStacks4": "BlueStacks 4",
+      "BlueStacks5": "BlueStacks 5",
+      "BlueStacks4HyperV": "BlueStacks 4 Hyper-V",
+      "BlueStacks5HyperV": "BlueStacks 5 Hyper-V",
+      "LDPlayer3": "LD Player 3",
+      "LDPlayer4": "LD Player 4",
+      "LDPlayer9": "LD Player 9",
+      "MuMuPlayer": "MuMu Player",
+      "MuMuPlayerX": "MuMu Player X",
+      "MuMuPlayer12": "MuMu Player 12",
+      "MEmuPlayer": "MEmu Player"
+    },
+    "name": {
+      "name": "Nombre de la instancia del emulador",
+      "help": ""
+    },
+    "path": {
+      "name": "Ruta de instalación del emulador",
+      "help": ""
+    }
+  },
+  "Error": {
+    "_info": {
+      "name": "Ajustes de depuración",
+      "help": ""
+    },
+    "Restart": {
+      "name": "Reiniciar el juego cuando haya un error",
+      "help": "",
+      "game": "Reiniciar juego",
+      "game_emulator": "Reiniciar emulador y el juego"
+    },
+    "SaveError": {
+      "name": "Guardar errores",
+      "help": "Graba los errores y los guarda automáticamente en la carpeta de logs para que puedas compartirlos fácilmente."
+    },
+    "ScreenshotLength": {
+      "name": "Tomar capturas de pantalla",
+      "help": "Número de capturas de pantalla tomadas cuando ocurra un error"
+    },
+    "OnePushConfig": {
+      "name": "Configuración para notificar errores",
+      "help": "Cuando SRC no puede manejar un error, envía un mensaje automáticamente. Puedes leer más información sobre este ajuste aquí:\nhttps://github.com/LmeSzinc/AzurLaneAutoScript/wiki/Onepush-configuration-%5BEN%5D"
+    }
+  },
+  "Optimization": {
+    "_info": {
+      "name": "Ajustes de optimización",
+      "help": ""
+    },
+    "ScreenshotInterval": {
+      "name": "Tomar capturas cada X segundos",
+      "help": "El intervalo mínimo entre 2 capturas, limitarlo a 0.1 ~ 0.3, puede ayudar a reducir el consumo de CPU."
+    },
+    "CombatScreenshotInterval": {
+      "name": "Tomar capturas cada X segundos en combate",
+      "help": "El intervalo mínimo entre 2 capturas, limitarlo a 0.1 ~ 1.0, puede ayudar a reducir el consumo de CPU."
+    },
+    "WhenTaskQueueEmpty": {
+      "name": "Cuando no haya tareas",
+      "help": "Cerrar Honkai: Star Rail cuando no haya tareas puede ayudar a reducir el consumo de CPU.",
+      "stay_there": "Quedarse en el sitio",
+      "goto_main": "Ir al lugar principal",
+      "close_game": "Cerrar el juego",
+      "close_emulator": "Cerrar el emulador"
+    }
+  },
+  "Freebies": {
+    "_info": {
+      "name": "Configuración de recompensas de obsequios",
+      "help": ""
+    },
+    "FriendGifts": {
+      "name": "Freebies.FriendGifts.name",
+      "help": "Freebies.FriendGifts.help"
+    },
+    "DailyShare": {
+      "name": "Freebies.DailyShare.name",
+      "help": "Freebies.DailyShare.help"
+    },
+    "MailReward": {
+      "name": "Recibir recompensas por correo",
+      "help": ""
+    }
+  },
+  "ZhaoCai": {
+    "_info": {
+      "name": "ZhaoCai._info.name",
+      "help": "ZhaoCai._info.help"
+    },
+    "ZhaoCaiFree": {
+      "name": "ZhaoCai.ZhaoCaiFree.name",
+      "help": "ZhaoCai.ZhaoCaiFree.help"
+    }
+  },
+  "Organization": {
+    "_info": {
+      "name": "Organization._info.name",
+      "help": "Organization._info.help"
+    },
+    "OrganizationPray": {
+      "name": "Organization.OrganizationPray.name",
+      "help": "Organization.OrganizationPray.help"
+    }
+  },
+  "DailyReward": {
+    "_info": {
+      "name": "DailyReward._info.name",
+      "help": "DailyReward._info.help"
+    },
+    "Weekly": {
+      "name": "DailyReward.Weekly.name",
+      "help": "DailyReward.Weekly.help"
+    }
+  },
+  "SquadRaid": {
+    "_info": {
+      "name": "SquadRaid._info.name",
+      "help": "SquadRaid._info.help"
+    },
+    "SquadRaidBenefit": {
+      "name": "SquadRaid.SquadRaidBenefit.name",
+      "help": "SquadRaid.SquadRaidBenefit.help"
+    },
+    "SquadRaidFight": {
+      "name": "SquadRaid.SquadRaidFight.name",
+      "help": "SquadRaid.SquadRaidFight.help",
+      "SquadHelp": "SquadHelp"
+    }
+  },
+  "SurvivalTrail": {
+    "_info": {
+      "name": "SurvivalTrail._info.name",
+      "help": "SurvivalTrail._info.help"
+    },
+    "SurvivalTrialResetTimes": {
+      "name": "SurvivalTrail.SurvivalTrialResetTimes.name",
+      "help": "SurvivalTrail.SurvivalTrialResetTimes.help"
+    }
+  },
+  "TiLi": {
+    "_info": {
+      "name": "TiLi._info.name",
+      "help": "TiLi._info.help"
+    },
+    "TiLiRemain": {
+      "name": "TiLi.TiLiRemain.name",
+      "help": "TiLi.TiLiRemain.help"
+    },
+    "LevelRestrictions": {
+      "name": "TiLi.LevelRestrictions.name",
+      "help": "TiLi.LevelRestrictions.help"
+    },
+    "DungeonFirst": {
+      "name": "TiLi.DungeonFirst.name",
+      "help": "TiLi.DungeonFirst.help"
+    }
+  },
+  "TiLiStorage": {
+    "_info": {
+      "name": "TiLiStorage._info.name",
+      "help": "TiLiStorage._info.help"
+    },
+    "Dungeon": {
+      "name": "TiLiStorage.Dungeon.name",
+      "help": "TiLiStorage.Dungeon.help"
+    }
+  },
+  "CultivationRoad": {
+    "_info": {
+      "name": "CultivationRoad._info.name",
+      "help": "CultivationRoad._info.help"
+    },
+    "ClearRedDot": {
+      "name": "CultivationRoad.ClearRedDot.name",
+      "help": "CultivationRoad.ClearRedDot.help"
+    }
+  },
+  "Duel": {
+    "_info": {
+      "name": "Duel._info.name",
+      "help": "Duel._info.help"
+    },
+    "VictoryNumber": {
+      "name": "Duel.VictoryNumber.name",
+      "help": "Duel.VictoryNumber.help"
+    }
+  },
+  "ItemStorage": {
+    "_info": {
+      "name": "ItemStorage._info.name",
+      "help": "ItemStorage._info.help"
+    },
+    "Credit": {
+      "name": "ItemStorage.Credit.name",
+      "help": "ItemStorage.Credit.help"
+    },
+    "StallerJade": {
+      "name": "ItemStorage.StallerJade.name",
+      "help": "ItemStorage.StallerJade.help"
+    }
+  },
+  "Gui": {
+    "Aside": {
+      "Install": "Instalar",
+      "Home": "Inicio",
+      "Develop": "Desarrollo",
+      "Performance": "Rendimiento",
+      "Setting": "Ajustes",
+      "AddAlas": "Añadir"
+    },
+    "Button": {
+      "Start": "Iniciar",
+      "Stop": "Detener",
+      "ScrollON": "Autodeslizamiento ON",
+      "ScrollOFF": "Autodeslizamiento OFF",
+      "ClearLog": "Borrar log",
+      "Setting": "Ajustes",
+      "CheckUpdate": "Comprobar actualización",
+      "ClickToUpdate": "Click para actualizar",
+      "RetryUpdate": "Reintentar actualización",
+      "CancelUpdate": "Cancelar actualización"
+    },
+    "Toast": {
+      "DisableTranslateMode": "Click aquí para deshabilitar el modo traducido",
+      "ConfigSaved": "Configuración guardada",
+      "AlasIsRunning": "El planificador ya se está ejecutando",
+      "ClickToUpdate": "Nueva actualización disponible, haz click aquí para actualizar"
+    },
+    "Status": {
+      "Running": "En ejecución",
+      "Inactive": "Inactivo",
+      "Warning": "¡Advertencia!",
+      "Updating": "Esperando actualización"
+    },
+    "MenuAlas": {
+      "Overview": "Vista general",
+      "Log": "Logs"
+    },
+    "MenuDevelop": {
+      "HomePage": "Inicio",
+      "Translate": "Traducir",
+      "Update": "Actualizador",
+      "Remote": "Acceso remoto",
+      "Utils": "Utilidades"
+    },
+    "Overview": {
+      "Scheduler": "Planificador",
+      "Log": "Log",
+      "Running": "En ejecución",
+      "Pending": "Pendiente",
+      "Waiting": "En espera",
+      "NoTask": "Sin tarea"
+    },
+    "Dashboard": {
+      "NoData": "sin datos",
+      "TimeError": "error de tiempo",
+      "JustNow": "justo ahora",
+      "MinutesAgo": "hace {time}m",
+      "HoursAgo": "hace {time}h",
+      "DaysAgo": "hace {time}d",
+      "LongTimeAgo": "hace mucho tiempo",
+      "EtaDays": "ETA {time}d"
+    },
+    "AddAlas": {
+      "PopupTitle": "Añadir nueva configuración",
+      "NewName": "Nuevo nombre",
+      "CopyFrom": "Copiar configuración existente",
+      "Confirm": "Añadir",
+      "FileExist": "Ya existe uan configuración con ese nombre, elige otro por favor.",
+      "InvalidChar": "El nombre de la configuración no puede tener los siguientes caracteres: .\\/:*?\"<>|",
+      "InvalidPrefixTemplate": "El nombre de la configuración no puede empezar por 'template'"
+    },
+    "Update": {
+      "UpToDate": "Última versión",
+      "HaveUpdate": "Nueva versión disponible",
+      "UpdateStart": "Empezar actualización",
+      "UpdateWait": "Esperando a que SRC complete todas las tareas",
+      "UpdateRun": "Actualizando",
+      "UpdateSuccess": "Actualización exitosa, reiniciando...",
+      "UpdateFailed": "La actualización ha fallado. Puedes ver más detalles en ./log/*_gui.txt",
+      "UpdateChecking": "Comprobando actualizaciones",
+      "UpdateCancel": "Actualización cancelada, reiniciando SRC",
+      "UpdateFinish": "Actualización exitosa, reinicia manualmente por favor",
+      "Local": "Local",
+      "Upstream": "Remoto",
+      "Author": "Autor",
+      "Time": "Hora del commit",
+      "Message": "Mensaje del commit",
+      "DisabledWarn": "El módulo actualizador está deshabilitado. Reinicia manualmente para la actualización.",
+      "DetailedHistory": "Historial de commmits detallado"
+    },
+    "Remote": {
+      "Running": "Acceso remoto ON",
+      "NotRunning": "No se está ejecutando, servidor desconectado u offline.",
+      "NotEnable": "Deshabilitado. Establece la contraseña para webui en deploy.yaml y activa el acceso remoto.",
+      "EntryPoint": "Punto de entrada:",
+      "ConfigureHint": "Tutorial de configuración:",
+      "SSHNotInstall": "No existe el comando SSH en tu sistema. Por favor, sigue el tutorial e instala uno."
+    },
+    "Text": {
+      "InvalidFeedBack": "Formato inválido. Ejemplo: {0}",
+      "Clear": "Limpiar"
+    }
+  }
+}

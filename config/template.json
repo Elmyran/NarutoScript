@@ -1,0 +1,180 @@
+{
+  "Alas": {
+    "Emulator": {
+      "Serial": "auto",
+      "GameClient": "android",
+      "PackageName": "auto",
+      "GameLanguage": "auto",
+      "ScreenshotMethod": "scrcpy",
+      "ControlMethod": "MaaTouch",
+      "AdbRestart": false
+    },
+    "EmulatorInfo": {
+      "Emulator": "auto",
+      "name": null,
+      "path": null
+    },
+    "Error": {
+      "Restart": "game",
+      "SaveError": true,
+      "ScreenshotLength": 1,
+      "OnePushConfig": "provider: null"
+    },
+    "Optimization": {
+      "ScreenshotInterval": 0.2,
+      "CombatScreenshotInterval": 1.0,
+      "WhenTaskQueueEmpty": "goto_main"
+    }
+  },
+  "Restart": {
+    "Scheduler": {
+      "Enable": true,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "Restart",
+      "ServerUpdate": "05:00"
+    }
+  },
+  "Duel": {
+    "Scheduler": {
+      "Enable": false,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "Duel",
+      "ServerUpdate": "05:00"
+    },
+    "Duel": {
+      "VictoryNumber": 0
+    }
+  },
+  "FengRao": {
+    "Scheduler": {
+      "Enable": false,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "FengRao",
+      "ServerUpdate": "05:00"
+    }
+  },
+  "SquadRaid": {
+    "Scheduler": {
+      "Enable": false,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "SquadRaid",
+      "ServerUpdate": "05:00"
+    },
+    "SquadRaid": {
+      "SquadRaidBenefit": true,
+      "SquadRaidFight": "SquadHelp"
+    }
+  },
+  "Organization": {
+    "Scheduler": {
+      "Enable": false,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "Organization",
+      "ServerUpdate": "05:00"
+    },
+    "Organization": {
+      "OrganizationPray": true
+    }
+  },
+  "SurvivalTrail": {
+    "Scheduler": {
+      "Enable": false,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "SurvivalTrail",
+      "ServerUpdate": "05:00"
+    },
+    "SurvivalTrail": {
+      "SurvivalTrialResetTimes": 0
+    }
+  },
+  "TiLi": {
+    "Scheduler": {
+      "Enable": false,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "TiLi",
+      "ServerUpdate": "05:00"
+    },
+    "TiLi": {
+      "TiLiRemain": 0,
+      "LevelRestrictions": 72,
+      "DungeonFirst": true
+    },
+    "TiLiStorage": {
+      "Dungeon": {}
+    }
+  },
+  "Mission": {
+    "Scheduler": {
+      "Enable": false,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "Mission",
+      "ServerUpdate": "05:00"
+    }
+  },
+  "Freebies": {
+    "Scheduler": {
+      "Enable": false,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "Freebies",
+      "ServerUpdate": "05:00"
+    },
+    "Freebies": {
+      "FriendGifts": true,
+      "DailyShare": true,
+      "MailReward": true
+    }
+  },
+  "ZhaoCai": {
+    "Scheduler": {
+      "Enable": false,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "ZhaoCai",
+      "ServerUpdate": "05:00"
+    },
+    "ZhaoCai": {
+      "ZhaoCaiFree": true
+    }
+  },
+  "DailyReward": {
+    "Scheduler": {
+      "Enable": false,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "DailyReward",
+      "ServerUpdate": "05:00"
+    },
+    "DailyReward": {
+      "Weekly": true
+    }
+  },
+  "DataUpdate": {
+    "Scheduler": {
+      "Enable": false,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "DataUpdate",
+      "ServerUpdate": "05:00"
+    },
+    "ItemStorage": {
+      "Credit": {},
+      "StallerJade": {}
+    }
+  },
+  "CultivationRoad": {
+    "Scheduler": {
+      "Enable": false,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "CultivationRoad",
+      "ServerUpdate": "05:00"
+    },
+    "CultivationRoad": {
+      "ClearRedDot": true
+    }
+  },
+  "Akatsuki": {
+    "Scheduler": {
+      "Enable": false,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "Akatsuki",
+      "ServerUpdate": "05:00"
+    }
+  }
+}

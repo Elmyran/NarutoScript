@@ -1,0 +1,30 @@
+# --------------------
+# Define non-modifiable values
+# --------------------
+
+
+# ==================== Alas ====================
+
+Alas:
+  Emulator:
+    ControlMethod: MaaTouch
+  Optimization:
+    ScreenshotInterval: 0.2
+    CombatScreenshotInterval: 1.0
+Restart:
+  Scheduler:
+    Enable:
+      type: state
+      value: true
+      option: [ true, ]
+      option_bold: [ true, ]
+    ServerUpdate: 05:00
+
+
+# ==================== Daily ====================
+
+
+
+# ==================== Weekly ====================
+
+

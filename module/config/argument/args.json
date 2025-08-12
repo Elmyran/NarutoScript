@@ -1,0 +1,622 @@
+{
+  "Alas": {
+    "Emulator": {
+      "Serial": {
+        "type": "input",
+        "value": "auto",
+        "valuetype": "str"
+      },
+      "GameClient": {
+        "type": "select",
+        "value": "android",
+        "option": [
+          "android"
+        ]
+      },
+      "PackageName": {
+        "type": "select",
+        "value": "auto",
+        "option": [
+          "auto",
+          "CN-Official"
+        ]
+      },
+      "GameLanguage": {
+        "type": "select",
+        "value": "auto",
+        "option": [
+          "auto",
+          "cn"
+        ]
+      },
+      "ScreenshotMethod": {
+        "type": "select",
+        "value": "scrcpy",
+        "option": [
+          "auto",
+          "ADB",
+          "ADB_nc",
+          "uiautomator2",
+          "aScreenCap",
+          "aScreenCap_nc",
+          "DroidCast",
+          "DroidCast_raw",
+          "scrcpy",
+          "nemu_ipc",
+          "ldopengl"
+        ]
+      },
+      "ControlMethod": {
+        "type": "select",
+        "value": "MaaTouch",
+        "option": [
+          "minitouch",
+          "MaaTouch"
+        ],
+        "display": "hide"
+      },
+      "AdbRestart": {
+        "type": "checkbox",
+        "value": false
+      }
+    },
+    "EmulatorInfo": {
+      "Emulator": {
+        "type": "select",
+        "value": "auto",
+        "option": [
+          "auto",
+          "NoxPlayer",
+          "NoxPlayer64",
+          "BlueStacks4",
+          "BlueStacks5",
+          "BlueStacks4HyperV",
+          "BlueStacks5HyperV",
+          "LDPlayer3",
+          "LDPlayer4",
+          "LDPlayer9",
+          "MuMuPlayer",
+          "MuMuPlayerX",
+          "MuMuPlayer12",
+          "MEmuPlayer"
+        ]
+      },
+      "name": {
+        "type": "textarea",
+        "value": null
+      },
+      "path": {
+        "type": "textarea",
+        "value": null
+      }
+    },
+    "Error": {
+      "Restart": {
+        "type": "select",
+        "value": "game",
+        "option": [
+          "game",
+          "game_emulator"
+        ]
+      },
+      "SaveError": {
+        "type": "checkbox",
+        "value": true
+      },
+      "ScreenshotLength": {
+        "type": "input",
+        "value": 1
+      },
+      "OnePushConfig": {
+        "type": "textarea",
+        "value": "provider: null",
+        "mode": "yaml"
+      }
+    },
+    "Optimization": {
+      "ScreenshotInterval": {
+        "type": "input",
+        "value": 0.2,
+        "display": "hide"
+      },
+      "CombatScreenshotInterval": {
+        "type": "input",
+        "value": 1.0,
+        "display": "hide"
+      },
+      "WhenTaskQueueEmpty": {
+        "type": "select",
+        "value": "goto_main",
+        "option": [
+          "stay_there",
+          "goto_main",
+          "close_game",
+          "close_emulator"
+        ]
+      }
+    }
+  },
+  "Restart": {
+    "Scheduler": {
+      "Enable": {
+        "type": "state",
+        "value": true,
+        "option": [
+          true
+        ],
+        "option_bold": [
+          true
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "Restart",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    }
+  },
+  "Duel": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "Duel",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    },
+    "Duel": {
+      "VictoryNumber": {
+        "type": "input",
+        "value": 0
+      }
+    }
+  },
+  "FengRao": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "FengRao",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    }
+  },
+  "SquadRaid": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "SquadRaid",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    },
+    "SquadRaid": {
+      "SquadRaidBenefit": {
+        "type": "checkbox",
+        "value": true
+      },
+      "SquadRaidFight": {
+        "type": "select",
+        "value": "SquadHelp",
+        "option": [
+          "SquadHelp"
+        ]
+      }
+    }
+  },
+  "Organization": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "Organization",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    },
+    "Organization": {
+      "OrganizationPray": {
+        "type": "checkbox",
+        "value": true
+      }
+    }
+  },
+  "SurvivalTrail": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "SurvivalTrail",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    },
+    "SurvivalTrail": {
+      "SurvivalTrialResetTimes": {
+        "type": "input",
+        "value": 0
+      }
+    }
+  },
+  "TiLi": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "TiLi",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    },
+    "TiLi": {
+      "TiLiRemain": {
+        "type": "input",
+        "value": 0
+      },
+      "LevelRestrictions": {
+        "type": "input",
+        "value": 72
+      },
+      "DungeonFirst": {
+        "type": "checkbox",
+        "value": true
+      }
+    },
+    "TiLiStorage": {
+      "Dungeon": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredDungeon"
+      }
+    }
+  },
+  "Mission": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "Mission",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    }
+  },
+  "Freebies": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "Freebies",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    },
+    "Freebies": {
+      "FriendGifts": {
+        "type": "checkbox",
+        "value": true
+      },
+      "DailyShare": {
+        "type": "checkbox",
+        "value": true
+      },
+      "MailReward": {
+        "type": "checkbox",
+        "value": true
+      }
+    }
+  },
+  "ZhaoCai": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "ZhaoCai",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    },
+    "ZhaoCai": {
+      "ZhaoCaiFree": {
+        "type": "checkbox",
+        "value": true
+      }
+    }
+  },
+  "DailyReward": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "DailyReward",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    },
+    "DailyReward": {
+      "Weekly": {
+        "type": "checkbox",
+        "value": true
+      }
+    }
+  },
+  "DataUpdate": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "DataUpdate",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    },
+    "ItemStorage": {
+      "Credit": {
+        "type": "stored",
+        "value": {},
+        "display": "display",
+        "stored": "StoredInt",
+        "order": 7,
+        "color": "#ab7cf2"
+      },
+      "StallerJade": {
+        "type": "stored",
+        "value": {},
+        "display": "display",
+        "stored": "StoredInt",
+        "order": 8,
+        "color": "#fc8f8b"
+      }
+    }
+  },
+  "CultivationRoad": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "CultivationRoad",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    },
+    "CultivationRoad": {
+      "ClearRedDot": {
+        "type": "checkbox",
+        "value": true
+      }
+    }
+  },
+  "Akatsuki": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "Akatsuki",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    }
+  }
+}
