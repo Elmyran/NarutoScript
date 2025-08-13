@@ -8,6 +8,10 @@
       "name": "日常",
       "help": ""
     },
+    "Rewards": {
+      "name": "收获",
+      "help": ""
+    },
     "Weekly": {
       "name": "周常",
       "help": ""
@@ -50,20 +54,32 @@
       "name": "任务集会所",
       "help": ""
     },
-    "Freebies": {
-      "name": "白嫖奖励",
+    "DataUpdate": {
+      "name": "数据更新",
       "help": ""
     },
     "ZhaoCai": {
       "name": "招财",
       "help": ""
     },
+    "Freebies": {
+      "name": "白嫖奖励",
+      "help": ""
+    },
     "DailyReward": {
       "name": "活跃度奖励",
       "help": ""
     },
-    "DataUpdate": {
-      "name": "数据更新",
+    "LeaderBoard": {
+      "name": "排行榜点赞",
+      "help": ""
+    },
+    "MonthlySignIn": {
+      "name": "每月签到",
+      "help": ""
+    },
+    "InformationClub": {
+      "name": "情报社",
       "help": ""
     },
     "CultivationRoad": {
@@ -229,34 +245,6 @@
       "close_emulator": "关闭模拟器"
     }
   },
-  "Freebies": {
-    "_info": {
-      "name": "白嫖奖励",
-      "help": ""
-    },
-    "FriendGifts": {
-      "name": "赠送体力",
-      "help": ""
-    },
-    "DailyShare": {
-      "name": "每日分享",
-      "help": ""
-    },
-    "MailReward": {
-      "name": "领取邮件",
-      "help": ""
-    }
-  },
-  "ZhaoCai": {
-    "_info": {
-      "name": "招财",
-      "help": ""
-    },
-    "ZhaoCaiFree": {
-      "name": "每日免费招财",
-      "help": ""
-    }
-  },
   "Organization": {
     "_info": {
       "name": "组织活动",
@@ -264,16 +252,6 @@
     },
     "OrganizationPray": {
       "name": "组织祈福",
-      "help": ""
-    }
-  },
-  "DailyReward": {
-    "_info": {
-      "name": "活跃度奖励",
-      "help": ""
-    },
-    "Weekly": {
-      "name": "周常奖励",
       "help": ""
     }
   },
@@ -330,16 +308,6 @@
       "help": "TiLiStorage.Dungeon.help"
     }
   },
-  "CultivationRoad": {
-    "_info": {
-      "name": "修行之路",
-      "help": ""
-    },
-    "ClearRedDot": {
-      "name": "清除红点",
-      "help": "自动点击修行宝箱"
-    }
-  },
   "Duel": {
     "_info": {
       "name": "决斗场",
@@ -362,6 +330,54 @@
     "StallerJade": {
       "name": "ItemStorage.StallerJade.name",
       "help": "ItemStorage.StallerJade.help"
+    }
+  },
+  "Freebies": {
+    "_info": {
+      "name": "白嫖奖励",
+      "help": ""
+    },
+    "FriendGifts": {
+      "name": "赠送体力",
+      "help": ""
+    },
+    "DailyShare": {
+      "name": "每日分享",
+      "help": ""
+    },
+    "MailReward": {
+      "name": "领取邮件",
+      "help": ""
+    }
+  },
+  "ZhaoCai": {
+    "_info": {
+      "name": "招财",
+      "help": ""
+    },
+    "ZhaoCaiFree": {
+      "name": "每日免费招财",
+      "help": ""
+    }
+  },
+  "DailyReward": {
+    "_info": {
+      "name": "活跃度奖励",
+      "help": ""
+    },
+    "Weekly": {
+      "name": "周常奖励",
+      "help": ""
+    }
+  },
+  "CultivationRoad": {
+    "_info": {
+      "name": "修行之路",
+      "help": ""
+    },
+    "ClearRedDot": {
+      "name": "清除红点",
+      "help": "自动点击修行宝箱"
     }
   },
   "Gui": {

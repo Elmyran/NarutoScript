@@ -2,6 +2,7 @@ from module.alas import AzurLaneAutoScript
 from module.logger import logger
 
 
+
 class StarRailCopilot(AzurLaneAutoScript):
     def restart(self):
         from tasks.login.login import Login
@@ -74,6 +75,15 @@ class StarRailCopilot(AzurLaneAutoScript):
     def duel(self):
         from tasks.duel.duel import Duel
         Duel(config=self.config, device=self.device).run()
+    def leader_board(self):
+        from tasks.leaderboard.leaderboard import LeaderBoard
+        LeaderBoard(config=self.config, device=self.device).run()
+    def information_club(self):
+        from tasks.information_club.information_club import InformationClub
+        InformationClub(config=self.config, device=self.device).run()
+    def monthly_sign_in(self):
+        from tasks.activity.monthly_sign_in.monthly_sign_in import MonthlySignIn
+        MonthlySignIn(config=self.config, device=self.device).run()
 
 
 

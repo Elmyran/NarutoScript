@@ -13,8 +13,7 @@ from tasks.daily.utils import daily_utils
 class DailyRewardClaim(UI,daily_utils):
     def handle_daily_reward(self):
         self.device.click_record_clear()
-        self.ui_ensure(page_main)
-        self.ui_goto(page_daily)
+        self.ui_ensure(page_daily)
         self._reward_daily_claim()
         if self.config.DailyReward_Weekly:
             self._reward_weekly_claim()

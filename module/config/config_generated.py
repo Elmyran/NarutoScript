@@ -40,19 +40,8 @@ class GeneratedConfig:
     Optimization_CombatScreenshotInterval = 1.0
     Optimization_WhenTaskQueueEmpty = 'goto_main'  # stay_there, goto_main, close_game, close_emulator
 
-    # Group `Freebies`
-    Freebies_FriendGifts = True
-    Freebies_DailyShare = True
-    Freebies_MailReward = True
-
-    # Group `ZhaoCai`
-    ZhaoCai_ZhaoCaiFree = True
-
     # Group `Organization`
     Organization_OrganizationPray = True
-
-    # Group `DailyReward`
-    DailyReward_Weekly = True
 
     # Group `SquadRaid`
     SquadRaid_SquadRaidBenefit = True
@@ -69,12 +58,23 @@ class GeneratedConfig:
     # Group `TiLiStorage`
     TiLiStorage_Dungeon = {}
 
-    # Group `CultivationRoad`
-    CultivationRoad_ClearRedDot = True
-
     # Group `Duel`
     Duel_VictoryNumber = 0
 
     # Group `ItemStorage`
     ItemStorage_Credit = {}
     ItemStorage_StallerJade = {}
+
+    # Group `Freebies`
+    Freebies_FriendGifts = True
+    Freebies_DailyShare = True
+    Freebies_MailReward = True
+
+    # Group `ZhaoCai`
+    ZhaoCai_ZhaoCaiFree = True
+
+    # Group `DailyReward`
+    DailyReward_Weekly = True
+
+    # Group `CultivationRoad`
+    CultivationRoad_ClearRedDot = True

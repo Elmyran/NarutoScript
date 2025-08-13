@@ -18,10 +18,19 @@
       "SurvivalTrail",
       "TiLi",
       "Mission",
-      "Freebies",
-      "ZhaoCai",
-      "DailyReward",
       "DataUpdate"
+    ]
+  },
+  "Rewards": {
+    "menu": "collapse",
+    "page": "setting",
+    "tasks": [
+      "ZhaoCai",
+      "Freebies",
+      "DailyReward",
+      "LeaderBoard",
+      "MonthlySignIn",
+      "InformationClub"
     ]
   },
   "Weekly": {

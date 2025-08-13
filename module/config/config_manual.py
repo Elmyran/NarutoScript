@@ -10,6 +10,11 @@ class ManualConfig:
 
     SCHEDULER_PRIORITY = """
     Restart
+    > Freebies  
+    > ZhaoCai
+    > LeaderBoard
+    > InformationClub
+    > MonthlySignIn
     > CultivationRoad 
     > Akatsuki 
     > SquadRaid
@@ -18,8 +23,6 @@ class ManualConfig:
     > SurvivalTrail
     > TiLi
     > Mission
-    > Freebies  
-    > ZhaoCai
     > Duel
     > DailyReward
     > DataUpdate

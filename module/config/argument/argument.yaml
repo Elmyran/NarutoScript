@@ -90,28 +90,13 @@ Optimization:
 
 # ==================== Daily ====================
 
-Freebies:
-  FriendGifts:
-    type: checkbox
-    value: true
-  DailyShare:
-    type: checkbox
-    value: true
-  MailReward:
-    type: checkbox
-    value: true
-ZhaoCai:
-  ZhaoCaiFree:
-    type: checkbox
-    value:  true
+
+
 Organization:
   OrganizationPray:
     type: checkbox
     value:  true
-DailyReward:
-  Weekly:
-    type: checkbox
-    value: true
+
 SquadRaid:
   SquadRaidBenefit:
     type: checkbox
@@ -138,10 +123,7 @@ TiLiStorage:
   Dungeon:
     stored: StoredDungeon
     display: hide
-CultivationRoad:
-  ClearRedDot:
-    type: checkbox
-    value:  true
+
 Duel:
   VictoryNumber:
     type: input
@@ -160,10 +142,30 @@ ItemStorage:
     display: display
 
 
-# ==================== Rogue ====================
-
-
-
+# ==================== Rewards ====================
+Freebies:
+  FriendGifts:
+    type: checkbox
+    value: true
+  DailyShare:
+    type: checkbox
+    value: true
+  MailReward:
+    type: checkbox
+    value: true
+ZhaoCai:
+  ZhaoCaiFree:
+    type: checkbox
+    value:  true
+DailyReward:
+  Weekly:
+    type: checkbox
+    value: true
+# ==================== Weekly ====================
+CultivationRoad:
+  ClearRedDot:
+    type: checkbox
+    value:  true
 # ==================== Tool ====================
 
 

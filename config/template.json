@@ -111,17 +111,16 @@
       "ServerUpdate": "05:00"
     }
   },
-  "Freebies": {
+  "DataUpdate": {
     "Scheduler": {
       "Enable": false,
       "NextRun": "2020-01-01 00:00:00",
-      "Command": "Freebies",
+      "Command": "DataUpdate",
       "ServerUpdate": "05:00"
     },
-    "Freebies": {
-      "FriendGifts": true,
-      "DailyShare": true,
-      "MailReward": true
+    "ItemStorage": {
+      "Credit": {},
+      "StallerJade": {}
     }
   },
   "ZhaoCai": {
@@ -135,6 +134,19 @@
       "ZhaoCaiFree": true
     }
   },
+  "Freebies": {
+    "Scheduler": {
+      "Enable": false,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "Freebies",
+      "ServerUpdate": "05:00"
+    },
+    "Freebies": {
+      "FriendGifts": true,
+      "DailyShare": true,
+      "MailReward": true
+    }
+  },
   "DailyReward": {
     "Scheduler": {
       "Enable": false,
@@ -146,16 +158,28 @@
       "Weekly": true
     }
   },
-  "DataUpdate": {
+  "LeaderBoard": {
     "Scheduler": {
       "Enable": false,
       "NextRun": "2020-01-01 00:00:00",
-      "Command": "DataUpdate",
+      "Command": "LeaderBoard",
       "ServerUpdate": "05:00"
-    },
-    "ItemStorage": {
-      "Credit": {},
-      "StallerJade": {}
+    }
+  },
+  "MonthlySignIn": {
+    "Scheduler": {
+      "Enable": false,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "MonthlySignIn",
+      "ServerUpdate": "05:00"
+    }
+  },
+  "InformationClub": {
+    "Scheduler": {
+      "Enable": false,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "InformationClub",
+      "ServerUpdate": "05:00"
     }
   },
   "CultivationRoad": {

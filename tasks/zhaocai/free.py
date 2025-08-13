@@ -8,11 +8,9 @@ from module.base.timer import Timer
 class ZhaoCaiFree(UI):
     def handle_zhao_cai(self):
         self.device.click_record_clear()
-        self.ui_ensure(page_main)
-        if self.appear(ZHAO_CAI_RED_DOT):
-            self._enter_zhao_cai()
-            self.free_zhao_cai()
-        self.ui_ensure(page_main)
+        self.ui_ensure(page_zhaocai)
+        self.free_zhao_cai()
+        self.ui_goto_main()
 
 
     def free_zhao_cai(self):

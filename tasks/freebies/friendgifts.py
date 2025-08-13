@@ -11,8 +11,7 @@ from module.logger.logger import logger
 class FriendGifts(UI):
     def handle_friend_gifts(self):
         self.device.click_record_clear()
-        self.ui_ensure(page_main)
-        self.ui_goto(page_friend_panel)
+        self.ui_ensure(page_friend_panel)
         self._friend_gifts_give()
         self._friend_gifts_claim()
         self._friend_gifts_exit()

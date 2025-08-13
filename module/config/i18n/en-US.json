@@ -8,6 +8,10 @@
       "name": "Daily",
       "help": ""
     },
+    "Rewards": {
+      "name": "Menu.Rewards.name",
+      "help": "Menu.Rewards.help"
+    },
     "Weekly": {
       "name": "Menu.Weekly.name",
       "help": "Menu.Weekly.help"
@@ -50,21 +54,33 @@
       "name": "Task.Mission.name",
       "help": "Task.Mission.help"
     },
-    "Freebies": {
-      "name": "Freebies",
-      "help": ""
+    "DataUpdate": {
+      "name": "Task.DataUpdate.name",
+      "help": "Task.DataUpdate.help"
     },
     "ZhaoCai": {
       "name": "Task.ZhaoCai.name",
       "help": "Task.ZhaoCai.help"
     },
+    "Freebies": {
+      "name": "Task.Freebies.name",
+      "help": "Task.Freebies.help"
+    },
     "DailyReward": {
       "name": "Task.DailyReward.name",
       "help": "Task.DailyReward.help"
     },
-    "DataUpdate": {
-      "name": "Task.DataUpdate.name",
-      "help": "Task.DataUpdate.help"
+    "LeaderBoard": {
+      "name": "Task.LeaderBoard.name",
+      "help": "Task.LeaderBoard.help"
+    },
+    "MonthlySignIn": {
+      "name": "Task.MonthlySignIn.name",
+      "help": "Task.MonthlySignIn.help"
+    },
+    "InformationClub": {
+      "name": "Task.InformationClub.name",
+      "help": "Task.InformationClub.help"
     },
     "CultivationRoad": {
       "name": "Task.CultivationRoad.name",
@@ -229,34 +245,6 @@
       "close_emulator": "Close Emulator"
     }
   },
-  "Freebies": {
-    "_info": {
-      "name": "Freebies Reward Settings",
-      "help": ""
-    },
-    "FriendGifts": {
-      "name": "Freebies.FriendGifts.name",
-      "help": "Freebies.FriendGifts.help"
-    },
-    "DailyShare": {
-      "name": "Freebies.DailyShare.name",
-      "help": "Freebies.DailyShare.help"
-    },
-    "MailReward": {
-      "name": "Receive mail rewards",
-      "help": ""
-    }
-  },
-  "ZhaoCai": {
-    "_info": {
-      "name": "ZhaoCai._info.name",
-      "help": "ZhaoCai._info.help"
-    },
-    "ZhaoCaiFree": {
-      "name": "ZhaoCai.ZhaoCaiFree.name",
-      "help": "ZhaoCai.ZhaoCaiFree.help"
-    }
-  },
   "Organization": {
     "_info": {
       "name": "Organization._info.name",
@@ -265,16 +253,6 @@
     "OrganizationPray": {
       "name": "Organization.OrganizationPray.name",
       "help": "Organization.OrganizationPray.help"
-    }
-  },
-  "DailyReward": {
-    "_info": {
-      "name": "DailyReward._info.name",
-      "help": "DailyReward._info.help"
-    },
-    "Weekly": {
-      "name": "DailyReward.Weekly.name",
-      "help": "DailyReward.Weekly.help"
     }
   },
   "SquadRaid": {
@@ -330,16 +308,6 @@
       "help": "TiLiStorage.Dungeon.help"
     }
   },
-  "CultivationRoad": {
-    "_info": {
-      "name": "CultivationRoad._info.name",
-      "help": "CultivationRoad._info.help"
-    },
-    "ClearRedDot": {
-      "name": "CultivationRoad.ClearRedDot.name",
-      "help": "CultivationRoad.ClearRedDot.help"
-    }
-  },
   "Duel": {
     "_info": {
       "name": "Duel._info.name",
@@ -362,6 +330,54 @@
     "StallerJade": {
       "name": "ItemStorage.StallerJade.name",
       "help": "ItemStorage.StallerJade.help"
+    }
+  },
+  "Freebies": {
+    "_info": {
+      "name": "Freebies Reward Settings",
+      "help": ""
+    },
+    "FriendGifts": {
+      "name": "Freebies.FriendGifts.name",
+      "help": "Freebies.FriendGifts.help"
+    },
+    "DailyShare": {
+      "name": "Freebies.DailyShare.name",
+      "help": "Freebies.DailyShare.help"
+    },
+    "MailReward": {
+      "name": "Receive mail rewards",
+      "help": ""
+    }
+  },
+  "ZhaoCai": {
+    "_info": {
+      "name": "ZhaoCai._info.name",
+      "help": "ZhaoCai._info.help"
+    },
+    "ZhaoCaiFree": {
+      "name": "ZhaoCai.ZhaoCaiFree.name",
+      "help": "ZhaoCai.ZhaoCaiFree.help"
+    }
+  },
+  "DailyReward": {
+    "_info": {
+      "name": "DailyReward._info.name",
+      "help": "DailyReward._info.help"
+    },
+    "Weekly": {
+      "name": "DailyReward.Weekly.name",
+      "help": "DailyReward.Weekly.help"
+    }
+  },
+  "CultivationRoad": {
+    "_info": {
+      "name": "CultivationRoad._info.name",
+      "help": "CultivationRoad._info.help"
+    },
+    "ClearRedDot": {
+      "name": "CultivationRoad.ClearRedDot.name",
+      "help": "CultivationRoad.ClearRedDot.help"
     }
   },
   "Gui": {

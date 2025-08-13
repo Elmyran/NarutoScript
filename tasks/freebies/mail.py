@@ -23,7 +23,6 @@ class MailReward(UI):
             if self.appear(MAIL_CHECK):
                 logger.info('Mail enter success')
                 break
-
             if self.appear_then_click(MAIL_RED_DOT,interval=1):
                 continue
 
@@ -83,18 +82,11 @@ class MailReward(UI):
             out: page_menu
         """
         self.device.click_record_clear()
-        self.ui_ensure(page_main)
+        self.ui_ensure(page_mail)
+        self._mail_claim()
+        self.ui_goto_main()
 
-        #MAIL_RED_DOT
-        if self.appear(MAIL_RED_DOT):
-            # claim all
-            self._mail_enter()
-            self._mail_claim()
-            self._mail_exit()
-            return True
-        else:
-            logger.info('Mail Not Found Red Dot')
-            return False
+
 
 
     def _mail_delete(self):

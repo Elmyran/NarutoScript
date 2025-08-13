@@ -5,6 +5,8 @@ from tasks.daily.assets.assets_daily_daily import *
 from tasks.daily.assets.assets_daily_weekly import *
 from tasks.duel.assets.assets_duel import *
 from tasks.duel.assets.assets_duel_ninjutsu import *
+from tasks.information_club.assets.assets_information_club import *
+from tasks.leaderboard.assets.assets_leaderboard import *
 from tasks.organization.assets.assets_organization_pray import *
 from tasks.organization.assets.assets_organization_replacement import *
 from tasks.organization.assets.assets_organization_boxclaim import *
@@ -22,7 +24,7 @@ from tasks.freebies.assets.assets_freebies_mail import *
 from tasks.freebies.assets.assets_freebies_dailyshare import *
 from tasks.freebies.assets.assets_freebies_friendgifts import *
 from tasks.login.assets.assets_login import *
-
+from tasks.activity.assets.assets_activity import *
 
 
 class Page:
@@ -181,3 +183,20 @@ page_ninjutsu.link(DUEL_TASK,destination=page_task_panel)
 page_task_panel.link(DUEL_TASK_PANEL,destination=page_ninjutsu)
 page_ninjutsu.link(NINJUTSU_EXIT,destination=page_duel)
 page_duel.link(DUEL_EXIT,destination=page_main)
+#LeaderBoard
+page_leader_board=Page(LEADER_BOARD_CHECK)
+page_main.link(MAIN_GOTO_LEADER_BOARD,destination=page_leader_board)
+page_leader_board.link(LEADER_BOARD_EXIT,destination=page_main)
+#InformationClub
+page_information_club=Page(CLUB_GOTO_WELFARE_STATION)
+page_welfare_station=Page(WELFARE_STATION_CHECK)
+page_main.link(MAIN_GOTO_CLUB,destination=page_information_club)
+page_information_club.link(CLUB_GOTO_WELFARE_STATION,destination=page_welfare_station)
+page_information_club.link(WELFARE_STATION_EXIT,destination=page_main)
+page_welfare_station.link(WELFARE_STATION_EXIT,destination=page_main)
+#Activity
+page_activity=Page(ACTIVITY_CHECK)
+page_main.link(MAIN_GOTO_ACTIVITY,destination=page_activity)
+page_activity.link(ACTIVITY_EXIT,destination=page_main)
+
+

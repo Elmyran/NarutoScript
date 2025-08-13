@@ -43,18 +43,33 @@ Daily:
       - TiLiStorage
     Mission:
       - Scheduler
-    Freebies:
-      - Scheduler
-      - Freebies
-    ZhaoCai:
-      - Scheduler
-      - ZhaoCai
-    DailyReward:
-      - Scheduler
-      - DailyReward
+
     DataUpdate:
       - Scheduler
       - ItemStorage
+
+Rewards:
+  menu: 'collapse'
+  page: 'setting'
+  tasks:
+    ZhaoCai:
+      - Scheduler
+      - ZhaoCai
+    Freebies:
+      - Scheduler
+      - Freebies
+    DailyReward:
+      - Scheduler
+      - DailyReward
+    LeaderBoard:
+      - Scheduler
+      - LeaderBoard
+    MonthlySignIn:
+      - Scheduler
+      - MonthlySignIn
+    InformationClub:
+      - Scheduler
+      - InformationClub
 
 
 

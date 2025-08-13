@@ -407,113 +407,6 @@
       }
     }
   },
-  "Freebies": {
-    "Scheduler": {
-      "Enable": {
-        "type": "checkbox",
-        "value": false,
-        "option": [
-          true,
-          false
-        ]
-      },
-      "NextRun": {
-        "type": "datetime",
-        "value": "2020-01-01 00:00:00",
-        "validate": "datetime"
-      },
-      "Command": {
-        "type": "input",
-        "value": "Freebies",
-        "display": "hide"
-      },
-      "ServerUpdate": {
-        "type": "input",
-        "value": "05:00",
-        "display": "hide"
-      }
-    },
-    "Freebies": {
-      "FriendGifts": {
-        "type": "checkbox",
-        "value": true
-      },
-      "DailyShare": {
-        "type": "checkbox",
-        "value": true
-      },
-      "MailReward": {
-        "type": "checkbox",
-        "value": true
-      }
-    }
-  },
-  "ZhaoCai": {
-    "Scheduler": {
-      "Enable": {
-        "type": "checkbox",
-        "value": false,
-        "option": [
-          true,
-          false
-        ]
-      },
-      "NextRun": {
-        "type": "datetime",
-        "value": "2020-01-01 00:00:00",
-        "validate": "datetime"
-      },
-      "Command": {
-        "type": "input",
-        "value": "ZhaoCai",
-        "display": "hide"
-      },
-      "ServerUpdate": {
-        "type": "input",
-        "value": "05:00",
-        "display": "hide"
-      }
-    },
-    "ZhaoCai": {
-      "ZhaoCaiFree": {
-        "type": "checkbox",
-        "value": true
-      }
-    }
-  },
-  "DailyReward": {
-    "Scheduler": {
-      "Enable": {
-        "type": "checkbox",
-        "value": false,
-        "option": [
-          true,
-          false
-        ]
-      },
-      "NextRun": {
-        "type": "datetime",
-        "value": "2020-01-01 00:00:00",
-        "validate": "datetime"
-      },
-      "Command": {
-        "type": "input",
-        "value": "DailyReward",
-        "display": "hide"
-      },
-      "ServerUpdate": {
-        "type": "input",
-        "value": "05:00",
-        "display": "hide"
-      }
-    },
-    "DailyReward": {
-      "Weekly": {
-        "type": "checkbox",
-        "value": true
-      }
-    }
-  },
   "DataUpdate": {
     "Scheduler": {
       "Enable": {
@@ -556,6 +449,194 @@
         "stored": "StoredInt",
         "order": 8,
         "color": "#fc8f8b"
+      }
+    }
+  },
+  "ZhaoCai": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "ZhaoCai",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    },
+    "ZhaoCai": {
+      "ZhaoCaiFree": {
+        "type": "checkbox",
+        "value": true
+      }
+    }
+  },
+  "Freebies": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "Freebies",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    },
+    "Freebies": {
+      "FriendGifts": {
+        "type": "checkbox",
+        "value": true
+      },
+      "DailyShare": {
+        "type": "checkbox",
+        "value": true
+      },
+      "MailReward": {
+        "type": "checkbox",
+        "value": true
+      }
+    }
+  },
+  "DailyReward": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "DailyReward",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    },
+    "DailyReward": {
+      "Weekly": {
+        "type": "checkbox",
+        "value": true
+      }
+    }
+  },
+  "LeaderBoard": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "LeaderBoard",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    }
+  },
+  "MonthlySignIn": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "MonthlySignIn",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    }
+  },
+  "InformationClub": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "InformationClub",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
       }
     }
   },

@@ -481,7 +481,6 @@ class ModuleBase:
         self.device.screenshot()
         m = 0
         last_swipe_time = time.time()
-
         # 启动时立即滑动，根据参数决定先左滑还是先右滑
         if left and not right:
             self.device.swipe(swipe_points_1[0], swipe_points_1[1])
@@ -497,7 +496,6 @@ class ModuleBase:
 
         for _ in self.loop():
             moving = (time.time() - last_swipe_time) < swipe_cooldown
-
             if time_limit.reached():
                 if m >= max_swipes:
                     raise GameStuckError(f"wait_and_swipe_then_click: max swipes {max_swipes} reached")
@@ -509,11 +507,9 @@ class ModuleBase:
                 last_swipe_time = time.time()
                 m += 1
                 time_limit.reset()
-
             if self.appear(check_obj):
                 return True
-
             click_obj.load_search((0, 0, 1280, 720))
-
-            if not moving and self.appear_then_click(click_obj):
+            if not moving and self.appear_then_click(click_obj,interval=0):
+                print('识别成功')
                 continue
