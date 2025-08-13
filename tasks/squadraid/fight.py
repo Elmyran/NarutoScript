@@ -3,6 +3,7 @@
 from module.base.timer import Timer
 from module.exception import GameStuckError
 from module.logger import logger
+from module.ocr.digit import SimpleDigitOcr
 from module.ocr.ocr import Digit
 from tasks.base.assets.assets_base_popup import EXIT_CONFIRM
 from tasks.base.page import page_squad, page_squad_help_battle, page_main
@@ -26,8 +27,8 @@ class SquadRaidFight(UI):
             for _ in  self.loop():
                 if time.reached():
                     raise GameStuckError('SQUAD_RAID_REMAIN_TIMES DETECTED ERROR')
-                ocr=Digit(SQUAD_RAID_REMAIN_TIMES,lang='cn')
-                res=ocr.ocr_single_line(self.device.image)
+                ocr=SimpleDigitOcr()
+                res=ocr.extract_digit_simple(self.device.image,SQUAD_RAID_REMAIN_TIMES)
                 if res==2 or res==1:
                     break
                 if self.appear(SQUAD_RAID_HAVE_DONE):

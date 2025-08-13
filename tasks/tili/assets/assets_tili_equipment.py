@@ -395,10 +395,21 @@ SWEEP_STUFF_REMAIN = ButtonWrapper(
     ),
     en=None,
 )
-TI_LI_REMAIN = ButtonWrapper(
-    name='TI_LI_REMAIN',
+TI_LI_REMAIN_AFTER_SWEEP = ButtonWrapper(
+    name='TI_LI_REMAIN_AFTER_SWEEP',
     cn=Button(
-        file='./assets/cn/tili/equipment/TI_LI_REMAIN.png',
+        file='./assets/cn/tili/equipment/TI_LI_REMAIN_AFTER_SWEEP.png',
+        area=(747, 104, 895, 154),
+        search=(727, 84, 915, 174),
+        color=(100, 89, 78),
+        button=(747, 104, 895, 154),
+    ),
+    en=None,
+)
+TI_LI_REMAIN_BEFORE_SWEEP = ButtonWrapper(
+    name='TI_LI_REMAIN_BEFORE_SWEEP',
+    cn=Button(
+        file='./assets/cn/tili/equipment/TI_LI_REMAIN_BEFORE_SWEEP.png',
         area=(749, 191, 894, 233),
         search=(729, 171, 914, 253),
         color=(86, 73, 64),

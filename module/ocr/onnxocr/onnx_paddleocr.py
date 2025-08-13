@@ -3,7 +3,7 @@ import cv2
 import re
 
 from module.base.base import ModuleBase
-from module.base.button import ButtonWrapper
+from module.base.button import ButtonWrapper, Button
 from module.base.utils import area2corner, corner2area, area_in_area
 from module.device.method.utils import HierarchyButton
 from tasks.mission.priority import TaskPriority
@@ -141,28 +141,21 @@ class ONNXPaddleOcr(TextSystem,ModuleBase):
             if re.search(pattern,box.txt):
                 boxes_matched_time.append(box)
         return boxes_matched_time
-    def ocr_with_area(self,button=None):
-        img=button.image
-        area=button.area
-        # 1. 读取图像
-        image = cv2.imread(img)
-        # 2. 解析坐标并裁剪特定区域
+    def ocr_with_area(self, img, button=None):
+        area = button
+        if isinstance(button, (Button, ButtonWrapper)):
+            area = button.area
+
+        image = img  # img is already a numpy array
+
+        # Crop the region of interest
         x1, y1, x2, y2 = area
-        # 确保坐标有效
         x1, y1 = max(0, x1), max(0, y1)
         x2, y2 = min(image.shape[1], x2), min(image.shape[0], y2)
-        roi = image[y1:y2, x1:x2]  # OpenCV的裁剪格式: [y1:y2, x1:x2]
+        roi = image[y1:y2, x1:x2]  # Keep original 3-channel format
 
-        # 3. 预处理（提升识别率）
-        # 转换为灰度图
-        gray_roi = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
-        # 二值化（根据实际图像调整阈值）
-        _, thresh_roi = cv2.threshold(gray_roi, 150, 255, cv2.THRESH_BINARY_INV)
-
-        result=self.ocr(img)
-
-
-
+        # Use the original ROI for OCR (maintains 3 channels)
+        result = self.ocr(roi)
         return result
 
 # 创建全局OCR模型实例

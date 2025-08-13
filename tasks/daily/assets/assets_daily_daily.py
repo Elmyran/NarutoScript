@@ -47,92 +47,38 @@ DAILY_PROGRESS = ButtonWrapper(
     ),
     en=None,
 )
-DAILY_REWARD_10 = ButtonWrapper(
-    name='DAILY_REWARD_10',
-    cn=Button(
-        file='./assets/cn/daily/daily/DAILY_REWARD_10.png',
-        area=(474, 526, 551, 595),
-        search=(454, 506, 571, 615),
-        color=(141, 120, 35),
-        button=(474, 526, 551, 595),
-    ),
-    en=None,
-)
-DAILY_REWARD_100 = ButtonWrapper(
-    name='DAILY_REWARD_100',
-    cn=Button(
-        file='./assets/cn/daily/daily/DAILY_REWARD_100.png',
-        area=(1137, 523, 1233, 593),
-        search=(1117, 503, 1253, 613),
-        color=(122, 96, 52),
-        button=(1137, 523, 1233, 593),
-    ),
-    en=None,
-)
-DAILY_REWARD_100_DONE = ButtonWrapper(
-    name='DAILY_REWARD_100_DONE',
-    cn=Button(
-        file='./assets/cn/daily/daily/DAILY_REWARD_100_DONE.png',
-        area=(1118, 501, 1239, 602),
-        search=(1098, 481, 1259, 622),
-        color=(142, 109, 54),
-        button=(1118, 501, 1239, 602),
-    ),
-    en=None,
-)
-DAILY_REWARD_10_DONE = ButtonWrapper(
-    name='DAILY_REWARD_10_DONE',
-    cn=Button(
-        file='./assets/cn/daily/daily/DAILY_REWARD_10_DONE.png',
-        area=(454, 494, 569, 599),
-        search=(434, 474, 589, 619),
-        color=(113, 99, 55),
-        button=(454, 494, 569, 599),
-    ),
-    en=None,
-)
-DAILY_REWARD_40 = ButtonWrapper(
-    name='DAILY_REWARD_40',
-    cn=Button(
-        file='./assets/cn/daily/daily/DAILY_REWARD_40.png',
-        area=(697, 524, 774, 596),
-        search=(677, 504, 794, 616),
-        color=(72, 92, 95),
-        button=(697, 524, 774, 596),
-    ),
-    en=None,
-)
-DAILY_REWARD_40_DONE = ButtonWrapper(
-    name='DAILY_REWARD_40_DONE',
-    cn=Button(
-        file='./assets/cn/daily/daily/DAILY_REWARD_40_DONE.png',
-        area=(669, 499, 805, 594),
-        search=(649, 479, 825, 614),
-        color=(110, 117, 98),
-        button=(669, 499, 805, 594),
-    ),
-    en=None,
-)
-DAILY_REWARD_80 = ButtonWrapper(
-    name='DAILY_REWARD_80',
-    cn=Button(
-        file='./assets/cn/daily/daily/DAILY_REWARD_80.png',
-        area=(991, 516, 1070, 590),
-        search=(971, 496, 1090, 610),
-        color=(119, 90, 63),
-        button=(991, 516, 1070, 590),
-    ),
-    en=None,
-)
-DAILY_REWARD_80_DONE = ButtonWrapper(
-    name='DAILY_REWARD_80_DONE',
-    cn=Button(
-        file='./assets/cn/daily/daily/DAILY_REWARD_80_DONE.png',
-        area=(955, 500, 1091, 596),
-        search=(935, 480, 1111, 616),
-        color=(124, 99, 69),
-        button=(955, 500, 1091, 596),
-    ),
+DAILY_REWARD = ButtonWrapper(
+    name='DAILY_REWARD',
+    cn=[
+        Button(
+            file='./assets/cn/daily/daily/DAILY_REWARD.png',
+            area=(470, 520, 554, 597),
+            search=(450, 500, 574, 617),
+            color=(141, 116, 38),
+            button=(470, 520, 554, 597),
+        ),
+        Button(
+            file='./assets/cn/daily/daily/DAILY_REWARD.2.png',
+            area=(694, 525, 776, 596),
+            search=(674, 505, 796, 616),
+            color=(135, 133, 94),
+            button=(694, 525, 776, 596),
+        ),
+        Button(
+            file='./assets/cn/daily/daily/DAILY_REWARD.3.png',
+            area=(991, 521, 1073, 599),
+            search=(971, 501, 1093, 619),
+            color=(165, 123, 57),
+            button=(991, 521, 1073, 599),
+        ),
+        Button(
+            file='./assets/cn/daily/daily/DAILY_REWARD.4.png',
+            area=(1141, 523, 1224, 600),
+            search=(1121, 503, 1244, 620),
+            color=(172, 134, 48),
+            button=(1141, 523, 1224, 600),
+        ),
+    ],
     en=None,
 )
 DAILY_REWARD_DETAIL = ButtonWrapper(
@@ -144,6 +90,40 @@ DAILY_REWARD_DETAIL = ButtonWrapper(
         color=(33, 32, 21),
         button=(455, 643, 682, 706),
     ),
+    en=None,
+)
+DAILY_REWARD_HAVE_CLAIMED = ButtonWrapper(
+    name='DAILY_REWARD_HAVE_CLAIMED',
+    cn=[
+        Button(
+            file='./assets/cn/daily/daily/DAILY_REWARD_HAVE_CLAIMED.png',
+            area=(451, 507, 559, 601),
+            search=(431, 487, 579, 621),
+            color=(110, 95, 47),
+            button=(451, 507, 559, 601),
+        ),
+        Button(
+            file='./assets/cn/daily/daily/DAILY_REWARD_HAVE_CLAIMED.2.png',
+            area=(679, 512, 781, 598),
+            search=(659, 492, 801, 618),
+            color=(96, 115, 99),
+            button=(679, 512, 781, 598),
+        ),
+        Button(
+            file='./assets/cn/daily/daily/DAILY_REWARD_HAVE_CLAIMED.3.png',
+            area=(963, 505, 1069, 594),
+            search=(943, 485, 1089, 614),
+            color=(121, 94, 66),
+            button=(963, 505, 1069, 594),
+        ),
+        Button(
+            file='./assets/cn/daily/daily/DAILY_REWARD_HAVE_CLAIMED.4.png',
+            area=(1129, 507, 1222, 598),
+            search=(1109, 487, 1242, 618),
+            color=(155, 112, 45),
+            button=(1129, 507, 1222, 598),
+        ),
+    ],
     en=None,
 )
 MAIN_GOTO_DAILY = ButtonWrapper(

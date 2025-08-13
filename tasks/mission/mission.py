@@ -75,7 +75,7 @@ class Mission(UI):
                 raise GameStuckError("Mission reward claim")
             if self.appear_then_click(MISSION_REWARD_CLAIM_ALL,interval=0.5):
                 continue
-            if self.appear(MISSION_REWARD,interval=0.5):
+            if self.appear_then_click(MISSION_REWARD,interval=0.5):
                 continue
             res = ocr.matched_ocr(self.device.image, Claimable)
             if not res and times>2:
@@ -94,6 +94,11 @@ class Mission(UI):
                 return False
             if time.reached():
                 raise GameStuckError("Task Selected Stucked")
+            TASK_HAVE_ACCEPTED.load_search(TASK_DETECT_AREA.area)
+            res=TASK_HAVE_ACCEPTED.match_multi_template(self.device.image)
+            if res and len(res)==3:
+                return False
+
             if CHARACTER_UNSELECTED.match_template(self.device.image, direct_match=True):
                 break
             task = self._mission_select_priority()
@@ -124,7 +129,7 @@ class Mission(UI):
         self.device.screenshot()
         # OCR识别部分保持不变
         ocr = ONNXPaddleOcr(use_angle_cls=True, use_gpu=False)
-        result = ocr.ocr_with_area(TASK_DETECT_AREA)
+        result = ocr.ocr(self.device.image)
         # 时间和任务识别
         task_time = ocr.matchTime(result)
         task_name = ocr.matchArea(result, TASK_AREA.search)
@@ -243,3 +248,7 @@ class Mission(UI):
             if self.ui_page_appear(page_main):
                 break
 
+az=Mission('alas',task='Alas')
+az.image_file=r'C:\Users\liuzy\Desktop\StarRailCopilot\tasks\mission\MuMu12-20250813-130007.png'
+ocr=ONNXPaddleOcr(use_angle_cls=True, use_gpu=False)
+print(ocr.ocr_with_area(az.device.image,TASK_DETECT_AREA))

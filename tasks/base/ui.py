@@ -348,7 +348,9 @@ class UI(MainPage):
         Returns:
             If handled any popup.
         """
-        if self.handle_exit():
+        if self.handle_exit(interval=1):
+            return True
+        if self.handle_reward(interval=1):
             return True
 
 

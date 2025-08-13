@@ -351,6 +351,17 @@ TASK_GREEN_BOX = ButtonWrapper(
     ),
     en=None,
 )
+TASK_HAVE_ACCEPTED = ButtonWrapper(
+    name='TASK_HAVE_ACCEPTED',
+    cn=Button(
+        file='./assets/cn/mission/TASK_HAVE_ACCEPTED.png',
+        area=(1109, 220, 1232, 314),
+        search=(1089, 200, 1252, 334),
+        color=(44, 21, 30),
+        button=(1109, 220, 1232, 314),
+    ),
+    en=None,
+)
 TASK_RED_BOX = ButtonWrapper(
     name='TASK_RED_BOX',
     cn=Button(

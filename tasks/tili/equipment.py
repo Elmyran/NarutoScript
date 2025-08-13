@@ -29,7 +29,7 @@ class Equipment(UI):
             
 
     def _equipment_enter(self):
-        time=Timer(8,count=10).start()
+        time=Timer(20,count=30).start()
         for _ in self.loop():
             if time.reached():
                 raise GameStuckError('Equipment Enter Stuck')
@@ -72,7 +72,7 @@ class Equipment(UI):
                 continue  # 切换失败，直接下一个装备
             # 检查是否可升级
             res = self._check_equipment_upgradeable_and_advance()
-            print('res', res)
+
 
             if res:
                 return True  # 找到可升级装备
@@ -243,6 +243,10 @@ class Equipment(UI):
         for _ in self.loop():
             if time.reached():
                 raise GameStuckError('Equipment Sweep Enter Stuck')
+            ocr=DigitCounter(TI_LI_REMAIN_BEFORE_SWEEP)
+            current,remain,total= ocr.ocr_single_line(self.device.image)
+            if current<5 and total==200:
+                return 'TI_LI_SHORTAGE'
             if self.appear(SWEEP_DETAIL):
                 break
             if self.appear_then_click(STUFF_SWEEP_BUTTON):
@@ -251,9 +255,9 @@ class Equipment(UI):
         for _ in self.loop():
             if sweep_time.reached():
                 raise GameStuckError('Equipment Sweep Stuck')
-            ocr=DigitCounter(TI_LI_REMAIN)
+            ocr=DigitCounter(TI_LI_REMAIN_AFTER_SWEEP)
             current,remain,total= ocr.ocr_single_line(self.device.image)
-            if current<5 :
+            if current<5 and total==200 :
                 for _ in self.loop():
                     if self.appear(STUFF_CHECK):
                         break
