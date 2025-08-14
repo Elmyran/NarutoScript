@@ -10,6 +10,8 @@ import numpy as np
 
 class PopupHandler(ModuleBase):
     def handle_exit(self, interval=5)-> bool:
+        if self.appear_then_click(EXIT_ORGANIZATION_FROG_PURSE,interval=interval):
+            return True
         if self.appear_then_click(EXIT_CONFIRM,interval=interval):
             return True
         if self.appear_then_click(EXIT_ORGANIZATION_RED_ENVELOPE,interval=interval):

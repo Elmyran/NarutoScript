@@ -15,6 +15,7 @@ class ManualConfig:
     > LeaderBoard
     > InformationClub
     > MonthlySignIn
+    > IchirakuRamen
     > CultivationRoad 
     > Akatsuki 
     > SquadRaid

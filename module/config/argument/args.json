@@ -407,51 +407,6 @@
       }
     }
   },
-  "DataUpdate": {
-    "Scheduler": {
-      "Enable": {
-        "type": "checkbox",
-        "value": false,
-        "option": [
-          true,
-          false
-        ]
-      },
-      "NextRun": {
-        "type": "datetime",
-        "value": "2020-01-01 00:00:00",
-        "validate": "datetime"
-      },
-      "Command": {
-        "type": "input",
-        "value": "DataUpdate",
-        "display": "hide"
-      },
-      "ServerUpdate": {
-        "type": "input",
-        "value": "05:00",
-        "display": "hide"
-      }
-    },
-    "ItemStorage": {
-      "Credit": {
-        "type": "stored",
-        "value": {},
-        "display": "display",
-        "stored": "StoredInt",
-        "order": 7,
-        "color": "#ab7cf2"
-      },
-      "StallerJade": {
-        "type": "stored",
-        "value": {},
-        "display": "display",
-        "stored": "StoredInt",
-        "order": 8,
-        "color": "#fc8f8b"
-      }
-    }
-  },
   "ZhaoCai": {
     "Scheduler": {
       "Enable": {
@@ -631,6 +586,33 @@
       "Command": {
         "type": "input",
         "value": "InformationClub",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    }
+  },
+  "IchirakuRamen": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "IchirakuRamen",
         "display": "hide"
       },
       "ServerUpdate": {

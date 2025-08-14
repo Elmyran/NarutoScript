@@ -269,8 +269,8 @@ class Equipment(UI):
                 for _ in self.loop():
                     if self.appear(STUFF_CHECK):
                         break
-                    if self.appear(SWEEP_CHECK):
-                        self.device.click(EQUIPMENT_EXIT)
+                    if self.appear_then_click(SWEEP_CHECK):
+                        continue
                 return 'STUFF_FULL'
             if SWEEP_RUNNING.match_template(self.device.image,direct_match=True):
                 continue

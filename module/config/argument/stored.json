@@ -1,28 +1,4 @@
 {
-  "Credit": {
-    "name": "Credit",
-    "path": "DataUpdate.ItemStorage.Credit",
-    "i18n": "ItemStorage.Credit.name",
-    "stored": "StoredInt",
-    "attrs": {
-      "time": "2020-01-01 00:00:00",
-      "value": 0
-    },
-    "order": 7,
-    "color": "#ab7cf2"
-  },
-  "StallerJade": {
-    "name": "StallerJade",
-    "path": "DataUpdate.ItemStorage.StallerJade",
-    "i18n": "ItemStorage.StallerJade.name",
-    "stored": "StoredInt",
-    "attrs": {
-      "time": "2020-01-01 00:00:00",
-      "value": 0
-    },
-    "order": 8,
-    "color": "#fc8f8b"
-  },
   "Dungeon": {
     "name": "Dungeon",
     "path": "TiLi.TiLiStorage.Dungeon",

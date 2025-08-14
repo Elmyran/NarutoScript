@@ -54,10 +54,6 @@
       "name": "任务集会所",
       "help": ""
     },
-    "DataUpdate": {
-      "name": "数据更新",
-      "help": ""
-    },
     "ZhaoCai": {
       "name": "招财",
       "help": ""
@@ -80,6 +76,10 @@
     },
     "InformationClub": {
       "name": "情报社",
+      "help": ""
+    },
+    "IchirakuRamen": {
+      "name": "一乐拉面",
       "help": ""
     },
     "CultivationRoad": {

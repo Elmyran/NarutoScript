@@ -14,6 +14,17 @@ ACTIVITY_CHECK = ButtonWrapper(
     ),
     en=None,
 )
+ACTIVITY_DETAIL_AREA = ButtonWrapper(
+    name='ACTIVITY_DETAIL_AREA',
+    cn=Button(
+        file='./assets/cn/activity/ACTIVITY_DETAIL_AREA.png',
+        area=(164, 59, 1280, 720),
+        search=(144, 39, 1280, 720),
+        color=(136, 103, 61),
+        button=(164, 59, 1280, 720),
+    ),
+    en=None,
+)
 ACTIVITY_EXIT = ButtonWrapper(
     name='ACTIVITY_EXIT',
     cn=Button(

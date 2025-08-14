@@ -18,5 +18,3 @@ from module.config.stored.classes import (
 
 class StoredGenerated:
     Dungeon = StoredDungeon("TiLi.TiLiStorage.Dungeon")
-    Credit = StoredInt("DataUpdate.ItemStorage.Credit")
-    StallerJade = StoredInt("DataUpdate.ItemStorage.StallerJade")

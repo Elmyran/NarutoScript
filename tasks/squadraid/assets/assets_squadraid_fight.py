@@ -236,3 +236,14 @@ SQUAD_RAID_REMAIN_TIMES = ButtonWrapper(
     ),
     en=None,
 )
+SQUAD_RAID_TIMES_COUNTER = ButtonWrapper(
+    name='SQUAD_RAID_TIMES_COUNTER',
+    cn=Button(
+        file='./assets/cn/squadraid/fight/SQUAD_RAID_TIMES_COUNTER.png',
+        area=(720, 621, 787, 657),
+        search=(700, 601, 807, 677),
+        color=(51, 43, 14),
+        button=(720, 621, 787, 657),
+    ),
+    en=None,
+)

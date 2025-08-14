@@ -84,7 +84,9 @@ class StarRailCopilot(AzurLaneAutoScript):
     def monthly_sign_in(self):
         from tasks.activity.monthly_sign_in.monthly_sign_in import MonthlySignIn
         MonthlySignIn(config=self.config, device=self.device).run()
-
+    def ichiraku_ramen(self):
+        from  tasks.activity.ichiraku_ramen.ichiraku_ramen import IchirakuRamen
+        IchirakuRamen(config=self.config, device=self.device).run()
 
 
 

@@ -13,6 +13,16 @@ EXIT_CONFIRM = ButtonWrapper(
         button=(536, 414, 741, 486),
     ),
 )
+EXIT_ORGANIZATION_FROG_PURSE = ButtonWrapper(
+    name='EXIT_ORGANIZATION_FROG_PURSE',
+    share=Button(
+        file='./assets/share/base/popup/EXIT_ORGANIZATION_FROG_PURSE.png',
+        area=(538, 240, 738, 479),
+        search=(518, 220, 758, 499),
+        color=(214, 145, 111),
+        button=(538, 240, 738, 479),
+    ),
+)
 EXIT_ORGANIZATION_RED_ENVELOPE = ButtonWrapper(
     name='EXIT_ORGANIZATION_RED_ENVELOPE',
     share=Button(

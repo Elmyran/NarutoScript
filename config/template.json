@@ -111,18 +111,6 @@
       "ServerUpdate": "05:00"
     }
   },
-  "DataUpdate": {
-    "Scheduler": {
-      "Enable": false,
-      "NextRun": "2020-01-01 00:00:00",
-      "Command": "DataUpdate",
-      "ServerUpdate": "05:00"
-    },
-    "ItemStorage": {
-      "Credit": {},
-      "StallerJade": {}
-    }
-  },
   "ZhaoCai": {
     "Scheduler": {
       "Enable": false,
@@ -179,6 +167,14 @@
       "Enable": false,
       "NextRun": "2020-01-01 00:00:00",
       "Command": "InformationClub",
+      "ServerUpdate": "05:00"
+    }
+  },
+  "IchirakuRamen": {
+    "Scheduler": {
+      "Enable": false,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "IchirakuRamen",
       "ServerUpdate": "05:00"
     }
   },

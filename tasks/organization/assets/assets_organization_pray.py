@@ -52,6 +52,17 @@ ORGANIZATION_EXIT = ButtonWrapper(
     ),
     en=None,
 )
+ORGANIZATION_FROG_PURSE = ButtonWrapper(
+    name='ORGANIZATION_FROG_PURSE',
+    cn=Button(
+        file='./assets/cn/organization/pray/ORGANIZATION_FROG_PURSE.png',
+        area=(538, 240, 738, 479),
+        search=(518, 220, 758, 499),
+        color=(214, 145, 111),
+        button=(538, 240, 738, 479),
+    ),
+    en=None,
+)
 ORGANIZATION_GOTO_PRAY = ButtonWrapper(
     name='ORGANIZATION_GOTO_PRAY',
     cn=Button(

@@ -44,9 +44,9 @@ Daily:
     Mission:
       - Scheduler
 
-    DataUpdate:
-      - Scheduler
-      - ItemStorage
+#    DataUpdate:
+#      - Scheduler
+#      - ItemStorage
 
 Rewards:
   menu: 'collapse'
@@ -70,6 +70,10 @@ Rewards:
     InformationClub:
       - Scheduler
       - InformationClub
+    IchirakuRamen:
+      - Scheduler
+      - IchirakuRamen
+
 
 
 

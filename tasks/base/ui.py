@@ -140,7 +140,7 @@ class UI(MainPage):
             for page in Page.iter_pages():
                 if page.parent is None or page.check_button is None:
                     continue
-                if self.ui_page_appear(page, interval=5):
+                if self.ui_page_appear(page, interval=2):
                     logger.info(f'Page switch: {page} -> {page.parent}')
                     self.handle_lang_check(page)
                     if self.ui_page_confirm(page):
@@ -352,6 +352,7 @@ class UI(MainPage):
             return True
         if self.handle_reward(interval=1):
             return True
+
 
 
 

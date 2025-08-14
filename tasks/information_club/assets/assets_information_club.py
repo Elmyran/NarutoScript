@@ -16,13 +16,22 @@ CLUB_GOTO_WELFARE_STATION = ButtonWrapper(
 )
 DAILY_SIGN_IN_BUTTON = ButtonWrapper(
     name='DAILY_SIGN_IN_BUTTON',
-    cn=Button(
-        file='./assets/cn/information_club/DAILY_SIGN_IN_BUTTON.png',
-        area=(583, 529, 701, 577),
-        search=(563, 509, 721, 597),
-        color=(213, 100, 94),
-        button=(583, 529, 701, 577),
-    ),
+    cn=[
+        Button(
+            file='./assets/cn/information_club/DAILY_SIGN_IN_BUTTON.png',
+            area=(583, 529, 701, 577),
+            search=(563, 509, 721, 597),
+            color=(213, 100, 94),
+            button=(583, 529, 701, 577),
+        ),
+        Button(
+            file='./assets/cn/information_club/DAILY_SIGN_IN_BUTTON.2.png',
+            area=(584, 73, 663, 112),
+            search=(564, 53, 683, 132),
+            color=(219, 123, 117),
+            button=(584, 73, 663, 112),
+        ),
+    ],
     en=None,
 )
 DAILY_SIGN_IN_HAVE_DONE = ButtonWrapper(

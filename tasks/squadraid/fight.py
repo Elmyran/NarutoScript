@@ -4,7 +4,7 @@ from module.base.timer import Timer
 from module.exception import GameStuckError
 from module.logger import logger
 from module.ocr.digit import SimpleDigitOcr
-from module.ocr.ocr import Digit
+from module.ocr.ocr import Digit, DigitCounter
 from tasks.base.assets.assets_base_popup import EXIT_CONFIRM
 from tasks.base.page import page_squad, page_squad_help_battle, page_main
 from tasks.base.ui import UI
@@ -27,13 +27,12 @@ class SquadRaidFight(UI):
             for _ in  self.loop():
                 if time.reached():
                     raise GameStuckError('SQUAD_RAID_REMAIN_TIMES DETECTED ERROR')
-                ocr=SimpleDigitOcr()
-                res=ocr.extract_digit_simple(self.device.image,SQUAD_RAID_REMAIN_TIMES)
-                if res==2 or res==1:
+                ocr=DigitCounter(SQUAD_RAID_TIMES_COUNTER)
+                current,remain,total=ocr.ocr_single_line(self.device.image)
+                if remain!=2 and total!=0:
                     break
                 if self.appear(SQUAD_RAID_HAVE_DONE):
                     return False
-
             self._help_battle_select()
             self._start_fight()
         else:
@@ -64,11 +63,11 @@ class SquadRaidFight(UI):
         for _ in self.loop():
             if time.reached():
                 raise GameStuckError("SQUAD_RAID_FIGHT_STUCK")
-            if self.appear_then_click(HELP_BATTLE_START_FIGHT):
+            if self.appear_then_click(HELP_BATTLE_START_FIGHT,interval=0):
                 continue
             if self.appear(SQUAD_RAID_FIGHTING):
                 continue
-            if self.appear_then_click(SQUAD_RAID_FIGHT_SUCCESS):
+            if self.appear_then_click(SQUAD_RAID_FIGHT_SUCCESS,interval=0):
                 continue
             if self.appear(SQUAD_RAID_CHECK):
                 return True
@@ -98,15 +97,14 @@ class SquadRaidFight(UI):
                     time.reset()
                 elif m>5:
                     raise GameStuckError("Squad Raid enter Stucked")
+            if self.ui_page_appear(page_squad):
+                return True
             SQUAD_RAID_RED_DOT.load_search((0, 0, 1280, 720))  # Full screen but bounded
             if self.appear_then_click(SQUAD_RAID_RED_DOT, interval=1):
                 continue
             if MAIN_GOTO_SQUAD_RAID.match_template(self.device.image,direct_match=True):
                 move = False
                 continue
-            if self.appear(SQUAD_RAID_CHECK):
-                return True
-
         logger.info(f"Squad Raid entered")
         return True
 

@@ -17,8 +17,7 @@
       "Organization",
       "SurvivalTrail",
       "TiLi",
-      "Mission",
-      "DataUpdate"
+      "Mission"
     ]
   },
   "Rewards": {
@@ -30,7 +29,8 @@
       "DailyReward",
       "LeaderBoard",
       "MonthlySignIn",
-      "InformationClub"
+      "InformationClub",
+      "IchirakuRamen"
     ]
   },
   "Weekly": {

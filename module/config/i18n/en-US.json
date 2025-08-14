@@ -54,10 +54,6 @@
       "name": "Task.Mission.name",
       "help": "Task.Mission.help"
     },
-    "DataUpdate": {
-      "name": "Task.DataUpdate.name",
-      "help": "Task.DataUpdate.help"
-    },
     "ZhaoCai": {
       "name": "Task.ZhaoCai.name",
       "help": "Task.ZhaoCai.help"
@@ -81,6 +77,10 @@
     "InformationClub": {
       "name": "Task.InformationClub.name",
       "help": "Task.InformationClub.help"
+    },
+    "IchirakuRamen": {
+      "name": "Task.IchirakuRamen.name",
+      "help": "Task.IchirakuRamen.help"
     },
     "CultivationRoad": {
       "name": "Task.CultivationRoad.name",
