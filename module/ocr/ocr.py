@@ -61,7 +61,7 @@ class Ocr:
     merge_thres_x = 0
     merge_thres_y = 0
 
-    def __init__(self, button: ButtonWrapper, lang=None, name=None):
+    def __init__(self, button: ButtonWrapper, lang='cn', name=None):
         """
         Args:
             button:

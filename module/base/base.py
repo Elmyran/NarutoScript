@@ -477,7 +477,7 @@ class ModuleBase:
                                     swipe_points_2=([1200, 314], [0, 322]),
                                     max_swipes=5, swipe_interval=10,
                                     swipe_cooldown=0.3,
-                                    left=True, right=False):
+                                    left=False, right=False):
         self.device.screenshot()
         m = 0
         last_swipe_time = time.time()

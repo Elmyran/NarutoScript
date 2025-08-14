@@ -3,11 +3,14 @@ from module.base.timer import Timer
 from module.base.utils import crop
 from module.exception import GameStuckError
 from module.logger import logger
-from module.ocr.ocr import Digit, DigitCounter
+from module.ocr.ocr import Digit, DigitCounter, Ocr
+from module.ocr.onnxocr.onnx_paddleocr import ONNXPaddleOcr
 from tasks.base.assets.assets_base import TILI_REMAIN
 from tasks.base.page import *
 from tasks.base.ui import UI
 from tasks.tili.assets.assets_tili_equipment import *
+from tasks.tili.keyword import NotTurnOn, MopUp
+
 
 class Equipment(UI):
     def handle_equipment(self):
@@ -23,6 +26,7 @@ class Equipment(UI):
                 res=self._equipment_advance()
                 if res=='TI_LI_SHORTAGE':
                     break
+                else:continue
             else:
                 break
         self._equipment_exit()
@@ -63,7 +67,6 @@ class Equipment(UI):
         if not valid_parts:
             logger.info("No equipment parts below level found")
             return False
-
         for button in valid_parts:
             logger.info(f"Trying equipment part: {button}")
             # 切换装备，最多尝试 3 次
@@ -72,14 +75,11 @@ class Equipment(UI):
                 continue  # 切换失败，直接下一个装备
             # 检查是否可升级
             res = self._check_equipment_upgradeable_and_advance()
-
-
             if res:
                 return True  # 找到可升级装备
             else:
                 logger.info(f"{button} cannot be upgraded, moving to next part")
                 continue  # 铜币不足 / 材料不足，继续下一个
-
         return False
 
 
@@ -89,14 +89,15 @@ class Equipment(UI):
             timeout = Timer(3, count=6).start()
             click_interval = Timer(1)
             # 获取当前装备详情截图作为基准
+            if button==EQUIPMENT_KNIFE:
+                return True
+            #如果需要切换的是刀，则直接不需要验证
             self.device.screenshot()
             initial_detail = self.image_crop(EQUIPMENT_PART_DETAIL.area, copy=True)
-
             while not timeout.reached():
                 self.device.screenshot()
-
                 # 点击装备按钮
-                if click_interval.reached() and self.appear(button):
+                if click_interval.reached() :
                     self.device.click(button)
                     click_interval.reset()
                     self.device.sleep(0.3)  # 等待 UI 响应
@@ -111,15 +112,13 @@ class Equipment(UI):
 
         return False
     def _get_valid_equipment_parts(self):
-        """Get all equipment parts below level 72"""
+        """Get all equipment parts below level 79"""
         part_areas = [EQUIPMENT_KNIFE, EQUIPMENT_RING, EQUIPMENT_CAP,
                       EQUIPMENT_SHIRT, EQUIPMENT_BOOK, EQUIPMENT_NECKLACE]
-
         self.device.screenshot()
         image_list = [crop(self.device.image, area.area) for area in part_areas]
         ocr = Digit(part_areas[0])
         results = ocr.ocr_multi_lines(image_list)
-
         valid_parts = []
         for i, (value, score) in enumerate(results):
             logger.info(f"Part {i+1}: {value}")
@@ -130,8 +129,13 @@ class Equipment(UI):
     def _check_equipment_upgradeable_and_advance(self):
         """检测铜币和升级条件"""
         timeout = Timer(5, count=10).start()
+
         for _ in self.loop():
             if timeout.reached():
+                return False
+            ocr=Ocr(STUFF_LIST_AREA,lang='cn')
+            res=ocr.matched_ocr(self.device.image,NotTurnOn)
+            if res:
                 return False
             if self.appear(STUFF_FILL_ALL):
                 return True
@@ -145,123 +149,107 @@ class Equipment(UI):
                 continue
         return False
     def _equipment_advance(self):
+        skip_stuff=False
         time=Timer(20,count=30).start()
         for _ in self.loop():
             if time.reached():
                 raise GameStuckError('Equipment Advance Stuck')
-            if self.appear(STUFF_EQUIPMENT_DIRECT):
+            if self.appear(STUFF_SINGLE):
+                skip_stuff=True|skip_stuff
+            if self.appear(STUFF_EQUIPMENT):
                 break
             if self.appear(STUFF_SYNTHETIC_BUTTON):
                 break
             if self.appear(STUFF_SWEEP_BUTTON):
                 break
-            stuff=self.find_first_unclaimed_item()
+            ocr=Ocr(STUFF_LIST_AREA,lang='cn')
+            stuff=ocr.matched_ocr(self.device.image,MopUp)
             if not stuff:
                 continue
-            self.device.click(stuff)
+            self.device.click(stuff[0])
 
-        for _ in self.loop():
-            if time.reached():
-                raise GameStuckError('Equipment Advance Stuff Part 1 Stuck')
-            if self.appear(EQUIPMENT_CHECK):
-                break
-            if self.appear_then_click(STUFF_SYNTHETIC_BUTTON):
-                continue
-            if self.appear_then_click(STUFF_EQUIPMENT):
-                continue
-            if self.appear_then_click(STUFF_EQUIPMENT_DIRECT):
-                continue
-            ocr=DigitCounter(STUFF_PART_1)
-            current, remain, total = ocr.ocr_single_line(self.device.image)
-            if remain>0:
-                self.device.click(STUFF_PART_1)
+        if not skip_stuff:
+
+            for _ in self.loop():
+                if time.reached():
+                    raise GameStuckError('Equipment Advance Stuff Part 1 Stuck')
+                if self.appear(EQUIPMENT_CHECK):
+                    break
+                if self.appear_then_click(STUFF_EQUIPMENT,interval=1):
+                    continue
+                if self.appear_then_click(STUFF_SYNTHETIC_BUTTON,interval=1):
+                    continue
+                ocr=DigitCounter(STUFF_PART_1)
+                current, remain, total = ocr.ocr_single_line(self.device.image)
+                if remain>0:
+                    self.device.click(STUFF_PART_1)
+                    res=self.sweep()
+                    if res=='TI_LI_SHORTAGE':
+                        return 'TI_LI_SHORTAGE'
+                    elif res=='STUFF_FULL':
+                        continue
+                elif remain<=0:
+                    break
+            for _ in self.loop():
+                if time.reached():
+                    raise GameStuckError('Equipment Advance Stuff Part 2 Stuck')
+                if self.appear(EQUIPMENT_CHECK):
+                    break
+                if self.appear_then_click(STUFF_EQUIPMENT,interval=1):
+                    continue
+                if self.appear_then_click(STUFF_SYNTHETIC_BUTTON,interval=1):
+                    continue
+                ocr=DigitCounter(STUFF_PART_2)
+                current, remain, total = ocr.ocr_single_line(self.device.image)
+                if remain>0:
+                    self.device.click(STUFF_PART_2)
+                    res=self.sweep()
+                    if res=='TI_LI_SHORTAGE':
+                        return 'TI_LI_SHORTAGE'
+                    elif res=='STUFF_FULL':
+                        continue
+                elif remain<=0:
+                    break
+        else:
+            for _ in self.loop():
+                if time.reached():
+                    raise GameStuckError('Equipment Advance Stuff Part 1 Stuck')
+                if self.appear(EQUIPMENT_CHECK):
+                    break
+                if self.appear_then_click(STUFF_SYNTHETIC_BUTTON,interval=1):
+                    continue
+                if self.appear_then_click(STUFF_EQUIPMENT,interval=1):
+                    continue
                 res=self.sweep()
                 if res=='TI_LI_SHORTAGE':
                     return 'TI_LI_SHORTAGE'
                 elif res=='STUFF_FULL':
                     continue
-            elif remain<=0:
-                break
-        for _ in self.loop():
-            if time.reached():
-                raise GameStuckError('Equipment Advance Stuff Part 2 Stuck')
-            if self.appear(EQUIPMENT_CHECK):
-                break
-            if self.appear_then_click(STUFF_SYNTHETIC_BUTTON):
-                continue
-            if self.appear_then_click(STUFF_EQUIPMENT):
-                continue
-            if self.appear_then_click(STUFF_EQUIPMENT_DIRECT):
-                continue
-            ocr=DigitCounter(STUFF_PART_2)
-            current, remain, total = ocr.ocr_single_line(self.device.image)
-            if remain>0:
-                self.device.click(STUFF_PART_2)
-                res=self.sweep()
-                if res=='TI_LI_SHORTAGE':
-                    return 'TI_LI_SHORTAGE'
-                elif res=='STUFF_FULL':
-                    continue
-            elif remain<=0:
-                break
-
-
-
-
-
-
-    def find_first_unclaimed_item(self):
-
-        """
-        从左到右找到第一个未获得的物品
-
-        Returns:
-            int: 第一个未获得物品的位置索引（0-5），如果都已获得则返回-1
-        """
-        # 定义六个物品的区域（从左到右）
-        item_areas = [STUFF_1, STUFF_2, STUFF_3, STUFF_4, STUFF_5, STUFF_6]
-        for i, area in enumerate(item_areas):
-            # 检测该区域是否有鲜艳颜色（已获得状态）
-            # 根据实际情况调整颜色值和阈值
-            bright_color_count = self.image_color_count(
-                area,
-                color=(255, 255, 255),  # 鲜艳颜色，需要根据实际调整
-                threshold=200,          # 颜色相似度阈值
-                count=50               # 最小像素数量
-            )
-
-            if not bright_color_count:
-                # 没有检测到鲜艳颜色，说明是暗色（未获得）
-                logger.info(f"Found first unclaimed item at position {i}")
-                return item_areas[i]
-
-        logger.info("All items have been claimed")
-        return None
-
+        return 'TI_LI_SHORTAGE'
     def sweep(self):
         time=Timer(4,count=5).start()
         for _ in self.loop():
             if time.reached():
                 raise GameStuckError('Equipment Sweep Enter Stuck')
-            ocr=DigitCounter(TI_LI_REMAIN_BEFORE_SWEEP)
-            current,remain,total= ocr.ocr_single_line(self.device.image)
-            if current<5 and total==200:
-                return 'TI_LI_SHORTAGE'
             if self.appear(SWEEP_DETAIL):
                 break
-            if self.appear_then_click(STUFF_SWEEP_BUTTON):
+            if self.appear_then_click(STUFF_SWEEP_BUTTON,interval=1):
                 continue
+        ocr=DigitCounter(TI_LI_REMAIN_BEFORE_SWEEP)
+        current,remain,total= ocr.ocr_single_line(self.device.image)
+        if current<5 and total==200:
+            return 'TI_LI_SHORTAGE'
         sweep_time=Timer(10,count=15).start()
         for _ in self.loop():
             if sweep_time.reached():
                 raise GameStuckError('Equipment Sweep Stuck')
             ocr=DigitCounter(TI_LI_REMAIN_AFTER_SWEEP)
             current,remain,total= ocr.ocr_single_line(self.device.image)
-            if current<5 and total==200 :
+            if current<5 and total!=0 :
                 for _ in self.loop():
                     if self.appear(STUFF_CHECK):
                         break
-                    if self.appear_then_click(SWEEP_CHECK):
+                    if self.appear_then_click(SWEEP_CHECK,interval=1):
                         continue
                 self.config.TiLi_TiLiRemain=current
                 return 'TI_LI_SHORTAGE'
@@ -269,17 +257,20 @@ class Equipment(UI):
                 for _ in self.loop():
                     if self.appear(STUFF_CHECK):
                         break
-                    if self.appear_then_click(SWEEP_CHECK):
+                    if self.appear_then_click(SWEEP_CHECK,interval=1):
                         continue
                 return 'STUFF_FULL'
             if SWEEP_RUNNING.match_template(self.device.image,direct_match=True):
-                continue
+                if STUFF_NOT_FULL.match_template(self.device.image,direct_match=True):
+                    self.appear_then_click(SWEEP_CONTINUE,interval=1)
+                    continue
             if self.appear(SWEEP_START):
                 self.device.click(SWEEP_START)
                 continue
             if self.appear(STUFF_SWEEP_BUTTON):
                 self.device.click(STUFF_SWEEP_BUTTON)
                 continue
+
         return 'TI_LI_SHORTAGE'
 
     def _equipment_exit(self):
