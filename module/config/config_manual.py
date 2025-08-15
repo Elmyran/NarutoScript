@@ -15,6 +15,7 @@ class ManualConfig:
     > InformationClub
     > MonthlySignIn
     > IchirakuRamen
+    > Recruit
     > Freebies 
     > CultivationRoad 
     > Akatsuki 

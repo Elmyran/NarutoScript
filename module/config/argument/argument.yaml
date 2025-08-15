@@ -161,6 +161,10 @@ DailyReward:
   Weekly:
     type: checkbox
     value: true
+Recruit:
+  SkipNormalRecruit:
+    type: checkbox
+    value: false
 # ==================== Weekly ====================
 CultivationRoad:
   ClearRedDot:

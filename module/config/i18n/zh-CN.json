@@ -54,6 +54,10 @@
       "name": "任务集会所",
       "help": ""
     },
+    "Recruit": {
+      "name": "免费招募",
+      "help": ""
+    },
     "ZhaoCai": {
       "name": "招财",
       "help": ""
@@ -367,6 +371,16 @@
     },
     "Weekly": {
       "name": "周常奖励",
+      "help": ""
+    }
+  },
+  "Recruit": {
+    "_info": {
+      "name": "招募设置",
+      "help": ""
+    },
+    "SkipNormalRecruit": {
+      "name": "跳过免费招募",
       "help": ""
     }
   },

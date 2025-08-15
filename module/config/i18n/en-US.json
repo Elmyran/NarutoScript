@@ -54,6 +54,10 @@
       "name": "Task.Mission.name",
       "help": "Task.Mission.help"
     },
+    "Recruit": {
+      "name": "Task.Recruit.name",
+      "help": "Task.Recruit.help"
+    },
     "ZhaoCai": {
       "name": "Task.ZhaoCai.name",
       "help": "Task.ZhaoCai.help"
@@ -368,6 +372,16 @@
     "Weekly": {
       "name": "DailyReward.Weekly.name",
       "help": "DailyReward.Weekly.help"
+    }
+  },
+  "Recruit": {
+    "_info": {
+      "name": "Recruit._info.name",
+      "help": "Recruit._info.help"
+    },
+    "SkipNormalRecruit": {
+      "name": "Recruit.SkipNormalRecruit.name",
+      "help": "Recruit.SkipNormalRecruit.help"
     }
   },
   "CultivationRoad": {

@@ -141,7 +141,7 @@ class Pray(UI,daily_utils):
                 continue
 
 
-        claim_time=Timer(10, count=20).start()
+        claim_time=Timer(20, count=30).start()
         for _ in self.loop():
             if claim_time.reached():
                 raise GameStuckError("Organization Box Replacement Stucked")

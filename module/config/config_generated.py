@@ -76,5 +76,8 @@ class GeneratedConfig:
     # Group `DailyReward`
     DailyReward_Weekly = True
 
+    # Group `Recruit`
+    Recruit_SkipNormalRecruit = False
+
     # Group `CultivationRoad`
     CultivationRoad_ClearRedDot = True

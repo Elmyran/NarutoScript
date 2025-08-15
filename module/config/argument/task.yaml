@@ -43,6 +43,9 @@ Daily:
       - TiLiStorage
     Mission:
       - Scheduler
+    Recruit:
+      - Scheduler
+      - Recruit
 
 #    DataUpdate:
 #      - Scheduler

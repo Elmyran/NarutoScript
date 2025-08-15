@@ -10,6 +10,7 @@ from tasks.leaderboard.assets.assets_leaderboard import *
 from tasks.organization.assets.assets_organization_pray import *
 from tasks.organization.assets.assets_organization_replacement import *
 from tasks.organization.assets.assets_organization_boxclaim import *
+from tasks.recruit.assets.assets_recruit import *
 
 from tasks.tili.assets.assets_tili_dungeon import *
 from tasks.tili.assets.assets_tili_equipment import *
@@ -195,8 +196,10 @@ page_main.link(MAIN_GOTO_CLUB,destination=page_information_club)
 page_information_club.link(CLUB_GOTO_WELFARE_STATION,destination=page_welfare_station)
 page_information_club.link(WELFARE_STATION_EXIT,destination=page_main)
 page_welfare_station.link(WELFARE_STATION_EXIT,destination=page_main)
-
-
+#Recruit
+page_recruit=Page(RECRUIT_CHECK)
+page_main.link(MAIN_GOTO_RECRUIT,destination=page_recruit)
+page_recruit.link(RECRUIT_EXIT,destination=page_main)
 #Activity
 page_activity=Page(ACTIVITY_CHECK)
 page_main.link(MAIN_GOTO_ACTIVITY,destination=page_activity)

@@ -87,6 +87,9 @@ class StarRailCopilot(AzurLaneAutoScript):
     def ichiraku_ramen(self):
         from  tasks.activity.ichiraku_ramen.ichiraku_ramen import IchirakuRamen
         IchirakuRamen(config=self.config, device=self.device).run()
+    def recruit(self):
+        from tasks.recruit.recruit import Recruit
+        Recruit(config=self.config, device=self.device).run()
 
 
 
