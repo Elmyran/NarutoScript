@@ -16,13 +16,22 @@ CLAIM_ALL = ButtonWrapper(
 )
 CLAIM_ALL_DONE = ButtonWrapper(
     name='CLAIM_ALL_DONE',
-    cn=Button(
-        file='./assets/cn/freebies/mail/CLAIM_ALL_DONE.png',
-        area=(575, 335, 721, 382),
-        search=(555, 315, 741, 402),
-        color=(75, 78, 78),
-        button=(575, 335, 721, 382),
-    ),
+    cn=[
+        Button(
+            file='./assets/cn/freebies/mail/CLAIM_ALL_DONE.png',
+            area=(575, 335, 721, 382),
+            search=(555, 315, 741, 402),
+            color=(75, 78, 78),
+            button=(575, 335, 721, 382),
+        ),
+        Button(
+            file='./assets/cn/freebies/mail/CLAIM_ALL_DONE.2.png',
+            area=(190, 349, 522, 531),
+            search=(170, 329, 542, 551),
+            color=(214, 202, 175),
+            button=(190, 349, 522, 531),
+        ),
+    ],
     en=None,
 )
 CLAIM_DELETE = ButtonWrapper(

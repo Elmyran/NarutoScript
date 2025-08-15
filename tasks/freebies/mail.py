@@ -23,7 +23,7 @@ class MailReward(UI):
             if self.appear(MAIL_CHECK):
                 logger.info('Mail enter success')
                 break
-            if self.appear_then_click(MAIL_RED_DOT,interval=1):
+            if self.appear_then_click(MAIL_RED_DOT,interval=1,similarity=0.9):
                 continue
 
     def _mail_exit(self):

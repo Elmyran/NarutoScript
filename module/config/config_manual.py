@@ -9,13 +9,13 @@ class ManualConfig:
         return server.lang
 
     SCHEDULER_PRIORITY = """
-    Restart
-    > Freebies  
+    Restart 
     > ZhaoCai
     > LeaderBoard
     > InformationClub
     > MonthlySignIn
     > IchirakuRamen
+    > Freebies 
     > CultivationRoad 
     > Akatsuki 
     > SquadRaid
