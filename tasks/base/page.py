@@ -196,15 +196,15 @@ page_information_club.link(CLUB_GOTO_WELFARE_STATION,destination=page_welfare_st
 page_information_club.link(WELFARE_STATION_EXIT,destination=page_main)
 page_welfare_station.link(WELFARE_STATION_EXIT,destination=page_main)
 #SecretAdventure
-page_secret_challenge=Page(SECRET_REALM_CHALLENGE_CHECK)
-page_main.link(MAIN_GOTO_SECRET_REALM_CHALLENGE,destination=page_secret_challenge)
-page_secret_adventure=Page(SECRET_ADVENTURE_CHECK)
-page_secret_challenge.link(SECRET_REALM_CHALLENGE_CHECK,destination=page_secret_adventure)
-page_secret_room=Page(SECRET_ADVENTURE_ROOM_CHECK)
-page_secret_adventure.link(SECRET_ADVENTURE_CREATE_ROOM,destination=page_secret_room)
-page_secret_room.link(SECRET_ADVENTURE_ROOM_EXIT,destination=page_secret_adventure)
-page_secret_adventure.link(SECRET_ADVENTURE_EXIT,destination=page_secret_challenge)
-page_secret_challenge.link(SECRET_REALM_CHALLENGE_EXIT,destination=page_main)
+# page_secret_challenge=Page(SECRET_REALM_CHALLENGE_CHECK)
+# page_main.link(MAIN_GOTO_SECRET_REALM_CHALLENGE,destination=page_secret_challenge)
+# page_secret_adventure=Page(SECRET_ADVENTURE_CHECK)
+# page_secret_challenge.link(SECRET_REALM_CHALLENGE_CHECK,destination=page_secret_adventure)
+# page_secret_room=Page(SECRET_ADVENTURE_ROOM_CHECK)
+# page_secret_adventure.link(SECRET_ADVENTURE_CREATE_ROOM,destination=page_secret_room)
+# page_secret_room.link(SECRET_ADVENTURE_ROOM_EXIT,destination=page_secret_adventure)
+# page_secret_adventure.link(SECRET_ADVENTURE_EXIT,destination=page_secret_challenge)
+# page_secret_challenge.link(SECRET_REALM_CHALLENGE_EXIT,destination=page_main)
 
 
 #Activity
