@@ -1,6 +1,6 @@
 from module.base.timer import Timer, future_time
 from tasks.activity.assets.assets_activity import *
-from tasks.activity.assets.assets_activity_ichiraku_remen import *
+from tasks.activity.assets.assets_activity_ichiraku_ramen import *
 from tasks.base.page import page_activity
 from tasks.base.ui import UI
 

@@ -12,7 +12,13 @@ ACTIVITY_CHECK = ButtonWrapper(
         color=(98, 97, 76),
         button=(0, 3, 162, 111),
     ),
-    en=None,
+    share=Button(
+        file='./assets/share/activity/ACTIVITY_CHECK.png',
+        area=(0, 3, 162, 111),
+        search=(0, 0, 182, 131),
+        color=(98, 97, 76),
+        button=(0, 3, 162, 111),
+    ),
 )
 ACTIVITY_DETAIL_AREA = ButtonWrapper(
     name='ACTIVITY_DETAIL_AREA',
@@ -23,7 +29,13 @@ ACTIVITY_DETAIL_AREA = ButtonWrapper(
         color=(136, 103, 61),
         button=(164, 59, 1280, 720),
     ),
-    en=None,
+    share=Button(
+        file='./assets/share/activity/ACTIVITY_DETAIL_AREA.png',
+        area=(164, 59, 1280, 720),
+        search=(144, 39, 1280, 720),
+        color=(136, 103, 61),
+        button=(164, 59, 1280, 720),
+    ),
 )
 ACTIVITY_EXIT = ButtonWrapper(
     name='ACTIVITY_EXIT',
@@ -34,7 +46,13 @@ ACTIVITY_EXIT = ButtonWrapper(
         color=(37, 17, 7),
         button=(1101, 0, 1280, 74),
     ),
-    en=None,
+    share=Button(
+        file='./assets/share/activity/ACTIVITY_EXIT.png',
+        area=(1101, 0, 1280, 74),
+        search=(1081, 0, 1280, 94),
+        color=(37, 17, 7),
+        button=(1101, 0, 1280, 74),
+    ),
 )
 ACTIVITY_LIST_AREA = ButtonWrapper(
     name='ACTIVITY_LIST_AREA',
@@ -45,7 +63,13 @@ ACTIVITY_LIST_AREA = ButtonWrapper(
         color=(70, 97, 126),
         button=(0, 104, 162, 720),
     ),
-    en=None,
+    share=Button(
+        file='./assets/share/activity/ACTIVITY_LIST_AREA.png',
+        area=(1, 117, 189, 718),
+        search=(0, 97, 209, 720),
+        color=(88, 103, 116),
+        button=(1, 117, 189, 718),
+    ),
 )
 MAIN_GOTO_ACTIVITY = ButtonWrapper(
     name='MAIN_GOTO_ACTIVITY',
@@ -56,5 +80,11 @@ MAIN_GOTO_ACTIVITY = ButtonWrapper(
         color=(131, 116, 104),
         button=(1189, 18, 1255, 84),
     ),
-    en=None,
+    share=Button(
+        file='./assets/share/activity/MAIN_GOTO_ACTIVITY.png',
+        area=(1189, 18, 1255, 84),
+        search=(1169, 0, 1275, 104),
+        color=(131, 116, 104),
+        button=(1189, 18, 1255, 84),
+    ),
 )

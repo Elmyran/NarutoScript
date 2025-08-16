@@ -55,5 +55,3 @@ class Recruit(UI):
             return None
 
 
-az = Recruit('alas', task='Alas')
-az.handle_recruit()
