@@ -90,6 +90,9 @@ class StarRailCopilot(AzurLaneAutoScript):
     def recruit(self):
         from tasks.recruit.recruit import Recruit
         Recruit(config=self.config, device=self.device).run()
+    def battle_order(self):
+        from tasks.battle_order.battle_order import BattleOrder
+        BattleOrder(config=self.config, device=self.device).run()
 
 
 

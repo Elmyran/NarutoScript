@@ -14,7 +14,7 @@ class FriendGifts(UI):
         self.ui_ensure(page_friend_panel)
         self._friend_gifts_give()
         self._friend_gifts_claim()
-        self._friend_gifts_exit()
+        self.ui_goto_main()
 
     def _friend_gifts_give(self):
        time=Timer(8,count=10).start()
@@ -36,30 +36,22 @@ class FriendGifts(UI):
             if self.appear(GIFTS_CLAIM_CONFIRM):
                 break
             if self.appear(GIFTS_CLAIM_CHECK):
-                return  True
-            if self.appear(GIFTS_CLAIM,interval=1):
-                self.device.click(GIFTS_CLAIM)
+                return True
+            if self.appear_then_click(GIFTS_CLAIM,interval=1):
                 continue
 
         for _ in self.loop():
             if time.reached():
                 raise GameStuckError("friend gifts confirm failed")
-            if self.appear(GIFTS_CLAIM_CHECK):
-                break
             if self.appear_then_click(GIFTS_CLAIM_CONFIRM):
                 continue
-            if self.appear(GIFTS_CLAIM,interval=1):
-                self.device.click(GIFTS_CLAIM)
+            if self.appear(GIFTS_CLAIM_CHECK):
+                break
+            if self.appear_then_click(GIFTS_CLAIM,interval=1):
                 continue
         return True
 
-    def _friend_gifts_exit(self):
-        time=Timer(5,count=8).start()
-        for _ in self.loop():
-            if time.reached():
-                raise GameStuckError("friend gifts exit failed")
-            if self.ui_page_appear(page_main):
-                break
-            if self.appear(FRIEND_PANEL_GOTO_MAIN,interval=1):
-                self.device.click(FRIEND_PANEL_GOTO_MAIN)
-                continue
+
+az=FriendGifts('alas',task='Alas')
+az.device.screenshot()
+az.ui_goto_main()

@@ -76,6 +76,11 @@ Rewards:
     IchirakuRamen:
       - Scheduler
       - IchirakuRamen
+    BattleOrder:
+      - Scheduler
+      - BattleOrder
+      - BattleOrderStorage
+
 
 
 

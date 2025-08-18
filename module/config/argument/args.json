@@ -655,6 +655,47 @@
       }
     }
   },
+  "BattleOrder": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "BattleOrder",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    },
+    "BattleOrder": {
+      "LikeAndShare": {
+        "type": "checkbox",
+        "value": true
+      }
+    },
+    "BattleOrderStorage": {
+      "BattleOrderRank": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "SortedBattleOrderRank"
+      }
+    }
+  },
   "CultivationRoad": {
     "Scheduler": {
       "Enable": {

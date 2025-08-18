@@ -27,6 +27,7 @@ class ManualConfig:
     > Mission
     > Duel
     > DailyReward
+    > BattleOrder
     > DataUpdate
     """
 

@@ -1,4 +1,4 @@
-from typing import Callable
+
 
 from module.base.base import ModuleBase
 from module.base.utils import color_similarity_2d
@@ -15,6 +15,8 @@ class PopupHandler(ModuleBase):
         if self.appear_then_click(EXIT_CONFIRM,interval=interval):
             return True
         if self.appear_then_click(EXIT_ORGANIZATION_RED_ENVELOPE,interval=interval):
+            return True
+        if self.appear_then_click(FRIEND_GIFTS_CLAIM_CONFIRM,interval=interval):
             return True
 
         return False

@@ -9,7 +9,7 @@ from module.config.stored.classes import (
     StoredInt,
     StoredPlanner,
     StoredPlannerOverall,
-    StoredTrailblazePower,
+    StoredTrailblazePower, SortedBattleOrderRank,
 )
 
 
@@ -18,3 +18,4 @@ from module.config.stored.classes import (
 
 class StoredGenerated:
     Dungeon = StoredDungeon("TiLi.TiLiStorage.Dungeon")
+    BattleOrderRank = SortedBattleOrderRank("BattleOrder.BattleOrderStorage.BattleOrderRank")

@@ -236,4 +236,6 @@ class StoredPlannerOverall(StoredBase):
 
 
 class StoredDungeon(StoredCounter, StoredExpiredAt0500):
+    FIXED_TOTAL = 1
+class SortedBattleOrderRank(StoredCounter,StoredExpiredAtMonday0500):
     FIXED_TOTAL = 1 # Weekly limit

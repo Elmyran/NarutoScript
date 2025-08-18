@@ -52,13 +52,11 @@ class SurvivalTrail(UI):
         logger.info(f"survival trial entered")
 
     def _mop_up(self):
-        time = Timer(25, count=30).start()
+        time = Timer(40, count=60).start()
         for _ in self.loop():
             if time.reached():
                 raise GameStuckError("Survival Trial Stucked")
-
-            if self.appear(SURVIVAL_TELEPORT):
-                self.device.click(SURVIVAL_TELEPORT)
+            if self.appear_then_click(SURVIVAL_TELEPORT,interval=0):
                 continue
             if self.appear(SURVIVAL_CHECK):
                 break
@@ -113,8 +111,6 @@ class SurvivalTrail(UI):
                 return False
             if self.appear_then_click(SURVIVAL_RESET_BUTTON):
                 continue
-
-
         return True
 
     def survival_exit(self):

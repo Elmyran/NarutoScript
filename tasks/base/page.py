@@ -1,6 +1,9 @@
 import traceback
 
 from tasks.base.assets.assets_base_page import *
+from tasks.battle_order.assets.assets_battle_order import BATTLE_ORDER_CHECK, MAIN_GOTO_BATTLE_ORDER, \
+    BATTLE_ORDER_RANK_GOTO_SHARE, BATTLE_ORDER_GOTO_RANK
+from tasks.battle_order.assets.assets_battle_order_ui import BATTLE_ORDER_EXIT, BATTLE_ORDER_RANK_EXIT
 from tasks.daily.assets.assets_daily_daily import *
 from tasks.daily.assets.assets_daily_weekly import *
 from tasks.duel.assets.assets_duel import *
@@ -200,6 +203,13 @@ page_welfare_station.link(WELFARE_STATION_EXIT,destination=page_main)
 page_recruit=Page(RECRUIT_CHECK)
 page_main.link(MAIN_GOTO_RECRUIT,destination=page_recruit)
 page_recruit.link(RECRUIT_EXIT,destination=page_main)
+#BattleOrder
+page_battle_order=Page(BATTLE_ORDER_CHECK)
+page_main.link(MAIN_GOTO_BATTLE_ORDER,destination=page_battle_order)
+page_battle_order.link(BATTLE_ORDER_EXIT,destination=page_main)
+page_battle_order_rank=Page(BATTLE_ORDER_RANK_GOTO_SHARE)
+page_battle_order_rank.link(BATTLE_ORDER_RANK_EXIT,destination=page_battle_order)
+page_battle_order.link(BATTLE_ORDER_GOTO_RANK,destination=page_battle_order_rank)
 #Activity
 page_activity=Page(ACTIVITY_CHECK)
 page_main.link(MAIN_GOTO_ACTIVITY,destination=page_activity)

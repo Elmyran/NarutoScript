@@ -119,11 +119,6 @@ TiLi:
   DungeonFirst:
     type: checkbox
     value: true
-TiLiStorage:
-  Dungeon:
-    stored: StoredDungeon
-    display: hide
-
 Duel:
   VictoryNumber:
     type: input
@@ -165,11 +160,29 @@ Recruit:
   SkipNormalRecruit:
     type: checkbox
     value: false
+BattleOrder:
+  LikeAndShare:
+    type: checkbox
+    value:  true
 # ==================== Weekly ====================
 CultivationRoad:
   ClearRedDot:
     type: checkbox
     value:  true
+
+# ==================== Sorted ====================
+TiLiStorage:
+  Dungeon:
+    stored: StoredDungeon
+    value: {}
+    display: hide
+BattleOrderStorage:
+  BattleOrderRank:
+    stored: SortedBattleOrderRank
+    value:  {}
+    display: hide
+
+
 # ==================== Tool ====================
 
 

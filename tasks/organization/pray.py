@@ -2,6 +2,7 @@ from module.base import button
 from module.base.timer import Timer
 from module.base.utils import color_similarity_2d
 from module.exception import GameStuckError
+from module.ocr.ocr import Ocr
 from tasks.base.assets.assets_base_popup import EXIT_ORGANIZATION_RED_ENVELOPE
 from tasks.base.page import page_main
 from tasks.base.ui import UI
@@ -12,6 +13,10 @@ from module.logger import  logger
 import cv2
 from tasks.daily.utils import daily_utils
 import numpy as np
+
+from tasks.organization.keyword import ReplacementHaveClaimedKeyword, ReplacementClaimKeyword
+
+
 class Pray(UI,daily_utils):
     def handle_Organization_Pray(self):
         self.device.click_record_clear()
@@ -139,12 +144,10 @@ class Pray(UI,daily_utils):
                 break
             if self.appear_then_click(PRAY_BOX_REPLACEMENT,interval=1):
                 continue
-
-
-        claim_time=Timer(20, count=30).start()
+        claim_time=Timer(30, count=40).start()
         for _ in self.loop():
             if claim_time.reached():
-                raise GameStuckError("Organization Box Replacement Stucked")
+                raise GameStuckError("Organization Box Replacement Stucked Claim")
             PRAY_BOX_REPLACEMENT_HAVE_CLAIMED.load_search(PRAY_BOX_REPLACEMENT_LIST.area)
             success = PRAY_BOX_REPLACEMENT_HAVE_CLAIMED.match_multi_template(self.device.image)
             if success and len(success) == 3:
@@ -156,7 +159,7 @@ class Pray(UI,daily_utils):
         for _ in self.loop():
             if time.reached():
                 raise GameStuckError("Organization Box Replacement Stucked")
-            if self.appear(PRAY_BUTTON,interval=1):
+            if self.appear(PRAY_BUTTON):
                 break
             if self.appear_then_click(PRAY_BOX_REPLACEMENT_HAVE_CLAIMED,interval=1):
                 continue

@@ -1,12 +1,10 @@
-from module.logger import logger
-from module.ui.draggable_list import DraggableList
-from module.ocr.ocr import Ocr
+
+
 from module.ocr.keyword import Keyword
 from dataclasses import dataclass
 from typing import ClassVar
 
-from tasks.activity.assets.assets_activity import ACTIVITY_LIST_AREA
-from tasks.activity.assets.assets_activity_ui import MONTHLY_SIGN_IN_CHECK
+
 
 
 # 首先定义活动标签页的关键词类

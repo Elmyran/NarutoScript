@@ -33,6 +33,16 @@ EXIT_ORGANIZATION_RED_ENVELOPE = ButtonWrapper(
         button=(1003, 23, 1145, 121),
     ),
 )
+FRIEND_GIFTS_CLAIM_CONFIRM = ButtonWrapper(
+    name='FRIEND_GIFTS_CLAIM_CONFIRM',
+    share=Button(
+        file='./assets/share/base/popup/FRIEND_GIFTS_CLAIM_CONFIRM.png',
+        area=(364, 168, 917, 403),
+        search=(344, 148, 937, 423),
+        color=(148, 142, 126),
+        button=(540, 411, 738, 488),
+    ),
+)
 GET_CHARACTER = ButtonWrapper(
     name='GET_CHARACTER',
     en=Button(

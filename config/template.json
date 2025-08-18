@@ -189,6 +189,20 @@
       "ServerUpdate": "05:00"
     }
   },
+  "BattleOrder": {
+    "Scheduler": {
+      "Enable": false,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "BattleOrder",
+      "ServerUpdate": "05:00"
+    },
+    "BattleOrder": {
+      "LikeAndShare": true
+    },
+    "BattleOrderStorage": {
+      "BattleOrderRank": {}
+    }
+  },
   "CultivationRoad": {
     "Scheduler": {
       "Enable": false,

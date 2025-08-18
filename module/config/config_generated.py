@@ -55,9 +55,6 @@ class GeneratedConfig:
     TiLi_LevelRestrictions = 72
     TiLi_DungeonFirst = True
 
-    # Group `TiLiStorage`
-    TiLiStorage_Dungeon = {}
-
     # Group `Duel`
     Duel_VictoryNumber = 0
 
@@ -79,5 +76,14 @@ class GeneratedConfig:
     # Group `Recruit`
     Recruit_SkipNormalRecruit = False
 
+    # Group `BattleOrder`
+    BattleOrder_LikeAndShare = True
+
     # Group `CultivationRoad`
     CultivationRoad_ClearRedDot = True
+
+    # Group `TiLiStorage`
+    TiLiStorage_Dungeon = {}
+
+    # Group `BattleOrderStorage`
+    BattleOrderStorage_BattleOrderRank = {}
