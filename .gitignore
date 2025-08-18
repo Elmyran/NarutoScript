@@ -1,6 +1,5 @@
 ### AzurLaneAutoScript
 log
-tasks/autofight
 config/backup/*
 config/*.ini
 !config/template.ini
@@ -258,3 +257,4 @@ adb_port.ini
 *.zip
 .vscode/*
 /tasks/autofight/
+/assets/cn/autofight
