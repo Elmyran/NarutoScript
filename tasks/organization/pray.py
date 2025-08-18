@@ -60,7 +60,7 @@ class Pray(UI,daily_utils):
         time=Timer(8, count=10).start()
         for _ in self.loop():
             if time.reached():
-                raise GameStuckError("Organization Pray Stucked")
+                raise GameStuckError("Organization enter pray panel Stuck")
             if self.appear_then_click(ORGANIZATION_PLAY_PANEL):
                 continue
             if self.appear_then_click(ORGANIZATION_GOTO_PRAY):
@@ -70,18 +70,26 @@ class Pray(UI,daily_utils):
 
 
     def pray(self):
-        time=Timer(6, count=10).start()
+        time=Timer(20, count=30).start()
         for _ in self.loop():
             if time.reached():
                 raise GameStuckError("Organization Pray Stucked")
+            if self.appear(PRAY_SUCCESS):
+                break
+            if self.appear(PRAY_HAVE_DONE):
+                break
             if self.appear_then_click(PRAY_BUTTON,interval=1):
                 continue
-            if self.appear(PRAY_SUCCESS,interval=1):
-                self.device.click(PRAY_SUCCESS)
+        for _ in self.loop():
+            if time.reached():
+                raise GameStuckError("Organization Pray Exit Stucked")
+            if self.appear_then_click(PRAY_SUCCESS,interval=0):
+                continue
+            if self.appear_then_click(PRAY_HAVE_DONE,interval=0):
+                continue
+            if self.appear(PRAY_BUTTON,interval=1):
                 break
-            if self.appear(PRAY_HAVE_DONE,interval=1):
-                self.device.click(PRAY_HAVE_DONE)
-                break
+
 
 
     def pray_box_claim(self):

@@ -65,6 +65,7 @@ class Akatsuki(UI):
 
 
     def _reward_claim(self):
+        self.device.click_record_clear()
         time=Timer(3, count=5).start()
         for _ in self.loop():
             if time.reached() and self.appear(AKATSUKI_DONE):
@@ -75,7 +76,7 @@ class Akatsuki(UI):
                 self.device.click(AKATSUKI_REWARD_RED_DOT)
             elif time.reached():
                 return  False
-        claim_time=Timer(10, count=20).start()
+        claim_time=Timer(20, count=30).start()
         times=0
         for _ in self.loop():
             if claim_time.reached():
@@ -88,10 +89,9 @@ class Akatsuki(UI):
                 if times>3 :
                     break
                 continue
-            if self.appear_then_click(REWARD_CLAIM_ALL):
+            if self.appear_then_click(REWARD_CLAIM_ALL,interval=0):
                 continue
-            if self.appear(REWARD_CLAIM_BUTTON):
-                self.device.click(REWARD_CLAIM_BUTTON)
+            if self.appear_then_click(REWARD_CLAIM_BUTTON,interval=1):
                 continue
     def _akatsuki_exit(self):
         self.device.click_record_clear()

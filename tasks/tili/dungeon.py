@@ -65,6 +65,8 @@ class Dungeon(UI):
                 raise GameStuckError('Dungeon Exit Stucked')
             if self.ui_page_appear(page_main):
                 break
+            if self.appear_then_click(TI_LI_SHORTAGE,interval=0):
+                continue
             if self.appear(SWEEP_END_CONFIRM):
                 self.device.click(DUNGEON_EXIT)
                 continue

@@ -248,7 +248,3 @@ class Mission(UI):
             if self.ui_page_appear(page_main):
                 break
 
-az=Mission('alas',task='Alas')
-az.image_file=r'C:\Users\liuzy\Desktop\StarRailCopilot\tasks\mission\MuMu12-20250813-130007.png'
-ocr=ONNXPaddleOcr(use_angle_cls=True, use_gpu=False)
-print(ocr.ocr_with_area(az.device.image,TASK_DETECT_AREA))
