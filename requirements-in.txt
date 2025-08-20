@@ -38,3 +38,5 @@ aiofiles
 # For dev
 # pip-tools
 # pynput==1.7.6
+torch==2.8.0
+ultralytics==8.3.182

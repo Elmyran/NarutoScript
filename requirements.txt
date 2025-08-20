@@ -67,10 +67,10 @@ shapely==2.0.1            # via pponnxcr
 six==1.16.0               # via uiautomator2
 sniffio==1.3.0            # via anyio
 starlette==0.14.2         # via -r requirements-in.txt
-sympy==1.12               # via onnxruntime
+sympy>=1.13.3              # via onnxruntime
 tornado==6.3.1            # via pywebio
 tqdm==4.65.0              # via -r requirements-in.txt
-typing-extensions==4.8.0  # via pydantic, pydantic-core
+typing-extensions>=4.10.0 # via pydantic, pydantic-core
 ua-parser==0.16.1         # via user-agents
 uiautomator2==2.16.17     # via -r requirements-in.txt
 uiautomator2cache==0.3.1  # via -r requirements-in.txt
