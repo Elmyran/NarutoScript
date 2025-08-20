@@ -83,3 +83,5 @@ websockets==11.0.3        # via uvicorn
 whichcraft==0.6.1         # via adbutils, uiautomator2
 wrapt==1.15.0             # via -r requirements-in.txt, deprecated
 xmltodict==0.13.0         # via apkutils2
+torch==2.8.0
+ultralytics==8.3.182

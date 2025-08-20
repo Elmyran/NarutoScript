@@ -37,7 +37,7 @@ Deploy:
     # URL of pypi mirror
     # [CN user] Use 'https://pypi.tuna.tsinghua.edu.cn/simple' for faster and more stable download
     # [Other] Use null
-    PypiMirror: null
+    PypiMirror: https://pypi.tuna.tsinghua.edu.cn/simple
     # Install dependencies at startup
     # [In most cases] Use true
     InstallDependencies: true
