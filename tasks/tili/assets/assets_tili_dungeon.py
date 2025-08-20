@@ -109,7 +109,7 @@ TI_LI_SHORTAGE = ButtonWrapper(
         area=(365, 188, 918, 532),
         search=(345, 168, 938, 552),
         color=(166, 161, 142),
-        button=(365, 188, 918, 532),
+        button=(837, 191, 917, 249),
     ),
     en=None,
 )

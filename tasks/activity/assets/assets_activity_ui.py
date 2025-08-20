@@ -3,6 +3,16 @@ from module.base.button import Button, ButtonWrapper
 # This file was auto-generated, do not modify it manually. To generate:
 # ``` python -m dev_tools.button_extract ```
 
+DING_CI_KAO_ROU_CHECK = ButtonWrapper(
+    name='DING_CI_KAO_ROU_CHECK',
+    share=Button(
+        file='./assets/share/activity/ui/DING_CI_KAO_ROU_CHECK.png',
+        area=(0, 482, 148, 553),
+        search=(0, 462, 168, 573),
+        color=(165, 156, 127),
+        button=(0, 482, 148, 553),
+    ),
+)
 MONTHLY_SIGN_IN_CHECK = ButtonWrapper(
     name='MONTHLY_SIGN_IN_CHECK',
     share=[

@@ -24,7 +24,7 @@ class Dungeon(UI):
     def _dungeon_enter(self):
 
         self.device.click_record_clear()
-        time=Timer(20,count=30).start()
+
         time_enter=Timer(8,count=10).start()
         for _ in self.loop():
             if time_enter.reached():
@@ -37,7 +37,7 @@ class Dungeon(UI):
             if self.appear(MAIN_GOTO_DUNGEON):
                 self.device.click(MAIN_GOTO_DUNGEON)
                 continue
-
+        time=Timer(40,count=60).start()
         for _ in self.loop():
             if  time.reached():
                 raise GameStuckError('Dungeon Sweep Stucked')

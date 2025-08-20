@@ -114,33 +114,9 @@ class Pray(UI,daily_utils):
 
 
 
-            #  0.01 30 60
-    def detect_ring_golden_glow(self, chest_area, inner_radius=20, outer_radius=60):
-        self.device.screenshot()
-        """在圆环区域内检测金光效果"""
-        image, ring_mask, detection_area = self.create_ring_mask(chest_area, inner_radius, outer_radius)
 
-        # 检测金色区域
-        golden_similarity = color_similarity_2d(image, color=(252, 209, 123))
 
-        # 应用圆环遮罩
-        masked_golden = cv2.bitwise_and(golden_similarity, golden_similarity, mask=ring_mask.astype(np.uint8))
 
-        # 阈值化处理
-        cv2.inRange(masked_golden, 200, 255, dst=masked_golden)
-
-        # 统计圆环内的金光像素
-        glow_pixels = cv2.countNonZero(masked_golden)
-        ring_pixels = cv2.countNonZero(ring_mask.astype(np.uint8))
-
-        # 计算金光像素占圆环面积的比例
-        if ring_pixels > 0:
-            glow_ratio = glow_pixels / ring_pixels
-            print(glow_ratio)
-            return glow_ratio > 0.02  # 5%以上认为有金光
-    def detect_golden_box(self):
-        not_golden_box=self.detect_ring_golden_glow(PRAY_BOX_CLAIM_15) or self.detect_ring_golden_glow(PRAY_BOX_CLAIM_25)
-        return not_golden_box
 
     def _pray_box_replacement(self):
         time=Timer(3, count=5).start()
@@ -155,7 +131,7 @@ class Pray(UI,daily_utils):
         claim_time=Timer(30, count=40).start()
         for _ in self.loop():
             if claim_time.reached():
-                raise GameStuckError("Organization Box Replacement Stucked Claim")
+                raise GameStuckError("Organization Box Replacement Claim Stuck ")
             PRAY_BOX_REPLACEMENT_HAVE_CLAIMED.load_search(PRAY_BOX_REPLACEMENT_LIST.area)
             success = PRAY_BOX_REPLACEMENT_HAVE_CLAIMED.match_multi_template(self.device.image)
             if success and len(success) == 3:
@@ -166,9 +142,10 @@ class Pray(UI,daily_utils):
 
         for _ in self.loop():
             if time.reached():
-                raise GameStuckError("Organization Box Replacement Stucked")
+                raise GameStuckError("Organization Box Replacement Exit Stuck")
             if self.appear(PRAY_BUTTON):
                 break
+            PRAY_BOX_REPLACEMENT_HAVE_CLAIMED.load_search(PRAY_BOX_REPLACEMENT_LIST.area)
             if self.appear_then_click(PRAY_BOX_REPLACEMENT_HAVE_CLAIMED,interval=1):
                 continue
 

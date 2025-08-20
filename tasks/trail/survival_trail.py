@@ -14,7 +14,7 @@ class SurvivalTrail(UI):
         self.ui_ensure(page_main)
         self._enter_trail()
         self._mop_up()
-        self.survival_exit()
+        self.ui_goto_main()
     def _enter_trail(self):
         if self.appear(SURVIVAL_PAGE_CHECK):
             return True
@@ -113,18 +113,5 @@ class SurvivalTrail(UI):
                 continue
         return True
 
-    def survival_exit(self):
-        time=Timer(20, count=30).start()
-        for _ in self.loop():
-            if time.reached():
-                raise GameStuckError("Survival Trial Exit   Stucked")
-            if self.ui_page_appear(page_main):
-                break
-            if self.appear(SURVIVAL_EXIT):
-                self.device.click(SURVIVAL_EXIT)
-                continue
-            if self.appear(TRAIL_EXIT):
-                self.device.click(TRAIL_EXIT)
-                continue
 
 

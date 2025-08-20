@@ -4,8 +4,8 @@ import re
 
 from module.base.base import ModuleBase
 from module.base.button import ButtonWrapper, Button
-from module.base.utils import area2corner, corner2area, area_in_area
-from module.device.method.utils import HierarchyButton
+from module.base.utils import  corner2area, area_in_area
+
 from tasks.mission.priority import TaskPriority
 from .predict_system import TextSystem
 from .utils import infer_args as init_args
@@ -205,6 +205,8 @@ def sav2Img(org_img, result, name="draw_ocr.jpg"):
     im_show = draw_ocr(image, boxes, txts, scores)
     im_show = Image.fromarray(im_show)
     im_show.save(name)
+
+
 
 
 if __name__ == "__main__":

@@ -11,21 +11,22 @@ class ManualConfig:
     SCHEDULER_PRIORITY = """
     Restart 
     > ZhaoCai
-    > LeaderBoard
     > InformationClub
     > MonthlySignIn
-    > IchirakuRamen
+    > YiLeLaMian
     > Recruit
-    > Freebies 
+    > DingCiKaoRou
+    > Freebies
+    > LeaderBoard 
     > CultivationRoad 
     > Akatsuki 
     > SquadRaid
     > FengRao
     > Organization
     > SurvivalTrail
-    > TiLi
     > Mission
     > Duel
+    > TiLi
     > DailyReward
     > BattleOrder
     > DataUpdate

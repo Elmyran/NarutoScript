@@ -3,6 +3,7 @@
 from module.base.timer import Timer
 from module.exception import GameStuckError
 from module.logger import logger
+from module.ocr.custom_ocr import CustomDigitCounter
 from module.ocr.digit import SimpleDigitOcr
 from module.ocr.ocr import Digit, DigitCounter
 from tasks.base.assets.assets_base_popup import EXIT_CONFIRM
@@ -20,14 +21,14 @@ class SquadRaidFight(UI):
                break
         if self.config.SquadRaid_SquadRaidBenefit:
             HelpBattleBenefit(self.config,self.device).handle_help_battle_benefit()
-        self.exit_to_main()
+        self.ui_goto_main()
     def _squad_raid_fight(self):
         if self._enter_squad_raid_screen():
             time=Timer(10,count=20).start()
             for _ in  self.loop():
                 if time.reached():
                     raise GameStuckError('SQUAD_RAID_REMAIN_TIMES DETECTED ERROR')
-                ocr=DigitCounter(SQUAD_RAID_TIMES_COUNTER)
+                ocr=CustomDigitCounter(SQUAD_RAID_TIMES_COUNTER)
                 current,remain,total=ocr.ocr_single_line(self.device.image)
                 if remain!=2 and total!=0:
                     break
@@ -108,13 +109,4 @@ class SquadRaidFight(UI):
         logger.info(f"Squad Raid entered")
         return True
 
-    def exit_to_main(self):
-        for _ in self.loop():
-            if self.appear(EXIT_CONFIRM):
-                self.device.click(EXIT_CONFIRM)
-                continue
-            if self.appear(SQUAD_RAID_EXIT):
-                self.device.click(SQUAD_RAID_EXIT)
-            if self.ui_page_appear(page_main):
-                break
-            self.device.click_record_clear()
+

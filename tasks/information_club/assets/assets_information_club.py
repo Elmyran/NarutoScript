@@ -47,13 +47,22 @@ DAILY_SIGN_IN_HAVE_DONE = ButtonWrapper(
 )
 DAILY_SIGN_IN_SUCCESS = ButtonWrapper(
     name='DAILY_SIGN_IN_SUCCESS',
-    cn=Button(
-        file='./assets/cn/information_club/DAILY_SIGN_IN_SUCCESS.png',
-        area=(584, 553, 702, 601),
-        search=(564, 533, 722, 621),
-        color=(213, 101, 95),
-        button=(584, 553, 702, 601),
-    ),
+    cn=[
+        Button(
+            file='./assets/cn/information_club/DAILY_SIGN_IN_SUCCESS.png',
+            area=(584, 553, 702, 601),
+            search=(564, 533, 722, 621),
+            color=(213, 101, 95),
+            button=(584, 553, 702, 601),
+        ),
+        Button(
+            file='./assets/cn/information_club/DAILY_SIGN_IN_SUCCESS.2.png',
+            area=(580, 530, 700, 576),
+            search=(560, 510, 720, 596),
+            color=(120, 120, 120),
+            button=(580, 530, 700, 576),
+        ),
+    ],
     en=None,
 )
 MAIN_GOTO_CLUB = ButtonWrapper(

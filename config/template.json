@@ -42,7 +42,12 @@
       "ServerUpdate": "05:00"
     },
     "Duel": {
-      "VictoryNumber": 0
+      "DuelWeeklyStatus": true,
+      "CurrentVictoryNumber": 0,
+      "TargetVictoryNumber": 10
+    },
+    "DuelStorage": {
+      "DuelDaily": {}
     }
   },
   "FengRao": {
@@ -181,11 +186,11 @@
       "ServerUpdate": "05:00"
     }
   },
-  "IchirakuRamen": {
+  "YiLeLaMian": {
     "Scheduler": {
       "Enable": false,
       "NextRun": "2020-01-01 00:00:00",
-      "Command": "IchirakuRamen",
+      "Command": "YiLeLaMian",
       "ServerUpdate": "05:00"
     }
   },
@@ -197,7 +202,8 @@
       "ServerUpdate": "05:00"
     },
     "BattleOrder": {
-      "LikeAndShare": true
+      "LikeAndShare": true,
+      "CharacterFragments": "秽土长门"
     },
     "BattleOrderStorage": {
       "BattleOrderRank": {}
@@ -219,6 +225,14 @@
       "Enable": false,
       "NextRun": "2020-01-01 00:00:00",
       "Command": "Akatsuki",
+      "ServerUpdate": "05:00"
+    }
+  },
+  "DingCiKaoRou": {
+    "Scheduler": {
+      "Enable": false,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "DingCiKaoRou",
       "ServerUpdate": "05:00"
     }
   }

@@ -1,10 +1,7 @@
 import traceback
 
 from tasks.base.assets.assets_base_page import *
-from tasks.battle_order.assets.assets_battle_order import BATTLE_ORDER_CHECK, MAIN_GOTO_BATTLE_ORDER, \
-    BATTLE_ORDER_RANK_GOTO_SHARE, BATTLE_ORDER_GOTO_RANK
-from tasks.battle_order.assets.assets_battle_order_ui import BATTLE_ORDER_EXIT, BATTLE_ORDER_RANK_EXIT
-from tasks.daily.assets.assets_daily_daily import *
+
 from tasks.daily.assets.assets_daily_weekly import *
 from tasks.duel.assets.assets_duel import *
 from tasks.duel.assets.assets_duel_ninjutsu import *
@@ -30,7 +27,7 @@ from tasks.freebies.assets.assets_freebies_dailyshare import *
 from tasks.freebies.assets.assets_freebies_friendgifts import *
 from tasks.login.assets.assets_login import *
 from tasks.activity.assets.assets_activity import *
-
+from tasks.base.assets.assets_base_page import *
 
 class Page:
     # Key: str, page name like "page_main"
@@ -130,10 +127,7 @@ page_organization.link(ORGANIZATION_EXIT,destination=page_main)
 #DailyReward
 page_daily=Page(DAILY_CHECK)
 page_main.link(MAIN_GOTO_DAILY,destination=page_daily)
-page_daily.link(DAILY_EXIT,destination=page_main)
-page_weekly=Page(WEEKLY_CHECK)
-page_daily.link(WEEKlY_BUTTON,destination=page_weekly)
-page_weekly.link(WEEKLY_EXIT,destination=page_daily)
+page_daily.link(CLOSE,destination=page_main)
 #SquadRaid
 page_squad=Page(SQUAD_RAID_CHECK)
 page_main.link(MAIN_GOTO_SQUAD_RAID,destination=page_squad)
@@ -163,10 +157,6 @@ page_cultivation.link(CULTIVATION_BOX,destination=page_cultivation_box)
 
 #Equipment
 page_equipment=Page(EQUIPMENT_CHECK)
-page_stuff=Page(STUFF_CHECK)
-page_sweep=Page(SWEEP_CHECK)
-page_sweep.link(EQUIPMENT_EXIT,destination=page_stuff)
-page_stuff.link(EQUIPMENT_EXIT,destination=page_equipment)
 page_equipment.link(EQUIPMENT_EXIT,destination=page_main)
 #Dungeon
 page_dungeon=Page(SWITCH_TO_DUNGEON)
@@ -206,9 +196,9 @@ page_recruit.link(RECRUIT_EXIT,destination=page_main)
 #BattleOrder
 page_battle_order=Page(BATTLE_ORDER_CHECK)
 page_main.link(MAIN_GOTO_BATTLE_ORDER,destination=page_battle_order)
-page_battle_order.link(BATTLE_ORDER_EXIT,destination=page_main)
-page_battle_order_rank=Page(BATTLE_ORDER_RANK_GOTO_SHARE)
-page_battle_order_rank.link(BATTLE_ORDER_RANK_EXIT,destination=page_battle_order)
+page_battle_order.link(CLOSE,destination=page_main)
+page_battle_order_rank=Page(BATTLE_ORDER_RANK_CHECK)
+page_battle_order_rank.link(CLOSE,destination=page_battle_order)
 page_battle_order.link(BATTLE_ORDER_GOTO_RANK,destination=page_battle_order_rank)
 #Activity
 page_activity=Page(ACTIVITY_CHECK)

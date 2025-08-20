@@ -56,7 +56,9 @@ class GeneratedConfig:
     TiLi_DungeonFirst = True
 
     # Group `Duel`
-    Duel_VictoryNumber = 0
+    Duel_DuelWeeklyStatus = True
+    Duel_CurrentVictoryNumber = 0
+    Duel_TargetVictoryNumber = 10
 
     # Group `ItemStorage`
     ItemStorage_Credit = {}
@@ -78,6 +80,7 @@ class GeneratedConfig:
 
     # Group `BattleOrder`
     BattleOrder_LikeAndShare = True
+    BattleOrder_CharacterFragments = '秽土长门'  # 秽土解斑, 永恒佐助, 忍战樱, 九喇嘛鸣人, 死门凯, 秽土柱间, 秽土鼬, 仙人兜, 秽土斑, 白面具, 秽土扉间, 百豪纲手, 秽土水门, 秽土日斩, 秽土长门, 斑, 柱间, 四代目雷影, 扉间, 神秘面具男, 须佐能乎鼬, 天道佩恩, 水门, 大蛇丸, 自来也
 
     # Group `CultivationRoad`
     CultivationRoad_ClearRedDot = True
@@ -87,3 +90,6 @@ class GeneratedConfig:
 
     # Group `BattleOrderStorage`
     BattleOrderStorage_BattleOrderRank = {}
+
+    # Group `DuelStorage`
+    DuelStorage_DuelDaily = {}

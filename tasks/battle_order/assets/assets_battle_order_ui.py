@@ -3,6 +3,16 @@ from module.base.button import Button, ButtonWrapper
 # This file was auto-generated, do not modify it manually. To generate:
 # ``` python -m dev_tools.button_extract ```
 
+BATTLE_ORDER_DETAIL = ButtonWrapper(
+    name='BATTLE_ORDER_DETAIL',
+    share=Button(
+        file='./assets/share/battle_order/ui/BATTLE_ORDER_DETAIL.png',
+        area=(170, 96, 1280, 643),
+        search=(150, 76, 1280, 663),
+        color=(150, 96, 51),
+        button=(170, 96, 1280, 643),
+    ),
+)
 BATTLE_ORDER_EXIT = ButtonWrapper(
     name='BATTLE_ORDER_EXIT',
     share=Button(
@@ -35,13 +45,22 @@ BATTLE_ORDER_RANK_EXIT = ButtonWrapper(
 )
 BATTLE_ORDER_REWARD_CHECK = ButtonWrapper(
     name='BATTLE_ORDER_REWARD_CHECK',
-    share=Button(
-        file='./assets/share/battle_order/ui/BATTLE_ORDER_REWARD_CHECK.png',
-        area=(241, 53, 369, 91),
-        search=(221, 33, 389, 111),
-        color=(86, 61, 20),
-        button=(241, 53, 369, 91),
-    ),
+    share=[
+        Button(
+            file='./assets/share/battle_order/ui/BATTLE_ORDER_REWARD_CHECK.png',
+            area=(241, 53, 369, 91),
+            search=(221, 33, 389, 111),
+            color=(86, 61, 20),
+            button=(241, 53, 369, 91),
+        ),
+        Button(
+            file='./assets/share/battle_order/ui/BATTLE_ORDER_REWARD_CHECK.2.png',
+            area=(2, 136, 164, 226),
+            search=(0, 116, 184, 246),
+            color=(169, 128, 66),
+            button=(2, 136, 164, 226),
+        ),
+    ],
 )
 BATTLE_ORDER_REWARD_CLICK = ButtonWrapper(
     name='BATTLE_ORDER_REWARD_CLICK',
@@ -55,13 +74,22 @@ BATTLE_ORDER_REWARD_CLICK = ButtonWrapper(
 )
 BATTLE_ORDER_WEEKLY_REWARD_CHECK = ButtonWrapper(
     name='BATTLE_ORDER_WEEKLY_REWARD_CHECK',
-    share=Button(
-        file='./assets/share/battle_order/ui/BATTLE_ORDER_WEEKLY_REWARD_CHECK.png',
-        area=(601, 131, 751, 184),
-        search=(581, 111, 771, 204),
-        color=(176, 158, 104),
-        button=(601, 131, 751, 184),
-    ),
+    share=[
+        Button(
+            file='./assets/share/battle_order/ui/BATTLE_ORDER_WEEKLY_REWARD_CHECK.png',
+            area=(601, 131, 751, 184),
+            search=(581, 111, 771, 204),
+            color=(176, 158, 104),
+            button=(601, 131, 751, 184),
+        ),
+        Button(
+            file='./assets/share/battle_order/ui/BATTLE_ORDER_WEEKLY_REWARD_CHECK.2.png',
+            area=(2, 336, 163, 427),
+            search=(0, 316, 183, 447),
+            color=(168, 129, 68),
+            button=(2, 336, 163, 427),
+        ),
+    ],
 )
 BATTLE_ORDER_WEEKLY_REWARD_CLICK = ButtonWrapper(
     name='BATTLE_ORDER_WEEKLY_REWARD_CLICK',
@@ -75,13 +103,22 @@ BATTLE_ORDER_WEEKLY_REWARD_CLICK = ButtonWrapper(
 )
 BATTLE_ORDER_WEEKLY_TASK_CHECK = ButtonWrapper(
     name='BATTLE_ORDER_WEEKLY_TASK_CHECK',
-    share=Button(
-        file='./assets/share/battle_order/ui/BATTLE_ORDER_WEEKLY_TASK_CHECK.png',
-        area=(827, 112, 974, 159),
-        search=(807, 92, 994, 179),
-        color=(180, 175, 160),
-        button=(827, 112, 974, 159),
-    ),
+    share=[
+        Button(
+            file='./assets/share/battle_order/ui/BATTLE_ORDER_WEEKLY_TASK_CHECK.png',
+            area=(827, 112, 974, 159),
+            search=(807, 92, 994, 179),
+            color=(180, 175, 160),
+            button=(827, 112, 974, 159),
+        ),
+        Button(
+            file='./assets/share/battle_order/ui/BATTLE_ORDER_WEEKLY_TASK_CHECK.2.png',
+            area=(1, 233, 165, 329),
+            search=(0, 213, 185, 349),
+            color=(170, 131, 67),
+            button=(1, 233, 165, 329),
+        ),
+    ],
 )
 BATTLE_ORDER_WEEKLY_TASK_CLICK = ButtonWrapper(
     name='BATTLE_ORDER_WEEKLY_TASK_CLICK',

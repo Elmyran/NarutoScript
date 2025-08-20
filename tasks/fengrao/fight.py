@@ -14,7 +14,7 @@ class FengRaoFight(UI):
         self.ui_ensure(page_main)
         self._feng_rao_enter()
         self._feng_rao_fight()
-        self._feng_rao_exit()
+        self.ui_goto_main()
 
 
     def _feng_rao_enter(self):
@@ -64,9 +64,9 @@ class FengRaoFight(UI):
         for _ in self.loop():
             if self.appear(FENG_RAO_HAVE_DONE):
                 return
-            if self.appear_then_click(FENG_RAO_START_FIGHT_BUTTON):
+            if self.appear_then_click(FENG_RAO_START_FIGHT_BUTTON,interval=1):
                 continue
-            if self.appear_then_click(FENG_RAO_FIGHT_STATUS):
+            if self.appear_then_click(FENG_RAO_FIGHT_STATUS,interval=1):
                 break
         self.fight()
 
@@ -140,12 +140,6 @@ class FengRaoFight(UI):
             except:
                 pass
 
-    def _feng_rao_exit(self):
-        for _ in self.loop():
-            if self.appear(FENG_RAO_EXIT):
-                self.device.click(FENG_RAO_EXIT)
-            if self.ui_page_appear(page_main):
-                break
 
 
 

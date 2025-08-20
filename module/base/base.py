@@ -1,3 +1,6 @@
+import cv2
+from ultralytics import YOLO
+
 import module.config.server as server_
 from module.base.button import Button, ButtonWrapper, ClickButton, match_template
 from module.base.timer import Timer
@@ -211,6 +214,59 @@ class ModuleBase:
             self.interval_reset(button, interval=interval)
 
         return appear
+    def detect_claimable_buttons(self, similarity=0.85, encourage=10):
+        """
+        检测图片中所有可领取奖励，返回ClickButton对象列表
+        """
+        import time
+        start_time = time.time()
+
+        img = self.device.screenshot()
+        # 检查图像通道数
+        if img.shape[2] == 3:  # RGB
+            img_bgr = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+        elif img.shape[2] == 4:  # RGBA
+            img_bgr = cv2.cvtColor(img, cv2.COLOR_RGBA2BGR)
+        else:
+            img_bgr = img
+
+        model = YOLO("module/ocr/best.pt")
+        results = model.predict(img_bgr, conf=similarity, verbose=False)  # 禁用YOLO输出
+
+        claimable_buttons = []
+        for result in results:
+            boxes = result.boxes
+            if boxes is not None:
+                for i, box in enumerate(boxes):
+                    cls_id = int(box.cls[0])
+                    conf = float(box.conf[0])
+
+                    if conf < similarity or cls_id != 0:
+                        continue
+
+                        # 获取边界框坐标
+                    x1, y1, x2, y2 = box.xyxy[0].tolist()
+                    cx, cy = int((x1 + x2) / 2), int((y1 + y2) / 2)
+
+                    # 创建按钮区域和点击区域
+                    button_area = (int(x1), int(y1), int(x2), int(y2))
+                    click_area = area_offset(
+                        (-encourage, -encourage, encourage, encourage),
+                        offset=(cx, cy)
+                    )
+
+                    claimable_button = ClickButton(
+                        area=button_area,
+                        button=click_area,
+                        name=f'YOLO_CLAIMABLE_{i}'
+                    )
+                    claimable_buttons.append(claimable_button)
+
+                    # 添加项目风格的日志输出
+        elapsed_time = time.time() - start_time
+        logger.attr(f'YOLO Detection {elapsed_time:.1f}s', f'{len(claimable_buttons)} claimable buttons')
+
+        return claimable_buttons
 
     def match_template_color(self, button, interval=0, similarity=0.85, threshold=30):
         """
@@ -478,6 +534,8 @@ class ModuleBase:
                                     max_swipes=5, swipe_interval=10,
                                     swipe_cooldown=0.3,
                                     left=False, right=False):
+        if self.appear(check_obj):
+            return True
         self.device.screenshot()
         m = 0
         last_swipe_time = time.time()

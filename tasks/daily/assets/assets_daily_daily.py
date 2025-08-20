@@ -14,17 +14,6 @@ DAILY_BAR = ButtonWrapper(
     ),
     en=None,
 )
-DAILY_CHECK = ButtonWrapper(
-    name='DAILY_CHECK',
-    cn=Button(
-        file='./assets/cn/daily/daily/DAILY_CHECK.png',
-        area=(1, 0, 267, 125),
-        search=(0, 0, 287, 145),
-        color=(146, 109, 43),
-        button=(1, 0, 267, 125),
-    ),
-    en=None,
-)
 DAILY_EXIT = ButtonWrapper(
     name='DAILY_EXIT',
     cn=Button(
@@ -124,16 +113,5 @@ DAILY_REWARD_HAVE_CLAIMED = ButtonWrapper(
             button=(1129, 507, 1222, 598),
         ),
     ],
-    en=None,
-)
-MAIN_GOTO_DAILY = ButtonWrapper(
-    name='MAIN_GOTO_DAILY',
-    cn=Button(
-        file='./assets/cn/daily/daily/MAIN_GOTO_DAILY.png',
-        area=(1189, 320, 1272, 392),
-        search=(1169, 300, 1280, 412),
-        color=(85, 77, 70),
-        button=(1189, 320, 1272, 392),
-    ),
     en=None,
 )

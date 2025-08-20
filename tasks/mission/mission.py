@@ -119,9 +119,8 @@ class Mission(UI):
                 self.device.click(CHARACTER_SELECTED_AUTO)
             elif CHARACTER_UNSELECTED.match_template(self.device.image, direct_match=True):
                 self.device.click(CHARACTER_FIRST)
-
             if CHARACTER_SELECTED.match_template(self.device.image, direct_match=True):
-                self.appear_then_click(TASK_ACCEPT)
+                self.appear_then_click(TASK_ACCEPT,interval=1)
 
         return True
 

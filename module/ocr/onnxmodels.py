@@ -1,12 +1,5 @@
-import time
-import cv2
-import re
-from module.base.utils import area2corner, corner2area, area_in_area
+
 from module.base.decorator import cached_property, del_cached_property
-
-import argparse
-import sys
-
 from module.ocr.onnxocr.onnx_paddleocr import ONNXPaddleOcr
 
 

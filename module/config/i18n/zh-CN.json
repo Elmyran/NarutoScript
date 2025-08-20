@@ -15,6 +15,10 @@
     "Weekly": {
       "name": "周常",
       "help": ""
+    },
+    "Activity": {
+      "name": "限时活动",
+      "help": ""
     }
   },
   "Task": {
@@ -82,7 +86,7 @@
       "name": "情报社",
       "help": ""
     },
-    "IchirakuRamen": {
+    "YiLeLaMian": {
       "name": "一乐拉面",
       "help": ""
     },
@@ -96,6 +100,10 @@
     },
     "Akatsuki": {
       "name": "追击晓组织",
+      "help": ""
+    },
+    "DingCiKaoRou": {
+      "name": "丁次烤肉",
       "help": ""
     }
   },
@@ -308,11 +316,19 @@
   },
   "Duel": {
     "_info": {
-      "name": "决斗场",
+      "name": "周胜设置",
       "help": ""
     },
-    "VictoryNumber": {
-      "name": "当前每周胜场",
+    "DuelWeeklyStatus": {
+      "name": "开启周胜",
+      "help": "没有其他任务时，继续进行目标场数"
+    },
+    "CurrentVictoryNumber": {
+      "name": "当前胜场",
+      "help": ""
+    },
+    "TargetVictoryNumber": {
+      "name": "目标胜场",
       "help": ""
     }
   },
@@ -386,6 +402,35 @@
     "LikeAndShare": {
       "name": "排行榜点赞和分享",
       "help": ""
+    },
+    "CharacterFragments": {
+      "name": "忍者碎片",
+      "help": "",
+      "秽土解斑": "秽土解斑",
+      "永恒佐助": "永恒佐助",
+      "忍战樱": "忍战樱",
+      "九喇嘛鸣人": "九喇嘛鸣人",
+      "死门凯": "死门凯",
+      "秽土柱间": "秽土柱间",
+      "秽土鼬": "秽土鼬",
+      "仙人兜": "仙人兜",
+      "秽土斑": "秽土斑",
+      "白面具": "白面具",
+      "秽土扉间": "秽土扉间",
+      "百豪纲手": "百豪纲手",
+      "秽土水门": "秽土水门",
+      "秽土日斩": "秽土日斩",
+      "秽土长门": "秽土长门",
+      "斑": "斑",
+      "柱间": "柱间",
+      "四代目雷影": "四代目雷影",
+      "扉间": "扉间",
+      "神秘面具男": "神秘面具男",
+      "须佐能乎鼬": "须佐能乎鼬",
+      "天道佩恩": "天道佩恩",
+      "水门": "水门",
+      "大蛇丸": "大蛇丸",
+      "自来也": "自来也"
     }
   },
   "CultivationRoad": {
@@ -416,6 +461,16 @@
     "BattleOrderRank": {
       "name": "BattleOrderStorage.BattleOrderRank.name",
       "help": "BattleOrderStorage.BattleOrderRank.help"
+    }
+  },
+  "DuelStorage": {
+    "_info": {
+      "name": "DuelStorage._info.name",
+      "help": "DuelStorage._info.help"
+    },
+    "DuelDaily": {
+      "name": "DuelStorage.DuelDaily.name",
+      "help": "DuelStorage.DuelDaily.help"
     }
   },
   "Gui": {

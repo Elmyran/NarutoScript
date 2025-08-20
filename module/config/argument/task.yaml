@@ -25,6 +25,7 @@ Daily:
     Duel:
       - Scheduler
       - Duel
+      - DuelStorage
     FengRao:
       - Scheduler
       - FengRao
@@ -46,6 +47,8 @@ Daily:
     Recruit:
       - Scheduler
       - Recruit
+
+
 
 #    DataUpdate:
 #      - Scheduler
@@ -73,9 +76,9 @@ Rewards:
     InformationClub:
       - Scheduler
       - InformationClub
-    IchirakuRamen:
+    YiLeLaMian:
       - Scheduler
-      - IchirakuRamen
+      - YiLeLaMian
     BattleOrder:
       - Scheduler
       - BattleOrder
@@ -100,7 +103,13 @@ Weekly:
       - Scheduler
       - Akatsuki
 
-
+# ==================== Activity ====================
+Activity:
+  menu: 'collapse'
+  page: 'setting'
+  tasks:
+    DingCiKaoRou:
+      - Scheduler
 
 
 

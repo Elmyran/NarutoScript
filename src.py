@@ -75,6 +75,7 @@ class StarRailCopilot(AzurLaneAutoScript):
     def duel(self):
         from tasks.duel.duel import Duel
         Duel(config=self.config, device=self.device).run()
+
     def leader_board(self):
         from tasks.leaderboard.leaderboard import LeaderBoard
         LeaderBoard(config=self.config, device=self.device).run()
@@ -84,15 +85,18 @@ class StarRailCopilot(AzurLaneAutoScript):
     def monthly_sign_in(self):
         from tasks.activity.monthly_sign_in.monthly_sign_in import MonthlySignIn
         MonthlySignIn(config=self.config, device=self.device).run()
-    def ichiraku_ramen(self):
-        from  tasks.activity.ichiraku_ramen.ichiraku_ramen import IchirakuRamen
-        IchirakuRamen(config=self.config, device=self.device).run()
+    def yi_le_la_mian(self):
+        from  tasks.activity.yi_le_la_mian.yi_le_la_mian import YiLeLaMian
+        YiLeLaMian(config=self.config, device=self.device).run()
     def recruit(self):
         from tasks.recruit.recruit import Recruit
         Recruit(config=self.config, device=self.device).run()
     def battle_order(self):
         from tasks.battle_order.battle_order import BattleOrder
         BattleOrder(config=self.config, device=self.device).run()
+    def ding_ci_kao_rou(self):
+        from tasks.activity.ding_ci_kao_rou.ding_ci_kao_rou import DingCiKaoRou
+        DingCiKaoRou(config=self.config, device=self.device).handle_ding_ci_kao_rou()
 
 
 

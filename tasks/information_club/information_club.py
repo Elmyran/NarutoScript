@@ -20,7 +20,6 @@ class InformationClub(UI):
                 raise GameStuckError('Information club claim stuck')
             if self.appear(DAILY_SIGN_IN_HAVE_DONE):
                 break
-
             if self.appear_then_click(DAILY_SIGN_IN_SUCCESS,interval=1):
                 continue
             if self.appear_then_click(DAILY_SIGN_IN_BUTTON,interval=1):

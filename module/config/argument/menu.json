@@ -31,7 +31,7 @@
       "LeaderBoard",
       "MonthlySignIn",
       "InformationClub",
-      "IchirakuRamen",
+      "YiLeLaMian",
       "BattleOrder"
     ]
   },
@@ -41,6 +41,13 @@
     "tasks": [
       "CultivationRoad",
       "Akatsuki"
+    ]
+  },
+  "Activity": {
+    "menu": "collapse",
+    "page": "setting",
+    "tasks": [
+      "DingCiKaoRou"
     ]
   }
 }

@@ -18,7 +18,14 @@ class PopupHandler(ModuleBase):
             return True
         if self.appear_then_click(FRIEND_GIFTS_CLAIM_CONFIRM,interval=interval):
             return True
-
+        if self.appear_then_click(EXIT_WEEKLY_REWARD,interval=interval):
+            return True
+        if self.appear_then_click(DING_CI_KAO_ROU_REWARD,interval=interval):
+            return True
+        if self.appear_then_click(POPUP_EQUIPMENT_STUFF,interval=interval):
+            return True
+        if self.appear_then_click(POPUP_EQUIPMENT_SWEEP,interval=interval):
+            return True
         return False
 
     def reward_appear(self) -> bool:
@@ -59,12 +66,9 @@ class PopupHandler(ModuleBase):
             """
         # Same as ModuleBase.match_template()
             self.device.stuck_record_add(GET_REWARD)
-
             if interval and not self.interval_is_reached(GET_REWARD, interval=interval):
                 return False
-
             appear = self.reward_appear()
-
             if click_button is None:
                 if appear:
                     self.device.click(GET_REWARD)
@@ -75,7 +79,6 @@ class PopupHandler(ModuleBase):
 
             if appear and interval:
                 self.interval_reset(GET_REWARD, interval=interval)
-
             return appear
     # def handle_ui_close(self, appear_button: ButtonWrapper | Callable, interval=2) -> bool:
     #     """
