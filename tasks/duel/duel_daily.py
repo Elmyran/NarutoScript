@@ -24,6 +24,8 @@ class DuelDaily(UI):
                 break
 
     def _duel_task_detect(self):
+        self.device.click_record_clear()
+        self.device.stuck_record_clear()
         time=Timer(30, count=30).start()
         #进入任务面板
         for _ in self.loop():
@@ -85,6 +87,7 @@ class DuelDaily(UI):
 
     def start_fight(self):
         self.device.click_record_clear()
+        self.device.stuck_record_clear()
         for _ in self.loop():
             if self.appear(DUEL_ROUND_SWITCH):
                 break
@@ -92,15 +95,17 @@ class DuelDaily(UI):
                 break
             if self.appear_then_click(DUEL_TASK_PANEL):
                 continue
-            if self.appear_then_click(DUEL_START_FIGHT,similarity=0.9,interval=1):
+            if DUEL_START_FIGHT.match_template_luma(self.device.image,similarity=0.9):
+                self.device.click(DUEL_START_FIGHT)
                 continue
 
         buttons = [CHARACTER_TI_SHEN,CHARACTER_SKILL_1, CHARACTER_SKILL_2, CHARACTER_SKILL_3, CHARACTER_PSYCHIC, CHARACTER_SECRET_SCROLL]
         original=self.device.stuck_timer
         self.device.stuck_timer=Timer(100,100).start()
         for _ in self.loop():
+
             if self.appear_then_click(DUEL_EXCEPTION):
-                self.config.Duel_VictoryNumber+=1
+                self.config.Duel_CurrentVictoryNumber+=1
                 print(f'find a exception')
                 return 'FIGHT_SUCCESS'
             if self.appear_then_click(DUEL_FIGHT_FAIL):
@@ -109,7 +114,7 @@ class DuelDaily(UI):
                 return 'FIGHT_FAIL'
             if self.appear_then_click(DUEL_FIGHT_SUCCESS):
                 self.device.stuck_timer=original
-                self.config.Duel_VictoryNumber+=1
+                self.config.Duel_CurrentVictoryNumber+=1
                 print(f'FIGHT_SUCCESS')
                 return 'FIGHT_SUCCESS'
             if self.appear(DUEL_ROUND_SWITCH):
@@ -137,9 +142,12 @@ class DuelDaily(UI):
         last_check = time.time()
         idx = 0
         other_count = len(other_buttons)
+
         original=self.device.stuck_timer
         self.device.stuck_timer=Timer(100,100).start()
         while True:
+            self.device.click_record_clear()
+            self.device.stuck_record_clear()
             # 超时退出
             if time.time() - start_time > timeout:
                 print(f"超时 {timeout} 秒，停止点击。")

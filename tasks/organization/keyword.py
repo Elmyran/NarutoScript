@@ -1,9 +1,9 @@
-
+from dataclasses import dataclass
 
 from module.ocr.keyword import Keyword
-from dataclasses import dataclass
-from typing import ClassVar
 
+from typing import ClassVar
+@dataclass
 class OrganizationKeyword(Keyword):
     instances: ClassVar = {}
 ReplacementHaveClaimedKeyword = OrganizationKeyword(

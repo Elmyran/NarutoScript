@@ -8,6 +8,7 @@ from tasks.freebies.assets.assets_freebies_dailyshare import QQ_MENU
 
 class BattleOrderRank(UI):
     def handle_battle_order_rank(self):
+        self.device.click_record_clear()
         self.ui_ensure(page_battle_order_rank)
         self._handle_battle_order_rank_like()
         self._handle_battle_order_share()

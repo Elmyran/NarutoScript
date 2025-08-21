@@ -3,10 +3,9 @@
 from module.base.timer import Timer
 from module.exception import GameStuckError
 from module.logger import logger
-from module.ocr.custom_ocr import CustomDigitCounter
-from module.ocr.digit import SimpleDigitOcr
-from module.ocr.ocr import Digit, DigitCounter
-from tasks.base.assets.assets_base_popup import EXIT_CONFIRM
+
+from module.ocr.ocr import  DigitCounter
+
 from tasks.base.page import page_squad, page_squad_help_battle, page_main
 from tasks.base.ui import UI
 from tasks.squadraid.assets.assets_squadraid_fight import *

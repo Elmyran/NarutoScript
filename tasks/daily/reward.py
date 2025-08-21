@@ -39,9 +39,9 @@ class DailyRewardClaim(UI,daily_utils):
             res=DAILY_REWARD_HAVE_CLAIMED.match_multi_template(self.device.image)
             if res and len(res)==4:
                 break
-            if self.appear_then_click(DAILY_REWARD_DETAIL,interval=1):
+            if self.appear_then_click(DAILY_REWARD_DETAIL,interval=1,similarity=0.9):
                 continue
-            if self.appear_then_click(DAILY_REWARD,interval=0):
+            if self.appear_then_click(DAILY_REWARD,interval=0,similarity=0.9):
                 continue
 
 

@@ -14,6 +14,7 @@ from tasks.duel.assets.assets_duel import *
 class DuelWeekly(UI):
     def handle_duel_weekly(self):
         self.device.click_record_clear()
+        self.device.stuck_record_clear()
         self.ui_ensure(page_main)
         self.swipe_and_appear_then_click(DUEL_CHECK,MAIN_GOTO_DUEL,left=True)
         self.ui_ensure(page_ninjutsu)
@@ -42,6 +43,8 @@ class DuelWeekly(UI):
 
 
     def _duel_task_detect(self):
+        self.device.click_record_clear()
+        self.device.stuck_record_clear()
         time=Timer(30, count=30).start()
         #进入任务面板
         for _ in self.loop():
@@ -70,6 +73,8 @@ class DuelWeekly(UI):
                     break
         return True
     def _weekly_victory_reward_claim(self):
+        self.device.click_record_clear()
+        self.device.stuck_record_clear()
         time=Timer(20,30).start()
         for _ in self.loop():
             if time.reached():
@@ -83,19 +88,24 @@ class DuelWeekly(UI):
 
     def start_fight(self):
         self.device.click_record_clear()
+        self.device.stuck_record_clear()
         for _ in self.loop():
+
             if self.appear(DUEL_ROUND_SWITCH):
                 break
             if self.appear(DUEL_IS_IN_FIGHT):
                 break
             if self.appear_then_click(DUEL_TASK_PANEL):
                 continue
-            if self.appear_then_click(DUEL_START_FIGHT,similarity=0.9,interval=1):
+            if DUEL_START_FIGHT.match_template_luma(self.device.image,similarity=0.9):
+                self.device.click(DUEL_START_FIGHT)
                 continue
         buttons = [CHARACTER_TI_SHEN,CHARACTER_SKILL_1, CHARACTER_SKILL_2, CHARACTER_SKILL_3, CHARACTER_PSYCHIC, CHARACTER_SECRET_SCROLL]
         original=self.device.stuck_timer
         self.device.stuck_timer=Timer(100,100).start()
         for _ in self.loop():
+            self.device.click_record_clear()
+            self.device.stuck_record_clear()
             if self.appear_then_click(DUEL_EXCEPTION):
                 self.config.Duel_CurrentVictoryNumber+=1
                 print(f'find a exception')
@@ -135,6 +145,7 @@ class DuelWeekly(UI):
         original=self.device.stuck_timer
         self.device.stuck_timer=Timer(100,100).start()
         while True:
+
             # 超时退出
             if time.time() - start_time > timeout:
                 print(f"超时 {timeout} 秒，停止点击。")

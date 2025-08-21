@@ -1,8 +1,11 @@
-from module.base import button
+import cv2
+import numpy as np
+
 from module.base.timer import Timer
 from module.base.utils import color_similarity_2d
+
 from module.exception import GameStuckError
-from module.ocr.ocr import Ocr
+
 from tasks.base.assets.assets_base_popup import EXIT_ORGANIZATION_RED_ENVELOPE
 from tasks.base.page import page_main
 from tasks.base.ui import UI
@@ -10,11 +13,9 @@ from tasks.organization.assets.assets_organization_pray import *
 from tasks.organization.assets.assets_organization_boxclaim import *
 from tasks.organization.assets.assets_organization_replacement import *
 from module.logger import  logger
-import cv2
-from tasks.daily.utils import daily_utils
-import numpy as np
 
-from tasks.organization.keyword import ReplacementHaveClaimedKeyword, ReplacementClaimKeyword
+from tasks.daily.utils import daily_utils
+
 
 
 class Pray(UI,daily_utils):
@@ -150,3 +151,30 @@ class Pray(UI,daily_utils):
                 continue
 
 
+        #  0.01 30 60
+    def detect_ring_golden_glow(self, chest_area, inner_radius=20, outer_radius=60):
+        self.device.screenshot()
+        """在圆环区域内检测金光效果"""
+        image, ring_mask, detection_area = self.create_ring_mask(chest_area, inner_radius, outer_radius)
+
+        # 检测金色区域
+        golden_similarity = color_similarity_2d(image, color=(252, 209, 123))
+
+        # 应用圆环遮罩
+        masked_golden = cv2.bitwise_and(golden_similarity, golden_similarity, mask=ring_mask.astype(np.uint8))
+
+        # 阈值化处理
+        cv2.inRange(masked_golden, 200, 255, dst=masked_golden)
+
+        # 统计圆环内的金光像素
+        glow_pixels = cv2.countNonZero(masked_golden)
+        ring_pixels = cv2.countNonZero(ring_mask.astype(np.uint8))
+
+        # 计算金光像素占圆环面积的比例
+        if ring_pixels > 0:
+            glow_ratio = glow_pixels / ring_pixels
+            print(glow_ratio)
+            return glow_ratio > 0.02  # 5%以上认为有金光
+    def detect_golden_box(self):
+        not_golden_box=self.detect_ring_golden_glow(PRAY_BOX_CLAIM_15) or self.detect_ring_golden_glow(PRAY_BOX_CLAIM_25)
+        return not_golden_box

@@ -1,4 +1,4 @@
-from module.ocr.ocr import Duration
+
 from tasks.base.page import page_recruit
 from tasks.base.ui import UI
 from tasks.recruit.assets.assets_recruit import *

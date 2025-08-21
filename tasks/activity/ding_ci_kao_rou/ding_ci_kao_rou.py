@@ -10,6 +10,7 @@ from tasks.base.ui import UI
 
 class DingCiKaoRou(UI):
     def handle_ding_ci_kao_rou(self):
+        self.device.click_record_clear()
         self.ui_ensure(page_activity)
         ACTIVITY_TAB_LIST.search_rows(main=self,keyword=DingCiKaoRouKeyword)
         self._handle_kao_rou()

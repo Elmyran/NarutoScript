@@ -5,15 +5,15 @@ from psutil._pswindows import Priority
 from module.base.timer import Timer
 from module.exception import GameStuckError
 from module.logger.logger import logger
-from module.ocr.digit import SimpleDigitOcr
+
 from module.ocr.ocr import Ocr, Digit, Duration, OcrResultButton
-from module.ocr.onnxocr.onnx_paddleocr import ONNXPaddleOcr
+
 from module.ocr.utils import pair_buttons
 from tasks.base.page import page_main
 from tasks.base.ui import UI
 
 from tasks.mission.assets.assets_mission import *
-from tasks.mission.filter import TimeFilterOcr
+
 from tasks.mission.keyword import Claimable, Acceptable
 from tasks.mission.priority import TaskPriority, MissionTask
 
@@ -189,7 +189,7 @@ class Mission(UI):
             return None
 
             # 按优先级排序：先按箱子类型（RED=1, BLUE=2, GREEN=3），再按魂玉数量（降序）
-        sorted_tasks = sorted(tasks, key=lambda x: (x.box_type.value, -x.soul_jade))
+        sorted_tasks = sorted(tasks, key=lambda x: (x.box_type.value, -x.soul_jade_amount))
 
         highest_priority_task = sorted_tasks[0]
         logger.info(f"选择最高优先级任务: {highest_priority_task.name}, "
