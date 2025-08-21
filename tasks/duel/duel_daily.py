@@ -19,7 +19,8 @@ class DuelDaily(UI):
         for _ in  self.loop():
             res=self._duel_task_detect()
             if res==False:
-                self.start_fight()
+                if self.start_fight()=='Delay 5 Minute':
+                    return  'Delay 5 Minute'
             else:
                 break
 
@@ -93,9 +94,11 @@ class DuelDaily(UI):
                 break
             if self.appear(DUEL_IS_IN_FIGHT):
                 break
+            if self.appear(DUEL_TASK_DELAY):
+                return 'Delay 5 Minute'
             if self.appear_then_click(DUEL_TASK_PANEL):
                 continue
-            if DUEL_START_FIGHT.match_template_luma(self.device.image,similarity=0.9):
+            if DUEL_START_FIGHT.match_template_luma(self.device.image,similarity=0.95,interval=1):
                 self.device.click(DUEL_START_FIGHT)
                 continue
 

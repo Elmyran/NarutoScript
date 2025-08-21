@@ -141,14 +141,7 @@ class Pray(UI,daily_utils):
             if self.appear_then_click(PRAY_BOX_REPLACEMENT_BUTTON,interval=1):
                 continue
 
-        for _ in self.loop():
-            if time.reached():
-                raise GameStuckError("Organization Box Replacement Exit Stuck")
-            if self.appear(PRAY_BUTTON):
-                break
-            PRAY_BOX_REPLACEMENT_HAVE_CLAIMED.load_search(PRAY_BOX_REPLACEMENT_LIST.area)
-            if self.appear_then_click(PRAY_BOX_REPLACEMENT_HAVE_CLAIMED,interval=1):
-                continue
+
 
 
         #  0.01 30 60

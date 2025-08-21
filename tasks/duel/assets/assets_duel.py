@@ -149,6 +149,17 @@ DUEL_TASK = ButtonWrapper(
     ),
     en=None,
 )
+DUEL_TASK_DELAY = ButtonWrapper(
+    name='DUEL_TASK_DELAY',
+    cn=Button(
+        file='./assets/cn/duel/DUEL_TASK_DELAY.png',
+        area=(202, 338, 860, 378),
+        search=(182, 318, 880, 398),
+        color=(78, 78, 81),
+        button=(202, 338, 860, 378),
+    ),
+    en=None,
+)
 DUEL_TASK_NOT_ACHIEVED_BUTTON = ButtonWrapper(
     name='DUEL_TASK_NOT_ACHIEVED_BUTTON',
     cn=Button(

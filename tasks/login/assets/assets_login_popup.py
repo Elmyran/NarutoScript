@@ -3,6 +3,17 @@ from module.base.button import Button, ButtonWrapper
 # This file was auto-generated, do not modify it manually. To generate:
 # ``` python -m dev_tools.button_extract ```
 
+CHAO_YING_ADVERTISE = ButtonWrapper(
+    name='CHAO_YING_ADVERTISE',
+    cn=Button(
+        file='./assets/cn/login/popup/CHAO_YING_ADVERTISE.png',
+        area=(1127, 0, 1280, 74),
+        search=(1107, 0, 1280, 94),
+        color=(30, 14, 9),
+        button=(1127, 0, 1280, 74),
+    ),
+    en=None,
+)
 Daily_Bonus = ButtonWrapper(
     name='Daily_Bonus',
     cn=Button(

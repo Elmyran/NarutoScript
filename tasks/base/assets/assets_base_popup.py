@@ -53,6 +53,16 @@ EXIT_ORGANIZATION_RED_ENVELOPE = ButtonWrapper(
         button=(1003, 23, 1145, 121),
     ),
 )
+EXIT_ORGANIZATION_REPLACEMENT = ButtonWrapper(
+    name='EXIT_ORGANIZATION_REPLACEMENT',
+    share=Button(
+        file='./assets/share/base/popup/EXIT_ORGANIZATION_REPLACEMENT.png',
+        area=(540, 91, 751, 150),
+        search=(520, 71, 771, 170),
+        color=(198, 187, 140),
+        button=(969, 25, 1081, 79),
+    ),
+)
 EXIT_WEEKLY_REWARD = ButtonWrapper(
     name='EXIT_WEEKLY_REWARD',
     share=Button(

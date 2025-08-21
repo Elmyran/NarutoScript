@@ -26,6 +26,8 @@ class PopupHandler(ModuleBase):
             return True
         if self.appear_then_click(POPUP_EQUIPMENT_SWEEP,interval=interval):
             return True
+        if self.appear_then_click(EXIT_ORGANIZATION_REPLACEMENT,interval=interval):
+            return  True
         return False
 
     def reward_appear(self) -> bool:

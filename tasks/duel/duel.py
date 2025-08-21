@@ -1,3 +1,4 @@
+import tasks.duel.duel
 from module.logger import logger
 from tasks.base.ui import UI
 
@@ -8,7 +9,9 @@ class Duel(UI):
             self.config.stored.DuelDaily.clear()
         if not self.config.stored.DuelDaily.is_full():
             from tasks.duel.duel_daily import DuelDaily
-            DuelDaily(config=self.config, device=self.device).handle_duel_daily()
+            if DuelDaily(config=self.config, device=self.device).handle_duel_daily()=='Delay 5 Minute':
+                self.config.task_delay(minute=5)
+                return
             self.config.stored.DuelDaily.add()
         if self.config.Duel_DuelWeeklyStatus:
             self.config.get_next_task()
