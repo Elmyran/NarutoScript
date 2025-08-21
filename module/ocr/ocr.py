@@ -1,6 +1,5 @@
 import time
 from datetime import timedelta
-from typing import List
 
 import numpy as np
 from pponnxcr.predict_system import BoxedResult
@@ -385,10 +384,10 @@ class Duration(Ocr):
         regex_str = {
             'cn': r'^(?P<prefix>.*?)'
                   r'((?P<days>\d{1,2})\s*天\s*)?'
-                  r'((?P<hours>\d{1,2})\s*(小时|时)\s*)?'
-                  r'((?P<minutes>\d{1,2})\s*(分钟|分)\s*)?'
+                  r'((?P<hours>\d{1,2})\s*小时\s*)?'
+                  r'((?P<minutes>\d{1,2})\s*分钟\s*)?'
                   r'((?P<seconds>\d{1,2})\s*秒)?'
-                  r'(?P<suffix>.*)$',  # 简化后缀匹配
+                  r'(?P<suffix>[^天时钟秒]*?)$',
             'en': r'^(?P<prefix>.*?)'
                   r'((?P<days>\d{1,2})\s*d\s*)?'
                   r'((?P<hours>\d{1,2})\s*h\s*)?'
@@ -398,10 +397,7 @@ class Duration(Ocr):
         }[lang]
         return re.compile(regex_str)
 
-
-
     def after_process(self, result):
-        print(result)
         result = super().after_process(result)
         result = result.strip('.,。，')
         result = result.replace('Oh', '0h').replace('oh', '0h')
@@ -414,7 +410,6 @@ class Duration(Ocr):
         Returns:
             timedelta:
         """
-
         matched = self.timedelta_regex(self.lang).search(result)
         if not matched:
             return timedelta()

@@ -103,6 +103,39 @@ CHARACTER_UNSELECTED = ButtonWrapper(
     ),
     en=None,
 )
+HUN_YU_1 = ButtonWrapper(
+    name='HUN_YU_1',
+    cn=Button(
+        file='./assets/cn/mission/HUN_YU_1.png',
+        area=(761, 224, 839, 303),
+        search=(741, 204, 859, 323),
+        color=(51, 114, 72),
+        button=(761, 224, 839, 303),
+    ),
+    en=None,
+)
+HUN_YU_2 = ButtonWrapper(
+    name='HUN_YU_2',
+    cn=Button(
+        file='./assets/cn/mission/HUN_YU_2.png',
+        area=(766, 336, 840, 415),
+        search=(746, 316, 860, 435),
+        color=(66, 123, 86),
+        button=(766, 336, 840, 415),
+    ),
+    en=None,
+)
+HUN_YU_3 = ButtonWrapper(
+    name='HUN_YU_3',
+    cn=Button(
+        file='./assets/cn/mission/HUN_YU_3.png',
+        area=(765, 452, 839, 527),
+        search=(745, 432, 859, 547),
+        color=(51, 114, 74),
+        button=(765, 452, 839, 527),
+    ),
+    en=None,
+)
 MAIN_GOTO_MISSION = ButtonWrapper(
     name='MAIN_GOTO_MISSION',
     cn=[
@@ -370,6 +403,17 @@ TASK_RED_BOX = ButtonWrapper(
         search=(906, 429, 1022, 546),
         color=(118, 53, 69),
         button=(926, 449, 1002, 526),
+    ),
+    en=None,
+)
+TASK_TIME_LIST = ButtonWrapper(
+    name='TASK_TIME_LIST',
+    cn=Button(
+        file='./assets/cn/mission/TASK_TIME_LIST.png',
+        area=(1096, 208, 1242, 549),
+        search=(1076, 188, 1262, 569),
+        color=(101, 67, 51),
+        button=(1096, 208, 1242, 549),
     ),
     en=None,
 )

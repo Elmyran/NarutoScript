@@ -1,4 +1,5 @@
 from module.base.timer import Timer
+from module.logger import logger
 from module.ocr.ocr import Digit
 from tasks.activity.assets.assets_activity_ding_ci_kao_rou import *
 from tasks.activity.draglist import ACTIVITY_TAB_LIST
@@ -40,6 +41,7 @@ class DingCiKaoRou(UI):
         ocr=Digit(BEEF_3)
         for _ in self.loop():
             if self.appear(BEEF_CONFIRM):
+                logger.info(BEEF_3.area)
                 res=ocr.ocr_single_line(self.device.image)
                 if res!=0:
                     self.device.swipe([1043,520],[764,439])

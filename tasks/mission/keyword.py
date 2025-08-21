@@ -25,3 +25,12 @@ Acceptable = MissionState(
     jp='受け取る',
     es='Aceptar',
 )
+TaskTime = MissionState(
+    id=3,
+    name='TaskTime',
+    cn='时间',
+    cht='接取',
+    en='Accept',
+    jp='受け取る',
+    es='Aceptar',
+)
