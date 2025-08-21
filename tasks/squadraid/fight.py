@@ -28,7 +28,7 @@ class SquadRaidFight(UI):
             for _ in  self.loop():
                 if time.reached():
                     raise GameStuckError('SQUAD_RAID_REMAIN_TIMES DETECTED ERROR')
-                ocr=CustomDigitCounter(SQUAD_RAID_TIMES_COUNTER)
+                ocr=DigitCounter(SQUAD_RAID_TIMES_COUNTER)
                 current,remain,total=ocr.ocr_single_line(self.device.image)
                 if remain!=2 and total!=0:
                     break

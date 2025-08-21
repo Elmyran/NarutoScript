@@ -19,7 +19,9 @@ class MissionTask:
     """任务数据类"""
     name: str
     time: int  # 时间（分钟）
-    soul_jade_amount: int
+    area: tuple[int, int, int, int] = (0, 0, 0, 0)
+    button: tuple[int, int, int, int] = (0, 0, 0, 0)
+    soul_jade_amount: int=0
     priority: TaskPriority = TaskPriority.GREEN
     created_at: datetime = field(default_factory=datetime.now)
 
@@ -33,7 +35,6 @@ class MissionTask:
         import re
         hour_match = re.search(r'(\d+)时', time_str)
         minute_match = re.search(r'(\d+)分', time_str)
-
         hours = int(hour_match.group(1)) if hour_match else 0
         minutes = int(minute_match.group(1)) if minute_match else 0
 
@@ -61,7 +62,7 @@ class MissionTask:
         task = cls(
             name=data['name'],
             time=data['time'],
-            soul_jade_amount=data.get('soul_jade_amount', 0),
+            soul_jade_amount=data.get('soul_jade_amount',0),
             priority=TaskPriority(data.get('priority', TaskPriority.GREEN.value))
         )
         if 'created_at' in data:

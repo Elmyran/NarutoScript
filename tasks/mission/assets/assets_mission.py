@@ -300,10 +300,10 @@ TASK_AREA = ButtonWrapper(
     name='TASK_AREA',
     cn=Button(
         file='./assets/cn/mission/TASK_AREA.png',
-        area=(535, 209, 581, 541),
-        search=(515, 189, 601, 561),
-        color=(72, 59, 50),
-        button=(535, 209, 581, 541),
+        area=(518, 199, 594, 549),
+        search=(498, 179, 614, 569),
+        color=(64, 48, 52),
+        button=(518, 199, 594, 549),
     ),
     en=None,
 )

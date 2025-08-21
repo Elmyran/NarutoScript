@@ -16,3 +16,12 @@ Claimable = MissionState(
     jp='受取可能',
     es='Reclamable',
 )
+Acceptable = MissionState(
+    id=2,
+    name='Acceptable',
+    cn='接取',
+    cht='接取',
+    en='Accept',
+    jp='受け取る',
+    es='Aceptar',
+)

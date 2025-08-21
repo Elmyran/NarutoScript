@@ -39,7 +39,7 @@ mpmath==1.3.0             # via sympy
 numpy==1.24.3             # via -r requirements-in.txt, onnxruntime, opencv-python, pponnxcr, scipy, shapely
 onepush==1.3.0            # via -r requirements-in.txt
 onnxruntime==1.14.1       # via pponnxcr
-opencv-python==4.7.0.72   # via -r requirements-in.txt, pponnxcr
+opencv-contrib-python==4.7.0.72   # via -r requirements-in.txt, pponnxcr
 packaging==20.9           # via deprecation, onnxruntime, uiautomator2
 pillow==9.5.0             # via -r requirements-in.txt, adbutils, uiautomator2
 pponnxcr==2.0             # via -r requirements-in.txt
@@ -85,3 +85,13 @@ wrapt==1.15.0             # via -r requirements-in.txt, deprecated
 xmltodict==0.13.0         # via apkutils2
 torch==2.8.0
 ultralytics==8.3.182
+flask
+gunicorn
+onnxruntime-gpu==1.14.1
+
+scikit-image
+imgaug
+lmdb
+
+pymupdf
+pdf2image

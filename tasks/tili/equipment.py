@@ -3,8 +3,7 @@ from module.base.timer import Timer
 from module.base.utils import crop
 from module.exception import GameStuckError
 from module.logger import logger
-from module.ocr.ocr import Digit, Ocr
-from module.ocr.custom_ocr import CustomDigitCounter
+from module.ocr.ocr import Digit, Ocr, DigitCounter
 
 from tasks.base.assets.assets_base import TILI_REMAIN
 from tasks.base.page import *
@@ -165,7 +164,7 @@ class Equipment(UI):
         for _ in self.loop():
             if time.reached():
                 raise GameStuckError('Equipment Advance Stuff Part 1 Stuck')
-            ocr = CustomDigitCounter(STUFF_PART_1)
+            ocr = DigitCounter(STUFF_PART_1)
             current, remain, total = ocr.ocr_single_line(self.device.image)
             if total > 0 and remain > 0:
                 self.device.click(STUFF_PART_1)
@@ -175,7 +174,7 @@ class Equipment(UI):
         for _ in self.loop():
             if time.reached():
                 raise GameStuckError('Equipment Advance Stuff Part 1 Stuck')
-            ocr = CustomDigitCounter(STUFF_PART_2)
+            ocr = DigitCounter(STUFF_PART_2)
             current, remain, total = ocr.ocr_single_line(self.device.image)
             if total > 0 and remain > 0:
                 self.device.click(STUFF_PART_2)
@@ -199,7 +198,7 @@ class Equipment(UI):
 
         for _ in self.loop():
             # 体力不足
-            ti_li = CustomDigitCounter(TI_LI_REMAIN_AFTER_SWEEP)
+            ti_li = DigitCounter(TI_LI_REMAIN_AFTER_SWEEP)
             ti_li_current, ti_li_remain, ti_li_total = ti_li.ocr_single_line(self.device.image)
             if ti_li_current < 5 and ti_li_total == 200:
                 return True
