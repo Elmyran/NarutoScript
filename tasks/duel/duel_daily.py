@@ -98,8 +98,7 @@ class DuelDaily(UI):
                 return 'Delay 5 Minute'
             if self.appear_then_click(DUEL_TASK_PANEL):
                 continue
-            if DUEL_START_FIGHT.match_template_luma(self.device.image,similarity=0.95,interval=1):
-                self.device.click(DUEL_START_FIGHT)
+            if self.appear_then_click(DUEL_START_FIGHT,similarity=0.95,interval=2):
                 continue
 
         buttons = [CHARACTER_TI_SHEN,CHARACTER_SKILL_1, CHARACTER_SKILL_2, CHARACTER_SKILL_3, CHARACTER_PSYCHIC, CHARACTER_SECRET_SCROLL]

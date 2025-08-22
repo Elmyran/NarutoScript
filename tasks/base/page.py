@@ -1,5 +1,6 @@
 import traceback
 
+from tasks.activity.assets.assets_activity_diao_yu_da_shi import *
 from tasks.base.assets.assets_base_page import *
 
 from tasks.daily.assets.assets_daily_weekly import *
@@ -204,5 +205,10 @@ page_battle_order.link(BATTLE_ORDER_GOTO_RANK,destination=page_battle_order_rank
 page_activity=Page(ACTIVITY_CHECK)
 page_main.link(MAIN_GOTO_ACTIVITY,destination=page_activity)
 page_activity.link(ACTIVITY_EXIT,destination=page_main)
-
+#钓鱼大师
+page_diao_yu_da_shi=Page(DIAO_YU_DA_SHI_CHECK)
+page_main.link(MAIN_GOTO_DIAO_YU_DA_SHI,destination=page_diao_yu_da_shi)
+page_diao_yu_da_shi.link(CLOSE,destination=page_main)
+page_diao_yu=Page(DIAO_YU_CHECK)
+page_diao_yu.link(CLOSE,destination=page_diao_yu_da_shi)
 

@@ -90,15 +90,13 @@ class DuelWeekly(UI):
         self.device.click_record_clear()
         self.device.stuck_record_clear()
         for _ in self.loop():
-
             if self.appear(DUEL_ROUND_SWITCH):
                 break
             if self.appear(DUEL_IS_IN_FIGHT):
                 break
-            if self.appear_then_click(DUEL_TASK_PANEL):
+            if self.appear_then_click(DUEL_TASK_PANEL,interval=1):
                 continue
-            if DUEL_START_FIGHT.match_template_luma(self.device.image,similarity=0.9):
-                self.device.click(DUEL_START_FIGHT)
+            if self.appear_then_click(DUEL_START_FIGHT,similarity=0.95,interval=2):
                 continue
         buttons = [CHARACTER_TI_SHEN,CHARACTER_SKILL_1, CHARACTER_SKILL_2, CHARACTER_SKILL_3, CHARACTER_PSYCHIC, CHARACTER_SECRET_SCROLL]
         original=self.device.stuck_timer
