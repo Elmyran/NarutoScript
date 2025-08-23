@@ -32,8 +32,8 @@ class FriendGifts(UI):
                 raise GameStuckError("friend gifts claim failed")
             if self.appear(GIFTS_CLAIM_CHECK):
                 return True
-            if self.appear_then_click(GIFTS_CLAIM_CONFIRM,0):
-                break
+            if self.appear_then_click(GIFTS_CLAIM_CONFIRM,interval=1):
+                continue
             if self.appear_then_click(GIFTS_CLAIM,interval=1):
                 continue
 

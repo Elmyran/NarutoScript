@@ -8,6 +8,7 @@ from tasks.ren_zhe_tiao_zhan.auto_fight import AutoBattle
 from tasks.ren_zhe_tiao_zhan.ocr import MiJingOcr
 class MiJing(UI):
     def handle_mi_jing(self):
+        self.device.click_record_clear()
         self.ui_ensure(page_main)
         self.swipe_and_appear_then_click(click_obj=MAIN_GOTO_REN_ZHE_TIAO_ZHAN,check_obj=REN_ZHE_TIAO_ZHAN_CHECK,right=True)
         self.ui_ensure(page_mi_jing_room)
@@ -50,7 +51,6 @@ class MiJing(UI):
         return False
 
     def _mi_jing_fight(self):
-        self.device.screenshot()
         battle=AutoBattle(config=self.config,device=self.device)
         battle.start_services()
         try:
