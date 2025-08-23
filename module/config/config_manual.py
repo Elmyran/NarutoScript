@@ -24,6 +24,7 @@ class ManualConfig:
     > FengRao
     > Organization
     > SurvivalTrail
+    > MiJing
     > Mission
     > Duel
     > TiLi

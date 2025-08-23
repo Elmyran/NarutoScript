@@ -97,6 +97,9 @@ class StarRailCopilot(AzurLaneAutoScript):
     def ding_ci_kao_rou(self):
         from tasks.activity.ding_ci_kao_rou.ding_ci_kao_rou import DingCiKaoRou
         DingCiKaoRou(config=self.config, device=self.device).handle_ding_ci_kao_rou()
+    def mi_jing(self):
+        from tasks.ren_zhe_tiao_zhan.mi_jing import MiJing
+        MiJing(config=self.config, device=self.device).handle_mi_jing()
 
 
 

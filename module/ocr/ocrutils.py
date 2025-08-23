@@ -1,12 +1,14 @@
 import time
 from typing import List, Tuple, Union
 import cv2
-from PIL import Image
 
-from .predict_system import TextSystem
-from .utils import infer_args as init_args
-from .utils import draw_ocr
+
+
 import argparse
+
+from module.base.button import Button
+from module.ocr.onnxocr.onnx_paddleocr import ONNXPaddleOcr
+from tasks.ren_zhe_tiao_zhan.assets.assets_ren_zhe_tiao_zhan import MI_JING_TYPE
 
 
 class Timer:
@@ -48,37 +50,49 @@ class NumberUtils:
 
 
 class OCR:
-    """OCR 封装类"""
-    def __init__(self, use_angle_cls=True, use_gpu=False, **kwargs):
-        parser = init_args()
-        inference_args_dict = {action.dest: action.default for action in parser._actions}
-        params = argparse.Namespace(**inference_args_dict)
-        params.rec_image_shape = "3, 48, 320"
-        params.__dict__.update(**kwargs)
-        self.model = ONNXPaddleOcr(use_angle_cls=use_angle_cls, use_gpu=use_gpu, **params.__dict__)
+    """OCR 封装类，支持 Button 区域"""
+    def __init__(self, button: Button = None, use_angle_cls=True, use_gpu=False, **kwargs):
+        """
+        Args:
+            button (Button): 如果传入 Button，则默认 OCR 该 Button 的 area 区域
+        """
+        self.button = button
+        self.model = ONNXPaddleOcr(use_angle_cls=use_angle_cls, use_gpu=use_gpu, **kwargs)
 
-    def ocr_text(self, img: Union[str, 'np.ndarray'], det=True, rec=True, cls=True):
-        """完整 OCR 识别"""
+    def _prepare_img(self, img, ocr_direct=False):
+        """根据是否传入 Button 来裁剪图像"""
         if isinstance(img, str):
             img = cv2.imread(img)
+
+        if self.button is not None and not ocr_direct:
+            x1, y1, x2, y2 = self.button.area
+            return img[y1:y2, x1:x2]
+
+        return img
+
+    def ocr_text(self, img, det=True, rec=True, cls=True, ocr_direct=False):
+        """完整 OCR 识别，返回 TxtBox 列表"""
+        img = self._prepare_img(img, ocr_direct)
         return self.model.ocr(img, det=det, rec=rec, cls=cls)
 
-    def ocr_text_region(self, img: Union[str, 'np.ndarray'], region: Tuple[int, int, int, int]):
-        """识别图像指定区域文字"""
-        if isinstance(img, str):
-            img = cv2.imread(img)
-        x1, y1, x2, y2 = region
-        crop_img = img[y1:y2, x1:x2]
-        return self.model.ocr(crop_img)
+    def ocr_single_line(self, img, det=True, rec=True, cls=True, ocr_direct=False):
+        """OCR 识别，返回纯文字列表"""
+        results = self.ocr_text(img, det=det, rec=rec, cls=cls, ocr_direct=ocr_direct)
 
-    def ocr_detect(self, img: Union[str, 'np.ndarray']):
+        # results 可能是 [TxtBox,...] 或 [[TxtBox,...]]
+        if len(results) > 0 and hasattr(results[0], "txt"):
+            return [box.txt for box in results]
+        elif len(results) > 0 and isinstance(results[0], list):
+            return [box.txt for box in results[0]]
+        return []
+
+    def ocr_detect(self, img, ocr_direct=False):
         """只检测文字区域"""
-        if isinstance(img, str):
-            img = cv2.imread(img)
+        img = self._prepare_img(img, ocr_direct)
         return self.model.ocr(img, det=True, rec=False)
 
-    def ocr_detect_region(self, img: Union[str, 'np.ndarray'], region: Tuple[int, int, int, int]):
-        """只检测指定区域文字"""
+    def ocr_detect_region(self, img, region, ocr_direct=False):
+        """检测指定区域文字"""
         if isinstance(img, str):
             img = cv2.imread(img)
         x1, y1, x2, y2 = region
@@ -88,23 +102,9 @@ class OCR:
 
 
 
-# Example usage
-if __name__ == "__main__":
-    ocr_tool = OCR(use_angle_cls=True, use_gpu=False)
-    img_path = "/data2/liujingsong3/fiber_box/test/img/20230531230052008263304.jpg"
 
-    timer = Timer()
-    timer.start()
-    result = ocr_tool.ocr_text(img_path)
-    print("OCR result:", result)
-    print("Elapsed time: {:.3f}s".format(timer.stop()))
 
-    # 保存结果
-    ocr_tool.save_result_image(cv2.imread(img_path), result)
 
-    # 数字提取示例
-    for line in result[0]:
-        text = line[1][0]
-        numbers = NumberUtils.extract_numbers(text)
-        counter = NumberUtils.extract_counter(text)
-        print(f"text: {text}, numbers: {numbers}, counter: {counter}")
+
+
+

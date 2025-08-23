@@ -3,6 +3,28 @@ from module.base.button import Button, ButtonWrapper
 # This file was auto-generated, do not modify it manually. To generate:
 # ``` python -m dev_tools.button_extract ```
 
+FIGHT_FAIL = ButtonWrapper(
+    name='FIGHT_FAIL',
+    cn=Button(
+        file='./assets/cn/organization/fortress/FIGHT_FAIL.png',
+        area=(0, 0, 1280, 720),
+        search=(0, 0, 1280, 720),
+        color=(71, 67, 61),
+        button=(0, 0, 1280, 720),
+    ),
+    en=None,
+)
+FIGHT_SUCCESS = ButtonWrapper(
+    name='FIGHT_SUCCESS',
+    cn=Button(
+        file='./assets/cn/organization/fortress/FIGHT_SUCCESS.png',
+        area=(0, 0, 1280, 720),
+        search=(0, 0, 1280, 720),
+        color=(63, 54, 41),
+        button=(0, 0, 1280, 720),
+    ),
+    en=None,
+)
 FORTRESS_ENTER_CONFIRM = ButtonWrapper(
     name='FORTRESS_ENTER_CONFIRM',
     cn=Button(
@@ -11,6 +33,17 @@ FORTRESS_ENTER_CONFIRM = ButtonWrapper(
         search=(772, 547, 977, 644),
         color=(211, 140, 12),
         button=(792, 567, 957, 624),
+    ),
+    en=None,
+)
+FORTRESS_EXIT = ButtonWrapper(
+    name='FORTRESS_EXIT',
+    cn=Button(
+        file='./assets/cn/organization/fortress/FORTRESS_EXIT.png',
+        area=(1216, 9, 1280, 61),
+        search=(1196, 0, 1280, 81),
+        color=(99, 104, 117),
+        button=(1216, 9, 1280, 61),
     ),
     en=None,
 )
@@ -55,6 +88,39 @@ FORTRESS_PAGE = ButtonWrapper(
         search=(1111, 567, 1270, 720),
         color=(82, 80, 83),
         button=(1131, 587, 1250, 706),
+    ),
+    en=None,
+)
+FORTRESS_ROUND_SWITCH = ButtonWrapper(
+    name='FORTRESS_ROUND_SWITCH',
+    cn=Button(
+        file='./assets/cn/organization/fortress/FORTRESS_ROUND_SWITCH.png',
+        area=(545, 200, 737, 438),
+        search=(525, 180, 757, 458),
+        color=(217, 123, 46),
+        button=(545, 200, 737, 438),
+    ),
+    en=None,
+)
+FORTRESS_SCORE = ButtonWrapper(
+    name='FORTRESS_SCORE',
+    cn=Button(
+        file='./assets/cn/organization/fortress/FORTRESS_SCORE.png',
+        area=(471, 565, 511, 605),
+        search=(451, 545, 531, 625),
+        color=(13, 14, 11),
+        button=(471, 565, 511, 605),
+    ),
+    en=None,
+)
+FORTRESS_SELECT = ButtonWrapper(
+    name='FORTRESS_SELECT',
+    cn=Button(
+        file='./assets/cn/organization/fortress/FORTRESS_SELECT.png',
+        area=(517, 6, 733, 67),
+        search=(497, 0, 753, 87),
+        color=(92, 81, 78),
+        button=(517, 6, 733, 67),
     ),
     en=None,
 )

@@ -88,10 +88,8 @@ ultralytics==8.3.182
 flask
 gunicorn
 onnxruntime-gpu==1.14.1
-
 scikit-image
 imgaug
 lmdb
-
 pymupdf
 pdf2image

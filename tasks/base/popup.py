@@ -33,8 +33,6 @@ class PopupHandler(ModuleBase):
     def reward_appear(self) -> bool:
         buttons = GET_REWARD.buttons
         for button in buttons:
-            print(button)
-
             image = self.image_crop(button.search, copy=False)
             image = color_similarity_2d(image, color=(203, 181, 132))
 

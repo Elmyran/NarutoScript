@@ -8,10 +8,14 @@ from tasks.duel.assets.assets_duel import *
 from tasks.duel.assets.assets_duel_ninjutsu import *
 from tasks.information_club.assets.assets_information_club import *
 from tasks.leaderboard.assets.assets_leaderboard import *
+from tasks.organization.assets.assets_organization_fortress import FORTRESS_LOCAL_SELECT, FORTRESS_PAGE, \
+    ORGANIZATION_GOTO_FORTRESS
 from tasks.organization.assets.assets_organization_pray import *
 from tasks.organization.assets.assets_organization_replacement import *
 from tasks.organization.assets.assets_organization_boxclaim import *
 from tasks.recruit.assets.assets_recruit import *
+from tasks.ren_zhe_tiao_zhan.assets.assets_ren_zhe_tiao_zhan import REN_ZHE_TIAO_ZHAN_CHECK, MI_JING_CHECK, \
+    MI_JING_ROOM_CHECK, REN_ZHE_TIAO_ZHAN_GOTO_MI_JING, MI_JING_CREATE_ROOM
 
 from tasks.tili.assets.assets_tili_dungeon import *
 from tasks.tili.assets.assets_tili_equipment import *
@@ -125,6 +129,14 @@ page_organization=Page(ORGANIZATION)
 page_pray=Page(ORGANIZATION_PRAY_CHECK)
 page_pray.link(PRAY_EXIT,destination=page_organization)
 page_organization.link(ORGANIZATION_EXIT,destination=page_main)
+#Fortress
+# page_fortress_type=Page(FORTRESS_LOCAL_SELECT)
+# page_fortress_select=Page(FORTRESS_SELECT)
+# page_fortress_page=Page(FORTRESS_PAGE)
+# page_organization.link(ORGANIZATION_GOTO_FORTRESS,destination=page_fortress_type)
+# page_fortress_type.link(FORTRESS_LOCAL_SELECT,destination=page_fortress_select)
+# page_fortress_page.link(FORTRESS_EXIT,destination=page_fortress_select)
+# page_fortress_select.link(CLOSE,destination=page_organization)
 #DailyReward
 page_daily=Page(DAILY_CHECK)
 page_main.link(MAIN_GOTO_DAILY,destination=page_daily)
@@ -201,6 +213,17 @@ page_battle_order.link(CLOSE,destination=page_main)
 page_battle_order_rank=Page(BATTLE_ORDER_RANK_CHECK)
 page_battle_order_rank.link(CLOSE,destination=page_battle_order)
 page_battle_order.link(BATTLE_ORDER_GOTO_RANK,destination=page_battle_order_rank)
+#MiJing
+page_ren_zhe_tiao_zhan=Page(REN_ZHE_TIAO_ZHAN_CHECK)
+page_mi_jing=Page(MI_JING_CHECK)
+page_mi_jing_room=Page(MI_JING_ROOM_CHECK)
+page_ren_zhe_tiao_zhan.link(REN_ZHE_TIAO_ZHAN_GOTO_MI_JING,destination=page_mi_jing)
+page_mi_jing.link(MI_JING_CREATE_ROOM,destination=page_mi_jing_room)
+page_mi_jing_room.link(CLOSE,destination=page_mi_jing)
+page_mi_jing.link(CLOSE,destination=page_ren_zhe_tiao_zhan)
+page_ren_zhe_tiao_zhan.link(CLOSE,destination=page_main)
+
+
 #Activity
 page_activity=Page(ACTIVITY_CHECK)
 page_main.link(MAIN_GOTO_ACTIVITY,destination=page_activity)
@@ -211,4 +234,5 @@ page_main.link(MAIN_GOTO_DIAO_YU_DA_SHI,destination=page_diao_yu_da_shi)
 page_diao_yu_da_shi.link(CLOSE,destination=page_main)
 page_diao_yu=Page(DIAO_YU_CHECK)
 page_diao_yu.link(CLOSE,destination=page_diao_yu_da_shi)
+
 

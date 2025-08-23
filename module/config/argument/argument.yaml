@@ -129,6 +129,10 @@ Duel:
   TargetVictoryNumber:
     type: input
     value: 10
+MiJing:
+
+
+
 
 ItemStorage:
   Credit:

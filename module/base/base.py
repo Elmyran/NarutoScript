@@ -536,6 +536,7 @@ class ModuleBase:
                                     left=False, right=False):
         if self.appear(check_obj):
             return True
+
         self.device.screenshot()
         m = 0
         last_swipe_time = time.time()

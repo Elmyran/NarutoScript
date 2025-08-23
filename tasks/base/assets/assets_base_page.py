@@ -42,13 +42,29 @@ CLOSE = ButtonWrapper(
         color=(26, 12, 8),
         button=(1102, 0, 1280, 74),
     ),
-    share=Button(
-        file='./assets/share/base/page/CLOSE.png',
-        area=(1102, 0, 1280, 74),
-        search=(1082, 0, 1280, 94),
-        color=(26, 12, 8),
-        button=(1102, 0, 1280, 74),
-    ),
+    share=[
+        Button(
+            file='./assets/share/base/page/CLOSE.png',
+            area=(1102, 0, 1280, 74),
+            search=(1082, 0, 1280, 94),
+            color=(26, 12, 8),
+            button=(1102, 0, 1280, 74),
+        ),
+        Button(
+            file='./assets/share/base/page/CLOSE.2.png',
+            area=(1208, 13, 1273, 64),
+            search=(1188, 0, 1280, 84),
+            color=(89, 37, 20),
+            button=(1208, 13, 1273, 64),
+        ),
+        Button(
+            file='./assets/share/base/page/CLOSE.3.png',
+            area=(1185, 2, 1272, 70),
+            search=(1165, 0, 1280, 90),
+            color=(102, 56, 34),
+            button=(1185, 2, 1272, 70),
+        ),
+    ],
 )
 DAILY_CHECK = ButtonWrapper(
     name='DAILY_CHECK',
@@ -59,6 +75,35 @@ DAILY_CHECK = ButtonWrapper(
         color=(146, 109, 43),
         button=(1, 0, 267, 125),
     ),
+)
+FIGHT_CLOSE = ButtonWrapper(
+    name='FIGHT_CLOSE',
+    share=Button(
+        file='./assets/share/base/page/FIGHT_CLOSE.png',
+        area=(1213, 11, 1271, 58),
+        search=(1193, 0, 1280, 78),
+        color=(55, 58, 71),
+        button=(1213, 11, 1271, 58),
+    ),
+)
+FIGHT_CLOSE_CONFIRM = ButtonWrapper(
+    name='FIGHT_CLOSE_CONFIRM',
+    share=[
+        Button(
+            file='./assets/share/base/page/FIGHT_CLOSE_CONFIRM.png',
+            area=(413, 412, 626, 490),
+            search=(393, 392, 646, 510),
+            color=(195, 133, 28),
+            button=(413, 412, 626, 490),
+        ),
+        Button(
+            file='./assets/share/base/page/FIGHT_CLOSE_CONFIRM.2.png',
+            area=(415, 416, 621, 489),
+            search=(395, 396, 641, 509),
+            color=(211, 140, 14),
+            button=(415, 416, 621, 489),
+        ),
+    ],
 )
 MAIN_GOTO_BATTLE_ORDER = ButtonWrapper(
     name='MAIN_GOTO_BATTLE_ORDER',

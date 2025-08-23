@@ -62,6 +62,10 @@
       "name": "Task.Recruit.name",
       "help": "Task.Recruit.help"
     },
+    "MiJing": {
+      "name": "Task.MiJing.name",
+      "help": "Task.MiJing.help"
+    },
     "ZhaoCai": {
       "name": "Task.ZhaoCai.name",
       "help": "Task.ZhaoCai.help"

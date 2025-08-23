@@ -47,6 +47,10 @@ Daily:
     Recruit:
       - Scheduler
       - Recruit
+    MiJing:
+      - Scheduler
+      - MiJing
+
 
 
 

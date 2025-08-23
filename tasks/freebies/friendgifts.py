@@ -21,37 +21,22 @@ class FriendGifts(UI):
        for _ in self.loop():
         if time.reached():
             raise GameStuckError("friend gifts give failed")
-        if self.appear(GIFTS_GIVE,interval=1):
-            self.device.click(GIFTS_GIVE)
-            continue
         if self.appear(GIVE_DONE):
             break
-
-
+        if self.appear_then_click(GIFTS_GIVE,interval=1):
+            continue
     def _friend_gifts_claim(self):
         time=Timer(8,count=10).start()
         for _ in self.loop():
             if time.reached():
                 raise GameStuckError("friend gifts claim failed")
-            if self.appear(GIFTS_CLAIM_CONFIRM):
-                break
             if self.appear(GIFTS_CLAIM_CHECK):
                 return True
-            if self.appear_then_click(GIFTS_CLAIM,interval=1):
-                continue
-
-        for _ in self.loop():
-            if time.reached():
-                raise GameStuckError("friend gifts confirm failed")
-            if self.appear_then_click(GIFTS_CLAIM_CONFIRM):
-                continue
-            if self.appear(GIFTS_CLAIM_CHECK):
+            if self.appear_then_click(GIFTS_CLAIM_CONFIRM,0):
                 break
             if self.appear_then_click(GIFTS_CLAIM,interval=1):
                 continue
-        return True
 
 
-az=FriendGifts('alas',task='Alas')
-az.device.screenshot()
-az.ui_goto_main()
+
+

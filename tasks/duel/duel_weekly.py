@@ -61,7 +61,9 @@ class DuelWeekly(UI):
                 raise GameStuckError(' duel task detected stuck')
             ocr=Digit(DUEL_TASK_WINS_NUMBER)
             res=ocr.ocr_single_line(self.device.image)
-            if res is not None:
+            if res is not None and res!=0:
+                with self.config.multi_set():
+                    self.config.Duel_CurrentVictoryNumber=res
                 target=self.config.Duel_TargetVictoryNumber
                 if res < target:
                     self.appear_then_click(DUEL_TASK_PANEL)
@@ -99,22 +101,20 @@ class DuelWeekly(UI):
             if self.appear_then_click(DUEL_START_FIGHT,similarity=0.95,interval=2):
                 continue
         buttons = [CHARACTER_TI_SHEN,CHARACTER_SKILL_1, CHARACTER_SKILL_2, CHARACTER_SKILL_3, CHARACTER_PSYCHIC, CHARACTER_SECRET_SCROLL]
-        original=self.device.stuck_timer
-        self.device.stuck_timer=Timer(100,100).start()
         for _ in self.loop():
             self.device.click_record_clear()
             self.device.stuck_record_clear()
             if self.appear_then_click(DUEL_EXCEPTION):
-                self.config.Duel_CurrentVictoryNumber+=1
+                with self.config.multi_set():
+                    self.config.Duel_CurrentVictoryNumber+=1
                 print(f'find a exception')
                 return 'FIGHT_SUCCESS'
             if self.appear_then_click(DUEL_FIGHT_FAIL):
-                self.device.stuck_timer=original
                 print(f'Fight_FAIL')
                 return 'FIGHT_FAIL'
             if self.appear_then_click(DUEL_FIGHT_SUCCESS):
-                self.device.stuck_timer=original
-                self.config.Duel_CurrentVictoryNumber+=1
+                with self.config.multi_set():
+                    self.config.Duel_CurrentVictoryNumber+=1
                 print(f'FIGHT_SUCCESS')
                 return 'FIGHT_SUCCESS'
             if self.appear(DUEL_ROUND_SWITCH):
@@ -123,6 +123,7 @@ class DuelWeekly(UI):
                     self.click_buttons_until_end(CHARACTER_ATTACK,buttons,DUEL_FIGHT_END)
                 finally:
                     self.device.stuck_record_clear()
+                    self.device.click_record_clear()
 
     def click_buttons_until_end(self, attack_button, other_buttons, fail_check, timeout=390, check_interval=0.5):
         """
