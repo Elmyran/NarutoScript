@@ -7,7 +7,7 @@ import adbutils
 from module.device.device import Device
 from module.logger import logger
 from module.base.timer import Timer
-from tasks.autofight.joystick import GameControl, JoystickContact
+from tasks.ren_zhe_tiao_zhan.joystick import GameControl, JoystickContact
 from tasks.ren_zhe_tiao_zhan.assets.assets_ren_zhe_tiao_zhan import MI_JING_SUCCESS
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 import torch
