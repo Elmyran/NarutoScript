@@ -100,7 +100,6 @@ class Page:
 
 #Main_Page
 page_main=Page(MAIN_GOTO_CHARACTER)
-
 #Mail
 page_mail=Page(MAIL_CHECK)
 page_mail.link(MAIL_EXIT,destination=page_main)
@@ -113,13 +112,11 @@ page_mission.link(MISSION_EXIT,destination=page_main)
 page_panel=Page(PANEL_CHECK)
 page_main.link(MAIN_GOTO_PANEL,destination=page_panel)
 page_panel.link(PANEL_GOTO_MAIN,destination=page_main)
-#Friend_Gifts
+#FriendGifts
 page_friend_panel=Page(FRIEND_PANEL_CHECK)
-page_gifts_claim=Page(GIFTS_CLAIM_CHECK)
 page_main.link(MAIN_GOTO_FRIEND_PANEL,destination=page_friend_panel)
 page_friend_panel.link(FRIEND_PANEL_GOTO_MAIN,destination=page_main)
-page_gifts_claim.link(GIFTS_CLAIM_CONFIRM,destination=page_friend_panel)
-#Zhao_Cai
+#ZhaoCai
 page_zhaocai=Page(ZHAO_CAI_CHECK)
 page_main.link(MAIN_GOTO_ZHAO_CAI,destination=page_zhaocai)
 page_zhaocai.link(ZHAO_CAI_GOTO_MAIN,destination=page_main)
@@ -221,7 +218,7 @@ page_ren_zhe_tiao_zhan.link(REN_ZHE_TIAO_ZHAN_GOTO_MI_JING,destination=page_mi_j
 page_mi_jing.link(MI_JING_CREATE_ROOM,destination=page_mi_jing_room)
 page_mi_jing_room.link(CLOSE,destination=page_mi_jing)
 page_mi_jing.link(CLOSE,destination=page_ren_zhe_tiao_zhan)
-page_ren_zhe_tiao_zhan.link(CLOSE,destination=page_main)
+page_ren_zhe_tiao_zhan.link(REN_ZHE_TIAO_ZHAN_CLOSE,destination=page_main)
 
 
 #Activity

@@ -2,7 +2,7 @@ import numpy as np
 import cv2
 import time
 import os
-import scrcpy
+import pyscrcpy
 import adbutils
 from module.device.device import Device
 from module.logger import logger
@@ -31,7 +31,7 @@ class AutoBattle(GameControl):
         self.path_finding_period=5
         try:
             logger.info(f"--- Initializing scrcpy client for device {self.device.serial} ---")
-            self.client = scrcpy.Client(device=adbutils.device(serial=self.device.serial))
+            self.client = pyscrcpy.Client(device=adbutils.device(serial=self.device.serial),max_fps=60)
             self.joystick = JoystickContact(self)
             logger.info("--- Scrcpy client and Joystick initialized. ---")
         except Exception as e:
@@ -43,7 +43,7 @@ class AutoBattle(GameControl):
 
     def start_services(self):
         if not self.client.alive:
-            self.client.start(threaded=True, daemon_threaded=True)
+            self.client.start(threaded=True)
             while self.client.last_frame is None:
                 time.sleep(0.1)
         logger.info("--- Services started, ready for battle. ---")

@@ -52,17 +52,17 @@ CLOSE = ButtonWrapper(
         ),
         Button(
             file='./assets/share/base/page/CLOSE.2.png',
-            area=(1208, 13, 1273, 64),
-            search=(1188, 0, 1280, 84),
-            color=(89, 37, 20),
-            button=(1208, 13, 1273, 64),
-        ),
-        Button(
-            file='./assets/share/base/page/CLOSE.3.png',
             area=(1185, 2, 1272, 70),
             search=(1165, 0, 1280, 90),
             color=(102, 56, 34),
             button=(1185, 2, 1272, 70),
+        ),
+        Button(
+            file='./assets/share/base/page/CLOSE.3.png',
+            area=(1177, 1, 1280, 76),
+            search=(1157, 0, 1280, 96),
+            color=(92, 56, 37),
+            button=(1177, 1, 1280, 76),
         ),
     ],
 )
@@ -164,4 +164,23 @@ MAIN_GOTO_PANEL = ButtonWrapper(
         color=(173, 141, 118),
         button=(66, 14, 120, 84),
     ),
+)
+REN_ZHE_TIAO_ZHAN_CLOSE = ButtonWrapper(
+    name='REN_ZHE_TIAO_ZHAN_CLOSE',
+    share=[
+        Button(
+            file='./assets/share/base/page/REN_ZHE_TIAO_ZHAN_CLOSE.png',
+            area=(1221, 20, 1266, 57),
+            search=(1201, 0, 1280, 77),
+            color=(115, 39, 14),
+            button=(1221, 20, 1266, 57),
+        ),
+        Button(
+            file='./assets/share/base/page/REN_ZHE_TIAO_ZHAN_CLOSE.2.png',
+            area=(1208, 13, 1273, 64),
+            search=(1188, 0, 1280, 84),
+            color=(89, 37, 20),
+            button=(1208, 13, 1273, 64),
+        ),
+    ],
 )
