@@ -76,13 +76,29 @@ MI_JING_REMAIN_CHALLENGE_TICKETS = ButtonWrapper(
 )
 MI_JING_REWARD_EXIT = ButtonWrapper(
     name='MI_JING_REWARD_EXIT',
-    cn=Button(
-        file='./assets/cn/ren_zhe_tiao_zhan/MI_JING_REWARD_EXIT.png',
-        area=(826, 592, 890, 640),
-        search=(806, 572, 910, 660),
-        color=(83, 61, 44),
-        button=(45, 648, 175, 702),
-    ),
+    cn=[
+        Button(
+            file='./assets/cn/ren_zhe_tiao_zhan/MI_JING_REWARD_EXIT.png',
+            area=(826, 592, 890, 640),
+            search=(806, 572, 910, 660),
+            color=(83, 61, 44),
+            button=(45, 648, 175, 702),
+        ),
+        Button(
+            file='./assets/cn/ren_zhe_tiao_zhan/MI_JING_REWARD_EXIT.2.png',
+            area=(181, 598, 253, 641),
+            search=(161, 578, 273, 661),
+            color=(69, 54, 43),
+            button=(45, 648, 175, 702),
+        ),
+        Button(
+            file='./assets/cn/ren_zhe_tiao_zhan/MI_JING_REWARD_EXIT.3.png',
+            area=(503, 135, 786, 212),
+            search=(483, 115, 806, 232),
+            color=(119, 72, 11),
+            button=(45, 648, 175, 702),
+        ),
+    ],
     en=None,
 )
 MI_JING_ROOM_CHECK = ButtonWrapper(
