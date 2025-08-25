@@ -60,7 +60,7 @@ class Equipment(UI):
                 break
             if self._synthesized_and_equipped() and synthetic_success==False:
                 synthetic_success=True
-            if self.appear(POPUP_EXIT, interval=0):
+            if self.appear(POPUP_CLOSE, interval=0):
                 break
             EQUIPMENT_PART_DETAIL_RED_DOT.load_search(EQUIPMENT_PART_DETAIL_AREA.area)
             if self.appear_then_click(EQUIPMENT_PART_DETAIL_RED_DOT, interval=1):
