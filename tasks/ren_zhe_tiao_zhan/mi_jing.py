@@ -26,7 +26,6 @@ class MiJing(UI):
                     return True
                 elif type in type_2:
                     break
-
             if self.appear_then_click(MI_JING_START_NOTIFY,interval=1):
                 continue
             if self.appear_then_click(MI_JING_START_CONFIRM,interval=1):
@@ -55,8 +54,10 @@ class MiJing(UI):
         battle.start_services()
         try:
             for _ in self.loop():
+                MI_JING_REWARD_EXIT.load_search(MI_JING_REWARD_AREA.area)
                 if self.appear_then_click(MI_JING_REWARD_EXIT,interval=0):
                     continue
+                MI_JING_SUCCESS.load_search(MI_JING_REWARD_AREA.area)
                 if self.appear_then_click(MI_JING_SUCCESS,interval=0):
                     continue
                 res=self._select_mi_jing()

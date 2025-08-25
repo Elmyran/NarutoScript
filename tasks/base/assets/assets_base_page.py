@@ -45,10 +45,10 @@ CLOSE = ButtonWrapper(
     share=[
         Button(
             file='./assets/share/base/page/CLOSE.png',
-            area=(1184, 1, 1280, 70),
-            search=(1164, 0, 1280, 90),
-            color=(93, 52, 32),
-            button=(1184, 1, 1280, 70),
+            area=(1187, 6, 1279, 74),
+            search=(1167, 0, 1280, 94),
+            color=(54, 21, 11),
+            button=(1187, 6, 1279, 74),
         ),
         Button(
             file='./assets/share/base/page/CLOSE.2.png',
