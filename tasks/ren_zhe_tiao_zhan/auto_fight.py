@@ -8,7 +8,8 @@ from module.device.device import Device
 from module.logger import logger
 from module.base.timer import Timer
 from tasks.ren_zhe_tiao_zhan.joystick import GameControl, JoystickContact
-from tasks.ren_zhe_tiao_zhan.assets.assets_ren_zhe_tiao_zhan import MI_JING_SUCCESS
+from tasks.ren_zhe_tiao_zhan.assets.assets_ren_zhe_tiao_zhan import MI_JING_SUCCESS, MI_JING_REWARD_EXIT
+
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 import torch
 from ultralytics import YOLO
@@ -69,7 +70,7 @@ class AutoBattle(GameControl):
                 continue
             img = cv2.cvtColor(img_raw, cv2.COLOR_BGR2RGB)
             self.device.image = img
-            if self.appear(MI_JING_SUCCESS):
+            if self.appear(MI_JING_SUCCESS) or self.appear(MI_JING_REWARD_EXIT):
                 logger.info("--- Battle finished (MI_JING_SUCCESS detected). ---")
                 self.joystick.up()
                 break
