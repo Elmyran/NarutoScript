@@ -1,5 +1,7 @@
 from module.base.timer import Timer
+
 from module.ocr.ocr import Digit
+from module.ocr.ocrutils import DigitOCR
 from tasks.base.assets.assets_base_page import FIGHT_CLOSE_CONFIRM, FIGHT_CLOSE
 from tasks.base.page import page_main, page_mi_jing_room
 from tasks.base.ui import UI
@@ -15,8 +17,9 @@ class MiJing(UI):
         self._mi_jing_fight()
         self.ui_goto_main()
     def _select_mi_jing(self):
+        self.device.screenshot()
         ocr=MiJingOcr(MI_JING_TYPE)
-        ticket=Digit(MI_JING_REMAIN_CHALLENGE_TICKETS)
+        ticket=Digit(MI_JING_REMAIN_CHALLENGE_TICKET)
         type_1=['落岩秘境','雷霆秘境','烈炎秘境','水牢秘境','罡体秘境']
         type_2=['毒风秘境','阴阳秘境']
         for _ in  self.loop():
@@ -69,6 +72,5 @@ class MiJing(UI):
                     battle.run()
         finally:
             battle.stop_services()
-
 
 

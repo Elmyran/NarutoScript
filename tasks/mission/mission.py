@@ -1,7 +1,7 @@
 from module.base.timer import Timer
 from module.exception import GameStuckError
 from module.logger.logger import logger
-from module.ocr.digit import DigitOcr
+
 from module.ocr.ocr import Ocr
 from module.ocr.onnxocr.onnx_paddleocr import ONNXPaddleOcr
 from module.ocr.utils import pair_buttons

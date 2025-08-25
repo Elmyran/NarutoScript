@@ -105,7 +105,8 @@ class ONNXPaddleOcr(TextSystem,ModuleBase):
 
             if not rec:
                 return resultToBox(cls_res)
-            return resultToBox(ocr_res)
+            return ocr_res
+
     # OCR关键词过滤
     def matchKeys(self,boxes,keys):
         """

@@ -99,8 +99,7 @@ class Ocr:
         Returns:
             str:
         """
-        if result.startswith('UID'):
-            result = 'UID'
+
         return result
 
     def format_result(self, result):
