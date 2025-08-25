@@ -25,7 +25,6 @@ Daily:
     Duel:
       - Scheduler
       - Duel
-      - DuelStorage
     FengRao:
       - Scheduler
       - FengRao

@@ -19,10 +19,10 @@ DAILY_SIGN_IN_BUTTON = ButtonWrapper(
     cn=[
         Button(
             file='./assets/cn/information_club/DAILY_SIGN_IN_BUTTON.png',
-            area=(583, 529, 701, 577),
-            search=(563, 509, 721, 597),
-            color=(213, 100, 94),
-            button=(583, 529, 701, 577),
+            area=(584, 532, 699, 575),
+            search=(564, 512, 719, 595),
+            color=(209, 84, 78),
+            button=(584, 532, 699, 575),
         ),
         Button(
             file='./assets/cn/information_club/DAILY_SIGN_IN_BUTTON.2.png',
@@ -38,10 +38,10 @@ DAILY_SIGN_IN_HAVE_DONE = ButtonWrapper(
     name='DAILY_SIGN_IN_HAVE_DONE',
     cn=Button(
         file='./assets/cn/information_club/DAILY_SIGN_IN_HAVE_DONE.png',
-        area=(583, 73, 665, 111),
-        search=(563, 53, 685, 131),
-        color=(206, 195, 182),
-        button=(583, 73, 665, 111),
+        area=(586, 76, 664, 108),
+        search=(566, 56, 684, 128),
+        color=(199, 186, 172),
+        button=(586, 76, 664, 108),
     ),
     en=None,
 )
@@ -50,17 +50,17 @@ DAILY_SIGN_IN_SUCCESS = ButtonWrapper(
     cn=[
         Button(
             file='./assets/cn/information_club/DAILY_SIGN_IN_SUCCESS.png',
-            area=(584, 553, 702, 601),
-            search=(564, 533, 722, 621),
-            color=(213, 101, 95),
-            button=(584, 553, 702, 601),
+            area=(583, 557, 697, 597),
+            search=(563, 537, 717, 617),
+            color=(209, 85, 78),
+            button=(583, 557, 697, 597),
         ),
         Button(
             file='./assets/cn/information_club/DAILY_SIGN_IN_SUCCESS.2.png',
-            area=(580, 530, 700, 576),
-            search=(560, 510, 720, 596),
-            color=(120, 120, 120),
-            button=(580, 530, 700, 576),
+            area=(584, 532, 699, 574),
+            search=(564, 512, 719, 594),
+            color=(111, 111, 111),
+            button=(584, 532, 699, 574),
         ),
     ],
     en=None,

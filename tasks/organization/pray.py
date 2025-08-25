@@ -107,7 +107,6 @@ class Pray(UI,daily_utils):
                 self.device.click(PRAY_BOX_CLAIM_15)
                 continue
             if self.detect_ring_golden_glow(PRAY_BOX_CLAIM_25):
-                self.appear_then_click(PRAY_BOX_CLAIM_20,interval=1)
                 self.appear_then_click(PRAY_BOX_CLAIM_25)
                 continue
             if self.appear_then_click(EXIT_ORGANIZATION_RED_ENVELOPE):

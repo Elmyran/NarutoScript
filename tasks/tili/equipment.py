@@ -6,6 +6,7 @@ from module.logger import logger
 from module.ocr.ocr import Digit, Ocr, DigitCounter
 
 from tasks.base.assets.assets_base import TILI_REMAIN
+from tasks.base.assets.assets_base_popup import *
 from tasks.base.page import *
 from tasks.base.ui import UI
 from tasks.tili.assets.assets_tili_equipment import *
@@ -59,7 +60,7 @@ class Equipment(UI):
                 break
             if self._synthesized_and_equipped() and synthetic_success==False:
                 synthetic_success=True
-            if self.appear(COPPER_COINS_SHORTAGE, interval=0):
+            if self.appear(POPUP_EXIT, interval=0):
                 break
             EQUIPMENT_PART_DETAIL_RED_DOT.load_search(EQUIPMENT_PART_DETAIL_AREA.area)
             if self.appear_then_click(EQUIPMENT_PART_DETAIL_RED_DOT, interval=1):
@@ -198,9 +199,7 @@ class Equipment(UI):
 
         for _ in self.loop():
             # 体力不足
-            ti_li = DigitCounter(TI_LI_REMAIN_AFTER_SWEEP)
-            ti_li_current, ti_li_remain, ti_li_total = ti_li.ocr_single_line(self.device.image)
-            if ti_li_current < 5 and ti_li_total == 200:
+            if self.appear(TI_LI_SHORTAGE):
                 return True
             # 材料足够
             if self.appear(STUFF_MATERIAL_FULL):

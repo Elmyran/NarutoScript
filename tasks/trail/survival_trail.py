@@ -58,6 +58,8 @@ class SurvivalTrail(UI):
                 raise GameStuckError("Survival Trial Stucked")
             if self.appear_then_click(SURVIVAL_TELEPORT,interval=0):
                 continue
+            if self.appear_then_click(SURVIVAL_CHAO_YING_CONFIRM,interval=0):
+                continue
             if self.appear(SURVIVAL_CHECK):
                 break
             if self.appear(SURVIVAL_HAVE_DONE):

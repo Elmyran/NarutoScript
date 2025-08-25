@@ -43,11 +43,9 @@
     },
     "Duel": {
       "DuelWeeklyStatus": true,
-      "CurrentVictoryNumber": 0,
+      "DuelDaily": {},
+      "CurrentVictoryCount": {},
       "TargetVictoryNumber": 10
-    },
-    "DuelStorage": {
-      "DuelDaily": {}
     }
   },
   "FengRao": {

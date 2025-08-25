@@ -26,6 +26,7 @@ class DuelDaily(UI):
     def _duel_task_detect(self):
         self.device.click_record_clear()
         self.device.stuck_record_clear()
+        self.config.stored.CurrentVictoryCount.total=self.config.Duel_TargetVictoryNumber
         time=Timer(30, count=30).start()
         #进入任务面板
         for _ in self.loop():
@@ -95,6 +96,8 @@ class DuelDaily(UI):
                 break
             if self.appear(DUEL_TASK_DELAY):
                 return 'Delay 5 Minute'
+            if self.appear(DUEL_IS_IN_MATCHING):
+                continue
             if self.appear_then_click(DUEL_TASK_PANEL):
                 continue
             if self.appear_then_click(DUEL_START_FIGHT,similarity=0.95,interval=2):
@@ -106,16 +109,14 @@ class DuelDaily(UI):
         for _ in self.loop():
             self.device.click_record_clear()
             if self.appear_then_click(DUEL_EXCEPTION):
-                with self.config.multi_set():
-                    self.config.Duel_CurrentVictoryNumber+=1
+                self.config.stored.CurrentVictoryCount.add(1)
                 print(f'find a exception')
                 return 'FIGHT_SUCCESS'
             if self.appear_then_click(DUEL_FIGHT_FAIL):
                 print(f'Fight_FAIL')
                 return 'FIGHT_FAIL'
             if self.appear_then_click(DUEL_FIGHT_SUCCESS):
-                with self.config.multi_set():
-                    self.config.Duel_CurrentVictoryNumber+=1
+                self.config.stored.CurrentVictoryCount.add(1)
                 print(f'FIGHT_SUCCESS')
                 return 'FIGHT_SUCCESS'
             if self.appear(DUEL_ROUND_SWITCH):

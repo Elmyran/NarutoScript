@@ -16,9 +16,7 @@ class PopupHandler(ModuleBase):
             return True
         if self.appear_then_click(EXIT_ORGANIZATION_RED_ENVELOPE,interval=interval):
             return True
-        if self.appear_then_click(FRIEND_GIFTS_CLAIM_CONFIRM,interval=interval):
-            return True
-        if self.appear_then_click(EXIT_WEEKLY_REWARD,interval=interval):
+        if self.appear_then_click(POPUP_CLOSE,interval=interval):
             return True
         if self.appear_then_click(DING_CI_KAO_ROU_REWARD,interval=interval):
             return True

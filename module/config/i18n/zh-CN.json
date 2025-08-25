@@ -327,7 +327,11 @@
       "name": "开启周胜",
       "help": "没有其他任务时，继续进行目标场数"
     },
-    "CurrentVictoryNumber": {
+    "DuelDaily": {
+      "name": "每日胜场已完成次数",
+      "help": ""
+    },
+    "CurrentVictoryCount": {
       "name": "当前胜场",
       "help": ""
     },
@@ -465,16 +469,6 @@
     "BattleOrderRank": {
       "name": "BattleOrderStorage.BattleOrderRank.name",
       "help": "BattleOrderStorage.BattleOrderRank.help"
-    }
-  },
-  "DuelStorage": {
-    "_info": {
-      "name": "DuelStorage._info.name",
-      "help": "DuelStorage._info.help"
-    },
-    "DuelDaily": {
-      "name": "DuelStorage.DuelDaily.name",
-      "help": "DuelStorage.DuelDaily.help"
     }
   },
   "Gui": {

@@ -52,15 +52,15 @@ class CultivationMopUp(UI):
 
     def _cultivation_mop_up(self):
         for _ in self.loop():
-
             if self.appear(CULTIVATION_MOP_UP_REWARD_CLAIM):
                 self.device.click(CULTIVATION_MOP_UP_REWARD_CLAIM)
                 continue
             if self.appear(CULTIVATION_MOP_UP_SUCCESS):
                 self.device.click(CULTIVATION_MOP_UP_SUCCESS)
                 continue
-            if self.appear(CULTIVATION_RESET_MOP_UP_RUNNING):
-                break
+            if self.appear(CULTIVATION_CLAIM_CHAO_YING):
+                self.device.click(CULTIVATION_CLAIM_CHAO_YING)
+                continue
             if self.appear(CULTIVATION_MOP_UP_DONE) :
                 ocr=Digit(CULTIVATION_MOP_UP_RESET_TIMES,lang='cn')
                 times=ocr.ocr_single_line(self.device.image)
@@ -68,6 +68,9 @@ class CultivationMopUp(UI):
                     return self._cultivation_reset()
                 elif times==0:
                     return 'MOP_UP_SUCCESS'
+            if self.appear(CULTIVATION_RESET_MOP_UP_RUNNING):
+                break
+
     def _cultivation_reset(self):
         for _ in self.loop():
             ocr=Digit(CULTIVATION_MOP_UP_RESET_TIMES,lang='cn')

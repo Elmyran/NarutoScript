@@ -8,6 +8,7 @@ from tasks.duel.assets.assets_duel import *
 from tasks.duel.assets.assets_duel_ninjutsu import *
 from tasks.information_club.assets.assets_information_club import *
 from tasks.leaderboard.assets.assets_leaderboard import *
+from tasks.organization.assets.assets_organization_akatsuki import AKATSUKI_CHECK
 from tasks.organization.assets.assets_organization_fortress import FORTRESS_LOCAL_SELECT, FORTRESS_PAGE, \
     ORGANIZATION_GOTO_FORTRESS
 from tasks.organization.assets.assets_organization_pray import *
@@ -126,6 +127,10 @@ page_organization=Page(ORGANIZATION)
 page_pray=Page(ORGANIZATION_PRAY_CHECK)
 page_pray.link(PRAY_EXIT,destination=page_organization)
 page_organization.link(ORGANIZATION_EXIT,destination=page_main)
+#Akatsuki
+page_akatsuki=Page(AKATSUKI_CHECK)
+page_akatsuki.link(CLOSE,destination=page_organization)
+
 #Fortress
 # page_fortress_type=Page(FORTRESS_LOCAL_SELECT)
 # page_fortress_select=Page(FORTRESS_SELECT)
@@ -172,12 +177,11 @@ page_equipment.link(EQUIPMENT_EXIT,destination=page_main)
 page_dungeon=Page(SWITCH_TO_DUNGEON)
 page_elite_dungeon=Page(CONVENIENT_SWEEP)
 page_dungeon_sweep=Page(SWEEP_BUTTON)
-page_dungeon_sweep_running=Page(SWEEP_RUNNING)
-page_dungeon_sweep_running.link(DUNGEON_EXIT,destination=page_dungeon_sweep)
 page_dungeon_sweep.link(DUNGEON_EXIT,destination=page_elite_dungeon)
 page_elite_dungeon.link(DUNGEON_EXIT,destination=page_main)
 page_dungeon.link(SWITCH_TO_DUNGEON,destination=page_elite_dungeon)
 page_dungeon.link(DUNGEON_EXIT,destination=page_main)
+page_main.link(MAIN_GOTO_DUNGEON,destination=page_dungeon)
 #DUEL
 page_duel=Page(DUEL_CHECK)
 page_ninjutsu=Page(DUEL_START_FIGHT)

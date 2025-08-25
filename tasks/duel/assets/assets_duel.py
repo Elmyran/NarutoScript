@@ -107,6 +107,17 @@ DUEL_IS_IN_FIGHT = ButtonWrapper(
     ),
     en=None,
 )
+DUEL_IS_IN_MATCHING = ButtonWrapper(
+    name='DUEL_IS_IN_MATCHING',
+    cn=Button(
+        file='./assets/cn/duel/DUEL_IS_IN_MATCHING.png',
+        area=(493, 336, 788, 368),
+        search=(473, 316, 808, 388),
+        color=(80, 64, 6),
+        button=(493, 336, 788, 368),
+    ),
+    en=None,
+)
 DUEL_ROUND_SWITCH = ButtonWrapper(
     name='DUEL_ROUND_SWITCH',
     cn=[

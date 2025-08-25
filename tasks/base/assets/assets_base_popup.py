@@ -10,7 +10,7 @@ COPPER_COINS_SHORTAGE = ButtonWrapper(
         area=(363, 188, 918, 534),
         search=(343, 168, 938, 554),
         color=(163, 156, 137),
-        button=(841, 188, 920, 249),
+        button=(363, 188, 918, 534),
     ),
 )
 DING_CI_KAO_ROU_REWARD = ButtonWrapper(
@@ -25,13 +25,22 @@ DING_CI_KAO_ROU_REWARD = ButtonWrapper(
 )
 EXIT_CONFIRM = ButtonWrapper(
     name='EXIT_CONFIRM',
-    share=Button(
-        file='./assets/share/base/popup/EXIT_CONFIRM.png',
-        area=(365, 167, 920, 407),
-        search=(345, 147, 940, 427),
-        color=(148, 147, 134),
-        button=(536, 414, 741, 486),
-    ),
+    share=[
+        Button(
+            file='./assets/share/base/popup/EXIT_CONFIRM.png',
+            area=(536, 414, 741, 486),
+            search=(516, 394, 761, 506),
+            color=(212, 141, 13),
+            button=(536, 414, 741, 486),
+        ),
+        Button(
+            file='./assets/share/base/popup/EXIT_CONFIRM.2.png',
+            area=(540, 411, 738, 488),
+            search=(520, 391, 758, 508),
+            color=(213, 144, 18),
+            button=(540, 411, 738, 488),
+        ),
+    ],
 )
 EXIT_ORGANIZATION_FROG_PURSE = ButtonWrapper(
     name='EXIT_ORGANIZATION_FROG_PURSE',
@@ -63,37 +72,11 @@ EXIT_ORGANIZATION_REPLACEMENT = ButtonWrapper(
         button=(969, 25, 1081, 79),
     ),
 )
-EXIT_WEEKLY_REWARD = ButtonWrapper(
-    name='EXIT_WEEKLY_REWARD',
-    share=Button(
-        file='./assets/share/base/popup/EXIT_WEEKLY_REWARD.png',
-        area=(835, 190, 918, 251),
-        search=(815, 170, 938, 271),
-        color=(83, 52, 50),
-        button=(835, 190, 918, 251),
-    ),
-)
-FRIEND_GIFTS_CLAIM_CONFIRM = ButtonWrapper(
-    name='FRIEND_GIFTS_CLAIM_CONFIRM',
-    share=Button(
-        file='./assets/share/base/popup/FRIEND_GIFTS_CLAIM_CONFIRM.png',
-        area=(364, 168, 917, 403),
-        search=(344, 148, 937, 423),
-        color=(148, 142, 126),
-        button=(540, 411, 738, 488),
-    ),
-)
 GET_CHARACTER = ButtonWrapper(
     name='GET_CHARACTER',
+    cn=None,
     en=Button(
         file='./assets/en/base/popup/GET_CHARACTER.png',
-        area=(205, 321, 242, 339),
-        search=(185, 301, 262, 359),
-        color=(126, 127, 127),
-        button=(205, 321, 242, 339),
-    ),
-    share=Button(
-        file='./assets/share/base/popup/GET_CHARACTER.png',
         area=(205, 321, 242, 339),
         search=(185, 301, 262, 359),
         color=(126, 127, 127),
@@ -102,15 +85,9 @@ GET_CHARACTER = ButtonWrapper(
 )
 GET_LIGHT_CONE = ButtonWrapper(
     name='GET_LIGHT_CONE',
+    cn=None,
     en=Button(
         file='./assets/en/base/popup/GET_LIGHT_CONE.png',
-        area=(260, 322, 306, 338),
-        search=(240, 302, 326, 358),
-        color=(147, 147, 148),
-        button=(260, 322, 306, 338),
-    ),
-    share=Button(
-        file='./assets/share/base/popup/GET_LIGHT_CONE.png',
         area=(260, 322, 306, 338),
         search=(240, 302, 326, 358),
         color=(147, 147, 148),
@@ -127,15 +104,43 @@ GET_REWARD = ButtonWrapper(
         button=(479, 131, 786, 213),
     ),
 )
+POPUP_CLOSE = ButtonWrapper(
+    name='POPUP_CLOSE',
+    share=[
+        Button(
+            file='./assets/share/base/popup/POPUP_CLOSE.png',
+            area=(1058, 97, 1140, 170),
+            search=(1038, 77, 1160, 190),
+            color=(75, 43, 42),
+            button=(1058, 97, 1140, 170),
+        ),
+        Button(
+            file='./assets/share/base/popup/POPUP_CLOSE.2.png',
+            area=(837, 191, 917, 249),
+            search=(817, 171, 937, 269),
+            color=(67, 45, 49),
+            button=(837, 191, 917, 249),
+        ),
+    ],
+)
 POPUP_EQUIPMENT_STUFF = ButtonWrapper(
     name='POPUP_EQUIPMENT_STUFF',
-    share=Button(
-        file='./assets/share/base/popup/POPUP_EQUIPMENT_STUFF.png',
-        area=(674, 178, 846, 219),
-        search=(654, 158, 866, 239),
-        color=(123, 124, 120),
-        button=(1166, 143, 1247, 227),
-    ),
+    share=[
+        Button(
+            file='./assets/share/base/popup/POPUP_EQUIPMENT_STUFF.png',
+            area=(674, 178, 846, 219),
+            search=(654, 158, 866, 239),
+            color=(123, 124, 120),
+            button=(1166, 143, 1247, 227),
+        ),
+        Button(
+            file='./assets/share/base/popup/POPUP_EQUIPMENT_STUFF.2.png',
+            area=(746, 240, 868, 284),
+            search=(726, 220, 888, 304),
+            color=(150, 131, 78),
+            button=(1166, 143, 1247, 227),
+        ),
+    ],
 )
 POPUP_EQUIPMENT_SWEEP = ButtonWrapper(
     name='POPUP_EQUIPMENT_SWEEP',
@@ -158,15 +163,9 @@ POPUP_EQUIPMENT_SWEEP = ButtonWrapper(
 )
 POPUP_TITLE_TIP = ButtonWrapper(
     name='POPUP_TITLE_TIP',
+    cn=None,
     en=Button(
         file='./assets/en/base/popup/POPUP_TITLE_TIP.png',
-        area=(620, 245, 659, 272),
-        search=(600, 225, 679, 292),
-        color=(163, 162, 163),
-        button=(620, 245, 659, 272),
-    ),
-    share=Button(
-        file='./assets/share/base/popup/POPUP_TITLE_TIP.png',
         area=(620, 245, 659, 272),
         search=(600, 225, 679, 292),
         color=(163, 162, 163),

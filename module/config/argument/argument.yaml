@@ -123,13 +123,18 @@ Duel:
   DuelWeeklyStatus:
     type: checkbox
     value:  true
-  CurrentVictoryNumber:
-    type: state
-    value: 0
+  DuelDaily:
+    stored: StoredDuel
+    value: { }
+    display: hide
+  CurrentVictoryCount:
+    stored: StoredDuelCurrentVictory
+    value: { }
+    display: display
   TargetVictoryNumber:
     type: input
     value: 10
-MiJing:
+
 
 
 
@@ -222,11 +227,8 @@ BattleOrderStorage:
     stored: StoredBattleOrderRank
     value:  {}
     display: hide
-DuelStorage:
-  DuelDaily:
-    stored: StoredDuel
-    value:  {}
-    display: hide
+
+
 
 # ==================== Activity ====================
 

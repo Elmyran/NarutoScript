@@ -25,6 +25,17 @@ CULTIVATION_BOX_CHECK = ButtonWrapper(
     ),
     en=None,
 )
+CULTIVATION_CLAIM_CHAO_YING = ButtonWrapper(
+    name='CULTIVATION_CLAIM_CHAO_YING',
+    cn=Button(
+        file='./assets/cn/trail/cultivation/CULTIVATION_CLAIM_CHAO_YING.png',
+        area=(553, 520, 717, 569),
+        search=(533, 500, 737, 589),
+        color=(219, 162, 34),
+        button=(553, 520, 717, 569),
+    ),
+    en=None,
+)
 CULTIVATION_EXIT = ButtonWrapper(
     name='CULTIVATION_EXIT',
     cn=Button(

@@ -59,6 +59,7 @@ class SquadRaidFight(UI):
 
 
     def _start_fight(self):
+        self.device.click_record_remove(HELP_BATTLE_START_FIGHT)
         time=Timer(60,8).start()
         for _ in self.loop():
             if time.reached():

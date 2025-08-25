@@ -1,4 +1,5 @@
 from pponnxcr import TextSystem as TextSystem_
+from ultralytics import YOLO
 
 from module.base.decorator import cached_property, del_cached_property
 from module.exception import ScriptError
@@ -77,6 +78,8 @@ class OcrModel:
     @cached_property
     def zht(self):
         return TextSystem('zht')
+
+
 
 
 OCR_MODEL = OcrModel()

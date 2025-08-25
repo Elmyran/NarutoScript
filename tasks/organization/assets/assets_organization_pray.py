@@ -156,13 +156,22 @@ ORGANIZATION_XIAO = ButtonWrapper(
 )
 PRAY_BUTTON = ButtonWrapper(
     name='PRAY_BUTTON',
-    cn=Button(
-        file='./assets/cn/organization/pray/PRAY_BUTTON.png',
-        area=(476, 544, 676, 618),
-        search=(456, 524, 696, 638),
-        color=(190, 129, 31),
-        button=(476, 544, 676, 618),
-    ),
+    cn=[
+        Button(
+            file='./assets/cn/organization/pray/PRAY_BUTTON.png',
+            area=(476, 544, 676, 618),
+            search=(456, 524, 696, 638),
+            color=(190, 129, 31),
+            button=(476, 544, 676, 618),
+        ),
+        Button(
+            file='./assets/cn/organization/pray/PRAY_BUTTON.2.png',
+            area=(714, 532, 917, 606),
+            search=(694, 512, 937, 626),
+            color=(209, 153, 39),
+            button=(714, 532, 917, 606),
+        ),
+    ],
     en=None,
 )
 PRAY_EXIT = ButtonWrapper(

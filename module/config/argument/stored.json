@@ -1,12 +1,25 @@
 {
   "DuelDaily": {
     "name": "DuelDaily",
-    "path": "Duel.DuelStorage.DuelDaily",
-    "i18n": "DuelStorage.DuelDaily.name",
+    "path": "Duel.Duel.DuelDaily",
+    "i18n": "Duel.DuelDaily.name",
     "stored": "StoredDuel",
     "attrs": {
       "time": "2020-01-01 00:00:00",
       "total": 1,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "CurrentVictoryCount": {
+    "name": "CurrentVictoryCount",
+    "path": "Duel.Duel.CurrentVictoryCount",
+    "i18n": "Duel.CurrentVictoryCount.name",
+    "stored": "StoredDuelCurrentVictory",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 0,
       "value": 0
     },
     "order": 0,

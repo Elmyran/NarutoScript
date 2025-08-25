@@ -327,9 +327,13 @@
       "name": "Duel.DuelWeeklyStatus.name",
       "help": "Duel.DuelWeeklyStatus.help"
     },
-    "CurrentVictoryNumber": {
-      "name": "Duel.CurrentVictoryNumber.name",
-      "help": "Duel.CurrentVictoryNumber.help"
+    "DuelDaily": {
+      "name": "Duel.DuelDaily.name",
+      "help": "Duel.DuelDaily.help"
+    },
+    "CurrentVictoryCount": {
+      "name": "Duel.CurrentVictoryCount.name",
+      "help": "Duel.CurrentVictoryCount.help"
     },
     "TargetVictoryNumber": {
       "name": "Duel.TargetVictoryNumber.name",
@@ -465,16 +469,6 @@
     "BattleOrderRank": {
       "name": "BattleOrderStorage.BattleOrderRank.name",
       "help": "BattleOrderStorage.BattleOrderRank.help"
-    }
-  },
-  "DuelStorage": {
-    "_info": {
-      "name": "DuelStorage._info.name",
-      "help": "DuelStorage._info.help"
-    },
-    "DuelDaily": {
-      "name": "DuelStorage.DuelDaily.name",
-      "help": "DuelStorage.DuelDaily.help"
     }
   },
   "Gui": {

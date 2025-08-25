@@ -5,6 +5,7 @@ from module.config.stored.classes import (
     StoredCounter,
     StoredDailyActivity,
     StoredDuel,
+    StoredDuelCurrentVictory,
     StoredDungeon,
     StoredExpiredAt0500,
     StoredExpiredAtMonday0500,
@@ -19,6 +20,7 @@ from module.config.stored.classes import (
 # ``` python -m module/config/config_updater.py ```
 
 class StoredGenerated:
-    DuelDaily = StoredDuel("Duel.DuelStorage.DuelDaily")
+    DuelDaily = StoredDuel("Duel.Duel.DuelDaily")
+    CurrentVictoryCount = StoredDuelCurrentVictory("Duel.Duel.CurrentVictoryCount")
     Dungeon = StoredDungeon("TiLi.TiLiStorage.Dungeon")
     BattleOrderRank = StoredBattleOrderRank("BattleOrder.BattleOrderStorage.BattleOrderRank")

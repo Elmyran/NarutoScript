@@ -19,9 +19,9 @@ class BattleOrderRank(UI):
                 raise GameStuckError("BATTLE ORDER RANK LIKE STUCK")
             if self.appear(BATTLE_ORDER_RANK_HAVE_LIKED):
                 break
-            if self.appear_then_click(BATTLE_ORDER_RANK_LIKE_BUTTON):
+            if self.appear_then_click(BATTLE_ORDER_RANK_LIKE_BUTTON,interval=0):
                 continue
-            if self.appear_then_click(BATTLE_ORDER_GOTO_RANK):
+            if self.appear_then_click(BATTLE_ORDER_GOTO_RANK,interval=0):
                 continue
 
     def _handle_battle_order_share(self):
@@ -31,7 +31,7 @@ class BattleOrderRank(UI):
                 raise GameStuckError('BATTLE ORDER RANK SHARE  STUCK')
             if self.appear_then_click(BATTLE_ORDER_SHARE_GOTO_QQ):
                 continue
-            if self.appear_then_click(BATTLE_ORDER_RANK_GOTO_SHARE):
+            if self.appear_then_click(BATTLE_ORDER_RANK_GOTO_SHARE,interval=0):
                 continue
             if self.appear(QQ_MENU,interval=1):
                 self.device.app_stop_adb('com.tencent.mobileqq')

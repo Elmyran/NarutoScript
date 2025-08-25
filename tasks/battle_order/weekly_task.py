@@ -2,6 +2,7 @@ from module.base.timer import Timer
 from tasks.base.page import page_battle_order
 from tasks.base.ui import UI
 from tasks.battle_order.assets.assets_battle_order_task import *
+from tasks.battle_order.assets.assets_battle_order_ui import BATTLE_ORDER_DETAIL
 from tasks.battle_order.switch import BATTLE_ORDER_TAB
 class BattleOrderWeeklyTask(UI):
     def handle_battle_order_weekly_task(self):
@@ -18,9 +19,10 @@ class BattleOrderWeeklyTask(UI):
                 continue
             if self.appear_then_click(BATTLE_ORDER_TASK_REWARD_CLAIM_CONFIRM,interval=0):
                 continue
+            BATTLE_ORDER_TASK_REWARD_CLAIM.load_search(BATTLE_ORDER_DETAIL.area)
             if self.appear_then_click(BATTLE_ORDER_TASK_REWARD_CLAIM,interval=0):
                 continue
-            if self.appear(BATTLE_ORDER_TASK_UNFINISH):
+            if self.appear(BATTLE_ORDER_TASK_UNFINISH,interval=1):
                 break
 
 

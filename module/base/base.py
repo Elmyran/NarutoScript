@@ -2,6 +2,7 @@ import cv2
 from ultralytics import YOLO
 
 import module.config.server as server_
+from deploy.Windows.utils import cached_property
 from module.base.button import Button, ButtonWrapper, ClickButton, match_template
 from module.base.timer import Timer
 from module.base.utils import *
@@ -10,6 +11,7 @@ from module.device.device import Device
 from module.device.method.utils import HierarchyButton
 from module.exception import GameStuckError
 from module.logger import logger
+from module.ocr.yolomodel import YOLO_MODEL
 from module.webui.setting import cached_class_property
 import time
 
@@ -17,7 +19,9 @@ import time
 class ModuleBase:
     config: AzurLaneConfig
     device: Device
-
+    @cached_property
+    def yolo_model(self):
+        return YOLO_MODEL.get_model()
     def __init__(self, config, device=None, task=None):
         """
         Args:
@@ -51,6 +55,7 @@ class ModuleBase:
         else:
             logger.warning('Alas ModuleBase received an unknown device, assume it is Device')
             self.device = device
+
 
         self.interval_timer = {}
 
@@ -222,17 +227,10 @@ class ModuleBase:
         start_time = time.time()
 
         img = self.device.screenshot()
-        # 检查图像通道数
-        if img.shape[2] == 3:  # RGB
-            img_bgr = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
-        elif img.shape[2] == 4:  # RGBA
-            img_bgr = cv2.cvtColor(img, cv2.COLOR_RGBA2BGR)
-        else:
-            img_bgr = img
 
-        model = YOLO("module/ocr/best.pt")
-        results = model.predict(img_bgr, conf=similarity, verbose=False)  # 禁用YOLO输出
 
+        model = self.yolo_model
+        results = model.predict(img, conf=similarity, verbose=False)  # 禁用YOLO输出
         claimable_buttons = []
         for result in results:
             boxes = result.boxes

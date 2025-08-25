@@ -19,9 +19,9 @@ class Akatsuki(UI):
         self.ui_ensure(page_main)
         self._organization_panel_enter()
         self._enter_akatsuki_panel()
-        result=self._reward_claim()
-        self._akatsuki_exit()
-        return result
+        self._reward_claim()
+        self.ui_goto_main()
+
     def _organization_panel_enter(self):
         self.device.swipe([0, 322], [1280, 314])
         move = True
@@ -77,6 +77,7 @@ class Akatsuki(UI):
             elif time.reached():
                 return  False
         claim_time=Timer(20, count=30).start()
+        down=True
         times=0
         for _ in self.loop():
             if claim_time.reached():
@@ -84,13 +85,19 @@ class Akatsuki(UI):
             REWARD_HAVE_CLAIMED.load_search(REWARD_CLAIM_PANEL.area)
             success = REWARD_HAVE_CLAIMED.match_multi_template(self.device.image)
             if success and len(success) == 5:
-                self.device.swipe([1028,593],[1027,201])
+                if down==True:
+                    self.device.swipe([1028,593],[1027,201])
+                    down=False
+                else :
+                    self.device.swipe([1028,201],[1027,593])
+                    down=True
                 times+=1
                 if times>3 :
                     break
                 continue
             if self.appear_then_click(REWARD_CLAIM_ALL,interval=0):
                 continue
+            REWARD_CLAIM_BUTTON.load_search(REWARD_CLAIM_PANEL.area)
             if self.appear_then_click(REWARD_CLAIM_BUTTON,interval=1):
                 continue
     def _akatsuki_exit(self):

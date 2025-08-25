@@ -57,7 +57,8 @@ class GeneratedConfig:
 
     # Group `Duel`
     Duel_DuelWeeklyStatus = True
-    Duel_CurrentVictoryNumber = 0
+    Duel_DuelDaily = {}
+    Duel_CurrentVictoryCount = {}
     Duel_TargetVictoryNumber = 10
 
     # Group `ItemStorage`
@@ -90,6 +91,3 @@ class GeneratedConfig:
 
     # Group `BattleOrderStorage`
     BattleOrderStorage_BattleOrderRank = {}
-
-    # Group `DuelStorage`
-    DuelStorage_DuelDaily = {}

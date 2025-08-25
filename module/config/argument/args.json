@@ -196,21 +196,21 @@
         "type": "checkbox",
         "value": true
       },
-      "CurrentVictoryNumber": {
-        "type": "state",
-        "value": 0
-      },
-      "TargetVictoryNumber": {
-        "type": "input",
-        "value": 10
-      }
-    },
-    "DuelStorage": {
       "DuelDaily": {
         "type": "stored",
         "value": {},
         "display": "hide",
         "stored": "StoredDuel"
+      },
+      "CurrentVictoryCount": {
+        "type": "stored",
+        "value": {},
+        "display": "display",
+        "stored": "StoredDuelCurrentVictory"
+      },
+      "TargetVictoryNumber": {
+        "type": "input",
+        "value": 10
       }
     }
   },

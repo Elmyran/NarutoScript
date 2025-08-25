@@ -3,15 +3,35 @@ from module.base.button import Button, ButtonWrapper
 # This file was auto-generated, do not modify it manually. To generate:
 # ``` python -m dev_tools.button_extract ```
 
+SURVIVAL_CHAO_YING_CONFIRM = ButtonWrapper(
+    name='SURVIVAL_CHAO_YING_CONFIRM',
+    cn=Button(
+        file='./assets/cn/trail/survival/SURVIVAL_CHAO_YING_CONFIRM.png',
+        area=(544, 431, 731, 498),
+        search=(524, 411, 751, 518),
+        color=(218, 144, 13),
+        button=(544, 431, 731, 498),
+    ),
+    en=None,
+)
 SURVIVAL_CHECK = ButtonWrapper(
     name='SURVIVAL_CHECK',
-    cn=Button(
-        file='./assets/cn/trail/survival/SURVIVAL_CHECK.png',
-        area=(542, 226, 691, 337),
-        search=(522, 206, 711, 357),
-        color=(96, 81, 53),
-        button=(542, 226, 691, 337),
-    ),
+    cn=[
+        Button(
+            file='./assets/cn/trail/survival/SURVIVAL_CHECK.png',
+            area=(542, 226, 691, 337),
+            search=(522, 206, 711, 357),
+            color=(96, 81, 53),
+            button=(542, 226, 691, 337),
+        ),
+        Button(
+            file='./assets/cn/trail/survival/SURVIVAL_CHECK.2.png',
+            area=(815, 156, 938, 278),
+            search=(795, 136, 958, 298),
+            color=(148, 123, 67),
+            button=(815, 156, 938, 278),
+        ),
+    ],
     en=None,
 )
 SURVIVAL_EXIT = ButtonWrapper(
