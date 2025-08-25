@@ -57,6 +57,8 @@ class MiJing(UI):
         battle.start_services()
         try:
             for _ in self.loop():
+                self.device.click_record_remove(MI_JING_REWARD_EXIT)
+                self.device.click_record_remove(MI_JING_SUCCESS)
                 MI_JING_REWARD_EXIT.load_search(MI_JING_REWARD_AREA.area)
                 if self.appear_then_click(MI_JING_REWARD_EXIT,interval=0):
                     continue
