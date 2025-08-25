@@ -228,9 +228,14 @@ class ModuleBase:
 
         img = self.device.screenshot()
 
-
+        if img.shape[2] == 3:  # RGB
+            img_bgr = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+        elif img.shape[2] == 4:  # RGBA
+            img_bgr = cv2.cvtColor(img, cv2.COLOR_RGBA2BGR)
+        else:
+            img_bgr = img
         model = self.yolo_model
-        results = model.predict(img, conf=similarity, verbose=False)  # 禁用YOLO输出
+        results = model.predict(img_bgr, conf=similarity, verbose=False)  # 禁用YOLO输出
         claimable_buttons = []
         for result in results:
             boxes = result.boxes
