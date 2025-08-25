@@ -1,7 +1,7 @@
 from module.base.timer import Timer
 from module.exception import GameStuckError
-from module.ocr.ocr import Digit
-from tasks.base.assets.assets_base import TILI_REMAIN
+from module.ocr.ocr import Digit, DigitCounter
+from tasks.base.assets.assets_base import TILI_REMAIN, TI_LI_REMAIN_COUNTER
 from tasks.base.page import page_main, page_elite_dungeon
 from tasks.base.ui import UI
 from tasks.tili.assets.assets_tili_dungeon import *
@@ -10,10 +10,10 @@ class Dungeon(UI):
     def handle_dungeon(self):
         self.device.click_record_clear()
         self.ui_ensure(page_main)
-        ocr=Digit(TILI_REMAIN,lang='cn')
-        ti_li=ocr.ocr_single_line(self.device.image)
-        self.config.TiLi_TiLiRemain=ti_li
-        if ti_li<10:
+        ocr=DigitCounter(TI_LI_REMAIN_COUNTER,lang='cn')
+        current,remain,total=ocr.ocr_single_line(self.device.image)
+        if current<10 and total==200:
+            self.config.TiLi_TiLiRemain=current
             return False
         self.ui_ensure(page_elite_dungeon)
         res=self._dungeon_sweep()

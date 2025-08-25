@@ -14,3 +14,14 @@ TILI_REMAIN = ButtonWrapper(
     ),
     en=None,
 )
+TI_LI_REMAIN_COUNTER = ButtonWrapper(
+    name='TI_LI_REMAIN_COUNTER',
+    cn=Button(
+        file='./assets/cn/base/TI_LI_REMAIN_COUNTER.png',
+        area=(382, 19, 521, 58),
+        search=(362, 0, 541, 78),
+        color=(70, 75, 93),
+        button=(382, 19, 521, 58),
+    ),
+    en=None,
+)

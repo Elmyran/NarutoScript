@@ -5,7 +5,7 @@ from module.exception import GameStuckError
 from module.logger import logger
 from module.ocr.ocr import Digit, Ocr, DigitCounter
 
-from tasks.base.assets.assets_base import TILI_REMAIN
+from tasks.base.assets.assets_base import TILI_REMAIN, TI_LI_REMAIN_COUNTER
 from tasks.base.assets.assets_base_popup import *
 from tasks.base.page import *
 from tasks.base.ui import UI
@@ -18,10 +18,10 @@ class Equipment(UI):
     def handle_equipment(self):
         self.device.click_record_clear()
         self.ui_ensure(page_main)
-        ocr = Digit(TILI_REMAIN, lang='cn')
-        ti_li = ocr.ocr_single_line(self.device.image)
-        self.config.TiLi_TiLiRemain = ti_li
-        if ti_li < 10:
+        ocr=DigitCounter(TI_LI_REMAIN_COUNTER,lang='cn')
+        current,remain,total=ocr.ocr_single_line(self.device.image)
+        if current<5 and total==200:
+            self.config.TiLi_TiLiRemain=current
             return False
         self._equipment_enter()
         for _ in self.loop():

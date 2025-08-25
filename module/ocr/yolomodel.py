@@ -16,7 +16,7 @@ class YoloModel:
         延迟加载 YOLO 模型，只在首次调用时初始化
         """
         try:
-            model=YOLO('module/ocr/best.pt').to("cpu")
+            model=YOLO('module/ocr/claim.pt')
             return model
         except Exception as e:
             raise ScriptError(f'YOLO model initialization failed: {e}')

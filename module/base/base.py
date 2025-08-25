@@ -219,23 +219,17 @@ class ModuleBase:
             self.interval_reset(button, interval=interval)
 
         return appear
-    def detect_claimable_buttons(self, similarity=0.85, encourage=10):
+    def detect_claimable_buttons(self, image=None,similarity=0.85, encourage=10):
         """
         检测图片中所有可领取奖励，返回ClickButton对象列表
         """
         import time
         start_time = time.time()
-
-        img = self.device.screenshot()
-
-        if img.shape[2] == 3:  # RGB
-            img_bgr = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
-        elif img.shape[2] == 4:  # RGBA
-            img_bgr = cv2.cvtColor(img, cv2.COLOR_RGBA2BGR)
-        else:
-            img_bgr = img
+        if image:
+            img=image
+        else: img=self.device.screenshot()
         model = self.yolo_model
-        results = model.predict(img_bgr, conf=similarity, verbose=False)  # 禁用YOLO输出
+        results = model.predict(img,conf=similarity, verbose=False)  # 禁用YOLO输出
         claimable_buttons = []
         for result in results:
             boxes = result.boxes
