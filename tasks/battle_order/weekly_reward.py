@@ -1,3 +1,5 @@
+from ultralytics import YOLO
+
 from module.base.timer import Timer
 
 from tasks.base.page import page_battle_order
@@ -16,14 +18,11 @@ class BattleOrderWeeklyReward(UI):
                 break
             if self.appear_then_click(BATTLE_ORDER_WEEKLY_REWARD_CLAIM_SUCCESS,interval=0,similarity=0.9):
                 continue
-            res=self.detect_claimable_buttons(similarity=0.1)
+            res=self.detect_claimable_buttons(button=BATTLE_ORDER_WEEKLY_REWARD_AREA,similarity=0.6)
             if res and len(res)>0:
-                self.device.click(res[0])
-                time.reset()
-
-
-
-
-
+                if self.interval_is_reached('claimable_click', interval=1):
+                    self.device.click(res[0])
+                    self.interval_reset('claimable_click', interval=1)
+                    time.reset()
 
 

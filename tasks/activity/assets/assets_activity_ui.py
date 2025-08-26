@@ -42,3 +42,23 @@ MONTHLY_SIGN_IN_CLICK = ButtonWrapper(
         button=(13, 572, 151, 634),
     ),
 )
+TIAN_TIAN_AI_MEI_SHI_CHECK = ButtonWrapper(
+    name='TIAN_TIAN_AI_MEI_SHI_CHECK',
+    share=Button(
+        file='./assets/share/activity/ui/TIAN_TIAN_AI_MEI_SHI_CHECK.png',
+        area=(5, 248, 149, 321),
+        search=(0, 228, 169, 341),
+        color=(158, 150, 121),
+        button=(5, 248, 149, 321),
+    ),
+)
+TIAN_TIAN_AI_MEI_SHI_CLICK = ButtonWrapper(
+    name='TIAN_TIAN_AI_MEI_SHI_CLICK',
+    share=Button(
+        file='./assets/share/activity/ui/TIAN_TIAN_AI_MEI_SHI_CLICK.png',
+        area=(2, 253, 149, 324),
+        search=(0, 233, 169, 344),
+        color=(74, 110, 147),
+        button=(2, 253, 149, 324),
+    ),
+)

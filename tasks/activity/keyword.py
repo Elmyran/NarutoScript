@@ -67,3 +67,12 @@ JieRiRiLiKeyword = ActivityTab(
     jp='祭日カレンダー',
     es='Calendario de Festivales'
 )
+TianTianAiMeiShiKeyword = ActivityTab(
+    id=6,
+    name='TianTianAiMeiShiKeyword',
+    cn='天天爱美食',
+    cht='天天爱美食',
+    en='Love Food Everyday',
+    jp='毎日グルメ',
+    es='Amar la Comida Diaria'
+)

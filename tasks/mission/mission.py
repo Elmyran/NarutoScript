@@ -3,6 +3,7 @@ from module.exception import GameStuckError
 from module.logger.logger import logger
 
 from module.ocr.ocr import Ocr
+from module.ocr.ocrutils import DigitOcr
 from module.ocr.onnxocr.onnx_paddleocr import ONNXPaddleOcr
 from module.ocr.utils import pair_buttons
 from tasks.base.page import page_main

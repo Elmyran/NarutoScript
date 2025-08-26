@@ -3,6 +3,17 @@ from module.base.button import Button, ButtonWrapper
 # This file was auto-generated, do not modify it manually. To generate:
 # ``` python -m dev_tools.button_extract ```
 
+BATTLE_ORDER_WEEKLY_REWARD_AREA = ButtonWrapper(
+    name='BATTLE_ORDER_WEEKLY_REWARD_AREA',
+    cn=Button(
+        file='./assets/cn/battle_order/reward/BATTLE_ORDER_WEEKLY_REWARD_AREA.png',
+        area=(283, 231, 1174, 463),
+        search=(263, 211, 1194, 483),
+        color=(184, 159, 123),
+        button=(283, 231, 1174, 463),
+    ),
+    en=None,
+)
 BATTLE_ORDER_WEEKLY_REWARD_CLAIM = ButtonWrapper(
     name='BATTLE_ORDER_WEEKLY_REWARD_CLAIM',
     cn=[

@@ -11,7 +11,7 @@ from tasks.base.page import *
 from tasks.base.ui import UI
 from tasks.tili.assets.assets_tili_equipment import *
 from tasks.tili.keyword import  MopUpKeyword,SyntheticKeyword
-
+from tasks.tili.ocr import StuffOcr
 
 
 class Equipment(UI):
@@ -165,7 +165,7 @@ class Equipment(UI):
         for _ in self.loop():
             if time.reached():
                 raise GameStuckError('Equipment Advance Stuff Part 1 Stuck')
-            ocr = DigitCounter(STUFF_PART_1)
+            ocr = StuffOcr(STUFF_PART_1)
             current, remain, total = ocr.ocr_single_line(self.device.image)
             if total > 0 and remain > 0:
                 self.device.click(STUFF_PART_1)
@@ -175,13 +175,14 @@ class Equipment(UI):
         for _ in self.loop():
             if time.reached():
                 raise GameStuckError('Equipment Advance Stuff Part 1 Stuck')
-            ocr = DigitCounter(STUFF_PART_2)
+            ocr = StuffOcr(STUFF_PART_2)
             current, remain, total = ocr.ocr_single_line(self.device.image)
             if total > 0 and remain > 0:
                 self.device.click(STUFF_PART_2)
                 return True
             elif total > 0 >= remain:
                 break
+        return False
 
     def _start_sweep(self):
         time = Timer(4, count=5).start()

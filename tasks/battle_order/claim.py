@@ -1,7 +1,4 @@
 
-
-from ultralytics import YOLO
-
 from module.base.timer import Timer
 from tasks.base.assets.assets_base_page import BATTLE_ORDER_CHECK
 from tasks.base.page import page_battle_order
@@ -29,10 +26,13 @@ class BattleOrderClaim(UI):
                 continue
             if self.appear_then_click(BATTLE_ORDER_REWARD_CLAIM_SUCCESS,interval=0):
                 continue
-            res=self.detect_claimable_buttons(similarity=0.4)
+            res=self.detect_claimable_buttons(button=BATTLE_ORDER_REWARD_AREA,similarity=0.6)
             if res and len(res)!=0:
-                self.device.click(res[0])
-                time.reset()
+                if self.interval_is_reached('claimable_click', interval=1):
+                    self.device.click(res[0])
+                    self.interval_reset('claimable_click', interval=1)
+                    time.reset()
+
 
     def _character_fragments_select(self):
         name=self.config.BattleOrder_CharacterFragments
