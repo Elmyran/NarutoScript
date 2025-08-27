@@ -234,6 +234,18 @@
       "ServerUpdate": "05:00"
     }
   },
+  "PanRen": {
+    "Scheduler": {
+      "Enable": false,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "PanRen",
+      "ServerUpdate": "05:00"
+    },
+    "PanRen": {
+      "SecondPassword": null,
+      "PanRenFinishCount": {}
+    }
+  },
   "DingCiKaoRou": {
     "Scheduler": {
       "Enable": false,

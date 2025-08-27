@@ -105,6 +105,11 @@ Weekly:
     Akatsuki:
       - Scheduler
       - Akatsuki
+    PanRen:
+      - Scheduler
+      - PanRen
+
+
 
 # ==================== Activity ====================
 Activity:

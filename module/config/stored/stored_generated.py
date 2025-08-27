@@ -10,6 +10,7 @@ from module.config.stored.classes import (
     StoredExpiredAt0500,
     StoredExpiredAtMonday0500,
     StoredInt,
+    StoredPanRenCount,
     StoredPlanner,
     StoredPlannerOverall,
     StoredTrailblazePower,
@@ -24,3 +25,4 @@ class StoredGenerated:
     CurrentVictoryCount = StoredDuelCurrentVictory("Duel.Duel.CurrentVictoryCount")
     Dungeon = StoredDungeon("TiLi.TiLiStorage.Dungeon")
     BattleOrderRank = StoredBattleOrderRank("BattleOrder.BattleOrderStorage.BattleOrderRank")
+    PanRenFinishCount = StoredPanRenCount("PanRen.PanRen.PanRenFinishCount")

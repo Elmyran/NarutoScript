@@ -25,7 +25,11 @@ class DuelWeekly(UI):
             if success:
                 end_or_not=self._duel_task_detect()
                 if end_or_not==False:
-                    res=self.start_fight()
+                    self.device.stuck_timer = Timer(420, count=420).start()
+                    try:
+                        res=self.start_fight()
+                    finally:
+                        self.device.stuck_timer = Timer(60, count=60).start()
                     if res=='FIGHT_SUCCESS':
                         success=True
                     elif res=='FIGHT_FAIL':
@@ -34,8 +38,11 @@ class DuelWeekly(UI):
                     break
             else:
                 #输了则继续战斗
-                self.start_fight()
-                res=self.start_fight()
+                self.device.stuck_timer = Timer(420, count=420).start()
+                try:
+                    res=self.start_fight()
+                finally:
+                    self.device.stuck_timer = Timer(60, count=60).start()
                 if res=='FIGHT_SUCCESS':
                     success=True
                 elif res=='FIGHT_FAIL':
@@ -108,7 +115,6 @@ class DuelWeekly(UI):
         buttons = [CHARACTER_TI_SHEN,CHARACTER_SKILL_1, CHARACTER_SKILL_2, CHARACTER_SKILL_3, CHARACTER_PSYCHIC, CHARACTER_SECRET_SCROLL]
         for _ in self.loop():
             self.device.click_record_clear()
-            self.device.stuck_record_clear()
             if self.appear_then_click(DUEL_EXCEPTION):
                 self.config.stored.CurrentVictoryCount.add(1)
                 print(f'find a exception')
@@ -122,11 +128,8 @@ class DuelWeekly(UI):
                 return 'FIGHT_SUCCESS'
             if self.appear(DUEL_ROUND_SWITCH):
                 print('ROUND SWITCH')
-                try:
-                    self.click_buttons_until_end(CHARACTER_ATTACK,buttons,DUEL_FIGHT_END)
-                finally:
-                    self.device.stuck_record_clear()
-                    self.device.click_record_clear()
+                self.click_buttons_until_end(CHARACTER_ATTACK,buttons,DUEL_FIGHT_END)
+
 
     def click_buttons_until_end(self, attack_button, other_buttons, fail_check, timeout=390, check_interval=0.5):
         """
@@ -144,10 +147,8 @@ class DuelWeekly(UI):
         last_check = time.time()
         idx = 0
         other_count = len(other_buttons)
-        original=self.device.stuck_timer
-        self.device.stuck_timer=Timer(100,100).start()
         while True:
-
+            self.device.click_record_clear()
             # 超时退出
             if time.time() - start_time > timeout:
                 print(f"超时 {timeout} 秒，停止点击。")
@@ -176,5 +177,3 @@ class DuelWeekly(UI):
                 x, y = ensure_int(x, y)
                 self.device.click_maatouch(x, y)
                 idx = (idx + 1) % other_count
-        self.device.stuck_record_clear()
-        self.device.stuck_timer=original

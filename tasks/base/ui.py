@@ -1,9 +1,11 @@
 from module.base.button import ButtonWrapper
 from module.base.decorator import run_once
 from module.base.timer import Timer
-from module.exception import GameNotRunningError, GamePageUnknownError, HandledError
+from module.exception import GameNotRunningError, GamePageUnknownError, HandledError, GameStuckError, \
+    RequestHumanTakeover
 from module.logger import logger
 from module.ocr.ocr import Ocr
+from tasks.base.assets.assets_base_code_second import *
 from tasks.base.assets.assets_base_page import MAIN_GOTO_CHARACTER
 
 from tasks.base.main_page import MainPage
@@ -437,4 +439,25 @@ class UI(MainPage):
                     break
             if 1:
                 clicked = True
-
+    def handle_second_password(self):
+        self.device.screenshot()
+        code='040225'
+        #code=self.config.PanRen_SecondPassword
+        if code is None:
+            raise RequestHumanTakeover('SecondPassword need to fill')
+        for _ in  self.loop():
+            CODE_SECOND_PASSWORD_INPUT_CONFIRM.load_search([0,0,1280,720])
+            if self.appear(CODE_SECOND_PASSWORD_INPUT_CONFIRM):
+                break
+            if self.appear_then_click(CODE_SECOND_PASSWORD,interval=2):
+                continue
+        if hasattr(self.device, 'u2'):
+            self.device.u2.send_keys(code)
+        time=Timer(3,count=6).start()
+        for _ in self.loop():
+            if time.reached():
+                break
+            if self.appear_then_click(CODE_SECOND_PASSWORD_INPUT_CONFIRM,interval=0):
+                continue
+            if self.appear(CODE_SECOND_PASSWORD):
+                self.appear_then_click(CODE_SECOND_PASSWORD_CONFIRM,interval=1)

@@ -830,6 +830,45 @@
       }
     }
   },
+  "PanRen": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "PanRen",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    },
+    "PanRen": {
+      "SecondPassword": {
+        "type": "input",
+        "value": ""
+      },
+      "PanRenFinishCount": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredPanRenCount"
+      }
+    }
+  },
   "DingCiKaoRou": {
     "Scheduler": {
       "Enable": {

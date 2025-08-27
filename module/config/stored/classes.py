@@ -242,4 +242,6 @@ class StoredDuel(StoredCounter,StoredExpiredAt0500):
     FIXED_TOTAL = 1
 class StoredDuelCurrentVictory(StoredCounter, StoredExpiredAtMonday0500):
     value = 0
+class StoredPanRenCount(StoredCounter, StoredExpiredAtMonday0500):
+    FIXED_TOTAL = 2
 

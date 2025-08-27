@@ -215,6 +215,15 @@ CultivationRoad:
   ClearRedDot:
     type: checkbox
     value:  true
+PanRen:
+  SecondPassword:
+    type: input
+    value: ''
+  PanRenFinishCount:
+    stored: StoredPanRenCount
+    value: {}
+    display: hide
+
 
 # ==================== Storage ====================
 TiLiStorage:

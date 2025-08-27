@@ -86,6 +86,10 @@ class GeneratedConfig:
     # Group `CultivationRoad`
     CultivationRoad_ClearRedDot = True
 
+    # Group `PanRen`
+    PanRen_SecondPassword = None
+    PanRen_PanRenFinishCount = {}
+
     # Group `TiLiStorage`
     TiLiStorage_Dungeon = {}
 

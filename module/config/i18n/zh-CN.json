@@ -106,6 +106,10 @@
       "name": "追击晓组织",
       "help": ""
     },
+    "PanRen": {
+      "name": "叛忍来袭",
+      "help": ""
+    },
     "DingCiKaoRou": {
       "name": "丁次烤肉",
       "help": ""
@@ -449,6 +453,20 @@
     "ClearRedDot": {
       "name": "清除红点",
       "help": "自动点击修行宝箱"
+    }
+  },
+  "PanRen": {
+    "_info": {
+      "name": "设置",
+      "help": ""
+    },
+    "SecondPassword": {
+      "name": "二级密码",
+      "help": ""
+    },
+    "PanRenFinishCount": {
+      "name": "PanRen.PanRenFinishCount.name",
+      "help": "PanRen.PanRenFinishCount.help"
     }
   },
   "TiLiStorage": {

@@ -9,14 +9,14 @@ from tasks.duel.assets.assets_duel_ninjutsu import *
 from tasks.information_club.assets.assets_information_club import *
 from tasks.leaderboard.assets.assets_leaderboard import *
 from tasks.organization.assets.assets_organization_akatsuki import AKATSUKI_CHECK
-from tasks.organization.assets.assets_organization_fortress import FORTRESS_LOCAL_SELECT, FORTRESS_PAGE, \
-    ORGANIZATION_GOTO_FORTRESS
+from tasks.organization.assets.assets_organization_battlefield import *
+from tasks.organization.assets.assets_organization_fortress import *
+from tasks.organization.assets.assets_organization_pan_ren import PAN_REN_CHECK
 from tasks.organization.assets.assets_organization_pray import *
 from tasks.organization.assets.assets_organization_replacement import *
 from tasks.organization.assets.assets_organization_boxclaim import *
 from tasks.recruit.assets.assets_recruit import *
-from tasks.ren_zhe_tiao_zhan.assets.assets_ren_zhe_tiao_zhan import REN_ZHE_TIAO_ZHAN_CHECK, MI_JING_CHECK, \
-    MI_JING_ROOM_CHECK, REN_ZHE_TIAO_ZHAN_GOTO_MI_JING, MI_JING_CREATE_ROOM
+from tasks.ren_zhe_tiao_zhan.assets.assets_ren_zhe_tiao_zhan import *
 
 from tasks.tili.assets.assets_tili_dungeon import *
 from tasks.tili.assets.assets_tili_equipment import *
@@ -139,10 +139,19 @@ page_akatsuki.link(CLOSE,destination=page_organization)
 # page_fortress_type.link(FORTRESS_LOCAL_SELECT,destination=page_fortress_select)
 # page_fortress_page.link(FORTRESS_EXIT,destination=page_fortress_select)
 # page_fortress_select.link(CLOSE,destination=page_organization)
+#BattleField
+page_battle_field_select=Page(BATTLE_FIELD_SELECT_CHECK)
+page_organization.link(ORGANIZATION_GOTO_BATTLE_FIELD,destination=page_battle_field_select)
+page_battle_field_tian=Page(BATTLE_FIELD_TIAN_CHECK)
+# page_battle_field_di=Page(BATTLE_FIELD_DI_CHECK)
+#PanRen
+page_pan_ren=Page(PAN_REN_CHECK)
+page_pan_ren.link(CLOSE,destination=page_organization)
 #DailyReward
 page_daily=Page(DAILY_CHECK)
 page_main.link(MAIN_GOTO_DAILY,destination=page_daily)
 page_daily.link(CLOSE,destination=page_main)
+
 #SquadRaid
 page_squad=Page(SQUAD_RAID_CHECK)
 page_main.link(MAIN_GOTO_SQUAD_RAID,destination=page_squad)

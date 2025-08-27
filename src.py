@@ -100,6 +100,9 @@ class StarRailCopilot(AzurLaneAutoScript):
     def mi_jing(self):
         from tasks.ren_zhe_tiao_zhan.ren_zhe_tiao_zhan import RenZheTiaoZhan
         RenZheTiaoZhan(config=self.config, device=self.device).run()
+    def pan_ren(self):
+        from tasks.organization.pan_ren import OrganizationPanRen
+        OrganizationPanRen(config=self.config, device=self.device).run()
 
 
 

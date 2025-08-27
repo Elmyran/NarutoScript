@@ -57,6 +57,13 @@ CLOSE = ButtonWrapper(
             color=(102, 56, 34),
             button=(1185, 2, 1272, 70),
         ),
+        Button(
+            file='./assets/share/base/page/CLOSE.3.png',
+            area=(1212, 21, 1263, 70),
+            search=(1192, 1, 1280, 90),
+            color=(49, 50, 53),
+            button=(1212, 21, 1263, 70),
+        ),
     ],
 )
 DAILY_CHECK = ButtonWrapper(

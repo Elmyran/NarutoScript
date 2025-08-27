@@ -106,6 +106,10 @@
       "name": "Task.Akatsuki.name",
       "help": "Task.Akatsuki.help"
     },
+    "PanRen": {
+      "name": "Task.PanRen.name",
+      "help": "Task.PanRen.help"
+    },
     "DingCiKaoRou": {
       "name": "Task.DingCiKaoRou.name",
       "help": "Task.DingCiKaoRou.help"
@@ -449,6 +453,20 @@
     "ClearRedDot": {
       "name": "CultivationRoad.ClearRedDot.name",
       "help": "CultivationRoad.ClearRedDot.help"
+    }
+  },
+  "PanRen": {
+    "_info": {
+      "name": "PanRen._info.name",
+      "help": "PanRen._info.help"
+    },
+    "SecondPassword": {
+      "name": "PanRen.SecondPassword.name",
+      "help": "PanRen.SecondPassword.help"
+    },
+    "PanRenFinishCount": {
+      "name": "PanRen.PanRenFinishCount.name",
+      "help": "PanRen.PanRenFinishCount.help"
     }
   },
   "TiLiStorage": {

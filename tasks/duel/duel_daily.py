@@ -12,20 +12,25 @@ from tasks.duel.assets.assets_duel import *
 class DuelDaily(UI):
     def handle_duel_daily(self):
         self.device.click_record_clear()
+        self.device.stuck_record_clear()
         self.ui_ensure(page_main)
         self.swipe_and_appear_then_click(DUEL_CHECK,MAIN_GOTO_DUEL,left=True)
         self.ui_ensure(page_ninjutsu)
         for _ in  self.loop():
             res=self._duel_task_detect()
             if res==False:
-                if self.start_fight()=='Delay 5 Minute':
-                    return  'Delay 5 Minute'
+                self.device.stuck_timer = Timer(420, count=420).start()
+                try:
+                    if self.start_fight()=='Delay 5 Minute':
+                        return  'Delay 5 Minute'
+                finally:
+                    self.device.stuck_timer = Timer(60, count=60).start()
+
             else:
                 break
 
     def _duel_task_detect(self):
         self.device.click_record_clear()
-        self.device.stuck_record_clear()
         self.config.stored.CurrentVictoryCount.total=self.config.Duel_TargetVictoryNumber
         time=Timer(30, count=30).start()
         #进入任务面板
@@ -88,7 +93,6 @@ class DuelDaily(UI):
 
     def start_fight(self):
         self.device.click_record_clear()
-        self.device.stuck_record_clear()
         for _ in self.loop():
             if self.appear(DUEL_ROUND_SWITCH):
                 break
@@ -121,11 +125,10 @@ class DuelDaily(UI):
                 return 'FIGHT_SUCCESS'
             if self.appear(DUEL_ROUND_SWITCH):
                 print('ROUND SWITCH')
-                try:
-                    self.click_buttons_until_end(CHARACTER_ATTACK,buttons,DUEL_FIGHT_END)
-                finally:
-                    self.device.stuck_record_clear()
-                    self.device.click_record_clear()
+
+                self.click_buttons_until_end(CHARACTER_ATTACK,buttons,DUEL_FIGHT_END)
+
+
 
 
 
@@ -145,12 +148,8 @@ class DuelDaily(UI):
         last_check = time.time()
         idx = 0
         other_count = len(other_buttons)
-
-        original=self.device.stuck_timer
-        self.device.stuck_timer=Timer(100,100).start()
         while True:
             self.device.click_record_clear()
-            self.device.stuck_record_clear()
             # 超时退出
             if time.time() - start_time > timeout:
                 print(f"超时 {timeout} 秒，停止点击。")
@@ -179,5 +178,3 @@ class DuelDaily(UI):
                 x, y = ensure_int(x, y)
                 self.device.click_maatouch(x, y)
                 idx = (idx + 1) % other_count
-        self.device.stuck_record_clear()
-        self.device.stuck_timer=original
