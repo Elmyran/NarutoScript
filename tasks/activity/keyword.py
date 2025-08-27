@@ -47,9 +47,18 @@ QingSongHaoLiKeyword = ActivityTab(
     jp='気楽なギフト',
     es='Regalos Fáciles'
 )
+TianTianAiMeiShiKeyword = ActivityTab(
+    id=4,
+    name='TianTianAiMeiShiKeyword',
+    cn='天天爱美食',
+    cht='天天爱美食',
+    en='Love Food Everyday',
+    jp='毎日グルメ',
+    es='Amar la Comida Diaria'
+)
 
 MeiYueQianDaoKeyword = ActivityTab(
-    id=4,
+    id=5,
     name='MeiYueQianDaoKeyword',
     cn='每月签到',
     cht='每月簽到',
@@ -59,20 +68,11 @@ MeiYueQianDaoKeyword = ActivityTab(
 )
 
 JieRiRiLiKeyword = ActivityTab(
-    id=5,
+    id=6,
     name='JieRiRiLiKeyword',
     cn='节日日历',
     cht='節日曆',
     en='Festival Calendar',
     jp='祭日カレンダー',
     es='Calendario de Festivales'
-)
-TianTianAiMeiShiKeyword = ActivityTab(
-    id=6,
-    name='TianTianAiMeiShiKeyword',
-    cn='天天爱美食',
-    cht='天天爱美食',
-    en='Love Food Everyday',
-    jp='毎日グルメ',
-    es='Amar la Comida Diaria'
 )
