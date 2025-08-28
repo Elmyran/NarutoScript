@@ -65,10 +65,13 @@ class GeneratedConfig:
     ItemStorage_Credit = {}
     ItemStorage_StallerJade = {}
 
-    # Group `Freebies`
-    Freebies_FriendGifts = True
-    Freebies_DailyShare = True
-    Freebies_MailReward = True
+    # Group `DailyFreebies`
+    DailyFreebies_FriendGifts = True
+    DailyFreebies_DailyShare = True
+    DailyFreebies_MailReward = True
+
+    # Group `WeeklyFreebies`
+    WeeklyFreebies_WeeklyPackage = True
 
     # Group `ZhaoCai`
     ZhaoCai_ZhaoCaiFree = True
@@ -95,3 +98,6 @@ class GeneratedConfig:
 
     # Group `BattleOrderStorage`
     BattleOrderStorage_BattleOrderRank = {}
+
+    # Group `FreebiesStorage`
+    FreebiesStorage_WeeklyPackage = {}

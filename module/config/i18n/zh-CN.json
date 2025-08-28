@@ -358,13 +358,13 @@
       "help": "ItemStorage.StallerJade.help"
     }
   },
-  "Freebies": {
+  "DailyFreebies": {
     "_info": {
-      "name": "白嫖奖励",
+      "name": "每日",
       "help": ""
     },
     "FriendGifts": {
-      "name": "赠送体力",
+      "name": "体力赠送",
       "help": ""
     },
     "DailyShare": {
@@ -372,7 +372,17 @@
       "help": ""
     },
     "MailReward": {
-      "name": "领取邮件",
+      "name": "邮件领取",
+      "help": ""
+    }
+  },
+  "WeeklyFreebies": {
+    "_info": {
+      "name": "每周",
+      "help": ""
+    },
+    "WeeklyPackage": {
+      "name": "购买每周礼包",
       "help": ""
     }
   },
@@ -487,6 +497,16 @@
     "BattleOrderRank": {
       "name": "BattleOrderStorage.BattleOrderRank.name",
       "help": "BattleOrderStorage.BattleOrderRank.help"
+    }
+  },
+  "FreebiesStorage": {
+    "_info": {
+      "name": "FreebiesStorage._info.name",
+      "help": "FreebiesStorage._info.help"
+    },
+    "WeeklyPackage": {
+      "name": "FreebiesStorage.WeeklyPackage.name",
+      "help": "FreebiesStorage.WeeklyPackage.help"
     }
   },
   "Gui": {

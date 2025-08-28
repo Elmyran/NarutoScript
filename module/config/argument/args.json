@@ -542,7 +542,7 @@
         "display": "hide"
       }
     },
-    "Freebies": {
+    "DailyFreebies": {
       "FriendGifts": {
         "type": "checkbox",
         "value": true
@@ -554,6 +554,20 @@
       "MailReward": {
         "type": "checkbox",
         "value": true
+      }
+    },
+    "WeeklyFreebies": {
+      "WeeklyPackage": {
+        "type": "checkbox",
+        "value": true
+      }
+    },
+    "FreebiesStorage": {
+      "WeeklyPackage": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredFreebiesWeeklyPackage"
       }
     }
   },

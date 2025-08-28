@@ -223,6 +223,11 @@ page_battle_order.link(CLOSE,destination=page_main)
 page_battle_order_rank=Page(BATTLE_ORDER_RANK_CHECK)
 page_battle_order_rank.link(CLOSE,destination=page_battle_order)
 page_battle_order.link(BATTLE_ORDER_GOTO_RANK,destination=page_battle_order_rank)
+#StorePurchase
+page_chongzhi=Page(CHONG_ZHI_CHECK)
+page_main.link(CHONG_ZHI_CHECK,destination=page_chongzhi)
+page_chongzhi.link(CLOSE,destination=page_main)
+
 #MiJing
 page_ren_zhe_tiao_zhan=Page(REN_ZHE_TIAO_ZHAN_CHECK)
 page_mi_jing=Page(MI_JING_CHECK)

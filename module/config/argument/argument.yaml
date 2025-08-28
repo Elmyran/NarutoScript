@@ -153,7 +153,7 @@ ItemStorage:
 
 
 # ==================== Rewards ====================
-Freebies:
+DailyFreebies:
   FriendGifts:
     type: checkbox
     value: true
@@ -163,6 +163,11 @@ Freebies:
   MailReward:
     type: checkbox
     value: true
+WeeklyFreebies:
+  WeeklyPackage:
+    type: checkbox
+    value: true
+
 ZhaoCai:
   ZhaoCaiFree:
     type: checkbox
@@ -236,7 +241,11 @@ BattleOrderStorage:
     stored: StoredBattleOrderRank
     value:  {}
     display: hide
-
+FreebiesStorage:
+  WeeklyPackage:
+    stored: StoredFreebiesWeeklyPackage
+    value: {}
+    display: hide
 
 
 # ==================== Activity ====================

@@ -66,7 +66,9 @@ Rewards:
       - ZhaoCai
     Freebies:
       - Scheduler
-      - Freebies
+      - DailyFreebies
+      - WeeklyFreebies
+      - FreebiesStorage
     DailyReward:
       - Scheduler
       - DailyReward

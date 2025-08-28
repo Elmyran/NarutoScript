@@ -64,13 +64,22 @@ EXIT_ORGANIZATION_RED_ENVELOPE = ButtonWrapper(
 )
 EXIT_ORGANIZATION_REPLACEMENT = ButtonWrapper(
     name='EXIT_ORGANIZATION_REPLACEMENT',
-    share=Button(
-        file='./assets/share/base/popup/EXIT_ORGANIZATION_REPLACEMENT.png',
-        area=(540, 91, 751, 150),
-        search=(520, 71, 771, 170),
-        color=(198, 187, 140),
-        button=(969, 25, 1081, 79),
-    ),
+    share=[
+        Button(
+            file='./assets/share/base/popup/EXIT_ORGANIZATION_REPLACEMENT.png',
+            area=(540, 91, 751, 150),
+            search=(520, 71, 771, 170),
+            color=(198, 187, 140),
+            button=(969, 25, 1081, 79),
+        ),
+        Button(
+            file='./assets/share/base/popup/EXIT_ORGANIZATION_REPLACEMENT.2.png',
+            area=(428, 94, 883, 224),
+            search=(408, 74, 903, 244),
+            color=(206, 197, 166),
+            button=(969, 25, 1081, 79),
+        ),
+    ],
 )
 GET_CHARACTER = ButtonWrapper(
     name='GET_CHARACTER',

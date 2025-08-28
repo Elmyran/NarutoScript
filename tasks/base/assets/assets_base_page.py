@@ -33,6 +33,16 @@ BATTLE_ORDER_RANK_CHECK = ButtonWrapper(
         button=(990, 558, 1079, 601),
     ),
 )
+CHONG_ZHI_CHECK = ButtonWrapper(
+    name='CHONG_ZHI_CHECK',
+    share=Button(
+        file='./assets/share/base/page/CHONG_ZHI_CHECK.png',
+        area=(81, 44, 244, 143),
+        search=(61, 24, 264, 163),
+        color=(114, 82, 56),
+        button=(81, 44, 244, 143),
+    ),
+)
 CLOSE = ButtonWrapper(
     name='CLOSE',
     en=Button(
@@ -123,6 +133,16 @@ MAIN_GOTO_CHARACTER = ButtonWrapper(
         search=(6, 600, 126, 720),
         color=(87, 94, 99),
         button=(26, 620, 106, 709),
+    ),
+)
+MAIN_GOTO_CHONG_ZHI = ButtonWrapper(
+    name='MAIN_GOTO_CHONG_ZHI',
+    share=Button(
+        file='./assets/share/base/page/MAIN_GOTO_CHONG_ZHI.png',
+        area=(288, 52, 354, 81),
+        search=(268, 32, 374, 101),
+        color=(177, 133, 62),
+        button=(288, 52, 354, 81),
     ),
 )
 MAIN_GOTO_DAILY = ButtonWrapper(

@@ -232,8 +232,6 @@ class StoredPlanner(StoredBase):
 class StoredPlannerOverall(StoredBase):
     value: str = '??%'
     comment: str = '<??d'
-
-
 class StoredDungeon(StoredCounter, StoredExpiredAt0500):
     FIXED_TOTAL = 1
 class StoredBattleOrderRank(StoredCounter,StoredExpiredAtMonday0500):
@@ -244,4 +242,6 @@ class StoredDuelCurrentVictory(StoredCounter, StoredExpiredAtMonday0500):
     value = 0
 class StoredPanRenCount(StoredCounter, StoredExpiredAtMonday0500):
     FIXED_TOTAL = 2
+class StoredFreebiesWeeklyPackage(StoredCounter, StoredExpiredAtMonday0500):
+    FIXED_TOTAL = 1
 

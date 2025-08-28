@@ -9,6 +9,7 @@ from module.config.stored.classes import (
     StoredDungeon,
     StoredExpiredAt0500,
     StoredExpiredAtMonday0500,
+    StoredFreebiesWeeklyPackage,
     StoredInt,
     StoredPanRenCount,
     StoredPlanner,
@@ -24,5 +25,6 @@ class StoredGenerated:
     DuelDaily = StoredDuel("Duel.Duel.DuelDaily")
     CurrentVictoryCount = StoredDuelCurrentVictory("Duel.Duel.CurrentVictoryCount")
     Dungeon = StoredDungeon("TiLi.TiLiStorage.Dungeon")
+    WeeklyPackage = StoredFreebiesWeeklyPackage("Freebies.FreebiesStorage.WeeklyPackage")
     BattleOrderRank = StoredBattleOrderRank("BattleOrder.BattleOrderStorage.BattleOrderRank")
     PanRenFinishCount = StoredPanRenCount("PanRen.PanRen.PanRenFinishCount")

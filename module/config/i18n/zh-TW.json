@@ -358,22 +358,32 @@
       "help": "ItemStorage.StallerJade.help"
     }
   },
-  "Freebies": {
+  "DailyFreebies": {
     "_info": {
-      "name": "白嫖獎勵設定",
-      "help": ""
+      "name": "DailyFreebies._info.name",
+      "help": "DailyFreebies._info.help"
     },
     "FriendGifts": {
-      "name": "Freebies.FriendGifts.name",
-      "help": "Freebies.FriendGifts.help"
+      "name": "DailyFreebies.FriendGifts.name",
+      "help": "DailyFreebies.FriendGifts.help"
     },
     "DailyShare": {
-      "name": "Freebies.DailyShare.name",
-      "help": "Freebies.DailyShare.help"
+      "name": "DailyFreebies.DailyShare.name",
+      "help": "DailyFreebies.DailyShare.help"
     },
     "MailReward": {
-      "name": "領取郵件獎勵",
-      "help": ""
+      "name": "DailyFreebies.MailReward.name",
+      "help": "DailyFreebies.MailReward.help"
+    }
+  },
+  "WeeklyFreebies": {
+    "_info": {
+      "name": "WeeklyFreebies._info.name",
+      "help": "WeeklyFreebies._info.help"
+    },
+    "WeeklyPackage": {
+      "name": "WeeklyFreebies.WeeklyPackage.name",
+      "help": "WeeklyFreebies.WeeklyPackage.help"
     }
   },
   "ZhaoCai": {
@@ -487,6 +497,16 @@
     "BattleOrderRank": {
       "name": "BattleOrderStorage.BattleOrderRank.name",
       "help": "BattleOrderStorage.BattleOrderRank.help"
+    }
+  },
+  "FreebiesStorage": {
+    "_info": {
+      "name": "FreebiesStorage._info.name",
+      "help": "FreebiesStorage._info.help"
+    },
+    "WeeklyPackage": {
+      "name": "FreebiesStorage.WeeklyPackage.name",
+      "help": "FreebiesStorage.WeeklyPackage.help"
     }
   },
   "Gui": {

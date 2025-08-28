@@ -151,10 +151,16 @@
       "Command": "Freebies",
       "ServerUpdate": "05:00"
     },
-    "Freebies": {
+    "DailyFreebies": {
       "FriendGifts": true,
       "DailyShare": true,
       "MailReward": true
+    },
+    "WeeklyFreebies": {
+      "WeeklyPackage": true
+    },
+    "FreebiesStorage": {
+      "WeeklyPackage": {}
     }
   },
   "DailyReward": {
