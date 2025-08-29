@@ -19,6 +19,7 @@ class ManualConfig:
     > DingCiKaoRou
     > Freebies
     > LeaderBoard 
+    > JiFenSai
     > CultivationRoad 
     > Akatsuki 
     > SquadRaid

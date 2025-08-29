@@ -66,6 +66,10 @@
       "name": "Task.MiJing.name",
       "help": "Task.MiJing.help"
     },
+    "JiFenSai": {
+      "name": "Task.JiFenSai.name",
+      "help": "Task.JiFenSai.help"
+    },
     "ZhaoCai": {
       "name": "Task.ZhaoCai.name",
       "help": "Task.ZhaoCai.help"
@@ -344,6 +348,16 @@
       "help": "Duel.TargetVictoryNumber.help"
     }
   },
+  "JiFenSai": {
+    "_info": {
+      "name": "JiFenSai._info.name",
+      "help": "JiFenSai._info.help"
+    },
+    "DailyRewardClaim": {
+      "name": "JiFenSai.DailyRewardClaim.name",
+      "help": "JiFenSai.DailyRewardClaim.help"
+    }
+  },
   "ItemStorage": {
     "_info": {
       "name": "ItemStorage._info.name",
@@ -507,6 +521,26 @@
     "WeeklyPackage": {
       "name": "FreebiesStorage.WeeklyPackage.name",
       "help": "FreebiesStorage.WeeklyPackage.help"
+    }
+  },
+  "JiFenSaiStorage": {
+    "_info": {
+      "name": "JiFenSaiStorage._info.name",
+      "help": "JiFenSaiStorage._info.help"
+    },
+    "JiFenSaiDailyRewardClaim": {
+      "name": "JiFenSaiStorage.JiFenSaiDailyRewardClaim.name",
+      "help": "JiFenSaiStorage.JiFenSaiDailyRewardClaim.help"
+    }
+  },
+  "MiJingStorage": {
+    "_info": {
+      "name": "MiJingStorage._info.name",
+      "help": "MiJingStorage._info.help"
+    },
+    "MiJingCount": {
+      "name": "MiJingStorage.MiJingCount.name",
+      "help": "MiJingStorage.MiJingCount.help"
     }
   },
   "Gui": {

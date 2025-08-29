@@ -49,6 +49,12 @@ Daily:
     MiJing:
       - Scheduler
       - MiJing
+      - MiJingStorage
+    JiFenSai:
+      - Scheduler
+      - JiFenSai
+      - JiFenSaiStorage
+
 
 
 

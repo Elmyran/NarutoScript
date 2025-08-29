@@ -75,6 +75,7 @@ class AutoBattle(GameControl):
             MI_JING_REWARD_EXIT.load_search(MI_JING_REWARD_AREA.area)
             if self.appear(MI_JING_SUCCESS) or self.appear(MI_JING_REWARD_EXIT):
                 logger.info("--- Battle finished (MI_JING_SUCCESS detected). ---")
+                self.config.stored.MiJingCount.add(1)
                 self.joystick.up()
                 break
             if not self.client or not self.client.alive:
@@ -105,7 +106,7 @@ class AutoBattle(GameControl):
                 dx, dy = enemy_center[0] - self_center[0], enemy_center[1] - self_center[1]
                 if dist > attack_range:
                     angle = np.degrees(np.arctan2(dx, -dy))
-                    self.joystick.set(angle)
+                    self.move_to_direction(angle,0.3)
                 else:
                     is_in_sweet_spot_x = self.ATTACK_SWEET_SPOT_X[0] < dx < self.ATTACK_SWEET_SPOT_X[1]
                     is_in_sweet_spot_y = self.ATTACK_SWEET_SPOT_Y[0] < dy < self.ATTACK_SWEET_SPOT_Y[1]
@@ -120,7 +121,7 @@ class AutoBattle(GameControl):
                             self.execute_attack()
                     elif not is_in_sweet_spot_y:
                         angle = 180 if dy > 0 else 0
-                        self.joystick.set(angle)
+                        self.move_to_direction(angle,0.3)
                     elif is_in_sweet_spot_x and not is_in_blind_spot:
                         if np.random.rand() < 0.7:
                             self.joystick.up()
@@ -132,10 +133,10 @@ class AutoBattle(GameControl):
                                 self.execute_attack()
                         else:
                             angle = 90 if dx > 0 else -90
-                            self.joystick.set(angle)
+                            self.move_to_direction(angle,0.3)
                     else:
                         angle = 90 if dx > 0 else -90
-                        self.joystick.set(angle)
+                        self.move_to_direction(angle,0.3)
             else:
                 miss_count += 1
                 if current_state == 'COMBAT' and miss_count >= MISS_THRESHOLD:
@@ -163,4 +164,5 @@ class AutoBattle(GameControl):
                         self.joystick.up()
                     else:
                         angle = self.DIRECTION_ANGLES.get(direction, 0)
-                        self.joystick.set(angle)
+                        self.move_to_direction(angle,0.3)
+

@@ -64,7 +64,11 @@
     },
     "MiJing": {
       "name": "秘境挑战",
-      "help": ""
+      "help": "当前仅支持百战佩恩，建议战力在1500w以上"
+    },
+    "JiFenSai": {
+      "name": "积分赛",
+      "help": "当前仅支持奖励领取，挑战功能后续支持"
     },
     "ZhaoCai": {
       "name": "招财",
@@ -108,7 +112,7 @@
     },
     "PanRen": {
       "name": "叛忍来袭",
-      "help": ""
+      "help": "当前叛忍执行时间尚未完善，会在要塞时间不断等待，建议暂时关闭"
     },
     "DingCiKaoRou": {
       "name": "丁次烤肉",
@@ -344,6 +348,16 @@
       "help": ""
     }
   },
+  "JiFenSai": {
+    "_info": {
+      "name": "积分赛",
+      "help": ""
+    },
+    "DailyRewardClaim": {
+      "name": "排名奖励领取",
+      "help": ""
+    }
+  },
   "ItemStorage": {
     "_info": {
       "name": "ItemStorage._info.name",
@@ -507,6 +521,26 @@
     "WeeklyPackage": {
       "name": "FreebiesStorage.WeeklyPackage.name",
       "help": "FreebiesStorage.WeeklyPackage.help"
+    }
+  },
+  "JiFenSaiStorage": {
+    "_info": {
+      "name": "JiFenSaiStorage._info.name",
+      "help": "JiFenSaiStorage._info.help"
+    },
+    "JiFenSaiDailyRewardClaim": {
+      "name": "JiFenSaiStorage.JiFenSaiDailyRewardClaim.name",
+      "help": "JiFenSaiStorage.JiFenSaiDailyRewardClaim.help"
+    }
+  },
+  "MiJingStorage": {
+    "_info": {
+      "name": "MiJingStorage._info.name",
+      "help": "MiJingStorage._info.help"
+    },
+    "MiJingCount": {
+      "name": "MiJingStorage.MiJingCount.name",
+      "help": "MiJingStorage.MiJingCount.help"
     }
   },
   "Gui": {

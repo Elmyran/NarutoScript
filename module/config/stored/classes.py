@@ -244,4 +244,7 @@ class StoredPanRenCount(StoredCounter, StoredExpiredAtMonday0500):
     FIXED_TOTAL = 2
 class StoredFreebiesWeeklyPackage(StoredCounter, StoredExpiredAtMonday0500):
     FIXED_TOTAL = 1
-
+class StoredJiFenSaiRewardClaimCount(StoredCounter,StoredExpiredAt0500):
+    FIXED_TOTAL = 1
+class StoredMiJingCount(StoredCounter, StoredExpiredAtMonday0500):
+    value = 0

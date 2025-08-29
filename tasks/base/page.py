@@ -236,7 +236,9 @@ page_mi_jing.link(MI_JING_CREATE_ROOM,destination=page_mi_jing_room)
 page_mi_jing_room.link(CLOSE,destination=page_mi_jing)
 page_mi_jing.link(CLOSE,destination=page_ren_zhe_tiao_zhan)
 page_ren_zhe_tiao_zhan.link(REN_ZHE_TIAO_ZHAN_CLOSE,destination=page_main)
-
+#JiFenSai
+page_ji_fen_sai=Page(JI_FEN_SAI_CHECK)
+page_ji_fen_sai.link(CLOSE,destination=page_main)
 
 #Activity
 page_activity=Page(ACTIVITY_CHECK)

@@ -134,6 +134,11 @@ Duel:
   TargetVictoryNumber:
     type: input
     value: 10
+JiFenSai:
+  DailyRewardClaim:
+    type: checkbox
+    value: true
+
 
 
 
@@ -246,7 +251,16 @@ FreebiesStorage:
     stored: StoredFreebiesWeeklyPackage
     value: {}
     display: hide
-
+JiFenSaiStorage:
+  JiFenSaiDailyRewardClaim:
+    stored: StoredJiFenSaiRewardClaimCount
+    value: {}
+    display: hide
+MiJingStorage:
+  MiJingCount:
+    stored: StoredMiJingCount
+    value: { }
+    display: hide
 
 # ==================== Activity ====================
 
