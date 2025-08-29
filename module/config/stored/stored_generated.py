@@ -11,6 +11,8 @@ from module.config.stored.classes import (
     StoredExpiredAtMonday0500,
     StoredFreebiesWeeklyPackage,
     StoredInt,
+    StoredJiFenSaiRewardClaimCount,
+    StoredMiJingCount,
     StoredPanRenCount,
     StoredPlanner,
     StoredPlannerOverall,
@@ -25,6 +27,8 @@ class StoredGenerated:
     DuelDaily = StoredDuel("Duel.Duel.DuelDaily")
     CurrentVictoryCount = StoredDuelCurrentVictory("Duel.Duel.CurrentVictoryCount")
     Dungeon = StoredDungeon("TiLi.TiLiStorage.Dungeon")
+    MiJingCount = StoredMiJingCount("MiJing.MiJingStorage.MiJingCount")
+    JiFenSaiDailyRewardClaim = StoredJiFenSaiRewardClaimCount("JiFenSai.JiFenSaiStorage.JiFenSaiDailyRewardClaim")
     WeeklyPackage = StoredFreebiesWeeklyPackage("Freebies.FreebiesStorage.WeeklyPackage")
     BattleOrderRank = StoredBattleOrderRank("BattleOrder.BattleOrderStorage.BattleOrderRank")
     PanRenFinishCount = StoredPanRenCount("PanRen.PanRen.PanRenFinishCount")

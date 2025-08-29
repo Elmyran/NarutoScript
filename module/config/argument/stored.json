@@ -38,6 +38,32 @@
     "order": 0,
     "color": "#777777"
   },
+  "MiJingCount": {
+    "name": "MiJingCount",
+    "path": "MiJing.MiJingStorage.MiJingCount",
+    "i18n": "MiJingStorage.MiJingCount.name",
+    "stored": "StoredMiJingCount",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 0,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "JiFenSaiDailyRewardClaim": {
+    "name": "JiFenSaiDailyRewardClaim",
+    "path": "JiFenSai.JiFenSaiStorage.JiFenSaiDailyRewardClaim",
+    "i18n": "JiFenSaiStorage.JiFenSaiDailyRewardClaim.name",
+    "stored": "StoredJiFenSaiRewardClaimCount",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 1,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
   "WeeklyPackage": {
     "name": "WeeklyPackage",
     "path": "Freebies.FreebiesStorage.WeeklyPackage",

@@ -3,7 +3,6 @@
 from module.base.base import ModuleBase
 from module.base.utils import color_similarity_2d
 from module.logger import logger
-
 from tasks.base.assets.assets_base_popup import *
 import cv2
 import numpy as np
@@ -26,6 +25,9 @@ class PopupHandler(ModuleBase):
             return True
         if self.appear_then_click(EXIT_ORGANIZATION_REPLACEMENT,interval=interval):
             return  True
+        if self.appear_then_click(POPUP_MI_JING_BOX,interval=interval):
+            return True
+
         return False
 
     def reward_appear(self) -> bool:

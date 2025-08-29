@@ -61,6 +61,9 @@ class GeneratedConfig:
     Duel_CurrentVictoryCount = {}
     Duel_TargetVictoryNumber = 10
 
+    # Group `JiFenSai`
+    JiFenSai_DailyRewardClaim = True
+
     # Group `ItemStorage`
     ItemStorage_Credit = {}
     ItemStorage_StallerJade = {}
@@ -101,3 +104,9 @@ class GeneratedConfig:
 
     # Group `FreebiesStorage`
     FreebiesStorage_WeeklyPackage = {}
+
+    # Group `JiFenSaiStorage`
+    JiFenSaiStorage_JiFenSaiDailyRewardClaim = {}
+
+    # Group `MiJingStorage`
+    MiJingStorage_MiJingCount = {}

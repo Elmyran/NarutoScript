@@ -55,20 +55,13 @@ CLOSE = ButtonWrapper(
     share=[
         Button(
             file='./assets/share/base/page/CLOSE.png',
-            area=(1187, 6, 1279, 74),
-            search=(1167, 0, 1280, 94),
-            color=(54, 21, 11),
-            button=(1187, 6, 1279, 74),
-        ),
-        Button(
-            file='./assets/share/base/page/CLOSE.2.png',
             area=(1185, 2, 1272, 70),
             search=(1165, 0, 1280, 90),
             color=(102, 56, 34),
             button=(1185, 2, 1272, 70),
         ),
         Button(
-            file='./assets/share/base/page/CLOSE.3.png',
+            file='./assets/share/base/page/CLOSE.2.png',
             area=(1212, 21, 1263, 70),
             search=(1192, 1, 1280, 90),
             color=(49, 50, 53),
@@ -114,6 +107,16 @@ FIGHT_CLOSE_CONFIRM = ButtonWrapper(
             button=(415, 416, 621, 489),
         ),
     ],
+)
+JI_FEN_SAI_CHECK = ButtonWrapper(
+    name='JI_FEN_SAI_CHECK',
+    share=Button(
+        file='./assets/share/base/page/JI_FEN_SAI_CHECK.png',
+        area=(101, 22, 398, 138),
+        search=(81, 2, 418, 158),
+        color=(149, 87, 36),
+        button=(101, 22, 398, 138),
+    ),
 )
 MAIN_GOTO_BATTLE_ORDER = ButtonWrapper(
     name='MAIN_GOTO_BATTLE_ORDER',
@@ -165,6 +168,16 @@ MAIN_GOTO_FRIEND_PANEL = ButtonWrapper(
         button=(33, 194, 81, 239),
     ),
 )
+MAIN_GOTO_JI_FEN_SAI = ButtonWrapper(
+    name='MAIN_GOTO_JI_FEN_SAI',
+    share=Button(
+        file='./assets/share/base/page/MAIN_GOTO_JI_FEN_SAI.png',
+        area=(487, 94, 519, 192),
+        search=(467, 74, 539, 212),
+        color=(140, 140, 133),
+        button=(487, 94, 519, 192),
+    ),
+)
 MAIN_GOTO_MAIL = ButtonWrapper(
     name='MAIN_GOTO_MAIL',
     share=Button(
@@ -183,6 +196,16 @@ MAIN_GOTO_PANEL = ButtonWrapper(
         search=(46, 0, 140, 104),
         color=(173, 141, 118),
         button=(66, 14, 120, 84),
+    ),
+)
+REN_ZHE_TIAO_ZHAN_CHECK = ButtonWrapper(
+    name='REN_ZHE_TIAO_ZHAN_CHECK',
+    share=Button(
+        file='./assets/share/base/page/REN_ZHE_TIAO_ZHAN_CHECK.png',
+        area=(1199, 638, 1256, 698),
+        search=(1179, 618, 1276, 718),
+        color=(131, 114, 92),
+        button=(1199, 638, 1256, 698),
     ),
 )
 REN_ZHE_TIAO_ZHAN_CLOSE = ButtonWrapper(

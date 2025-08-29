@@ -170,6 +170,16 @@ POPUP_EQUIPMENT_SWEEP = ButtonWrapper(
         ),
     ],
 )
+POPUP_MI_JING_BOX = ButtonWrapper(
+    name='POPUP_MI_JING_BOX',
+    share=Button(
+        file='./assets/share/base/popup/POPUP_MI_JING_BOX.png',
+        area=(312, 263, 445, 360),
+        search=(292, 243, 465, 380),
+        color=(170, 87, 39),
+        button=(1139, 362, 1266, 450),
+    ),
+)
 POPUP_TITLE_TIP = ButtonWrapper(
     name='POPUP_TITLE_TIP',
     cn=None,
