@@ -17,16 +17,17 @@ class GameInPopup(ModuleBase):
         for _ in  self.loop():
             if timer.reached():
                 return True
-            if self.appear_then_click(GAME_MAIN_ANNOUNCEMENT):
+            if self.appear_then_click(GAME_MAIN_ANNOUNCEMENT,interval=2):
                 timer.reset()
                 continue
-            if self.appear_then_click(GAME_IN_ADVERTISE):
+            if self.match_template_luma(GAME_IN_ADVERTISE,interval=2):
+                self.device.click(GAME_IN_ADVERTISE)
                 timer.reset()
                 continue
-            if self.appear_then_click(Daily_Bonus):
+            if self.appear_then_click(Daily_Bonus,interval=2):
                 timer.reset()
                 continue
-            if self.appear_then_click(RANK_UP):
+            if self.appear_then_click(RANK_UP,interval=2):
                 timer.reset()
                 continue
 
@@ -51,7 +52,5 @@ class GameInPopup(ModuleBase):
                 return True
             if timer.reached():
                 return False
-
-
 
         return False

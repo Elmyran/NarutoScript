@@ -17,6 +17,7 @@ from tasks.tili.ocr import StuffOcr
 class Equipment(UI):
     def handle_equipment(self):
         self.device.click_record_clear()
+        self.device.stuck_record_clear()
         self.ui_ensure(page_main)
         ocr=DigitCounter(TI_LI_REMAIN_COUNTER,lang='cn')
         current,remain,total=ocr.ocr_single_line(self.device.image)
@@ -24,17 +25,23 @@ class Equipment(UI):
             self.config.TiLi_TiLiRemain=current
             return False
         self._equipment_enter()
-        for _ in self.loop():
-            self._equipment_part_red_dot_handle()
-            self.ui_ensure(page_equipment)
-            self.device.click(EQUIPMENT_KNIFE)
-            self._select_equipment_part()
-            self._stuff_material_check()
-            res=self._start_sweep()
-            self.ui_ensure(page_equipment)
-            self._synthesized_and_equipped()
-            if res:
-                break
+        self.device.stuck_timer=Timer(300,count=300).start()
+        try:
+            for _ in self.loop():
+                self._equipment_part_red_dot_handle()
+                self.ui_ensure(page_equipment)
+                self.device.click(EQUIPMENT_KNIFE)
+                self._select_equipment_part()
+                self._stuff_material_check()
+                res=self._start_sweep()
+                self.ui_ensure(page_equipment)
+                self._synthesized_and_equipped()
+                if res:
+                    break
+        finally:
+            self.device.stuck_timer=Timer(60,count=60).start()
+
+
 
 
 

@@ -3,17 +3,6 @@ from module.base.button import Button, ButtonWrapper
 # This file was auto-generated, do not modify it manually. To generate:
 # ``` python -m dev_tools.button_extract ```
 
-CHAO_YING_ADVERTISE = ButtonWrapper(
-    name='CHAO_YING_ADVERTISE',
-    cn=Button(
-        file='./assets/cn/login/popup/CHAO_YING_ADVERTISE.png',
-        area=(1127, 0, 1280, 74),
-        search=(1107, 0, 1280, 94),
-        color=(30, 14, 9),
-        button=(1127, 0, 1280, 74),
-    ),
-    en=None,
-)
 Daily_Bonus = ButtonWrapper(
     name='Daily_Bonus',
     cn=Button(
@@ -30,31 +19,24 @@ GAME_IN_ADVERTISE = ButtonWrapper(
     cn=[
         Button(
             file='./assets/cn/login/popup/GAME_IN_ADVERTISE.png',
+            area=(1190, 3, 1278, 68),
+            search=(1170, 0, 1280, 88),
+            color=(71, 30, 17),
+            button=(1190, 3, 1278, 68),
+        ),
+        Button(
+            file='./assets/cn/login/popup/GAME_IN_ADVERTISE.2.png',
             area=(1183, 9, 1276, 74),
             search=(1163, 0, 1280, 94),
             color=(97, 67, 70),
             button=(1183, 9, 1276, 74),
         ),
         Button(
-            file='./assets/cn/login/popup/GAME_IN_ADVERTISE.2.png',
-            area=(1177, 1, 1280, 79),
-            search=(1157, 0, 1280, 99),
-            color=(44, 15, 6),
-            button=(1177, 1, 1280, 79),
-        ),
-        Button(
             file='./assets/cn/login/popup/GAME_IN_ADVERTISE.3.png',
-            area=(1102, 0, 1280, 74),
-            search=(1082, 0, 1280, 94),
-            color=(26, 12, 8),
-            button=(1102, 0, 1280, 74),
-        ),
-        Button(
-            file='./assets/cn/login/popup/GAME_IN_ADVERTISE.4.png',
-            area=(1133, 0, 1280, 72),
-            search=(1113, 0, 1280, 92),
-            color=(33, 11, 5),
-            button=(1133, 0, 1280, 72),
+            area=(1166, 13, 1270, 108),
+            search=(1146, 0, 1280, 128),
+            color=(133, 97, 45),
+            button=(1166, 13, 1270, 108),
         ),
     ],
     en=None,

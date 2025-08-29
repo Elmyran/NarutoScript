@@ -9,6 +9,7 @@ from tasks.tili.assets.assets_tili_dungeon import *
 class Dungeon(UI):
     def handle_dungeon(self):
         self.device.click_record_clear()
+        self.device.stuck_record_clear()
         self.ui_ensure(page_main)
         ocr=DigitCounter(TI_LI_REMAIN_COUNTER,lang='cn')
         current,remain,total=ocr.ocr_single_line(self.device.image)
@@ -23,7 +24,7 @@ class Dungeon(UI):
         else:
             return False
     def _dungeon_sweep(self):
-        time=Timer(40,count=60).start()
+        time=Timer(60,count=60).start()
         for _ in self.loop():
             if  time.reached():
                 raise GameStuckError('Dungeon Sweep Stucked')
@@ -37,7 +38,7 @@ class Dungeon(UI):
                 continue
             if self.appear_then_click(SWEEP_CONFIRM_BUTTON):
                 continue
-            if self.appear_then_click(SWEEP_BUTTON):
+            if self.image_color_count(SWEEP_BUTTON,color=(251,182,0),threshold=221,count=200):
                 continue
             if self.appear_then_click(CONVENIENT_SWEEP):
                 continue
