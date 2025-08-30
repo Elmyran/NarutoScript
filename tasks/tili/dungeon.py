@@ -38,7 +38,8 @@ class Dungeon(UI):
                 continue
             if self.appear_then_click(SWEEP_CONFIRM_BUTTON):
                 continue
-            if self.image_color_count(SWEEP_BUTTON,color=(251,182,0),threshold=221,count=200):
+            if self.match_template_color(SWEEP_BUTTON,interval=1):
+                self.device.click(SWEEP_BUTTON)
                 continue
             if self.appear_then_click(CONVENIENT_SWEEP):
                 continue

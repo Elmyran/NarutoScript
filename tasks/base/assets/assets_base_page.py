@@ -130,13 +130,22 @@ MAIN_GOTO_BATTLE_ORDER = ButtonWrapper(
 )
 MAIN_GOTO_CHARACTER = ButtonWrapper(
     name='MAIN_GOTO_CHARACTER',
-    share=Button(
-        file='./assets/share/base/page/MAIN_GOTO_CHARACTER.png',
-        area=(26, 620, 106, 709),
-        search=(6, 600, 126, 720),
-        color=(87, 94, 99),
-        button=(26, 620, 106, 709),
-    ),
+    share=[
+        Button(
+            file='./assets/share/base/page/MAIN_GOTO_CHARACTER.png',
+            area=(26, 620, 106, 709),
+            search=(6, 600, 126, 720),
+            color=(87, 94, 99),
+            button=(26, 620, 106, 709),
+        ),
+        Button(
+            file='./assets/share/base/page/MAIN_GOTO_CHARACTER.2.png',
+            area=(36, 633, 93, 693),
+            search=(16, 613, 113, 713),
+            color=(110, 119, 129),
+            button=(36, 633, 93, 693),
+        ),
+    ],
 )
 MAIN_GOTO_CHONG_ZHI = ButtonWrapper(
     name='MAIN_GOTO_CHONG_ZHI',

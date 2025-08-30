@@ -60,6 +60,7 @@ class SquadRaidFight(UI):
 
     def _start_fight(self):
         self.device.click_record_remove(HELP_BATTLE_START_FIGHT)
+        self.device.click_record_remove(SQUAD_RAID_FIGHT_SUCCESS)
         time=Timer(60,8).start()
         for _ in self.loop():
             if time.reached():
@@ -68,7 +69,7 @@ class SquadRaidFight(UI):
                 continue
             if self.appear(SQUAD_RAID_FIGHTING):
                 continue
-            if self.appear_then_click(SQUAD_RAID_FIGHT_SUCCESS,interval=0):
+            if self.appear_then_click(SQUAD_RAID_FIGHT_SUCCESS,interval=1):
                 continue
             if self.appear(SQUAD_RAID_CHECK):
                 return True
