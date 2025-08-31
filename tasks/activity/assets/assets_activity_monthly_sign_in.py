@@ -36,13 +36,24 @@ MONTHLY_SIGN_IN_HAVE_DONE = ButtonWrapper(
     ),
     en=None,
 )
+MONTHLY_SIGN_IN_TITLE_HAVE_CLAIM = ButtonWrapper(
+    name='MONTHLY_SIGN_IN_TITLE_HAVE_CLAIM',
+    cn=Button(
+        file='./assets/cn/activity/monthly_sign_in/MONTHLY_SIGN_IN_TITLE_HAVE_CLAIM.png',
+        area=(535, 547, 614, 618),
+        search=(515, 527, 634, 638),
+        color=(134, 82, 66),
+        button=(535, 547, 614, 618),
+    ),
+    en=None,
+)
 SIGN_IN_PROGRESS = ButtonWrapper(
     name='SIGN_IN_PROGRESS',
     cn=Button(
         file='./assets/cn/activity/monthly_sign_in/SIGN_IN_PROGRESS.png',
-        area=(988, 543, 1061, 582),
-        search=(968, 523, 1081, 602),
-        color=(177, 159, 117),
+        area=(872, 540, 1098, 584),
+        search=(852, 520, 1118, 604),
+        color=(183, 168, 135),
         button=(535, 536, 615, 620),
     ),
     en=None,
