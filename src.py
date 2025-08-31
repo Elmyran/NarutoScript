@@ -103,6 +103,9 @@ class StarRailCopilot(AzurLaneAutoScript):
     def pan_ren(self):
         from tasks.organization.pan_ren import OrganizationPanRen
         OrganizationPanRen(config=self.config, device=self.device).run()
+    def ji_fen_sai(self):
+        from tasks.ji_fen_sai.ji_fen_sai import JiFenSai
+        JiFenSai(config=self.config, device=self.device).run()
 
 
 
