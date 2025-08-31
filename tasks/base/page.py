@@ -182,6 +182,10 @@ page_cultivation.link(CULTIVATION_BOX,destination=page_cultivation_box)
 #Equipment
 page_equipment=Page(EQUIPMENT_CHECK)
 page_equipment.link(EQUIPMENT_EXIT,destination=page_main)
+#TongLing
+page_tong_ling=Page(TONG_LING_CHECK)
+page_main.link(MAIN_GOTO_TONG_LING,destination=page_tong_ling)
+page_tong_ling.link(CLOSE,destination=page_main)
 #Dungeon
 page_dungeon=Page(SWITCH_TO_DUNGEON)
 page_elite_dungeon=Page(CONVENIENT_SWEEP)

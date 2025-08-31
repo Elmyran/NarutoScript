@@ -54,14 +54,9 @@ Daily:
       - Scheduler
       - JiFenSai
       - JiFenSaiStorage
-
-
-
-
-
-#    DataUpdate:
-#      - Scheduler
-#      - ItemStorage
+    DataUpdate:
+      - Scheduler
+      - ItemStorage
 
 Rewards:
   menu: 'collapse'

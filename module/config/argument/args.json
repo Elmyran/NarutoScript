@@ -374,10 +374,6 @@
       }
     },
     "TiLi": {
-      "TiLiRemain": {
-        "type": "input",
-        "value": 0
-      },
       "LevelRestrictions": {
         "type": "input",
         "value": 72
@@ -529,6 +525,77 @@
         "value": {},
         "display": "hide",
         "stored": "StoredJiFenSaiRewardClaimCount"
+      }
+    }
+  },
+  "DataUpdate": {
+    "Scheduler": {
+      "Enable": {
+        "type": "state",
+        "value": true,
+        "option": [
+          true
+        ],
+        "option_bold": [
+          true
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "DataUpdate",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    },
+    "ItemStorage": {
+      "TiLi": {
+        "type": "stored",
+        "value": {},
+        "display": "display",
+        "stored": "StoredTiLi",
+        "order": 1,
+        "color": "#FF0000"
+      },
+      "Golds": {
+        "type": "stored",
+        "value": {},
+        "display": "display",
+        "stored": "StoredInt",
+        "order": 2,
+        "color": "#FFD700"
+      },
+      "Tickets": {
+        "type": "stored",
+        "value": {},
+        "display": "display",
+        "stored": "StoredInt",
+        "order": 3,
+        "color": "#000000"
+      },
+      "Coins": {
+        "type": "stored",
+        "value": {},
+        "display": "display",
+        "stored": "StoredInt",
+        "order": 4,
+        "color": "#D2B48C"
+      },
+      "Fame": {
+        "type": "stored",
+        "value": {},
+        "display": "display",
+        "stored": "StoredInt",
+        "order": 5,
+        "color": "#32CD32"
       }
     }
   },

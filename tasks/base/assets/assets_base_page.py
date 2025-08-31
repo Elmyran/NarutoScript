@@ -207,6 +207,16 @@ MAIN_GOTO_PANEL = ButtonWrapper(
         button=(66, 14, 120, 84),
     ),
 )
+MAIN_GOTO_TONG_LING = ButtonWrapper(
+    name='MAIN_GOTO_TONG_LING',
+    share=Button(
+        file='./assets/share/base/page/MAIN_GOTO_TONG_LING.png',
+        area=(363, 630, 415, 703),
+        search=(343, 610, 435, 720),
+        color=(175, 141, 78),
+        button=(363, 630, 415, 703),
+    ),
+)
 REN_ZHE_TIAO_ZHAN_CHECK = ButtonWrapper(
     name='REN_ZHE_TIAO_ZHAN_CHECK',
     share=Button(
@@ -235,4 +245,14 @@ REN_ZHE_TIAO_ZHAN_CLOSE = ButtonWrapper(
             button=(1208, 13, 1273, 64),
         ),
     ],
+)
+TONG_LING_CHECK = ButtonWrapper(
+    name='TONG_LING_CHECK',
+    share=Button(
+        file='./assets/share/base/page/TONG_LING_CHECK.png',
+        area=(984, 601, 1036, 699),
+        search=(964, 581, 1056, 719),
+        color=(154, 89, 45),
+        button=(984, 601, 1036, 699),
+    ),
 )

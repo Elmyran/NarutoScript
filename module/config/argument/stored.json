@@ -1,4 +1,65 @@
 {
+  "TiLi": {
+    "name": "TiLi",
+    "path": "DataUpdate.ItemStorage.TiLi",
+    "i18n": "ItemStorage.TiLi.name",
+    "stored": "StoredTiLi",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 200,
+      "value": 0
+    },
+    "order": 1,
+    "color": "#FF0000"
+  },
+  "Golds": {
+    "name": "Golds",
+    "path": "DataUpdate.ItemStorage.Golds",
+    "i18n": "ItemStorage.Golds.name",
+    "stored": "StoredInt",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "value": 0
+    },
+    "order": 2,
+    "color": "#FFD700"
+  },
+  "Tickets": {
+    "name": "Tickets",
+    "path": "DataUpdate.ItemStorage.Tickets",
+    "i18n": "ItemStorage.Tickets.name",
+    "stored": "StoredInt",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "value": 0
+    },
+    "order": 3,
+    "color": "#000000"
+  },
+  "Coins": {
+    "name": "Coins",
+    "path": "DataUpdate.ItemStorage.Coins",
+    "i18n": "ItemStorage.Coins.name",
+    "stored": "StoredInt",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "value": 0
+    },
+    "order": 4,
+    "color": "#D2B48C"
+  },
+  "Fame": {
+    "name": "Fame",
+    "path": "DataUpdate.ItemStorage.Fame",
+    "i18n": "ItemStorage.Fame.name",
+    "stored": "StoredInt",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "value": 0
+    },
+    "order": 5,
+    "color": "#32CD32"
+  },
   "DuelDaily": {
     "name": "DuelDaily",
     "path": "Duel.Duel.DuelDaily",

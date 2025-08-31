@@ -98,7 +98,6 @@
       "ServerUpdate": "05:00"
     },
     "TiLi": {
-      "TiLiRemain": 0,
       "LevelRestrictions": 72,
       "DungeonFirst": true
     },
@@ -148,6 +147,21 @@
     },
     "JiFenSaiStorage": {
       "JiFenSaiDailyRewardClaim": {}
+    }
+  },
+  "DataUpdate": {
+    "Scheduler": {
+      "Enable": true,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "DataUpdate",
+      "ServerUpdate": "05:00"
+    },
+    "ItemStorage": {
+      "TiLi": {},
+      "Golds": {},
+      "Tickets": {},
+      "Coins": {},
+      "Fame": {}
     }
   },
   "ZhaoCai": {

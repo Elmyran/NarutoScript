@@ -19,6 +19,13 @@ Restart:
       option: [ true, ]
       option_bold: [ true, ]
     ServerUpdate: 05:00
+DataUpdate:
+  Scheduler:
+    Enable:
+      type: state
+      value: true
+      option: [ true, ]
+      option_bold: [ true, ]
 
 
 # ==================== Daily ====================

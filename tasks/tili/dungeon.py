@@ -13,9 +13,10 @@ class Dungeon(UI):
         self.ui_ensure(page_main)
         ocr=DigitCounter(TI_LI_REMAIN_COUNTER,lang='cn')
         current,remain,total=ocr.ocr_single_line(self.device.image)
-        if current<10 and total==200:
-            self.config.TiLi_TiLiRemain=current
-            return False
+        if current>0 and total==200:
+            self.config.stored.TiLi.value=current
+            if current<10:
+                return False
         self.ui_ensure(page_elite_dungeon)
         res=self._dungeon_sweep()
         self.ui_goto_main()

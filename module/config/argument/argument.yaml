@@ -110,9 +110,6 @@ SurvivalTrail:
     type: input
     value:  0
 TiLi:
-  TiLiRemain:
-    type: input
-    value:  0
   LevelRestrictions:
     type: input
     value:  72
@@ -144,17 +141,7 @@ JiFenSai:
 
 
 
-ItemStorage:
-  Credit:
-    stored: StoredInt
-    order: 7
-    color: "#ab7cf2"
-    display: display
-  StallerJade:
-    stored: StoredInt
-    order: 8
-    color: "#fc8f8b"
-    display: display
+
 
 
 # ==================== Rewards ====================
@@ -236,6 +223,34 @@ PanRen:
 
 
 # ==================== Storage ====================
+ItemStorage:
+  TiLi:
+    stored: StoredTiLi
+    order: 1
+    color: "#FF0000"
+    display: display
+  Golds:
+    stored: StoredInt
+    order: 2
+    color: "#FFD700"
+    display: display
+  Tickets:
+    stored: StoredInt
+    order: 3
+    color: "#000000"
+    display: display
+  Coins:
+    stored: StoredInt
+    order: 4
+    color: "#D2B48C"
+    display: display
+  Fame:
+    stored: StoredInt
+    order: 5
+    color: "#32CD32"
+    display: display
+
+
 TiLiStorage:
   Dungeon:
     stored: StoredDungeon
@@ -261,7 +276,6 @@ MiJingStorage:
     stored: StoredMiJingCount
     value: { }
     display: hide
-
 # ==================== Activity ====================
 
 

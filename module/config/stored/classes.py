@@ -248,3 +248,24 @@ class StoredJiFenSaiRewardClaimCount(StoredCounter,StoredExpiredAt0500):
     FIXED_TOTAL = 1
 class StoredMiJingCount(StoredCounter, StoredExpiredAtMonday0500):
     value = 0
+class StoredTiLi(StoredCounter):
+
+    FIXED_TOTAL = 200
+    def predict_current(self) -> int:
+        """
+        Predict current stamina from records
+        """
+        # Overflowed
+        value = self.value
+        if value >= self.FIXED_TOTAL:
+            return value
+        # Invalid time, record in the future
+        record = self.time
+        now = datetime.now()
+        if record >= now:
+            return value
+        # Calculate
+        # Recover 1 trailbaze power each 6 minutes
+        diff = (now - record).total_seconds()
+        value += int(diff // 360)
+        return value

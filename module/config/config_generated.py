@@ -51,7 +51,6 @@ class GeneratedConfig:
     SurvivalTrail_SurvivalTrialResetTimes = 0
 
     # Group `TiLi`
-    TiLi_TiLiRemain = 0
     TiLi_LevelRestrictions = 72
     TiLi_DungeonFirst = True
 
@@ -63,10 +62,6 @@ class GeneratedConfig:
 
     # Group `JiFenSai`
     JiFenSai_DailyRewardClaim = True
-
-    # Group `ItemStorage`
-    ItemStorage_Credit = {}
-    ItemStorage_StallerJade = {}
 
     # Group `DailyFreebies`
     DailyFreebies_FriendGifts = True
@@ -95,6 +90,13 @@ class GeneratedConfig:
     # Group `PanRen`
     PanRen_SecondPassword = None
     PanRen_PanRenFinishCount = {}
+
+    # Group `ItemStorage`
+    ItemStorage_TiLi = {}
+    ItemStorage_Golds = {}
+    ItemStorage_Tickets = {}
+    ItemStorage_Coins = {}
+    ItemStorage_Fame = {}
 
     # Group `TiLiStorage`
     TiLiStorage_Dungeon = {}

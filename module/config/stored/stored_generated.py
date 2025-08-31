@@ -16,6 +16,7 @@ from module.config.stored.classes import (
     StoredPanRenCount,
     StoredPlanner,
     StoredPlannerOverall,
+    StoredTiLi,
     StoredTrailblazePower,
 )
 
@@ -29,6 +30,11 @@ class StoredGenerated:
     Dungeon = StoredDungeon("TiLi.TiLiStorage.Dungeon")
     MiJingCount = StoredMiJingCount("MiJing.MiJingStorage.MiJingCount")
     JiFenSaiDailyRewardClaim = StoredJiFenSaiRewardClaimCount("JiFenSai.JiFenSaiStorage.JiFenSaiDailyRewardClaim")
+    TiLi = StoredTiLi("DataUpdate.ItemStorage.TiLi")
+    Golds = StoredInt("DataUpdate.ItemStorage.Golds")
+    Tickets = StoredInt("DataUpdate.ItemStorage.Tickets")
+    Coins = StoredInt("DataUpdate.ItemStorage.Coins")
+    Fame = StoredInt("DataUpdate.ItemStorage.Fame")
     WeeklyPackage = StoredFreebiesWeeklyPackage("Freebies.FreebiesStorage.WeeklyPackage")
     BattleOrderRank = StoredBattleOrderRank("BattleOrder.BattleOrderStorage.BattleOrderRank")
     PanRenFinishCount = StoredPanRenCount("PanRen.PanRen.PanRenFinishCount")

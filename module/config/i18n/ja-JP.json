@@ -70,6 +70,10 @@
       "name": "Task.JiFenSai.name",
       "help": "Task.JiFenSai.help"
     },
+    "DataUpdate": {
+      "name": "Task.DataUpdate.name",
+      "help": "Task.DataUpdate.help"
+    },
     "ZhaoCai": {
       "name": "Task.ZhaoCai.name",
       "help": "Task.ZhaoCai.help"
@@ -313,10 +317,6 @@
       "name": "TiLi._info.name",
       "help": "TiLi._info.help"
     },
-    "TiLiRemain": {
-      "name": "TiLi.TiLiRemain.name",
-      "help": "TiLi.TiLiRemain.help"
-    },
     "LevelRestrictions": {
       "name": "TiLi.LevelRestrictions.name",
       "help": "TiLi.LevelRestrictions.help"
@@ -356,20 +356,6 @@
     "DailyRewardClaim": {
       "name": "JiFenSai.DailyRewardClaim.name",
       "help": "JiFenSai.DailyRewardClaim.help"
-    }
-  },
-  "ItemStorage": {
-    "_info": {
-      "name": "ItemStorage._info.name",
-      "help": "ItemStorage._info.help"
-    },
-    "Credit": {
-      "name": "ItemStorage.Credit.name",
-      "help": "ItemStorage.Credit.help"
-    },
-    "StallerJade": {
-      "name": "ItemStorage.StallerJade.name",
-      "help": "ItemStorage.StallerJade.help"
     }
   },
   "DailyFreebies": {
@@ -491,6 +477,32 @@
     "PanRenFinishCount": {
       "name": "PanRen.PanRenFinishCount.name",
       "help": "PanRen.PanRenFinishCount.help"
+    }
+  },
+  "ItemStorage": {
+    "_info": {
+      "name": "ItemStorage._info.name",
+      "help": "ItemStorage._info.help"
+    },
+    "TiLi": {
+      "name": "ItemStorage.TiLi.name",
+      "help": "ItemStorage.TiLi.help"
+    },
+    "Golds": {
+      "name": "ItemStorage.Golds.name",
+      "help": "ItemStorage.Golds.help"
+    },
+    "Tickets": {
+      "name": "ItemStorage.Tickets.name",
+      "help": "ItemStorage.Tickets.help"
+    },
+    "Coins": {
+      "name": "ItemStorage.Coins.name",
+      "help": "ItemStorage.Coins.help"
+    },
+    "Fame": {
+      "name": "ItemStorage.Fame.name",
+      "help": "ItemStorage.Fame.help"
     }
   },
   "TiLiStorage": {

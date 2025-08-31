@@ -35,7 +35,7 @@ class StarRailCopilot(AzurLaneAutoScript):
 
 
     def data_update(self):
-        from tasks.item.data_update import DataUpdate
+        from tasks.data_update.data_update import DataUpdate
         DataUpdate(config=self.config, device=self.device).run()
 
     def freebies(self):

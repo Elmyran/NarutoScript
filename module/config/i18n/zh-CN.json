@@ -70,6 +70,10 @@
       "name": "积分赛",
       "help": "当前仅支持奖励领取，挑战功能后续支持"
     },
+    "DataUpdate": {
+      "name": "数据更新",
+      "help": ""
+    },
     "ZhaoCai": {
       "name": "招财",
       "help": ""
@@ -313,10 +317,6 @@
       "name": "清体力",
       "help": ""
     },
-    "TiLiRemain": {
-      "name": "体力",
-      "help": "只有大于10，任务才会执行"
-    },
     "LevelRestrictions": {
       "name": "装备等级限制",
       "help": "只会扫荡限制等级以下的装备"
@@ -356,20 +356,6 @@
     "DailyRewardClaim": {
       "name": "排名奖励领取",
       "help": ""
-    }
-  },
-  "ItemStorage": {
-    "_info": {
-      "name": "ItemStorage._info.name",
-      "help": "ItemStorage._info.help"
-    },
-    "Credit": {
-      "name": "ItemStorage.Credit.name",
-      "help": "ItemStorage.Credit.help"
-    },
-    "StallerJade": {
-      "name": "ItemStorage.StallerJade.name",
-      "help": "ItemStorage.StallerJade.help"
     }
   },
   "DailyFreebies": {
@@ -491,6 +477,32 @@
     "PanRenFinishCount": {
       "name": "PanRen.PanRenFinishCount.name",
       "help": "PanRen.PanRenFinishCount.help"
+    }
+  },
+  "ItemStorage": {
+    "_info": {
+      "name": "数据更新",
+      "help": ""
+    },
+    "TiLi": {
+      "name": "体力",
+      "help": ""
+    },
+    "Golds": {
+      "name": "金币",
+      "help": ""
+    },
+    "Tickets": {
+      "name": "高级招募券",
+      "help": ""
+    },
+    "Coins": {
+      "name": "铜币",
+      "help": ""
+    },
+    "Fame": {
+      "name": "声望",
+      "help": ""
     }
   },
   "TiLiStorage": {
