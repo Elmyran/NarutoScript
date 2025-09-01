@@ -3,6 +3,8 @@ from module.exception import GameStuckError
 from module.logger import logger
 from module.ocr.ocr import Digit
 from tasks.base.page import page_main
+from tasks.base.task_tab.draglist import TASK_TAB_LIST
+from tasks.base.task_tab.keyword import TrailKeyword
 from tasks.base.ui import UI
 from tasks.trail.assets.assets_trail import *
 from tasks.trail.assets.assets_trail_cultivation import *
@@ -12,36 +14,19 @@ class CultivationMopUp(UI):
     def handle_cultivation_mop_up(self):
         self.device.click_record_clear()
         self.ui_ensure(page_main)
-        self._enter_trial()
+        if not TASK_TAB_LIST.search_rows(main=self,keyword=TrailKeyword):
+            raise GameStuckError(' Trail Not Found')
+        self._enter_cultivation()
         flag=self._cultivation_mop_up()
         if self.config.CultivationRoad_ClearRedDot and flag=='MOP_UP_SUCCESS':
             self._red_dot_clear()
         self._cultivation_exit()
         return flag
-    def _enter_trial(self):
-        self.device.screenshot()
-        if self.appear(CULTIVATION_PAGE_CHECK):
-            return True
-        self.device.swipe( [1200, 314],[0, 322])
-        move = True
+    def _enter_cultivation(self):
         time = Timer(10, count=10).start()
-        m=2
         for _ in self.loop():
             if time.reached():
-                if move and m%2==0:
-                    self.device.swipe([0, 322], [1200, 314])
-                    time.reset()
-                    m=m+1
-                elif move and m%2==1:
-                    self.device.swipe( [1200, 314],[0, 322])
-                    m=m+1
-                    time.reset()
-                elif m>5:
-                    raise GameStuckError("Survival Trial Stucked")
-            MAIN_GOTO_TRAIL.load_search((200, 50, 1000, 700))
-            if self.appear_then_click(MAIN_GOTO_TRAIL):
-                move = False
-                continue
+                raise GameStuckError("Survival Trial Stucked")
             if self.appear(TRAIL_CULTIVATION_CHECK):
                 self.device.click(TRAIL_CULTIVATION_CHECK)
                 continue

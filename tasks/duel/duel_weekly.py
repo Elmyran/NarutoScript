@@ -7,6 +7,8 @@ from module.logger import logger
 from module.ocr.ocr import Digit
 from tasks.base.assets.assets_base_skill import *
 from tasks.base.page import page_main, page_ninjutsu
+from tasks.base.task_tab.draglist import TASK_TAB_LIST
+from tasks.base.task_tab.keyword import DuelKeyword
 from tasks.base.ui import UI
 from tasks.duel.assets.assets_duel import *
 
@@ -16,7 +18,8 @@ class DuelWeekly(UI):
         self.device.click_record_clear()
         self.device.stuck_record_clear()
         self.ui_ensure(page_main)
-        self.swipe_and_appear_then_click(DUEL_CHECK,MAIN_GOTO_DUEL,left=True)
+        if not TASK_TAB_LIST.search_rows(main=self,keyword=DuelKeyword):
+            raise GameStuckError(' Duel  Tab Not Found')
         self.ui_ensure(page_ninjutsu)
         #上一局输赢
         success=True

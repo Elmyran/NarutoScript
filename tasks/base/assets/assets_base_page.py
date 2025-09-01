@@ -207,6 +207,16 @@ MAIN_GOTO_PANEL = ButtonWrapper(
         button=(66, 14, 120, 84),
     ),
 )
+MAIN_GOTO_TASK_SEARCH_AREA = ButtonWrapper(
+    name='MAIN_GOTO_TASK_SEARCH_AREA',
+    share=Button(
+        file='./assets/share/base/page/MAIN_GOTO_TASK_SEARCH_AREA.png',
+        area=(219, 87, 1089, 609),
+        search=(199, 67, 1109, 629),
+        color=(127, 146, 113),
+        button=(219, 87, 1089, 609),
+    ),
+)
 MAIN_GOTO_TONG_LING = ButtonWrapper(
     name='MAIN_GOTO_TONG_LING',
     share=Button(

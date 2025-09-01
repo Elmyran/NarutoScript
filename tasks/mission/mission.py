@@ -7,6 +7,8 @@ from module.ocr.ocrutils import DigitOcr
 from module.ocr.onnxocr.onnx_paddleocr import ONNXPaddleOcr
 from module.ocr.utils import pair_buttons
 from tasks.base.page import page_main
+from tasks.base.task_tab.draglist import TASK_TAB_LIST
+from tasks.base.task_tab.keyword import MissionKeyword
 from tasks.base.ui import UI
 from tasks.mission.assets.assets_mission import *
 from tasks.mission.keyword import Claimable
@@ -21,8 +23,8 @@ class Mission(UI):
     def handle_mission(self):
         self.device.click_record_clear()
         self.ui_ensure(page_main)
-        if not self._mission_enter():
-            return False
+        if not TASK_TAB_LIST.search_rows(main=self,keyword=MissionKeyword):
+            raise GameStuckError(' Mission Tab Not Found')
         self._mission_reward_claim()
         for _ in self.loop():
             if self._mission_selected():
@@ -32,35 +34,7 @@ class Mission(UI):
         self.mission_exit()
 
 
-    def _mission_enter(self):
-        self.device.swipe([0, 322], [1280, 314])
-        move = True
-        time = Timer(10, count=10).start()
-        m = 2
-        for _ in self.loop():
-            if time.reached():
-                if move and m % 2 == 0:
-                    self.device.swipe([1200, 314], [0, 322])
-                    time.reset()
-                    m = m + 1
-                elif move and m % 2 == 1:
-                    self.device.swipe([0, 322], [1200, 314])
-                    m = m + 1
-                    time.reset()
-                elif m > 5:
-                    raise GameStuckError("Mission enter Stucked")
-            if self.appear(MISSION_CHECK):
-                return True
-            MISSION_RED_DOT.load_search((100, 50, 1100, 700))
-            if self.appear(MISSION_RED_DOT):
-                move = False
-                MAIN_GOTO_MISSION.load_search((100, 50, 1100, 700))
-                if self.appear_then_click(MAIN_GOTO_MISSION):
-                    continue
 
-
-
-        logger.info(f"Mission  entered")
 
     def _mission_reward_claim(self):
         ocr = Ocr(MISSION_TASK_CLAIMED_LIST, lang='cn')

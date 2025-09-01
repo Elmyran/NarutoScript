@@ -8,6 +8,8 @@ from module.exception import GameStuckError
 
 from tasks.base.assets.assets_base_popup import EXIT_ORGANIZATION_RED_ENVELOPE
 from tasks.base.page import page_main
+from tasks.base.task_tab.draglist import TASK_TAB_LIST
+from tasks.base.task_tab.keyword import OrganizationKeyword
 from tasks.base.ui import UI
 from tasks.organization.assets.assets_organization_pray import *
 from tasks.organization.assets.assets_organization_boxclaim import *
@@ -22,40 +24,14 @@ class Pray(UI,daily_utils):
     def handle_Organization_Pray(self):
         self.device.click_record_clear()
         self.ui_ensure(page_main)
-        self._organization_panel_enter()
+        if not TASK_TAB_LIST.search_rows(main=self,keyword=OrganizationKeyword):
+            raise GameStuckError(' Organization Not Found')
         self._enter_pray_panel()
         self.pray()
         self.pray_box_claim()
         self._pray_box_replacement()
         self.ui_goto_main()
-    def _organization_panel_enter(self):
-        self.device.swipe([0, 322], [1280, 314])
-        move = True
-        time = Timer(10, count=10).start()
-        m=2
-        for _ in self.loop():
-            if time.reached():
-                if move and m%2==0:
-                    self.device.swipe( [1200, 314],[0, 322])
-                    time.reset()
-                    m=m+1
-                elif move and m%2==1:
-                    self.device.swipe([0, 322], [1200, 314])
-                    m=m+1
-                    time.reset()
-                elif m>5:
-                    raise GameStuckError("Organization Pray Stucked")
-            ORGANIZATION_RED_DOT.load_search((200, 100, 1100, 400))
-            if self.appear_then_click(ORGANIZATION_RED_DOT):
-                continue
-            MAIN_GOTO_ORGANIZATION.load_search((200, 100, 1100, 400))
-            if MAIN_GOTO_ORGANIZATION.match_template(self.device.image,direct_match=True):
-                move = False
-                continue
-            if self.appear(ORGANIZATION_PANEL):
-                return True
 
-        logger.info(f"Organization Panel entered")
 
     def _enter_pray_panel(self):
         time=Timer(8, count=10).start()

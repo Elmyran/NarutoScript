@@ -7,6 +7,8 @@ from module.logger import logger
 from module.ocr.ocr import Digit
 from tasks.base.assets.assets_base_code_second import CODE_SECOND_PASSWORD
 from tasks.base.page import page_main
+from tasks.base.task_tab.draglist import TASK_TAB_LIST
+from tasks.base.task_tab.keyword import OrganizationKeyword
 from tasks.organization.assets.assets_organization import *
 from tasks.organization.assets.assets_organization_pan_ren import *
 from tasks.organization.assets.assets_organization_pray import *
@@ -52,6 +54,8 @@ class OrganizationPanRen(GameControl):
         self.device.click_record_clear()
         self.device.stuck_record_clear()
         self.ui_ensure(page_main)
+        if not TASK_TAB_LIST.search_rows(main=self,keyword=OrganizationKeyword):
+            raise GameStuckError(' Organization Not Found')
         self._organization_enter()
         self.device.stuck_timer = Timer(420, count=420).start()
         try:
@@ -70,29 +74,10 @@ class OrganizationPanRen(GameControl):
         self.ui_goto_main()
 
     def _organization_enter(self):
-        self.device.swipe([0, 322], [1280, 314])
-        move = True
         time = Timer(10, count=10).start()
-        m=2
         for _ in self.loop():
             if time.reached():
-                if move and m%2==0:
-                    self.device.swipe( [1200, 314],[0, 322])
-                    time.reset()
-                    m=m+1
-                elif move and m%2==1:
-                    self.device.swipe([0, 322], [1200, 314])
-                    m=m+1
-                    time.reset()
-                elif m>5:
-                    raise GameStuckError("Organization Pray Stucked")
-            ORGANIZATION_RED_DOT.load_search((200, 100, 1100, 400))
-            if self.appear_then_click(ORGANIZATION_RED_DOT,interval=1):
-                continue
-            MAIN_GOTO_ORGANIZATION.load_search((200, 100, 1100, 400))
-            if MAIN_GOTO_ORGANIZATION.match_template(self.device.image,direct_match=True):
-                move = False
-                continue
+                raise GameStuckError("Organization Page Enter Stucked")
             if self.appear_then_click(ORGANIZATION_PANEL_GOTO_PAGE,interval=0):
                 continue
             if self.appear(ORGANIZATION):

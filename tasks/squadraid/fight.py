@@ -2,11 +2,10 @@
 
 from module.base.timer import Timer
 from module.exception import GameStuckError
-from module.logger import logger
-
 from module.ocr.ocr import  DigitCounter
-
 from tasks.base.page import page_squad, page_squad_help_battle, page_main
+from tasks.base.task_tab.draglist import TASK_TAB_LIST
+from tasks.base.task_tab.keyword import SquadRaidKeyword
 from tasks.base.ui import UI
 from tasks.squadraid.assets.assets_squadraid_fight import *
 from tasks.squadraid.benefit import HelpBattleBenefit
@@ -15,6 +14,8 @@ class SquadRaidFight(UI):
     def handle_squad_raid(self):
         self.device.click_record_clear()
         self.ui_ensure(page_main)
+        if not TASK_TAB_LIST.search_rows(main=self,keyword=SquadRaidKeyword):
+            raise GameStuckError(' SquadRaid Not Found')
         for _ in self.loop():
            if not self._squad_raid_fight():
                break
@@ -22,21 +23,19 @@ class SquadRaidFight(UI):
             HelpBattleBenefit(self.config,self.device).handle_help_battle_benefit()
         self.ui_goto_main()
     def _squad_raid_fight(self):
-        if self._enter_squad_raid_screen():
-            time=Timer(10,count=20).start()
-            for _ in  self.loop():
-                if time.reached():
-                    raise GameStuckError('SQUAD_RAID_REMAIN_TIMES DETECTED ERROR')
-                ocr=DigitCounter(SQUAD_RAID_TIMES_COUNTER)
-                current,remain,total=ocr.ocr_single_line(self.device.image)
-                if remain!=2 and total!=0:
-                    break
-                if self.appear(SQUAD_RAID_HAVE_DONE):
-                    return False
-            self._help_battle_select()
-            self._start_fight()
-        else:
-            return True
+        time=Timer(10,count=20).start()
+        for _ in  self.loop():
+            if time.reached():
+                raise GameStuckError('SQUAD_RAID_REMAIN_TIMES DETECTED ERROR')
+            ocr=DigitCounter(SQUAD_RAID_TIMES_COUNTER)
+            current,remain,total=ocr.ocr_single_line(self.device.image)
+            if remain!=2 and total!=0:
+                break
+            if self.appear(SQUAD_RAID_HAVE_DONE):
+                 return False
+        self._help_battle_select()
+        self._start_fight()
+
         return True
     def _help_battle_select(self):
         time=Timer(10,count=20).start()
@@ -77,37 +76,6 @@ class SquadRaidFight(UI):
 
         return True
 
-    def _enter_squad_raid_screen(self):
-        if self.ui_page_appear(page_squad) or self.ui_page_appear(page_squad_help_battle):
-            return True
-        self.device.swipe( [1200, 314],[0, 322])
-        self.device.swipe( [1200, 314],[0, 322])
-        move = True
-        time = Timer(10, count=10).start()
-        m=2
-        for _ in self.loop():
-            if time.reached():
-                if move and m%2==0:
-                    self.device.swipe([0, 322], [1200, 314])
-                    self.device.swipe([0, 322], [1200, 314])
-                    time.reset()
-                    m=m+1
-                elif move and m%2==1:
-                    self.device.swipe( [1200, 314],[0, 322])
-                    self.device.swipe( [1200, 314],[0, 322])
-                    m=m+1
-                    time.reset()
-                elif m>5:
-                    raise GameStuckError("Squad Raid enter Stucked")
-            if self.ui_page_appear(page_squad):
-                return True
-            SQUAD_RAID_RED_DOT.load_search((0, 0, 1280, 720))  # Full screen but bounded
-            if self.appear_then_click(SQUAD_RAID_RED_DOT, interval=1):
-                continue
-            if MAIN_GOTO_SQUAD_RAID.match_template(self.device.image,direct_match=True):
-                move = False
-                continue
-        logger.info(f"Squad Raid entered")
-        return True
+
 
 

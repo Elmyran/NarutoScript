@@ -3,6 +3,8 @@ from module.exception import GameStuckError
 from module.logger import logger
 from module.ocr.ocr import Digit
 from tasks.base.page import page_main
+from tasks.base.task_tab.draglist import TASK_TAB_LIST
+from tasks.base.task_tab.keyword import TrailKeyword
 from tasks.base.ui import UI
 from tasks.trail.assets.assets_trail import *
 from tasks.trail.assets.assets_trail_survival import *
@@ -12,43 +14,23 @@ class SurvivalTrail(UI):
     def handle_survival_trail (self):
         self.device.click_record_clear()
         self.ui_ensure(page_main)
-        self._enter_trail()
+        if not TASK_TAB_LIST.search_rows(main=self,keyword=TrailKeyword):
+            raise GameStuckError(' Trail Not Found')
+        self._enter_survival()
         self._mop_up()
         self.ui_goto_main()
-    def _enter_trail(self):
-        if self.appear(SURVIVAL_PAGE_CHECK):
-            return True
-        self.device.swipe( [1200, 314],[0, 322])
-        move = True
+    def _enter_survival(self):
         time = Timer(10, count=10).start()
-        m=2
         for _ in self.loop():
             if time.reached():
-                if move and m%2==0:
-                    self.device.swipe([0, 322], [1200, 314])
-                    time.reset()
-                    m=m+1
-                elif move and m%2==1:
-                    self.device.swipe( [1200, 314],[0, 322])
-                    m=m+1
-                    time.reset()
-                elif m>5:
-                    raise GameStuckError("Survival Trial Stucked")
+                raise GameStuckError("Survival Trial Stucked")
             if self.appear(SURVIVAL_PAGE_CHECK):
                 break
-            TRAIL_RED_DOT.load_search((200, 50, 1000, 700))
-            if self.appear_then_click(TRAIL_RED_DOT):
-                continue
-            MAIN_GOTO_TRAIL.load_search((200, 50, 1000, 700))
-            if MAIN_GOTO_TRAIL.match_template(self.device.image,direct_match=True):
-                move = False
-                continue
             if self.appear(TRAIL_SURVIVAL_CHECK):
                 self.device.click(TRAIL_SURVIVAL_CHECK)
                 continue
             if self.appear(SURVIVAL_TELEPORT):
                 break
-
         logger.info(f"survival trial entered")
 
     def _mop_up(self):

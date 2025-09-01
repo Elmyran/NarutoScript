@@ -4,6 +4,8 @@ from module.config.utils import get_server_next_monday_update
 from module.exception import GameStuckError
 from module.logger import logger
 from tasks.base.page import page_main
+from tasks.base.task_tab.draglist import TASK_TAB_LIST
+from tasks.base.task_tab.keyword import OrganizationKeyword
 from tasks.base.ui import UI
 from tasks.organization.assets.assets_organization_akatsuki import *
 from tasks.organization.assets.assets_organization_pray import *
@@ -17,43 +19,25 @@ class Akatsuki(UI):
     def handle_pursue_akatsuki(self):
         self.device.click_record_clear()
         self.ui_ensure(page_main)
-        self._organization_panel_enter()
-        self._enter_akatsuki_panel()
+        if not TASK_TAB_LIST.search_rows(main=self,keyword=OrganizationKeyword):
+            raise GameStuckError(' Organization Not Found')
+        self._organization_play_panel_enter()
+        self._enter_akatsuki_page()
         self._reward_claim()
         self.ui_goto_main()
 
-    def _organization_panel_enter(self):
-        self.device.swipe([0, 322], [1280, 314])
-        move = True
+    def _organization_play_panel_enter(self):
         time = Timer(10, count=10).start()
-        m=2
         for _ in self.loop():
             if time.reached():
-                if move and m%2==0:
-                    self.device.swipe( [1200, 314],[0, 322])
-                    time.reset()
-                    m=m+1
-                elif move and m%2==1:
-                    self.device.swipe([0, 322], [1200, 314])
-                    m=m+1
-                    time.reset()
-                elif m>5:
-                    raise GameStuckError("Organization Play Panel Stucked")
+                raise GameStuckError("Organization Play Panel Stucked")
             if self.appear(ORGANIZATION_GOTO_PRAY,interval=1):
                 break
             if self.appear(ORGANIZATION_PLAY_PANEL):
                 self.device.click(ORGANIZATION_PLAY_PANEL)
                 continue
-            ORGANIZATION_RED_DOT.load_search((200, 100, 1100, 400))
-            if self.appear_then_click(ORGANIZATION_RED_DOT):
-                continue
-            MAIN_GOTO_ORGANIZATION.load_search((200, 100, 1100, 400))
-            if MAIN_GOTO_ORGANIZATION.match_template(self.device.image,direct_match=True):
-                move = False
-                continue
-
         logger.info(f"Organization Play Panel entered")
-    def _enter_akatsuki_panel(self):
+    def _enter_akatsuki_page(self):
         time=Timer(8, count=10).start()
         for _ in self.loop():
             if time.reached():

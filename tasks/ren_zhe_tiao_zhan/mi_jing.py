@@ -1,7 +1,10 @@
 from module.base.timer import Timer
+from module.exception import GameStuckError
 from module.ocr.ocr import Digit
 from tasks.base.assets.assets_base_page import FIGHT_CLOSE_CONFIRM, FIGHT_CLOSE
 from tasks.base.page import page_main, page_mi_jing_room
+from tasks.base.task_tab.draglist import TASK_TAB_LIST
+from tasks.base.task_tab.keyword import RenZheTiaoZhanKeyword
 from tasks.base.ui import UI
 from tasks.ren_zhe_tiao_zhan.assets.assets_ren_zhe_tiao_zhan import *
 from tasks.ren_zhe_tiao_zhan.auto_fight import AutoBattle
@@ -13,7 +16,8 @@ class MiJing(UI):
         pre_count=self.config.stored.MiJingCount.value
         self.device.click_record_clear()
         self.ui_ensure(page_main)
-        self.swipe_and_appear_then_click(click_obj=MAIN_GOTO_REN_ZHE_TIAO_ZHAN,check_obj=REN_ZHE_TIAO_ZHAN_CHECK,right=True)
+        if not TASK_TAB_LIST.search_rows(main=self,keyword=RenZheTiaoZhanKeyword):
+            raise GameStuckError(' RenZheTiaoZhan Not Found')
         self.ui_ensure(page_mi_jing_room)
         self._mi_jing_fight()
         if (self.config.stored.MiJingCount.value >= 6 > pre_count) or (

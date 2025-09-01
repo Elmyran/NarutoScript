@@ -8,6 +8,7 @@ from module.ocr.ocr import Digit
 from tasks.base.assets.assets_base_move import CHOOSE_RIGHT
 from tasks.base.assets.assets_base_skill import *
 from tasks.base.page import page_main
+from tasks.base.task_tab.draglist import TASK_TAB_LIST
 from tasks.base.ui import UI
 from tasks.duel.assets.assets_duel import DUEL_EXCEPTION, DUEL_FIGHT_SUCCESS, DUEL_FIGHT_FAIL, \
     DUEL_FIGHT_END
@@ -16,48 +17,31 @@ from tasks.organization.assets.assets_organization_fortress import ORGANIZATION_
     FORTRESS_MATCHING, FORTRESS_ROUND_SWITCH, FORTRESS_SCORE
 from tasks.organization.assets.assets_organization_pray import ORGANIZATION_RED_DOT, MAIN_GOTO_ORGANIZATION, \
     ORGANIZATION_PANEL
-
+from tasks.organization.keyword import OrganizationKeyword
 
 
 class Fortress(UI):
     def handle_organization_fortress(self):
         self.device.click_record_clear()
         self.ui_ensure(page_main)
-        self._organization_panel_enter()
+        if not TASK_TAB_LIST.search_rows(main=self,keyword=OrganizationKeyword):
+            raise GameStuckError(' Organization Not Found')
+        self._organization_page_enter()
         self._organization_goto_fortress()
         self._fortress_goto_fight()
         self.ui_goto_main()
-    def _organization_panel_enter(self):
-        self.device.swipe([0, 322], [1280, 314])
-        move = True
+    def _organization_page_enter(self):
         time = Timer(10, count=10).start()
-        m=2
         for _ in self.loop():
-            ORGANIZATION_RED_DOT.load_search((200, 100, 1100, 400))
-            if self.appear_then_click(ORGANIZATION_RED_DOT):
-                continue
-            MAIN_GOTO_ORGANIZATION.load_search((200, 100, 1100, 400))
-            if MAIN_GOTO_ORGANIZATION.match_template(self.device.image,direct_match=True):
-                move = False
-                continue
+            if time.reached():
+                raise GameStuckError("Organization Panel Goto Page Stuck")
             if self.appear(ORGANIZATION_MAIN_PAGE):
                 break
             if self.appear(ORGANIZATION_PANEL):
-                if self.appear(ORGANIZATION_ENTER):
-                    self.device.click(ORGANIZATION_ENTER)
+                self.appear_then_click(ORGANIZATION_ENTER,interval=0)
                 continue
-            if time.reached():
-                if move and m%2==0:
-                    self.device.swipe( [1200, 314],[0, 322])
-                    time.reset()
-                    m=m+1
-                elif move and m%2==1:
-                    self.device.swipe([0, 322], [1200, 314])
-                    m=m+1
-                    time.reset()
-                elif m>5:
-                    raise GameStuckError("Organization Pray Stucked")
-        logger.info(f"Organization Panel entered")
+
+        logger.info(f"Organization Page entered")
 
     def _organization_goto_fortress(self):
         for  _ in self.loop():

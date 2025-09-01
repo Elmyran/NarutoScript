@@ -6,6 +6,8 @@ from module.exception import GameStuckError
 from tasks.base.assets.assets_base_skill import CHARACTER_ATTACK, CHARACTER_TI_SHEN, CHARACTER_SKILL_1, \
     CHARACTER_SKILL_2, CHARACTER_SKILL_3, CHARACTER_PSYCHIC, CHARACTER_SECRET_SCROLL
 from tasks.base.page import page_ninjutsu, page_main
+from tasks.base.task_tab.draglist import TASK_TAB_LIST
+from tasks.base.task_tab.keyword import DuelKeyword
 from tasks.base.ui import UI
 from tasks.duel.assets.assets_duel import *
 
@@ -14,7 +16,8 @@ class DuelDaily(UI):
         self.device.click_record_clear()
         self.device.stuck_record_clear()
         self.ui_ensure(page_main)
-        self.swipe_and_appear_then_click(DUEL_CHECK,MAIN_GOTO_DUEL,left=True)
+        if not TASK_TAB_LIST.search_rows(main=self,keyword=DuelKeyword):
+            raise GameStuckError(' Duel  Tab Not Found')
         self.ui_ensure(page_ninjutsu)
         for _ in  self.loop():
             res=self._duel_task_detect()

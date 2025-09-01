@@ -105,13 +105,29 @@ GET_LIGHT_CONE = ButtonWrapper(
 )
 GET_REWARD = ButtonWrapper(
     name='GET_REWARD',
-    share=Button(
-        file='./assets/share/base/popup/GET_REWARD.png',
-        area=(479, 131, 786, 213),
-        search=(459, 111, 806, 233),
-        color=(130, 60, 17),
-        button=(479, 131, 786, 213),
-    ),
+    share=[
+        Button(
+            file='./assets/share/base/popup/GET_REWARD.png',
+            area=(479, 131, 786, 213),
+            search=(459, 111, 806, 233),
+            color=(130, 60, 17),
+            button=(479, 131, 786, 213),
+        ),
+        Button(
+            file='./assets/share/base/popup/GET_REWARD.2.png',
+            area=(550, 600, 729, 661),
+            search=(530, 580, 749, 681),
+            color=(221, 147, 9),
+            button=(550, 600, 729, 661),
+        ),
+        Button(
+            file='./assets/share/base/popup/GET_REWARD.3.png',
+            area=(545, 599, 731, 659),
+            search=(525, 579, 751, 679),
+            color=(209, 135, 14),
+            button=(545, 599, 731, 659),
+        ),
+    ],
 )
 POPUP_CLOSE = ButtonWrapper(
     name='POPUP_CLOSE',

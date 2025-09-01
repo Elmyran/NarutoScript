@@ -1,6 +1,8 @@
 from module.base.timer import Timer
 from module.exception import GameStuckError
 from tasks.base.page import page_main
+from tasks.base.task_tab.draglist import TASK_TAB_LIST
+from tasks.base.task_tab.keyword import LeaderBoardKeyword
 from tasks.base.ui import UI
 from tasks.leaderboard.assets.assets_leaderboard import *
 
@@ -14,7 +16,8 @@ class LeaderBoard(UI):
     def handle_leader_board(self):
         self.device.click_record_clear()
         self.ui_ensure(page_main)
-        self.swipe_and_appear_then_click(click_obj=MAIN_GOTO_LEADER_BOARD,check_obj=LEADER_BOARD_CHECK,left=True)
+        if not TASK_TAB_LIST.search_rows(main=self,keyword=LeaderBoardKeyword):
+            raise GameStuckError(' Leaderboard Not Found')
         time=Timer(20,count=30).start()
         for _ in self.loop():
             if time.reached():

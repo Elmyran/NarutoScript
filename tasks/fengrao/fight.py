@@ -3,6 +3,8 @@ from module.exception import GameStuckError
 from module.logger import logger
 from tasks.base.assets.assets_base_skill import CHARACTER_SKILL_1, CHARACTER_SKILL_2, CHARACTER_ATTACK
 from tasks.base.page import page_main, page_feng_rao
+from tasks.base.task_tab.draglist import TASK_TAB_LIST
+from tasks.base.task_tab.keyword import FengRaoKeyword
 from tasks.base.ui import UI
 from tasks.fengrao.assets.assets_fengrao import FENG_RAO_RED_DOT, MAIN_GOTO_FENG_RAO, FENG_RAO_CHECK, \
     FENG_RAO_START_FIGHT_BUTTON, FENG_RAO_FIGHT_STATUS, FENG_RAO_FIGHT_SUCCESS, FENG_RAO_HAVE_DONE, FENG_RAO_EXIT
@@ -12,54 +14,10 @@ class FengRaoFight(UI):
     def handle_feng_rao(self):
         self.device.click_record_clear()
         self.ui_ensure(page_main)
-        self._feng_rao_enter()
+        if not TASK_TAB_LIST.search_rows(main=self,keyword=FengRaoKeyword):
+            raise GameStuckError(' FengRao Task Tab Not Found')
         self._feng_rao_fight()
         self.ui_goto_main()
-
-
-    def _feng_rao_enter(self):
-        self.device.swipe([0, 322], [1200, 314])
-        move = True
-        m = 2
-        moving = True           # 是否正在滑动
-        last_swipe_time = time.time()
-        time_limit = Timer(10, count=10).start()
-
-        for _ in self.loop():
-            # 滑动超时处理
-            if time_limit.reached():
-                if move and m % 2 == 0:
-                    self.device.swipe([1200, 314], [0, 322])
-                    last_swipe_time = time.time()
-                    m += 1
-                    time_limit.reset()
-                elif move and m % 2 == 1:
-                    self.device.swipe([0, 322], [1200, 314])
-                    last_swipe_time = time.time()
-                    m += 1
-                    time_limit.reset()
-                elif m > 5:
-                    raise GameStuckError("Duel enter Stuck")
-
-            # 滑动刚结束，给动画缓冲
-            if time.time() - last_swipe_time < 0.3:
-                moving = True
-            else:
-                moving = False
-
-            # 检查是否进入
-            if self.appear(FENG_RAO_CHECK):
-                return True
-
-            # 全屏加载搜索区域
-            MAIN_GOTO_FENG_RAO.load_search((0, 0, 1280, 720))
-
-            # 滑动时只识别，不点击
-            if not moving and self.appear_then_click(MAIN_GOTO_FENG_RAO):
-                continue
-
-
-        logger.info(f"FengRao entered")
     def _feng_rao_fight(self):
         for _ in self.loop():
             if self.appear(FENG_RAO_HAVE_DONE):
