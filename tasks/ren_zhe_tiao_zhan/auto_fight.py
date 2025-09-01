@@ -9,7 +9,7 @@ from module.logger import logger
 from module.base.timer import Timer
 from tasks.ren_zhe_tiao_zhan.joystick import GameControl, JoystickContact
 from tasks.ren_zhe_tiao_zhan.assets.assets_ren_zhe_tiao_zhan import MI_JING_SUCCESS, MI_JING_REWARD_EXIT, \
-    MI_JING_REWARD_AREA
+    MI_JING_REWARD_AREA, MI_JING_FAIL
 
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 import torch
@@ -76,6 +76,10 @@ class AutoBattle(GameControl):
             if self.appear(MI_JING_SUCCESS) or self.appear(MI_JING_REWARD_EXIT):
                 logger.info("--- Battle finished (MI_JING_SUCCESS detected). ---")
                 self.config.stored.MiJingCount.add(1)
+                self.joystick.up()
+                break
+            if self.appear(MI_JING_FAIL):
+                logger.info("--- Battle finished (MI_JING_FAIL detected). ---")
                 self.joystick.up()
                 break
             if not self.client or not self.client.alive:
