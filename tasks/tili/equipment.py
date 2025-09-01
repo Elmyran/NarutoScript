@@ -193,20 +193,13 @@ class Equipment(UI):
         return False
 
     def _start_sweep(self):
-        time = Timer(4, count=5).start()
+        time = Timer(60, count=60).start()
         for _ in self.loop():
             if time.reached():
                 raise GameStuckError('Equipment Sweep Enter Stuck')
-            SWEEP_RUNNING.load_search(SWEEP_AREA.area)
-            if self.appear(SWEEP_RUNNING):
-                break
-            if self.appear_then_click(SWEEP_START,similarity=0.9, interval=1):
-                continue
-            if STUFF_SWEEP_BUTTON.match_template_luma(self.device.image, similarity=0.9):
+            if STUFF_SWEEP_BUTTON.match_template_color(self.device.image,interval=1):
                 self.device.click(STUFF_SWEEP_BUTTON)
                 continue
-
-        for _ in self.loop():
             # 体力不足
             if self.appear(TI_LI_SHORTAGE):
                 return True
@@ -214,16 +207,16 @@ class Equipment(UI):
             if self.appear(STUFF_MATERIAL_FULL):
                 return False
             # 体力充足，材料不足，继续扫荡
-            SWEEP_RUNNING.load_search(SWEEP_AREA.area)
-            self.appear_then_click(SWEEP_RUNNING,similarity=0.9, interval=0.5)
-
             SWEEP_CONTINUE.load_search(SWEEP_AREA.area)
             if self.appear(SWEEP_CONTINUE,similarity=0.9, interval=2):
                 if self.appear(STUFF_MATERIAL_FULL):
                     return False
                 else:
                     self.device.click(SWEEP_CONTINUE)
-
+            SWEEP_RUNNING.load_search(SWEEP_AREA.area)
+            self.appear_then_click(SWEEP_RUNNING,similarity=0.9, interval=0.5)
+            if self.appear_then_click(SWEEP_START,similarity=0.9, interval=1):
+                continue
         return True
     def _synthesized_and_equipped(self):
         ocr=Ocr(EQUIPMENT_PART_STUFF_AREA)
