@@ -20,10 +20,11 @@ from tasks.trail.assets.assets_trail import TRAIL_SURVIVAL_CHECK
 
 
 class DraggableTaskTabList(DraggableList):
-    drag_vector = (0.7,0.9)
+
     def __init__(self, name, keyword_class, custom_ocr: OCR, search_button: ButtonWrapper, **kwargs):
         # 创建适配器OCR类
         ocr_adapter = lambda button: TaskTabOcr(button, custom_ocr)
+        self.drag_vector = (0.7,0.9)
         super().__init__(name, keyword_class, ocr_adapter, search_button, **kwargs)
     def load_rows(self, main: ModuleBase):
         """重写load_rows以支持竖向文字识别"""
@@ -82,7 +83,7 @@ class DraggableTaskTabList(DraggableList):
                     main.wait_until_stable(
                         self.search_button,
                         timer=Timer(0, count=0),
-                        timeout=Timer(1.5, count=5)
+                        timeout=Timer(3, count=8)
                     )
 
                     # 重新识别
@@ -113,6 +114,7 @@ class DraggableTaskTabList(DraggableList):
             return main.appear(SQUAD_RAID_CHECK)
         elif button.matched_keyword.name == "RenZheTiaoZhanKeyword":
             return main.appear(REN_ZHE_TIAO_ZHAN_CHECK)
+        return False
 
 
 
