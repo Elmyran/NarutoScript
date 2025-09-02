@@ -18,7 +18,7 @@ class BattleOrderWeeklyReward(UI):
                 break
             if self.appear_then_click(BATTLE_ORDER_WEEKLY_REWARD_CLAIM_SUCCESS,interval=0,similarity=0.9):
                 continue
-            res=self.detect_claimable_buttons(button=BATTLE_ORDER_WEEKLY_REWARD_AREA,similarity=0.6)
+            res=self.detect_claimable_buttons(button=BATTLE_ORDER_WEEKLY_REWARD_AREA,similarity=0.5)
             if res and len(res)>0:
                 if self.interval_is_reached('claimable_click', interval=1):
                     self.device.click(res[0])
