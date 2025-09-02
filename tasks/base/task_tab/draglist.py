@@ -63,7 +63,7 @@ class DraggableTaskTabList(DraggableList):
         if self.keyword2button(row, show_warning=False):
             return True
 
-        max_total_drags = 8   # 总的拖拽次数（比如左右各 2 次，一共 4 次；你可以改成 8、12…）
+        max_total_drags = 10   # 总的拖拽次数
         per_direction_drags = 2  # 每个方向要拖动的次数
         total_drag_count = 0
 
@@ -93,29 +93,56 @@ class DraggableTaskTabList(DraggableList):
 
         logger.warning(f'Target {row} not found after {total_drag_count} total drags')
         return False
-    def is_row_selected(self, button: OcrResultButton, main: ModuleBase) -> bool:
-        """根据不同任务类型判断选中状态"""
-        # 根据任务类型使用不同的判断逻辑
-        if button.matched_keyword.name == "JiFenSaiKeyword":
-            return main.appear(JI_FEN_SAI_CHECK)
-        elif button.matched_keyword.name == "MissionKeyword":
-            return main.appear(MISSION_CHECK)
-        elif button.matched_keyword.name == "OrganizationKeyword":
-            return main.appear(ORGANIZATION_PANEL)
-        elif button.matched_keyword.name == "LeaderBoardKeyword":
-            return main.appear(LEADER_BOARD_CHECK)
-        elif button.matched_keyword.name == "DuelKeyword":
-            return  main.appear(DUEL_CHECK)
-        elif button.matched_keyword.name == "FengRaoKeyword":
-            return main.appear(FENG_RAO_CHECK)
-        elif button.matched_keyword.name == "TrailKeyword":
-            return main.appear(TRAIL_SURVIVAL_CHECK)
-        elif button.matched_keyword.name == "SquadRaidKeyword":
-            return main.appear(SQUAD_RAID_CHECK)
-        elif button.matched_keyword.name == "RenZheTiaoZhanKeyword":
-            return main.appear(REN_ZHE_TIAO_ZHAN_CHECK)
-        return False
+    def select_row(self, row: Keyword, main: ModuleBase, insight=True, skip_first_screenshot=True):
+        """重写选择方法，点击后检测到任务界面就返回True，不继续搜索"""
+        if insight:
+            result = self.insight_row(row, main=main, skip_first_screenshot=skip_first_screenshot)
+            if not result:
+                return False
 
+        logger.info(f'Select row: {row}')
+        button = self.keyword2button(row)
+        if button is None:
+            logger.warning(f'Keyword {row} is not in current rows of {self}')
+            return False
+
+            # 点击标签
+        main.device.click(button)
+        # 使用Timer进行智能等待
+        timeout = Timer(3, count=6).start()
+        while 1:
+            main.device.screenshot()
+
+            # 检测是否进入了任何任务界面
+            if self._is_in_any_task_interface(main):
+                logger.info(f'Successfully entered task interface for {row.name}')
+                return True
+
+                # 超时检查
+            if timeout.reached():
+                logger.warning(f'Failed to detect task interface after clicking {row.name}')
+                return False
+
+    def _is_in_any_task_interface(self, main: ModuleBase) -> bool:
+        """检测是否在任何任务界面中"""
+        task_checks = [
+            JI_FEN_SAI_CHECK,
+            MISSION_CHECK,
+            ORGANIZATION_PANEL,
+            LEADER_BOARD_CHECK,
+            DUEL_CHECK,
+            FENG_RAO_CHECK,
+            TRAIL_SURVIVAL_CHECK,
+            SQUAD_RAID_CHECK,
+            REN_ZHE_TIAO_ZHAN_CHECK
+        ]
+
+        for check_button in task_checks:
+            if main.appear(check_button):
+                logger.info(f'Detected task interface: {check_button.name}')
+                return True
+
+        return False
 
 
 
