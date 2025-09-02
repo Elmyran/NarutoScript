@@ -1,8 +1,13 @@
 import collections
 import itertools
 
+import numpy as np
 from lxml import etree
 
+from module.base.button import ClickButton
+from module.base.utils import random_rectangle_point, ensure_int, image_size, point2str, ensure_time, \
+    random_rectangle_vector_opted, area_offset
+from module.device.converter import ResolutionConverter
 from module.device.env import IS_WINDOWS
 # Patch pkg_resources before importing adbutils and uiautomator2
 from module.device.pkg_resources import get_distribution
@@ -96,6 +101,7 @@ class Device(Screenshot, Control, AppControl):
         self.screenshot_interval_set()
         self.method_check()
 
+        self.resolution_converter=None
         # Auto-select the fastest screenshot method
         if not self.config.is_template_config and self.config.Emulator_ScreenshotMethod == 'auto':
             self.run_simple_screenshot_benchmark()
@@ -171,7 +177,9 @@ class Device(Screenshot, Control, AppControl):
                 super().screenshot()
             else:
                 raise
-
+        if self.resolution_converter is None:
+            width, height = image_size(self.image)
+            self.resolution_converter = ResolutionConverter(width, height)
         return self.image
 
     def dump_hierarchy(self) -> etree._Element:
@@ -296,7 +304,124 @@ class Device(Screenshot, Control, AppControl):
         self.stuck_record_clear()
         self.click_record_clear()
 
-    def app_stop(self):
-        super().app_stop()
+    def app_stop(self,package=None):
+        super().app_stop(package=package)
         self.stuck_record_clear()
         self.click_record_clear()
+    def click(self, button, control_check=True):
+        """Method to click a button.
+
+        Args:
+            button (button.Button): AzurLane Button instance.
+            control_check (bool):
+        """
+        if control_check:
+            self.handle_control_check(button)
+        x, y = random_rectangle_point(button.button)
+        x,y=self.resolution_converter.convert_to_target(x,y)
+        x, y = ensure_int(x, y)
+        logger.info(
+            'Click %s @ %s' % (point2str(x, y), button)
+        )
+        method = self.click_methods.get(
+            self.config.Emulator_ControlMethod,
+            self.click_adb
+        )
+        method(x, y)
+
+
+
+    def long_click(self, button, duration=(1, 1.2)):
+        """Method to long click a button.
+
+        Args:
+            button (button.Button): AzurLane Button instance.
+            duration(int, float, tuple):
+        """
+        self.handle_control_check(button)
+        x, y = random_rectangle_point(button.button)
+        x,y=self.resolution_converter.convert_to_target(x,y)
+        x, y = ensure_int(x, y)
+        duration = ensure_time(duration)
+        logger.info(
+            'Click %s @ %s, %s' % (point2str(x, y), button, duration)
+        )
+        method = self.config.Emulator_ControlMethod
+        if method == 'minitouch':
+            self.long_click_minitouch(x, y, duration)
+        elif method == 'uiautomator2':
+            self.long_click_uiautomator2(x, y, duration)
+        elif method == 'scrcpy':
+            self.long_click_scrcpy(x, y, duration)
+        elif method == 'MaaTouch':
+            self.long_click_maatouch(x, y, duration)
+        elif method == 'nemu_ipc':
+            self.long_click_nemu_ipc(x, y, duration)
+        else:
+            self.swipe_adb((x, y), (x, y), duration)
+
+    def swipe(self, p1, p2, duration=(0.1, 0.2), name='SWIPE', distance_check=True):
+        self.handle_control_check(name)
+        p1, p2 = ensure_int(p1, p2)
+        p1=self.resolution_converter.convert_to_target(*p1)
+        p2=self.resolution_converter.convert_to_target(*p2)
+        duration = ensure_time(duration)
+        method = self.config.Emulator_ControlMethod
+        if method == 'uiautomator2':
+            logger.info('Swipe %s -> %s, %s' % (point2str(*p1), point2str(*p2), duration))
+        elif method in ['minitouch', 'MaaTouch', 'scrcpy', 'nemu_ipc']:
+            logger.info('Swipe %s -> %s' % (point2str(*p1), point2str(*p2)))
+        else:
+            # ADB needs to be slow, or swipe doesn't work
+            duration *= 2.5
+            logger.info('Swipe %s -> %s, %s' % (point2str(*p1), point2str(*p2), duration))
+
+        if distance_check:
+            if np.linalg.norm(np.subtract(p1, p2)) < 10:
+                # Should swipe a certain distance, otherwise AL will treat it as click.
+                # uiautomator2 should >= 6px, minitouch should >= 5px
+                logger.info('Swipe distance < 10px, dropped')
+                return
+
+        if method == 'minitouch':
+            self.swipe_minitouch(p1, p2)
+        elif method == 'uiautomator2':
+            self.swipe_uiautomator2(p1, p2, duration=duration)
+        elif method == 'scrcpy':
+            self.swipe_scrcpy(p1, p2)
+        elif method == 'MaaTouch':
+            self.swipe_maatouch(p1, p2)
+        elif method == 'nemu_ipc':
+            self.swipe_nemu_ipc(p1, p2)
+        else:
+            self.swipe_adb(p1, p2, duration=duration)
+
+
+
+    def drag(self, p1, p2, segments=1, shake=(0, 15), point_random=(-10, -10, 10, 10), shake_random=(-5, -5, 5, 5),
+             swipe_duration=0.25, shake_duration=0.1, name='DRAG'):
+        self.handle_control_check(name)
+        converter_p1=self.resolution_converter.convert_to_target(*p1)
+        converter_p2=self.resolution_converter.convert_to_target(*p2)
+        p1, p2 = ensure_int(converter_p1, converter_p2)
+        logger.info(
+            'Drag %s -> %s' % (point2str(*p1), point2str(*p2))
+        )
+        method = self.config.Emulator_ControlMethod
+        if method == 'minitouch':
+            self.drag_minitouch(p1, p2, point_random=point_random)
+        elif method == 'uiautomator2':
+            self.drag_uiautomator2(
+                p1, p2, segments=segments, shake=shake, point_random=point_random, shake_random=shake_random,
+                swipe_duration=swipe_duration, shake_duration=shake_duration)
+        elif method == 'scrcpy':
+            self.drag_scrcpy(p1, p2, point_random=point_random)
+        elif method == 'MaaTouch':
+            self.drag_maatouch(p1, p2, point_random=point_random)
+        elif method == 'nemu_ipc':
+            self.drag_nemu_ipc(p1, p2, point_random=point_random)
+        else:
+            logger.warning(f'Control method {method} does not support drag well, '
+                           f'falling back to ADB swipe may cause unexpected behaviour')
+            self.swipe_adb(p1, p2, duration=ensure_time(swipe_duration * 2))
+            self.click(ClickButton(area=area_offset(point_random, p2), name=name))

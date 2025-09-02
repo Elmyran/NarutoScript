@@ -420,9 +420,7 @@ class Uiautomator2(Connection):
         """
         width, height = self.resolution_uiautomator2()
         logger.attr('Screen_size', f'{width}x{height}')
-        if width == 1280 and height == 720:
-            return (width, height)
-        if width == 720 and height == 1280:
+        if (width / height == 16 / 9) or (height / width == 16 / 9):
             return (width, height)
 
         logger.critical(f'Resolution not supported: {width}x{height}')

@@ -73,7 +73,10 @@ class Screenshot(Adb, WSA, DroidCast, AScreenCap, Scrcpy, NemuIpc, LDOpenGL):
             method = self.screenshot_methods.get(method, self.screenshot_adb)
 
             self.image = method()
-
+            width, height = image_size(self.image)
+            #将截图缩放到1280*720
+            if width != 1280 or height != 720:
+                self.image = cv2.resize(self.image, (1280, 720), interpolation=cv2.INTER_AREA)
             # if self.config.Emulator_ScreenshotDedithering:
             #     # This will take 40-60ms
             #     cv2.fastNlMeansDenoising(self.image, self.image, h=17, templateWindowSize=1, searchWindowSize=2)
@@ -102,7 +105,7 @@ class Screenshot(Adb, WSA, DroidCast, AScreenCap, Scrcpy, NemuIpc, LDOpenGL):
             np.ndarray:
         """
         width, height = image_size(self.image)
-        if width == 1280 and height == 720:
+        if width / height == 16/9:
             return image
 
         # Rotate screenshots only when they're not 1280x720
@@ -230,16 +233,16 @@ class Screenshot(Adb, WSA, DroidCast, AScreenCap, Scrcpy, NemuIpc, LDOpenGL):
             # Check screen size
             width, height = image_size(self.image)
             logger.attr('Screen_size', f'{width}x{height}')
-            if width == 1280 and height == 720:
+            if width / height == 16 / 9:
                 self._screen_size_checked = True
                 return True
-            elif not orientated and (width == 720 and height == 1280):
+            elif not orientated and (height/width==16/9):
                 logger.info('Received orientated screenshot, handling')
                 self.get_orientation()
                 self.image = self._handle_orientated_image(self.image)
                 orientated = True
                 width, height = image_size(self.image)
-                if width == 720 and height == 1280:
+                if height/width==16/9:
                     logger.info('Unable to handle orientated screenshot, continue for now')
                     return True
                 else:
@@ -260,7 +263,8 @@ class Screenshot(Adb, WSA, DroidCast, AScreenCap, Scrcpy, NemuIpc, LDOpenGL):
             return True
         # Check screen color
         # May get a pure black screenshot on some emulators.
-        color = get_color(self.image, area=(0, 0, 1280, 720))
+        width, height = image_size(self.image)
+        color = get_color(self.image, area=(0, 0, width, height))
         if sum(color) < 1:
             if self.config.Emulator_Serial == 'wsa-0':
                 for _ in range(2):
