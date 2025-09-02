@@ -197,7 +197,7 @@ class Equipment(UI):
         for _ in self.loop():
             if time.reached():
                 raise GameStuckError('Equipment Sweep Enter Stuck')
-            if STUFF_SWEEP_BUTTON.match_template_color(self.device.image,interval=1):
+            if self.match_template_color(SWEEP_BUTTON,interval=1):
                 self.device.click(STUFF_SWEEP_BUTTON)
                 continue
             # 体力不足
