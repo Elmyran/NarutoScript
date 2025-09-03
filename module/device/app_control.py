@@ -42,20 +42,15 @@ class AppControl(Adb, WSA, Uiautomator2):
         else:
             self.app_stop_adb(package)
 
-    def app_stop(self):
+    def app_start(self):
         method = self.config.Emulator_ControlMethod
-        logger.info(f'App stop: {self.package}')
-        if method in AppControl._app_u2_family:
-            self.app_stop_uiautomator2()
+        logger.info(f'App start: {self.package}')
+        if self.config.Emulator_Serial == 'wsa-0':
+            self.app_start_wsa(display=0)
+        elif method in AppControl._app_u2_family:
+            self.app_start_uiautomator2()
         else:
-            self.app_stop_adb()
-    def app_stop(self,package):
-        method = self.config.Emulator_ControlMethod
-        logger.info(f'App stop: {package}')
-        if method in AppControl._app_u2_family:
-            self.app_stop_uiautomator2(package)
-        else:
-            self.app_stop_adb(package)
+            self.app_start_adb()
 
     def hierarchy_timer_set(self, interval=None):
         if interval is None:
