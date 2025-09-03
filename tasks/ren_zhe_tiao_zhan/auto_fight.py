@@ -4,9 +4,12 @@ import time
 import os
 import pyscrcpy
 import adbutils
+
+from module.base.utils import image_size
 from module.device.device import Device
 from module.logger import logger
 from module.base.timer import Timer
+from tasks.base.assets.assets_base_popup import GET_REWARD
 from tasks.ren_zhe_tiao_zhan.joystick import GameControl, JoystickContact
 from tasks.ren_zhe_tiao_zhan.assets.assets_ren_zhe_tiao_zhan import MI_JING_SUCCESS, MI_JING_REWARD_EXIT, \
     MI_JING_REWARD_AREA, MI_JING_FAIL
@@ -20,9 +23,9 @@ class AutoBattle(GameControl):
         super().__init__(config, device, task)
         self.PATHFINDING_PATTERN = [("RIGHT", 5.0), ("STOP", 0.5), ("LEFT", 5.0), ("STOP", 0.5)]
         self.DIRECTION_ANGLES = {"RIGHT": 90, "UP": 0, "LEFT": -90, "DOWN": 180, "STOP": 0}
-        self.ATTACK_SWEET_SPOT_Y = (-40, 40)
+        self.ATTACK_SWEET_SPOT_Y = (-100, 100)
         self.ATTACK_SWEET_SPOT_X = (-300, 300)
-        self.FACING_BLIND_SPOT_X = (-40, 40)
+        self.FACING_BLIND_SPOT_X = (-50, 50)
         self.TARGET_LOST_BUFFER_DURATION = 2.0
         self.device_torch = "cuda" if torch.cuda.is_available() else "cpu"
         print(self.device_torch)
@@ -70,10 +73,13 @@ class AutoBattle(GameControl):
             if img_raw is None:
                 continue
             img = cv2.cvtColor(img_raw, cv2.COLOR_BGR2RGB)
+            width, height = image_size(img)
+            if width != 1280 or height != 720:
+                img = cv2.resize(img, (1280, 720), interpolation=cv2.INTER_AREA)
             self.device.image = img
             MI_JING_SUCCESS.load_search(MI_JING_REWARD_AREA.area)
             MI_JING_REWARD_EXIT.load_search(MI_JING_REWARD_AREA.area)
-            if self.appear(MI_JING_SUCCESS) or self.appear(MI_JING_REWARD_EXIT):
+            if self.appear(MI_JING_SUCCESS) or self.appear(MI_JING_REWARD_EXIT) :
                 logger.info("--- Battle finished (MI_JING_SUCCESS detected). ---")
                 self.config.stored.MiJingCount.add(1)
                 self.joystick.up()
@@ -85,7 +91,7 @@ class AutoBattle(GameControl):
             if not self.client or not self.client.alive:
                 logger.error("Scrcpy client is not running. Aborting fight.")
                 break
-            results = self.model(img_raw, conf=0.7, verbose=False, device=self.device_torch)
+            results = self.model(img_raw, conf=0.6, verbose=False, device=self.device_torch)
             self_boxes, enemy_boxes = [], []
             for r in results:
                 for box in r.boxes:
@@ -169,4 +175,7 @@ class AutoBattle(GameControl):
                     else:
                         angle = self.DIRECTION_ANGLES.get(direction, 0)
                         self.move_to_direction(angle,0.3)
+
+
+
 
