@@ -397,10 +397,10 @@ STUFF_SWEEP_BUTTON = ButtonWrapper(
     name='STUFF_SWEEP_BUTTON',
     cn=Button(
         file='./assets/cn/tili/equipment/STUFF_SWEEP_BUTTON.png',
-        area=(735, 524, 928, 601),
-        search=(715, 504, 948, 621),
-        color=(212, 141, 10),
-        button=(735, 524, 928, 601),
+        area=(337, 526, 534, 593),
+        search=(317, 506, 554, 613),
+        color=(223, 152, 14),
+        button=(337, 526, 534, 593),
     ),
     en=None,
 )

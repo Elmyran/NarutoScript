@@ -7,7 +7,8 @@ from module.ocr.ocr import OcrResultButton
 
 from module.ocr.ocrutils import OCR
 from module.ui.draggable_list import DraggableList
-from tasks.base.assets.assets_base_page import MAIN_GOTO_TASK_SEARCH_AREA, JI_FEN_SAI_CHECK, REN_ZHE_TIAO_ZHAN_CHECK
+from tasks.base.assets.assets_base_page import MAIN_GOTO_TASK_SEARCH_AREA, JI_FEN_SAI_CHECK, REN_ZHE_TIAO_ZHAN_CHECK, \
+    MAIN_GOTO_TASK_DRAG_AREA
 from tasks.base.task_tab.keyword import TaskTab
 from tasks.base.task_tab.ocr import TaskTabOcr, TaskOcr
 from tasks.duel.assets.assets_duel import DUEL_CHECK
@@ -23,9 +24,9 @@ class DraggableTaskTabList(DraggableList):
 
     def __init__(self, name, keyword_class, custom_ocr: OCR, search_button: ButtonWrapper, **kwargs):
         # 创建适配器OCR类
-        ocr_adapter = lambda button: TaskTabOcr(button, custom_ocr)
+        ocr_adapter = lambda button: TaskTabOcr(search_button, custom_ocr)
         self.drag_vector = (0.7,0.9)
-        super().__init__(name, keyword_class, ocr_adapter, search_button, **kwargs)
+        super().__init__(name, keyword_class, ocr_adapter, MAIN_GOTO_TASK_DRAG_AREA, **kwargs)
     def load_rows(self, main: ModuleBase):
         """重写load_rows以支持竖向文字识别"""
         # 使用自定义OCR进行文字识别
@@ -154,4 +155,5 @@ TASK_TAB_LIST = DraggableTaskTabList(
     check_row_order=False,
     active_color=(212,190,143),
     drag_direction="right",
+
 )

@@ -7,10 +7,10 @@ BATTLE_ORDER_CHECK = ButtonWrapper(
     name='BATTLE_ORDER_CHECK',
     share=Button(
         file='./assets/share/base/page/BATTLE_ORDER_CHECK.png',
-        area=(0, 5, 170, 113),
-        search=(0, 0, 190, 133),
-        color=(142, 98, 52),
-        button=(0, 5, 170, 113),
+        area=(0, 0, 166, 121),
+        search=(0, 0, 186, 141),
+        color=(122, 94, 60),
+        button=(0, 0, 166, 121),
     ),
 )
 BATTLE_ORDER_GOTO_RANK = ButtonWrapper(
@@ -207,14 +207,24 @@ MAIN_GOTO_PANEL = ButtonWrapper(
         button=(66, 14, 120, 84),
     ),
 )
+MAIN_GOTO_TASK_DRAG_AREA = ButtonWrapper(
+    name='MAIN_GOTO_TASK_DRAG_AREA',
+    share=Button(
+        file='./assets/share/base/page/MAIN_GOTO_TASK_DRAG_AREA.png',
+        area=(89, 276, 1192, 409),
+        search=(69, 256, 1212, 429),
+        color=(133, 141, 102),
+        button=(89, 276, 1192, 409),
+    ),
+)
 MAIN_GOTO_TASK_SEARCH_AREA = ButtonWrapper(
     name='MAIN_GOTO_TASK_SEARCH_AREA',
     share=Button(
         file='./assets/share/base/page/MAIN_GOTO_TASK_SEARCH_AREA.png',
-        area=(219, 87, 1089, 609),
-        search=(199, 67, 1109, 629),
-        color=(127, 146, 113),
-        button=(219, 87, 1089, 609),
+        area=(356, 87, 1089, 609),
+        search=(336, 67, 1109, 629),
+        color=(128, 145, 111),
+        button=(356, 87, 1089, 609),
     ),
 )
 MAIN_GOTO_TONG_LING = ButtonWrapper(

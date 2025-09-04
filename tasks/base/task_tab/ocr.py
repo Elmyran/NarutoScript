@@ -14,30 +14,31 @@ class TaskTabOcr(Ocr):
     def after_process(self, result):
         """对OCR结果进行修正"""
         result = super().after_process(result)
-
-        # 针对识别到的文字进行修正
-        corrections = {
-            '积分寒': '积分赛',
-            '排符榜': '排行榜',
-            '忍者大寨': '忍者大赛',
-            '任务集会部': '任务集会所',
-            '忍者挑践': '忍者挑战',
-            '組织': '组织',
-            '決鬥場': '决斗场',
-            '試煉之地': '试炼之地',
-            '小隊突襲': '小队突袭',
-            '豐饒之間': '丰饶之间'
-        }
-        for wrong, correct in corrections.items():
-            if wrong in result:
-                result = result.replace(wrong, correct)
+        # 单字符修正
+        result = result.replace('寒', '赛')
+        result = result.replace('符', '行')
+        result = result.replace('寨', '赛')
+        result = result.replace('部', '所')
+        result = result.replace('狂', '任')
+        result = result.replace('践', '战')
+        # 繁体字修正
+        result = result.replace('組', '组')
+        result = result.replace('決', '决')
+        result = result.replace('鬥', '斗')
+        result = result.replace('試', '试')
+        result = result.replace('煉', '炼')
+        result = result.replace('隊', '队')
+        result = result.replace('襲', '袭')
+        result = result.replace('豐', '丰')
+        result = result.replace('饒', '饶')
+        result = result.replace('間', '间')
         if '小队突' in result:
             result='小队突袭'
         if '积分' in result :
             result = '积分赛'
         if '排' in result and '榜' in result:
             result = '排行榜'
-        if '任务集会' in result:
+        if '集会' in result:
             result = '任务集会所'
         if '忍者挑' in result:
             result='忍者挑战'
