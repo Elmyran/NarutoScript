@@ -12,7 +12,7 @@ from module.base.timer import Timer
 from tasks.base.assets.assets_base_popup import GET_REWARD
 from tasks.ren_zhe_tiao_zhan.joystick import GameControl, JoystickContact
 from tasks.ren_zhe_tiao_zhan.assets.assets_ren_zhe_tiao_zhan import MI_JING_SUCCESS, MI_JING_REWARD_EXIT, \
-    MI_JING_REWARD_AREA, MI_JING_FAIL
+    MI_JING_REWARD_AREA, MI_JING_FAIL, MI_JING_ROOM_CHECK
 
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 import torch
@@ -77,17 +77,21 @@ class AutoBattle(GameControl):
             if width != 1280 or height != 720:
                 img = cv2.resize(img, (1280, 720), interpolation=cv2.INTER_AREA)
             self.device.image = img
-            MI_JING_SUCCESS.load_search(MI_JING_REWARD_AREA.area)
+
             MI_JING_REWARD_EXIT.load_search(MI_JING_REWARD_AREA.area)
-            if self.appear(MI_JING_SUCCESS) or self.appear(MI_JING_REWARD_EXIT) :
+            if  self.appear(MI_JING_REWARD_EXIT) :
                 logger.info("--- Battle finished (MI_JING_SUCCESS detected). ---")
                 self.config.stored.MiJingCount.add(1)
                 self.joystick.up()
                 break
-            if self.appear(MI_JING_FAIL):
+            if self.appear(MI_JING_ROOM_CHECK):
+                break
+            MI_JING_SUCCESS.load_search(MI_JING_REWARD_AREA.area)
+            if self.appear_then_click(MI_JING_FAIL) or self.appear_then_click(MI_JING_SUCCESS)  :
                 logger.info("--- Battle finished (MI_JING_FAIL detected). ---")
                 self.joystick.up()
-                break
+                continue
+
             if not self.client or not self.client.alive:
                 logger.error("Scrcpy client is not running. Aborting fight.")
                 break

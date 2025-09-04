@@ -27,7 +27,6 @@ class MiJing(UI):
             MiJingBoxClaim(config=self.config,device=self.device).handle_mi_jing_box_claim()
         self.ui_goto_main()
     def _select_mi_jing(self):
-        self.device.screenshot()
         ocr=MiJingOcr(MI_JING_TYPE)
         ticket=Digit(MI_JING_REMAIN_CHALLENGE_TICKET)
         type_1=['落岩秘境','雷霆秘境','烈炎秘境','水牢秘境','罡体秘境']
@@ -79,13 +78,14 @@ class MiJing(UI):
                     MI_JING_SUCCESS.clear_offset()
                     self.device.click(MI_JING_SUCCESS)
                     continue
-                res=self._select_mi_jing()
-                if res=='End':
-                    break
-                elif res==False:
-                    continue
-                elif res==True:
-                    battle.run()
+                if self.appear(MI_JING_ROOM_CHECK):
+                    res=self._select_mi_jing()
+                    if res=='End':
+                        break
+                    elif res==False:
+                        continue
+                    elif res==True:
+                        battle.run()
         finally:
             battle.stop_services()
 
