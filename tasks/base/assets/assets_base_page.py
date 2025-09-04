@@ -27,10 +27,10 @@ BATTLE_ORDER_RANK_CHECK = ButtonWrapper(
     name='BATTLE_ORDER_RANK_CHECK',
     share=Button(
         file='./assets/share/base/page/BATTLE_ORDER_RANK_CHECK.png',
-        area=(990, 558, 1079, 601),
-        search=(970, 538, 1099, 621),
-        color=(150, 127, 75),
-        button=(990, 558, 1079, 601),
+        area=(89, 36, 306, 125),
+        search=(69, 16, 326, 145),
+        color=(168, 107, 47),
+        button=(89, 36, 306, 125),
     ),
 )
 CHONG_ZHI_CHECK = ButtonWrapper(
@@ -66,6 +66,13 @@ CLOSE = ButtonWrapper(
             search=(1192, 1, 1280, 90),
             color=(49, 50, 53),
             button=(1212, 21, 1263, 70),
+        ),
+        Button(
+            file='./assets/share/base/page/CLOSE.3.png',
+            area=(1186, 0, 1280, 82),
+            search=(1166, 0, 1280, 102),
+            color=(62, 23, 8),
+            button=(1186, 0, 1280, 82),
         ),
     ],
 )

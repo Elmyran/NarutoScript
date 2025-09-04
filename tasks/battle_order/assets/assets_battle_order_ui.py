@@ -48,17 +48,17 @@ BATTLE_ORDER_REWARD_CHECK = ButtonWrapper(
     share=[
         Button(
             file='./assets/share/battle_order/ui/BATTLE_ORDER_REWARD_CHECK.png',
-            area=(241, 53, 369, 91),
-            search=(221, 33, 389, 111),
-            color=(86, 61, 20),
-            button=(241, 53, 369, 91),
+            area=(310, 415, 359, 470),
+            search=(290, 395, 379, 490),
+            color=(167, 123, 45),
+            button=(310, 415, 359, 470),
         ),
         Button(
             file='./assets/share/battle_order/ui/BATTLE_ORDER_REWARD_CHECK.2.png',
-            area=(2, 136, 164, 226),
-            search=(0, 116, 184, 246),
-            color=(169, 128, 66),
-            button=(2, 136, 164, 226),
+            area=(0, 121, 164, 217),
+            search=(0, 101, 184, 237),
+            color=(171, 131, 67),
+            button=(0, 121, 164, 217),
         ),
     ],
 )
@@ -84,10 +84,10 @@ BATTLE_ORDER_WEEKLY_REWARD_CHECK = ButtonWrapper(
         ),
         Button(
             file='./assets/share/battle_order/ui/BATTLE_ORDER_WEEKLY_REWARD_CHECK.2.png',
-            area=(2, 336, 163, 427),
-            search=(0, 316, 183, 447),
-            color=(168, 129, 68),
-            button=(2, 336, 163, 427),
+            area=(0, 315, 164, 415),
+            search=(0, 295, 184, 435),
+            color=(168, 129, 67),
+            button=(0, 315, 164, 415),
         ),
     ],
 )
@@ -113,10 +113,10 @@ BATTLE_ORDER_WEEKLY_TASK_CHECK = ButtonWrapper(
         ),
         Button(
             file='./assets/share/battle_order/ui/BATTLE_ORDER_WEEKLY_TASK_CHECK.2.png',
-            area=(1, 233, 165, 329),
-            search=(0, 213, 185, 349),
-            color=(170, 131, 67),
-            button=(1, 233, 165, 329),
+            area=(3, 217, 166, 315),
+            search=(0, 197, 186, 335),
+            color=(171, 132, 68),
+            button=(3, 217, 166, 315),
         ),
     ],
 )
