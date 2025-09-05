@@ -55,6 +55,8 @@ class Mission(UI):
             current,remain,total=select.ocr_single_line(self.device.image)
             if remain!=0 and total!=0 and remain>task_select_number:
                 task_select_number=remain
+                with self.config.multi_set():
+                    self.config.stored.MissionAccept.value=task_select_number
             if total!=0 and remain==total:
                 break
             res=self._single_task_select(task)
@@ -62,8 +64,7 @@ class Mission(UI):
                 break
             else:
                 accepted_tasks.append(task.time)
-        with self.config.multi_set():
-            self.config.stored.MissionAccept.value=task_select_number
+
         return True
     def _single_task_select(self,task):
         for _ in self.loop():
