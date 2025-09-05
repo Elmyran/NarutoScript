@@ -278,15 +278,13 @@ class StoredMissionAccept(StoredCounter,StoredExpiredAt0500):
         from datetime import datetime, timedelta
         # 清除过期任务
         self._clear_expired_missions()
-
         # 添加新任务时间
         current_time = datetime.now()
         for minutes in duration_minutes_list:
             completion_time = current_time + timedelta(minutes=minutes)
             self.mission_times.append(completion_time)
 
-            # 更新计数
-        self.value +=len(duration_minutes_list)
+
 
     def _clear_expired_missions(self):
         from datetime import datetime

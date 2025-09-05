@@ -12,8 +12,6 @@ from tasks.base.ui import UI
 from tasks.mission.assets.assets_mission import *
 from tasks.mission.keyword import Claimable
 from tasks.mission.priority import TaskPriority
-
-
 class Mission(UI):
     def run(self):
         if self.config.stored.MissionAccept.is_expired():
@@ -49,15 +47,24 @@ class Mission(UI):
     def _task_select(self,accepted_tasks):
         tasks=self._mission_select_priority()
         select=DigitCounter(TASK_SELECT_REAMIN_TIMES)
+        task_select_number=0
+        time=Timer(60,count=60).start()
         for task in tasks:
+            if time.reached():
+                raise GameStuckError(' Mission Task  Select Stuck')
             current,remain,total=select.ocr_single_line(self.device.image)
+            if remain!=0 and total!=0 and remain>task_select_number:
+                task_select_number=remain
             if total!=0 and remain==total:
-                return True
+                break
             res=self._single_task_select(task)
             if res:
-                return True
+                break
             else:
                 accepted_tasks.append(task.time)
+        with self.config.multi_set():
+            self.config.stored.MissionAccept.value=task_select_number
+        return True
     def _single_task_select(self,task):
         for _ in self.loop():
             if CHARACTER_UNSELECTED.match_template(self.device.image, direct_match=True):
@@ -91,9 +98,8 @@ class Mission(UI):
                 self.device.click(CHARACTER_SELECTED_AUTO)
             elif CHARACTER_UNSELECTED.match_template(self.device.image, direct_match=True):
                 self.device.click(CHARACTER_FIRST)
-
             if CHARACTER_SELECTED.match_template(self.device.image, direct_match=True):
-                self.appear_then_click(TASK_ACCEPT)
+                self.appear_then_click(TASK_ACCEPT,interval=2)
     def _mission_reward_claim(self):
         ocr = Ocr(MISSION_TASK_CLAIMED_LIST, lang='cn')
         res = ocr.matched_ocr(self.device.image, Claimable)
