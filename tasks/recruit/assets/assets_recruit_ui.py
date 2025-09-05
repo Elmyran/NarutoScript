@@ -27,20 +27,20 @@ PREMIUM_RECRUIT_CHECK = ButtonWrapper(
     name='PREMIUM_RECRUIT_CHECK',
     share=Button(
         file='./assets/share/recruit/ui/PREMIUM_RECRUIT_CHECK.png',
-        area=(0, 125, 149, 174),
-        search=(0, 105, 169, 194),
-        color=(167, 153, 109),
-        button=(0, 125, 149, 174),
+        area=(2, 127, 155, 173),
+        search=(0, 107, 175, 193),
+        color=(172, 158, 116),
+        button=(2, 127, 155, 173),
     ),
 )
 PREMIUM_RECRUIT_CLICK = ButtonWrapper(
     name='PREMIUM_RECRUIT_CLICK',
     share=Button(
         file='./assets/share/recruit/ui/PREMIUM_RECRUIT_CLICK.png',
-        area=(3, 130, 149, 207),
-        search=(0, 110, 169, 227),
-        color=(111, 103, 53),
-        button=(3, 130, 149, 207),
+        area=(1, 134, 156, 173),
+        search=(0, 114, 176, 193),
+        color=(109, 104, 65),
+        button=(1, 134, 156, 173),
     ),
 )
 RECRUIT_LIMITED_RETURN_CHECK = ButtonWrapper(

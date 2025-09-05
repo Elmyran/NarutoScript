@@ -73,10 +73,10 @@ PREMIUM_RECRUIT_FREE_DONE = ButtonWrapper(
     name='PREMIUM_RECRUIT_FREE_DONE',
     cn=Button(
         file='./assets/cn/recruit/PREMIUM_RECRUIT_FREE_DONE.png',
-        area=(788, 540, 944, 608),
-        search=(768, 520, 964, 628),
-        color=(95, 90, 52),
-        button=(788, 540, 944, 608),
+        area=(796, 548, 939, 601),
+        search=(776, 528, 959, 621),
+        color=(103, 97, 56),
+        button=(796, 548, 939, 601),
     ),
     en=None,
 )

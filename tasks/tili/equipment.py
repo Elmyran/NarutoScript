@@ -33,7 +33,6 @@ class Equipment(UI):
                 self.ui_ensure(page_equipment)
                 self.device.click(EQUIPMENT_KNIFE)
                 self._select_equipment_part()
-                self._stuff_material_check()
                 res=self._start_sweep()
                 self.ui_ensure(page_equipment)
                 self._synthesized_and_equipped()
@@ -168,29 +167,7 @@ class Equipment(UI):
                 return res
         return False
 
-    def _stuff_material_check(self):
-        time = Timer(20, count=30).start()
-        for _ in self.loop():
-            if time.reached():
-                raise GameStuckError('Equipment Advance Stuff Part 1 Stuck')
-            ocr = StuffOcr(STUFF_PART_1)
-            current, remain, total = ocr.ocr_single_line(self.device.image)
-            if total > 0 and remain > 0:
-                self.device.click(STUFF_PART_1)
-                return True
-            elif total > 0 >= remain:
-                break
-        for _ in self.loop():
-            if time.reached():
-                raise GameStuckError('Equipment Advance Stuff Part 1 Stuck')
-            ocr = StuffOcr(STUFF_PART_2)
-            current, remain, total = ocr.ocr_single_line(self.device.image)
-            if total > 0 and remain > 0:
-                self.device.click(STUFF_PART_2)
-                return True
-            elif total > 0 >= remain:
-                break
-        return False
+
 
     def _start_sweep(self):
         time = Timer(60, count=60).start()

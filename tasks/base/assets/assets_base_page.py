@@ -115,6 +115,16 @@ FIGHT_CLOSE_CONFIRM = ButtonWrapper(
         ),
     ],
 )
+FULL_SCREEN = ButtonWrapper(
+    name='FULL_SCREEN',
+    share=Button(
+        file='./assets/share/base/page/FULL_SCREEN.png',
+        area=(0, 0, 1280, 720),
+        search=(0, 0, 1280, 720),
+        color=(92, 108, 92),
+        button=(0, 0, 1280, 720),
+    ),
+)
 JI_FEN_SAI_CHECK = ButtonWrapper(
     name='JI_FEN_SAI_CHECK',
     share=Button(
