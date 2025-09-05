@@ -1,4 +1,5 @@
 from module.base.timer import Timer
+from module.config.stored.classes import StoredMissionAccept
 from module.exception import GameStuckError
 from module.logger.logger import logger
 from module.ocr.ocr import Ocr, DigitCounter
@@ -64,7 +65,6 @@ class Mission(UI):
                 break
             else:
                 accepted_tasks.append(task.time)
-
         return True
     def _single_task_select(self,task):
         for _ in self.loop():
@@ -223,16 +223,6 @@ class Mission(UI):
         # 添加时间修正逻辑 - 调整为最接近的60分钟倍数
         corrected_minutes = round(total_minutes / 60) * 60
         return corrected_minutes
-    def test(self):
-
-        self.config.stored.MissionAccept.write_missions([5])
-        delay_time=self.config.stored.MissionAccept.get_nearest_completion_time()
-        if delay_time:
-            self.config.task_delay(target=delay_time)
-        else:
-            self.config.task_delay(server_update=True)
-
-
 
 
 
