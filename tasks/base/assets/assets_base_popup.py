@@ -207,3 +207,13 @@ POPUP_TITLE_TIP = ButtonWrapper(
         button=(620, 245, 659, 272),
     ),
 )
+SHORTAGE = ButtonWrapper(
+    name='SHORTAGE',
+    share=Button(
+        file='./assets/share/base/popup/SHORTAGE.png',
+        area=(350, 145, 933, 532),
+        search=(330, 125, 953, 552),
+        color=(174, 170, 150),
+        button=(841, 147, 929, 211),
+    ),
+)

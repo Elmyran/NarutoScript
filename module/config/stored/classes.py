@@ -4,6 +4,7 @@ from functools import cached_property as functools_cached_property
 from module.base.decorator import cached_property
 from module.config.deep import deep_get
 from module.config.utils import DEFAULT_TIME, get_server_last_monday_update, get_server_last_update
+from module.ocr.ocr import DigitCounter
 
 
 def now():
@@ -269,3 +270,49 @@ class StoredTiLi(StoredCounter):
         diff = (now - record).total_seconds()
         value += int(diff // 360)
         return value
+class StoredMissionAccept(StoredCounter,StoredExpiredAt0500):
+    mission_times = []
+    value = 0
+    FIXED_TOTAL = 9
+    def write_missions(self, duration_minutes_list):
+        from datetime import datetime, timedelta
+        # 清除过期任务
+        self._clear_expired_missions()
+
+        # 添加新任务时间
+        current_time = datetime.now()
+        for minutes in duration_minutes_list:
+            completion_time = current_time + timedelta(minutes=minutes)
+            self.mission_times.append(completion_time)
+
+            # 更新计数
+        self.value +=len(duration_minutes_list)
+
+    def _clear_expired_missions(self):
+        from datetime import datetime
+        now = datetime.now()
+        # 过滤掉已过期的任务
+        valid_times = []
+        for t in self.mission_times:
+            if isinstance(t, str):
+                try:
+                    t = datetime.fromisoformat(t)
+                except (ValueError, TypeError):
+                    continue
+            elif not isinstance(t, datetime):
+                continue
+
+            if t > now:
+                valid_times.append(t)
+
+        self.mission_times = valid_times
+
+    def get_nearest_completion_time(self):
+        self._clear_expired_missions()
+        if self.mission_times:
+            return min(self.mission_times)
+        else:
+            return None
+    def clear(self):
+        super().clear()
+        self.mission_times = []

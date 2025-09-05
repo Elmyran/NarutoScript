@@ -503,6 +503,10 @@
     "Fame": {
       "name": "ItemStorage.Fame.name",
       "help": "ItemStorage.Fame.help"
+    },
+    "Mission": {
+      "name": "ItemStorage.Mission.name",
+      "help": "ItemStorage.Mission.help"
     }
   },
   "TiLiStorage": {
@@ -553,6 +557,16 @@
     "MiJingCount": {
       "name": "MiJingStorage.MiJingCount.name",
       "help": "MiJingStorage.MiJingCount.help"
+    }
+  },
+  "MissionStorage": {
+    "_info": {
+      "name": "MissionStorage._info.name",
+      "help": "MissionStorage._info.help"
+    },
+    "MissionAccept": {
+      "name": "MissionStorage.MissionAccept.name",
+      "help": "MissionStorage.MissionAccept.help"
     }
   },
   "Gui": {

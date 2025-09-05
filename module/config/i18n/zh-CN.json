@@ -503,6 +503,10 @@
     "Fame": {
       "name": "声望",
       "help": ""
+    },
+    "Mission": {
+      "name": "任务集会所",
+      "help": ""
     }
   },
   "TiLiStorage": {
@@ -553,6 +557,16 @@
     "MiJingCount": {
       "name": "MiJingStorage.MiJingCount.name",
       "help": "MiJingStorage.MiJingCount.help"
+    }
+  },
+  "MissionStorage": {
+    "_info": {
+      "name": "任务集会所",
+      "help": ""
+    },
+    "MissionAccept": {
+      "name": "已接取数量",
+      "help": ""
     }
   },
   "Gui": {

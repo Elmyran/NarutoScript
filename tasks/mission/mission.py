@@ -1,8 +1,7 @@
 from module.base.timer import Timer
 from module.exception import GameStuckError
 from module.logger.logger import logger
-
-from module.ocr.ocr import Ocr
+from module.ocr.ocr import Ocr, DigitCounter
 from module.ocr.ocrutils import DigitOcr
 from module.ocr.onnxocr.onnx_paddleocr import ONNXPaddleOcr
 from module.ocr.utils import pair_buttons
@@ -17,25 +16,84 @@ from tasks.mission.priority import TaskPriority
 
 class Mission(UI):
     def run(self):
+        if self.config.stored.MissionAccept.is_expired():
+            self.config.stored.MissionAccept.clear()
         self.handle_mission()
-        self.config.task_delay(server_update=True)
+        if self.config.stored.MissionAccept.is_full():
+            self.config.task_delay(server_update=True)
+        else:
+            delay_time=self.config.stored.MissionAccept.get_nearest_completion_time()
+            if delay_time:
+                self.config.task_delay(target=delay_time)
+            else:
+                self.config.task_delay(server_update=True)
         self.config.task_stop()
+
     def handle_mission(self):
         self.device.click_record_clear()
         self.ui_ensure(page_main)
         if not TASK_TAB_LIST.search_rows(main=self,keyword=MissionKeyword):
             raise GameStuckError(' Mission Tab Not Found')
         self._mission_reward_claim()
+        self._circle_task_select()
+        self.ui_goto_main()
+    def _circle_task_select(self):
+        accepted_tasks=[]
         for _ in self.loop():
-            if self._mission_selected():
-                continue
-            else:
+            res=self._task_select(accepted_tasks)
+            if res:
                 break
-        self.mission_exit()
+            self._task_refresh()
+        with self.config.multi_set():
+            self.config.stored.MissionAccept.write_missions(accepted_tasks)
+    def _task_select(self,accepted_tasks):
+        tasks=self._mission_select_priority()
+        select=DigitCounter(TASK_SELECT_REAMIN_TIMES)
+        for task in tasks:
+            current,remain,total=select.ocr_single_line(self.device.image)
+            if total!=0 and remain==total:
+                return True
+            res=self._single_task_select(task)
+            if res:
+                return True
+            else:
+                accepted_tasks.append(task.time)
+    def _single_task_select(self,task):
+        for _ in self.loop():
+            if CHARACTER_UNSELECTED.match_template(self.device.image, direct_match=True):
+                if self.character_select():
+                    return True
+                else:
+                    return False
+            self.device.click(task)
+    def _task_refresh(self):
+        refresh=DigitCounter(TASK_REFRESH_REMAIN_TIMES)
+        current,remain,total=refresh.ocr_single_line(self.device.image)
+        pre=current
+        for _ in self.loop():
+            current,remain,total=refresh.ocr_single_line(self.device.image)
+            if current!=pre:
+                return True
+            if self.appear(TASK_REFRESH_TIMES_SHORTAGE):
+                return False
+            # todo 超影免费刷新button
+    def character_select(self):
+        time=Timer(20,count=30).start()
+        for _ in self.loop():
+            if time.reached():
+                raise GameStuckError("Character selected Stucked")
+            if THE_TASKBAR_IS_FULL.match_template(self.device.image):
+                return True
+            else:
+                if self.appear(MISSION_CHECK):
+                    return False
+            if self.appear(CHARACTER_SELECTED_AUTO) and CHARACTER_UNSELECTED.match_template(self.device.image, direct_match=True):
+                self.device.click(CHARACTER_SELECTED_AUTO)
+            elif CHARACTER_UNSELECTED.match_template(self.device.image, direct_match=True):
+                self.device.click(CHARACTER_FIRST)
 
-
-
-
+            if CHARACTER_SELECTED.match_template(self.device.image, direct_match=True):
+                self.appear_then_click(TASK_ACCEPT)
     def _mission_reward_claim(self):
         ocr = Ocr(MISSION_TASK_CLAIMED_LIST, lang='cn')
         res = ocr.matched_ocr(self.device.image, Claimable)
@@ -60,44 +118,7 @@ class Mission(UI):
                 self.device.click(res[0])
 
 
-    def _mission_selected(self):
-        time = Timer(10, count=20).start()
-        task_select_time = Timer(4, count=8).start()
-        for _ in self.loop():
-            if task_select_time.reached():
-                return False
-            if time.reached():
-                raise GameStuckError("Task Selected Stucked")
-            TASK_HAVE_ACCEPTED.load_search(TASK_DETECT_AREA.area)
-            res=TASK_HAVE_ACCEPTED.match_multi_template(self.device.image)
-            if res and len(res)==3:
-                return False
 
-            if CHARACTER_UNSELECTED.match_template(self.device.image, direct_match=True):
-                break
-            task = self._mission_select_priority()
-            if task:
-                self.device.click(task)
-                continue
-
-
-        for _ in self.loop():
-            if time.reached():
-                raise GameStuckError("Character selected Stucked")
-            if THE_TASKBAR_IS_FULL.match_template(self.device.image):
-                return False
-            else:
-                if self.appear(MISSION_CHECK):
-                    break
-            if self.appear(CHARACTER_SELECTED_AUTO) and CHARACTER_UNSELECTED.match_template(self.device.image, direct_match=True):
-                self.device.click(CHARACTER_SELECTED_AUTO)
-            elif CHARACTER_UNSELECTED.match_template(self.device.image, direct_match=True):
-                self.device.click(CHARACTER_FIRST)
-
-            if CHARACTER_SELECTED.match_template(self.device.image, direct_match=True):
-                self.appear_then_click(TASK_ACCEPT)
-
-        return True
 
     def _mission_select_priority(self):
         self.device.screenshot()
@@ -141,12 +162,7 @@ class Mission(UI):
             # 按优先级排序：先按箱子类型（RED=1, BLUE=2, GREEN=3），再按魂玉数量（降序）
         sorted_tasks = sorted(tasks, key=lambda x: (x.box_type.value, -x.soul_jade))
 
-        highest_priority_task = sorted_tasks[0]
-        logger.info(f"选择最高优先级任务: {highest_priority_task.txt}, "
-                    f"箱子类型: {highest_priority_task.box_type.name}, "
-                    f"魂玉: {highest_priority_task.soul_jade}")
-
-        return highest_priority_task
+        return sorted_tasks
 
     def get_soul_jade_amount(self, task):
         time = Timer(2, 4).start()
@@ -173,16 +189,16 @@ class Mission(UI):
     def get_box_type(self, task):
         time = Timer(2, 4).start()
         for _ in self.loop():
-            TASK_GREEN_BOX.load_search(task.area)
-            if self.appear(TASK_GREEN_BOX):
+            TASK_BOX_GREEN.load_search(task.area)
+            if self.appear(TASK_BOX_GREEN):
                 task.box_type = TaskPriority.GREEN
                 break
-            TASK_BLUE_BOX.load_search(task.area)
-            if self.appear(TASK_BLUE_BOX):
+            TASK_BOX_BLUE.load_search(task.area)
+            if self.appear(TASK_BOX_BLUE):
                 task.box_type = TaskPriority.BLUE
                 break
-            TASK_BLUE_BOX.load_search(task.area)
-            if self.appear(TASK_RED_BOX):
+            TASK_BOX_BLUE.load_search(task.area)
+            if self.appear(TASK_BOX_RED):
                 task.box_type = TaskPriority.RED
                 break
             if time.reached():
@@ -192,32 +208,24 @@ class Mission(UI):
     def _parse_time_to_minutes(self, time_str: str) -> int:
         """解析时间字符串为分钟数，并修正为60的倍数"""
         import re
-
-        # 原有解析逻辑
         hour_match = re.search(r'(\d+)时', time_str)
         minute_match = re.search(r'(\d+)分', time_str)
-
         hours = int(hour_match.group(1)) if hour_match else 0
         minutes = int(minute_match.group(1)) if minute_match else 0
-
         total_minutes = hours * 60 + minutes
-
         # 添加时间修正逻辑 - 调整为最接近的60分钟倍数
         corrected_minutes = round(total_minutes / 60) * 60
-
-        logger.debug(f"时间解析: '{time_str}' -> {total_minutes}分钟 -> 修正为 {corrected_minutes}分钟")
         return corrected_minutes
+    def test(self):
 
-    def mission_exit(self):
-        time = Timer(10, 20).start()
-        for _ in self.loop():
-            if time.reached():
-                raise GameStuckError('Mission Exite Stucked')
-            if self.appear(CHARACTER_SELECT_EXIT):
-                self.device.click(CHARACTER_SELECT_EXIT)
-                continue
-            if self.appear(MISSION_EXIT):
-                self.device.click(MISSION_EXIT)
-                continue
-            if self.ui_page_appear(page_main):
-                break
+        self.config.stored.MissionAccept.write_missions([5])
+        delay_time=self.config.stored.MissionAccept.get_nearest_completion_time()
+        if delay_time:
+            self.config.task_delay(target=delay_time)
+        else:
+            self.config.task_delay(server_update=True)
+
+
+
+
+

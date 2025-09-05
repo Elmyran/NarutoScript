@@ -60,6 +60,20 @@
     "order": 5,
     "color": "#32CD32"
   },
+  "Mission": {
+    "name": "Mission",
+    "path": "DataUpdate.ItemStorage.Mission",
+    "i18n": "ItemStorage.Mission.name",
+    "stored": "StoredMissionAccept",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "mission_times": [],
+      "total": 9,
+      "value": 0
+    },
+    "order": 6,
+    "color": "#ff6b6b"
+  },
   "DuelDaily": {
     "name": "DuelDaily",
     "path": "Duel.Duel.DuelDaily",
@@ -94,6 +108,20 @@
     "attrs": {
       "time": "2020-01-01 00:00:00",
       "total": 1,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "MissionAccept": {
+    "name": "MissionAccept",
+    "path": "Mission.MissionStorage.MissionAccept",
+    "i18n": "MissionStorage.MissionAccept.name",
+    "stored": "StoredMissionAccept",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "mission_times": [],
+      "total": 9,
       "value": 0
     },
     "order": 0,

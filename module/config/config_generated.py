@@ -97,6 +97,7 @@ class GeneratedConfig:
     ItemStorage_Tickets = {}
     ItemStorage_Coins = {}
     ItemStorage_Fame = {}
+    ItemStorage_Mission = {}
 
     # Group `TiLiStorage`
     TiLiStorage_Dungeon = {}
@@ -112,3 +113,6 @@ class GeneratedConfig:
 
     # Group `MiJingStorage`
     MiJingStorage_MiJingCount = {}
+
+    # Group `MissionStorage`
+    MissionStorage_MissionAccept = {}

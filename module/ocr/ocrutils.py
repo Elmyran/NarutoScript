@@ -218,9 +218,9 @@ class DigitOcr(ONNXPaddleOcr):
             # 处理其他可能有area属性的对象
             name = getattr(area, 'name', str(area))
             area = area.area
-        # 如果没有名称，使用默认名称
+            # 如果没有名称，使用默认名称
         if name is None:
-            name = 'DigitSimple'
+            name = 'Digit'
         start_time = time.time()
         try:
             # 裁剪区域
@@ -249,13 +249,16 @@ class DigitOcr(ONNXPaddleOcr):
             numbers = re.findall(r'\d+', corrected_text)
             if numbers:
                 result = int(numbers[0])
-                # 使用logger.attr保持一致的输出风格
-                logger.attr(name, result)
+                # 使用logger.attr保持一致的输出风格，添加耗时
+                elapsed_time = time.time() - start_time
+                logger.attr(f'{name} {elapsed_time:.3f}s', result)
                 return result
             else:
-                logger.attr(name, 0)
+                elapsed_time = time.time() - start_time
+                logger.attr(f'{name} {elapsed_time:.3f}s', 0)
                 return 0
         except Exception as e:
-            logger.warning(f"数字识别失败: {e}")
+            elapsed_time = time.time() - start_time
+            logger.warning(f"数字识别失败 {elapsed_time:.3f}s: {e}")
             return 0
 

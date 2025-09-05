@@ -27,6 +27,8 @@ class PopupHandler(ModuleBase):
             return  True
         if self.appear_then_click(POPUP_MI_JING_BOX,interval=interval):
             return True
+        if self.appear_then_click(SHORTAGE,interval=interval):
+            return True
 
         return False
 

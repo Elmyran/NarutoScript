@@ -111,6 +111,9 @@
       "NextRun": "2020-01-01 00:00:00",
       "Command": "Mission",
       "ServerUpdate": "05:00"
+    },
+    "MissionStorage": {
+      "MissionAccept": {}
     }
   },
   "Recruit": {
@@ -161,7 +164,8 @@
       "Golds": {},
       "Tickets": {},
       "Coins": {},
-      "Fame": {}
+      "Fame": {},
+      "Mission": {}
     }
   },
   "ZhaoCai": {

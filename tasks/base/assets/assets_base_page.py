@@ -254,6 +254,16 @@ MAIN_GOTO_TONG_LING = ButtonWrapper(
         button=(363, 630, 415, 703),
     ),
 )
+MISSION_CHARACTER_SELECT_CHECK = ButtonWrapper(
+    name='MISSION_CHARACTER_SELECT_CHECK',
+    share=Button(
+        file='./assets/share/base/page/MISSION_CHARACTER_SELECT_CHECK.png',
+        area=(827, 504, 865, 543),
+        search=(807, 484, 885, 563),
+        color=(82, 49, 16),
+        button=(827, 504, 865, 543),
+    ),
+)
 REN_ZHE_TIAO_ZHAN_CHECK = ButtonWrapper(
     name='REN_ZHE_TIAO_ZHAN_CHECK',
     share=Button(

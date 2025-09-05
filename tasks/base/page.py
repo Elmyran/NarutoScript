@@ -107,8 +107,9 @@ page_mail.link(MAIL_EXIT,destination=page_main)
 page_main.link(MAIN_GOTO_MAIL,destination=page_mail)
 #Mission
 page_mission=Page(MISSION_CHECK)
-page_main.link(MISSION_RED_DOT,destination=page_mission)
-page_mission.link(MISSION_EXIT,destination=page_main)
+page_mission.link(CLOSE,destination=page_main)
+page_mission_character_select=Page(MISSION_CHARACTER_SELECT_CHECK)
+page_mission_character_select.link(CLOSE,destination=page_main)
 #DailyShare
 page_panel=Page(PANEL_CHECK)
 page_main.link(MAIN_GOTO_PANEL,destination=page_panel)
