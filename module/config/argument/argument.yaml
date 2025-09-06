@@ -216,6 +216,9 @@ PanRen:
   SecondPassword:
     type: input
     value: ''
+  NoRewardJoinOrNot:
+    type: checkbox
+    value: False
   PanRenFinishCount:
     stored: StoredPanRenCount
     value: {}

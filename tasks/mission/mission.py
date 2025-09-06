@@ -1,5 +1,4 @@
 from module.base.timer import Timer
-from module.config.stored.classes import StoredMissionAccept
 from module.exception import GameStuckError
 from module.logger.logger import logger
 from module.ocr.ocr import Ocr, DigitCounter
@@ -121,7 +120,7 @@ class Mission(UI):
             if self.appear_then_click(MISSION_REWARD,interval=0.5):
                 continue
             res = ocr.matched_ocr(self.device.image, Claimable)
-            if not res and times>2:
+            if not res and times>4:
                 break
             elif not res:
                 times += 1

@@ -12,7 +12,6 @@ class LeaderBoard(UI):
         self.handle_leader_board()
         self.config.task_delay(server_update=True)
         self.config.task_stop()
-
     def handle_leader_board(self):
         self.device.click_record_clear()
         self.ui_ensure(page_main)
@@ -22,9 +21,8 @@ class LeaderBoard(UI):
         for _ in self.loop():
             if time.reached():
                 raise GameStuckError('Leader board like timed out')
-            LEADER_BOARD_HAVE_LIKED.load_search(LEADER_BOARD_AREA.area)
-            if LEADER_BOARD_HAVE_LIKED.match_template(self.device.image):
+            if self.appear(LEADER_BOARD_HAVE_LIKED):
                 break
-            if self.appear_then_click(LEADER_BOARD_LIKE_BUTTON):
+            if self.appear_then_click(LEADER_BOARD_LIKE_BUTTON,interval=1):
                 continue
 

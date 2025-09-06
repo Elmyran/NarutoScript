@@ -89,6 +89,7 @@ class GeneratedConfig:
 
     # Group `PanRen`
     PanRen_SecondPassword = None
+    PanRen_NoRewardJoinOrNot = False
     PanRen_PanRenFinishCount = {}
 
     # Group `ItemStorage`

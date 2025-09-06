@@ -2,32 +2,40 @@ import time
 
 from module.base.timer import Timer
 from module.base.utils import random_rectangle_point, ensure_int
+from module.config.utils import get_nearest_weekday_date
 from module.exception import GameStuckError
 from module.logger import logger
 from module.ocr.ocr import Digit
 from tasks.base.assets.assets_base_move import CHOOSE_RIGHT
 from tasks.base.assets.assets_base_skill import *
-from tasks.base.page import page_main
+from tasks.base.page import page_main, page_fortress_select
 from tasks.base.task_tab.draglist import TASK_TAB_LIST
-from tasks.base.ui import UI
+from tasks.base.task_tab.keyword import OrganizationKeyword
+
 from tasks.duel.assets.assets_duel import DUEL_EXCEPTION, DUEL_FIGHT_SUCCESS, DUEL_FIGHT_FAIL, \
     DUEL_FIGHT_END
-from tasks.organization.assets.assets_organization_fortress import ORGANIZATION_ENTER, ORGANIZATION_MAIN_PAGE, \
-    ORGANIZATION_GOTO_FORTRESS, FORTRESS_LOCAL_SELECT, FORTRESS_FIRE, FORTRESS_ENTER_CONFIRM, FORTRESS_PAGE, \
-    FORTRESS_MATCHING, FORTRESS_ROUND_SWITCH, FORTRESS_SCORE
-from tasks.organization.assets.assets_organization_pray import ORGANIZATION_RED_DOT, MAIN_GOTO_ORGANIZATION, \
-    ORGANIZATION_PANEL
-from tasks.organization.keyword import OrganizationKeyword
+from tasks.organization.assets.assets_organization_fortress import *
+from tasks.organization.assets.assets_organization_pray import  ORGANIZATION_PANEL
+from tasks.ren_zhe_tiao_zhan.joystick import GameControl
 
 
-class Fortress(UI):
+class Fortress(GameControl):
+    def run(self):
+        self.handle_organization_fortress()
+        next_saturday = get_nearest_weekday_date(5)
+        saturday_8pm = next_saturday.replace(hour=20, minute=0, second=0, microsecond=0)
+        self.config.task_delay(target=saturday_8pm)
+        self.config.task_call('PanRen')
+        self.config.task_stop()
+
     def handle_organization_fortress(self):
         self.device.click_record_clear()
         self.ui_ensure(page_main)
         if not TASK_TAB_LIST.search_rows(main=self,keyword=OrganizationKeyword):
             raise GameStuckError(' Organization Not Found')
         self._organization_page_enter()
-        self._organization_goto_fortress()
+        self.ui_ensure(page_fortress_select)
+        self._fortress_select()
         self._fortress_goto_fight()
         self.ui_goto_main()
     def _organization_page_enter(self):
@@ -42,8 +50,7 @@ class Fortress(UI):
                 continue
 
         logger.info(f"Organization Page entered")
-
-    def _organization_goto_fortress(self):
+    def _fortress_select(self):
         for  _ in self.loop():
             if self.appear(FORTRESS_PAGE):
                 break
@@ -53,14 +60,8 @@ class Fortress(UI):
             if self.appear(FORTRESS_FIRE):
                 self.device.click(FORTRESS_FIRE)
                 continue
-            if self.appear(FORTRESS_LOCAL_SELECT):
-                self.device.click(FORTRESS_LOCAL_SELECT)
-                continue
-            if self.appear(ORGANIZATION_GOTO_FORTRESS):
-                self.device.click(ORGANIZATION_GOTO_FORTRESS)
-                continue
+
     def _fortress_goto_fight(self):
-        self.device.screenshot()
         ocr=Digit(FORTRESS_SCORE)
         for _ in self.loop():
             self.device.click_record_clear()
@@ -72,7 +73,7 @@ class Fortress(UI):
                 if score and score>=40:
                     break
                 else:
-                    self.device.long_click(CHOOSE_RIGHT,duration=2)
+                    self.move_to_direction(90,2)
             if self.appear(FORTRESS_ROUND_SWITCH):
                 self._start_fight()
 
@@ -147,8 +148,7 @@ class Fortress(UI):
                 idx = (idx + 1) % other_count
         self.device.stuck_record_clear()
         self.device.stuck_timer=original
-az=Fortress('alas',task='Alas')
-az.ui_goto_main()
+
 
 
 

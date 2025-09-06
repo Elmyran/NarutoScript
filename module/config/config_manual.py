@@ -9,7 +9,8 @@ class ManualConfig:
         return server.lang
 
     SCHEDULER_PRIORITY = """
-    Restart 
+    Restart
+    > Fortress 
     > PanRen
     > ZhaoCai
     > InformationClub

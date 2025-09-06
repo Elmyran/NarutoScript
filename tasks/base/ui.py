@@ -6,7 +6,7 @@ from module.exception import GameNotRunningError, GamePageUnknownError, HandledE
 from module.logger import logger
 from module.ocr.ocr import Ocr
 from tasks.base.assets.assets_base_code_second import *
-from tasks.base.assets.assets_base_page import MAIN_GOTO_CHARACTER
+from tasks.base.assets.assets_base_page import MAIN_GOTO_CHARACTER, FULL_SCREEN
 
 from tasks.base.main_page import MainPage
 from tasks.base.page import Page, page_main
@@ -440,13 +440,11 @@ class UI(MainPage):
             if 1:
                 clicked = True
     def handle_second_password(self):
-        self.device.screenshot()
-        code='040225'
-        #code=self.config.PanRen_SecondPassword
+        code=self.config.PanRen_SecondPassword
         if code is None:
             raise RequestHumanTakeover('SecondPassword need to fill')
         for _ in  self.loop():
-            CODE_SECOND_PASSWORD_INPUT_CONFIRM.load_search([0,0,1280,720])
+            CODE_SECOND_PASSWORD_INPUT_CONFIRM.load_search(FULL_SCREEN.area)
             if self.appear(CODE_SECOND_PASSWORD_INPUT_CONFIRM):
                 break
             if self.appear_then_click(CODE_SECOND_PASSWORD,interval=2):

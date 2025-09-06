@@ -17,8 +17,8 @@ class OrganizationPanRen(GameControl):
     def run(self):
         next_wednesday = get_nearest_weekday_date(2)
         next_saturday = get_nearest_weekday_date(5)
-        wednesday_target_time = next_wednesday.replace(hour=21, minute=0, second=0, microsecond=0)
-        saturday_target_time = next_saturday.replace(hour=20, minute=0, second=0, microsecond=0)
+        wednesday_target_time = next_wednesday.replace(hour=21, minute=20, second=0, microsecond=0)
+        saturday_target_time = next_saturday.replace(hour=20, minute=15, second=0, microsecond=0)
         if self.config.stored.PanRenFinishCount.is_expired():
             self.config.stored.PanRenFinishCount.clear()
         if self.config.stored.PanRenFinishCount.is_full():
@@ -32,6 +32,8 @@ class OrganizationPanRen(GameControl):
         self.handle_organization_pan_ren()
         self.config.stored.PanRenFinishCount.add()
         self.config.task_delay(target=[wednesday_target_time, saturday_target_time])
+        if self.config.PanRen_SecondPassword:
+            self.config.task_call('Restart')
         self.config.task_stop()
     def _check_time(self):
         server_weekday = get_server_weekday()
@@ -57,12 +59,17 @@ class OrganizationPanRen(GameControl):
         if not TASK_TAB_LIST.search_rows(main=self,keyword=OrganizationKeyword):
             raise GameStuckError(' Organization Not Found')
         self._organization_enter()
-        self.device.stuck_timer = Timer(420, count=420).start()
+        self.device.stuck_timer = Timer(900, count=900).start()
+        end_early=None
         try:
-            self._wait_pan_ren_start()
+            end_early=self._wait_pan_ren_start()
         finally:
             self.device.stuck_timer = Timer(60, count=60).start()
-        self._pan_ren_goto_fight()
+            if end_early:
+                return True
+
+        if self._pan_ren_goto_fight():
+            return True
         self._start_auto_fight()
         self.device.screenshot_interval_set(1)
         self.device.stuck_timer=Timer(120, count=120).start()
@@ -71,7 +78,7 @@ class OrganizationPanRen(GameControl):
         finally:
             self.device.screenshot_interval_set()
             self.device.stuck_timer=Timer(60, count=60).start()
-        self.ui_goto_main()
+
 
     def _organization_enter(self):
         time = Timer(10, count=10).start()
@@ -91,9 +98,14 @@ class OrganizationPanRen(GameControl):
                 break
             if self.appear(ORGANIZATION):
                 self.move_to_direction(270,0.2)
-        time=Timer(30).start()
+        time=Timer(60).start()
+        count=0
         for _ in self.loop():
             if time.reached():
+                if count>10:
+                    logger.info('Not Detect PanRen Start ')
+                    return True
+                count+=1
                 logger.info("Waiting for Pan Ren to start")
                 time.reset()
             PAN_REN_HAVE_START.load_search((0,0,1280,720))
@@ -103,6 +115,14 @@ class OrganizationPanRen(GameControl):
         for _ in self.loop():
             if self.appear(PAN_REN_AUTO_FIGHT):
                 break
+            if self.appear(PAN_REN_JOIN_NO_REWARD):
+                if self.config.PanRen_NoRewardJoinOrNot:
+                    self.appear_then_click(PAN_REN_JOIN_NO_REWARD_CONFIRM,interval=1)
+                    continue
+                else:
+                    self.appear_then_click(PAN_REN_JOIN_NO_REWARD_CANCEL,interval=1)
+                    return True
+
             if self.appear_then_click(CHARACTER_SELECT_CONFIRM,interval=0):
                 continue
             if self.appear_then_click(PAN_REN_JOIN_BUTTON,interval=0):
@@ -128,7 +148,7 @@ class OrganizationPanRen(GameControl):
     def _check_credit(self):
         ocr=Digit(PAN_REN_CREDITS)
         target_credit = 45
-        time=Timer(60).start()
+        time=Timer(30).start()
         pre_credit=0
         for _ in self.loop():
             if time.reached():

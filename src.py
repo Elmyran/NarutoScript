@@ -106,6 +106,9 @@ class StarRailCopilot(AzurLaneAutoScript):
     def ji_fen_sai(self):
         from tasks.ji_fen_sai.ji_fen_sai import JiFenSai
         JiFenSai(config=self.config, device=self.device).run()
+    def fortress(self):
+        from tasks.organization.fortress import Fortress
+        Fortress(config=self.config, device=self.device).run()
 
 
 

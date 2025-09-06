@@ -36,17 +36,6 @@ FORTRESS_ENTER_CONFIRM = ButtonWrapper(
     ),
     en=None,
 )
-FORTRESS_EXIT = ButtonWrapper(
-    name='FORTRESS_EXIT',
-    cn=Button(
-        file='./assets/cn/organization/fortress/FORTRESS_EXIT.png',
-        area=(1216, 9, 1280, 61),
-        search=(1196, 0, 1280, 81),
-        color=(99, 104, 117),
-        button=(1216, 9, 1280, 61),
-    ),
-    en=None,
-)
 FORTRESS_FIRE = ButtonWrapper(
     name='FORTRESS_FIRE',
     cn=Button(
@@ -106,10 +95,10 @@ FORTRESS_SCORE = ButtonWrapper(
     name='FORTRESS_SCORE',
     cn=Button(
         file='./assets/cn/organization/fortress/FORTRESS_SCORE.png',
-        area=(471, 565, 511, 605),
-        search=(451, 545, 531, 625),
-        color=(13, 14, 11),
-        button=(471, 565, 511, 605),
+        area=(370, 562, 513, 607),
+        search=(350, 542, 533, 627),
+        color=(73, 81, 81),
+        button=(370, 562, 513, 607),
     ),
     en=None,
 )

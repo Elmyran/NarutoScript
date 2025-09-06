@@ -284,7 +284,16 @@
     },
     "PanRen": {
       "SecondPassword": null,
+      "NoRewardJoinOrNot": false,
       "PanRenFinishCount": {}
+    }
+  },
+  "Fortress": {
+    "Scheduler": {
+      "Enable": false,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "Fortress",
+      "ServerUpdate": "05:00"
     }
   },
   "DingCiKaoRou": {

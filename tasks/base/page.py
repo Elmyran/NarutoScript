@@ -132,14 +132,14 @@ page_organization.link(ORGANIZATION_EXIT,destination=page_main)
 page_akatsuki=Page(AKATSUKI_CHECK)
 page_akatsuki.link(CLOSE,destination=page_organization)
 
-#Fortress
-# page_fortress_type=Page(FORTRESS_LOCAL_SELECT)
-# page_fortress_select=Page(FORTRESS_SELECT)
-# page_fortress_page=Page(FORTRESS_PAGE)
-# page_organization.link(ORGANIZATION_GOTO_FORTRESS,destination=page_fortress_type)
-# page_fortress_type.link(FORTRESS_LOCAL_SELECT,destination=page_fortress_select)
-# page_fortress_page.link(FORTRESS_EXIT,destination=page_fortress_select)
-# page_fortress_select.link(CLOSE,destination=page_organization)
+# Fortress
+page_fortress_type=Page(FORTRESS_LOCAL_SELECT)
+page_fortress_select=Page(FORTRESS_SELECT)
+page_fortress_page=Page(FORTRESS_PAGE)
+page_organization.link(ORGANIZATION_GOTO_FORTRESS,destination=page_fortress_type)
+page_fortress_type.link(FORTRESS_LOCAL_SELECT,destination=page_fortress_select)
+page_fortress_page.link(CLOSE,destination=page_fortress_select)
+page_fortress_select.link(CLOSE,destination=page_organization)
 #BattleField
 page_battle_field_select=Page(BATTLE_FIELD_SELECT_CHECK)
 page_organization.link(ORGANIZATION_GOTO_BATTLE_FIELD,destination=page_battle_field_select)

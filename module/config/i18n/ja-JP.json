@@ -118,6 +118,10 @@
       "name": "Task.PanRen.name",
       "help": "Task.PanRen.help"
     },
+    "Fortress": {
+      "name": "Task.Fortress.name",
+      "help": "Task.Fortress.help"
+    },
     "DingCiKaoRou": {
       "name": "Task.DingCiKaoRou.name",
       "help": "Task.DingCiKaoRou.help"
@@ -473,6 +477,10 @@
     "SecondPassword": {
       "name": "PanRen.SecondPassword.name",
       "help": "PanRen.SecondPassword.help"
+    },
+    "NoRewardJoinOrNot": {
+      "name": "PanRen.NoRewardJoinOrNot.name",
+      "help": "PanRen.NoRewardJoinOrNot.help"
     },
     "PanRenFinishCount": {
       "name": "PanRen.PanRenFinishCount.name",

@@ -84,10 +84,10 @@ PAN_REN_HAVE_START = ButtonWrapper(
     name='PAN_REN_HAVE_START',
     cn=Button(
         file='./assets/cn/organization/pan_ren/PAN_REN_HAVE_START.png',
-        area=(203, 102, 624, 139),
-        search=(183, 82, 644, 159),
-        color=(87, 75, 60),
-        button=(203, 102, 624, 139),
+        area=(327, 107, 471, 139),
+        search=(307, 87, 491, 159),
+        color=(66, 63, 56),
+        button=(327, 107, 471, 139),
     ),
     en=None,
 )
@@ -99,6 +99,39 @@ PAN_REN_JOIN_BUTTON = ButtonWrapper(
         search=(612, 364, 811, 459),
         color=(197, 131, 18),
         button=(632, 384, 791, 439),
+    ),
+    en=None,
+)
+PAN_REN_JOIN_NO_REWARD = ButtonWrapper(
+    name='PAN_REN_JOIN_NO_REWARD',
+    cn=Button(
+        file='./assets/cn/organization/pan_ren/PAN_REN_JOIN_NO_REWARD.png',
+        area=(363, 167, 919, 510),
+        search=(343, 147, 939, 530),
+        color=(163, 150, 117),
+        button=(363, 167, 919, 510),
+    ),
+    en=None,
+)
+PAN_REN_JOIN_NO_REWARD_CANCEL = ButtonWrapper(
+    name='PAN_REN_JOIN_NO_REWARD_CANCEL',
+    cn=Button(
+        file='./assets/cn/organization/pan_ren/PAN_REN_JOIN_NO_REWARD_CANCEL.png',
+        area=(657, 415, 857, 485),
+        search=(637, 395, 877, 505),
+        color=(215, 145, 11),
+        button=(657, 415, 857, 485),
+    ),
+    en=None,
+)
+PAN_REN_JOIN_NO_REWARD_CONFIRM = ButtonWrapper(
+    name='PAN_REN_JOIN_NO_REWARD_CONFIRM',
+    cn=Button(
+        file='./assets/cn/organization/pan_ren/PAN_REN_JOIN_NO_REWARD_CONFIRM.png',
+        area=(417, 412, 619, 488),
+        search=(397, 392, 639, 508),
+        color=(210, 142, 17),
+        button=(417, 412, 619, 488),
     ),
     en=None,
 )

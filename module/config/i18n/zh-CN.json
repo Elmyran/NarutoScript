@@ -116,7 +116,11 @@
     },
     "PanRen": {
       "name": "叛忍来袭",
-      "help": "当前叛忍执行时间尚未完善，会在要塞时间不断等待，建议暂时关闭"
+      "help": ""
+    },
+    "Fortress": {
+      "name": "本服要塞",
+      "help": "当前仅支持火要塞"
     },
     "DingCiKaoRou": {
       "name": "丁次烤肉",
@@ -472,6 +476,10 @@
     },
     "SecondPassword": {
       "name": "二级密码",
+      "help": "叛忍结束后会重启游戏"
+    },
+    "NoRewardJoinOrNot": {
+      "name": "无奖励是否参与",
       "help": ""
     },
     "PanRenFinishCount": {

@@ -1,12 +1,10 @@
 from dataclasses import dataclass
-
 from module.ocr.keyword import Keyword
-
 from typing import ClassVar
 @dataclass
-class OrganizationKeyword(Keyword):
+class OrganizationClaimStatusKeyword(Keyword):
     instances: ClassVar = {}
-ReplacementHaveClaimedKeyword = OrganizationKeyword(
+ReplacementHaveClaimedKeyword = OrganizationClaimStatusKeyword(
     id=0,
     name='HaveClaimed',
     cn='已领取',            # 简体中文
@@ -15,8 +13,8 @@ ReplacementHaveClaimedKeyword = OrganizationKeyword(
     jp='受け取り済み',        # 日文
     es='Reclamado'           # 西班牙文
 )
-ReplacementClaimKeyword = OrganizationKeyword(
-    id=0,
+ReplacementClaimKeyword = OrganizationClaimStatusKeyword(
+    id=1,
     name='Claim',
     cn='领取',              # 简体中文
     cht='領取',              # 繁體中文
