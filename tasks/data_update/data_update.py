@@ -72,7 +72,10 @@ class DataUpdate(UI):
             if fames:
                 self.config.stored.Fame.value=fames
                 break
-
+    def _mission(self):
+        with self.config.multi_set():
+            mission=self.config.stored.MissionAccept.value
+            self.config.stored.Mission.value=mission
 
 
 

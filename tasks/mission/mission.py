@@ -26,6 +26,9 @@ class Mission(UI):
                 self.config.task_delay(target=delay_time)
             else:
                 self.config.task_delay(server_update=True)
+        with self.config.multi_set():
+            mission=self.config.stored.MissionAccept.value
+            self.config.stored.Mission.value=mission
         self.config.task_stop()
 
     def handle_mission(self):
@@ -36,6 +39,7 @@ class Mission(UI):
         self._mission_reward_claim()
         self._circle_task_select()
         self.ui_goto_main()
+
     def _circle_task_select(self):
         accepted_tasks=[]
         for _ in self.loop():

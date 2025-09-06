@@ -32,11 +32,11 @@ class TaskTabOcr(Ocr):
         result = result.replace('豐', '丰')
         result = result.replace('饒', '饶')
         result = result.replace('間', '间')
-        if '小队突' in result:
+        if '小队突' in result or '小队' in result or '突袭' in result:
             result='小队突袭'
-        if '积分' in result :
+        if '积分'in result or '积' in result:
             result = '积分赛'
-        if '排' in result and '榜' in result:
+        if '排' in result and '榜' in result or '行' in result:
             result = '排行榜'
         if '集会' in result:
             result = '任务集会所'
