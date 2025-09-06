@@ -1,8 +1,10 @@
+
 import time
+from datetime import datetime
 
 from module.base.timer import Timer
 from module.base.utils import random_rectangle_point, ensure_int
-from module.config.utils import get_nearest_weekday_date
+from module.config.utils import get_nearest_weekday_date, get_server_weekday, server_time_offset
 from module.exception import GameStuckError
 from module.logger import logger
 from module.ocr.ocr import Digit
@@ -21,13 +23,31 @@ from tasks.ren_zhe_tiao_zhan.joystick import GameControl
 
 class Fortress(GameControl):
     def run(self):
-        self.handle_organization_fortress()
         next_saturday = get_nearest_weekday_date(5)
         saturday_8pm = next_saturday.replace(hour=20, minute=0, second=0, microsecond=0)
+        if not self._check_time():
+            self.config.task_delay(target=saturday_8pm)
+            self.config.task_stop()
+            return
+
+        self.handle_organization_fortress()
         self.config.task_delay(target=saturday_8pm)
         self.config.task_call('PanRen')
         self.config.task_stop()
-
+    def _check_time(self):
+        server_weekday = get_server_weekday()
+        diff = server_time_offset()
+        server_now = datetime.now() - diff
+        current_hour = server_now.hour
+        current_minute = server_now.minute
+        if server_weekday == 5:
+            if not (current_hour==20 and  30>current_minute>=0):
+                logger.info(f'Not in Saturday time  20:00 - 20:30 (current hour: {current_hour}), task will stop')
+                return False
+        else:
+            logger.info(f'Not  Saturday (current: {server_weekday}), task will stop')
+            return False
+        return True
     def handle_organization_fortress(self):
         self.device.click_record_clear()
         self.ui_ensure(page_main)
