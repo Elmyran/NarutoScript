@@ -15,14 +15,14 @@ class BattleOrderWeeklyTask(UI):
                 break
             if self.appear(BATTLE_ORDER_TASK_END):
                 break
-            if self.appear_then_click(BATTLE_ORDER_TASK_REWARD_CLAIM_SUCCESS,interval=0):
+            if self.appear_then_click(BATTLE_ORDER_TASK_REWARD_CLAIM_SUCCESS,interval=1):
                 continue
             if self.appear_then_click(BATTLE_ORDER_TASK_REWARD_CLAIM_CONFIRM,interval=0):
                 continue
             BATTLE_ORDER_TASK_REWARD_CLAIM.load_search(BATTLE_ORDER_DETAIL.area)
             if self.appear_then_click(BATTLE_ORDER_TASK_REWARD_CLAIM,interval=0):
                 continue
-            if self.appear(BATTLE_ORDER_TASK_UNFINISH,interval=1):
+            if self.match_template_color(BATTLE_ORDER_TASK_UNFINISH,interval=2):
                 break
 
 

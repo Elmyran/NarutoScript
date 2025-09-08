@@ -131,7 +131,6 @@ page_organization.link(ORGANIZATION_EXIT,destination=page_main)
 #Akatsuki
 page_akatsuki=Page(AKATSUKI_CHECK)
 page_akatsuki.link(CLOSE,destination=page_organization)
-
 # Fortress
 page_fortress_type=Page(FORTRESS_LOCAL_SELECT)
 page_fortress_select=Page(FORTRESS_SELECT)
@@ -148,6 +147,9 @@ page_battle_field_tian=Page(BATTLE_FIELD_TIAN_CHECK)
 #PanRen
 page_pan_ren=Page(PAN_REN_CHECK)
 page_pan_ren.link(CLOSE,destination=page_organization)
+#QiuRiJi
+page_qiu_ri_ji=Page(QIU_RI_JI_CHECK)
+page_qiu_ri_ji.link(CLOSE,destination=page_main)
 #DailyReward
 page_daily=Page(DAILY_CHECK)
 page_main.link(MAIN_GOTO_DAILY,destination=page_daily)

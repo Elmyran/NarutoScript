@@ -1,0 +1,20 @@
+DIC_OS_MAP = {
+    0: {'cn': '铁之要塞', 'en': 'NY City', 'jp': 'NYシティ', 'tw': '紐約', 'area_pos': (830, 100), 'Level': 'Low'},
+    1: {'cn': '田之要塞', 'en': 'NY City', 'jp': 'NYシティ', 'tw': '紐約', 'area_pos': (1180, 236), 'Level': 'Low'},
+    2: {'cn': '土之要塞', 'en': 'NY City', 'jp': 'NYシティ', 'tw': '紐約', 'area_pos': (900, 460), 'Level': 'Medium'},
+    3: {'cn': '熊之要塞', 'en': 'NY City', 'jp': 'NYシティ', 'tw': '紐約', 'area_pos': (408, 495), 'Level': 'Low'},
+    4: {'cn': '汤之要塞', 'en': 'NY City', 'jp': 'NYシティ', 'tw': '紐約', 'area_pos': (1584, 197), 'Level': 'Low'},
+    5: {'cn': '涡之要塞', 'en': 'NY City', 'jp': 'NYシティ', 'tw': '紐約', 'area_pos': (1965, 431), 'Level': 'Low'},
+    6: {'cn': '霜之要塞', 'en': 'NY City', 'jp': 'NYシティ', 'tw': '紐約', 'area_pos': (2163, 465), 'Level': 'Low'},
+    7: {'cn': '水之要塞', 'en': 'NY City', 'jp': 'NYシティ', 'tw': '紐約', 'area_pos': (1670, 521), 'Level': 'Medium'},
+    8: {'cn': '火之要塞', 'en': 'NY City', 'jp': 'NYシティ', 'tw': '紐約', 'area_pos': (1221, 529), 'Level': 'High'},
+    9: {'cn': '雨之要塞', 'en': 'NY City', 'jp': 'NYシティ', 'tw': '紐約', 'area_pos': (322, 950), 'Level': 'Low'},
+    10: {'cn': '草之要塞', 'en': 'NY City', 'jp': 'NYシティ', 'tw': '紐約', 'area_pos': (289, 783), 'Level': 'Low'},
+    11: {'cn': '川之要塞', 'en': 'NY City', 'jp': 'NYシティ', 'tw': '紐約', 'area_pos': (891, 972), 'Level': 'Low'},
+    12: {'cn': '雷之要塞', 'en': 'NY City', 'jp': 'NYシティ', 'tw': '紐約', 'area_pos': (1118, 739), 'Level': 'Medium'},
+    13: {'cn': '风之要塞', 'en': 'NY City', 'jp': 'NYシティ', 'tw': '紐約', 'area_pos': (741, 668), 'Level': 'Medium'},
+    14: {'cn': '海之要塞', 'en': 'NY City', 'jp': 'NYシティ', 'tw': '紐約', 'area_pos': (582, 1010), 'Level': 'Low'},
+    15: {'cn': '泷之要塞', 'en': 'NY City', 'jp': 'NYシティ', 'tw': '紐約', 'area_pos': (1492, 978), 'Level': 'Low'},
+    16: {'cn': '云之要塞', 'en': 'NY City', 'jp': 'NYシティ', 'tw': '紐約', 'area_pos': (1788, 812), 'Level': 'Low'},
+    17: {'cn': '鸟之要塞', 'en': 'NY City', 'jp': 'NYシティ', 'tw': '紐約', 'area_pos': (1984, 856), 'Level': 'Low'}
+}

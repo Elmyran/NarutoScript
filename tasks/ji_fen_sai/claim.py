@@ -25,7 +25,7 @@ class JiFenSaiClaim(UI):
                 raise GameStuckError('JI Fen Sai Claim Stuck')
             if self.match_template_color(JI_FEN_SAI_CHECK):
                 break
-            if self.appear_then_click(JI_FEN_SAI_REWARD):
+            if self.appear_then_click(JI_FEN_SAI_REWARD,interval=1):
                 continue
 
 

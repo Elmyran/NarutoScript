@@ -9,17 +9,21 @@ from module.base.utils import image_size
 from module.device.device import Device
 from module.logger import logger
 from module.base.timer import Timer
+from module.ocr.yolomodel import YOLO_MODEL
 from tasks.base.assets.assets_base_popup import GET_REWARD
 from tasks.ren_zhe_tiao_zhan.joystick import GameControl, JoystickContact
 from tasks.ren_zhe_tiao_zhan.assets.assets_ren_zhe_tiao_zhan import MI_JING_SUCCESS, MI_JING_REWARD_EXIT, \
     MI_JING_REWARD_AREA, MI_JING_FAIL, MI_JING_ROOM_CHECK
 
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
-import torch
-from ultralytics import YOLO
-MODEL_PATH_CONFIG = r"tasks/ren_zhe_tiao_zhan/best.pt"
+
+CLASS_NAMES = {
+    0: 'self',
+    1: 'enemy',
+}
+MODEL_PATH_CONFIG = r"tasks/ren_zhe_tiao_zhan/best.onnx"
 class AutoBattle(GameControl):
-    def __init__(self, config, device: Device = None, task=None):
+    def __init__(self, config, device = None, task=None):
         super().__init__(config, device, task)
         self.PATHFINDING_PATTERN = [("RIGHT", 5.0), ("STOP", 0.5), ("LEFT", 5.0), ("STOP", 0.5)]
         self.DIRECTION_ANGLES = {"RIGHT": 90, "UP": 0, "LEFT": -90, "DOWN": 180, "STOP": 0}
@@ -27,12 +31,7 @@ class AutoBattle(GameControl):
         self.ATTACK_SWEET_SPOT_X = (-300, 300)
         self.FACING_BLIND_SPOT_X = (-50, 50)
         self.TARGET_LOST_BUFFER_DURATION = 2.0
-        self.device_torch = "cuda" if torch.cuda.is_available() else "cpu"
-        print(self.device_torch)
-        if self.device_torch == "cuda":
-            torch.zeros(1).cuda()
-        self.model = YOLO(MODEL_PATH_CONFIG)
-        self.model.to(self.device_torch)
+        self.model = YOLO_MODEL.get_model(MODEL_PATH_CONFIG,classes=CLASS_NAMES)
         logger.info("--- YOLO model loaded. ---")
         self.client = None
         try:
@@ -95,16 +94,17 @@ class AutoBattle(GameControl):
             if not self.client or not self.client.alive:
                 logger.error("Scrcpy client is not running. Aborting fight.")
                 break
-            results = self.model(img_raw, conf=0.6, verbose=False, device=self.device_torch)
+            results = self.model.predict(self.device.image, conf=0.6)
             self_boxes, enemy_boxes = [], []
             for r in results:
-                for box in r.boxes:
-                    b = box.xyxy[0].cpu().numpy()
-                    c = ((b[0] + b[2]) / 2, (b[1] + b[3]) / 2)
-                    if int(box.cls[0]) == 0:
-                        self_boxes.append({'center': c})
-                    else:
-                        enemy_boxes.append({'center': c})
+                # r 是 YoloResult
+                x, y, w, h = r.box
+                c = (x + w/2, y + h/2)  # 中心点坐标
+
+                if r.class_id == 0:  # self
+                    self_boxes.append({'center': c})
+                else:  # enemy
+                    enemy_boxes.append({'center': c})
             if self_boxes and enemy_boxes:
                 miss_count = 0
                 if current_state != 'COMBAT':
@@ -180,6 +180,8 @@ class AutoBattle(GameControl):
                         angle = self.DIRECTION_ANGLES.get(direction, 0)
                         self.move_to_direction(angle,0.3)
 
-
-
+az=AutoBattle('alas',task='Alas')
+az.start_services()
+az.run()
+az.stop_services()
 

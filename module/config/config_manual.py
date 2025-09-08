@@ -32,6 +32,7 @@ class ManualConfig:
     > Duel
     > TiLi
     > DailyReward
+    > QiuRiJi
     > BattleOrder
     > DataUpdate
     """

@@ -318,6 +318,9 @@ class Device(Screenshot, Control, AppControl):
         if control_check:
             self.handle_control_check(button)
         x, y = random_rectangle_point(button.button)
+        if self.resolution_converter==None:
+            width, height = image_size(self.image)
+            self.resolution_converter = ResolutionConverter(width, height)
         x,y=self.resolution_converter.convert_to_target(x,y)
         x, y = ensure_int(x, y)
         logger.info(
@@ -340,6 +343,9 @@ class Device(Screenshot, Control, AppControl):
         """
         self.handle_control_check(button)
         x, y = random_rectangle_point(button.button)
+        if self.resolution_converter==None:
+            width, height = image_size(self.image)
+            self.resolution_converter = ResolutionConverter(width, height)
         x,y=self.resolution_converter.convert_to_target(x,y)
         x, y = ensure_int(x, y)
         duration = ensure_time(duration)
@@ -363,6 +369,9 @@ class Device(Screenshot, Control, AppControl):
     def swipe(self, p1, p2, duration=(0.1, 0.2), name='SWIPE', distance_check=True):
         self.handle_control_check(name)
         p1, p2 = ensure_int(p1, p2)
+        if self.resolution_converter==None:
+            width, height = image_size(self.image)
+            self.resolution_converter = ResolutionConverter(width, height)
         p1=self.resolution_converter.convert_to_target(*p1)
         p2=self.resolution_converter.convert_to_target(*p2)
         duration = ensure_time(duration)
@@ -401,6 +410,9 @@ class Device(Screenshot, Control, AppControl):
     def drag(self, p1, p2, segments=1, shake=(0, 15), point_random=(-10, -10, 10, 10), shake_random=(-5, -5, 5, 5),
              swipe_duration=0.25, shake_duration=0.1, name='DRAG'):
         self.handle_control_check(name)
+        if self.resolution_converter==None:
+            width, height = image_size(self.image)
+            self.resolution_converter = ResolutionConverter(width, height)
         converter_p1=self.resolution_converter.convert_to_target(*p1)
         converter_p2=self.resolution_converter.convert_to_target(*p2)
         p1, p2 = ensure_int(converter_p1, converter_p2)

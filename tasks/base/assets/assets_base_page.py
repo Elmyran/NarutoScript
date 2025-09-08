@@ -271,6 +271,16 @@ MISSION_CHARACTER_SELECT_CHECK = ButtonWrapper(
         button=(827, 504, 865, 543),
     ),
 )
+QIU_RI_JI_CHECK = ButtonWrapper(
+    name='QIU_RI_JI_CHECK',
+    share=Button(
+        file='./assets/share/base/page/QIU_RI_JI_CHECK.png',
+        area=(1168, 252, 1235, 331),
+        search=(1148, 232, 1255, 351),
+        color=(132, 111, 75),
+        button=(1168, 252, 1235, 331),
+    ),
+)
 REN_ZHE_TIAO_ZHAN_CHECK = ButtonWrapper(
     name='REN_ZHE_TIAO_ZHAN_CHECK',
     share=Button(

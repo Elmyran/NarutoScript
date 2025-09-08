@@ -2,6 +2,9 @@ from module.ocr.keyword import Keyword
 from dataclasses import dataclass
 from typing import ClassVar
 
+
+
+
 # 首先定义活动标签页的关键词类
 @dataclass
 class ActivityTab(Keyword):
@@ -71,6 +74,15 @@ JieRiRiLiKeyword = ActivityTab(
     id=6,
     name='JieRiRiLiKeyword',
     cn='节日日历',
+    cht='節日曆',
+    en='Festival Calendar',
+    jp='祭日カレンダー',
+    es='Calendario de Festivales'
+)
+QiuRiJiKeyword = ActivityTab(
+    id=7,
+    name='QiuRiJiKeyword',
+    cn='组织秋日季',
     cht='節日曆',
     en='Festival Calendar',
     jp='祭日カレンダー',

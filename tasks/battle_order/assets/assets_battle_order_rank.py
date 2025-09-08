@@ -18,10 +18,10 @@ BATTLE_ORDER_RANK_GOTO_SHARE = ButtonWrapper(
     name='BATTLE_ORDER_RANK_GOTO_SHARE',
     cn=Button(
         file='./assets/cn/battle_order/rank/BATTLE_ORDER_RANK_GOTO_SHARE.png',
-        area=(990, 558, 1079, 601),
-        search=(970, 538, 1099, 621),
-        color=(150, 127, 75),
-        button=(990, 558, 1079, 601),
+        area=(980, 579, 1082, 621),
+        search=(960, 559, 1102, 641),
+        color=(150, 126, 77),
+        button=(980, 579, 1082, 621),
     ),
     en=None,
 )

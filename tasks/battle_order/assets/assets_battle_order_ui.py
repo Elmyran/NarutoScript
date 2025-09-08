@@ -95,10 +95,10 @@ BATTLE_ORDER_WEEKLY_REWARD_CLICK = ButtonWrapper(
     name='BATTLE_ORDER_WEEKLY_REWARD_CLICK',
     share=Button(
         file='./assets/share/battle_order/ui/BATTLE_ORDER_WEEKLY_REWARD_CLICK.png',
-        area=(0, 333, 161, 419),
-        search=(0, 313, 181, 439),
-        color=(73, 62, 53),
-        button=(0, 333, 161, 419),
+        area=(0, 344, 161, 413),
+        search=(0, 324, 181, 433),
+        color=(74, 64, 54),
+        button=(0, 344, 161, 413),
     ),
 )
 BATTLE_ORDER_WEEKLY_TASK_CHECK = ButtonWrapper(
@@ -124,9 +124,9 @@ BATTLE_ORDER_WEEKLY_TASK_CLICK = ButtonWrapper(
     name='BATTLE_ORDER_WEEKLY_TASK_CLICK',
     share=Button(
         file='./assets/share/battle_order/ui/BATTLE_ORDER_WEEKLY_TASK_CLICK.png',
-        area=(0, 232, 163, 326),
-        search=(0, 212, 183, 346),
-        color=(73, 61, 52),
-        button=(0, 232, 163, 326),
+        area=(4, 239, 163, 318),
+        search=(0, 219, 183, 338),
+        color=(75, 63, 53),
+        button=(4, 239, 163, 318),
     ),
 )

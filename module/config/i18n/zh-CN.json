@@ -125,6 +125,10 @@
     "DingCiKaoRou": {
       "name": "丁次烤肉",
       "help": ""
+    },
+    "QiuRiJi": {
+      "name": "组织秋日季",
+      "help": "部分题目尚未添加"
     }
   },
   "Scheduler": {

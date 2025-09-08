@@ -126,7 +126,7 @@ class GameControl(UI):
         try:
             region = self.SKILL_COOLDOWN_REGIONS[skill_name]
             roi = self.image_crop(region, copy=False)
-            hsv = cv2.cvtColor(roi, cv2.COLOR_BGR2HSV)
+            hsv = cv2.cvtColor(roi, cv2.COLOR_RGB2HSV)
             brightness = np.mean(hsv[:, :, 2])
             saturation = np.mean(hsv[:, :, 1])
             return brightness > self.BRIGHTNESS_THRESHOLD and saturation > self.SATURATION_THRESHOLD

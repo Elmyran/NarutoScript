@@ -7,10 +7,10 @@ AKATSUKI_CHECK = ButtonWrapper(
     name='AKATSUKI_CHECK',
     cn=Button(
         file='./assets/cn/organization/akatsuki/AKATSUKI_CHECK.png',
-        area=(109, 6, 547, 143),
-        search=(89, 0, 567, 163),
-        color=(138, 86, 42),
-        button=(109, 6, 547, 143),
+        area=(62, 21, 487, 137),
+        search=(42, 1, 507, 157),
+        color=(171, 106, 55),
+        button=(62, 21, 487, 137),
     ),
     en=None,
 )
@@ -18,10 +18,10 @@ AKATSUKI_DONE = ButtonWrapper(
     name='AKATSUKI_DONE',
     cn=Button(
         file='./assets/cn/organization/akatsuki/AKATSUKI_DONE.png',
-        area=(346, 469, 494, 559),
-        search=(326, 449, 514, 579),
-        color=(94, 84, 78),
-        button=(346, 469, 494, 559),
+        area=(433, 148, 517, 310),
+        search=(413, 128, 537, 330),
+        color=(127, 131, 133),
+        button=(433, 148, 517, 310),
     ),
     en=None,
 )
@@ -51,10 +51,10 @@ AKATSUKI_REWARD_RED_DOT = ButtonWrapper(
     name='AKATSUKI_REWARD_RED_DOT',
     cn=Button(
         file='./assets/cn/organization/akatsuki/AKATSUKI_REWARD_RED_DOT.png',
-        area=(689, 613, 739, 662),
-        search=(669, 593, 759, 682),
-        color=(109, 72, 37),
-        button=(689, 613, 739, 662),
+        area=(514, 594, 555, 643),
+        search=(494, 574, 575, 663),
+        color=(87, 63, 41),
+        button=(514, 594, 555, 643),
     ),
     en=None,
 )

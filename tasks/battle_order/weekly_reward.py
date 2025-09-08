@@ -1,4 +1,4 @@
-from ultralytics import YOLO
+
 
 from module.base.timer import Timer
 
@@ -24,5 +24,3 @@ class BattleOrderWeeklyReward(UI):
                     self.device.click(res[0])
                     self.interval_reset('claimable_click', interval=1)
                     time.reset()
-
-

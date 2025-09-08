@@ -1,6 +1,3 @@
-import cv2
-from ultralytics import YOLO
-
 import module.config.server as server_
 from deploy.Windows.utils import cached_property
 from module.base.button import Button, ButtonWrapper, ClickButton, match_template
@@ -221,70 +218,56 @@ class ModuleBase:
         return appear
     def detect_claimable_buttons(self, button: ButtonWrapper = None, image=None, similarity=0.85, encourage=10):
         """
-        检测图片中所有可领取奖励，返回ClickButton对象列表
-        使用遮掩法：只保留button.area区域，其他部分置黑
+        检测图片中所有可领取奖励，返回 ClickButton 对象列表
+        支持多个类别同时识别
         """
         import time
         start_time = time.time()
-
+        self.device.screenshot()
+        # 获取图片
         if image is not None:
-            if isinstance(image, str):  # 如果传的是路径
-                img = cv2.imread(image)
-            else: img=image
+            img = cv2.imread(image) if isinstance(image, str) else image
         else:
-            img = self.device.screenshot()
+            img = self.device.image
 
-
+        # 确定 ROI 区域
         if not button:
-
-            x1, y1, x2, y2 = [0,0,1280,720]
+            x1, y1, x2, y2 = 0, 0, 1280, 720
         else:
-            # 获取 button 的检测区域
             x1, y1, x2, y2 = button.area
-        # 遮掩法：构造 mask，只保留 ROI
 
-        mask_img = img.copy()
-        mask_img[:] = 0
+        # 遮掩法：只保留 ROI
+        mask_img = np.zeros_like(img)
         mask_img[y1:y2, x1:x2] = img[y1:y2, x1:x2]
-        mask_img = cv2.cvtColor(mask_img, cv2.COLOR_BGR2RGB)
+
+
         # YOLO 检测
         model = self.yolo_model
-        results = model.predict(mask_img, conf=similarity, verbose=False)  # 禁用 YOLO 输出
-
+        results = model.predict(mask_img, conf=similarity)  # 返回列表
+        print(results)
         claimable_buttons = []
+
         for result in results:
-            boxes = result.boxes
-            if boxes is not None:
-                for i, box in enumerate(boxes):
-                    cls_id = int(box.cls[0])
-                    conf = float(box.conf[0])
+            cls_id = result.class_id
+            conf = result.score
+            bx1, by1, bw, bh = result.box
+            cx, cy = int(bx1 + bw/2), int(by1 + bh/2)
 
-                    if conf < similarity or cls_id != 0:
-                        continue
+            if conf < similarity or cls_id != 0:
+                continue
 
-                    # 获取边界框坐标
-                    bx1, by1, bx2, by2 = box.xyxy[0].tolist()
-                    cx, cy = int((bx1 + bx2) / 2), int((by1 + by2) / 2)
+            button_area = (int(bx1), int(by1), int(bx1 + bw), int(by1 + bh))
+            click_area = area_offset((-encourage, -encourage, encourage, encourage), offset=(cx, cy))
 
-                    # 创建按钮区域和点击区域
-                    button_area = (int(bx1), int(by1), int(bx2), int(by2))
-                    click_area = area_offset(
-                        (-encourage, -encourage, encourage, encourage),
-                        offset=(cx, cy)
-                    )
-
-                    claimable_button = ClickButton(
-                        area=button_area,
-                        button=click_area,
-                        name=f'YOLO_CLAIMABLE_{i}'
-                    )
-                    claimable_buttons.append(claimable_button)
+            claimable_buttons.append(ClickButton(
+                area=button_area,
+                button=click_area,
+                name=f'YOLO_CLAIMABLE_cls{cls_id}'
+            ))
 
         elapsed_time = time.time() - start_time
-        logger.attr(f'YOLO Detection {elapsed_time:.1f}s', f'{len(claimable_buttons)} claimable buttons')                        # 绘制检测框
-        # img = results[0].plot()                                 # 绘制检测框
-        # cv2.imshow("Result", img)
-        # cv2.waitKey(0)
+        logger.attr(f'YOLO Detection {elapsed_time:.1f}s', f'{len(claimable_buttons)} claimable buttons')
+
         return claimable_buttons
 
     def match_template_color(self, button, interval=0, similarity=0.85, threshold=30):

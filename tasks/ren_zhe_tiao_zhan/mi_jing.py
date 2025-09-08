@@ -50,10 +50,12 @@ class MiJing(UI):
                         return 'End'
                     remain_tickets=ticket.ocr_single_line(self.device.image)
                     if remain_tickets>0:
+                        self.device.click_record_remove(MI_JING_ROOM_CHECK)
                         self.device.click(MI_JING_ROOM_CHECK)
                         flag=False
         for _ in self.loop():
             if self.appear(MI_JING_ROOM_CHECK,interval=1):
+                self.device.click_record_remove(FIGHT_CLOSE_CONFIRM)
                 break
             if self.appear_then_click(FIGHT_CLOSE_CONFIRM,interval=0):
                 continue

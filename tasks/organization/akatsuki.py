@@ -60,7 +60,7 @@ class Akatsuki(UI):
                 self.device.click(AKATSUKI_REWARD_RED_DOT)
             elif time.reached():
                 return  False
-        claim_time=Timer(20, count=30).start()
+        claim_time=Timer(60, count=60).start()
         down=True
         times=0
         for _ in self.loop():

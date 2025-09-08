@@ -110,22 +110,19 @@ class Mission(UI):
         if not res:
             return
         self.device.click(res[0])
-        time = Timer(15, count=20).start()
-        times=0
+        time = Timer(3, count=5).start()
         for _ in self.loop():
             if time.reached():
-                raise GameStuckError("Mission reward claim")
+                break
             if self.appear_then_click(MISSION_REWARD_CLAIM_ALL,interval=0.5):
                 continue
             if self.appear_then_click(MISSION_REWARD,interval=0.5):
                 continue
             res = ocr.matched_ocr(self.device.image, Claimable)
-            if not res and times>4:
-                break
-            elif not res:
-                times += 1
             if res:
                 self.device.click(res[0])
+                time.reset()
+
 
 
 

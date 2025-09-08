@@ -126,6 +126,8 @@ Activity:
   tasks:
     DingCiKaoRou:
       - Scheduler
+    QiuRiJi:
+      - Scheduler
 
 
 
