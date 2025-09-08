@@ -14,7 +14,7 @@ class ExecutionError(Exception):
 
 class ConfigModel:
     # Git
-    Repository: str = "https://github.com/Elmyran/NarutoScript"
+    Repository: str = "https://gitee.com/Elmyran/NarutoScript"
     Branch: str = "master"
     GitExecutable: str = "./toolkit/Git/mingw64/bin/git.exe"
     GitProxy: Optional[str] = None
@@ -125,7 +125,7 @@ class DeployConfig(ConfigModel):
         # Don't write these into deploy.yaml
         super().__setattr__('GitOverCdn', self.Repository in ['cn'])
         if self.Repository in ['global', 'cn']:
-            super().__setattr__('Repository', 'https://github.com/Elmyran/NarutoScript')
+            super().__setattr__('Repository', 'https://gitee.com/Elmyran/NarutoScript')
 
     def filepath(self, path):
         """
