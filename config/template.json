@@ -134,6 +134,13 @@
       "Command": "MiJing",
       "ServerUpdate": "05:00"
     },
+    "MiJingType": {
+      "LuoYan": true,
+      "LieYan": true,
+      "ShuiLao": true,
+      "GangTi": true,
+      "LeiTing": true
+    },
     "MiJingStorage": {
       "MiJingCount": {}
     }

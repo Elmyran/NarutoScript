@@ -366,6 +366,32 @@
       "help": "JiFenSai.DailyRewardClaim.help"
     }
   },
+  "MiJingType": {
+    "_info": {
+      "name": "MiJingType._info.name",
+      "help": "MiJingType._info.help"
+    },
+    "LuoYan": {
+      "name": "MiJingType.LuoYan.name",
+      "help": "MiJingType.LuoYan.help"
+    },
+    "LieYan": {
+      "name": "MiJingType.LieYan.name",
+      "help": "MiJingType.LieYan.help"
+    },
+    "ShuiLao": {
+      "name": "MiJingType.ShuiLao.name",
+      "help": "MiJingType.ShuiLao.help"
+    },
+    "GangTi": {
+      "name": "MiJingType.GangTi.name",
+      "help": "MiJingType.GangTi.help"
+    },
+    "LeiTing": {
+      "name": "MiJingType.LeiTing.name",
+      "help": "MiJingType.LeiTing.help"
+    }
+  },
   "DailyFreebies": {
     "_info": {
       "name": "DailyFreebies._info.name",

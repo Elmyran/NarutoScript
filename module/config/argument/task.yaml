@@ -49,7 +49,7 @@ Daily:
       - Recruit
     MiJing:
       - Scheduler
-      - MiJing
+      - MiJingType
       - MiJingStorage
     JiFenSai:
       - Scheduler

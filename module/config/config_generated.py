@@ -63,6 +63,13 @@ class GeneratedConfig:
     # Group `JiFenSai`
     JiFenSai_DailyRewardClaim = True
 
+    # Group `MiJingType`
+    MiJingType_LuoYan = True
+    MiJingType_LieYan = True
+    MiJingType_ShuiLao = True
+    MiJingType_GangTi = True
+    MiJingType_LeiTing = True
+
     # Group `DailyFreebies`
     DailyFreebies_FriendGifts = True
     DailyFreebies_DailyShare = True

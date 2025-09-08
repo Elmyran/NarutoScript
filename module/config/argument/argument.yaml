@@ -135,6 +135,22 @@ JiFenSai:
   DailyRewardClaim:
     type: checkbox
     value: true
+MiJingType:
+  LuoYan:
+    type: checkbox
+    value: true
+  LieYan:
+    type: checkbox
+    value: true
+  ShuiLao:
+    type: checkbox
+    value: true
+  GangTi:
+    type: checkbox
+    value: true
+  LeiTing:
+    type: checkbox
+    value: true
 
 
 

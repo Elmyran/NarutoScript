@@ -29,14 +29,35 @@ class MiJing(UI):
     def _select_mi_jing(self):
         ocr=MiJingOcr(MI_JING_TYPE)
         ticket=Digit(MI_JING_REMAIN_CHALLENGE_TICKET)
-        type_1=['落岩秘境','雷霆秘境','烈炎秘境','水牢秘境','罡体秘境']
-        type_2=['毒风秘境','阴阳秘境']
+        enable_types=[]
+        unenable_types=['毒风秘境','阴阳秘境']
+        if self.config.MiJingType_LuoYan:
+            enable_types.append('落岩秘境')
+        else:
+            unenable_types.append('落岩秘境')
+        if self.config.MiJingType_LeiTing:
+            enable_types.append('雷霆秘境')
+        else:
+            unenable_types.append('雷霆秘境')
+        if self.config.MiJingType_LieYan:
+            enable_types.append('烈炎秘境')
+        else:
+            unenable_types.append('烈炎秘境')
+        if self.config.MiJingType_ShuiLao:
+            enable_types.append('水牢秘境')
+        else:
+            unenable_types.append('水牢秘境')
+        if self.config.MiJingType_GangTi:
+            enable_types.append('罡体秘境')
+        else:
+            unenable_types.append('罡体秘境')
+
         for _ in  self.loop():
             type=ocr.ocr_single_line(self.device.image)
             if type and len(type)>0:
-                if type in type_1:
+                if type in enable_types:
                     return True
-                elif type in type_2:
+                elif type in unenable_types:
                     break
             if self.appear_then_click(MI_JING_START_NOTIFY,interval=1):
                 continue

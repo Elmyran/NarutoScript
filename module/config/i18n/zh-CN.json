@@ -366,6 +366,32 @@
       "help": ""
     }
   },
+  "MiJingType": {
+    "_info": {
+      "name": "秘境类型",
+      "help": ""
+    },
+    "LuoYan": {
+      "name": "落岩秘境",
+      "help": ""
+    },
+    "LieYan": {
+      "name": "烈炎秘境",
+      "help": ""
+    },
+    "ShuiLao": {
+      "name": "水牢秘境",
+      "help": ""
+    },
+    "GangTi": {
+      "name": "罡体秘境",
+      "help": ""
+    },
+    "LeiTing": {
+      "name": "雷霆秘境",
+      "help": ""
+    }
+  },
   "DailyFreebies": {
     "_info": {
       "name": "每日",
