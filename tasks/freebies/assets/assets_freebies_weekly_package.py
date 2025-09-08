@@ -18,10 +18,10 @@ WEEKLY_PACKAGE_CLAIM_BUTTON = ButtonWrapper(
     name='WEEKLY_PACKAGE_CLAIM_BUTTON',
     cn=Button(
         file='./assets/cn/freebies/weekly_package/WEEKLY_PACKAGE_CLAIM_BUTTON.png',
-        area=(559, 570, 722, 627),
-        search=(539, 550, 742, 647),
-        color=(205, 145, 27),
-        button=(559, 570, 722, 627),
+        area=(541, 579, 744, 650),
+        search=(521, 559, 764, 670),
+        color=(208, 143, 19),
+        button=(541, 579, 744, 650),
     ),
     en=None,
 )
