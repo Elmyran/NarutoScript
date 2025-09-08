@@ -180,8 +180,5 @@ class AutoBattle(GameControl):
                         angle = self.DIRECTION_ANGLES.get(direction, 0)
                         self.move_to_direction(angle,0.3)
 
-az=AutoBattle('alas',task='Alas')
-az.start_services()
-az.run()
-az.stop_services()
+
 
