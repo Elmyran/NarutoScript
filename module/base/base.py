@@ -244,7 +244,7 @@ class ModuleBase:
         # YOLO 检测
         model = self.yolo_model
         results = model.predict(mask_img, conf=similarity)  # 返回列表
-        print(results)
+    
         claimable_buttons = []
 
         for result in results:

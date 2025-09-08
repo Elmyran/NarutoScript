@@ -9,21 +9,23 @@ class BattleOrderWeeklyTask(UI):
         self.device.click_record_clear()
         self.ui_ensure(page_battle_order)
         BATTLE_ORDER_TAB.set('周任务',main=self)
-        time=Timer(30,30).start()
+        claim_time=Timer(3,6).start()
         for _ in self.loop():
-            if time.reached():
-                break
             if self.appear(BATTLE_ORDER_TASK_END):
                 break
             if self.appear_then_click(BATTLE_ORDER_TASK_REWARD_CLAIM_SUCCESS,interval=1):
+                claim_time.reset()
                 continue
             if self.appear_then_click(BATTLE_ORDER_TASK_REWARD_CLAIM_CONFIRM,interval=0):
+                claim_time.reset()
                 continue
             BATTLE_ORDER_TASK_REWARD_CLAIM.load_search(BATTLE_ORDER_DETAIL.area)
             if self.appear_then_click(BATTLE_ORDER_TASK_REWARD_CLAIM,interval=0):
+                claim_time.reset()
                 continue
-            if self.match_template_color(BATTLE_ORDER_TASK_UNFINISH,interval=2):
+            if claim_time.reached():
                 break
+
 
 
 
