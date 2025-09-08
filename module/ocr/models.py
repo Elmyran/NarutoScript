@@ -1,6 +1,4 @@
 from pponnxcr import TextSystem as TextSystem_
-from ultralytics import YOLO
-
 from module.base.decorator import cached_property, del_cached_property
 from module.exception import ScriptError
 
