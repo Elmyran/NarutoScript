@@ -1,7 +1,6 @@
 from module.base.timer import Timer
 from module.logger import logger
-from module.ocr.ocr import Ocr, Digit, DigitCounter
-
+from module.ocr.ocr import  Digit, DigitCounter
 from tasks.base.page import page_main, page_recruit, page_tong_ling
 from tasks.base.ui import UI
 from tasks.data_update.assets.assets_data_update import DATA_COINS, DATA_GOLD, DATA_RECRUITMENT_TICKETS, \
@@ -50,7 +49,7 @@ class DataUpdate(UI):
                     ti_li_flag=True
     def _recruit_tikit(self):
         self.ui_ensure(page_recruit)
-        ocr=Digit(DATA_RECRUITMENT_TICKETS)
+        ocr=DataDigit(DATA_RECRUITMENT_TICKETS)
         time=Timer(5,count=10).start()
         for _ in self.loop():
             if time.reached():
