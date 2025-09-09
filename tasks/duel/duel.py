@@ -1,5 +1,4 @@
-import tasks.duel.duel
-from module.logger import logger
+
 from tasks.base.ui import UI
 
 

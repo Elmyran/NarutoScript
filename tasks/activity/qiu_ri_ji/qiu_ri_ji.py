@@ -26,22 +26,20 @@ class QiuRiJi(GameControl):
         self.ui_ensure(page_activity)
         ACTIVITY_TAB_LIST.search_rows(main=self,keyword=QiuRiJiKeyword)
         self._activity_goto_qiu_ri_ji()
-        ocr=Digit(ACTION_NUMBER)
         for _ in self.loop():
             if self.appear(ACTION_SHORTAGE):
                 break
             if self.appear_then_click(QUICK_EXPLORE,interval=1):
                 if self._check():
                     self._handle()
+                    continue
                 else:
                     continue
             if self.appear(EXPLORING):
                 self._explore()
-            action=ocr.ocr_single_line(self.device.image)
-            if action!=0:
-                self.appear_then_click(EXPLORE_BUTTON,interval=1)
-            else:
-                break
+                continue
+            self.appear_then_click(EXPLORE_BUTTON,interval=1)
+
         self.ui_goto_main()
 
 
@@ -55,13 +53,11 @@ class QiuRiJi(GameControl):
 
 
     def _explore(self):
-
         self._search()
         if not self._check():
             return
         self._handle()
-
-
+        self.move_to_direction(0,2)
     def _search(self):
         self.device.screenshot()
         model=YOLO_MODEL.get_model('tasks/activity/qiu_ri_ji/best.onnx',classes=CLASS_NAMES)

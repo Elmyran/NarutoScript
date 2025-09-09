@@ -46,7 +46,7 @@ QUIZ_STRATEGIES = {
     Gaming:[QUIZ_OPTIONS['JianDao']],
     Expert:[QUIZ_OPTIONS['YiBiXi']],
     ZhiNai:[QUIZ_OPTIONS['ThrowAway']],
-    XiaoLi:[QUIZ_OPTIONS['JianDao']],
+    XiaoLi:[QUIZ_OPTIONS['GanHuo']],
     KaoGuan:[QUIZ_OPTIONS['HongDou']],
 
 }

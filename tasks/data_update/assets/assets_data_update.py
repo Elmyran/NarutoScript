@@ -37,10 +37,10 @@ DATA_RECRUITMENT_TICKETS = ButtonWrapper(
     name='DATA_RECRUITMENT_TICKETS',
     share=Button(
         file='./assets/share/data_update/DATA_RECRUITMENT_TICKETS.png',
-        area=(1026, 15, 1116, 57),
-        search=(1006, 0, 1136, 77),
-        color=(95, 106, 107),
-        button=(1026, 15, 1116, 57),
+        area=(1031, 19, 1108, 56),
+        search=(1011, 0, 1128, 76),
+        color=(90, 100, 100),
+        button=(1031, 19, 1108, 56),
     ),
 )
 DATA_TI_LI = ButtonWrapper(

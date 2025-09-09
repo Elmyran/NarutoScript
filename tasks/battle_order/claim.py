@@ -15,16 +15,20 @@ class BattleOrderClaim(UI):
         self.device.click_record_clear()
         self.ui_ensure(page_battle_order)
         BATTLE_ORDER_TAB.set('奖励',main=self)
-        time=Timer(2,5).start()
+        time=Timer(3,6).start()
         for _ in self.loop():
             if time.reached():
                 break
             if self.appear(BATTLE_ORDER_CHARACTER_SELECT_CHECK,interval=0):
+                time.clear()
                 self._character_fragments_select()
+                time.start()
                 continue
             if self.appear_then_click(BATTLE_ORDER_CLAIM_ALL,interval=0):
+                time.reset()
                 continue
             if self.appear_then_click(BATTLE_ORDER_REWARD_CLAIM_SUCCESS,interval=0):
+                time.reset()
                 continue
             res=self.detect_claimable_buttons(button=BATTLE_ORDER_REWARD_AREA,similarity=0.7)
             if res and len(res)!=0:
