@@ -114,6 +114,11 @@ Weekly:
       - PanRen
     Fortress:
       - Scheduler
+    BattleField:
+      - Scheduler
+      - BattleField
+
+
 
 
 

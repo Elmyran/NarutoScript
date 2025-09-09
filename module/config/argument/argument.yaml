@@ -239,6 +239,16 @@ PanRen:
     stored: StoredPanRenCount
     value: {}
     display: hide
+BattleField:
+  Type:
+    type: select
+    value: '天之战场'
+    option: [
+    '天之战场',
+    '地之战场'
+
+    ]
+
 
 
 # ==================== Storage ====================

@@ -272,7 +272,7 @@ class StoredTiLi(StoredCounter):
         return value
 class StoredMissionAccept(StoredCounter,StoredExpiredAt0500):
     value = 0
-    MISSION_TIMES = []
+    mission_times = []
     FIXED_TOTAL = 9
     def write_missions(self, duration_minutes_list):
         from datetime import datetime, timedelta
@@ -282,7 +282,7 @@ class StoredMissionAccept(StoredCounter,StoredExpiredAt0500):
         current_time = datetime.now()
         for minutes in duration_minutes_list:
             completion_time = current_time + timedelta(minutes=minutes)
-            self.MISSION_TIMES.append(completion_time)
+            self.mission_times.append(completion_time)
 
 
 
@@ -291,7 +291,7 @@ class StoredMissionAccept(StoredCounter,StoredExpiredAt0500):
         now = datetime.now()
         # 过滤掉已过期的任务
         valid_times = []
-        for t in self.MISSION_TIMES:
+        for t in self.mission_times:
             if isinstance(t, str):
                 try:
                     t = datetime.fromisoformat(t)
@@ -303,14 +303,14 @@ class StoredMissionAccept(StoredCounter,StoredExpiredAt0500):
             if t > now:
                 valid_times.append(t)
 
-        self.MISSION_TIMES = valid_times
+        self.mission_times = valid_times
 
     def get_nearest_completion_time(self):
         self._clear_expired_missions()
-        if self.MISSION_TIMES:
-            return min(self.MISSION_TIMES)
+        if self.mission_times:
+            return min(self.mission_times)
         else:
             return None
     def clear(self):
         super().clear()
-        self.MISSION_TIMES = []
+        self.mission_times = []

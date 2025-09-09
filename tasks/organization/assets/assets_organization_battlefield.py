@@ -3,6 +3,17 @@ from module.base.button import Button, ButtonWrapper
 # This file was auto-generated, do not modify it manually. To generate:
 # ``` python -m dev_tools.button_extract ```
 
+BATTLE_FIELD_CHECK = ButtonWrapper(
+    name='BATTLE_FIELD_CHECK',
+    cn=Button(
+        file='./assets/cn/organization/battlefield/BATTLE_FIELD_CHECK.png',
+        area=(1174, 299, 1221, 366),
+        search=(1154, 279, 1241, 386),
+        color=(142, 113, 69),
+        button=(1174, 299, 1221, 366),
+    ),
+    en=None,
+)
 BATTLE_FIELD_CREDITS = ButtonWrapper(
     name='BATTLE_FIELD_CREDITS',
     cn=Button(
@@ -11,17 +22,6 @@ BATTLE_FIELD_CREDITS = ButtonWrapper(
         search=(957, 635, 1082, 720),
         color=(70, 46, 21),
         button=(977, 655, 1062, 700),
-    ),
-    en=None,
-)
-BATTLE_FIELD_FIGHT_FAIL = ButtonWrapper(
-    name='BATTLE_FIELD_FIGHT_FAIL',
-    cn=Button(
-        file='./assets/cn/organization/battlefield/BATTLE_FIELD_FIGHT_FAIL.png',
-        area=(0, 0, 1280, 720),
-        search=(0, 0, 1280, 720),
-        color=(59, 55, 51),
-        button=(0, 0, 1280, 720),
     ),
     en=None,
 )
@@ -36,6 +36,17 @@ BATTLE_FIELD_SELECT_CHECK = ButtonWrapper(
     ),
     en=None,
 )
+BATTLE_FIELD_SELECT_GOTO_DI = ButtonWrapper(
+    name='BATTLE_FIELD_SELECT_GOTO_DI',
+    cn=Button(
+        file='./assets/cn/organization/battlefield/BATTLE_FIELD_SELECT_GOTO_DI.png',
+        area=(954, 472, 1108, 527),
+        search=(934, 452, 1128, 547),
+        color=(205, 135, 16),
+        button=(954, 472, 1108, 527),
+    ),
+    en=None,
+)
 BATTLE_FIELD_SELECT_GOTO_TIAN = ButtonWrapper(
     name='BATTLE_FIELD_SELECT_GOTO_TIAN',
     cn=Button(
@@ -47,25 +58,14 @@ BATTLE_FIELD_SELECT_GOTO_TIAN = ButtonWrapper(
     ),
     en=None,
 )
-BATTLE_FIELD_TIAN_CHECK = ButtonWrapper(
-    name='BATTLE_FIELD_TIAN_CHECK',
+INSPIRED_BUTTON = ButtonWrapper(
+    name='INSPIRED_BUTTON',
     cn=Button(
-        file='./assets/cn/organization/battlefield/BATTLE_FIELD_TIAN_CHECK.png',
-        area=(570, 16, 719, 65),
-        search=(550, 0, 739, 85),
-        color=(92, 108, 148),
-        button=(570, 16, 719, 65),
-    ),
-    en=None,
-)
-CHARACTER_SELECT_FIRST = ButtonWrapper(
-    name='CHARACTER_SELECT_FIRST',
-    cn=Button(
-        file='./assets/cn/organization/battlefield/CHARACTER_SELECT_FIRST.png',
-        area=(805, 141, 897, 230),
-        search=(785, 121, 917, 250),
-        color=(161, 118, 91),
-        button=(805, 141, 897, 230),
+        file='./assets/cn/organization/battlefield/INSPIRED_BUTTON.png',
+        area=(41, 248, 107, 310),
+        search=(21, 228, 127, 330),
+        color=(167, 135, 110),
+        button=(41, 248, 107, 310),
     ),
     en=None,
 )

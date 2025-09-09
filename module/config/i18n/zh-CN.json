@@ -122,6 +122,10 @@
       "name": "本服要塞",
       "help": "当前仅支持火要塞"
     },
+    "BattleField": {
+      "name": "天地战场",
+      "help": "只支持挂机，找位子和奖励领取未实现"
+    },
     "DingCiKaoRou": {
       "name": "丁次烤肉",
       "help": ""
@@ -515,6 +519,18 @@
     "PanRenFinishCount": {
       "name": "PanRen.PanRenFinishCount.name",
       "help": "PanRen.PanRenFinishCount.help"
+    }
+  },
+  "BattleField": {
+    "_info": {
+      "name": "BattleField._info.name",
+      "help": "BattleField._info.help"
+    },
+    "Type": {
+      "name": "BattleField.Type.name",
+      "help": "BattleField.Type.help",
+      "天之战场": "天之战场",
+      "地之战场": "地之战场"
     }
   },
   "ItemStorage": {

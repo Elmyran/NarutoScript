@@ -101,6 +101,8 @@ class Page:
 
 #Main_Page
 page_main=Page(MAIN_GOTO_CHARACTER)
+#Character_Select
+page_character_select=Page(CHARACTER_SELECT_PAGE)
 #Mail
 page_mail=Page(MAIL_CHECK)
 page_mail.link(MAIL_EXIT,destination=page_main)
@@ -142,8 +144,9 @@ page_fortress_select.link(CLOSE,destination=page_organization)
 #BattleField
 page_battle_field_select=Page(BATTLE_FIELD_SELECT_CHECK)
 page_organization.link(ORGANIZATION_GOTO_BATTLE_FIELD,destination=page_battle_field_select)
-page_battle_field_tian=Page(BATTLE_FIELD_TIAN_CHECK)
-# page_battle_field_di=Page(BATTLE_FIELD_DI_CHECK)
+
+page_battle_field=Page(BATTLE_FIELD_CHECK)
+page_battle_field.link(CLOSE,destination=page_organization)
 #PanRen
 page_pan_ren=Page(PAN_REN_CHECK)
 page_pan_ren.link(CLOSE,destination=page_organization)

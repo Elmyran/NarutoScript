@@ -99,6 +99,9 @@ class GeneratedConfig:
     PanRen_NoRewardJoinOrNot = False
     PanRen_PanRenFinishCount = {}
 
+    # Group `BattleField`
+    BattleField_Type = '天之战场'  # 天之战场, 地之战场
+
     # Group `ItemStorage`
     ItemStorage_TiLi = {}
     ItemStorage_Golds = {}

@@ -67,6 +67,7 @@
     "stored": "StoredMissionAccept",
     "attrs": {
       "time": "2020-01-01 00:00:00",
+      "mission_times": [],
       "total": 9,
       "value": 0
     },
@@ -119,6 +120,7 @@
     "stored": "StoredMissionAccept",
     "attrs": {
       "time": "2020-01-01 00:00:00",
+      "mission_times": [],
       "total": 9,
       "value": 0
     },

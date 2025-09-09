@@ -1068,6 +1068,43 @@
       }
     }
   },
+  "BattleField": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "BattleField",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    },
+    "BattleField": {
+      "Type": {
+        "type": "select",
+        "value": "天之战场",
+        "option": [
+          "天之战场",
+          "地之战场"
+        ]
+      }
+    }
+  },
   "DingCiKaoRou": {
     "Scheduler": {
       "Enable": {

@@ -10,7 +10,7 @@ from tasks.base.task_tab.draglist import TASK_TAB_LIST
 from tasks.base.task_tab.keyword import MissionKeyword
 from tasks.base.ui import UI
 from tasks.mission.assets.assets_mission import *
-from tasks.mission.keyword import Claimable
+from tasks.mission.mission_keyword import Claimable
 from tasks.mission.priority import TaskPriority
 class Mission(UI):
     def run(self):
@@ -36,7 +36,11 @@ class Mission(UI):
         if not TASK_TAB_LIST.search_rows(main=self,keyword=MissionKeyword):
             raise GameStuckError(' Mission Tab Not Found')
         self._mission_reward_claim()
-        self._circle_task_select()
+        try:
+            self.device.stuck_timer=Timer(180,count=180).start()
+            self._circle_task_select()
+        finally:
+            self.device.stuck_timer=Timer(60,count=60).start()
         self.ui_goto_main()
 
     def _circle_task_select(self):
@@ -50,6 +54,7 @@ class Mission(UI):
             self.config.stored.MissionAccept.write_missions(accepted_tasks)
     def _task_select(self,accepted_tasks):
         tasks=self._mission_select_priority()
+        tasks=self._task_strategy(tasks)
         select=DigitCounter(TASK_SELECT_REAMIN_TIMES)
         task_select_number=0
         time=Timer(60,count=60).start()
@@ -59,8 +64,6 @@ class Mission(UI):
             current,remain,total=select.ocr_single_line(self.device.image)
             if remain!=0 and total!=0 and remain>task_select_number:
                 task_select_number=remain
-                with self.config.multi_set():
-                    self.config.stored.MissionAccept.value=task_select_number
             if total!=0 and remain==total:
                 break
             res=self._single_task_select(task)
@@ -68,6 +71,8 @@ class Mission(UI):
                 break
             else:
                 accepted_tasks.append(task.time)
+        with self.config.multi_set():
+            self.config.stored.MissionAccept.value=task_select_number
         return True
     def _single_task_select(self,task):
         for _ in self.loop():
@@ -136,7 +141,6 @@ class Mission(UI):
         task_time = ocr.matchTime(result)
         task_name = ocr.matchArea(result, TASK_AREA.search)
         task_buttons = ocr.matchKeys(result, '接取')
-
         # 构建当前任务列表
         currentTask = []
         for name, time in pair_buttons(task_name, task_time, (-100, -50, 800, 50)):
@@ -156,7 +160,6 @@ class Mission(UI):
             self.get_soul_jade_amount(task)
             self.get_box_type(task)
             task_with_button.append(task)
-
             # 直接排序并返回最高优先级任务
         return self._select_highest_priority_task(task_with_button)
 
@@ -224,5 +227,13 @@ class Mission(UI):
         corrected_minutes = round(total_minutes / 60) * 60
         return corrected_minutes
 
+    def _task_strategy(self, tasks):
+        return tasks
+    def test(self):
+        self.config.stored.MissionAccept.write_missions([30])
+        time=self.config.stored.MissionAccept.get_nearest_completion_time()
+        self.config.task_delay(target=time)
+az=Mission('src',task='Alas')
+az.test()
 
 

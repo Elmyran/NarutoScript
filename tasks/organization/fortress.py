@@ -29,7 +29,6 @@ class Fortress(GameControl):
             self.config.task_delay(target=saturday_8pm)
             self.config.task_stop()
             return
-
         self.handle_organization_fortress()
         self.config.task_delay(target=saturday_8pm)
         self.config.task_call('PanRen')

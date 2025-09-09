@@ -303,6 +303,17 @@
       "ServerUpdate": "05:00"
     }
   },
+  "BattleField": {
+    "Scheduler": {
+      "Enable": false,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "BattleField",
+      "ServerUpdate": "05:00"
+    },
+    "BattleField": {
+      "Type": "天之战场"
+    }
+  },
   "DingCiKaoRou": {
     "Scheduler": {
       "Enable": false,
