@@ -19,58 +19,64 @@ class DataUpdate(UI):
         self._fame()
     def _coins_and_gold(self):
         self.ui_ensure(page_main)
-        coin=DataDigit(DATA_COINS)
-        gold=Digit(DATA_GOLD)
-        ti_li=DigitCounter(DATA_TI_LI)
+        coins_ocr=DataDigit(DATA_COINS)
+        gold_ocr=Digit(DATA_GOLD)
+        ti_li_ocr=DigitCounter(DATA_TI_LI)
         coins_flag=False
         gold_flag=False
         ti_li_flag=False
+        ti_li=0
+        gold=0
+        coins=0
         time=Timer(5,count=10).start()
         for _ in self.loop():
             if time.reached():
-                logger.warning('get coins and gold failed')
+                logger.warning('get ti_li or coins or gold failed')
                 break
             if coins_flag and gold_flag and ti_li_flag:
                 break
             if not coins_flag:
-                coins=coin.ocr_single_line(self.device.image)
-                if coins:
-                    self.config.stored.Coins.value=coins
+                coins=coins_ocr.ocr_single_line(self.device.image)
+                if coins>0:
                     coins_flag=True
             if not gold_flag:
-                gold=gold.ocr_single_line(self.device.image)
+                gold=gold_ocr.ocr_single_line(self.device.image)
                 if gold>0:
-                    self.config.stored.Golds.value=gold
                     gold_flag=True
             if not ti_li_flag:
-                current,remain,total=ti_li.ocr_single_line(self.device.image)
-                if current>0 and total==200:
-                    self.config.stored.TiLi.value=current
+                ti_li,remain,total=ti_li_ocr.ocr_single_line(self.device.image)
+                if  ti_li>0 and total==200:
                     ti_li_flag=True
+        with self.config.multi_set():
+            self.config.stored.TiLi.value=ti_li
+            self.config.stored.Coins.value=coins
+            self.config.stored.Golds.value=gold
     def _recruit_tikit(self):
         self.ui_ensure(page_recruit)
         ocr=DataDigit(DATA_RECRUITMENT_TICKETS)
         time=Timer(5,count=10).start()
+        ticket=0
         for _ in self.loop():
             if time.reached():
                 logger.warning('get recruit tickets failed')
                 break
             ticket=ocr.ocr_single_line(self.device.image)
             if ticket > 0:
-                self.config.stored.Tickets.value=ticket
                 break
+        self.config.stored.Tickets.value=ticket
     def _fame(self):
         self.ui_ensure(page_tong_ling)
         fame=DataDigit(DATA_FAME)
         time=Timer(5,count=10).start()
+        fames=0
         for _ in self.loop():
             if time.reached():
                 logger.warning('get fame failed')
                 break
             fames=fame.ocr_single_line(self.device.image)
-            if fames:
-                self.config.stored.Fame.value=fames
+            if fames > 0:
                 break
+        self.config.stored.Fame.value=fames
     def _mission(self):
         with self.config.multi_set():
             mission=self.config.stored.MissionAccept.value
