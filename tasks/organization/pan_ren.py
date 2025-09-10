@@ -123,12 +123,12 @@ class OrganizationPanRen(GameControl):
                     self.appear_then_click(PAN_REN_JOIN_NO_REWARD_CANCEL,interval=1)
                     return True
 
-            if self.appear_then_click(CHARACTER_SELECT_CONFIRM,interval=0):
+            if self.appear_then_click(CHARACTER_SELECT_CONFIRM,interval=1):
                 continue
-            if self.appear_then_click(PAN_REN_JOIN_BUTTON,interval=0):
+            if self.appear_then_click(PAN_REN_JOIN_BUTTON,interval=1):
                 continue
             ORGANIZATION_GOTO_PAN_REN.load_search((0, 0, 1280, 720))
-            if self.appear_then_click(ORGANIZATION_GOTO_PAN_REN,interval=0):
+            if self.appear_then_click(ORGANIZATION_GOTO_PAN_REN,interval=1):
                 continue
 
     def _start_auto_fight(self):

@@ -284,8 +284,12 @@ class StoredMissionAccept(StoredCounter,StoredExpiredAt0500):
             completion_time = current_time + timedelta(minutes=minutes)
             self.mission_times.append(completion_time)
 
-
-
+    @cached_property
+    def _attrs(self) -> dict:
+        attrs = super()._attrs
+        # 移除 mission_times，不让它显示在 UI 中
+        attrs.pop('mission_times', None)
+        return attrs
     def _clear_expired_missions(self):
         from datetime import datetime
         now = datetime.now()

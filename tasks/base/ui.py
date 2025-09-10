@@ -1,7 +1,7 @@
 from module.base.button import ButtonWrapper
 from module.base.decorator import run_once
 from module.base.timer import Timer
-from module.exception import GameNotRunningError, GamePageUnknownError, HandledError, GameStuckError, \
+from module.exception import GameNotRunningError, GamePageUnknownError, HandledError,  \
     RequestHumanTakeover
 from module.logger import logger
 from module.ocr.ocr import Ocr
