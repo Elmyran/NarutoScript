@@ -23,6 +23,7 @@ class Battlefield(UI):
         if not self._check_time():
             self.config.task_delay(target=wednesday_9_pm)
             self.config.task_stop()
+            return
         self.handle_battle_field()
         self.config.task_delay(target=wednesday_9_pm)
         self.config.task_call('PanRen')
