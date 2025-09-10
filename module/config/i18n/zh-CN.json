@@ -523,12 +523,12 @@
   },
   "BattleField": {
     "_info": {
-      "name": "BattleField._info.name",
-      "help": "BattleField._info.help"
+      "name": "",
+      "help": ""
     },
     "Type": {
-      "name": "BattleField.Type.name",
-      "help": "BattleField.Type.help",
+      "name": "类型",
+      "help": "",
       "天之战场": "天之战场",
       "地之战场": "地之战场"
     }
