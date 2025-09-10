@@ -25,6 +25,10 @@ class Fortress(GameControl):
     def run(self):
         next_saturday = get_nearest_weekday_date(5)
         saturday_8pm = next_saturday.replace(hour=20, minute=0, second=0, microsecond=0)
+        diff = server_time_offset()
+        server_now = datetime.now() - diff
+        if server_now.weekday() == 5 and server_now.hour < 20:
+            saturday_8pm=server_now.replace(hour=20, minute=0, second=0, microsecond=0)
         if not self._check_time():
             self.config.task_delay(target=saturday_8pm)
             self.config.task_stop()

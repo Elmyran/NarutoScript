@@ -246,8 +246,11 @@ BattleField:
     option: [
     '天之战场',
     '地之战场'
-
     ]
+  BattleFieldFinishCount:
+    stored: StoredBattleFieldCount
+    value: {}
+    display: hide
 
 
 

@@ -311,7 +311,8 @@
       "ServerUpdate": "05:00"
     },
     "BattleField": {
-      "Type": "天之战场"
+      "Type": "天之战场",
+      "BattleFieldFinishCount": {}
     }
   },
   "DingCiKaoRou": {

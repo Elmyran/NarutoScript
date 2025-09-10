@@ -1102,6 +1102,12 @@
           "天之战场",
           "地之战场"
         ]
+      },
+      "BattleFieldFinishCount": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredBattleFieldCount"
       }
     }
   },

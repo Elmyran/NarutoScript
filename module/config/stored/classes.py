@@ -314,3 +314,5 @@ class StoredMissionAccept(StoredCounter,StoredExpiredAt0500):
     def clear(self):
         super().clear()
         self.mission_times = []
+class StoredBattleFieldCount(StoredCounter,StoredExpiredAtMonday0500):
+    FIXED_TOTAL = 1

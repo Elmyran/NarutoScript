@@ -1,5 +1,6 @@
 from module.config.stored.classes import (
     StoredBase,
+    StoredBattleFieldCount,
     StoredBattleOrderRank,
     StoredBattlePassLevel,
     StoredCounter,
@@ -41,3 +42,4 @@ class StoredGenerated:
     WeeklyPackage = StoredFreebiesWeeklyPackage("Freebies.FreebiesStorage.WeeklyPackage")
     BattleOrderRank = StoredBattleOrderRank("BattleOrder.BattleOrderStorage.BattleOrderRank")
     PanRenFinishCount = StoredPanRenCount("PanRen.PanRen.PanRenFinishCount")
+    BattleFieldFinishCount = StoredBattleFieldCount("BattleField.BattleField.BattleFieldFinishCount")

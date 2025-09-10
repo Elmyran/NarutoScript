@@ -16,18 +16,32 @@ from tasks.organization.battlefield.switch import CHARACTER_TAB
 from toolkit.Lib.datetime import datetime
 
 
-class Battlefield(UI):
+class BattleField(UI):
     def run(self):
-        wednesday=get_nearest_weekday_date(2)
-        wednesday_9_pm=wednesday.replace(hour=21,minute=0,second=0,microsecond=0)
+        diff = server_time_offset()
+        server_now = datetime.now() - diff
+        if server_now.weekday() == 2 and server_now.hour < 21:
+            wednesday_9_pm = server_now.replace(hour=21, minute=0, second=0, microsecond=0)
+        else:
+            wednesday = get_nearest_weekday_date(2)
+            wednesday_9_pm = wednesday.replace(hour=21, minute=0, second=0, microsecond=0)
+        logger.info(wednesday_9_pm)
+        if self.config.stored.BattleFieldFinishCount.is_expired():
+            self.config.stored.BattleFieldFinishCount.clear()
+        if self.config.stored.BattleFieldFinishCount.is_full():
+            self.config.task_delay(target=wednesday_9_pm)
+            self.config.task_stop()
+            return False
         if not self._check_time():
             self.config.task_delay(target=wednesday_9_pm)
             self.config.task_stop()
-            return
+            return False
         self.handle_battle_field()
         self.config.task_delay(target=wednesday_9_pm)
         self.config.task_call('PanRen')
         self.config.task_stop()
+        return True
+
     def _check_time(self):
         server_weekday = get_server_weekday()
         diff = server_time_offset()

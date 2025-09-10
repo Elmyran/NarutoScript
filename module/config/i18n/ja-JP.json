@@ -531,6 +531,10 @@
       "help": "BattleField.Type.help",
       "天之战场": "天之战场",
       "地之战场": "地之战场"
+    },
+    "BattleFieldFinishCount": {
+      "name": "BattleField.BattleFieldFinishCount.name",
+      "help": "BattleField.BattleFieldFinishCount.help"
     }
   },
   "ItemStorage": {

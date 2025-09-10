@@ -101,6 +101,7 @@ class GeneratedConfig:
 
     # Group `BattleField`
     BattleField_Type = '天之战场'  # 天之战场, 地之战场
+    BattleField_BattleFieldFinishCount = {}
 
     # Group `ItemStorage`
     ItemStorage_TiLi = {}
