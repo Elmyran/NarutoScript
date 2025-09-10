@@ -25,6 +25,50 @@ BATTLE_FIELD_CREDITS = ButtonWrapper(
     ),
     en=None,
 )
+BATTLE_FIELD_REWARD_CHECK = ButtonWrapper(
+    name='BATTLE_FIELD_REWARD_CHECK',
+    cn=Button(
+        file='./assets/cn/organization/battlefield/BATTLE_FIELD_REWARD_CHECK.png',
+        area=(409, 99, 472, 211),
+        search=(389, 79, 492, 231),
+        color=(208, 195, 156),
+        button=(409, 99, 472, 211),
+    ),
+    en=None,
+)
+BATTLE_FIELD_REWARD_CLAIM_BUTTON = ButtonWrapper(
+    name='BATTLE_FIELD_REWARD_CLAIM_BUTTON',
+    cn=Button(
+        file='./assets/cn/organization/battlefield/BATTLE_FIELD_REWARD_CLAIM_BUTTON.png',
+        area=(692, 157, 783, 201),
+        search=(672, 137, 803, 221),
+        color=(166, 103, 30),
+        button=(692, 157, 783, 201),
+    ),
+    en=None,
+)
+BATTLE_FIELD_REWARD_CLAIM_DONE = ButtonWrapper(
+    name='BATTLE_FIELD_REWARD_CLAIM_DONE',
+    cn=Button(
+        file='./assets/cn/organization/battlefield/BATTLE_FIELD_REWARD_CLAIM_DONE.png',
+        area=(691, 149, 787, 205),
+        search=(671, 129, 807, 225),
+        color=(170, 120, 101),
+        button=(691, 149, 787, 205),
+    ),
+    en=None,
+)
+BATTLE_FIELD_REWARD_CONFIRM = ButtonWrapper(
+    name='BATTLE_FIELD_REWARD_CONFIRM',
+    cn=Button(
+        file='./assets/cn/organization/battlefield/BATTLE_FIELD_REWARD_CONFIRM.png',
+        area=(493, 138, 786, 215),
+        search=(473, 118, 806, 235),
+        color=(141, 68, 19),
+        button=(493, 138, 786, 215),
+    ),
+    en=None,
+)
 BATTLE_FIELD_SELECT_CHECK = ButtonWrapper(
     name='BATTLE_FIELD_SELECT_CHECK',
     cn=Button(
@@ -55,6 +99,17 @@ BATTLE_FIELD_SELECT_GOTO_TIAN = ButtonWrapper(
         search=(178, 452, 371, 548),
         color=(203, 133, 15),
         button=(198, 472, 351, 528),
+    ),
+    en=None,
+)
+BATTLE_FIELD_TYPE_CONFIRM = ButtonWrapper(
+    name='BATTLE_FIELD_TYPE_CONFIRM',
+    cn=Button(
+        file='./assets/cn/organization/battlefield/BATTLE_FIELD_TYPE_CONFIRM.png',
+        area=(426, 416, 618, 485),
+        search=(406, 396, 638, 505),
+        color=(222, 152, 11),
+        button=(426, 416, 618, 485),
     ),
     en=None,
 )

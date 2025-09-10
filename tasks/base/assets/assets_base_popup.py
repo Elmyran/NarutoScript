@@ -129,6 +129,16 @@ GET_REWARD = ButtonWrapper(
         ),
     ],
 )
+POPUP_BATTLE_FIELD_REWARD = ButtonWrapper(
+    name='POPUP_BATTLE_FIELD_REWARD',
+    share=Button(
+        file='./assets/share/base/popup/POPUP_BATTLE_FIELD_REWARD.png',
+        area=(409, 99, 472, 211),
+        search=(389, 79, 492, 231),
+        color=(208, 195, 156),
+        button=(1216, 9, 1280, 61),
+    ),
+)
 POPUP_CLOSE = ButtonWrapper(
     name='POPUP_CLOSE',
     share=[

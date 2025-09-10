@@ -91,9 +91,12 @@ class BattleField(UI):
         else:
             BATTLE_FIELD_TYPE=BATTLE_FIELD_SELECT_GOTO_DI
         for _ in self.loop():
-            if self.ui_page_appear(page_battle_field):
+            if self.ui_page_appear(page_character_select):
                 break
-            if self.appear_then_click(BATTLE_FIELD_TYPE,interval=1):
+            if self.appear_then_click(BATTLE_FIELD_TYPE_CONFIRM,interval=1):
+                continue
+            if self.match_template_color(BATTLE_FIELD_TYPE,interval=1):
+                self.device.click(BATTLE_FIELD_TYPE)
                 continue
 
     def _character_select(self):
@@ -140,14 +143,27 @@ class BattleField(UI):
         for _ in self.loop():
             if ocr_interval.reached():
                 credits=OCR.ocr_single_line(self.device.image)
-                logger.info('Credits:'+credits)
+                logger.info(f'Credits: {credits}')
                 if credits>1600:
                     logger.info('Credits reached 1600')
                     break
                 ocr_interval.reset()
 
     def _handle_reward(self):
-        pass
+        for _ in self.loop():
+            if self.appear(BATTLE_FIELD_REWARD_CHECK):
+                break
+            if self.match_template_color(BATTLE_FIELD_CHECK,interval=1):
+                self.device.click(BATTLE_FIELD_CHECK)
+                continue
+        for _ in self.loop():
+            if self.appear_then_click(BATTLE_FIELD_REWARD_CLAIM_DONE,interval=1):
+                break
+            if self.appear_then_click(BATTLE_FIELD_REWARD_CONFIRM,interval=0.5):
+                continue
+            if self.appear_then_click(BATTLE_FIELD_REWARD_CLAIM_BUTTON,interval=1):
+                continue
+
 
 
 

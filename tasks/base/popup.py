@@ -29,7 +29,8 @@ class PopupHandler(ModuleBase):
             return True
         if self.appear_then_click(SHORTAGE,interval=interval):
             return True
-
+        if self.appear_then_click(POPUP_BATTLE_FIELD_REWARD,interval=interval):
+            return True
         return False
 
     def reward_appear(self) -> bool:
