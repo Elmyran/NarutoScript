@@ -81,3 +81,22 @@ HongDou = QuizOption(
     jp='御手洗アンコ',
     es='Anko Mitarashi'
 )
+LuJiu=QuizOption(
+    id=8,
+    name='LuJiu',
+    cn='奈良鹿久',
+    cht='御手洗紅豆',
+    en='Anko Mitarashi',
+    jp='御手洗アンコ',
+    es='Anko Mitarashi'
+)
+YiDong=QuizOption(
+    id=9,
+    name='YiDong',
+    cn='切碎之刑',
+    cht='御手洗紅豆',
+    en='Anko Mitarashi',
+    jp='御手洗アンコ',
+    es='Anko Mitarashi'
+)
+

@@ -36,6 +36,8 @@ QUIZ_OPTIONS = {
     'ThrowAway':ThrowAway,
     'GanHuo':GanHuo,
     'HongDou':HongDou,
+    'LuJiu':LuJiu,
+    'YiDong':YiDong
 }
 
 # 建立答题策略
@@ -48,5 +50,8 @@ QUIZ_STRATEGIES = {
     ZhiNai:[QUIZ_OPTIONS['ThrowAway']],
     XiaoLi:[QUIZ_OPTIONS['GanHuo']],
     KaoGuan:[QUIZ_OPTIONS['HongDou']],
+    LianLuo:[QUIZ_OPTIONS['LuJiu']],
+    FeiDuan:[QUIZ_OPTIONS['YiDong']],
+
 
 }

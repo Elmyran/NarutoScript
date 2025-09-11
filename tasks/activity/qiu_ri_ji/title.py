@@ -61,12 +61,13 @@ Expert = QuizTitle(
 XiaoLi = QuizTitle(
     id=5,
     name='XiaoLi',
-    cn='“青春就是要不断运动！”李洛克干劲十足地出现在你面前，是否邀请他一起？',
-    cht='「青春就是要不斷運動！」李洛克幹勁十足地出現在你面前，是否邀請他一起？',
+    cn='“青春就是要不断运动！”李洛克干劲十足的出现在你面前，是否邀请他一起？',
+    cht='「青春就是要不斷運動！」李洛克幹勁十足的出現在你面前，是否邀請他一起？',
     en='"Youth means constant movement!" Rock Lee appears before you full of energy. Will you invite him to join?',
     jp='「青春とは絶えず動くことだ！」ロック・リーが元気いっぱいに現れた。君は彼を誘うか？',
     es='"¡La juventud significa moverse sin parar!" Rock Lee aparece lleno de energía frente a ti. ¿Lo invitas a unirse?',
 )
+
 
 ZhiNai = QuizTitle(
     id=6,
@@ -82,6 +83,24 @@ KaoGuan = QuizTitle(
     id=7,
     name='KaoGuan',
     cn='“让我来考考你！”中忍考试第二场的考官是谁？',
+    cht='「讓我來考考你！」中忍考試第二場的考官是誰？',
+    en='Let me test you! Who was the examiner of the second round of the Chunin Exams?',
+    jp='「試してみよう！」中忍試験第二試合の試験官は誰だった？',
+    es='¡Déjame ponerte a prueba! ¿Quién fue el examinador de la segunda ronda del Examen Chunin?',
+)
+LianLuo = QuizTitle(
+    id=8,
+    name='LianLuo',
+    cn='“让我来考考你!”第四次忍界大战中,担任联络部队队长的是?',
+    cht='「讓我來考考你！」中忍考試第二場的考官是誰？',
+    en='Let me test you! Who was the examiner of the second round of the Chunin Exams?',
+    jp='「試してみよう！」中忍試験第二試合の試験官は誰だった？',
+    es='¡Déjame ponerte a prueba! ¿Quién fue el examinador de la segunda ronda del Examen Chunin?',
+)
+FeiDuan=QuizTitle(
+    id=9,
+    name='FeiDuan',
+    cn='“让我来考考你!”飞段在使用哪个技能时可以自由移动?',
     cht='「讓我來考考你！」中忍考試第二場的考官是誰？',
     en='Let me test you! Who was the examiner of the second round of the Chunin Exams?',
     jp='「試してみよう！」中忍試験第二試合の試験官は誰だった？',

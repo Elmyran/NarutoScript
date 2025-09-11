@@ -59,7 +59,7 @@ class QiuRiJi(GameControl):
         self._handle()
         self.move_to_direction(0,2)
     def _search(self):
-        self.device.screenshot()
+        self.move_to_direction(0,1)
         model=YOLO_MODEL.get_model('tasks/activity/qiu_ri_ji/best.onnx',classes=CLASS_NAMES)
         for _ in self.loop():
             if FIND_BUTTON.match_template(self.device.image,direct_match=True):
@@ -100,7 +100,9 @@ class QiuRiJi(GameControl):
 
         angle = math.degrees(math.atan2(dx, dy))
         angle = (angle + 360) % 360
-        return angle
+        snapped_angle = round(angle / 45) * 45
+        snapped_angle %= 360  # 保证结果在 0-359 之间
+        return snapped_angle
 
     def _check(self):
         time=Timer(3,5).start()
@@ -116,7 +118,6 @@ class QiuRiJi(GameControl):
                 continue
 
     def _handle(self):
-        self.device.screenshot()
         ocr = OcrQuizOption(ANSWER_AREA)
         for _ in self.loop():
             if QIU_RI_JI_EXPLORE_BUTTON.match_template_color(self.device.image):
@@ -130,11 +131,9 @@ class QiuRiJi(GameControl):
                     self.device.click(button[0])
 
     def _select_option(self):
-        self.device.screenshot()
         title_ocr = OcrQuizTitle(QUESTION_AREA)
         results = title_ocr.detect_and_ocr(self.device.image)
         question_text = ''.join([r.ocr_text for r in results])
-        print(question_text)
         all_quiz_titles = list(QuizTitle.instances.values())
         matched_title = match_quiz_title(question_text, all_quiz_titles)
         if matched_title in QUIZ_STRATEGIES:
@@ -143,6 +142,5 @@ class QiuRiJi(GameControl):
             return priority_options
         logger.warning('No matching option found')
         return None
-
 
 

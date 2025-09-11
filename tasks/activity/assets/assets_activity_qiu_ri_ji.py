@@ -160,6 +160,13 @@ QIU_RI_JI_GET_REWARD = ButtonWrapper(
             color=(175, 158, 135),
             button=(472, 276, 976, 406),
         ),
+        Button(
+            file='./assets/cn/activity/qiu_ri_ji/QIU_RI_JI_GET_REWARD.9.png',
+            area=(469, 301, 981, 406),
+            search=(449, 281, 1001, 426),
+            color=(168, 153, 132),
+            button=(469, 301, 981, 406),
+        ),
     ],
     en=None,
 )
