@@ -15,6 +15,7 @@ Alas:
       - Optimization
     Restart:
       - Scheduler
+      - AccountStorage
 
 # ==================== Daily ====================
 

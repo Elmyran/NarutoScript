@@ -128,3 +128,6 @@ class GeneratedConfig:
 
     # Group `MissionStorage`
     MissionStorage_MissionAccept = {}
+
+    # Group `AccountStorage`
+    AccountStorage_AccountName = {}

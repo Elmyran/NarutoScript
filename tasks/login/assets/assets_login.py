@@ -23,6 +23,17 @@ ACCOUNT_CONFIRM = ButtonWrapper(
     ],
     en=None,
 )
+ACCOUNT_NAME = ButtonWrapper(
+    name='ACCOUNT_NAME',
+    cn=Button(
+        file='./assets/cn/login/ACCOUNT_NAME.png',
+        area=(193, 3, 322, 37),
+        search=(173, 0, 342, 57),
+        color=(67, 81, 124),
+        button=(193, 3, 322, 37),
+    ),
+    en=None,
+)
 LOGIN_LOADING = ButtonWrapper(
     name='LOGIN_LOADING',
     cn=Button(

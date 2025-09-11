@@ -1,6 +1,6 @@
 from module.base.timer import Timer
 from module.config.utils import get_nearest_weekday_date, get_server_weekday, server_time_offset
-
+from module.ocr.ocr import Ocr
 from module.exception import GameStuckError
 from module.logger import logger
 from module.ocr.ocr import Digit
@@ -14,8 +14,9 @@ from tasks.organization.assets.assets_organization_fortress import ORGANIZATION_
 from tasks.organization.assets.assets_organization_pray import ORGANIZATION_PANEL
 from tasks.organization.battlefield.switch import CHARACTER_TAB
 from toolkit.Lib.datetime import datetime
-
-
+from tasks.organization.battlefield.keywords import AccountNameKeyword
+from tasks.duel.assets.assets_duel import DUEL_FIGHT_FAIL
+from tasks.base.assets.assets_base_page import FULL_SCREEN
 class BattleField(UI):
     def run(self):
         diff = server_time_offset()
@@ -140,14 +141,28 @@ class BattleField(UI):
     def _check_state(self):
         OCR=Digit(BATTLE_FIELD_CREDITS)
         ocr_interval=Timer(30).start()
+        occupied=False
+        ocr=Ocr(FULL_SCREEN)
         for _ in self.loop():
-            if ocr_interval.reached():
+            if self.ui_get_current_page==page_battle_field and ocr_interval.reached():
                 credits=OCR.ocr_single_line(self.device.image)
                 logger.info(f'Credits: {credits}')
                 if credits>1600:
                     logger.info('Credits reached 1600')
                     break
                 ocr_interval.reset()
+            if self.ui_get_current_page!=page_battle_field and self.appear_then_click(DUEL_FIGHT_FAIL,interval=0):
+                logger.info('Battle Field Fight End Detected')
+                occupied=False
+                continue
+            if occupied==False and ocr.matched_ocr(self.device.image,keyword_classes=AccountNameKeyword,direct_ocr=True):
+                occupied=True
+                logger.info('Occupied Detected')
+                continue
+            if occupied==False and BATTLE_FIELD_EMPTY.match_template(self.device.image,direct_match=True) :
+                self.device.click(BATTLE_FIELD_EMPTY)
+                continue
+            
 
     def _handle_reward(self):
         for _ in self.loop():

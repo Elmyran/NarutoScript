@@ -67,12 +67,23 @@
     "stored": "StoredMissionAccept",
     "attrs": {
       "time": "2020-01-01 00:00:00",
-      "mission_times": [],
       "total": 9,
       "value": 0
     },
     "order": 6,
     "color": "#ff6b6b"
+  },
+  "AccountName": {
+    "name": "AccountName",
+    "path": "Restart.AccountStorage.AccountName",
+    "i18n": "AccountStorage.AccountName.name",
+    "stored": "StoredAccountName",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "value": ""
+    },
+    "order": 0,
+    "color": "#777777"
   },
   "DuelDaily": {
     "name": "DuelDaily",
@@ -120,7 +131,6 @@
     "stored": "StoredMissionAccept",
     "attrs": {
       "time": "2020-01-01 00:00:00",
-      "mission_times": [],
       "total": 9,
       "value": 0
     },

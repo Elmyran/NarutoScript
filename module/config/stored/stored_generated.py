@@ -1,4 +1,5 @@
 from module.config.stored.classes import (
+    StoredAccountName,
     StoredBase,
     StoredBattleFieldCount,
     StoredBattleOrderRank,
@@ -27,6 +28,7 @@ from module.config.stored.classes import (
 # ``` python -m module/config/config_updater.py ```
 
 class StoredGenerated:
+    AccountName = StoredAccountName("Restart.AccountStorage.AccountName")
     DuelDaily = StoredDuel("Duel.Duel.DuelDaily")
     CurrentVictoryCount = StoredDuelCurrentVictory("Duel.Duel.CurrentVictoryCount")
     Dungeon = StoredDungeon("TiLi.TiLiStorage.Dungeon")

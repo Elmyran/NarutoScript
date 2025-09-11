@@ -32,6 +32,9 @@
       "NextRun": "2020-01-01 00:00:00",
       "Command": "Restart",
       "ServerUpdate": "05:00"
+    },
+    "AccountStorage": {
+      "AccountName": {}
     }
   },
   "Duel": {

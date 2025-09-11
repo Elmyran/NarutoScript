@@ -455,7 +455,7 @@ class UI(MainPage):
         for _ in self.loop():
             if time.reached():
                 break
-            if self.appear_then_click(CODE_SECOND_PASSWORD_INPUT_CONFIRM,interval=0):
+            if self.appear_then_click(CODE_SECOND_PASSWORD_INPUT_CONFIRM,interval=1):
                 continue
             if self.appear(CODE_SECOND_PASSWORD):
                 self.appear_then_click(CODE_SECOND_PASSWORD_CONFIRM,interval=1)

@@ -163,6 +163,14 @@
         "value": "05:00",
         "display": "hide"
       }
+    },
+    "AccountStorage": {
+      "AccountName": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredAccountName"
+      }
     }
   },
   "Duel": {
@@ -1027,7 +1035,8 @@
     "PanRen": {
       "SecondPassword": {
         "type": "input",
-        "value": ""
+        "value": "",
+        "valuetype": "str"
       },
       "NoRewardJoinOrNot": {
         "type": "checkbox",

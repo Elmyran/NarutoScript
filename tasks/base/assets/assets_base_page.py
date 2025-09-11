@@ -280,13 +280,22 @@ MAIN_GOTO_TONG_LING = ButtonWrapper(
 )
 MISSION_CHARACTER_SELECT_CHECK = ButtonWrapper(
     name='MISSION_CHARACTER_SELECT_CHECK',
-    share=Button(
-        file='./assets/share/base/page/MISSION_CHARACTER_SELECT_CHECK.png',
-        area=(827, 504, 865, 543),
-        search=(807, 484, 885, 563),
-        color=(82, 49, 16),
-        button=(827, 504, 865, 543),
-    ),
+    share=[
+        Button(
+            file='./assets/share/base/page/MISSION_CHARACTER_SELECT_CHECK.png',
+            area=(827, 504, 865, 543),
+            search=(807, 484, 885, 563),
+            color=(82, 49, 16),
+            button=(827, 504, 865, 543),
+        ),
+        Button(
+            file='./assets/share/base/page/MISSION_CHARACTER_SELECT_CHECK.2.png',
+            area=(1114, 558, 1250, 710),
+            search=(1094, 538, 1270, 720),
+            color=(149, 117, 68),
+            button=(1114, 558, 1250, 710),
+        ),
+    ],
 )
 QIU_RI_JI_CHECK = ButtonWrapper(
     name='QIU_RI_JI_CHECK',

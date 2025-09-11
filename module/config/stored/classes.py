@@ -320,3 +320,5 @@ class StoredMissionAccept(StoredCounter,StoredExpiredAt0500):
         self.mission_times = []
 class StoredBattleFieldCount(StoredCounter,StoredExpiredAtMonday0500):
     FIXED_TOTAL = 1
+class StoredAccountName(StoredBase):
+    value = ''

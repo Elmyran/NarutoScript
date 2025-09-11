@@ -513,7 +513,7 @@
       "help": "叛忍结束后会重启游戏"
     },
     "NoRewardJoinOrNot": {
-      "name": "无奖励是否参与",
+      "name": "无奖励继续参与",
       "help": ""
     },
     "PanRenFinishCount": {
@@ -625,6 +625,16 @@
     "MissionAccept": {
       "name": "已接取数量",
       "help": ""
+    }
+  },
+  "AccountStorage": {
+    "_info": {
+      "name": "AccountStorage._info.name",
+      "help": "AccountStorage._info.help"
+    },
+    "AccountName": {
+      "name": "AccountStorage.AccountName.name",
+      "help": "AccountStorage.AccountName.help"
     }
   },
   "Gui": {

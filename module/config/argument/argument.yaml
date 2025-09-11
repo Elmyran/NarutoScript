@@ -232,6 +232,7 @@ PanRen:
   SecondPassword:
     type: input
     value: ''
+    valuetype: str
   NoRewardJoinOrNot:
     type: checkbox
     value: False
@@ -318,6 +319,11 @@ MissionStorage:
     stored: StoredMissionAccept
     value: {}
     display: display
+AccountStorage:
+  AccountName:
+    stored: StoredAccountName
+    value: ''
+    display: hide
 
 # ==================== Activity ====================
 

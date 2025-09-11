@@ -2,11 +2,11 @@ from module.base.base import ModuleBase
 from module.base.timer import Timer
 from module.exception import GameNotRunningError
 from module.logger import logger
-
+from module.ocr.keyword import parse_name  
 from tasks.base.page import page_main
 from tasks.base.ui import UI
 from tasks.login.assets.assets_login import *
-
+from module.ocr.ocr import Ocr
 from tasks.login.popup import GameInPopup
 
 
@@ -85,6 +85,14 @@ class Login(UI,GameInPopup):
         finally:
             self.device.screenshot_interval_set()
             self.device.stuck_timer = Timer(60, count=60).start()
+        ocr=Ocr(ACCOUNT_NAME)
+        for _ in self.loop():
+            name=ocr.ocr_single_line(self.device.image)
+            if name:
+                name=parse_name(name)
+                self.config.stored.AccountName.value=name
+                logger.info(f'detect account name: {name}')
+                break
 
     def app_stop(self):
         logger.hr('App stop')

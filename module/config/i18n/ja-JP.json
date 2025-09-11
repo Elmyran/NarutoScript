@@ -627,6 +627,16 @@
       "help": "MissionStorage.MissionAccept.help"
     }
   },
+  "AccountStorage": {
+    "_info": {
+      "name": "AccountStorage._info.name",
+      "help": "AccountStorage._info.help"
+    },
+    "AccountName": {
+      "name": "AccountStorage.AccountName.name",
+      "help": "AccountStorage.AccountName.help"
+    }
+  },
   "Gui": {
     "Aside": {
       "Install": "インストール",
