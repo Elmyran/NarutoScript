@@ -178,16 +178,3 @@ class BattleField(UI):
                 continue
             if self.appear_then_click(BATTLE_FIELD_REWARD_CLAIM_BUTTON,interval=1):
                 continue
-
-
-
-
-
-
-
-
-
-        
-    
-
-

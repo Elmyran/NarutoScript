@@ -51,7 +51,7 @@ from module.base.decorator import cached_property
 from module.logger import logger
 
 RETRY_TRIES = 5
-RETRY_DELAY = 3
+RETRY_DELAY = 5
 
 # Patch uiautomator2 appdir
 u2.init.appdir = os.path.dirname(uiautomator2cache.__file__)
