@@ -415,8 +415,13 @@ class Minitouch(Connection):
             return
 
         def early_minitouch_init_func():
-            _ = self._minitouch_builder
-
+            try:  
+                _ = self._minitouch_builder  
+            except Exception as e:  
+                logger.warning(f'Early MiniTouch initialization failed: {e}')  
+                # 清理缓存属性，让后续正常初始化时重试  
+                if has_cached_property(self, '_minitouch_builder'):  
+                    del_cached_property(self, '_minitouch_builder')  
         thread = threading.Thread(target=early_minitouch_init_func, daemon=True)
         self._minitouch_init_thread = thread
         thread.start()

@@ -138,8 +138,14 @@ class MaaTouch(Connection):
             return
 
         def early_maatouch_init_func():
-            _ = self._maatouch_builder
-
+            try:  
+                _ = self._maatouch_builder  
+            except Exception as e:  
+                logger.warning(f'Early MaaTouch initialization failed: {e}')  
+                # 清理缓存属性，让后续正常初始化时重试  
+                if has_cached_property(self, '_maatouch_builder'):  
+                    del_cached_property(self, '_maatouch_builder')  
+  
         thread = threading.Thread(target=early_maatouch_init_func, daemon=True)
         self._maatouch_init_thread = thread
         thread.start()
