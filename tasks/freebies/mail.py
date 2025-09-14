@@ -33,10 +33,10 @@ class MailReward(UI):
             out: CLAIM_ALL_DONE
         """
         logger.info('Mail claim all')
-        time=Timer(20,count=20).start()
+        time=Timer(5,count=10).start()
         for _ in self.loop():
             if time.reached():
-                raise GameStuckError("Mail claim all failed")
+                break
             if self.appear(CLAIM_ALL_DONE):
                 break
             if self.appear_then_click(CLAIM_ALL,interval=0):

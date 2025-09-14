@@ -320,7 +320,6 @@ class PlatformWindows(PlatformBase, EmulatorManager):
             if self._emulator_function_wrapper(self._emulator_start):
                 # Success
                 self.emulator_start_watch()
-                self.sleep(10)
                 return True
             else:
                 # Failed to start, stop and start again

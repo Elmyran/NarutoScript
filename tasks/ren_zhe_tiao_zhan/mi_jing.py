@@ -17,7 +17,7 @@ class MiJing(UI):
         self.device.click_record_clear()
         self.ui_ensure(page_main)
         if not TASK_TAB_LIST.search_rows(main=self,keyword=RenZheTiaoZhanKeyword):
-            raise GameStuckError(' RenZheTiaoZhan Not Found')
+            return False
         self.ui_ensure(page_mi_jing_room)
         self._mi_jing_fight()
         if (self.config.stored.MiJingCount.value >= 6 > pre_count) or (

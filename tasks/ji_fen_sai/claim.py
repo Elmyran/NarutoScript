@@ -15,7 +15,7 @@ class JiFenSaiClaim(UI):
         self.device.stuck_record_clear()
         self.ui_ensure(page_main)
         if not TASK_TAB_LIST.search_rows(main=self,keyword=JiFenSaiKeyword):
-            raise GameStuckError(' JiFenSai Task Tab Not Found')
+            return False
         self._claim_daily_reward()
         self.ui_goto_main()
     def _claim_daily_reward(self):
