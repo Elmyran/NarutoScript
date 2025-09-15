@@ -408,10 +408,10 @@ STUFF_SYNTHETIC_BUTTON = ButtonWrapper(
     name='STUFF_SYNTHETIC_BUTTON',
     cn=Button(
         file='./assets/cn/tili/equipment/STUFF_SYNTHETIC_BUTTON.png',
-        area=(337, 525, 531, 599),
-        search=(317, 505, 551, 619),
-        color=(201, 137, 24),
-        button=(337, 525, 531, 599),
+        area=(425, 529, 529, 592),
+        search=(405, 509, 549, 612),
+        color=(229, 162, 13),
+        button=(425, 529, 529, 592),
     ),
     en=None,
 )
