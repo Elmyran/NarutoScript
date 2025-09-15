@@ -1,3 +1,8 @@
+from ast import If
+from calendar import c
+from py import log
+from sympy import E
+from torch import eq
 from module.base.button import match_template
 from module.base.timer import Timer
 from module.base.utils import crop
@@ -26,16 +31,15 @@ class Equipment(UI):
             if current<5 and total==200:
                 return False
         self._equipment_enter()
-        self._equipment_part_red_dot_handle()
         self.device.stuck_timer=Timer(300,count=300).start()
+        
         try:
             for _ in self.loop():
-                self.ui_ensure(page_equipment)
-                self.device.click(EQUIPMENT_KNIFE)
+                self._equipment_part_red_dot_handle()
                 self._select_equipment_part()
                 self._synthesized_and_equipped()
+                self._select_equipment_part()
                 res=self._start_sweep()
-                
                 if res:
                     break
         finally:
@@ -82,6 +86,8 @@ class Equipment(UI):
                 continue
 
     def _select_equipment_part(self):
+        self.ui_ensure(page_equipment)
+        self.device.click(EQUIPMENT_KNIFE)
         """按顺序尝试装备部件，直到找到可升级的为止"""
         valid_parts = self._get_valid_equipment_parts()
         if not valid_parts:
@@ -101,15 +107,8 @@ class Equipment(UI):
             else:
                 logger.info(f"{button} cannot be upgraded, moving to next part")
                 continue  # 不可扫荡，继续下一个
-        #进入材料详情界面
-        time=Timer(2, count=4).start()
-        for _ in self.loop():
-            if time.reached():
-                raise GameStuckError('Equipment Part Stuff Select Click Error ')
-            if self.appear(STUFF_CHECK):
-                return True
-            self.device.click(res[0])
-        return False
+        return True
+       
 
     def _switch_equipment_with_verification(self, button, max_retries=3):
         """点击装备并验证切换成功，失败会重试"""
@@ -164,14 +163,36 @@ class Equipment(UI):
         for _ in self.loop():
             if time.reached():
                 return False
-            res = ocr.matched_ocr(self.device.image, keyword_classes=MopUpKeyword)
+            res = ocr.matched_ocr(self.device.image, keyword_classes=[MopUpKeyword, SyntheticKeyword])
             if res and len(res) > 0:
                 return res
         return False
 
 
 
-    def _start_sweep(self):
+    def _start_sweep(self,buttons):
+        ocr=StuffOcr(EQUIPMENT_PART_STUFF_AREA)
+        time=Timer(2,count=3).start()
+        for _ in self.loop():
+            if time.reached():
+                return False
+            buttons=ocr.matched_ocr(self.device.image, keyword_classes=[MopUpKeyword])
+            if buttons and len(buttons)>0:
+                break
+            else :
+                logger.info("No Mop Up Button Found")
+                continue
+                
+        #进入材料详情界面
+        time=Timer(2, count=4).start()
+        for _ in self.loop():
+            if time.reached():
+                raise GameStuckError('Equipment Part Stuff Select Click Error ')
+            if self.appear(STUFF_CHECK):
+                break
+            self.device.click(buttons[0])
+        
+       
         time = Timer(60, count=60).start()
         for _ in self.loop():
             if time.reached():
