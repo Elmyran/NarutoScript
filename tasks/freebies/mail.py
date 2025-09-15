@@ -33,13 +33,13 @@ class MailReward(UI):
             out: CLAIM_ALL_DONE
         """
         logger.info('Mail claim all')
-        time=Timer(5,count=10).start()
+        time=Timer(4,count=8).start()
         for _ in self.loop():
             if time.reached():
                 break
             if self.appear(CLAIM_ALL_DONE):
                 break
-            if self.appear_then_click(CLAIM_ALL,interval=0):
+            if self.appear_then_click(CLAIM_ALL,interval=1):
                 continue
 
 

@@ -10,6 +10,7 @@ from module.base.utils import random_rectangle_point, ensure_int, image_size, po
 from module.device.converter import ResolutionConverter
 from module.device.env import IS_WINDOWS
 # Patch pkg_resources before importing adbutils and uiautomator2
+from module.device.method.nemu_ipc import NemuIpcError
 from module.device.pkg_resources import get_distribution
 
 # Just avoid being removed by import optimization
@@ -80,7 +81,7 @@ class Device(Screenshot, Control, AppControl):
             try:
                 super().__init__(*args, **kwargs)
                 break
-            except EmulatorNotRunningError:
+            except (EmulatorNotRunningError,NemuIpcError) as e:
                 if trial >= 3:
                     logger.critical('Failed to start emulator after 3 trial')
                     raise RequestHumanTakeover
