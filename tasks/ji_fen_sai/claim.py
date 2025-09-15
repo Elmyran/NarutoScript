@@ -18,6 +18,7 @@ class JiFenSaiClaim(UI):
             return False
         self._claim_daily_reward()
         self.ui_goto_main()
+        return True
     def _claim_daily_reward(self):
         time=Timer(30,count=30).start()
         for _ in self.loop():

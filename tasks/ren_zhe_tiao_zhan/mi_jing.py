@@ -26,6 +26,7 @@ class MiJing(UI):
             from tasks.ren_zhe_tiao_zhan.mi_jing_box_claim import MiJingBoxClaim
             MiJingBoxClaim(config=self.config,device=self.device).handle_mi_jing_box_claim()
         self.ui_goto_main()
+        return True
     def _select_mi_jing(self):
         ocr=MiJingOcr(MI_JING_TYPE)
         ticket=Digit(MI_JING_REMAIN_CHALLENGE_TICKET)
