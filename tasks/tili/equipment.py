@@ -62,7 +62,7 @@ class Equipment(UI):
                 continue
 
     def _equipment_part_red_dot_handle(self):
-        time = Timer(2, count=2).start()
+        time = Timer(1, count=3).start()
         synthetic_success=False
         for _ in self.loop():
             if time.reached():
@@ -152,7 +152,7 @@ class Equipment(UI):
         return valid_parts
 
     def _check_part_status(self):
-        time = Timer(2, count=5).start()
+        time = Timer(1, count=3).start()
         ocr = Ocr(EQUIPMENT_PART_STUFF_AREA)
 
         for _ in self.loop():
@@ -167,7 +167,7 @@ class Equipment(UI):
 
     def _start_sweep(self):
         ocr=StuffOcr(EQUIPMENT_PART_STUFF_AREA)
-        time=Timer(2,count=3).start()
+        time=Timer(1,count=3).start()
         for _ in self.loop():
             if time.reached():
                 return False
