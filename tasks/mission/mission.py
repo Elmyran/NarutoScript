@@ -3,7 +3,7 @@ from module.exception import GameStuckError
 from module.logger.logger import logger
 from module.ocr.ocr import Ocr, DigitCounter
 from module.ocr.ocrutils import DigitOcr
-from module.ocr.onnxocr.onnx_paddleocr import ONNXPaddleOcr
+from module.ocr.onnxmodels import OCR_MODEL
 from module.ocr.utils import pair_buttons
 from tasks.base.page import page_main
 from tasks.base.task_tab.draglist import TASK_TAB_LIST
@@ -13,6 +13,7 @@ from tasks.mission.assets.assets_mission import *
 from tasks.mission.mission_keyword import Claimable
 from tasks.mission.priority import TaskPriority
 class Mission(UI):
+   
     def run(self):
         if self.config.stored.MissionAccept.is_expired():
             self.config.stored.MissionAccept.clear()
@@ -115,7 +116,7 @@ class Mission(UI):
         if not res:
             return
         self.device.click(res[0])
-        time = Timer(3, count=5).start()
+        time = Timer(1, count=3).start()
         for _ in self.loop():
             if time.reached():
                 break
@@ -133,9 +134,8 @@ class Mission(UI):
 
 
     def _mission_select_priority(self):
-        self.device.screenshot()
         # OCR识别部分保持不变
-        ocr = ONNXPaddleOcr(use_angle_cls=True, use_gpu=False)
+        ocr = OCR_MODEL.model  
         result = ocr.ocr(self.device.image)
         # 时间和任务识别
         task_time = ocr.matchTime(result)
@@ -229,11 +229,6 @@ class Mission(UI):
 
     def _task_strategy(self, tasks):
         return tasks
-    def test(self):
-        self.config.stored.MissionAccept.write_missions([30])
-        time=self.config.stored.MissionAccept.get_nearest_completion_time()
-        self.config.task_delay(target=time)
-az=Mission('src',task='Alas')
-az.test()
+   
 
 
