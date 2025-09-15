@@ -151,7 +151,6 @@ class Equipment(UI):
         return valid_parts
 
     def _check_part_status(self):
-        """检测铜币和升级条件"""
         time = Timer(2, count=5).start()
         ocr = Ocr(EQUIPMENT_PART_STUFF_AREA)
 
@@ -165,7 +164,7 @@ class Equipment(UI):
 
 
 
-    def _start_sweep(self,buttons):
+    def _start_sweep(self):
         ocr=StuffOcr(EQUIPMENT_PART_STUFF_AREA)
         time=Timer(2,count=3).start()
         for _ in self.loop():
