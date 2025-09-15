@@ -26,19 +26,21 @@ class Equipment(UI):
             if current<5 and total==200:
                 return False
         self._equipment_enter()
+        self._equipment_part_red_dot_handle()
         self.device.stuck_timer=Timer(300,count=300).start()
         try:
             for _ in self.loop():
-                self._equipment_part_red_dot_handle()
                 self.ui_ensure(page_equipment)
                 self.device.click(EQUIPMENT_KNIFE)
                 self._select_equipment_part()
-                res=self._start_sweep()
-                self.ui_ensure(page_equipment)
                 self._synthesized_and_equipped()
+                res=self._start_sweep()
+                
                 if res:
                     break
         finally:
+            self.ui_ensure(page_equipment)
+            self._synthesized_and_equipped()
             self.device.stuck_timer=Timer(60,count=60).start()
 
 
@@ -60,7 +62,7 @@ class Equipment(UI):
                 continue
 
     def _equipment_part_red_dot_handle(self):
-        time = Timer(1, count=2).start()
+        time = Timer(2, count=2).start()
         synthetic_success=False
         for _ in self.loop():
             if time.reached():
@@ -100,7 +102,7 @@ class Equipment(UI):
                 logger.info(f"{button} cannot be upgraded, moving to next part")
                 continue  # 不可扫荡，继续下一个
         #进入材料详情界面
-        time=Timer(2, count=5).start()
+        time=Timer(2, count=4).start()
         for _ in self.loop():
             if time.reached():
                 raise GameStuckError('Equipment Part Stuff Select Click Error ')
@@ -198,7 +200,7 @@ class Equipment(UI):
     def _synthesized_and_equipped(self):
         ocr=Ocr(EQUIPMENT_PART_STUFF_AREA)
         time=Timer(30, count=30).start()
-        select_time=Timer(2, count=3).start()
+        select_time=Timer(2, count=4).start()
         for _ in self.loop():
             if select_time.reached():
                 logger.info("Not Select Synthesized Stuff")
