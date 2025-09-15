@@ -27,7 +27,7 @@ class Equipment(UI):
                 return False
         self._equipment_enter()
         self.device.stuck_timer=Timer(300,count=300).start()
-        
+
         try:
             for _ in self.loop():
                 self._equipment_part_red_dot_handle()
@@ -40,6 +40,7 @@ class Equipment(UI):
         finally:
             self.ui_ensure(page_equipment)
             self._synthesized_and_equipped()
+            self._equipment_part_red_dot_handle()
             self.device.stuck_timer=Timer(60,count=60).start()
 
 
@@ -198,11 +199,13 @@ class Equipment(UI):
             if self.appear(TI_LI_SHORTAGE):
                 return True
             # 材料足够
+            STUFF_MATERIAL_FULL.load_search(FULL_SCREEN.area)
             if self.appear(STUFF_MATERIAL_FULL):
                 return False
             # 体力充足，材料不足，继续扫荡
             SWEEP_CONTINUE.load_search(SWEEP_AREA.area)
             if self.appear(SWEEP_CONTINUE,similarity=0.9, interval=2):
+                STUFF_MATERIAL_FULL.load_search(FULL_SCREEN.area)
                 if self.appear(STUFF_MATERIAL_FULL):
                     return False
                 else:
