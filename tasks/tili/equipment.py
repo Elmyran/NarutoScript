@@ -63,12 +63,9 @@ class Equipment(UI):
 
     def _equipment_part_red_dot_handle(self):
         time = Timer(1, count=3).start()
-        synthetic_success=False
         for _ in self.loop():
             if time.reached():
                 break
-            if self._synthesized_and_equipped() and synthetic_success==False:
-                synthetic_success=True
             if self.appear(POPUP_CLOSE, interval=0):
                 break
             EQUIPMENT_PART_DETAIL_RED_DOT.load_search(EQUIPMENT_PART_DETAIL_AREA.area)
@@ -78,7 +75,6 @@ class Equipment(UI):
             EQUIPMENT_PART_RED_DOT.load_search(EQUIPMENT_PART_AREA.area)
             if self.appear_then_click(EQUIPMENT_PART_RED_DOT, interval=1):
                 time.reset()
-                synthetic_success=False
                 continue
 
     def _select_equipment_part(self):

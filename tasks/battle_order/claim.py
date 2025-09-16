@@ -30,7 +30,7 @@ class BattleOrderClaim(UI):
             if self.appear_then_click(BATTLE_ORDER_REWARD_CLAIM_SUCCESS,interval=0):
                 time.reset()
                 continue
-            res=self.detect_claimable_buttons(button=BATTLE_ORDER_REWARD_AREA,similarity=0.5)
+            res=self.detect_claimable_buttons(image=self.device.image,button=BATTLE_ORDER_REWARD_AREA,similarity=0.5)
             if res and len(res)!=0:
                 if self.interval_is_reached('claimable_click', interval=1):
                     self.device.click(res[0])

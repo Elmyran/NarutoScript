@@ -216,17 +216,16 @@ class ModuleBase:
             self.interval_reset(button, interval=interval)
 
         return appear
-    def detect_claimable_buttons(self, button: ButtonWrapper = None, image=None, similarity=0.85, encourage=10):
+    def detect_claimable_buttons(self,image, button: ButtonWrapper = None, similarity=0.85, encourage=10):
         """
         检测图片中所有可领取奖励，返回 ClickButton 对象列表
         支持多个类别同时识别
         """
         import time
         start_time = time.time()
-        self.device.screenshot()
         # 获取图片
-        if image is not None:
-            img = cv2.imread(image) if isinstance(image, str) else image
+        if isinstance(image, str):
+            img = cv2.imread(image)
         else:
             img = self.device.image
 
@@ -239,12 +238,10 @@ class ModuleBase:
         # 遮掩法：只保留 ROI
         mask_img = np.zeros_like(img)
         mask_img[y1:y2, x1:x2] = img[y1:y2, x1:x2]
-
-
         # YOLO 检测
         model = self.yolo_model
         results = model.predict(mask_img, conf=similarity)  # 返回列表
-    
+        print(results)
         claimable_buttons = []
 
         for result in results:

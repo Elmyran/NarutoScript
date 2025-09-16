@@ -1,3 +1,4 @@
+
 import cv2
 import numpy as np
 
@@ -44,7 +45,7 @@ class YOLO11:
 
         self.color_palette = np.random.uniform(0, 255, size=(len(self.classes), 3))
 
-        self.session = ort.InferenceSession(self.onnx_model, providers=['DmlExecutionProvider','CUDAExecutionProvider',"CPUExecutionProvider"])
+        self.session = ort.InferenceSession(self.onnx_model, providers=['DmlExecutionProvider',"CPUExecutionProvider"])
 
     def predict(self, image=None, conf=None, iou=None):
         if image is not None:
@@ -55,22 +56,19 @@ class YOLO11:
             self.iou_thres = iou
         img_data = self.preprocess(self.input_image)
         outputs = self.session.run(None, {self.session.get_inputs()[0].name: img_data})
-
-
         # 后处理，返回图像和检测框
         return self.postprocess(self.img, outputs)
 
     def preprocess(self, image):
         if isinstance(image, str):  # 文件路径
             self.img = cv2.imread(image)
-            self.img=cv2.cvtColor(self.img, cv2.COLOR_BGR2RGB)
-        elif isinstance(image, np.ndarray):  # 已经是图片
+            img = cv2.cvtColor(self.img, cv2.COLOR_BGR2RGB)
+        else:  # 已经是图片
             self.img = image
-        else:
-            raise ValueError("Unsupported input type for YOLO preprocess")
-
+       
+        
         img, self.ratio, (self.dw, self.dh) = self.letterbox(self.img, new_shape=(640, 640))
-
+        
         image_data = np.array(img) / 255.0
         image_data = np.transpose(image_data, (2, 0, 1))  # 通道优先
         image_data = np.expand_dims(image_data, axis=0).astype(np.float32)
@@ -93,31 +91,29 @@ class YOLO11:
         return img, (r, r), (dw, dh)
 
     def postprocess(self, input_image, output):
-
         outputs = np.squeeze(output[0])  # (300, 6)
 
         boxes, scores, class_ids = [], [], []
 
         for i in range(outputs.shape[0]):
-            x, y, w, h, score, class_id = outputs[i]
+            x1, y1, x2, y2, score, class_id = outputs[i]
 
             if score < self.confidence_thres:
-                continue  # 置信度过低的直接跳过
+                continue
 
             # 转回原图尺寸
-            x = (x - self.dw) / self.ratio[0]
-            y = (y - self.dh) / self.ratio[1]
-            w /= self.ratio[0]
-            h /= self.ratio[1]
+            x1 = (x1 - self.dw) / self.ratio[0]
+            y1 = (y1 - self.dh) / self.ratio[1]
+            x2 = (x2 - self.dw) / self.ratio[0]
+            y2 = (y2 - self.dh) / self.ratio[1]
 
-            left = int(x - w / 2)
-            top = int(y - h / 2)
+            w = x2 - x1
+            h = y2 - y1
 
-            boxes.append([left, top, int(w), int(h)])
+            boxes.append([int(x1), int(y1), int(w), int(h)])
             scores.append(float(score))
             class_ids.append(int(class_id))
 
-        # 直接封装成 YoloResult 返回
         results_list = []
         for i in range(len(boxes)):
             results_list.append(YoloResult(
@@ -129,7 +125,6 @@ class YOLO11:
             ))
 
         return results_list
-
     def draw_detections(self, img, box, score, class_id):
         x1, y1, w, h = box
         color = self.color_palette[class_id]
