@@ -765,7 +765,7 @@ class Connection(ConnectionAttr):
             return True
 
         # Try to connect
-        for _ in range(3):
+        for _ in range(RETRY_TRIES):
             msg = self.adb_client.connect(self.serial)
             logger.info(msg)
             # Connected to 127.0.0.1:59865

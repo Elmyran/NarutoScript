@@ -218,7 +218,7 @@ class Equipment(UI):
     def _synthesized_and_equipped(self):
         ocr=Ocr(EQUIPMENT_PART_STUFF_AREA)
         time=Timer(30, count=30).start()
-        select_time=Timer(2, count=4).start()
+        select_time=Timer(1, count=3).start()
         for _ in self.loop():
             if select_time.reached():
                 logger.info("Not Select Synthesized Stuff")

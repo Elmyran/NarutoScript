@@ -3,6 +3,7 @@ import itertools
 
 import numpy as np
 from lxml import etree
+from torch import R
 
 from module.base.button import ClickButton
 from module.base.utils import random_rectangle_point, ensure_int, image_size, point2str, ensure_time, \
@@ -11,6 +12,7 @@ from module.device.converter import ResolutionConverter
 from module.device.env import IS_WINDOWS
 # Patch pkg_resources before importing adbutils and uiautomator2
 from module.device.method.nemu_ipc import NemuIpcError
+from module.device.method.utils import RETRY_TRIES
 from module.device.pkg_resources import get_distribution
 
 # Just avoid being removed by import optimization
@@ -77,13 +79,13 @@ class Device(Screenshot, Control, AppControl):
     stuck_timer = Timer(60, count=60).start()
 
     def __init__(self, *args, **kwargs):
-        for trial in range(4):
+        for trial in range(RETRY_TRIES):
             try:
                 super().__init__(*args, **kwargs)
                 break
             except (EmulatorNotRunningError,NemuIpcError) as e:
-                if trial >= 3:
-                    logger.critical('Failed to start emulator after 3 trial')
+                if trial >= RETRY_TRIES:
+                    logger.critical('Failed to start emulator after '+{RETRY_TRIES}+' trial')
                     raise RequestHumanTakeover
                 # Try to start emulator
                 if self.emulator_instance is not None:

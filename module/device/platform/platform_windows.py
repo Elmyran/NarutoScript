@@ -7,6 +7,7 @@ import psutil
 from module.base.decorator import run_once
 from module.base.timer import Timer
 from module.device.connection import AdbDeviceWithStatus
+from module.device.method.utils import RETRY_TRIES
 from module.device.platform.platform_base import PlatformBase
 from module.device.platform.emulator_windows import Emulator, EmulatorInstance, EmulatorManager
 from module.device.platform.utils import iter_process
@@ -312,7 +313,7 @@ class PlatformWindows(PlatformBase, EmulatorManager):
 
     def emulator_start(self):
         logger.hr('Emulator start', level=1)
-        for _ in range(3):
+        for _ in range(RETRY_TRIES):
             # Stop
             if not self._emulator_function_wrapper(self._emulator_stop):
                 return False
@@ -328,7 +329,7 @@ class PlatformWindows(PlatformBase, EmulatorManager):
                 else:
                     return False
 
-        logger.error('Failed to start emulator 3 times, stopped')
+        logger.error('Failed to start emulator '+{RETRY_TRIES}+ 'times, stopped')
         return False
 
     def emulator_stop(self):
