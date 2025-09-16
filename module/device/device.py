@@ -3,7 +3,7 @@ import itertools
 
 import numpy as np
 from lxml import etree
-from torch import R
+
 
 from module.base.button import ClickButton
 from module.base.utils import random_rectangle_point, ensure_int, image_size, point2str, ensure_time, \
