@@ -82,7 +82,19 @@ class GeneratedConfig:
     ZhaoCai_ZhaoCaiFree = True
 
     # Group `DailyReward`
-    DailyReward_Weekly = True
+    DailyReward_Daily = True
+
+    # Group `LeaderBoard`
+    LeaderBoard_claim = True
+
+    # Group `MonthlySignIn`
+    MonthlySignIn_SignIn = True
+
+    # Group `InformationClub`
+    InformationClub_SignIn = True
+
+    # Group `YiLeLaMian`
+    YiLeLaMian_Claim = True
 
     # Group `Recruit`
     Recruit_SkipNormalRecruit = False
@@ -116,6 +128,8 @@ class GeneratedConfig:
 
     # Group `BattleOrderStorage`
     BattleOrderStorage_BattleOrderRank = {}
+    BattleOrderStorage_BattleOrderActivityPoints = {}
+    BattleOrderStorage_BattleOrderTaskProgress = {}
 
     # Group `FreebiesStorage`
     FreebiesStorage_WeeklyPackage = {}

@@ -1,7 +1,6 @@
 
 from module.ocr.ocr import DigitCounter
-from tasks.activity.assets.assets_activity_monthly_sign_in import MONTHLY_SIGN_IN_BUTTON, \
-    MONTHLY_SIGN_IN_HAVE_DONE, SIGN_IN_PROGRESS, MONTHLY_SIGN_IN_TITLE_HAVE_CLAIM
+from tasks.freebies.assets.assets_freebies_monthly_sign_in import *
 from tasks.activity.draglist import ACTIVITY_TAB_LIST
 from tasks.activity.keyword import  MeiYueQianDaoKeyword
 from tasks.base.page import page_main, page_activity
@@ -9,10 +8,7 @@ from tasks.base.ui import UI
 
 
 class MonthlySignIn(UI):
-    def run(self):
-        self.handle_monthly_sign_in()
-        self.config.task_delay(server_update=True)
-        self.config.task_stop()
+    
     def handle_monthly_sign_in(self):
         self.device.click_record_clear()
         self.ui_ensure(page_activity)

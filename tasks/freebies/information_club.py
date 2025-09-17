@@ -2,14 +2,11 @@ from module.base.timer import Timer
 from module.exception import GameStuckError
 from tasks.base.page import page_welfare_station
 from tasks.base.ui import UI
-from tasks.information_club.assets.assets_information_club import *
+from tasks.freebies.assets.assets_freebies_information_club import *
 
 
 class InformationClub(UI):
-    def run(self):
-        self.handle_information_club()
-        self.config.task_delay(server_update=True)
-        self.config.task_stop()
+
 
     def handle_information_club(self):
         self.device.click_record_clear()
@@ -25,5 +22,3 @@ class InformationClub(UI):
             if self.appear(DAILY_SIGN_IN_HAVE_DONE,interval=1,similarity=0.7):
                 break
         self.ui_goto_main()
-    
-

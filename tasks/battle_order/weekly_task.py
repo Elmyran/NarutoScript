@@ -1,4 +1,7 @@
+
+from module.logger.logger import logger
 from module.base.timer import Timer
+from module.ocr.ocr import DigitCounter
 from tasks.base.page import page_battle_order
 from tasks.base.ui import UI
 from tasks.battle_order.assets.assets_battle_order_task import *
@@ -6,6 +9,10 @@ from tasks.battle_order.assets.assets_battle_order_ui import BATTLE_ORDER_DETAIL
 from tasks.battle_order.switch import BATTLE_ORDER_TAB
 class BattleOrderWeeklyTask(UI):
     def handle_battle_order_weekly_task(self):
+        if self.config.stored.BattleOrderTaskProgress.is_expired():
+            self.config.stored.BattleOrderTaskProgress.clear()
+        if self.config.stored.BattleOrderTaskProgress.is_full():
+            return True
         self.device.click_record_clear()
         self.ui_ensure(page_battle_order)
         BATTLE_ORDER_TAB.set('周任务',main=self)
@@ -25,6 +32,18 @@ class BattleOrderWeeklyTask(UI):
                 continue
             if claim_time.reached():
                 break
+        ocr_time=Timer(1,3).start()
+        progress=0
+        ocr=DigitCounter(BATTLE_ORDER_TASK_PROGRESS)
+        for _ in self.loop():
+            if ocr_time.reached():
+                break
+            current,remain,total=ocr.ocr_single_line(self.device.image)
+            if total!=0:
+                progress=current
+                break
+        self.config.stored.BattleOrderTaskProgress.value=progress
+
 
 
 

@@ -13,7 +13,7 @@ from tasks.base.task_tab.keyword import TaskTab
 from tasks.base.task_tab.ocr import TaskTabOcr, TaskOcr
 from tasks.duel.assets.assets_duel import DUEL_CHECK
 from tasks.fengrao.assets.assets_fengrao import FENG_RAO_CHECK
-from tasks.leaderboard.assets.assets_leaderboard import LEADER_BOARD_CHECK
+from tasks.freebies.assets.assets_freebies_leaderboard import LEADER_BOARD_CHECK
 from tasks.mission.assets.assets_mission import MISSION_CHECK
 from tasks.organization.assets.assets_organization_pray import  ORGANIZATION_PANEL
 from tasks.squadraid.assets.assets_squadraid_fight import SQUAD_RAID_CHECK

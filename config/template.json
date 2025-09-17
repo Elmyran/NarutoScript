@@ -162,33 +162,6 @@
       "JiFenSaiDailyRewardClaim": {}
     }
   },
-  "DataUpdate": {
-    "Scheduler": {
-      "Enable": true,
-      "NextRun": "2020-01-01 00:00:00",
-      "Command": "DataUpdate",
-      "ServerUpdate": "05:00"
-    },
-    "ItemStorage": {
-      "TiLi": {},
-      "Golds": {},
-      "Tickets": {},
-      "Coins": {},
-      "Fame": {},
-      "Mission": {}
-    }
-  },
-  "ZhaoCai": {
-    "Scheduler": {
-      "Enable": false,
-      "NextRun": "2020-01-01 00:00:00",
-      "Command": "ZhaoCai",
-      "ServerUpdate": "05:00"
-    },
-    "ZhaoCai": {
-      "ZhaoCaiFree": true
-    }
-  },
   "Freebies": {
     "Scheduler": {
       "Enable": false,
@@ -204,51 +177,26 @@
     "WeeklyFreebies": {
       "WeeklyPackage": true
     },
+    "ZhaoCai": {
+      "ZhaoCaiFree": true
+    },
     "FreebiesStorage": {
       "WeeklyPackage": {}
-    }
-  },
-  "DailyReward": {
-    "Scheduler": {
-      "Enable": false,
-      "NextRun": "2020-01-01 00:00:00",
-      "Command": "DailyReward",
-      "ServerUpdate": "05:00"
     },
     "DailyReward": {
-      "Weekly": true
-    }
-  },
-  "LeaderBoard": {
-    "Scheduler": {
-      "Enable": false,
-      "NextRun": "2020-01-01 00:00:00",
-      "Command": "LeaderBoard",
-      "ServerUpdate": "05:00"
-    }
-  },
-  "MonthlySignIn": {
-    "Scheduler": {
-      "Enable": false,
-      "NextRun": "2020-01-01 00:00:00",
-      "Command": "MonthlySignIn",
-      "ServerUpdate": "05:00"
-    }
-  },
-  "InformationClub": {
-    "Scheduler": {
-      "Enable": false,
-      "NextRun": "2020-01-01 00:00:00",
-      "Command": "InformationClub",
-      "ServerUpdate": "05:00"
-    }
-  },
-  "YiLeLaMian": {
-    "Scheduler": {
-      "Enable": false,
-      "NextRun": "2020-01-01 00:00:00",
-      "Command": "YiLeLaMian",
-      "ServerUpdate": "05:00"
+      "Daily": true
+    },
+    "LeaderBoard": {
+      "claim": true
+    },
+    "MonthlySignIn": {
+      "SignIn": true
+    },
+    "InformationClub": {
+      "SignIn": true
+    },
+    "YiLeLaMian": {
+      "Claim": true
     }
   },
   "BattleOrder": {
@@ -263,7 +211,25 @@
       "CharacterFragments": "秽土长门"
     },
     "BattleOrderStorage": {
-      "BattleOrderRank": {}
+      "BattleOrderRank": {},
+      "BattleOrderActivityPoints": {},
+      "BattleOrderTaskProgress": {}
+    }
+  },
+  "DataUpdate": {
+    "Scheduler": {
+      "Enable": true,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "DataUpdate",
+      "ServerUpdate": "05:00"
+    },
+    "ItemStorage": {
+      "TiLi": {},
+      "Golds": {},
+      "Tickets": {},
+      "Coins": {},
+      "Fame": {},
+      "Mission": {}
     }
   },
   "CultivationRoad": {

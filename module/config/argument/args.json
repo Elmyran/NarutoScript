@@ -566,6 +566,181 @@
       }
     }
   },
+  "Freebies": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "Freebies",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    },
+    "DailyFreebies": {
+      "FriendGifts": {
+        "type": "checkbox",
+        "value": true
+      },
+      "DailyShare": {
+        "type": "checkbox",
+        "value": true
+      },
+      "MailReward": {
+        "type": "checkbox",
+        "value": true
+      }
+    },
+    "WeeklyFreebies": {
+      "WeeklyPackage": {
+        "type": "checkbox",
+        "value": true
+      }
+    },
+    "ZhaoCai": {
+      "ZhaoCaiFree": {
+        "type": "checkbox",
+        "value": true
+      }
+    },
+    "FreebiesStorage": {
+      "WeeklyPackage": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredFreebiesWeeklyPackage"
+      }
+    },
+    "DailyReward": {
+      "Daily": {
+        "type": "checkbox",
+        "value": true
+      }
+    },
+    "LeaderBoard": {
+      "claim": {
+        "type": "checkbox",
+        "value": true
+      }
+    },
+    "MonthlySignIn": {
+      "SignIn": {
+        "type": "checkbox",
+        "value": true
+      }
+    },
+    "InformationClub": {
+      "SignIn": {
+        "type": "checkbox",
+        "value": true
+      }
+    },
+    "YiLeLaMian": {
+      "Claim": {
+        "type": "checkbox",
+        "value": true
+      }
+    }
+  },
+  "BattleOrder": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "BattleOrder",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    },
+    "BattleOrder": {
+      "LikeAndShare": {
+        "type": "checkbox",
+        "value": true
+      },
+      "CharacterFragments": {
+        "type": "select",
+        "value": "秽土长门",
+        "option": [
+          "秽土解斑",
+          "永恒佐助",
+          "忍战樱",
+          "九喇嘛鸣人",
+          "死门凯",
+          "秽土柱间",
+          "秽土鼬",
+          "仙人兜",
+          "秽土斑",
+          "白面具",
+          "秽土扉间",
+          "百豪纲手",
+          "秽土水门",
+          "秽土日斩",
+          "秽土长门",
+          "斑",
+          "柱间",
+          "四代目雷影",
+          "扉间",
+          "神秘面具男",
+          "须佐能乎鼬",
+          "天道佩恩",
+          "水门",
+          "大蛇丸",
+          "自来也"
+        ]
+      }
+    },
+    "BattleOrderStorage": {
+      "BattleOrderRank": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredBattleOrderRank"
+      },
+      "BattleOrderActivityPoints": {
+        "type": "stored",
+        "value": {},
+        "display": "display",
+        "stored": "StoredBattleOrderActivityPoints"
+      },
+      "BattleOrderTaskProgress": {
+        "type": "stored",
+        "value": {},
+        "display": "display",
+        "stored": "StoredBattleOrderTaskProgress"
+      }
+    }
+  },
   "DataUpdate": {
     "Scheduler": {
       "Enable": {
@@ -642,307 +817,6 @@
         "stored": "StoredMissionAccept",
         "order": 6,
         "color": "#ff6b6b"
-      }
-    }
-  },
-  "ZhaoCai": {
-    "Scheduler": {
-      "Enable": {
-        "type": "checkbox",
-        "value": false,
-        "option": [
-          true,
-          false
-        ]
-      },
-      "NextRun": {
-        "type": "datetime",
-        "value": "2020-01-01 00:00:00",
-        "validate": "datetime"
-      },
-      "Command": {
-        "type": "input",
-        "value": "ZhaoCai",
-        "display": "hide"
-      },
-      "ServerUpdate": {
-        "type": "input",
-        "value": "05:00",
-        "display": "hide"
-      }
-    },
-    "ZhaoCai": {
-      "ZhaoCaiFree": {
-        "type": "checkbox",
-        "value": true
-      }
-    }
-  },
-  "Freebies": {
-    "Scheduler": {
-      "Enable": {
-        "type": "checkbox",
-        "value": false,
-        "option": [
-          true,
-          false
-        ]
-      },
-      "NextRun": {
-        "type": "datetime",
-        "value": "2020-01-01 00:00:00",
-        "validate": "datetime"
-      },
-      "Command": {
-        "type": "input",
-        "value": "Freebies",
-        "display": "hide"
-      },
-      "ServerUpdate": {
-        "type": "input",
-        "value": "05:00",
-        "display": "hide"
-      }
-    },
-    "DailyFreebies": {
-      "FriendGifts": {
-        "type": "checkbox",
-        "value": true
-      },
-      "DailyShare": {
-        "type": "checkbox",
-        "value": true
-      },
-      "MailReward": {
-        "type": "checkbox",
-        "value": true
-      }
-    },
-    "WeeklyFreebies": {
-      "WeeklyPackage": {
-        "type": "checkbox",
-        "value": true
-      }
-    },
-    "FreebiesStorage": {
-      "WeeklyPackage": {
-        "type": "stored",
-        "value": {},
-        "display": "hide",
-        "stored": "StoredFreebiesWeeklyPackage"
-      }
-    }
-  },
-  "DailyReward": {
-    "Scheduler": {
-      "Enable": {
-        "type": "checkbox",
-        "value": false,
-        "option": [
-          true,
-          false
-        ]
-      },
-      "NextRun": {
-        "type": "datetime",
-        "value": "2020-01-01 00:00:00",
-        "validate": "datetime"
-      },
-      "Command": {
-        "type": "input",
-        "value": "DailyReward",
-        "display": "hide"
-      },
-      "ServerUpdate": {
-        "type": "input",
-        "value": "05:00",
-        "display": "hide"
-      }
-    },
-    "DailyReward": {
-      "Weekly": {
-        "type": "checkbox",
-        "value": true
-      }
-    }
-  },
-  "LeaderBoard": {
-    "Scheduler": {
-      "Enable": {
-        "type": "checkbox",
-        "value": false,
-        "option": [
-          true,
-          false
-        ]
-      },
-      "NextRun": {
-        "type": "datetime",
-        "value": "2020-01-01 00:00:00",
-        "validate": "datetime"
-      },
-      "Command": {
-        "type": "input",
-        "value": "LeaderBoard",
-        "display": "hide"
-      },
-      "ServerUpdate": {
-        "type": "input",
-        "value": "05:00",
-        "display": "hide"
-      }
-    }
-  },
-  "MonthlySignIn": {
-    "Scheduler": {
-      "Enable": {
-        "type": "checkbox",
-        "value": false,
-        "option": [
-          true,
-          false
-        ]
-      },
-      "NextRun": {
-        "type": "datetime",
-        "value": "2020-01-01 00:00:00",
-        "validate": "datetime"
-      },
-      "Command": {
-        "type": "input",
-        "value": "MonthlySignIn",
-        "display": "hide"
-      },
-      "ServerUpdate": {
-        "type": "input",
-        "value": "05:00",
-        "display": "hide"
-      }
-    }
-  },
-  "InformationClub": {
-    "Scheduler": {
-      "Enable": {
-        "type": "checkbox",
-        "value": false,
-        "option": [
-          true,
-          false
-        ]
-      },
-      "NextRun": {
-        "type": "datetime",
-        "value": "2020-01-01 00:00:00",
-        "validate": "datetime"
-      },
-      "Command": {
-        "type": "input",
-        "value": "InformationClub",
-        "display": "hide"
-      },
-      "ServerUpdate": {
-        "type": "input",
-        "value": "05:00",
-        "display": "hide"
-      }
-    }
-  },
-  "YiLeLaMian": {
-    "Scheduler": {
-      "Enable": {
-        "type": "checkbox",
-        "value": false,
-        "option": [
-          true,
-          false
-        ]
-      },
-      "NextRun": {
-        "type": "datetime",
-        "value": "2020-01-01 00:00:00",
-        "validate": "datetime"
-      },
-      "Command": {
-        "type": "input",
-        "value": "YiLeLaMian",
-        "display": "hide"
-      },
-      "ServerUpdate": {
-        "type": "input",
-        "value": "05:00",
-        "display": "hide"
-      }
-    }
-  },
-  "BattleOrder": {
-    "Scheduler": {
-      "Enable": {
-        "type": "checkbox",
-        "value": false,
-        "option": [
-          true,
-          false
-        ]
-      },
-      "NextRun": {
-        "type": "datetime",
-        "value": "2020-01-01 00:00:00",
-        "validate": "datetime"
-      },
-      "Command": {
-        "type": "input",
-        "value": "BattleOrder",
-        "display": "hide"
-      },
-      "ServerUpdate": {
-        "type": "input",
-        "value": "05:00",
-        "display": "hide"
-      }
-    },
-    "BattleOrder": {
-      "LikeAndShare": {
-        "type": "checkbox",
-        "value": true
-      },
-      "CharacterFragments": {
-        "type": "select",
-        "value": "秽土长门",
-        "option": [
-          "秽土解斑",
-          "永恒佐助",
-          "忍战樱",
-          "九喇嘛鸣人",
-          "死门凯",
-          "秽土柱间",
-          "秽土鼬",
-          "仙人兜",
-          "秽土斑",
-          "白面具",
-          "秽土扉间",
-          "百豪纲手",
-          "秽土水门",
-          "秽土日斩",
-          "秽土长门",
-          "斑",
-          "柱间",
-          "四代目雷影",
-          "扉间",
-          "神秘面具男",
-          "须佐能乎鼬",
-          "天道佩恩",
-          "水门",
-          "大蛇丸",
-          "自来也"
-        ]
-      }
-    },
-    "BattleOrderStorage": {
-      "BattleOrderRank": {
-        "type": "stored",
-        "value": {},
-        "display": "hide",
-        "stored": "StoredBattleOrderRank"
       }
     }
   },

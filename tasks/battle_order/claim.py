@@ -36,7 +36,7 @@ class BattleOrderClaim(UI):
                 time.reset()
                 continue
             if self.interval_is_reached('claimable_click', interval=0.5):
-                res=self.detect_reward_boxes(image=self.device.image,button=BATTLE_ORDER_REWARD_CLAIM_AREA)
+                res,_=self.detect_reward_boxes(image=self.device.image,button=BATTLE_ORDER_REWARD_CLAIM_AREA)
                 if res and len(res)!=0:
                         logger.info(f"Detect {len(res)} Claimable Reward ")
                         self.device.click(res[0])
@@ -60,7 +60,7 @@ class BattleOrderClaim(UI):
             if character.cn == chinese_name:
                 return character
         return None
-    def is_claimable_single_frame(self, image, roi, v_thresh=125, ratio_thresh=0.4, mean_v_thresh=120):
+    def is_claimable_single_frame(self, image, roi, v_thresh=125, ratio_thresh=0.4, mean_v_thresh=125):
         """
         平均亮度 + 白色过滤
         """
@@ -71,9 +71,7 @@ class BattleOrderClaim(UI):
         image = image[y1:y2, x1:x2]
         if image.size == 0:
             return False
-
-       
-
+        
         hsv = cv2.cvtColor(image, cv2.COLOR_RGB2HSV)
         s = hsv[:, :, 1]
         v = hsv[:, :, 2]
@@ -127,19 +125,17 @@ class BattleOrderClaim(UI):
             approx = cv2.approxPolyDP(cnt, 0.02 * peri, True)
             print(f"检测到轮廓: 面积={area}, 宽高比={ratio:.2f}, 顶点数={len(approx)}")
             # 矩形度过滤
-            rect_area = w * h
-            contour_area = cv2.contourArea(cnt)
-            extent = contour_area / float(rect_area)
-            if extent < 0.7:
+            extent = cv2.contourArea(cnt) / float(w * h)
+            if extent < 0.85 or extent > 1.05:
+                continue
+            ratio = w / float(h)
+            if ratio > 1.05:
                 continue
             # 过滤条件
-           
             if w > 95:
                 continue
             if h < 70 or h > 90:
                 continue
-            
-
             # 调整略大的框
             if w > max_w:
                 over = w - max_w
@@ -168,12 +164,11 @@ class BattleOrderClaim(UI):
         boxes.sort(key=lambda b: b.button[0])
         image=cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
         if not self.config.Error_SaveError:  
-            return boxes
+            return boxes,image
         self.device.screenshot_deque.append({  
         'time': datetime.now(),  
         'image': image
         }) 
         self.screenshot_tracking_add()
-        return boxes
-
+        return boxes,image
 

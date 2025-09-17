@@ -56,49 +56,24 @@ Daily:
       - Scheduler
       - JiFenSai
       - JiFenSaiStorage
-    DataUpdate:
-      - Scheduler
-      - ItemStorage
-
-Rewards:
-  menu: 'collapse'
-  page: 'setting'
-  tasks:
-    ZhaoCai:
-      - Scheduler
-      - ZhaoCai
     Freebies:
       - Scheduler
       - DailyFreebies
       - WeeklyFreebies
+      - ZhaoCai
       - FreebiesStorage
-    DailyReward:
-      - Scheduler
       - DailyReward
-    LeaderBoard:
-      - Scheduler
       - LeaderBoard
-    MonthlySignIn:
-      - Scheduler
       - MonthlySignIn
-    InformationClub:
-      - Scheduler
       - InformationClub
-    YiLeLaMian:
-      - Scheduler
       - YiLeLaMian
     BattleOrder:
       - Scheduler
       - BattleOrder
       - BattleOrderStorage
-
-
-
-
-
-
-
-
+    DataUpdate:
+      - Scheduler
+      - ItemStorage
 # ==================== Weekly ====================
 Weekly:
   menu: 'collapse'

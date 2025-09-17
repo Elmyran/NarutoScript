@@ -14,6 +14,17 @@ BATTLE_ORDER_TASK_END = ButtonWrapper(
     ),
     en=None,
 )
+BATTLE_ORDER_TASK_PROGRESS = ButtonWrapper(
+    name='BATTLE_ORDER_TASK_PROGRESS',
+    cn=Button(
+        file='./assets/cn/battle_order/task/BATTLE_ORDER_TASK_PROGRESS.png',
+        area=(238, 116, 476, 156),
+        search=(218, 96, 496, 176),
+        color=(173, 166, 150),
+        button=(238, 116, 476, 156),
+    ),
+    en=None,
+)
 BATTLE_ORDER_TASK_REWARD_CLAIM = ButtonWrapper(
     name='BATTLE_ORDER_TASK_REWARD_CLAIM',
     cn=Button(

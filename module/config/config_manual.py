@@ -13,14 +13,9 @@ class ManualConfig:
     > BattleField
     > Fortress 
     > PanRen
-    > ZhaoCai
-    > InformationClub
-    > MonthlySignIn
-    > YiLeLaMian
     > Recruit
     > DingCiKaoRou
     > Freebies
-    > LeaderBoard 
     > JiFenSai
     > CultivationRoad 
     > Akatsuki 
@@ -32,7 +27,6 @@ class ManualConfig:
     > Mission
     > Duel
     > TiLi
-    > DailyReward
     > QiuRiJi
     > BattleOrder
     > DataUpdate

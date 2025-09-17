@@ -22,7 +22,6 @@ class Freebies(ModuleBase):
         if self.config.DailyFreebies_DailyShare:
             logger.hr('Daily Share', level=1)
             DailyShare(config=self.config, device=self.device).handle_daily_share()
-
         if self.config.DailyFreebies_FriendGifts:
             logger.hr('Friend Gifts', level=1)
             FriendGifts(config=self.config, device=self.device).handle_friend_gifts()
@@ -30,6 +29,30 @@ class Freebies(ModuleBase):
         if  self.config.DailyFreebies_MailReward:
             logger.hr('Mail Reward', level=1)
             MailReward(config=self.config, device=self.device).handle_mail_reward()
-
+        if self.config.ZhaoCai_ZhaoCaiFree:
+            logger.hr('Zhao Cai Free', level=1)
+            from tasks.freebies.zhaocai import ZhaoCaiFree
+            ZhaoCaiFree(config=self.config, device=self.device).handle_zhao_cai()
+        if self.config.InformationClub_SignIn:
+            logger.hr('Information Club', level=1)
+            from tasks.freebies.information_club import InformationClub
+            InformationClub(config=self.config, device=self.device).handle_information_club()
+        if self.config.LeaderBoard_claim:
+            logger.hr('Leader Board', level=1)
+            from tasks.freebies.leaderboard import LeaderBoard
+            LeaderBoard(config=self.config, device=self.device).handle_leader_board()
+        if self.config.MonthlySignIn_SignIn:
+            logger.hr('Monthly Sign In', level=1)
+            from tasks.freebies.monthly_sign_in import MonthlySignIn
+            MonthlySignIn(config=self.config, device=self.device).handle_monthly_sign_in()
+        if self.config.YiLeLaMian_Claim:
+            logger.hr('Yi Le La Mian', level=1)
+            from tasks.freebies.yi_le_la_mian import YiLeLaMian
+            YiLeLaMian(config=self.config, device=self.device).handle_la_mian()
+        if self.config.DailyReward_Daily:
+            logger.hr('Daily Reward', level=1)
+            from tasks.freebies.dailyreward import DailyRewardClaim
+            DailyRewardClaim(config=self.config, device=self.device).handle_daily_reward()
         self.config.task_delay(server_update=True)
+        self.config.task_call('TiLi')
         self.config.task_stop()

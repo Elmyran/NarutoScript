@@ -12,7 +12,9 @@ class Duel(UI):
                 self.config.task_delay(minute=5)
                 return
             self.config.stored.DuelDaily.add()
-        if self.config.Duel_DuelWeeklyStatus:
+        current_victory_count=self.config.Duel_CurrentVictoryCount
+        target_victory_count=self.config.Duel_TargetVictoryNumber
+        if self.config.Duel_DuelWeeklyStatus and current_victory_count < target_victory_count:
             self.config.get_next_task()
             if len(self.config.pending_task) == 1 :
                 from tasks.duel.duel_weekly import DuelWeekly

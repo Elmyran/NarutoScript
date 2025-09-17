@@ -37,8 +37,10 @@ class DraggableActivityTabList(DraggableList):
         for direction in ['down', 'up']:  # 先向下再向上
             while True:
                 self.load_rows(main=main)
+                button = self.keyword2button(row, show_warning=False)  
                 if self.keyword2button(row, show_warning=False):
-                    return True
+                    if button:
+                        return True
 
                     # 检查是否到达列表末尾
                 current_buttons = {btn.matched_keyword.name for btn in self.cur_buttons}
@@ -51,6 +53,7 @@ class DraggableActivityTabList(DraggableList):
                 main.wait_until_stable(self.search_button, timer=Timer(0, count=0), timeout=Timer(1.5, count=5))
 
         return False
+   
         # 创建活动标签页列表实例
 ACTIVITY_TAB_LIST = DraggableActivityTabList(
     name='ActivityTabList',

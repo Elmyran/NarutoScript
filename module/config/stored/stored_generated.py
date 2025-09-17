@@ -2,7 +2,9 @@ from module.config.stored.classes import (
     StoredAccountName,
     StoredBase,
     StoredBattleFieldCount,
+    StoredBattleOrderActivityPoints,
     StoredBattleOrderRank,
+    StoredBattleOrderTaskProgress,
     StoredBattlePassLevel,
     StoredCounter,
     StoredDailyActivity,
@@ -35,13 +37,15 @@ class StoredGenerated:
     MissionAccept = StoredMissionAccept("Mission.MissionStorage.MissionAccept")
     MiJingCount = StoredMiJingCount("MiJing.MiJingStorage.MiJingCount")
     JiFenSaiDailyRewardClaim = StoredJiFenSaiRewardClaimCount("JiFenSai.JiFenSaiStorage.JiFenSaiDailyRewardClaim")
+    WeeklyPackage = StoredFreebiesWeeklyPackage("Freebies.FreebiesStorage.WeeklyPackage")
+    BattleOrderRank = StoredBattleOrderRank("BattleOrder.BattleOrderStorage.BattleOrderRank")
+    BattleOrderActivityPoints = StoredBattleOrderActivityPoints("BattleOrder.BattleOrderStorage.BattleOrderActivityPoints")
+    BattleOrderTaskProgress = StoredBattleOrderTaskProgress("BattleOrder.BattleOrderStorage.BattleOrderTaskProgress")
     TiLi = StoredTiLi("DataUpdate.ItemStorage.TiLi")
     Golds = StoredInt("DataUpdate.ItemStorage.Golds")
     Tickets = StoredInt("DataUpdate.ItemStorage.Tickets")
     Coins = StoredInt("DataUpdate.ItemStorage.Coins")
     Fame = StoredInt("DataUpdate.ItemStorage.Fame")
     Mission = StoredMissionAccept("DataUpdate.ItemStorage.Mission")
-    WeeklyPackage = StoredFreebiesWeeklyPackage("Freebies.FreebiesStorage.WeeklyPackage")
-    BattleOrderRank = StoredBattleOrderRank("BattleOrder.BattleOrderStorage.BattleOrderRank")
     PanRenFinishCount = StoredPanRenCount("PanRen.PanRen.PanRenFinishCount")
     BattleFieldFinishCount = StoredBattleFieldCount("BattleField.BattleField.BattleFieldFinishCount")

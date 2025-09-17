@@ -241,10 +241,16 @@ class AzurLaneAutoScript:
                     # 关闭模拟器
                     try:
                         self.device.emulator_stop()
+                        del_cached_property(self, 'config')
+                        del_cached_property(self, 'device')
                         logger.info('Emulator stopped successfully')
                     except Exception as e:
                         logger.warning(f'Failed to stop emulator: {e}')
                     if not self.wait_until(task.next_run):
+                        del_cached_property(self, 'config')
+                        del_cached_property(self, 'device')
+                        continue
+                    if task.command == 'Restart':
                         del_cached_property(self, 'config')
                         del_cached_property(self, 'device')
                         continue

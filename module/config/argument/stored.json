@@ -189,6 +189,32 @@
     "order": 0,
     "color": "#777777"
   },
+  "BattleOrderActivityPoints": {
+    "name": "BattleOrderActivityPoints",
+    "path": "BattleOrder.BattleOrderStorage.BattleOrderActivityPoints",
+    "i18n": "BattleOrderStorage.BattleOrderActivityPoints.name",
+    "stored": "StoredBattleOrderActivityPoints",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 300,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "BattleOrderTaskProgress": {
+    "name": "BattleOrderTaskProgress",
+    "path": "BattleOrder.BattleOrderStorage.BattleOrderTaskProgress",
+    "i18n": "BattleOrderStorage.BattleOrderTaskProgress.name",
+    "stored": "StoredBattleOrderTaskProgress",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 3500,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
   "PanRenFinishCount": {
     "name": "PanRenFinishCount",
     "path": "PanRen.PanRen.PanRenFinishCount",

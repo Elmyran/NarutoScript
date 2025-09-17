@@ -338,6 +338,9 @@ class PlatformWindows(PlatformBase, EmulatorManager):
             # Stop
             if self._emulator_function_wrapper(self._emulator_stop):
                 # Success
+                from module.base.decorator import del_cached_property  
+                del_cached_property(self, 'config')
+                del_cached_property(self, 'device')
                 return True
             else:
                 # Failed to stop, start and stop again

@@ -36,6 +36,17 @@ BATTLE_FIELD_EMPTY = ButtonWrapper(
     ),
     en=None,
 )
+BATTLE_FIELD_FINISHED = ButtonWrapper(
+    name='BATTLE_FIELD_FINISHED',
+    cn=Button(
+        file='./assets/cn/organization/battlefield/BATTLE_FIELD_FINISHED.png',
+        area=(362, 166, 917, 507),
+        search=(342, 146, 937, 527),
+        color=(167, 160, 134),
+        button=(362, 166, 917, 507),
+    ),
+    en=None,
+)
 BATTLE_FIELD_REWARD_CHECK = ButtonWrapper(
     name='BATTLE_FIELD_REWARD_CHECK',
     cn=Button(

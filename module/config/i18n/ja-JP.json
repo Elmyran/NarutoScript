@@ -8,10 +8,6 @@
       "name": "Menu.Daily.name",
       "help": "Menu.Daily.help"
     },
-    "Rewards": {
-      "name": "Menu.Rewards.name",
-      "help": "Menu.Rewards.help"
-    },
     "Weekly": {
       "name": "Menu.Weekly.name",
       "help": "Menu.Weekly.help"
@@ -70,41 +66,17 @@
       "name": "Task.JiFenSai.name",
       "help": "Task.JiFenSai.help"
     },
-    "DataUpdate": {
-      "name": "Task.DataUpdate.name",
-      "help": "Task.DataUpdate.help"
-    },
-    "ZhaoCai": {
-      "name": "Task.ZhaoCai.name",
-      "help": "Task.ZhaoCai.help"
-    },
     "Freebies": {
       "name": "Task.Freebies.name",
       "help": "Task.Freebies.help"
     },
-    "DailyReward": {
-      "name": "Task.DailyReward.name",
-      "help": "Task.DailyReward.help"
-    },
-    "LeaderBoard": {
-      "name": "Task.LeaderBoard.name",
-      "help": "Task.LeaderBoard.help"
-    },
-    "MonthlySignIn": {
-      "name": "Task.MonthlySignIn.name",
-      "help": "Task.MonthlySignIn.help"
-    },
-    "InformationClub": {
-      "name": "Task.InformationClub.name",
-      "help": "Task.InformationClub.help"
-    },
-    "YiLeLaMian": {
-      "name": "Task.YiLeLaMian.name",
-      "help": "Task.YiLeLaMian.help"
-    },
     "BattleOrder": {
       "name": "Task.BattleOrder.name",
       "help": "Task.BattleOrder.help"
+    },
+    "DataUpdate": {
+      "name": "Task.DataUpdate.name",
+      "help": "Task.DataUpdate.help"
     },
     "CultivationRoad": {
       "name": "Task.CultivationRoad.name",
@@ -439,9 +411,49 @@
       "name": "DailyReward._info.name",
       "help": "DailyReward._info.help"
     },
-    "Weekly": {
-      "name": "DailyReward.Weekly.name",
-      "help": "DailyReward.Weekly.help"
+    "Daily": {
+      "name": "DailyReward.Daily.name",
+      "help": "DailyReward.Daily.help"
+    }
+  },
+  "LeaderBoard": {
+    "_info": {
+      "name": "LeaderBoard._info.name",
+      "help": "LeaderBoard._info.help"
+    },
+    "claim": {
+      "name": "LeaderBoard.claim.name",
+      "help": "LeaderBoard.claim.help"
+    }
+  },
+  "MonthlySignIn": {
+    "_info": {
+      "name": "MonthlySignIn._info.name",
+      "help": "MonthlySignIn._info.help"
+    },
+    "SignIn": {
+      "name": "MonthlySignIn.SignIn.name",
+      "help": "MonthlySignIn.SignIn.help"
+    }
+  },
+  "InformationClub": {
+    "_info": {
+      "name": "InformationClub._info.name",
+      "help": "InformationClub._info.help"
+    },
+    "SignIn": {
+      "name": "InformationClub.SignIn.name",
+      "help": "InformationClub.SignIn.help"
+    }
+  },
+  "YiLeLaMian": {
+    "_info": {
+      "name": "YiLeLaMian._info.name",
+      "help": "YiLeLaMian._info.help"
+    },
+    "Claim": {
+      "name": "YiLeLaMian.Claim.name",
+      "help": "YiLeLaMian.Claim.help"
     }
   },
   "Recruit": {
@@ -585,6 +597,14 @@
     "BattleOrderRank": {
       "name": "BattleOrderStorage.BattleOrderRank.name",
       "help": "BattleOrderStorage.BattleOrderRank.help"
+    },
+    "BattleOrderActivityPoints": {
+      "name": "BattleOrderStorage.BattleOrderActivityPoints.name",
+      "help": "BattleOrderStorage.BattleOrderActivityPoints.help"
+    },
+    "BattleOrderTaskProgress": {
+      "name": "BattleOrderStorage.BattleOrderTaskProgress.name",
+      "help": "BattleOrderStorage.BattleOrderTaskProgress.help"
     }
   },
   "FreebiesStorage": {

@@ -45,15 +45,11 @@ class StarRailCopilot(AzurLaneAutoScript):
     def organization(self):
         from tasks.organization.organization import Organization
         Organization(config=self.config, device=self.device).run()
-    def daily_reward(self):
-        from tasks.daily.daily import Daily_Reward
-        Daily_Reward(config=self.config, device=self.device).run()
+   
     def squad_raid(self):
         from tasks.squadraid.squadraid import SquadRaid
         SquadRaid(config=self.config, device=self.device).run()
-    def zhao_cai(self):
-        from tasks.zhaocai.zhaocai import ZhaoCai
-        ZhaoCai(config=self.config, device=self.device).run()
+   
     def feng_rao(self):
         from tasks.fengrao.fengrao import FengRao
         FengRao(config=self.config, device=self.device).run()
@@ -75,19 +71,6 @@ class StarRailCopilot(AzurLaneAutoScript):
     def duel(self):
         from tasks.duel.duel import Duel
         Duel(config=self.config, device=self.device).run()
-
-    def leader_board(self):
-        from tasks.leaderboard.leaderboard import LeaderBoard
-        LeaderBoard(config=self.config, device=self.device).run()
-    def information_club(self):
-        from tasks.information_club.information_club import InformationClub
-        InformationClub(config=self.config, device=self.device).run()
-    def monthly_sign_in(self):
-        from tasks.activity.monthly_sign_in.monthly_sign_in import MonthlySignIn
-        MonthlySignIn(config=self.config, device=self.device).run()
-    def yi_le_la_mian(self):
-        from  tasks.activity.yi_le_la_mian.yi_le_la_mian import YiLeLaMian
-        YiLeLaMian(config=self.config, device=self.device).run()
     def recruit(self):
         from tasks.recruit.recruit import Recruit
         Recruit(config=self.config, device=self.device).run()

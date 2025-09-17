@@ -1,3 +1,4 @@
+from re import S
 from sympy import FU
 from module.base.timer import Timer
 from module.config.utils import get_nearest_weekday_date, get_server_weekday, server_time_offset
@@ -139,11 +140,15 @@ class BattleField(UI):
                 continue
 
     def _check_state(self):
+        account_name=self.config.stored.AccountName.value
+        AccountNameKeyword.cn=account_name
         OCR=Digit(BATTLE_FIELD_CREDITS)
         ocr_interval=Timer(30).start()
         occupied=False
         ocr=Ocr(FULL_SCREEN)
         for _ in self.loop():
+            if self.appear(BATTLE_FIELD_FINISHED):
+                break
             if self.ui_get_current_page()== page_battle_field and ocr_interval.reached():
                 credits=OCR.ocr_single_line(self.device.image)
                 logger.info(f'Credits: {credits}')
@@ -165,6 +170,7 @@ class BattleField(UI):
             
 
     def _handle_reward(self):
+        self.ui_ensure(page_battle_field)
         for _ in self.loop():
             if self.appear(BATTLE_FIELD_REWARD_CHECK):
                 break

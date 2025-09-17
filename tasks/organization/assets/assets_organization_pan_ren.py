@@ -84,10 +84,10 @@ PAN_REN_HAVE_START = ButtonWrapper(
     name='PAN_REN_HAVE_START',
     cn=Button(
         file='./assets/cn/organization/pan_ren/PAN_REN_HAVE_START.png',
-        area=(327, 107, 471, 139),
-        search=(307, 87, 491, 159),
+        area=(327, 107, 467, 139),
+        search=(307, 87, 487, 159),
         color=(66, 63, 56),
-        button=(327, 107, 471, 139),
+        button=(327, 107, 467, 139),
     ),
     en=None,
 )

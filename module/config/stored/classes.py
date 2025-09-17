@@ -1,5 +1,8 @@
+from ast import Store
 from datetime import datetime
 from functools import cached_property as functools_cached_property
+
+from anyio import value
 
 from module.base.decorator import cached_property
 from module.config.deep import deep_get
@@ -322,3 +325,9 @@ class StoredBattleFieldCount(StoredCounter,StoredExpiredAtMonday0500):
     FIXED_TOTAL = 1
 class StoredAccountName(StoredBase):
     value = ''
+class StoredBattleOrderActivityPoints(StoredCounter,StoredExpiredAtMonday0500):
+    value = 0
+    FIXED_TOTAL=300
+class StoredBattleOrderTaskProgress(StoredCounter,StoredExpiredAtMonday0500):
+    value = 0
+    FIXED_TOTAL=3500

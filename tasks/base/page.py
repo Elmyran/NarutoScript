@@ -3,11 +3,12 @@ import traceback
 from tasks.activity.assets.assets_activity_diao_yu_da_shi import *
 from tasks.base.assets.assets_base_page import *
 
-from tasks.daily.assets.assets_daily_weekly import *
+from tasks.freebies.assets.assets_freebies_daily_daily import *
+from tasks.freebies.assets.assets_freebies_daily_weekly import  *
 from tasks.duel.assets.assets_duel import *
 from tasks.duel.assets.assets_duel_ninjutsu import *
-from tasks.information_club.assets.assets_information_club import *
-from tasks.leaderboard.assets.assets_leaderboard import *
+from tasks.freebies.assets.assets_freebies_information_club import *
+from tasks.freebies.assets.assets_freebies_leaderboard import *
 from tasks.organization.assets.assets_organization_akatsuki import AKATSUKI_CHECK
 from tasks.organization.assets.assets_organization_battlefield import *
 from tasks.organization.assets.assets_organization_fortress import *
@@ -23,7 +24,7 @@ from tasks.tili.assets.assets_tili_equipment import *
 from tasks.trail.assets.assets_trail import *
 from tasks.trail.assets.assets_trail_survival import *
 from tasks.trail.assets.assets_trail_cultivation import *
-from tasks.zhaocai.assets.assets_zhaocai import *
+from tasks.freebies.assets.assets_freebies_zhaocai import *
 from tasks.fengrao.assets.assets_fengrao import *
 from tasks.squadraid.assets.assets_squadraid_fight import *
 from tasks.squadraid.assets.assets_squadraid_benefit import *

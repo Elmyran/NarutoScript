@@ -21,21 +21,9 @@
       "Recruit",
       "MiJing",
       "JiFenSai",
-      "DataUpdate"
-    ]
-  },
-  "Rewards": {
-    "menu": "collapse",
-    "page": "setting",
-    "tasks": [
-      "ZhaoCai",
       "Freebies",
-      "DailyReward",
-      "LeaderBoard",
-      "MonthlySignIn",
-      "InformationClub",
-      "YiLeLaMian",
-      "BattleOrder"
+      "BattleOrder",
+      "DataUpdate"
     ]
   },
   "Weekly": {

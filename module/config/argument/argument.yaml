@@ -175,13 +175,29 @@ WeeklyFreebies:
   WeeklyPackage:
     type: checkbox
     value: true
-
 ZhaoCai:
   ZhaoCaiFree:
     type: checkbox
     value:  true
 DailyReward:
-  Weekly:
+  Daily:
+    type: checkbox
+    value: true
+
+LeaderBoard:
+  claim:
+    type: checkbox
+    value: true
+MonthlySignIn:
+  SignIn:
+    type: checkbox
+    value: true
+InformationClub:
+  SignIn:
+    type: checkbox
+    value: true
+YiLeLaMian:
+  Claim:
     type: checkbox
     value: true
 Recruit:
@@ -299,6 +315,14 @@ BattleOrderStorage:
     stored: StoredBattleOrderRank
     value:  {}
     display: hide
+  BattleOrderActivityPoints:
+    stored: StoredBattleOrderActivityPoints
+    value: {}
+    display: display
+  BattleOrderTaskProgress:
+    stored: StoredBattleOrderTaskProgress
+    value: {}
+    display: display
 FreebiesStorage:
   WeeklyPackage:
     stored: StoredFreebiesWeeklyPackage

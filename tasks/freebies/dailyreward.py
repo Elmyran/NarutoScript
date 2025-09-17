@@ -1,22 +1,16 @@
 from module.base.timer import Timer
-from module.base.utils import color_bar_percentage, get_color, color_similarity_2d
-from tasks.base.page import page_main, page_daily
+from tasks.base.page import  page_daily
 from tasks.base.ui import UI
-from tasks.daily.assets.assets_daily_daily import *
-from tasks.daily.assets.assets_daily_weekly import  *
-import cv2
-import numpy as np
-
-from tasks.daily.utils import daily_utils
+from tasks.freebies.assets.assets_freebies_daily_daily import *
+from tasks.freebies.assets.assets_freebies_daily_weekly import  *
 
 
-class DailyRewardClaim(UI,daily_utils):
+class DailyRewardClaim(UI):
     def handle_daily_reward(self):
         self.device.click_record_clear()
         self.ui_ensure(page_daily)
         self._reward_daily_claim()
-        if self.config.DailyReward_Weekly:
-            self._reward_weekly_claim()
+        self._reward_weekly_claim()
         self.ui_goto_main()
     def _reward_weekly_claim(self):
 

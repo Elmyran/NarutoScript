@@ -6,6 +6,7 @@ from module.exception import GameStuckError
 from module.logger import logger
 from module.ocr.ocr import Digit
 from tasks.base.assets.assets_base_code_second import CODE_SECOND_PASSWORD
+from tasks.base.assets.assets_base_page import FULL_SCREEN
 from tasks.base.page import page_main
 from tasks.base.task_tab.draglist import TASK_TAB_LIST
 from tasks.base.task_tab.keyword import OrganizationKeyword
@@ -92,12 +93,12 @@ class OrganizationPanRen(GameControl):
 
     def _wait_pan_ren_start(self):
         for _ in self.loop():
-            ORGANIZATION_GOTO_PAN_REN.load_search((0,0,1280,720))
+            ORGANIZATION_GOTO_PAN_REN.load_search(FULL_SCREEN.area)
             if self.appear(ORGANIZATION_GOTO_PAN_REN):
                 self.stop_movement()
                 break
             if self.appear(ORGANIZATION):
-                self.move_to_direction(270,0.2)
+                self.move_to_direction(270,0.3)
         time=Timer(60).start()
         count=0
         for _ in self.loop():
@@ -108,7 +109,7 @@ class OrganizationPanRen(GameControl):
                 count+=1
                 logger.info("Waiting for Pan Ren to start")
                 time.reset()
-            PAN_REN_HAVE_START.load_search((0,0,1280,720))
+            PAN_REN_HAVE_START.load_search(FULL_SCREEN.area)
             if self.appear(PAN_REN_HAVE_START):
                 break
     def _pan_ren_goto_fight(self):
@@ -127,7 +128,7 @@ class OrganizationPanRen(GameControl):
                 continue
             if self.appear_then_click(PAN_REN_JOIN_BUTTON,interval=1):
                 continue
-            ORGANIZATION_GOTO_PAN_REN.load_search((0, 0, 1280, 720))
+            ORGANIZATION_GOTO_PAN_REN.load_search(FULL_SCREEN.area)
             if self.appear_then_click(ORGANIZATION_GOTO_PAN_REN,interval=1):
                 continue
 

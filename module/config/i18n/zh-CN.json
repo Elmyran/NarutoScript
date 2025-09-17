@@ -8,10 +8,6 @@
       "name": "日常",
       "help": ""
     },
-    "Rewards": {
-      "name": "收获",
-      "help": ""
-    },
     "Weekly": {
       "name": "周常",
       "help": ""
@@ -70,40 +66,16 @@
       "name": "积分赛",
       "help": "当前仅支持奖励领取，挑战功能后续支持"
     },
-    "DataUpdate": {
-      "name": "数据更新",
-      "help": ""
-    },
-    "ZhaoCai": {
-      "name": "招财",
-      "help": ""
-    },
     "Freebies": {
       "name": "白嫖奖励",
       "help": ""
     },
-    "DailyReward": {
-      "name": "活跃度奖励",
-      "help": ""
-    },
-    "LeaderBoard": {
-      "name": "排行榜点赞",
-      "help": ""
-    },
-    "MonthlySignIn": {
-      "name": "每月签到",
-      "help": ""
-    },
-    "InformationClub": {
-      "name": "情报社",
-      "help": ""
-    },
-    "YiLeLaMian": {
-      "name": "一乐拉面",
-      "help": ""
-    },
     "BattleOrder": {
       "name": "忍法帖",
+      "help": ""
+    },
+    "DataUpdate": {
+      "name": "数据更新",
       "help": ""
     },
     "CultivationRoad": {
@@ -398,7 +370,7 @@
   },
   "DailyFreebies": {
     "_info": {
-      "name": "每日",
+      "name": "每日奖励",
       "help": ""
     },
     "FriendGifts": {
@@ -439,8 +411,48 @@
       "name": "活跃度奖励",
       "help": ""
     },
-    "Weekly": {
-      "name": "周常奖励",
+    "Daily": {
+      "name": "每日活跃奖励",
+      "help": ""
+    }
+  },
+  "LeaderBoard": {
+    "_info": {
+      "name": "排行榜",
+      "help": ""
+    },
+    "claim": {
+      "name": "排行榜点赞",
+      "help": ""
+    }
+  },
+  "MonthlySignIn": {
+    "_info": {
+      "name": "每月签到",
+      "help": ""
+    },
+    "SignIn": {
+      "name": "每日签到",
+      "help": ""
+    }
+  },
+  "InformationClub": {
+    "_info": {
+      "name": "情报社",
+      "help": ""
+    },
+    "SignIn": {
+      "name": "每日签到",
+      "help": ""
+    }
+  },
+  "YiLeLaMian": {
+    "_info": {
+      "name": "一乐拉面",
+      "help": ""
+    },
+    "Claim": {
+      "name": "领取拉面",
       "help": ""
     }
   },
@@ -579,12 +591,20 @@
   },
   "BattleOrderStorage": {
     "_info": {
-      "name": "BattleOrderStorage._info.name",
-      "help": "BattleOrderStorage._info.help"
+      "name": "忍法帖",
+      "help": ""
     },
     "BattleOrderRank": {
       "name": "BattleOrderStorage.BattleOrderRank.name",
       "help": "BattleOrderStorage.BattleOrderRank.help"
+    },
+    "BattleOrderActivityPoints": {
+      "name": "周活跃度",
+      "help": ""
+    },
+    "BattleOrderTaskProgress": {
+      "name": "周任务经验",
+      "help": ""
     }
   },
   "FreebiesStorage": {

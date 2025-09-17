@@ -73,6 +73,7 @@ class DuelDaily(UI):
                 continue
             if self.appear_then_click(DUEL_TASK_REWARD_CLAIM_BUTTON,interval=0):
                 continue
+        
         #任务完成检测
         time_search=Timer(3, count=5).start()
         first_reach=True
