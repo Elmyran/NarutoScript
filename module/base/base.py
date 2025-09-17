@@ -18,7 +18,7 @@ class ModuleBase:
     device: Device
     @cached_property
     def yolo_model(self):
-        return YOLO_MODEL.get_model()
+        return YOLO_MODEL.get_model(input_size=(1280,720))
     def __init__(self, config, device=None, task=None):
         """
         Args:
@@ -510,7 +510,7 @@ class ModuleBase:
         data = self.device.screenshot_deque[-1]
         image = data['image']
         now = data['time']
-
+        
         def image_encode(im, ti):
             import io
             from module.handler.sensitive_info import handle_sensitive_image

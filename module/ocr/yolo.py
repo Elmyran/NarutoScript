@@ -16,7 +16,9 @@ class YoloResult:
         self.score = score
         self.class_id = class_id
         self.image = image
+        
         self.classes = classes if classes is not None else {0:'claimable',1:'unclaim',2:'claimed'}
+        
 
     def __repr__(self):
         x1, y1, w, h = self.box
@@ -24,7 +26,7 @@ class YoloResult:
         return f"[{cls_name} | Conf: {self.score:.2f} | BBox: ({x1},{y1},{w},{h})]"
 class YOLO11:
     """YOLO11 目标检测模型类，可动态传入类别映射。"""
-    def __init__(self, onnx_model, classes=None, confidence_thres=0.8, iou_thres=0.45):
+    def __init__(self, onnx_model, classes=None, confidence_thres=0.8, iou_thres=0.45,input_size=(640,640)):
         """
         初始化 YOLO11 类的实例。
         参数：
@@ -36,7 +38,7 @@ class YOLO11:
         self.onnx_model = onnx_model
         self.confidence_thres = confidence_thres
         self.iou_thres = iou_thres
-
+        self.input_size = input_size
         # 类别映射，可自定义
         if classes is None:
             self.classes = {0: 'claimable', 1: 'unclaim', 2: 'claimed'}
@@ -67,7 +69,7 @@ class YOLO11:
             self.img = image
        
         
-        img, self.ratio, (self.dw, self.dh) = self.letterbox(self.img, new_shape=(640, 640))
+        img, self.ratio, (self.dw, self.dh) = self.letterbox(self.img, new_shape=self.input_size)
         
         image_data = np.array(img) / 255.0
         image_data = np.transpose(image_data, (2, 0, 1))  # 通道优先
