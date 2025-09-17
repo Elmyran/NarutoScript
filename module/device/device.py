@@ -84,8 +84,8 @@ class Device(Screenshot, Control, AppControl):
                 super().__init__(*args, **kwargs)
                 break
             except (EmulatorNotRunningError,NemuIpcError) as e:
-                if trial >= RETRY_TRIES:
-                    logger.critical('Failed to start emulator after '+{RETRY_TRIES}+' trial')
+                if trial >= 3:
+                    logger.critical('Failed to start emulator after 3 trial')
                     raise RequestHumanTakeover
                 # Try to start emulator
                 if self.emulator_instance is not None:
