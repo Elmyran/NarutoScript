@@ -29,10 +29,10 @@ class DraggableTaskTabList(DraggableList):
         super().__init__(name, keyword_class, ocr_adapter, MAIN_GOTO_TASK_DRAG_AREA, **kwargs)
     def load_rows(self, main: ModuleBase):
         """重写load_rows以支持竖向文字识别"""
-        # 使用自定义OCR进行文字识别
+       
         self.cur_buttons = self.ocr.matched_ocr(main.device.image, self.keyword_class)
         print(self.cur_buttons)
-        # 对于竖向文字，可能需要调整索引计算逻辑
+        
         indexes = [self.keyword2index(row.matched_keyword) for row in self.cur_buttons]
         indexes = [index for index in indexes if index]
 

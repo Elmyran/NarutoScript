@@ -1,4 +1,6 @@
+
 from pponnxcr.predict_system import BoxedResult
+
 
 from module.base.button import ButtonWrapper
 from module.logger import logger
@@ -21,6 +23,7 @@ class TaskTabOcr(Ocr):
         result = result.replace('部', '所')
         result = result.replace('狂', '任')
         result = result.replace('践', '战')
+        result = result.replace('公', '会')
         # 繁体字修正
         result = result.replace('組', '组')
         result = result.replace('決', '决')
@@ -32,15 +35,18 @@ class TaskTabOcr(Ocr):
         result = result.replace('豐', '丰')
         result = result.replace('饒', '饶')
         result = result.replace('間', '间')
+        result = result.replace('紙', '织')
+        result = result.replace('焗', '场')
+        result = result.replace('綱','织')
         if '小队突' in result or '小队' in result or '突袭' in result:
             result='小队突袭'
-        if '积分'in result or '积' in result:
+        if '积分'in result or '积' in result or '分' in result:
             result = '积分赛'
         if '排' in result and '榜' in result or '行' in result:
             result = '排行榜'
         if '集会' in result:
             result = '任务集会所'
-        if '忍者挑' in result:
+        if '忍者挑' in result or '挑战' in result:
             result='忍者挑战'
         return result
     def detect_and_ocr(self, image, direct_ocr=False) -> list[BoxedResult]:
@@ -69,8 +75,7 @@ class TaskTabOcr(Ocr):
         return boxed_results
     def matched_ocr(self, image, keyword_classes, direct_ocr=False) -> list[OcrResultButton]:
         results = self.detect_and_ocr(image, direct_ocr=direct_ocr)
-        print('Matched OCR')
-        print(results)
+        logger.attr(name=f'{self.name} raw', text=results)
         results = [self._product_button(result, keyword_classes) for result in results]
         results = [result for result in results if result.is_keyword_matched]
 
