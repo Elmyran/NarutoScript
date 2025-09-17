@@ -144,14 +144,14 @@ class BattleField(UI):
         occupied=False
         ocr=Ocr(FULL_SCREEN)
         for _ in self.loop():
-            if self.ui_get_current_page==page_battle_field and ocr_interval.reached():
+            if self.ui_get_current_page()== page_battle_field and ocr_interval.reached():
                 credits=OCR.ocr_single_line(self.device.image)
                 logger.info(f'Credits: {credits}')
                 if credits>1600:
                     logger.info('Credits reached 1600')
                     break
                 ocr_interval.reset()
-            if self.ui_get_current_page!=page_battle_field and self.appear_then_click(DUEL_FIGHT_FAIL,interval=0):
+            if self.ui_get_current_page()!= page_battle_field!=page_battle_field and self.appear_then_click(DUEL_FIGHT_FAIL,interval=0):
                 logger.info('Battle Field Fight End Detected')
                 occupied=False
                 continue
