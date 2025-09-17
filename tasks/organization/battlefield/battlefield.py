@@ -1,3 +1,4 @@
+from sympy import FU
 from module.base.timer import Timer
 from module.config.utils import get_nearest_weekday_date, get_server_weekday, server_time_offset
 from module.ocr.ocr import Ocr
@@ -101,7 +102,6 @@ class BattleField(UI):
                 continue
 
     def _character_select(self):
-
         CHARACTER_TAB.set('忍者',main=self)
         for _ in self.loop():
             if self.appear(CHARACTER_SELECTED):
@@ -159,8 +159,8 @@ class BattleField(UI):
                 occupied=True
                 logger.info('Occupied Detected')
                 continue
-            if occupied==False and BATTLE_FIELD_EMPTY.match_template(self.device.image,direct_match=True) :
-                self.device.click(BATTLE_FIELD_EMPTY)
+            BATTLE_FIELD_EMPTY.load_search(FULL_SCREEN.area)
+            if occupied==False and self.appear_then_clcik(BATTLE_FIELD_EMPTY,interval=0):
                 continue
             
 
