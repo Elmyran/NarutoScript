@@ -15,7 +15,7 @@ class ManualConfig:
     > PanRen
     > Recruit
     > DingCiKaoRou
-    > Freebies
+    > TiLi
     > JiFenSai
     > CultivationRoad 
     > Akatsuki 
@@ -26,9 +26,9 @@ class ManualConfig:
     > MiJing
     > Mission
     > Duel
-    > TiLi
     > QiuRiJi
     > BattleOrder
+    > Freebies
     > DataUpdate
     """
 

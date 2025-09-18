@@ -12,7 +12,7 @@ class LeaderBoard(UI):
         self.device.click_record_clear()
         self.ui_ensure(page_main)
         if not TASK_TAB_LIST.search_rows(main=self,keyword=LeaderBoardKeyword):
-            raise GameStuckError(' Leaderboard Not Found')
+            return False
         time=Timer(20,count=30).start()
         for _ in self.loop():
             if time.reached():
