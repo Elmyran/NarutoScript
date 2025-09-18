@@ -5,9 +5,9 @@ from tasks.freebies.assets.assets_freebies_weekly_package import *
 
 class WeeklyPackage(UI):
     def handle_weekly_package(self):
-        if self.config.stored.PrivilegeWeeklyPackageClaimCount.is_expired():
-            self.config.stored.PrivilegeWeeklyPackageClaimCount.clear()
-        if self.config.stored.PrivilegeWeeklyPackageClaimCount.is_full():
+        if self.config.stored.PrivilegPackageFinishCount.is_expired():
+            self.config.stored.PrivilegPackageFinishCount.clear()
+        if self.config.stored.PrivilegPackageFinishCount.is_full():
             return True
         self.ui_ensure(page_chongzhi)
         for _ in self.loop():
@@ -19,5 +19,5 @@ class WeeklyPackage(UI):
                 self.device.click(WEEKLY_PACKAGE_BUTTON)
                 continue
         self.ui_goto_main()
-        self.config.stored.PrivilegeWeeklyPackageClaimCount.add()
+        self.config.stored.PrivilegPackageFinishCount.add()
 

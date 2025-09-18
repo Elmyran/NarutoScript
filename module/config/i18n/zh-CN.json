@@ -373,13 +373,13 @@
       "name": "体力赠送",
       "help": ""
     },
-    "start": {
+    "FriendGiftsstart": {
       "name": "体力赠送",
       "help": ""
     },
-    "FinishCount": {
-      "name": "当日完成次数",
-      "help": ""
+    "FriendGiftsFinishCount": {
+      "name": "FriendGifts.FriendGiftsFinishCount.name",
+      "help": "FriendGifts.FriendGiftsFinishCount.help"
     }
   },
   "DailyShare": {
@@ -387,13 +387,13 @@
       "name": "每日分享",
       "help": ""
     },
-    "start": {
+    "DailySharestart": {
       "name": "每日分享",
       "help": ""
     },
-    "FinishCount": {
-      "name": "DailyShare.FinishCount.name",
-      "help": "DailyShare.FinishCount.help"
+    "DailyShareFinishCount": {
+      "name": "DailyShare.DailyShareFinishCount.name",
+      "help": "DailyShare.DailyShareFinishCount.help"
     }
   },
   "MailReward": {
@@ -401,13 +401,13 @@
       "name": "邮件奖励",
       "help": ""
     },
-    "Claim": {
-      "name": "邮件领取",
+    "MailRewardClaim": {
+      "name": "领取邮件",
       "help": ""
     },
-    "FinishCount": {
-      "name": "MailReward.FinishCount.name",
-      "help": "MailReward.FinishCount.help"
+    "MailRewardFinishCount": {
+      "name": "MailReward.MailRewardFinishCount.name",
+      "help": "MailReward.MailRewardFinishCount.help"
     }
   },
   "PrivilegeWeeklyPackage": {
@@ -415,13 +415,13 @@
       "name": "特权周礼包",
       "help": ""
     },
-    "Claim": {
-      "name": "领取周礼包",
+    "PrivilegeWeeklyPackageClaim": {
+      "name": "特权周礼包",
       "help": ""
     },
-    "FinishCount": {
-      "name": "PrivilegeWeeklyPackage.FinishCount.name",
-      "help": "PrivilegeWeeklyPackage.FinishCount.help"
+    "PrivilegPackageFinishCount": {
+      "name": "PrivilegeWeeklyPackage.PrivilegPackageFinishCount.name",
+      "help": "PrivilegeWeeklyPackage.PrivilegPackageFinishCount.help"
     }
   },
   "ZhaoCai": {
@@ -433,9 +433,9 @@
       "name": "每日免费招财",
       "help": ""
     },
-    "FinishCount": {
-      "name": "ZhaoCai.FinishCount.name",
-      "help": "ZhaoCai.FinishCount.help"
+    "ZhaoCaiFinishCount": {
+      "name": "ZhaoCai.ZhaoCaiFinishCount.name",
+      "help": "ZhaoCai.ZhaoCaiFinishCount.help"
     }
   },
   "DailyReward": {
@@ -453,13 +453,13 @@
       "name": "排行榜",
       "help": ""
     },
-    "claim": {
+    "LeaderBoardclaim": {
       "name": "排行榜点赞",
       "help": ""
     },
-    "FinishCount": {
-      "name": "LeaderBoard.FinishCount.name",
-      "help": "LeaderBoard.FinishCount.help"
+    "LeaderBoardFinishCount": {
+      "name": "LeaderBoard.LeaderBoardFinishCount.name",
+      "help": "LeaderBoard.LeaderBoardFinishCount.help"
     }
   },
   "MonthlySignIn": {
@@ -467,13 +467,13 @@
       "name": "每月签到",
       "help": ""
     },
-    "SignIn": {
-      "name": "每日签到",
+    "MonthlySignIn": {
+      "name": "每月签到",
       "help": ""
     },
-    "FinishCount": {
-      "name": "MonthlySignIn.FinishCount.name",
-      "help": "MonthlySignIn.FinishCount.help"
+    "MonthlySignInFinishCount": {
+      "name": "MonthlySignIn.MonthlySignInFinishCount.name",
+      "help": "MonthlySignIn.MonthlySignInFinishCount.help"
     }
   },
   "InformationClub": {
@@ -481,13 +481,13 @@
       "name": "情报社",
       "help": ""
     },
-    "SignIn": {
-      "name": "每日签到",
+    "InformationClubSignIn": {
+      "name": "情报社签到",
       "help": ""
     },
-    "SignInCount": {
-      "name": "InformationClub.SignInCount.name",
-      "help": "InformationClub.SignInCount.help"
+    "InformationClubSignInCount": {
+      "name": "InformationClub.InformationClubSignInCount.name",
+      "help": "InformationClub.InformationClubSignInCount.help"
     }
   },
   "YiLeLaMian": {
@@ -495,9 +495,13 @@
       "name": "一乐拉面",
       "help": ""
     },
-    "Claim": {
-      "name": "领取拉面",
+    "YiLeLaMianClaim": {
+      "name": "拉面领取",
       "help": ""
+    },
+    "YiLeLaMianFinishCount": {
+      "name": "YiLeLaMian.YiLeLaMianFinishCount.name",
+      "help": "YiLeLaMian.YiLeLaMianFinishCount.help"
     }
   },
   "Recruit": {

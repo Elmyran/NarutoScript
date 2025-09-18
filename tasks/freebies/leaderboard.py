@@ -9,9 +9,9 @@ from tasks.freebies.assets.assets_freebies_leaderboard import *
 
 class LeaderBoard(UI):
     def handle_leader_board(self):
-        if self.config.stored.LeaderBoardLikeCount.is_expired():
-            self.config.stored.LeaderBoardLikeCount.clear()
-        if self.config.stored.LeaderBoardLikeCount.is_full():
+        if self.config.stored.LeaderBoardFinishCount.is_expired():
+            self.config.stored.LeaderBoardFinishCount.clear()
+        if self.config.stored.LeaderBoardFinishCount.is_full():
             return True
         self.device.click_record_clear()
         self.ui_ensure(page_main)
@@ -25,5 +25,5 @@ class LeaderBoard(UI):
                 break
             if self.appear_then_click(LEADER_BOARD_LIKE_BUTTON,interval=1):
                 continue
-        self.config.stored.LeaderBoardLikeCount.add()
+        self.config.stored.LeaderBoardFinishCount.add()
 

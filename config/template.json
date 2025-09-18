@@ -170,42 +170,43 @@
       "ServerUpdate": "05:00"
     },
     "FriendGifts": {
-      "start": true,
-      "FinishCount": {}
+      "FriendGiftsstart": true,
+      "FriendGiftsFinishCount": {}
     },
     "DailyShare": {
-      "start": true,
-      "FinishCount": {}
+      "DailySharestart": true,
+      "DailyShareFinishCount": {}
     },
     "MailReward": {
-      "Claim": true,
-      "FinishCount": {}
+      "MailRewardClaim": true,
+      "MailRewardFinishCount": {}
     },
     "PrivilegeWeeklyPackage": {
-      "Claim": true,
-      "FinishCount": {}
+      "PrivilegeWeeklyPackageClaim": true,
+      "PrivilegPackageFinishCount": {}
     },
     "ZhaoCai": {
       "ZhaoCaiFree": true,
-      "FinishCount": {}
+      "ZhaoCaiFinishCount": {}
     },
     "DailyReward": {
       "Daily": true
     },
     "LeaderBoard": {
-      "claim": true,
-      "FinishCount": {}
+      "LeaderBoardclaim": true,
+      "LeaderBoardFinishCount": {}
     },
     "MonthlySignIn": {
-      "SignIn": true,
-      "FinishCount": {}
+      "MonthlySignIn": true,
+      "MonthlySignInFinishCount": {}
     },
     "InformationClub": {
-      "SignIn": true,
-      "SignInCount": {}
+      "InformationClubSignIn": true,
+      "InformationClubSignInCount": {}
     },
     "YiLeLaMian": {
-      "Claim": true
+      "YiLeLaMianClaim": true,
+      "YiLeLaMianFinishCount": {}
     }
   },
   "BattleOrder": {

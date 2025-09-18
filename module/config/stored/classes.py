@@ -1,5 +1,6 @@
 
 
+from calendar import c
 from datetime import datetime
 from functools import cached_property as functools_cached_property
 
@@ -352,7 +353,10 @@ class StoredPrivilegeWeeklyPackageClaimCount(StoredCounter,StoredExpiredAtMonday
 class StoredInformationClubSignInCount(StoredCounter,StoredExpiredAt0500):
     value = 0
     FIXED_TOTAL = 1
-class StoredZhaoCaiFinishCOunt(StoredCounter,StoredExpiredAt0500):
+class StoredZhaoCaiFinishCount(StoredCounter,StoredExpiredAt0500):
+    value = 0
+    FIXED_TOTAL = 1
+class StoredYiLeLaMianClaimCount(StoredCounter,StoredExpiredAt0500):
     value = 0
     FIXED_TOTAL = 1
    

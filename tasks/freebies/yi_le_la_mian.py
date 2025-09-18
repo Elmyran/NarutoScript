@@ -11,9 +11,9 @@ class YiLeLaMian(UI):
         if now.hour<11:
             self.logger.info('Not 11am yet, skip claim')
             return False
-        if self.config.stored.YiLeLaMianClaimCount.is_expired():
-            self.config.stored.YiLeLaMianClaimCount.clear()
-        if self.config.stored.YiLeLaMianClaimCount.is_full():
+        if self.config.stored.YiLeLaMianFinishCount.is_expired():
+            self.config.stored.YiLeLaMianFinishCount.clear()
+        if self.config.stored.YiLeLaMianFinishCount.is_full():
             return True
         self.ui_ensure(page_activity)
         time=Timer(10,20).start()
@@ -27,7 +27,7 @@ class YiLeLaMian(UI):
             if self.appear_then_click(RAMEN_CLAIM,interval=1):
                 continue
         self.ui_goto_main()
-        self.config.stored.YiLeLaMianClaimCount.add()
+        self.config.stored.YiLeLaMianFinishCount.add()
 
 
 

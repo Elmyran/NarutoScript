@@ -373,13 +373,13 @@
       "name": "FriendGifts._info.name",
       "help": "FriendGifts._info.help"
     },
-    "start": {
-      "name": "FriendGifts.start.name",
-      "help": "FriendGifts.start.help"
+    "FriendGiftsstart": {
+      "name": "FriendGifts.FriendGiftsstart.name",
+      "help": "FriendGifts.FriendGiftsstart.help"
     },
-    "FinishCount": {
-      "name": "FriendGifts.FinishCount.name",
-      "help": "FriendGifts.FinishCount.help"
+    "FriendGiftsFinishCount": {
+      "name": "FriendGifts.FriendGiftsFinishCount.name",
+      "help": "FriendGifts.FriendGiftsFinishCount.help"
     }
   },
   "DailyShare": {
@@ -387,13 +387,13 @@
       "name": "DailyShare._info.name",
       "help": "DailyShare._info.help"
     },
-    "start": {
-      "name": "DailyShare.start.name",
-      "help": "DailyShare.start.help"
+    "DailySharestart": {
+      "name": "DailyShare.DailySharestart.name",
+      "help": "DailyShare.DailySharestart.help"
     },
-    "FinishCount": {
-      "name": "DailyShare.FinishCount.name",
-      "help": "DailyShare.FinishCount.help"
+    "DailyShareFinishCount": {
+      "name": "DailyShare.DailyShareFinishCount.name",
+      "help": "DailyShare.DailyShareFinishCount.help"
     }
   },
   "MailReward": {
@@ -401,13 +401,13 @@
       "name": "MailReward._info.name",
       "help": "MailReward._info.help"
     },
-    "Claim": {
-      "name": "MailReward.Claim.name",
-      "help": "MailReward.Claim.help"
+    "MailRewardClaim": {
+      "name": "MailReward.MailRewardClaim.name",
+      "help": "MailReward.MailRewardClaim.help"
     },
-    "FinishCount": {
-      "name": "MailReward.FinishCount.name",
-      "help": "MailReward.FinishCount.help"
+    "MailRewardFinishCount": {
+      "name": "MailReward.MailRewardFinishCount.name",
+      "help": "MailReward.MailRewardFinishCount.help"
     }
   },
   "PrivilegeWeeklyPackage": {
@@ -415,13 +415,13 @@
       "name": "PrivilegeWeeklyPackage._info.name",
       "help": "PrivilegeWeeklyPackage._info.help"
     },
-    "Claim": {
-      "name": "PrivilegeWeeklyPackage.Claim.name",
-      "help": "PrivilegeWeeklyPackage.Claim.help"
+    "PrivilegeWeeklyPackageClaim": {
+      "name": "PrivilegeWeeklyPackage.PrivilegeWeeklyPackageClaim.name",
+      "help": "PrivilegeWeeklyPackage.PrivilegeWeeklyPackageClaim.help"
     },
-    "FinishCount": {
-      "name": "PrivilegeWeeklyPackage.FinishCount.name",
-      "help": "PrivilegeWeeklyPackage.FinishCount.help"
+    "PrivilegPackageFinishCount": {
+      "name": "PrivilegeWeeklyPackage.PrivilegPackageFinishCount.name",
+      "help": "PrivilegeWeeklyPackage.PrivilegPackageFinishCount.help"
     }
   },
   "ZhaoCai": {
@@ -433,9 +433,9 @@
       "name": "ZhaoCai.ZhaoCaiFree.name",
       "help": "ZhaoCai.ZhaoCaiFree.help"
     },
-    "FinishCount": {
-      "name": "ZhaoCai.FinishCount.name",
-      "help": "ZhaoCai.FinishCount.help"
+    "ZhaoCaiFinishCount": {
+      "name": "ZhaoCai.ZhaoCaiFinishCount.name",
+      "help": "ZhaoCai.ZhaoCaiFinishCount.help"
     }
   },
   "DailyReward": {
@@ -453,13 +453,13 @@
       "name": "LeaderBoard._info.name",
       "help": "LeaderBoard._info.help"
     },
-    "claim": {
-      "name": "LeaderBoard.claim.name",
-      "help": "LeaderBoard.claim.help"
+    "LeaderBoardclaim": {
+      "name": "LeaderBoard.LeaderBoardclaim.name",
+      "help": "LeaderBoard.LeaderBoardclaim.help"
     },
-    "FinishCount": {
-      "name": "LeaderBoard.FinishCount.name",
-      "help": "LeaderBoard.FinishCount.help"
+    "LeaderBoardFinishCount": {
+      "name": "LeaderBoard.LeaderBoardFinishCount.name",
+      "help": "LeaderBoard.LeaderBoardFinishCount.help"
     }
   },
   "MonthlySignIn": {
@@ -467,13 +467,13 @@
       "name": "MonthlySignIn._info.name",
       "help": "MonthlySignIn._info.help"
     },
-    "SignIn": {
-      "name": "MonthlySignIn.SignIn.name",
-      "help": "MonthlySignIn.SignIn.help"
+    "MonthlySignIn": {
+      "name": "MonthlySignIn.MonthlySignIn.name",
+      "help": "MonthlySignIn.MonthlySignIn.help"
     },
-    "FinishCount": {
-      "name": "MonthlySignIn.FinishCount.name",
-      "help": "MonthlySignIn.FinishCount.help"
+    "MonthlySignInFinishCount": {
+      "name": "MonthlySignIn.MonthlySignInFinishCount.name",
+      "help": "MonthlySignIn.MonthlySignInFinishCount.help"
     }
   },
   "InformationClub": {
@@ -481,13 +481,13 @@
       "name": "InformationClub._info.name",
       "help": "InformationClub._info.help"
     },
-    "SignIn": {
-      "name": "InformationClub.SignIn.name",
-      "help": "InformationClub.SignIn.help"
+    "InformationClubSignIn": {
+      "name": "InformationClub.InformationClubSignIn.name",
+      "help": "InformationClub.InformationClubSignIn.help"
     },
-    "SignInCount": {
-      "name": "InformationClub.SignInCount.name",
-      "help": "InformationClub.SignInCount.help"
+    "InformationClubSignInCount": {
+      "name": "InformationClub.InformationClubSignInCount.name",
+      "help": "InformationClub.InformationClubSignInCount.help"
     }
   },
   "YiLeLaMian": {
@@ -495,9 +495,13 @@
       "name": "YiLeLaMian._info.name",
       "help": "YiLeLaMian._info.help"
     },
-    "Claim": {
-      "name": "YiLeLaMian.Claim.name",
-      "help": "YiLeLaMian.Claim.help"
+    "YiLeLaMianClaim": {
+      "name": "YiLeLaMian.YiLeLaMianClaim.name",
+      "help": "YiLeLaMian.YiLeLaMianClaim.help"
+    },
+    "YiLeLaMianFinishCount": {
+      "name": "YiLeLaMian.YiLeLaMianFinishCount.name",
+      "help": "YiLeLaMian.YiLeLaMianFinishCount.help"
     }
   },
   "Recruit": {

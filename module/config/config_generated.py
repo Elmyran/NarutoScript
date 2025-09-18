@@ -71,42 +71,43 @@ class GeneratedConfig:
     MiJingType_LeiTing = True
 
     # Group `FriendGifts`
-    FriendGifts_start = True
-    FriendGifts_FinishCount = {}
+    FriendGifts_FriendGiftsstart = True
+    FriendGifts_FriendGiftsFinishCount = {}
 
     # Group `DailyShare`
-    DailyShare_start = True
-    DailyShare_FinishCount = {}
+    DailyShare_DailySharestart = True
+    DailyShare_DailyShareFinishCount = {}
 
     # Group `MailReward`
-    MailReward_Claim = True
-    MailReward_FinishCount = {}
+    MailReward_MailRewardClaim = True
+    MailReward_MailRewardFinishCount = {}
 
     # Group `PrivilegeWeeklyPackage`
-    PrivilegeWeeklyPackage_Claim = True
-    PrivilegeWeeklyPackage_FinishCount = {}
+    PrivilegeWeeklyPackage_PrivilegeWeeklyPackageClaim = True
+    PrivilegeWeeklyPackage_PrivilegPackageFinishCount = {}
 
     # Group `ZhaoCai`
     ZhaoCai_ZhaoCaiFree = True
-    ZhaoCai_FinishCount = {}
+    ZhaoCai_ZhaoCaiFinishCount = {}
 
     # Group `DailyReward`
     DailyReward_Daily = True
 
     # Group `LeaderBoard`
-    LeaderBoard_claim = True
-    LeaderBoard_FinishCount = {}
+    LeaderBoard_LeaderBoardclaim = True
+    LeaderBoard_LeaderBoardFinishCount = {}
 
     # Group `MonthlySignIn`
-    MonthlySignIn_SignIn = True
-    MonthlySignIn_FinishCount = {}
+    MonthlySignIn_MonthlySignIn = True
+    MonthlySignIn_MonthlySignInFinishCount = {}
 
     # Group `InformationClub`
-    InformationClub_SignIn = True
-    InformationClub_SignInCount = {}
+    InformationClub_InformationClubSignIn = True
+    InformationClub_InformationClubSignInCount = {}
 
     # Group `YiLeLaMian`
-    YiLeLaMian_Claim = True
+    YiLeLaMian_YiLeLaMianClaim = True
+    YiLeLaMian_YiLeLaMianFinishCount = {}
 
     # Group `Recruit`
     Recruit_SkipNormalRecruit = False

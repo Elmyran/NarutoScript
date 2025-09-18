@@ -593,11 +593,11 @@
       }
     },
     "FriendGifts": {
-      "start": {
+      "FriendGiftsstart": {
         "type": "checkbox",
         "value": true
       },
-      "FinishCount": {
+      "FriendGiftsFinishCount": {
         "type": "stored",
         "value": {},
         "display": "hide",
@@ -605,11 +605,11 @@
       }
     },
     "DailyShare": {
-      "start": {
+      "DailySharestart": {
         "type": "checkbox",
         "value": true
       },
-      "FinishCount": {
+      "DailyShareFinishCount": {
         "type": "stored",
         "value": {},
         "display": "hide",
@@ -617,11 +617,11 @@
       }
     },
     "MailReward": {
-      "Claim": {
+      "MailRewardClaim": {
         "type": "checkbox",
         "value": true
       },
-      "FinishCount": {
+      "MailRewardFinishCount": {
         "type": "stored",
         "value": {},
         "display": "hide",
@@ -629,14 +629,15 @@
       }
     },
     "PrivilegeWeeklyPackage": {
-      "Claim": {
+      "PrivilegeWeeklyPackageClaim": {
         "type": "checkbox",
         "value": true
       },
-      "FinishCount": {
-        "type": "StoredPrivilegeWeeklyPackageClaimCount",
+      "PrivilegPackageFinishCount": {
+        "type": "stored",
         "value": {},
-        "display": "hide"
+        "display": "hide",
+        "stored": "StoredPrivilegeWeeklyPackageClaimCount"
       }
     },
     "ZhaoCai": {
@@ -644,11 +645,11 @@
         "type": "checkbox",
         "value": true
       },
-      "FinishCount": {
+      "ZhaoCaiFinishCount": {
         "type": "stored",
         "value": {},
         "display": "hide",
-        "stored": "StoredZhaoCaiFinishCOunt"
+        "stored": "StoredZhaoCaiFinishCount"
       }
     },
     "DailyReward": {
@@ -658,11 +659,11 @@
       }
     },
     "LeaderBoard": {
-      "claim": {
+      "LeaderBoardclaim": {
         "type": "checkbox",
         "value": true
       },
-      "FinishCount": {
+      "LeaderBoardFinishCount": {
         "type": "stored",
         "value": {},
         "display": "hide",
@@ -670,11 +671,11 @@
       }
     },
     "MonthlySignIn": {
-      "SignIn": {
+      "MonthlySignIn": {
         "type": "checkbox",
         "value": true
       },
-      "FinishCount": {
+      "MonthlySignInFinishCount": {
         "type": "stored",
         "value": {},
         "display": "hide",
@@ -682,11 +683,11 @@
       }
     },
     "InformationClub": {
-      "SignIn": {
+      "InformationClubSignIn": {
         "type": "checkbox",
         "value": true
       },
-      "SignInCount": {
+      "InformationClubSignInCount": {
         "type": "stored",
         "value": {},
         "display": "hide",
@@ -694,9 +695,15 @@
       }
     },
     "YiLeLaMian": {
-      "Claim": {
+      "YiLeLaMianClaim": {
         "type": "checkbox",
         "value": true
+      },
+      "YiLeLaMianFinishCount": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredYiLeLaMianClaimCount"
       }
     }
   },

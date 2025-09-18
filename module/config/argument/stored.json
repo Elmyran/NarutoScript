@@ -163,10 +163,88 @@
     "order": 0,
     "color": "#777777"
   },
-  "FinishCount": {
-    "name": "FinishCount",
-    "path": "Freebies.MonthlySignIn.FinishCount",
-    "i18n": "MonthlySignIn.FinishCount.name",
+  "FriendGiftsFinishCount": {
+    "name": "FriendGiftsFinishCount",
+    "path": "Freebies.FriendGifts.FriendGiftsFinishCount",
+    "i18n": "FriendGifts.FriendGiftsFinishCount.name",
+    "stored": "StoredFriendGiftsFinishCount",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 1,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "DailyShareFinishCount": {
+    "name": "DailyShareFinishCount",
+    "path": "Freebies.DailyShare.DailyShareFinishCount",
+    "i18n": "DailyShare.DailyShareFinishCount.name",
+    "stored": "StoredDailyShareFinishCount",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 1,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "MailRewardFinishCount": {
+    "name": "MailRewardFinishCount",
+    "path": "Freebies.MailReward.MailRewardFinishCount",
+    "i18n": "MailReward.MailRewardFinishCount.name",
+    "stored": "StoredMailRewardClaimCount",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 1,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "PrivilegPackageFinishCount": {
+    "name": "PrivilegPackageFinishCount",
+    "path": "Freebies.PrivilegeWeeklyPackage.PrivilegPackageFinishCount",
+    "i18n": "PrivilegeWeeklyPackage.PrivilegPackageFinishCount.name",
+    "stored": "StoredPrivilegeWeeklyPackageClaimCount",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 1,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "ZhaoCaiFinishCount": {
+    "name": "ZhaoCaiFinishCount",
+    "path": "Freebies.ZhaoCai.ZhaoCaiFinishCount",
+    "i18n": "ZhaoCai.ZhaoCaiFinishCount.name",
+    "stored": "StoredZhaoCaiFinishCount",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 1,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "LeaderBoardFinishCount": {
+    "name": "LeaderBoardFinishCount",
+    "path": "Freebies.LeaderBoard.LeaderBoardFinishCount",
+    "i18n": "LeaderBoard.LeaderBoardFinishCount.name",
+    "stored": "StoredLeaderBoardLikeCount",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 1,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "MonthlySignInFinishCount": {
+    "name": "MonthlySignInFinishCount",
+    "path": "Freebies.MonthlySignIn.MonthlySignInFinishCount",
+    "i18n": "MonthlySignIn.MonthlySignInFinishCount.name",
     "stored": "StoredMonthlySignInCount",
     "attrs": {
       "time": "2020-01-01 00:00:00",
@@ -176,11 +254,24 @@
     "order": 0,
     "color": "#777777"
   },
-  "SignInCount": {
-    "name": "SignInCount",
-    "path": "Freebies.InformationClub.SignInCount",
-    "i18n": "InformationClub.SignInCount.name",
+  "InformationClubSignInCount": {
+    "name": "InformationClubSignInCount",
+    "path": "Freebies.InformationClub.InformationClubSignInCount",
+    "i18n": "InformationClub.InformationClubSignInCount.name",
     "stored": "StoredInformationClubSignInCount",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 1,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "YiLeLaMianFinishCount": {
+    "name": "YiLeLaMianFinishCount",
+    "path": "Freebies.YiLeLaMian.YiLeLaMianFinishCount",
+    "i18n": "YiLeLaMian.YiLeLaMianFinishCount.name",
+    "stored": "StoredYiLeLaMianClaimCount",
     "attrs": {
       "time": "2020-01-01 00:00:00",
       "total": 1,

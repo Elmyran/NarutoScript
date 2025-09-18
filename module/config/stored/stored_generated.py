@@ -29,7 +29,8 @@ from module.config.stored.classes import (
     StoredPrivilegeWeeklyPackageClaimCount,
     StoredTiLi,
     StoredTrailblazePower,
-    StoredZhaoCaiFinishCOunt,
+    StoredYiLeLaMianClaimCount,
+    StoredZhaoCaiFinishCount,
 )
 
 
@@ -44,13 +45,15 @@ class StoredGenerated:
     MissionAccept = StoredMissionAccept("Mission.MissionStorage.MissionAccept")
     MiJingCount = StoredMiJingCount("MiJing.MiJingStorage.MiJingCount")
     JiFenSaiDailyRewardClaim = StoredJiFenSaiRewardClaimCount("JiFenSai.JiFenSaiStorage.JiFenSaiDailyRewardClaim")
-    FinishCount = StoredFriendGiftsFinishCount("Freebies.FriendGifts.FinishCount")
-    FinishCount = StoredDailyShareFinishCount("Freebies.DailyShare.FinishCount")
-    FinishCount = StoredMailRewardClaimCount("Freebies.MailReward.FinishCount")
-    FinishCount = StoredZhaoCaiFinishCOunt("Freebies.ZhaoCai.FinishCount")
-    FinishCount = StoredLeaderBoardLikeCount("Freebies.LeaderBoard.FinishCount")
-    FinishCount = StoredMonthlySignInCount("Freebies.MonthlySignIn.FinishCount")
-    SignInCount = StoredInformationClubSignInCount("Freebies.InformationClub.SignInCount")
+    FriendGiftsFinishCount = StoredFriendGiftsFinishCount("Freebies.FriendGifts.FriendGiftsFinishCount")
+    DailyShareFinishCount = StoredDailyShareFinishCount("Freebies.DailyShare.DailyShareFinishCount")
+    MailRewardFinishCount = StoredMailRewardClaimCount("Freebies.MailReward.MailRewardFinishCount")
+    PrivilegPackageFinishCount = StoredPrivilegeWeeklyPackageClaimCount("Freebies.PrivilegeWeeklyPackage.PrivilegPackageFinishCount")
+    ZhaoCaiFinishCount = StoredZhaoCaiFinishCount("Freebies.ZhaoCai.ZhaoCaiFinishCount")
+    LeaderBoardFinishCount = StoredLeaderBoardLikeCount("Freebies.LeaderBoard.LeaderBoardFinishCount")
+    MonthlySignInFinishCount = StoredMonthlySignInCount("Freebies.MonthlySignIn.MonthlySignInFinishCount")
+    InformationClubSignInCount = StoredInformationClubSignInCount("Freebies.InformationClub.InformationClubSignInCount")
+    YiLeLaMianFinishCount = StoredYiLeLaMianClaimCount("Freebies.YiLeLaMian.YiLeLaMianFinishCount")
     BattleOrderRank = StoredBattleOrderRank("BattleOrder.BattleOrderStorage.BattleOrderRank")
     BattleOrderActivityPoints = StoredBattleOrderActivityPoints("BattleOrder.BattleOrderStorage.BattleOrderActivityPoints")
     BattleOrderTaskProgress = StoredBattleOrderTaskProgress("BattleOrder.BattleOrderStorage.BattleOrderTaskProgress")

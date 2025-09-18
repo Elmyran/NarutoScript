@@ -163,43 +163,43 @@ MiJingType:
 # ==================== Rewards ====================
 
 FriendGifts:
-  start:
+  FriendGiftsstart:
     type: checkbox
     value: true
-  FinishCount:
+  FriendGiftsFinishCount:
     stored: StoredFriendGiftsFinishCount
     value: {}
     display: hide
 DailyShare:
-  start:
+  DailySharestart:
     type: checkbox
     value: true
-  FinishCount:
+  DailyShareFinishCount:
     stored: StoredDailyShareFinishCount
     value: {}
     display: hide
 MailReward:
-  Claim:
+  MailRewardClaim:
     type: checkbox
     value: true
-  FinishCount:
+  MailRewardFinishCount:
     stored: StoredMailRewardClaimCount
     value: {}
     display: hide
 PrivilegeWeeklyPackage:
-  Claim:
+  PrivilegeWeeklyPackageClaim:
     type: checkbox
     value: true
-  FinishCount:
-    type: StoredPrivilegeWeeklyPackageClaimCount
+  PrivilegPackageFinishCount:
+    stored: StoredPrivilegeWeeklyPackageClaimCount
     value: {}
     display: hide
 ZhaoCai:
   ZhaoCaiFree:
     type: checkbox
     value:  true
-  FinishCount:
-    stored: StoredZhaoCaiFinishCOunt
+  ZhaoCaiFinishCount:
+    stored: StoredZhaoCaiFinishCount
     value: {}
     display: hide
 DailyReward:
@@ -208,35 +208,39 @@ DailyReward:
     value: true
 
 LeaderBoard:
-  claim:
+  LeaderBoardclaim:
     type: checkbox
     value: true
-  FinishCount:
+  LeaderBoardFinishCount:
     stored: StoredLeaderBoardLikeCount
     value: {}
     display: hide
 MonthlySignIn:
-  SignIn:
+  MonthlySignIn:
     type: checkbox
     value: true
-  FinishCount:
+  MonthlySignInFinishCount:
     stored: StoredMonthlySignInCount
     value: {}
     display: hide
 InformationClub:
-  SignIn:
+  InformationClubSignIn:
     type: checkbox
     value: true
-  SignInCount:
+  InformationClubSignInCount:
     stored: StoredInformationClubSignInCount
     value: {}
     display: hide
 
 
 YiLeLaMian:
-  Claim:
+  YiLeLaMianClaim:
     type: checkbox
     value: true
+  YiLeLaMianFinishCount:
+    stored: StoredYiLeLaMianClaimCount
+    value: {}
+    display: hide
 Recruit:
   SkipNormalRecruit:
     type: checkbox

@@ -11,9 +11,9 @@ from tasks.base.ui import UI
 
 class MonthlySignIn(UI):
     def handle_monthly_sign_in(self):
-        if self.config.stored.MonthlySignInCount.is_expired():
-            self.config.stored.MonthlySignInCount.clear()
-        if self.config.stored.MonthlySignInCount.is_full():
+        if self.config.stored.MailRewardFinishCount.is_expired():
+            self.config.stored.MailRewardFinishCount.clear()
+        if self.config.stored.MailRewardFinishCount.is_full():
             return True
         self.device.click_record_clear()
         self.ui_ensure(page_activity)
@@ -31,7 +31,7 @@ class MonthlySignIn(UI):
             if self.appear(MONTHLY_SIGN_IN_HAVE_DONE):
                 break
         self.ui_goto_main()
-        self.config.stored.MonthlySignInCount.add()
+        self.config.stored.MailRewardFinishCount.add()
 
 
 
