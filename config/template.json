@@ -170,11 +170,11 @@
       "ServerUpdate": "05:00"
     },
     "FriendGifts": {
-      "FriendGiftsstart": true,
+      "FriendGiftsStart": true,
       "FriendGiftsFinishCount": {}
     },
     "DailyShare": {
-      "DailySharestart": true,
+      "DailyShareStart": true,
       "DailyShareFinishCount": {}
     },
     "MailReward": {

@@ -163,7 +163,7 @@ MiJingType:
 # ==================== Rewards ====================
 
 FriendGifts:
-  FriendGiftsstart:
+  FriendGiftsStart:
     type: checkbox
     value: true
   FriendGiftsFinishCount:
@@ -171,7 +171,7 @@ FriendGifts:
     value: {}
     display: hide
 DailyShare:
-  DailySharestart:
+  DailyShareStart:
     type: checkbox
     value: true
   DailyShareFinishCount:

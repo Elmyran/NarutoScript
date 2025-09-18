@@ -373,9 +373,9 @@
       "name": "FriendGifts._info.name",
       "help": "FriendGifts._info.help"
     },
-    "FriendGiftsstart": {
-      "name": "FriendGifts.FriendGiftsstart.name",
-      "help": "FriendGifts.FriendGiftsstart.help"
+    "FriendGiftsStart": {
+      "name": "FriendGifts.FriendGiftsStart.name",
+      "help": "FriendGifts.FriendGiftsStart.help"
     },
     "FriendGiftsFinishCount": {
       "name": "FriendGifts.FriendGiftsFinishCount.name",
@@ -387,9 +387,9 @@
       "name": "DailyShare._info.name",
       "help": "DailyShare._info.help"
     },
-    "DailySharestart": {
-      "name": "DailyShare.DailySharestart.name",
-      "help": "DailyShare.DailySharestart.help"
+    "DailyShareStart": {
+      "name": "DailyShare.DailyShareStart.name",
+      "help": "DailyShare.DailyShareStart.help"
     },
     "DailyShareFinishCount": {
       "name": "DailyShare.DailyShareFinishCount.name",

@@ -14,20 +14,20 @@ class Freebies(ModuleBase):
         Run all freebie tasks
         """
         delay_time = get_server_next_update(self.config.Scheduler_ServerUpdate)
-        if self.config.PrivilegeWeeklyPackage_Claim:
+        if self.config.PrivilegeWeeklyPackage_PrivilegeWeeklyPackageClaim:
             logger.hr(" Weekly Package ",level=1)
             from tasks.freebies.weekly_package import WeeklyPackage
             WeeklyPackage(config=self.config,device=self.device).handle_weekly_package()    
-        if self.config.DailyShare_start:
+        if self.config.DailyShare_DailyShareStart:
             logger.hr('Daily Share', level=1)
             from tasks.freebies.dailyshare import DailyShare
             DailyShare(config=self.config, device=self.device).handle_daily_share()
-        if self.config.FriendGifts_start:
+        if self.config.FriendGifts_FriendGiftsStart:
             logger.hr('Friend Gifts', level=1)
             from tasks.freebies.friendgifts import FriendGifts
             FriendGifts(config=self.config, device=self.device).handle_friend_gifts()
         # To actually get RedemptionCode rewards, you need to receive the mail
-        if  self.config.MailReward_Claim:
+        if  self.config.MailReward_MailRewardClaim:
             logger.hr('Mail Reward', level=1)
             from tasks.freebies.mail import MailReward
             MailReward(config=self.config, device=self.device).handle_mail_reward()
@@ -35,21 +35,21 @@ class Freebies(ModuleBase):
             logger.hr('Zhao Cai Free', level=1)
             from tasks.freebies.zhaocai import ZhaoCaiFree
             ZhaoCaiFree(config=self.config, device=self.device).handle_zhao_cai()
-        if self.config.InformationClub_SignIn:
+        if self.config.InformationClub_InformationClubSignIn:
             logger.hr('Information Club', level=1)
             from tasks.freebies.information_club import InformationClub
             InformationClub(config=self.config, device=self.device).handle_information_club()
-        if self.config.LeaderBoard_claim:
+        if self.config.LeaderBoard_LeaderBoardclaim:
             logger.hr('Leader Board', level=1)
             from tasks.freebies.leaderboard import LeaderBoard
             if not LeaderBoard(config=self.config, device=self.device).handle_leader_board():
                 five_minutes_later = datetime.now() + timedelta(minutes=5)
                 delay_time = nearest_future([delay_time, five_minutes_later])
-        if self.config.MonthlySignIn_SignIn:
+        if self.config.MonthlySignIn_MonthlySignIn:
             logger.hr('Monthly Sign In', level=1)
             from tasks.freebies.monthly_sign_in import MonthlySignIn
             MonthlySignIn(config=self.config, device=self.device).handle_monthly_sign_in()
-        if self.config.YiLeLaMian_Claim:
+        if self.config.YiLeLaMian_YiLeLaMianClaim:
             logger.hr('Yi Le La Mian', level=1)
             from tasks.freebies.yi_le_la_mian import YiLeLaMian
             if not YiLeLaMian(config=self.config, device=self.device).handle_la_mian():

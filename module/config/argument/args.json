@@ -593,7 +593,7 @@
       }
     },
     "FriendGifts": {
-      "FriendGiftsstart": {
+      "FriendGiftsStart": {
         "type": "checkbox",
         "value": true
       },
@@ -605,7 +605,7 @@
       }
     },
     "DailyShare": {
-      "DailySharestart": {
+      "DailyShareStart": {
         "type": "checkbox",
         "value": true
       },

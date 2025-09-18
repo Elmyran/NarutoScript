@@ -71,11 +71,11 @@ class GeneratedConfig:
     MiJingType_LeiTing = True
 
     # Group `FriendGifts`
-    FriendGifts_FriendGiftsstart = True
+    FriendGifts_FriendGiftsStart = True
     FriendGifts_FriendGiftsFinishCount = {}
 
     # Group `DailyShare`
-    DailyShare_DailySharestart = True
+    DailyShare_DailyShareStart = True
     DailyShare_DailyShareFinishCount = {}
 
     # Group `MailReward`
