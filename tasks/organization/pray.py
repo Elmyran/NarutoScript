@@ -15,12 +15,12 @@ from tasks.organization.assets.assets_organization_pray import *
 from tasks.organization.assets.assets_organization_boxclaim import *
 from tasks.organization.assets.assets_organization_replacement import *
 from module.logger import  logger
+from tasks.organization.util import RewardUtils
 
 
 
 
-
-class Pray(UI):
+class Pray(UI,RewardUtils):
     def handle_Organization_Pray(self):
         self.device.click_record_clear()
         self.ui_ensure(page_main)
