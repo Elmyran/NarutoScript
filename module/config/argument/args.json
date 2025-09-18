@@ -651,14 +651,6 @@
         "stored": "StoredZhaoCaiFinishCOunt"
       }
     },
-    "FreebiesStorage": {
-      "WeeklyPackage": {
-        "type": "stored",
-        "value": {},
-        "display": "hide",
-        "stored": "StoredFreebiesWeeklyPackage"
-      }
-    },
     "DailyReward": {
       "Daily": {
         "type": "checkbox",

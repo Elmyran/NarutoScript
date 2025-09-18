@@ -1,11 +1,10 @@
 import datetime
 from module.base.base import ModuleBase
 from module.logger import logger
-from tasks.freebies.dailyshare import DailyShare
-from tasks.freebies.friendgifts import FriendGifts
 
-from tasks.freebies.mail import MailReward
-from tasks.freebies.weekly_package import WeeklyPackage
+
+
+
 from module.config.utils import get_server_next_update, nearest_future 
 from module.base.timer import future_time  
 from datetime import datetime, timedelta  
@@ -15,22 +14,22 @@ class Freebies(ModuleBase):
         Run all freebie tasks
         """
         delay_time = get_server_next_update(self.config.Scheduler_ServerUpdate)
-        if self.config.WeeklyFreebies_WeeklyPackage:
+        if self.config.PrivilegeWeeklyPackage_Claim:
             logger.hr(" Weekly Package ",level=1)
-            if self.config.stored.WeeklyPackage.is_expired():
-                self.config.stored.WeeklyPackage.clear()
-            if not self.config.stored.WeeklyPackage.is_full():
-                WeeklyPackage(config=self.config,device=self.device).handle_weekly_package()
-                self.config.stored.WeeklyPackage.add(1)
-        if self.config.DailyFreebies_DailyShare:
+            from tasks.freebies.weekly_package import WeeklyPackage
+            WeeklyPackage(config=self.config,device=self.device).handle_weekly_package()    
+        if self.config.DailyShare_start:
             logger.hr('Daily Share', level=1)
+            from tasks.freebies.dailyshare import DailyShare
             DailyShare(config=self.config, device=self.device).handle_daily_share()
-        if self.config.DailyFreebies_FriendGifts:
+        if self.config.FriendGifts_start:
             logger.hr('Friend Gifts', level=1)
+            from tasks.freebies.friendgifts import FriendGifts
             FriendGifts(config=self.config, device=self.device).handle_friend_gifts()
         # To actually get RedemptionCode rewards, you need to receive the mail
-        if  self.config.DailyFreebies_MailReward:
+        if  self.config.MailReward_Claim:
             logger.hr('Mail Reward', level=1)
+            from tasks.freebies.mail import MailReward
             MailReward(config=self.config, device=self.device).handle_mail_reward()
         if self.config.ZhaoCai_ZhaoCaiFree:
             logger.hr('Zhao Cai Free', level=1)

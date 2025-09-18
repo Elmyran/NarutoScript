@@ -143,9 +143,6 @@ class GeneratedConfig:
     BattleOrderStorage_BattleOrderActivityPoints = {}
     BattleOrderStorage_BattleOrderTaskProgress = {}
 
-    # Group `FreebiesStorage`
-    FreebiesStorage_WeeklyPackage = {}
-
     # Group `JiFenSaiStorage`
     JiFenSaiStorage_JiFenSaiDailyRewardClaim = {}
 

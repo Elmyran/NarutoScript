@@ -14,7 +14,6 @@ from module.config.stored.classes import (
     StoredDungeon,
     StoredExpiredAt0500,
     StoredExpiredAtMonday0500,
-    StoredFreebiesWeeklyPackage,
     StoredFriendGiftsFinishCount,
     StoredInformationClubSignInCount,
     StoredInt,
@@ -49,7 +48,6 @@ class StoredGenerated:
     FinishCount = StoredDailyShareFinishCount("Freebies.DailyShare.FinishCount")
     FinishCount = StoredMailRewardClaimCount("Freebies.MailReward.FinishCount")
     FinishCount = StoredZhaoCaiFinishCOunt("Freebies.ZhaoCai.FinishCount")
-    WeeklyPackage = StoredFreebiesWeeklyPackage("Freebies.FreebiesStorage.WeeklyPackage")
     FinishCount = StoredLeaderBoardLikeCount("Freebies.LeaderBoard.FinishCount")
     FinishCount = StoredMonthlySignInCount("Freebies.MonthlySignIn.FinishCount")
     SignInCount = StoredInformationClubSignInCount("Freebies.InformationClub.SignInCount")

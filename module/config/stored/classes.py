@@ -1,5 +1,5 @@
-from ast import Store
-from calendar import c
+
+
 from datetime import datetime
 from functools import cached_property as functools_cached_property
 
@@ -8,7 +8,7 @@ from anyio import value
 from module.base.decorator import cached_property
 from module.config.deep import deep_get
 from module.config.utils import DEFAULT_TIME, get_server_last_monday_update, get_server_last_update
-from module.ocr.ocr import DigitCounter
+
 
 
 def now():
@@ -247,8 +247,7 @@ class StoredDuelCurrentVictory(StoredCounter, StoredExpiredAtMonday0500):
     value = 0
 class StoredPanRenCount(StoredCounter, StoredExpiredAtMonday0500):
     FIXED_TOTAL = 2
-class StoredFreebiesWeeklyPackage(StoredCounter, StoredExpiredAtMonday0500):
-    FIXED_TOTAL = 1
+
 class StoredJiFenSaiRewardClaimCount(StoredCounter,StoredExpiredAt0500):
     FIXED_TOTAL = 1
 class StoredMiJingCount(StoredCounter, StoredExpiredAtMonday0500):

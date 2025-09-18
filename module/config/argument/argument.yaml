@@ -360,11 +360,7 @@ BattleOrderStorage:
     stored: StoredBattleOrderTaskProgress
     value: {}
     display: display
-FreebiesStorage:
-  WeeklyPackage:
-    stored: StoredFreebiesWeeklyPackage
-    value: {}
-    display: hide
+
 JiFenSaiStorage:
   JiFenSaiDailyRewardClaim:
     stored: StoredJiFenSaiRewardClaimCount

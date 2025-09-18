@@ -651,16 +651,6 @@
       "help": "BattleOrderStorage.BattleOrderTaskProgress.help"
     }
   },
-  "FreebiesStorage": {
-    "_info": {
-      "name": "FreebiesStorage._info.name",
-      "help": "FreebiesStorage._info.help"
-    },
-    "WeeklyPackage": {
-      "name": "FreebiesStorage.WeeklyPackage.name",
-      "help": "FreebiesStorage.WeeklyPackage.help"
-    }
-  },
   "JiFenSaiStorage": {
     "_info": {
       "name": "JiFenSaiStorage._info.name",
