@@ -12,7 +12,7 @@ class Duel(UI):
                 self.config.task_delay(minute=5)
                 return
             self.config.stored.DuelDaily.add()
-        current_victory_count=self.config.Duel_CurrentVictoryCount
+        current_victory_count=self.config.stored.CurrentVictoryCount.value
         target_victory_count=self.config.Duel_TargetVictoryNumber
         if self.config.Duel_DuelWeeklyStatus and current_victory_count < target_victory_count:
             self.config.get_next_task()
