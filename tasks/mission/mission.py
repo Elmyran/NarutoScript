@@ -1,3 +1,4 @@
+
 from module.base.timer import Timer
 from module.exception import GameStuckError
 from module.logger.logger import logger
@@ -157,8 +158,7 @@ class Mission(UI):
                 max(task.area[3], button.area[3])
             )
             # 获取任务奖励信息
-            self.get_soul_jade_amount(task)
-            self.get_box_type(task)
+            self._get_task_reward_detail(task)
             task_with_button.append(task)
             # 直接排序并返回最高优先级任务
         return self._select_highest_priority_task(task_with_button)
@@ -174,46 +174,45 @@ class Mission(UI):
 
         return sorted_tasks
 
-    def get_soul_jade_amount(self, task):
+    def _get_task_reward_detail(self, task):
+        ocr = DigitOcr()
         time = Timer(2, 4).start()
+        box_type=None
+        soul_jade=0
         for _ in self.loop():
-            SOUL_JADE.load_search(task.area)
-            if SOUL_JADE.match_template(self.device.image, similarity=0.6):
-                # 基于匹配位置计算数字区域
-
-                number_area = (
-                    SOUL_JADE.button[0],
-                    SOUL_JADE.button[1],
-                    SOUL_JADE.button[2] + 20,  # 向右扩展包含数字
-                    SOUL_JADE.button[3] + 20  # 向下扩展包含数字
-                )
-                ocr = DigitOcr()
-                res = ocr.extract_digit_simple(self.device.image, number_area)
-                if res:
-                    task.soul_jade = int(res)
-                    break
             if time.reached():
-                task.soul_jade = 0
                 break
-
-    def get_box_type(self, task):
-        time = Timer(2, 4).start()
-        for _ in self.loop():
-            TASK_BOX_GREEN.load_search(task.area)
-            if self.appear(TASK_BOX_GREEN):
-                task.box_type = TaskPriority.GREEN
+            if soul_jade!=0 and box_type:
                 break
-            TASK_BOX_BLUE.load_search(task.area)
-            if self.appear(TASK_BOX_BLUE):
-                task.box_type = TaskPriority.BLUE
-                break
-            TASK_BOX_BLUE.load_search(task.area)
-            if self.appear(TASK_BOX_RED):
-                task.box_type = TaskPriority.RED
-                break
-            if time.reached():
-                task.box_type = TaskPriority.RED
-                break
+            if not box_type:
+                TASK_BOX_GREEN.load_search(task.area)
+                if self.appear(TASK_BOX_GREEN):
+                    box_type=TaskPriority.GREEN
+                TASK_BOX_BLUE.load_search(task.area)
+                if self.appear(TASK_BOX_BLUE):
+                    box_type=TaskPriority.BLUE
+                TASK_BOX_RED.load_search(task.area)
+                if self.appear(TASK_BOX_RED):
+                    box_type=TaskPriority.RED
+            if soul_jade==0:
+                SOUL_JADE.load_search(task.area)
+                if SOUL_JADE.match_template(self.device.image, similarity=0.6):
+                    # 基于匹配位置计算数字区域
+                    number_area = (
+                        SOUL_JADE.button[0],
+                        SOUL_JADE.button[1],
+                        SOUL_JADE.button[2] + 20,  # 向右扩展包含数字
+                        SOUL_JADE.button[3] + 20  # 向下扩展包含数字
+                    )
+                    res = ocr.extract_digit_simple(self.device.image, number_area)
+                    if res:
+                        soul_jade=int(res)
+        task.soul_jade=soul_jade
+  
+        if not box_type:
+            task.box_type=TaskPriority.GREEN
+        else :
+            task.box_type=box_type
 
     def _parse_time_to_minutes(self, time_str: str) -> int:
         """解析时间字符串为分钟数，并修正为60的倍数"""
@@ -229,6 +228,3 @@ class Mission(UI):
 
     def _task_strategy(self, tasks):
         return tasks
-   
-
-

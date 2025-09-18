@@ -274,7 +274,7 @@ class StoredTiLi(StoredCounter):
         diff = (now - record).total_seconds()
         value += int(diff // 360)
         return value
-class StoredMissionAccept(StoredCounter,StoredExpiredAt0500):
+class StoredMissionAccept(StoredCounter):
     value = 0
     mission_times = []
     FIXED_TOTAL = 9
