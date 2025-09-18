@@ -16,11 +16,11 @@ from tasks.organization.assets.assets_organization_boxclaim import *
 from tasks.organization.assets.assets_organization_replacement import *
 from module.logger import  logger
 
-from tasks.daily.utils import daily_utils
 
 
 
-class Pray(UI,daily_utils):
+
+class Pray(UI):
     def handle_Organization_Pray(self):
         self.device.click_record_clear()
         self.ui_ensure(page_main)
