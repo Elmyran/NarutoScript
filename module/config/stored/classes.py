@@ -1,4 +1,5 @@
 from ast import Store
+from calendar import c
 from datetime import datetime
 from functools import cached_property as functools_cached_property
 
@@ -331,3 +332,29 @@ class StoredBattleOrderActivityPoints(StoredCounter,StoredExpiredAtMonday0500):
 class StoredBattleOrderTaskProgress(StoredCounter,StoredExpiredAtMonday0500):
     value = 0
     FIXED_TOTAL=3500
+class StoredMonthlySignInCount(StoredCounter,StoredExpiredAt0500):
+    value = 0
+    FIXED_TOTAL = 1
+class StoredLeaderBoardLikeCount(StoredCounter,StoredExpiredAt0500):
+    value = 0
+    FIXED_TOTAL = 1
+class StoredDailyShareFinishCount(StoredCounter,StoredExpiredAt0500):
+    value = 0
+    FIXED_TOTAL = 1
+class StoredMailRewardClaimCount(StoredCounter,StoredExpiredAt0500):
+   value=0
+   FIXED_TOTAL = 1
+class StoredFriendGiftsFinishCount(StoredCounter,StoredExpiredAt0500):
+    value = 0
+    FIXED_TOTAL = 1
+class StoredPrivilegeWeeklyPackageClaimCount(StoredCounter,StoredExpiredAtMonday0500):
+    value = 0
+    FIXED_TOTAL = 1
+class StoredInformationClubSignInCount(StoredCounter,StoredExpiredAt0500):
+    value = 0
+    FIXED_TOTAL = 1
+class StoredZhaoCaiFinishCOunt(StoredCounter,StoredExpiredAt0500):
+    value = 0
+    FIXED_TOTAL = 1
+   
+    

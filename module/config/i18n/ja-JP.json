@@ -368,32 +368,60 @@
       "help": "MiJingType.LeiTing.help"
     }
   },
-  "DailyFreebies": {
+  "FriendGifts": {
     "_info": {
-      "name": "DailyFreebies._info.name",
-      "help": "DailyFreebies._info.help"
+      "name": "FriendGifts._info.name",
+      "help": "FriendGifts._info.help"
     },
-    "FriendGifts": {
-      "name": "DailyFreebies.FriendGifts.name",
-      "help": "DailyFreebies.FriendGifts.help"
+    "start": {
+      "name": "FriendGifts.start.name",
+      "help": "FriendGifts.start.help"
     },
-    "DailyShare": {
-      "name": "DailyFreebies.DailyShare.name",
-      "help": "DailyFreebies.DailyShare.help"
-    },
-    "MailReward": {
-      "name": "DailyFreebies.MailReward.name",
-      "help": "DailyFreebies.MailReward.help"
+    "FinishCount": {
+      "name": "FriendGifts.FinishCount.name",
+      "help": "FriendGifts.FinishCount.help"
     }
   },
-  "WeeklyFreebies": {
+  "DailyShare": {
     "_info": {
-      "name": "WeeklyFreebies._info.name",
-      "help": "WeeklyFreebies._info.help"
+      "name": "DailyShare._info.name",
+      "help": "DailyShare._info.help"
     },
-    "WeeklyPackage": {
-      "name": "WeeklyFreebies.WeeklyPackage.name",
-      "help": "WeeklyFreebies.WeeklyPackage.help"
+    "start": {
+      "name": "DailyShare.start.name",
+      "help": "DailyShare.start.help"
+    },
+    "FinishCount": {
+      "name": "DailyShare.FinishCount.name",
+      "help": "DailyShare.FinishCount.help"
+    }
+  },
+  "MailReward": {
+    "_info": {
+      "name": "MailReward._info.name",
+      "help": "MailReward._info.help"
+    },
+    "Claim": {
+      "name": "MailReward.Claim.name",
+      "help": "MailReward.Claim.help"
+    },
+    "FinishCount": {
+      "name": "MailReward.FinishCount.name",
+      "help": "MailReward.FinishCount.help"
+    }
+  },
+  "PrivilegeWeeklyPackage": {
+    "_info": {
+      "name": "PrivilegeWeeklyPackage._info.name",
+      "help": "PrivilegeWeeklyPackage._info.help"
+    },
+    "Claim": {
+      "name": "PrivilegeWeeklyPackage.Claim.name",
+      "help": "PrivilegeWeeklyPackage.Claim.help"
+    },
+    "FinishCount": {
+      "name": "PrivilegeWeeklyPackage.FinishCount.name",
+      "help": "PrivilegeWeeklyPackage.FinishCount.help"
     }
   },
   "ZhaoCai": {
@@ -404,6 +432,10 @@
     "ZhaoCaiFree": {
       "name": "ZhaoCai.ZhaoCaiFree.name",
       "help": "ZhaoCai.ZhaoCaiFree.help"
+    },
+    "FinishCount": {
+      "name": "ZhaoCai.FinishCount.name",
+      "help": "ZhaoCai.FinishCount.help"
     }
   },
   "DailyReward": {
@@ -424,6 +456,10 @@
     "claim": {
       "name": "LeaderBoard.claim.name",
       "help": "LeaderBoard.claim.help"
+    },
+    "FinishCount": {
+      "name": "LeaderBoard.FinishCount.name",
+      "help": "LeaderBoard.FinishCount.help"
     }
   },
   "MonthlySignIn": {
@@ -434,6 +470,10 @@
     "SignIn": {
       "name": "MonthlySignIn.SignIn.name",
       "help": "MonthlySignIn.SignIn.help"
+    },
+    "FinishCount": {
+      "name": "MonthlySignIn.FinishCount.name",
+      "help": "MonthlySignIn.FinishCount.help"
     }
   },
   "InformationClub": {
@@ -444,6 +484,10 @@
     "SignIn": {
       "name": "InformationClub.SignIn.name",
       "help": "InformationClub.SignIn.help"
+    },
+    "SignInCount": {
+      "name": "InformationClub.SignInCount.name",
+      "help": "InformationClub.SignInCount.help"
     }
   },
   "YiLeLaMian": {

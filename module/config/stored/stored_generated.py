@@ -8,21 +8,29 @@ from module.config.stored.classes import (
     StoredBattlePassLevel,
     StoredCounter,
     StoredDailyActivity,
+    StoredDailyShareFinishCount,
     StoredDuel,
     StoredDuelCurrentVictory,
     StoredDungeon,
     StoredExpiredAt0500,
     StoredExpiredAtMonday0500,
     StoredFreebiesWeeklyPackage,
+    StoredFriendGiftsFinishCount,
+    StoredInformationClubSignInCount,
     StoredInt,
     StoredJiFenSaiRewardClaimCount,
+    StoredLeaderBoardLikeCount,
+    StoredMailRewardClaimCount,
     StoredMiJingCount,
     StoredMissionAccept,
+    StoredMonthlySignInCount,
     StoredPanRenCount,
     StoredPlanner,
     StoredPlannerOverall,
+    StoredPrivilegeWeeklyPackageClaimCount,
     StoredTiLi,
     StoredTrailblazePower,
+    StoredZhaoCaiFinishCOunt,
 )
 
 
@@ -37,7 +45,14 @@ class StoredGenerated:
     MissionAccept = StoredMissionAccept("Mission.MissionStorage.MissionAccept")
     MiJingCount = StoredMiJingCount("MiJing.MiJingStorage.MiJingCount")
     JiFenSaiDailyRewardClaim = StoredJiFenSaiRewardClaimCount("JiFenSai.JiFenSaiStorage.JiFenSaiDailyRewardClaim")
+    FinishCount = StoredFriendGiftsFinishCount("Freebies.FriendGifts.FinishCount")
+    FinishCount = StoredDailyShareFinishCount("Freebies.DailyShare.FinishCount")
+    FinishCount = StoredMailRewardClaimCount("Freebies.MailReward.FinishCount")
+    FinishCount = StoredZhaoCaiFinishCOunt("Freebies.ZhaoCai.FinishCount")
     WeeklyPackage = StoredFreebiesWeeklyPackage("Freebies.FreebiesStorage.WeeklyPackage")
+    FinishCount = StoredLeaderBoardLikeCount("Freebies.LeaderBoard.FinishCount")
+    FinishCount = StoredMonthlySignInCount("Freebies.MonthlySignIn.FinishCount")
+    SignInCount = StoredInformationClubSignInCount("Freebies.InformationClub.SignInCount")
     BattleOrderRank = StoredBattleOrderRank("BattleOrder.BattleOrderStorage.BattleOrderRank")
     BattleOrderActivityPoints = StoredBattleOrderActivityPoints("BattleOrder.BattleOrderStorage.BattleOrderActivityPoints")
     BattleOrderTaskProgress = StoredBattleOrderTaskProgress("BattleOrder.BattleOrderStorage.BattleOrderTaskProgress")

@@ -1,3 +1,4 @@
+import datetime
 from module.base.base import ModuleBase
 from module.logger import logger
 from tasks.freebies.dailyshare import DailyShare
@@ -5,13 +6,15 @@ from tasks.freebies.friendgifts import FriendGifts
 
 from tasks.freebies.mail import MailReward
 from tasks.freebies.weekly_package import WeeklyPackage
-
-
+from module.config.utils import get_server_next_update, nearest_future 
+from module.base.timer import future_time  
+from datetime import datetime, timedelta  
 class Freebies(ModuleBase):
     def run(self):
         """
         Run all freebie tasks
         """
+        delay_time = get_server_next_update(self.config.Scheduler_ServerUpdate)
         if self.config.WeeklyFreebies_WeeklyPackage:
             logger.hr(" Weekly Package ",level=1)
             if self.config.stored.WeeklyPackage.is_expired():
@@ -40,7 +43,9 @@ class Freebies(ModuleBase):
         if self.config.LeaderBoard_claim:
             logger.hr('Leader Board', level=1)
             from tasks.freebies.leaderboard import LeaderBoard
-            LeaderBoard(config=self.config, device=self.device).handle_leader_board()
+            if not LeaderBoard(config=self.config, device=self.device).handle_leader_board():
+                five_minutes_later = datetime.now() + timedelta(minutes=5)
+                delay_time = nearest_future([delay_time, five_minutes_later])
         if self.config.MonthlySignIn_SignIn:
             logger.hr('Monthly Sign In', level=1)
             from tasks.freebies.monthly_sign_in import MonthlySignIn
@@ -48,11 +53,14 @@ class Freebies(ModuleBase):
         if self.config.YiLeLaMian_Claim:
             logger.hr('Yi Le La Mian', level=1)
             from tasks.freebies.yi_le_la_mian import YiLeLaMian
-            YiLeLaMian(config=self.config, device=self.device).handle_la_mian()
+            if not YiLeLaMian(config=self.config, device=self.device).handle_la_mian():
+                time = future_time("11:00")  
+                delay_time = nearest_future([delay_time, time])  
         if self.config.DailyReward_Daily:
             logger.hr('Daily Reward', level=1)
             from tasks.freebies.dailyreward import DailyRewardClaim
             DailyRewardClaim(config=self.config, device=self.device).handle_daily_reward()
-        self.config.task_delay(server_update=True)
+        
+        self.config.task_delay(target=delay_time)
         self.config.task_call('TiLi')
         self.config.task_stop()

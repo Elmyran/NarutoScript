@@ -58,8 +58,10 @@ Daily:
       - JiFenSaiStorage
     Freebies:
       - Scheduler
-      - DailyFreebies
-      - WeeklyFreebies
+      - FriendGifts
+      - DailyShare
+      - MailReward
+      - PrivilegeWeeklyPackage
       - ZhaoCai
       - FreebiesStorage
       - DailyReward

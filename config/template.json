@@ -169,16 +169,25 @@
       "Command": "Freebies",
       "ServerUpdate": "05:00"
     },
-    "DailyFreebies": {
-      "FriendGifts": true,
-      "DailyShare": true,
-      "MailReward": true
+    "FriendGifts": {
+      "start": true,
+      "FinishCount": {}
     },
-    "WeeklyFreebies": {
-      "WeeklyPackage": true
+    "DailyShare": {
+      "start": true,
+      "FinishCount": {}
+    },
+    "MailReward": {
+      "Claim": true,
+      "FinishCount": {}
+    },
+    "PrivilegeWeeklyPackage": {
+      "Claim": true,
+      "FinishCount": {}
     },
     "ZhaoCai": {
-      "ZhaoCaiFree": true
+      "ZhaoCaiFree": true,
+      "FinishCount": {}
     },
     "FreebiesStorage": {
       "WeeklyPackage": {}
@@ -187,13 +196,16 @@
       "Daily": true
     },
     "LeaderBoard": {
-      "claim": true
+      "claim": true,
+      "FinishCount": {}
     },
     "MonthlySignIn": {
-      "SignIn": true
+      "SignIn": true,
+      "FinishCount": {}
     },
     "InformationClub": {
-      "SignIn": true
+      "SignIn": true,
+      "SignInCount": {}
     },
     "YiLeLaMian": {
       "Claim": true

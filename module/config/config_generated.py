@@ -70,28 +70,40 @@ class GeneratedConfig:
     MiJingType_GangTi = True
     MiJingType_LeiTing = True
 
-    # Group `DailyFreebies`
-    DailyFreebies_FriendGifts = True
-    DailyFreebies_DailyShare = True
-    DailyFreebies_MailReward = True
+    # Group `FriendGifts`
+    FriendGifts_start = True
+    FriendGifts_FinishCount = {}
 
-    # Group `WeeklyFreebies`
-    WeeklyFreebies_WeeklyPackage = True
+    # Group `DailyShare`
+    DailyShare_start = True
+    DailyShare_FinishCount = {}
+
+    # Group `MailReward`
+    MailReward_Claim = True
+    MailReward_FinishCount = {}
+
+    # Group `PrivilegeWeeklyPackage`
+    PrivilegeWeeklyPackage_Claim = True
+    PrivilegeWeeklyPackage_FinishCount = {}
 
     # Group `ZhaoCai`
     ZhaoCai_ZhaoCaiFree = True
+    ZhaoCai_FinishCount = {}
 
     # Group `DailyReward`
     DailyReward_Daily = True
 
     # Group `LeaderBoard`
     LeaderBoard_claim = True
+    LeaderBoard_FinishCount = {}
 
     # Group `MonthlySignIn`
     MonthlySignIn_SignIn = True
+    MonthlySignIn_FinishCount = {}
 
     # Group `InformationClub`
     InformationClub_SignIn = True
+    InformationClub_SignInCount = {}
 
     # Group `YiLeLaMian`
     YiLeLaMian_Claim = True

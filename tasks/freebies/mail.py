@@ -21,10 +21,15 @@ class MailReward(UI):
             in: page_menu
             out: page_menu
         """
+        if self.config.stored.MailRewardClaimCount.is_expired():
+            self.config.stored.MailRewardClaimCount.clear()
+        if self.config.stored.MailRewardClaimCount.is_full():
+            return True
         self.device.click_record_clear()
         self.ui_ensure(page_mail)
         self._mail_claim()
         self.ui_goto_main()
+        self.config.stored.MailRewardClaimCount.add()
 
     def _mail_claim(self):
         """

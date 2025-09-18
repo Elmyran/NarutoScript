@@ -7,10 +7,15 @@ from module.base.timer import Timer
 
 class ZhaoCaiFree(UI):
     def handle_zhao_cai(self):
+        if self.config.stored.ZhaoCaiFinishCOunt.is_expired():
+            self.config.stored.ZhaoCaiFinishCOunt.clear()
+        if self.config.stored.ZhaoCaiFinishCOunt.is_full():
+            return True
         self.device.click_record_clear()
         self.ui_ensure(page_zhaocai)
         self.free_zhao_cai()
         self.ui_goto_main()
+        self.config.stored.ZhaoCaiFinishCOunt.add()
 
 
     def free_zhao_cai(self):

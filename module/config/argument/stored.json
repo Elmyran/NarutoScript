@@ -163,11 +163,37 @@
     "order": 0,
     "color": "#777777"
   },
+  "FinishCount": {
+    "name": "FinishCount",
+    "path": "Freebies.MonthlySignIn.FinishCount",
+    "i18n": "MonthlySignIn.FinishCount.name",
+    "stored": "StoredMonthlySignInCount",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 1,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
   "WeeklyPackage": {
     "name": "WeeklyPackage",
     "path": "Freebies.FreebiesStorage.WeeklyPackage",
     "i18n": "FreebiesStorage.WeeklyPackage.name",
     "stored": "StoredFreebiesWeeklyPackage",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 1,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "SignInCount": {
+    "name": "SignInCount",
+    "path": "Freebies.InformationClub.SignInCount",
+    "i18n": "InformationClub.SignInCount.name",
+    "stored": "StoredInformationClubSignInCount",
     "attrs": {
       "time": "2020-01-01 00:00:00",
       "total": 1,

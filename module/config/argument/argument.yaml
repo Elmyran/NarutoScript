@@ -161,24 +161,47 @@ MiJingType:
 
 
 # ==================== Rewards ====================
-DailyFreebies:
-  FriendGifts:
+
+FriendGifts:
+  start:
     type: checkbox
     value: true
-  DailyShare:
+  FinishCount:
+    stored: StoredFriendGiftsFinishCount
+    value: {}
+    display: hide
+DailyShare:
+  start:
     type: checkbox
     value: true
-  MailReward:
+  FinishCount:
+    stored: StoredDailyShareFinishCount
+    value: {}
+    display: hide
+MailReward:
+  Claim:
     type: checkbox
     value: true
-WeeklyFreebies:
-  WeeklyPackage:
+  FinishCount:
+    stored: StoredMailRewardClaimCount
+    value: {}
+    display: hide
+PrivilegeWeeklyPackage:
+  Claim:
     type: checkbox
     value: true
+  FinishCount:
+    type: StoredPrivilegeWeeklyPackageClaimCount
+    value: {}
+    display: hide
 ZhaoCai:
   ZhaoCaiFree:
     type: checkbox
     value:  true
+  FinishCount:
+    stored: StoredZhaoCaiFinishCOunt
+    value: {}
+    display: hide
 DailyReward:
   Daily:
     type: checkbox
@@ -188,14 +211,28 @@ LeaderBoard:
   claim:
     type: checkbox
     value: true
+  FinishCount:
+    stored: StoredLeaderBoardLikeCount
+    value: {}
+    display: hide
 MonthlySignIn:
   SignIn:
     type: checkbox
     value: true
+  FinishCount:
+    stored: StoredMonthlySignInCount
+    value: {}
+    display: hide
 InformationClub:
   SignIn:
     type: checkbox
     value: true
+  SignInCount:
+    stored: StoredInformationClubSignInCount
+    value: {}
+    display: hide
+
+
 YiLeLaMian:
   Claim:
     type: checkbox

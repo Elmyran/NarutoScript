@@ -10,12 +10,16 @@ from module.logger.logger import logger
 
 class FriendGifts(UI):
     def handle_friend_gifts(self):
+        if self.config.stored.FriendGiftsFinishCount.is_expired():
+            self.config.stored.FriendGiftsFinishCount.clear()
+        if self.config.stored.FriendGiftsFinishCount.is_full():
+            return True
         self.device.click_record_clear()
         self.ui_ensure(page_friend_panel)
         self._friend_gifts_give()
         self._friend_gifts_claim()
         self.ui_goto_main()
-
+        self.config.stored.FriendGiftsFinishCount.add()
     def _friend_gifts_give(self):
        time=Timer(8,count=10).start()
        for _ in self.loop():
@@ -36,7 +40,7 @@ class FriendGifts(UI):
                 continue
             if self.appear_then_click(GIFTS_CLAIM,interval=1):
                 continue
-
+                
 
 
 

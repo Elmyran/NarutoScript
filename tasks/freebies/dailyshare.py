@@ -10,6 +10,10 @@ from tasks.freebies.assets.assets_freebies_dailyshare import MAIN_GOTO_PANEL, SH
 
 class DailyShare(UI):
     def handle_daily_share(self):
+        if self.config.stored.DailyShareFinishCount.is_expired():
+            self.config.stored.DailyShareFinishCount.clear()
+        if self.config.stored.DailyShareFinishCount.is_full():
+            return True
         self.device.click_record_clear()
         self.ui_ensure(page_panel)
 
@@ -47,7 +51,9 @@ class DailyShare(UI):
             if click_interval.reached():
                 self.device.click(SHARE_GOTO_QQ)
                 click_interval.reset()
-
+        self.ui_goto_main()
+        self.config.stored.DailyShareFinishCount.add()
+        
 
 
 

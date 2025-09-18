@@ -368,32 +368,60 @@
       "help": ""
     }
   },
-  "DailyFreebies": {
+  "FriendGifts": {
     "_info": {
-      "name": "每日奖励",
-      "help": ""
-    },
-    "FriendGifts": {
       "name": "体力赠送",
       "help": ""
     },
-    "DailyShare": {
-      "name": "每日分享",
+    "start": {
+      "name": "体力赠送",
       "help": ""
     },
-    "MailReward": {
-      "name": "邮件领取",
+    "FinishCount": {
+      "name": "当日完成次数",
       "help": ""
     }
   },
-  "WeeklyFreebies": {
+  "DailyShare": {
     "_info": {
-      "name": "每周",
+      "name": "每日分享",
       "help": ""
     },
-    "WeeklyPackage": {
-      "name": "购买每周礼包",
+    "start": {
+      "name": "每日分享",
       "help": ""
+    },
+    "FinishCount": {
+      "name": "DailyShare.FinishCount.name",
+      "help": "DailyShare.FinishCount.help"
+    }
+  },
+  "MailReward": {
+    "_info": {
+      "name": "邮件奖励",
+      "help": ""
+    },
+    "Claim": {
+      "name": "邮件领取",
+      "help": ""
+    },
+    "FinishCount": {
+      "name": "MailReward.FinishCount.name",
+      "help": "MailReward.FinishCount.help"
+    }
+  },
+  "PrivilegeWeeklyPackage": {
+    "_info": {
+      "name": "特权周礼包",
+      "help": ""
+    },
+    "Claim": {
+      "name": "领取周礼包",
+      "help": ""
+    },
+    "FinishCount": {
+      "name": "PrivilegeWeeklyPackage.FinishCount.name",
+      "help": "PrivilegeWeeklyPackage.FinishCount.help"
     }
   },
   "ZhaoCai": {
@@ -404,6 +432,10 @@
     "ZhaoCaiFree": {
       "name": "每日免费招财",
       "help": ""
+    },
+    "FinishCount": {
+      "name": "ZhaoCai.FinishCount.name",
+      "help": "ZhaoCai.FinishCount.help"
     }
   },
   "DailyReward": {
@@ -424,6 +456,10 @@
     "claim": {
       "name": "排行榜点赞",
       "help": ""
+    },
+    "FinishCount": {
+      "name": "LeaderBoard.FinishCount.name",
+      "help": "LeaderBoard.FinishCount.help"
     }
   },
   "MonthlySignIn": {
@@ -434,6 +470,10 @@
     "SignIn": {
       "name": "每日签到",
       "help": ""
+    },
+    "FinishCount": {
+      "name": "MonthlySignIn.FinishCount.name",
+      "help": "MonthlySignIn.FinishCount.help"
     }
   },
   "InformationClub": {
@@ -444,6 +484,10 @@
     "SignIn": {
       "name": "每日签到",
       "help": ""
+    },
+    "SignInCount": {
+      "name": "InformationClub.SignInCount.name",
+      "help": "InformationClub.SignInCount.help"
     }
   },
   "YiLeLaMian": {

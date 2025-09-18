@@ -592,30 +592,63 @@
         "display": "hide"
       }
     },
-    "DailyFreebies": {
-      "FriendGifts": {
+    "FriendGifts": {
+      "start": {
         "type": "checkbox",
         "value": true
       },
-      "DailyShare": {
-        "type": "checkbox",
-        "value": true
-      },
-      "MailReward": {
-        "type": "checkbox",
-        "value": true
+      "FinishCount": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredFriendGiftsFinishCount"
       }
     },
-    "WeeklyFreebies": {
-      "WeeklyPackage": {
+    "DailyShare": {
+      "start": {
         "type": "checkbox",
         "value": true
+      },
+      "FinishCount": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredDailyShareFinishCount"
+      }
+    },
+    "MailReward": {
+      "Claim": {
+        "type": "checkbox",
+        "value": true
+      },
+      "FinishCount": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredMailRewardClaimCount"
+      }
+    },
+    "PrivilegeWeeklyPackage": {
+      "Claim": {
+        "type": "checkbox",
+        "value": true
+      },
+      "FinishCount": {
+        "type": "StoredPrivilegeWeeklyPackageClaimCount",
+        "value": {},
+        "display": "hide"
       }
     },
     "ZhaoCai": {
       "ZhaoCaiFree": {
         "type": "checkbox",
         "value": true
+      },
+      "FinishCount": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredZhaoCaiFinishCOunt"
       }
     },
     "FreebiesStorage": {
@@ -636,18 +669,36 @@
       "claim": {
         "type": "checkbox",
         "value": true
+      },
+      "FinishCount": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredLeaderBoardLikeCount"
       }
     },
     "MonthlySignIn": {
       "SignIn": {
         "type": "checkbox",
         "value": true
+      },
+      "FinishCount": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredMonthlySignInCount"
       }
     },
     "InformationClub": {
       "SignIn": {
         "type": "checkbox",
         "value": true
+      },
+      "SignInCount": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredInformationClubSignInCount"
       }
     },
     "YiLeLaMian": {
