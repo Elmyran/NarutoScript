@@ -5,6 +5,7 @@ from datetime import datetime
 from functools import cached_property as functools_cached_property
 
 from anyio import value
+from shapely import length
 
 from module.base.decorator import cached_property
 from module.config.deep import deep_get
@@ -287,6 +288,7 @@ class StoredMissionAccept(StoredCounter):
         for minutes in duration_minutes_list:
             completion_time = current_time + timedelta(minutes=minutes)
             self.mission_times.append(completion_time)
+        self.value=len(self.mission_times)
 
     @cached_property
     def _attrs(self) -> dict:
@@ -310,15 +312,16 @@ class StoredMissionAccept(StoredCounter):
 
             if t > now:
                 valid_times.append(t)
-
+        
         self.mission_times = valid_times
-
+        self.value=len(self.mission_times)
     def get_nearest_completion_time(self):
         self._clear_expired_missions()
         if self.mission_times:
             return min(self.mission_times)
         else:
             return None
+        
     def clear(self):
         super().clear()
         self.mission_times = []
