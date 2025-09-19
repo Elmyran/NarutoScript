@@ -1,5 +1,5 @@
 from module.exception import GameStuckError
-from tasks.base.page import page_main, page_zhaocai
+from tasks.base.page import  page_zhaocai
 from tasks.base.ui import UI
 from tasks.freebies.assets.assets_freebies_zhaocai import ZHAO_CAI_RED_DOT, ZHAO_CAI_FREE, ZHAO_CAI_PAIED, ZHAO_CAI_CHECK
 from module.logger.logger import logger

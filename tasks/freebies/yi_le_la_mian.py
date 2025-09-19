@@ -4,12 +4,13 @@ from tasks.freebies.assets.assets_freebies_yi_le_la_mian import *
 from tasks.base.page import page_activity
 from tasks.base.ui import UI
 from datetime import datetime
+from module.logger.logger import logger
 
 class YiLeLaMian(UI):
     def handle_la_mian(self):
         now = datetime.now() 
         if now.hour<11:
-            self.logger.info('Not 11am yet, skip claim')
+            logger.info('Not 11am yet, skip claim')
             return False
         if self.config.stored.YiLeLaMianFinishCount.is_expired():
             self.config.stored.YiLeLaMianFinishCount.clear()
