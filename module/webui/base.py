@@ -91,7 +91,7 @@ class Frame(Base):
             "header",
             [
                 put_html(Icon.ALAS).style("--header-icon--"),
-                put_text("SRC").style("--header-text--"),
+                put_text("NarutoScript").style("--header-text--"),
                 put_scope("header_status"),
                 put_scope("header_title"),
             ],

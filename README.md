@@ -26,7 +26,7 @@ NarutoScript 是一款基于 [崩坏:星穹铁道 StarRailCopilot](https://githu
 NarutoScript 基于 Alas 生态开发，以下项目可供参考：  
 👉 [AzurLaneAutoScript](https://github.com/LmeSzinc/AzurLaneAutoScript) - 碧蓝航线自动化脚本  
 👉 [StarRailCopilot](https://github.com/LmeSzinc/StarRailCopilot) - 星铁速溶茶，崩坏：星穹铁道脚本，基于下一代Alas框架
-由于能力有限且SRC关闭了插件系统，NarutoScript使用了SRC的GUI可能导致无法与SRC同时运行
+
 
 ## 许可证
 

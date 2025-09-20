@@ -110,7 +110,7 @@ class UI(MainPage):
         logger.warning("Starting from current page is not supported")
         logger.warning(f"Supported page: {[str(page) for page in Page.iter_pages()]}")
         logger.warning('Supported page: Any page with a "HOME" button on the upper-right')
-        logger.critical("Please switch to a supported page before starting SRC")
+        logger.critical("Please switch to a supported page before starting NS")
         raise GamePageUnknownError
 
     def ui_goto(self, destination, skip_first_screenshot=True):
