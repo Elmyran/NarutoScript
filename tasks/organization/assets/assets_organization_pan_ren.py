@@ -25,6 +25,17 @@ ORGANIZATION_GOTO_PAN_REN = ButtonWrapper(
     ),
     en=None,
 )
+PAN_REN_ABOUT_TO_START = ButtonWrapper(
+    name='PAN_REN_ABOUT_TO_START',
+    cn=Button(
+        file='./assets/cn/organization/pan_ren/PAN_REN_ABOUT_TO_START.png',
+        area=(441, 111, 598, 143),
+        search=(421, 91, 618, 163),
+        color=(68, 65, 58),
+        button=(441, 111, 598, 143),
+    ),
+    en=None,
+)
 PAN_REN_AUTO_FIGHT = ButtonWrapper(
     name='PAN_REN_AUTO_FIGHT',
     cn=Button(

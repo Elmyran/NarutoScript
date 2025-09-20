@@ -1,4 +1,6 @@
+
 from datetime import datetime
+
 
 from module.base.timer import Timer
 from module.config.utils import get_nearest_weekday_date, get_server_weekday, server_time_offset
@@ -30,7 +32,8 @@ class OrganizationPanRen(GameControl):
             self.config.task_delay(target=[wednesday_target_time, saturday_target_time])
             self.config.task_stop()
             return
-        self.handle_organization_pan_ren()
+        if not self.handle_organization_pan_ren():
+            return False
         self.config.stored.PanRenFinishCount.add()
         self.config.task_delay(target=[wednesday_target_time, saturday_target_time])
         if self.config.PanRen_SecondPassword:
@@ -41,6 +44,7 @@ class OrganizationPanRen(GameControl):
         diff = server_time_offset()
         server_now = datetime.now() - diff
         current_hour = server_now.hour
+        current_minute=server_now.minute
         if server_weekday == 2:  # Wednesday
             if not (21 <= current_hour < 22):
                 logger.info(f'Not in Wednesday time  21-22 (current hour: {current_hour}), task will stop')
@@ -52,6 +56,9 @@ class OrganizationPanRen(GameControl):
         else:
             logger.info(f'Not Wednesday Or Saturday (current: {server_weekday}), task will stop')
             return False
+        if not 5<current_minute<=40:
+            logger.info('Not 5 - 40 (current: {current_minute}), task will stop')
+            return False 
         return True
     def handle_organization_pan_ren(self):
         self.device.click_record_clear()
@@ -61,13 +68,13 @@ class OrganizationPanRen(GameControl):
             raise GameStuckError(' Organization Not Found')
         self._organization_enter()
         self.device.stuck_timer = Timer(900, count=900).start()
-        end_early=None
+        end_early=True
         try:
             end_early=self._wait_pan_ren_start()
         finally:
             self.device.stuck_timer = Timer(60, count=60).start()
-            if end_early:
-                return True
+            if  end_early:
+                return False
 
         if self._pan_ren_goto_fight():
             return True
@@ -109,9 +116,17 @@ class OrganizationPanRen(GameControl):
                 count+=1
                 logger.info("Waiting for Pan Ren to start")
                 time.reset()
+            PAN_REN_ABOUT_TO_START.load_search(FULL_SCREEN.area)
+            if self.appear(PAN_REN_ABOUT_TO_START):
+                logger.info('Pan Ren is about to start')
+                break
+        
+        for _ in self.loop():
             PAN_REN_HAVE_START.load_search(FULL_SCREEN.area)
             if self.appear(PAN_REN_HAVE_START):
+                logger.info('Pan Ren have start')
                 break
+        return False
     def _pan_ren_goto_fight(self):
         for _ in self.loop():
             if self.appear(PAN_REN_AUTO_FIGHT):
