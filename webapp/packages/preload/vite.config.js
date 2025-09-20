@@ -1,4 +1,4 @@
-import {chrome} from '../../.electron-vendors.cache.json';
+import {chrome} from '../../electron-vendors.config.json';
 import {preload} from 'unplugin-auto-expose';
 import {join} from 'node:path';
 import {injectAppVersion} from '../../version/inject-app-version-plugin.mjs';
