@@ -1,4 +1,5 @@
-import {node} from '../../.electron-vendors.cache.json';
+import vendors from '../../electron-vendors.config.json' assert {type: 'json'};  
+const {node} = vendors;
 import {join} from 'node:path';
 import {injectAppVersion} from '../../version/inject-app-version-plugin.mjs';
 

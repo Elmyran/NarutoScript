@@ -1,6 +1,6 @@
 {
-  "name": "src",
-  "description": "StarRailCopilot desktop app",
+  "name": "ns",
+  "description": "NarutoScript desktop app",
   "version": "0.4.0",
   "private": true,
   "main": "packages/main/dist/index.cjs",
