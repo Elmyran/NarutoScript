@@ -48,12 +48,8 @@ class Login(UI,GameInPopup):
             # End
             # Game client requires at least 5s to start
             # The first few frames might be captured before app_stop(), ignore them
-            if startup_timer.reached():
-                if self.ui_page_appear(page_main):
-                    if self.handle_game_popup():
-                        logger.info('Login to main confirm')
-                        break
-                self.handle_game_popup()
+            
+                
 
             # Watch resource downloading and loading
             if self.appear(LOGIN_LOADING, interval=5):
@@ -71,6 +67,17 @@ class Login(UI,GameInPopup):
                 self.device.stuck_record_clear()
                 login_success = True
                 continue
+            if startup_timer.reached():
+                if self.is_game_popup():
+                    if self.handle_game_popup():
+                        logger.info('Login to main confirm')
+                        break
+                elif self.ui_page_appear(page_main):
+                    if self.handle_game_popup():
+                        logger.info('Login to main success')
+                        break
+                
+            
 
 
 
