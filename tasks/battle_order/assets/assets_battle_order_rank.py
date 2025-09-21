@@ -27,22 +27,13 @@ BATTLE_ORDER_RANK_GOTO_SHARE = ButtonWrapper(
 )
 BATTLE_ORDER_RANK_HAVE_LIKED = ButtonWrapper(
     name='BATTLE_ORDER_RANK_HAVE_LIKED',
-    cn=[
-        Button(
-            file='./assets/cn/battle_order/rank/BATTLE_ORDER_RANK_HAVE_LIKED.png',
-            area=(984, 202, 1094, 275),
-            search=(964, 182, 1114, 295),
-            color=(199, 144, 70),
-            button=(984, 202, 1094, 275),
-        ),
-        Button(
-            file='./assets/cn/battle_order/rank/BATTLE_ORDER_RANK_HAVE_LIKED.2.png',
-            area=(1018, 234, 1051, 258),
-            search=(998, 214, 1071, 278),
-            color=(110, 108, 101),
-            button=(1018, 234, 1051, 258),
-        ),
-    ],
+    cn=Button(
+        file='./assets/cn/battle_order/rank/BATTLE_ORDER_RANK_HAVE_LIKED.png',
+        area=(984, 202, 1094, 275),
+        search=(964, 182, 1114, 295),
+        color=(199, 144, 70),
+        button=(984, 202, 1094, 275),
+    ),
     en=None,
 )
 BATTLE_ORDER_RANK_LIKE_BUTTON = ButtonWrapper(

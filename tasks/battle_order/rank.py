@@ -19,7 +19,7 @@ class BattleOrderRank(UI):
         for _ in self.loop():
             if time.reached():
                 raise GameStuckError("BATTLE ORDER RANK LIKE STUCK")
-            if BATTLE_ORDER_RANK_HAVE_LIKED.match_template_color(self.device.image,direct_match=True):
+            if BATTLE_ORDER_RANK_HAVE_LIKED.match_template_luma(self.device.image,direct_match=True):
                 break
             if self.appear_then_click(BATTLE_ORDER_RANK_LIKE_BUTTON,interval=0):
                 continue
@@ -58,7 +58,4 @@ class BattleOrderRank(UI):
             if click_interval.reached():
                 self.device.click(BATTLE_ORDER_SHARE_GOTO_QQ)
                 click_interval.reset()
-
-
-
 
