@@ -134,7 +134,6 @@ class GeneratedConfig:
     ItemStorage_Tickets = {}
     ItemStorage_Coins = {}
     ItemStorage_Fame = {}
-    ItemStorage_Mission = {}
 
     # Group `TiLiStorage`
     TiLiStorage_Dungeon = {}

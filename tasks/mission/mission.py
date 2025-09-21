@@ -27,9 +27,7 @@ class Mission(UI):
                 self.config.task_delay(target=delay_time)
             else:
                 self.config.task_delay(server_update=True)
-        with self.config.multi_set():
-            mission=self.config.stored.MissionAccept.value
-            self.config.stored.Mission.value=mission
+        
         self.config.task_stop()
 
     def handle_mission(self):
@@ -69,7 +67,7 @@ class Mission(UI):
             if total!=0 and remain==total:
                 break
             res=self._single_task_select(task)
-            if res:
+            if not res:
                 break
             else:
                 accepted_tasks.append(task.time)
@@ -101,10 +99,10 @@ class Mission(UI):
             if time.reached():
                 raise GameStuckError("Character selected Stucked")
             if THE_TASKBAR_IS_FULL.match_template(self.device.image):
-                return True
+                return False
             else:
                 if self.appear(MISSION_CHECK):
-                    return False
+                    return True
             if self.appear(CHARACTER_SELECTED_AUTO) and CHARACTER_UNSELECTED.match_template(self.device.image, direct_match=True):
                 self.device.click(CHARACTER_SELECTED_AUTO)
             elif CHARACTER_UNSELECTED.match_template(self.device.image, direct_match=True):

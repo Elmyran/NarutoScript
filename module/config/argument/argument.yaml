@@ -339,11 +339,7 @@ ItemStorage:
     order: 5
     color: "#32CD32"
     display: display
-  Mission:
-    stored: StoredMissionAccept
-    order: 6
-    color: "#ff6b6b"
-    display: display
+
 
 
 TiLiStorage:
@@ -378,8 +374,9 @@ MiJingStorage:
 MissionStorage:
   MissionAccept:
     stored: StoredMissionAccept
-    value: {}
     display: display
+    order: 6
+    color: "#ff6b6b"
 AccountStorage:
   AccountName:
     stored: StoredAccountName

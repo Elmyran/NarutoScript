@@ -10,8 +10,8 @@ class MissionState(Keyword):
 Claimable = MissionState(
     id=1,
     name='Claimable',
-    cn='可领取',
-    cht='可領取',
+    cn='领取',
+    cht='領取',
     en='Claimable',
     jp='受取可能',
     es='Reclamable',

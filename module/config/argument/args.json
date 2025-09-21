@@ -431,7 +431,9 @@
         "type": "stored",
         "value": {},
         "display": "display",
-        "stored": "StoredMissionAccept"
+        "stored": "StoredMissionAccept",
+        "order": 6,
+        "color": "#ff6b6b"
       }
     }
   },
@@ -859,14 +861,6 @@
         "stored": "StoredInt",
         "order": 5,
         "color": "#32CD32"
-      },
-      "Mission": {
-        "type": "stored",
-        "value": {},
-        "display": "display",
-        "stored": "StoredMissionAccept",
-        "order": 6,
-        "color": "#ff6b6b"
       }
     }
   },

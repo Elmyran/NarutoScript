@@ -62,6 +62,5 @@ class StoredGenerated:
     Tickets = StoredInt("DataUpdate.ItemStorage.Tickets")
     Coins = StoredInt("DataUpdate.ItemStorage.Coins")
     Fame = StoredInt("DataUpdate.ItemStorage.Fame")
-    Mission = StoredMissionAccept("DataUpdate.ItemStorage.Mission")
     PanRenFinishCount = StoredPanRenCount("PanRen.PanRen.PanRenFinishCount")
     BattleFieldFinishCount = StoredBattleFieldCount("BattleField.BattleField.BattleFieldFinishCount")

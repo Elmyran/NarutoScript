@@ -60,13 +60,22 @@
     "order": 5,
     "color": "#32CD32"
   },
-  "Mission": {
-    "name": "Mission",
-    "path": "DataUpdate.ItemStorage.Mission",
-    "i18n": "ItemStorage.Mission.name",
+  "MissionAccept": {
+    "name": "MissionAccept",
+    "path": "Mission.MissionStorage.MissionAccept",
+    "i18n": "MissionStorage.MissionAccept.name",
     "stored": "StoredMissionAccept",
     "attrs": {
       "time": "2020-01-01 00:00:00",
+      "task1": "",
+      "task2": "",
+      "task3": "",
+      "task4": "",
+      "task5": "",
+      "task6": "",
+      "task7": "",
+      "task8": "",
+      "task9": "",
       "total": 9,
       "value": 0
     },
@@ -119,19 +128,6 @@
     "attrs": {
       "time": "2020-01-01 00:00:00",
       "total": 1,
-      "value": 0
-    },
-    "order": 0,
-    "color": "#777777"
-  },
-  "MissionAccept": {
-    "name": "MissionAccept",
-    "path": "Mission.MissionStorage.MissionAccept",
-    "i18n": "MissionStorage.MissionAccept.name",
-    "stored": "StoredMissionAccept",
-    "attrs": {
-      "time": "2020-01-01 00:00:00",
-      "total": 9,
       "value": 0
     },
     "order": 0,

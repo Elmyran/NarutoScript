@@ -275,56 +275,85 @@ class StoredTiLi(StoredCounter):
         diff = (now - record).total_seconds()
         value += int(diff // 360)
         return value
-class StoredMissionAccept(StoredCounter):
-    value = 0
-    mission_times = []
-    FIXED_TOTAL = 9
-    def write_missions(self, duration_minutes_list):
-        from datetime import datetime, timedelta
-        # 清除过期任务
-        self._clear_expired_missions()
-        # 添加新任务时间
-        current_time = datetime.now()
-        for minutes in duration_minutes_list:
-            completion_time = current_time + timedelta(minutes=minutes)
-            self.mission_times.append(completion_time)
-        self.value=len(self.mission_times)
+class StoredMissionAccept(StoredCounter):  
+    value = 0  
+    task1 = ''  
+    task2 = ''  
+    task3 = ''  
+    task4 = ''  
+    task5 = ''  
+    task6 = ''  
+    task7 = ''  
+    task8 = ''  
+    task9 = ''  
+    FIXED_TOTAL = 9  
+      
+    def write_missions(self, duration_minutes_list):    
+        from datetime import datetime, timedelta    
+          
+        # 1. 先清除已过期的任务时间  
+        self._clear_expired_missions()  
+          
+        # 2. 计算新任务的完成时间  
+        current_time = datetime.now()  
+        new_completion_times = []  
+        for minutes in duration_minutes_list:  
+            completion_time = current_time + timedelta(minutes=minutes)  
+            new_completion_times.append(completion_time.isoformat())  
+          
+        # 3. 找到空闲的task字段并写入   
+        with self._config.multi_set():  
+            written_count = 0  
+            for i in range(9):  # task1-task9  
+                task_attr = f'task{i+1}'  
+                current_value = getattr(self, task_attr, '')  
+                  
+                # 如果该字段为空，且还有新任务需要写入  
+                if not current_value and written_count < len(new_completion_times):  
+                    setattr(self, task_attr, new_completion_times[written_count])  
+                    written_count += 1  
+  
+    def _clear_expired_missions(self):  
+        """清除所有过期的任务时间"""  
+        from datetime import datetime  
+        now = datetime.now()  
 
-    @cached_property
-    def _attrs(self) -> dict:
-        attrs = super()._attrs
-        # 移除 mission_times，不让它显示在 UI 中
-        attrs.pop('mission_times', None)
-        return attrs
-    def _clear_expired_missions(self):
-        from datetime import datetime
-        now = datetime.now()
-        # 过滤掉已过期的任务
-        valid_times = []
-        for t in self.mission_times:
-            if isinstance(t, str):
-                try:
-                    t = datetime.fromisoformat(t)
-                except (ValueError, TypeError):
-                    continue
-            elif not isinstance(t, datetime):
-                continue
-
-            if t > now:
-                valid_times.append(t)
-        
-        self.mission_times = valid_times
-        self.value=len(self.mission_times)
-    def get_nearest_completion_time(self):
-        self._clear_expired_missions()
-        if self.mission_times:
-            return min(self.mission_times)
-        else:
-            return None
-        
-    def clear(self):
-        super().clear()
-        self.mission_times = []
+        with self._config.multi_set():  
+            for i in range(9):  
+                task_attr = f'task{i+1}'  
+                task_time = getattr(self, task_attr, '')  
+                if task_time:  
+                    try:  
+                        completion_time = datetime.fromisoformat(task_time)  
+                        if completion_time <= now:  # 已过期  
+                            setattr(self, task_attr, '')  
+                    except (ValueError, TypeError):  
+                        # 无效时间格式，清除  
+                        setattr(self, task_attr, '')  
+          
+    def get_nearest_completion_time(self):  
+        """获取最近的任务完成时间"""  
+        from datetime import datetime  
+        now = datetime.now()  
+        valid_times = []  
+          
+        for i in range(9):  
+            task_time = getattr(self, f'task{i+1}', '')  
+            if not task_time:  
+                continue  
+            try:  
+                completion_time = datetime.fromisoformat(task_time)  
+                if completion_time > now:  
+                    valid_times.append(completion_time)  
+            except (ValueError, TypeError):  
+                continue  
+          
+        return min(valid_times) if valid_times else None            
+    def clear(self):  
+        """清除所有任务数据"""  
+        with self._config.multi_set():  
+            for i in range(9):  
+                setattr(self, f'task{i+1}', '')
 class StoredBattleFieldCount(StoredCounter,StoredExpiredAtMonday0500):
     FIXED_TOTAL = 1
 class StoredAccountName(StoredBase):

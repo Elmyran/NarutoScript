@@ -621,10 +621,6 @@
     "Fame": {
       "name": "声望",
       "help": ""
-    },
-    "Mission": {
-      "name": "任务集会所",
-      "help": ""
     }
   },
   "TiLiStorage": {
@@ -681,7 +677,7 @@
       "help": ""
     },
     "MissionAccept": {
-      "name": "已接取数量",
+      "name": "任务集会所",
       "help": ""
     }
   },

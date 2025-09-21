@@ -621,10 +621,6 @@
     "Fame": {
       "name": "ItemStorage.Fame.name",
       "help": "ItemStorage.Fame.help"
-    },
-    "Mission": {
-      "name": "ItemStorage.Mission.name",
-      "help": "ItemStorage.Mission.help"
     }
   },
   "TiLiStorage": {
