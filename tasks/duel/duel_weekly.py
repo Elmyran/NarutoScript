@@ -112,25 +112,25 @@ class DuelWeekly(UI):
                 continue
             if self.appear_then_click(DUEL_TASK_PANEL,interval=1):
                 continue
-
-            if self.appear_then_click(DUEL_START_FIGHT,similarity=0.95,interval=2):
+            if self.match_template_color(DUEL_START_FIGHT,interval=2):
+                self.device.click(DUEL_START_FIGHT)
                 continue
         buttons = [CHARACTER_TI_SHEN,CHARACTER_SKILL_1, CHARACTER_SKILL_2, CHARACTER_SKILL_3, CHARACTER_PSYCHIC, CHARACTER_SECRET_SCROLL]
         for _ in self.loop():
             self.device.click_record_clear()
             if self.appear_then_click(DUEL_EXCEPTION):
                 self.config.stored.CurrentVictoryCount.add(1)
-                print(f'find a exception')
-                return 'FIGHT_SUCCESS'
+                logger.info(f'Handle Exception')
+                return 'FIGHT SUCCESS'
             if self.appear_then_click(DUEL_FIGHT_FAIL):
-                print(f'Fight_FAIL')
+                logger.info(f'Fight Fail')
                 return 'FIGHT_FAIL'
             if self.appear_then_click(DUEL_FIGHT_SUCCESS):
                 self.config.stored.CurrentVictoryCount.add(1)
-                print(f'FIGHT_SUCCESS')
+                logger.info(f'Fight Success')
                 return 'FIGHT_SUCCESS'
             if self.appear(DUEL_ROUND_SWITCH):
-                print('ROUND SWITCH')
+                logger.info(f'Round Switch')
                 self.click_buttons_until_end(CHARACTER_ATTACK,buttons,DUEL_FIGHT_END)
 
 

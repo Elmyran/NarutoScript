@@ -3,6 +3,7 @@ from module.base.timer import Timer
 from module.exception import GameNotRunningError
 from module.logger import logger
 from module.ocr.keyword import parse_name  
+from tasks.base.assets.assets_base_page import MAIN_GOTO_CHARACTER
 from tasks.base.page import page_main
 from tasks.base.ui import UI
 from tasks.login.assets.assets_login import *
@@ -52,7 +53,7 @@ class Login(UI,GameInPopup):
                     if self.handle_game_popup():
                         logger.info('Login to main confirm')
                         break
-                else:self.handle_game_popup()
+                self.handle_game_popup()
 
             # Watch resource downloading and loading
             if self.appear(LOGIN_LOADING, interval=5):

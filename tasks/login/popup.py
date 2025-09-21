@@ -1,5 +1,6 @@
 from module.base.base import ModuleBase
 from module.base.timer import Timer
+from tasks.base.assets.assets_base_page import MAIN_GOTO_CHARACTER
 from tasks.base.page import page_main
 from tasks.base.ui import UI
 
@@ -15,19 +16,21 @@ class GameInPopup(ModuleBase):
         # CN user agreement popup
         timer=Timer(2,count=5).start()
         for _ in  self.loop():
-            if timer.reached():
+            if timer.reached() and self.match_template_color(MAIN_GOTO_CHARACTER,interval=1):
                 return True
-            if self.appear_then_click(GAME_MAIN_ANNOUNCEMENT,interval=2):
+            else :
+                timer.reset()
+            if self.appear_then_click(GAME_MAIN_ANNOUNCEMENT,interval=1):
                 timer.reset()
                 continue
-            if self.match_template_luma(GAME_IN_ADVERTISE,interval=2):
+            if self.match_template_luma(GAME_IN_ADVERTISE,interval=1):
                 self.device.click(GAME_IN_ADVERTISE)
                 timer.reset()
                 continue
-            if self.appear_then_click(Daily_Bonus,interval=2):
+            if self.appear_then_click(Daily_Bonus,interval=1):
                 timer.reset()
                 continue
-            if self.appear_then_click(RANK_UP,interval=2):
+            if self.appear_then_click(RANK_UP,interval=1):
                 timer.reset()
                 continue
 
@@ -54,3 +57,4 @@ class GameInPopup(ModuleBase):
                 return False
 
         return False
+
