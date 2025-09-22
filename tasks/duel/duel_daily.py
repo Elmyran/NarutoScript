@@ -11,7 +11,7 @@ from tasks.base.task_tab.draglist import TASK_TAB_LIST
 from tasks.base.task_tab.keyword import DuelKeyword
 from tasks.base.ui import UI
 from tasks.duel.assets.assets_duel import *
-
+from module.ocr.ocr import Digit
 class DuelDaily(UI):
     def handle_duel_daily(self):
         self.device.click_record_clear()
@@ -79,6 +79,8 @@ class DuelDaily(UI):
         time_search=Timer(3, count=5).start()
         first_reach=True
         second_reach=True
+        ocr=Digit(DUEL_TASK_WINS_NUMBER)
+        current_victory_count=0
         for _ in self.loop():
             if time_search.reached():
                 if first_reach:
@@ -91,9 +93,13 @@ class DuelDaily(UI):
                     second_reach=False
                 else:
                     break
+            res=ocr.ocr_single_line(self.device.image)
+            if res!=0:
+                current_victory_count=res
             #检测到未达成
             if DUEL_TASK_NOT_ACHIEVED_BUTTON.match_template(self.device.image,direct_match=True):
                 return False
+        self.config.stored.CurrentVictoryCount.value=current_victory_count
         return True
 
     def start_fight(self):

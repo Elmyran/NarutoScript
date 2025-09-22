@@ -116,6 +116,7 @@ class Mission(UI):
             return
         self.device.click(res[0])
         time = Timer(1, count=3).start()
+        click_interval=Timer(0.5).start()
         for _ in self.loop():
             if time.reached():
                 break
@@ -125,7 +126,9 @@ class Mission(UI):
                 continue
             res = ocr.matched_ocr(self.device.image, keyword_classes=[MissionClaimable,MissionClaim])
             if res:
-                self.device.click(res[0])
+                if click_interval.reached():
+                    self.device.click(res[0])
+                    click_interval.reset()
                 time.reset()
 
 
