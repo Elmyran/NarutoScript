@@ -13,7 +13,7 @@ class WeeklyPackage(UI):
         for _ in self.loop():
             if self.match_template_color(WEEKLY_PACKAGE_HAVE_CLAIM_DONE):
                 break
-            if self.appear_then_click(WEEKLY_PACKAGE_CLAIM_BUTTON,interval=1):
+            if self.appear_then_click(WEEKLY_PACKAGE_DETAIL,interval=1):
                 continue
             if self.match_template_color(WEEKLY_PACKAGE_BUTTON,interval=1):
                 self.device.click(WEEKLY_PACKAGE_BUTTON)

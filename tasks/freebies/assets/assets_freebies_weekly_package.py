@@ -14,14 +14,14 @@ WEEKLY_PACKAGE_BUTTON = ButtonWrapper(
     ),
     en=None,
 )
-WEEKLY_PACKAGE_CLAIM_BUTTON = ButtonWrapper(
-    name='WEEKLY_PACKAGE_CLAIM_BUTTON',
+WEEKLY_PACKAGE_DETAIL = ButtonWrapper(
+    name='WEEKLY_PACKAGE_DETAIL',
     cn=Button(
-        file='./assets/cn/freebies/weekly_package/WEEKLY_PACKAGE_CLAIM_BUTTON.png',
-        area=(541, 579, 744, 650),
-        search=(521, 559, 764, 670),
-        color=(208, 143, 19),
-        button=(541, 579, 744, 650),
+        file='./assets/cn/freebies/weekly_package/WEEKLY_PACKAGE_DETAIL.png',
+        area=(608, 63, 713, 102),
+        search=(588, 43, 733, 122),
+        color=(202, 194, 168),
+        button=(551, 588, 735, 643),
     ),
     en=None,
 )
