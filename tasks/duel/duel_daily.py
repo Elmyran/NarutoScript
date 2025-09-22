@@ -1,4 +1,5 @@
 
+from re import S
 import time
 from module.logger import logger
 from module.base.timer import Timer
@@ -14,6 +15,8 @@ from tasks.duel.assets.assets_duel import *
 from module.ocr.ocr import Digit
 class DuelDaily(UI):
     def handle_duel_daily(self):
+        if self.config.stored.CurrentVictoryCount.is_expired():
+            self.config.stored.CurrentVictoryCount.clear()
         self.device.click_record_clear()
         self.device.stuck_record_clear()
         self.ui_ensure(page_main)
