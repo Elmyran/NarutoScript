@@ -7,13 +7,22 @@ class MissionState(Keyword):
     instances: ClassVar = {}
 
 # 手动创建实例
-Claimable = MissionState(
+MissionClaimable = MissionState(
     id=1,
     name='Claimable',
-    cn='领取',
-    cht='領取',
+    cn='可领取',
+    cht='可領取',
     en='Claimable',
     jp='受取可能',
+    es='Reclamable',
+)
+MissionClaim = MissionState(
+    id=4,
+    name='Claim',
+    cn='领取',
+    cht='領取',
+    en='Claim',
+    jp='受取',
     es='Reclamable',
 )
 Acceptable = MissionState(
