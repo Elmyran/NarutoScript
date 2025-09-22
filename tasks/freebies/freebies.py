@@ -22,6 +22,10 @@ class Freebies(ModuleBase):
             logger.hr('Daily Share', level=1)
             from tasks.freebies.dailyshare import DailyShare
             DailyShare(config=self.config, device=self.device).handle_daily_share()
+        if self.config.InformationClub_InformationClubSignIn:
+            logger.hr('Information Club', level=1)
+            from tasks.freebies.information_club import InformationClub
+            InformationClub(config=self.config, device=self.device).handle_information_club()
         if self.config.FriendGifts_FriendGiftsStart:
             logger.hr('Friend Gifts', level=1)
             from tasks.freebies.friendgifts import FriendGifts
@@ -35,10 +39,7 @@ class Freebies(ModuleBase):
             logger.hr('Zhao Cai Free', level=1)
             from tasks.freebies.zhaocai import ZhaoCaiFree
             ZhaoCaiFree(config=self.config, device=self.device).handle_zhao_cai()
-        if self.config.InformationClub_InformationClubSignIn:
-            logger.hr('Information Club', level=1)
-            from tasks.freebies.information_club import InformationClub
-            InformationClub(config=self.config, device=self.device).handle_information_club()
+        
         if self.config.LeaderBoard_LeaderBoardclaim:
             logger.hr('Leader Board', level=1)
             from tasks.freebies.leaderboard import LeaderBoard

@@ -54,31 +54,15 @@ class Akatsuki(UI):
         for _ in self.loop():
             if time.reached() and self.appear(AKATSUKI_DONE):
                 return True
+            elif time.reached():
+                return  False
             if self.appear(AKATSUKI_REWARD_CHECK):
                 break
             if self.appear(AKATSUKI_REWARD_RED_DOT):
                 self.device.click(AKATSUKI_REWARD_RED_DOT)
-            elif time.reached():
-                return  False
-        claim_time=Timer(60, count=60).start()
-        down=True
-        times=0
         for _ in self.loop():
-            if claim_time.reached():
-                raise GameStuckError("Akatsuki Reward Claim Stucked")
-            REWARD_HAVE_CLAIMED.load_search(REWARD_CLAIM_PANEL.area)
-            success = REWARD_HAVE_CLAIMED.match_multi_template(self.device.image)
-            if success and len(success) == 5:
-                if down==True:
-                    self.device.swipe([1028,593],[1027,201])
-                    down=False
-                else :
-                    self.device.swipe([1028,201],[1027,593])
-                    down=True
-                times+=1
-                if times>3 :
-                    break
-                continue
+            if self.appear(REWARD_HAVE_CLAIMED):
+                break
             if self.appear_then_click(REWARD_CLAIM_ALL,interval=0):
                 continue
             REWARD_CLAIM_BUTTON.load_search(REWARD_CLAIM_PANEL.area)
