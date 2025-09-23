@@ -2,7 +2,7 @@
 from module.base.timer import Timer
 from module.exception import GameStuckError
 from module.logger.logger import logger
-from module.ocr.ocr import Ocr, DigitCounter
+from module.ocr.ocr import  DigitCounter
 from module.ocr.ocrutils import DigitOcr
 from module.ocr.onnxmodels import OCR_MODEL
 from module.ocr.utils import pair_buttons
@@ -230,6 +230,3 @@ class Mission(UI):
 
     def _task_strategy(self, tasks):
         return tasks
-az=Mission('ns',task='Alas')
-az.device.screenshot()
-az._mission_reward_claim()

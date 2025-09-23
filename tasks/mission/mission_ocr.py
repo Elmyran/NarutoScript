@@ -9,7 +9,7 @@ class MissionOcr(Ocr):
         """对OCR结果进行修正"""
         result = super().after_process(result)
         if '领取' in result:
-            result = '已领取'
+            result = '可领取'
         
       
         return result

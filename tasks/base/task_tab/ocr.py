@@ -42,9 +42,9 @@ class TaskTabOcr(Ocr):
             result='小队突袭'
         if '积分'in result or '积' in result or '分' in result:
             result = '积分赛'
-        if '排' in result and '榜' in result or '行' in result:
+        if '排' in result or '榜' in result or '行' in result:
             result = '排行榜'
-        if '集会' in result:
+        if '集会' in result or '任务' in result:
             result = '任务集会所'
         if '忍者挑' in result or '挑战' in result:
             result='忍者挑战'

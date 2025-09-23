@@ -3,14 +3,13 @@ from module.base.button import ButtonWrapper
 from module.base.timer import Timer
 from module.logger import logger
 from module.ocr.keyword import Keyword
-from module.ocr.ocr import OcrResultButton
-
 from module.ocr.ocrutils import OCR
+from tasks.base.task_tab.ocr import TaskOcr
 from module.ui.draggable_list import DraggableList
 from tasks.base.assets.assets_base_page import MAIN_GOTO_TASK_SEARCH_AREA, JI_FEN_SAI_CHECK, REN_ZHE_TIAO_ZHAN_CHECK, \
     MAIN_GOTO_TASK_DRAG_AREA
 from tasks.base.task_tab.keyword import TaskTab
-from tasks.base.task_tab.ocr import TaskTabOcr, TaskOcr
+from tasks.base.task_tab.ocr import TaskTabOcr
 from tasks.duel.assets.assets_duel import DUEL_CHECK
 from tasks.fengrao.assets.assets_fengrao import FENG_RAO_CHECK
 from tasks.freebies.assets.assets_freebies_leaderboard import LEADER_BOARD_CHECK
@@ -22,7 +21,7 @@ from tasks.trail.assets.assets_trail import TRAIL_SURVIVAL_CHECK
 
 class DraggableTaskTabList(DraggableList):
 
-    def __init__(self, name, keyword_class, custom_ocr: OCR, search_button: ButtonWrapper, **kwargs):
+    def __init__(self, name, keyword_class, custom_ocr: TaskTabOcr, search_button: ButtonWrapper, **kwargs):
         # 创建适配器OCR类
         ocr_adapter = lambda button: TaskTabOcr(search_button, custom_ocr)
         self.drag_vector = (0.7,0.9)
@@ -31,8 +30,6 @@ class DraggableTaskTabList(DraggableList):
         """重写load_rows以支持竖向文字识别"""
        
         self.cur_buttons = self.ocr.matched_ocr(main.device.image, self.keyword_class)
-        print(self.cur_buttons)
-        
         indexes = [self.keyword2index(row.matched_keyword) for row in self.cur_buttons]
         indexes = [index for index in indexes if index]
 
