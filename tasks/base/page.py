@@ -250,6 +250,10 @@ page_ren_zhe_tiao_zhan.link(REN_ZHE_TIAO_ZHAN_CLOSE,destination=page_main)
 #JiFenSai
 page_ji_fen_sai=Page(JI_FEN_SAI_CHECK)
 page_ji_fen_sai.link(CLOSE,destination=page_main)
+#Store
+page_store=Page(STORE_CHECK)
+page_main.link(MAIN_GOTO_STORE,destination=page_store)
+page_store.link(CLOSE,destination=page_main)
 
 #Activity
 page_activity=Page(ACTIVITY_CHECK)

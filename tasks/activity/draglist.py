@@ -8,8 +8,7 @@ from tasks.activity.assets.assets_activity import ACTIVITY_LIST_AREA
 from tasks.activity.assets.assets_activity_ui import MONTHLY_SIGN_IN_CHECK
 from tasks.activity.keyword import ActivityTab
 
-class DraggableActivityTabList(DraggableList):  
-    # 类似DraggableDungeonList的特殊属性  
+class DraggableActivityTabList(DraggableList):   
     target_activity = None  # 目标活动类型，用于过滤  
     limit_entrance = False  # 确保入口按钮可见  
       
