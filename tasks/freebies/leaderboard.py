@@ -17,13 +17,11 @@ class LeaderBoard(UI):
         self.ui_ensure(page_main)
         if not TASK_TAB_LIST.search_rows(main=self,keyword=LeaderBoardKeyword):
             return False
-        time=Timer(20,count=30).start()
         for _ in self.loop():
-            if time.reached():
-                raise GameStuckError('Leader board like timed out')
-            if self.appear(LEADER_BOARD_HAVE_LIKED):
+            if LEADER_BOARD_HAVE_LIKED.match_template_luma(self.device.image,direct_match=True):
                 break
             if self.appear_then_click(LEADER_BOARD_LIKE_BUTTON,interval=1):
                 continue
         self.config.stored.LeaderBoardFinishCount.add()
+
 

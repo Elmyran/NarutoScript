@@ -18,7 +18,6 @@ class MonthlySignIn(UI):
             return True
         self.device.click_record_clear()
         self.ui_ensure(page_activity)
-        self.wait_until_stable(ACTIVITY_CHECK)
         ACTIVITY_TAB_LIST.search_rows(main=self,keyword=MeiYueQianDaoKeyword)
         ocr=DigitCounter(SIGN_IN_PROGRESS)
         click_interval=Timer(1).start()
