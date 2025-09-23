@@ -38,4 +38,3 @@ aiofiles
 # For dev
 # pip-tools
 # pynput==1.7.6
-onnxruntime
