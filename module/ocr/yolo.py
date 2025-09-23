@@ -51,11 +51,9 @@ class YOLO11:
             logger.info("Using DmlExecutionProvider")
             local_provider.append('DmlExecutionProvider')
         elif 'CPUExecutionProvider' in available_providers:
-            logger.info("Using CPUExecutionProvider")
+            logger.warning("Using CPUExecutionProvider")
             local_provider.append('CPUExecutionProvider')
-        else:
-            logger.warning("No available providers, using CPUExecutionProvider")
-            local_provider.append('CPUExecutionProvider')
+        
         self.session = ort.InferenceSession(self.onnx_model, providers=local_provider)
 
     def predict(self, image=None, conf=None, iou=None):
@@ -148,3 +146,4 @@ class YOLO11:
                       (label_x + label_width, label_y + label_height), color, cv2.FILLED)
         cv2.putText(img, label, (label_x, label_y), cv2.FONT_HERSHEY_SIMPLEX,
                     0.5, (0, 0, 0), 1, cv2.LINE_AA)
+
