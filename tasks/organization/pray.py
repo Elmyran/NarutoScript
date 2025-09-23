@@ -34,13 +34,10 @@ class Pray(UI,RewardUtils):
 
 
     def _enter_pray_panel(self):
-        time=Timer(8, count=10).start()
         for _ in self.loop():
-            if time.reached():
-                raise GameStuckError("Organization enter pray panel Stuck")
-            if self.appear_then_click(ORGANIZATION_PLAY_PANEL):
+            if self.appear_then_click(ORGANIZATION_PLAY_PANEL,interval=1):
                 continue
-            if self.appear_then_click(ORGANIZATION_GOTO_PRAY):
+            if self.appear_then_click(ORGANIZATION_GOTO_PRAY,interval=1):
                 continue
             if self.appear(ORGANIZATION_PRAY_CHECK):
                 break
