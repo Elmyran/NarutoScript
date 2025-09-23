@@ -11,7 +11,8 @@ from tasks.base.task_tab.draglist import TASK_TAB_LIST
 from tasks.base.task_tab.keyword import MissionKeyword
 from tasks.base.ui import UI
 from tasks.mission.assets.assets_mission import *
-from tasks.mission.mission_keyword import MissionClaimable,MissionClaim
+from tasks.mission.mission_keyword import MissionClaimable
+from tasks.mission.mission_ocr import MissionOcr
 from tasks.mission.priority import TaskPriority
 class Mission(UI):
    
@@ -110,7 +111,7 @@ class Mission(UI):
             if CHARACTER_SELECTED.match_template(self.device.image, direct_match=True):
                 self.appear_then_click(TASK_ACCEPT,interval=2)
     def _mission_reward_claim(self):
-        ocr = Ocr(MISSION_TASK_CLAIMED_LIST, lang='cn')
+        ocr = MissionOcr(MISSION_TASK_CLAIMED_LIST, lang='cn')
         res = ocr.matched_ocr(self.device.image, MissionClaimable)
         if not res:
             return
@@ -124,7 +125,7 @@ class Mission(UI):
                 continue
             if self.appear_then_click(MISSION_REWARD,interval=0.5):
                 continue
-            res = ocr.matched_ocr(self.device.image, keyword_classes=[MissionClaimable,MissionClaim])
+            res = ocr.matched_ocr(self.device.image, keyword_classes=MissionClaimable)
             if res:
                 if click_interval.reached():
                     self.device.click(res[0])

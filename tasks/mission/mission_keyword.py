@@ -16,15 +16,7 @@ MissionClaimable = MissionState(
     jp='受取可能',
     es='Reclamable',
 )
-MissionClaim = MissionState(
-    id=4,
-    name='Claim',
-    cn='领取',
-    cht='領取',
-    en='Claim',
-    jp='受取',
-    es='Reclamable',
-)
+
 Acceptable = MissionState(
     id=2,
     name='Acceptable',
