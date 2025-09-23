@@ -4,15 +4,17 @@ from pponnxcr.predict_system import BoxedResult
 
 from module.base.button import ButtonWrapper
 from module.logger import logger
-from module.ocr.ocr import Ocr
+from module.ocr.ocr import Ocr, OcrWhiteLetterOnComplexBackground
 from module.ocr.ocrutils import OCR
 from module.ocr.onnxocr.onnx_paddleocr import ONNXPaddleOcr
 from tasks.base.assets.assets_base_page import MAIN_GOTO_TASK_SEARCH_AREA
 
 
-class TaskTabOcr(ONNXPaddleOcr):
+class TaskTabOcr(ONNXPaddleOcr,OcrWhiteLetterOnComplexBackground):
     def __init__(self, button: ButtonWrapper, **kwargs):
         super().__init__(button, **kwargs)
+    def pre_process(self, img):
+        return OcrWhiteLetterOnComplexBackground.pre_process(self,img)
     def after_process(self, result):
         """对OCR结果进行修正"""
         result = super().after_process(result)
