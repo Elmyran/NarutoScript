@@ -2,7 +2,7 @@
 import cv2
 import numpy as np
 import onnxruntime as ort
-
+from module.logger import logger
 # 类外定义类别映射关系
 CLASS_NAMES = {
     0: 'claimable',
@@ -45,8 +45,18 @@ class YOLO11:
             self.classes = classes
 
         self.color_palette = np.random.uniform(0, 255, size=(len(self.classes), 3))
-
-        self.session = ort.InferenceSession(self.onnx_model, providers=['DmlExecutionProvider',"CPUExecutionProvider"])
+        available_providers = ort.get_available_providers()
+        local_provider = []
+        if 'DmlExecutionProvider' in available_providers:
+            logger.info("Using DmlExecutionProvider")
+            local_provider.append('DmlExecutionProvider')
+        elif 'CPUExecutionProvider' in available_providers:
+            logger.info("Using CPUExecutionProvider")
+            local_provider.append('CPUExecutionProvider')
+        else:
+            logger.warning("No available providers, using CPUExecutionProvider")
+            local_provider.append('CPUExecutionProvider')
+        self.session = ort.InferenceSession(self.onnx_model, providers=local_provider)
 
     def predict(self, image=None, conf=None, iou=None):
         if image is not None:
