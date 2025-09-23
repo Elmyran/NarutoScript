@@ -1,7 +1,6 @@
 
 import cv2
 import numpy as np
-
 import onnxruntime as ort
 
 # 类外定义类别映射关系

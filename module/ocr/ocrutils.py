@@ -1,19 +1,13 @@
 import re
 import time
-from typing import List, Tuple, Union
+from typing import List, Tuple
 import cv2
-
-
-
-import argparse
-
-from loguru._logger import start_time
 
 from module.base.button import Button, ButtonWrapper
 from module.base.utils import float2str, crop
 from module.logger import logger
 from module.ocr.onnxocr.onnx_paddleocr import ONNXPaddleOcr
-from tasks.ren_zhe_tiao_zhan.assets.assets_ren_zhe_tiao_zhan import MI_JING_TYPE
+
 
 
 class Timer:
@@ -65,7 +59,7 @@ class OCR:
             name = button.name
         self.button: ButtonWrapper = button
         self.name: str = name
-        self.model = ONNXPaddleOcr(use_angle_cls=use_angle_cls, use_gpu=use_gpu, **kwargs)
+        self.model = ONNXPaddleOcr(button=self.button,use_angle_cls=use_angle_cls, use_gpu=use_gpu, **kwargs)
     def pre_process(self, image):
         """
         Args:
@@ -225,11 +219,12 @@ class DigitOcr(ONNXPaddleOcr):
         try:
             # 裁剪区域
             if area:
-                x1, y1, x2, y2 = area
-                image = image[y1:y2, x1:x2]
+                image = crop(image, area, copy=False)
 
                 # OCR识别
             result = self.ocr(image)
+            print('detected')
+            print(result)
 
             if not result:
                 return 0

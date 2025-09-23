@@ -4,7 +4,7 @@ from module.logger import logger
 from module.ocr.ocr import Digit
 from tasks.base.page import page_main
 from tasks.base.task_tab.draglist import TASK_TAB_LIST
-from tasks.base.task_tab.keyword import TrailKeyword
+from tasks.base.task_tab.task_keyword import TrailKeyword
 from tasks.base.ui import UI
 from tasks.trail.assets.assets_trail import *
 from tasks.trail.assets.assets_trail_cultivation import *

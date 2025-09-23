@@ -1,19 +1,19 @@
 
+from module.base.button import ClickButton
 from module.base.timer import Timer
 from module.exception import GameStuckError
 from module.logger.logger import logger
-from module.ocr.ocr import  DigitCounter
-from module.ocr.ocrutils import DigitOcr
-from module.ocr.onnxmodels import OCR_MODEL
+from module.ocr.ocr import   DigitCounter
 from module.ocr.utils import pair_buttons
+from tasks.base.assets.assets_base_page import FULL_SCREEN
 from tasks.base.page import page_main
 from tasks.base.task_tab.draglist import TASK_TAB_LIST
-from tasks.base.task_tab.keyword import MissionKeyword
+from tasks.base.task_tab.task_keyword import MissionKeyword
 from tasks.base.ui import UI
 from tasks.mission.assets.assets_mission import *
-from tasks.mission.mission_keyword import MissionClaimable
-from tasks.mission.mission_ocr import MissionOcr
-from tasks.mission.priority import TaskPriority
+from tasks.mission.mission_keyword import Acceptable, MissionClaimable, TaskTime
+from tasks.mission.mission_ocr import  MissionDigit, MissionWhiteLetterOcr, MissionOcr
+from tasks.mission.priority import MissionTask, TaskPriority
 class Mission(UI):
    
     def run(self):
@@ -137,28 +137,37 @@ class Mission(UI):
 
 
     def _mission_select_priority(self):
-        # OCR识别部分保持不变
-        ocr = OCR_MODEL.model  
-        result = ocr.ocr(self.device.image)
-        # 时间和任务识别
-        task_time = ocr.matchTime(result)
-        task_name = ocr.matchArea(result, TASK_AREA.search)
-        task_buttons = ocr.matchKeys(result, '接取')
+   
+        ocr = MissionWhiteLetterOcr(button=TASK_AREA,use_angle_cls=True)
+        # 任务名称识别
+        task_name_boxes = ocr.ocr(self.device.image, TASK_AREA.area)
+        task_name=[]
+        for box in task_name_boxes:  # 遍历列表中的每个 BoxedResult  
+            button = ocr._product_button(boxed_result=box, keyword_classes=[])  
+            task_name.append(button)
+
+        button=MissionOcr(TASK_ACCPET_BUTTON_AREA)
+        # 时间和按钮识别
+        task_buttons=button.matched_ocr(self.device.image, keyword_classes=Acceptable) 
+        task_time = button.matched_ocr(self.device.image,keyword_classes=TaskTime,partial_match=True)
         # 构建当前任务列表
         currentTask = []
         for name, time in pair_buttons(task_name, task_time, (-100, -50, 800, 50)):
-            name.time = self._parse_time_to_minutes(time.txt)
-            currentTask.append(name)
+            task=MissionTask(name=name.text, time=self._parse_time_to_minutes(time.text), area=name.area)
+            currentTask.append(task)
 
         task_with_button = []
+        
         for task, button in pair_buttons(currentTask, task_buttons, (-100, -50, 800, 110)):
+            
             task.button = button.button
             task.area = (
                 task.area[0],
-                min(task.area[1], button.area[1]),
+                min(task.area[1], button.area[1])-10,
                 button.area[0],
-                max(task.area[3], button.area[3])
+                max(task.area[3], button.area[3])+10
             )
+            print(task.area)
             # 获取任务奖励信息
             self._get_task_reward_detail(task)
             task_with_button.append(task)
@@ -172,14 +181,14 @@ class Mission(UI):
             return None
 
             # 按优先级排序：先按箱子类型（RED=1, BLUE=2, GREEN=3），再按魂玉数量（降序）
-        sorted_tasks = sorted(tasks, key=lambda x: (x.box_type.value, -x.soul_jade))
+        sorted_tasks = sorted(tasks, key=lambda x: (x.priority.value, -x.soul_jade_amount))
 
         return sorted_tasks
 
     def _get_task_reward_detail(self, task):
-        ocr = DigitOcr()
-        time = Timer(2, 4).start()
-        box_type=None
+        
+        time = Timer(1, 3).start()
+        box_type=TaskPriority.GREEN
         soul_jade=0
         for _ in self.loop():
             if time.reached():
@@ -201,20 +210,19 @@ class Mission(UI):
                 if SOUL_JADE.match_template(self.device.image, similarity=0.6):
                     # 基于匹配位置计算数字区域
                     number_area = (
-                        SOUL_JADE.button[0],
-                        SOUL_JADE.button[1],
-                        SOUL_JADE.button[2] + 20,  # 向右扩展包含数字
+                        800,
+                        SOUL_JADE.button[1]+30,
+                        840,  # 向右扩展包含数字
                         SOUL_JADE.button[3] + 20  # 向下扩展包含数字
                     )
-                    res = ocr.extract_digit_simple(self.device.image, number_area)
+
+                    jade=ClickButton(area=number_area,name='jade')
+                    ocr = MissionDigit(jade)
+                    res = ocr.ocr_single_line(self.device.image)
                     if res:
                         soul_jade=int(res)
-        task.soul_jade=soul_jade
-  
-        if not box_type:
-            task.box_type=TaskPriority.GREEN
-        else :
-            task.box_type=box_type
+        task.soul_jade_amount=soul_jade
+        task.priority=box_type
 
     def _parse_time_to_minutes(self, time_str: str) -> int:
         """解析时间字符串为分钟数，并修正为60的倍数"""
@@ -230,3 +238,6 @@ class Mission(UI):
 
     def _task_strategy(self, tasks):
         return tasks
+az=Mission('ns',task='Alas')
+az.device.screenshot()
+az.handle_mission()

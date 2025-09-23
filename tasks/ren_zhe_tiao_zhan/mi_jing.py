@@ -4,7 +4,7 @@ from module.ocr.ocr import Digit
 from tasks.base.assets.assets_base_page import FIGHT_CLOSE_CONFIRM, FIGHT_CLOSE
 from tasks.base.page import page_main, page_mi_jing_room
 from tasks.base.task_tab.draglist import TASK_TAB_LIST
-from tasks.base.task_tab.keyword import RenZheTiaoZhanKeyword
+from tasks.base.task_tab.task_keyword import RenZheTiaoZhanKeyword
 from tasks.base.ui import UI
 from tasks.ren_zhe_tiao_zhan.assets.assets_ren_zhe_tiao_zhan import *
 from tasks.ren_zhe_tiao_zhan.auto_fight import AutoBattle

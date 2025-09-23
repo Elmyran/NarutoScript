@@ -1,8 +1,7 @@
-from module.base.timer import Timer
-from module.exception import GameStuckError
+
 from tasks.base.page import page_main
 from tasks.base.task_tab.draglist import TASK_TAB_LIST
-from tasks.base.task_tab.keyword import LeaderBoardKeyword
+from tasks.base.task_tab.task_keyword import LeaderBoardKeyword
 from tasks.base.ui import UI
 from tasks.freebies.assets.assets_freebies_leaderboard import *
 

@@ -51,19 +51,7 @@ class DataUpdate(UI):
             self.config.stored.TiLi.value=ti_li
             self.config.stored.Coins.value=coins
             self.config.stored.Golds.value=gold
-    def _recruit_tikit(self):
-        self.ui_ensure(page_recruit)
-        ocr=DataDigit(DATA_RECRUITMENT_TICKETS)
-        time=Timer(5,count=10).start()
-        ticket=0
-        for _ in self.loop():
-            if time.reached():
-                logger.warning('get recruit tickets failed')
-                break
-            ticket=ocr.ocr_single_line(self.device.image)
-            if ticket > 0:
-                break
-        self.config.stored.Tickets.value=ticket
+ 
     def _fame(self):
         self.ui_ensure(page_tong_ling)
         fame=DataDigit(DATA_FAME)

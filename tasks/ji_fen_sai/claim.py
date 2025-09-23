@@ -3,7 +3,7 @@ from module.exception import GameStuckError
 from tasks.base.assets.assets_base_page import *
 from tasks.base.page import page_main
 from tasks.base.task_tab.draglist import TASK_TAB_LIST
-from tasks.base.task_tab.keyword import JiFenSaiKeyword
+from tasks.base.task_tab.task_keyword import JiFenSaiKeyword
 from tasks.base.ui import UI
 from tasks.ji_fen_sai.assets.assets_ji_fen_sai import JI_FEN_SAI_REWARD
 

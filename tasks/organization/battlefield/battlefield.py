@@ -9,14 +9,14 @@ from module.ocr.ocr import Digit
 from tasks.base.assets.assets_base_character import *
 from tasks.base.page import page_main, page_character_select, page_battle_field_select, page_battle_field
 from tasks.base.task_tab.draglist import TASK_TAB_LIST
-from tasks.base.task_tab.keyword import OrganizationKeyword
+from tasks.base.task_tab.task_keyword import OrganizationKeyword
 from tasks.base.ui import UI
 from tasks.organization.assets.assets_organization_battlefield import *
 from tasks.organization.assets.assets_organization_fortress import ORGANIZATION_MAIN_PAGE, ORGANIZATION_ENTER
 from tasks.organization.assets.assets_organization_pray import ORGANIZATION_PANEL
 from tasks.organization.battlefield.switch import CHARACTER_TAB
 from toolkit.Lib.datetime import datetime
-from tasks.organization.battlefield.keywords import AccountNameKeyword
+from tasks.organization.battlefield.name_keywords import AccountNameKeyword
 from tasks.duel.assets.assets_duel import DUEL_FIGHT_FAIL
 from tasks.base.assets.assets_base_page import FULL_SCREEN
 class BattleField(UI):

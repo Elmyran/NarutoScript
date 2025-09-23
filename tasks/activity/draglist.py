@@ -6,7 +6,7 @@ from module.ocr.ocr import Ocr
 from module.ui.draggable_list import DraggableList
 from tasks.activity.assets.assets_activity import ACTIVITY_LIST_AREA
 from tasks.activity.assets.assets_activity_ui import MONTHLY_SIGN_IN_CHECK
-from tasks.activity.keyword import ActivityTab
+from tasks.activity.activity_keyword import ActivityTab
 
 class DraggableActivityTabList(DraggableList):   
     target_activity = None  # 目标活动类型，用于过滤  

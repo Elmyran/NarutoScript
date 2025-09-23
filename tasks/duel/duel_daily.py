@@ -9,7 +9,7 @@ from tasks.base.assets.assets_base_skill import CHARACTER_ATTACK, CHARACTER_TI_S
     CHARACTER_SKILL_2, CHARACTER_SKILL_3, CHARACTER_PSYCHIC, CHARACTER_SECRET_SCROLL
 from tasks.base.page import page_ninjutsu, page_main
 from tasks.base.task_tab.draglist import TASK_TAB_LIST
-from tasks.base.task_tab.keyword import DuelKeyword
+from tasks.base.task_tab.task_keyword import DuelKeyword
 from tasks.base.ui import UI
 from tasks.duel.assets.assets_duel import *
 from module.ocr.ocr import Digit

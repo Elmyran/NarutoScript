@@ -1,4 +1,4 @@
-import onnxruntime
+import onnxruntime as ort
 
 class PredictBase(object):
     def __init__(self):
@@ -7,11 +7,11 @@ class PredictBase(object):
     def get_onnx_session(self, model_dir, use_gpu):
         # 使用gpu
         if use_gpu:
-            providers =[('CUDAExecutionProvider',{"cudnn_conv_algo_search": "DEFAULT"}),'CPUExecutionProvider']
+            providers =[('DmlExecutionProvider',{"cudnn_conv_algo_search": "DEFAULT"}),'CPUExecutionProvider']
         else:
             providers =['CPUExecutionProvider']
 
-        onnx_session = onnxruntime.InferenceSession(model_dir, None,providers=providers)
+        onnx_session = ort.InferenceSession(model_dir, None,providers=providers)
 
         # print("providers:", onnxruntime.get_device())
         return onnx_session

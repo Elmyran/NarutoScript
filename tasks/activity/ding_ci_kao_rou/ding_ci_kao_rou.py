@@ -3,7 +3,7 @@ from module.logger import logger
 from module.ocr.ocr import Digit
 from tasks.activity.assets.assets_activity_ding_ci_kao_rou import *
 from tasks.activity.draglist import ACTIVITY_TAB_LIST
-from tasks.activity.keyword import DingCiKaoRouKeyword
+from tasks.activity.activity_keyword import DingCiKaoRouKeyword
 
 from tasks.base.page import page_activity
 from tasks.base.ui import UI

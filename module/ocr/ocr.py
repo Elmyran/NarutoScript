@@ -23,6 +23,7 @@ class OcrResultButton:
             matched_keyword: Keyword object or None
         """
         self.area = boxed_result.box
+        
         self.search = area_pad(self.area, pad=-20)
         # self.color =
         self.button = boxed_result.box

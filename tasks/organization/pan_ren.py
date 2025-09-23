@@ -11,7 +11,7 @@ from tasks.base.assets.assets_base_code_second import CODE_SECOND_PASSWORD
 from tasks.base.assets.assets_base_page import FULL_SCREEN
 from tasks.base.page import page_main
 from tasks.base.task_tab.draglist import TASK_TAB_LIST
-from tasks.base.task_tab.keyword import OrganizationKeyword
+from tasks.base.task_tab.task_keyword import OrganizationKeyword
 from tasks.organization.assets.assets_organization import *
 from tasks.organization.assets.assets_organization_pan_ren import *
 from tasks.organization.assets.assets_organization_pray import *

@@ -10,7 +10,7 @@ from tasks.base.assets.assets_base_popup import *
 from tasks.base.page import *
 from tasks.base.ui import UI
 from tasks.tili.assets.assets_tili_equipment import *
-from tasks.tili.keyword import  MopUpKeyword,SyntheticKeyword
+from tasks.tili.tili_keyword import  MopUpKeyword,SyntheticKeyword
 from tasks.tili.ocr import StuffOcr
 
 

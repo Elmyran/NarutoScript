@@ -216,6 +216,16 @@ TASK_ACCEPT = ButtonWrapper(
     ),
     en=None,
 )
+TASK_ACCPET_BUTTON_AREA = ButtonWrapper(
+    name='TASK_ACCPET_BUTTON_AREA',
+    share=Button(
+        file='./assets/share/mission/TASK_ACCPET_BUTTON_AREA.png',
+        area=(1101, 208, 1238, 546),
+        search=(1081, 188, 1258, 566),
+        color=(102, 69, 49),
+        button=(1101, 208, 1238, 546),
+    ),
+)
 TASK_AREA = ButtonWrapper(
     name='TASK_AREA',
     cn=Button(

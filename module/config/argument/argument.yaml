@@ -324,19 +324,14 @@ ItemStorage:
     order: 2
     color: "#FFD700"
     display: display
-  Tickets:
-    stored: StoredInt
-    order: 3
-    color: "#000000"
-    display: display
   Coins:
     stored: StoredInt
-    order: 4
+    order: 3
     color: "#D2B48C"
     display: display
   Fame:
     stored: StoredInt
-    order: 5
+    order: 4
     color: "#32CD32"
     display: display
 

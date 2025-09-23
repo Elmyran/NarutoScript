@@ -1,34 +1,28 @@
 import time
 import cv2
 import re
-
+from pponnxcr.predict_system import BoxedResult
 from module.base.base import ModuleBase
-from module.base.button import ButtonWrapper, Button
-from module.base.utils import area2corner, corner2area, area_in_area
-from module.device.method.utils import HierarchyButton
-from tasks.mission.priority import TaskPriority
+from module.base.button import ButtonWrapper
+from module.base.utils import corner2area
+
+from module.base.utils.utils import area_offset, crop, float2str
+from module.exception import ScriptError
+from module.logger import logger
+from module.ocr.ocr import OcrResultButton
+from module.ocr.utils import merge_buttons
 from .predict_system import TextSystem
 from .utils import infer_args as init_args
-from .utils import str2bool, draw_ocr
+from .utils import  draw_ocr
 import argparse
-import sys
+
 from module.base.decorator import cached_property, del_cached_property
-class TxtBox:
-    def __init__(self,button,txt,threadhold,time=None,soul_jade=None,box_type=None):
-        self.area=corner2area(button)
-        self.button=corner2area(button)
-        self.txt=txt
-        self.time=time
-        self.soul_jade=soul_jade
-        self.box_type:TaskPriority=box_type
-        self.threadhold=threadhold
-    def __repr__(self):
-        """定义对象的字符串表示形式"""
-        return f"TxtBox(txt='{self.txt}', conf={self.threadhold:.4f}, area={self.area}， button={self.button}， time={self.time})"
 
 
 class ONNXPaddleOcr(TextSystem,ModuleBase):
-    def __init__(self, **kwargs):
+    merge_thres_x = 0
+    merge_thres_y = 0
+    def __init__(self,button:ButtonWrapper, name=None,**kwargs):
         # 默认参数
         parser = init_args()
         inference_args_dict = {}
@@ -39,7 +33,11 @@ class ONNXPaddleOcr(TextSystem,ModuleBase):
         params.rec_image_shape = "3, 48, 320"
         # 根据传入的参数覆盖更新默认参数
         params.__dict__.update(**kwargs)
-
+        self.button=button
+        if name!=None:
+            self.name=name
+        else:
+            self.name=self.button.name
         # 初始化模型
         super().__init__(params)
 
@@ -71,25 +69,33 @@ class ONNXPaddleOcr(TextSystem,ModuleBase):
             # 强制垃圾回收
         import gc
         gc.collect()
-    def ocr(self, img, det=True, rec=True, cls=True):
+    def pre_process(self, img):
 
+        return img
+    def after_process(self, img):
+        return img
+    def ocr(self, img, det=True, rec=True, cls=True,direct_ocr=False):
+        start_time = time.time()
         if cls == True and self.use_angle_cls == False:
             print(
                 "Since the angle classifier is not initialized, the angle classifier will not be uesd during the forward process"
             )
-
+        
+        if not direct_ocr:
+            img=crop(img,self.button.area)
+        img=self.pre_process(img)
         if det and rec:
             ocr_res = []
             dt_boxes, rec_res = self.__call__(img, cls)
             tmp_res = [[box.tolist(), res] for box, res in zip(dt_boxes, rec_res)]
             ocr_res.append(tmp_res)
-            return resultToBox(ocr_res)
+            
         elif det and not rec:
             ocr_res = []
             dt_boxes = self.text_detector(img)
             tmp_res = [box.tolist() for box in dt_boxes]
             ocr_res.append(tmp_res)
-            return resultToBox(ocr_res)
+            
         else:
             ocr_res = []
             cls_res = []
@@ -103,36 +109,112 @@ class ONNXPaddleOcr(TextSystem,ModuleBase):
             rec_res = self.text_recognizer(img)
             ocr_res.append(rec_res)
 
-            if not rec:
-                return resultToBox(cls_res)
-            return ocr_res
+         # 将 ocr_res 转换为 BoxedResult 列表
+        detected_results: list[BoxedResult] = self.resultToBoxResult(ocr_res)
+     
+        # 处理检测结果
+        processed_results = []
+        for result in detected_results:
+            if not direct_ocr:
+                result.box = area_offset(result.box, self.button.area[:2])
+            processed_results.append(result)
+        
+        # 过滤和合并结果
+        filtered_results = [result for result in processed_results if self.filter_detected(result)]
+        #merged_results = merge_buttons(filtered_results, thres_x=self.merge_thres_x, thres_y=self.merge_thres_y)
+        merged_results=filtered_results
+    
+        # 后处理文本
+        for result in merged_results :
+            result.ocr_text = self.after_process(result.ocr_text)
 
-    # OCR关键词过滤
-    def matchKeys(self,boxes,keys):
+        logger.attr(name='%s %ss' % (self.name, float2str(time.time() - start_time)),
+                    text=str([result.ocr_text for result in merged_results]))
+        return merged_results
+    def filter_detected(self, result: BoxedResult) -> bool:
         """
-        :param boxes: TxtBoxList(ocr results)
-        :param keys: keys to filter ocr results
-        :return:
+        Return False to drop result.
         """
-        if not isinstance(keys, list):
-            keys = [keys]
-        boxes_matched_keys = []
-        if not boxes  or not keys :
-            return boxes_matched_keys
-        for box in boxes:
-            for key in keys:
-                if box.txt==key:
-                    boxes_matched_keys.append(box)
-                    break
-        return boxes_matched_keys
-    def matchArea(self,boxes,area):
-        matched_boxes = []
-        if not boxes:
-            return matched_boxes
-        for box in boxes:
-            if area_in_area(box.button,area):
-                matched_boxes.append(box)
-        return matched_boxes
+        return True
+    def matched_ocr(self, image, keyword_classes, direct_ocr=False) -> list[OcrResultButton]:
+        """
+        Args:
+            image: Screenshot
+            keyword_classes: `Keyword` class or classes inherited `Keyword`, or a list of them.
+            direct_ocr: True to ignore `button` attribute and feed the image to OCR model without cropping.
+
+        Returns:
+            List of matched OcrResultButton.
+            OCR result which didn't matched known keywords will be dropped.
+        """
+        results = self.ocr(image, direct_ocr=direct_ocr)
+
+        results = [self._product_button(result, keyword_classes) for result in results]
+        results = [result for result in results if result.is_keyword_matched]
+
+        logger.attr(name=f'{self.name} matched',
+                    text=results)
+        return results
+            
+    def _product_button(
+            self,
+            boxed_result: BoxedResult,
+            keyword_classes,
+            lang: str = None,
+            ignore_punctuation=True,
+            ignore_digit=True
+    ) -> OcrResultButton:
+        if not isinstance(keyword_classes, list):
+            keyword_classes = [keyword_classes]
+
+        matched_keyword = self._match_result(
+            boxed_result.ocr_text,
+            keyword_classes=keyword_classes,
+            lang=lang,
+            ignore_punctuation=ignore_punctuation,
+            ignore_digit=ignore_digit,
+        )
+        button = OcrResultButton(boxed_result, matched_keyword)
+        return button
+    def _match_result(
+            self,
+            result: str,
+            keyword_classes,
+            lang: str = None,
+            ignore_punctuation=True,
+            ignore_digit=True):
+        """
+        Args:
+            result (str):
+            keyword_classes: A list of `Keyword` class or classes inherited `Keyword`
+
+        Returns:
+            If matched, return `Keyword` object or objects inherited `Keyword`
+            If not match, return None
+        """
+        if not isinstance(keyword_classes, list):
+            keyword_classes = [keyword_classes]
+
+        # Digits will be considered as the index of keyword
+        if ignore_digit:
+            if result.isdigit():
+                return None
+
+        # Try in current lang
+        for keyword_class in keyword_classes:
+            try:
+                matched = keyword_class.find(
+                    result,
+                    lang=lang,
+                    ignore_punctuation=ignore_punctuation
+                )
+                return matched
+            except ScriptError:
+                continue
+
+        return None
+    
+ 
     def matchTime(self,boxes):
         boxes_matched_time=[]
         if not boxes:
@@ -142,22 +224,28 @@ class ONNXPaddleOcr(TextSystem,ModuleBase):
             if re.search(pattern,box.txt):
                 boxes_matched_time.append(box)
         return boxes_matched_time
-    def ocr_with_area(self, img, button=None):
-        area = button
-        if isinstance(button, (Button, ButtonWrapper)):
-            area = button.area
-
-        image = img  # img is already a numpy array
-
-        # Crop the region of interest
-        x1, y1, x2, y2 = area
-        x1, y1 = max(0, x1), max(0, y1)
-        x2, y2 = min(image.shape[1], x2), min(image.shape[0], y2)
-        roi = image[y1:y2, x1:x2]  # Keep original 3-channel format
-
-        # Use the original ROI for OCR (maintains 3 channels)
-        result = self.ocr(roi)
-        return result
+  
+    def resultToBoxResult(self,ocr_res)-> list[BoxedResult]:
+        """
+        :param result: ocr method result
+        :return: TxtBox list
+        """
+        boxed_results = []  
+        ocr_res = ocr_res[0]
+        for item in ocr_res:  
+            # 提取坐标点和文本信息  
+            points, (text, score) = item  
+            # 将四个点转换为边界框 (x1, y1, x2, y2)  
+            box=tuple(corner2area(points))
+            # 创建 BoxedResult 对象  
+            boxed_result = BoxedResult(  
+                box=box,  
+                text_img=None,  # 通常为 None，除非需要保存文本图像  
+                ocr_text=text,  
+                score=score  
+            )  
+            boxed_results.append(boxed_result)  
+        return boxed_results
 
 # 创建全局OCR模型实例
 class CustomOcrModel:
@@ -175,21 +263,9 @@ class CustomOcrModel:
         del_cached_property(self, 'model')
     # 全局OCR模型实例
 CUSTOM_OCR_MODEL = CustomOcrModel()
-def resultToBox(result):
-    """
-    :param result: ocr method result
-    :return: TxtBox list
-    """
-    box=[]
-    if result is None:
-        return box
-    items=result[0]
-    for item in items:
-        area=item[0]
-        txt=item[1]
-        box.append(TxtBox(button=area,txt=txt[0],threadhold=txt[1]))
 
-    return box
+
+
 
 
 def sav2Img(org_img, result, name="draw_ocr.jpg"):
@@ -208,20 +284,3 @@ def sav2Img(org_img, result, name="draw_ocr.jpg"):
     im_show.save(name)
 
 
-if __name__ == "__main__":
-    import cv2
-
-    model = ONNXPaddleOcr(use_angle_cls=True, use_gpu=False)
-
-    img = cv2.imread(
-        "/data2/liujingsong3/fiber_box/test/img/20230531230052008263304.jpg"
-    )
-    s = time.time()
-    result = model.ocr(img)
-    e = time.time()
-    print("total time: {:.3f}".format(e - s))
-    print("result:", result)
-    for box in result[0]:
-        print(box)
-
-    sav2Img(img, result)

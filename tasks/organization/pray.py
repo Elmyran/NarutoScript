@@ -9,7 +9,7 @@ from module.exception import GameStuckError
 from tasks.base.assets.assets_base_popup import EXIT_ORGANIZATION_RED_ENVELOPE
 from tasks.base.page import page_main
 from tasks.base.task_tab.draglist import TASK_TAB_LIST
-from tasks.base.task_tab.keyword import OrganizationKeyword
+from tasks.base.task_tab.task_keyword import OrganizationKeyword
 from tasks.base.ui import UI
 from tasks.organization.assets.assets_organization_pray import *
 from tasks.organization.assets.assets_organization_boxclaim import *

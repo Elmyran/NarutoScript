@@ -6,7 +6,7 @@ from module.ocr.ocr import Digit
 from module.ocr.yolomodel import YOLO_MODEL
 from tasks.activity.assets.assets_activity_qiu_ri_ji import *
 from tasks.activity.draglist import ACTIVITY_TAB_LIST
-from tasks.activity.keyword import QiuRiJiKeyword
+from tasks.activity.activity_keyword import QiuRiJiKeyword
 from tasks.activity.qiu_ri_ji.ocr import OcrQuizTitle, OcrQuizOption
 from tasks.activity.qiu_ri_ji.question import match_quiz_title, QUIZ_STRATEGIES
 from tasks.activity.qiu_ri_ji.title import QuizTitle

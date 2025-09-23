@@ -19,7 +19,6 @@ class DraggableCharacterTabList(DraggableList):
             button.area[2] + 118,  # 选中框右边界 (名字右边+118)
             button.area[3]  +10    # 选中框下边界 (名字下边+8)
         )
-        print(check_box_area)
         BATTLE_ORDER_CHECK_STATUS.load_search(check_box_area)
         if main.appear(BATTLE_ORDER_CHECK_STATUS):
             return True

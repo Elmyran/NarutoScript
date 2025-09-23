@@ -4,7 +4,7 @@ from module.ocr.ocr import DigitCounter
 from tasks.activity.assets.assets_activity import ACTIVITY_CHECK
 from tasks.freebies.assets.assets_freebies_monthly_sign_in import *
 from tasks.activity.draglist import ACTIVITY_TAB_LIST
-from tasks.activity.keyword import  MeiYueQianDaoKeyword
+from tasks.activity.activity_keyword import  MeiYueQianDaoKeyword
 from tasks.base.page import  page_activity
 from tasks.base.ui import UI
 from module.base.timer import Timer
