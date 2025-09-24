@@ -108,6 +108,7 @@ class OrganizationPanRen(GameControl):
                 self.move_to_direction(270,0.3)
         time=Timer(60).start()
         count=0
+        start=False
         for _ in self.loop():
             if time.reached():
                 if count>10:
@@ -116,14 +117,12 @@ class OrganizationPanRen(GameControl):
                 count+=1
                 logger.info("Waiting for Pan Ren to start")
                 time.reset()
-            PAN_REN_ABOUT_TO_START.load_search(FULL_SCREEN.area)
-            if self.appear(PAN_REN_ABOUT_TO_START):
+            if not start and PAN_REN_ABOUT_TO_START.match_template(self.device.image,direct_match=True):
                 logger.info('Pan Ren is about to start')
-                break
-        
-        for _ in self.loop():
-            PAN_REN_HAVE_START.load_search(FULL_SCREEN.area)
-            if self.appear(PAN_REN_HAVE_START):
+                time.clear()
+                start=True
+                continue
+            if PAN_REN_HAVE_START.match_template(self.device.image,direct_match=True):
                 logger.info('Pan Ren have start')
                 break
         return False
@@ -148,10 +147,7 @@ class OrganizationPanRen(GameControl):
                 continue
 
     def _start_auto_fight(self):
-        time=Timer(30, count=30).start()
         for _ in self.loop():
-            if time.reached():
-                raise GameStuckError("Pan Ren Start Auto Fight Stuck")
             if self.appear(PAN_REN_AUTO_FIGHT_SUCCESS):
                 break
             if self.appear_then_click(PAN_REN_AUTO_FIGHT_CONFIRM, interval=0):
@@ -159,7 +155,7 @@ class OrganizationPanRen(GameControl):
             if self.appear(CODE_SECOND_PASSWORD):
                 self.handle_second_password()
                 continue
-            if self.appear_then_click(PAN_REN_AUTO_FIGHT):
+            if self.appear_then_click(PAN_REN_AUTO_FIGHT,interval=1):
                 continue
     def _check_credit(self):
         ocr=Digit(PAN_REN_CREDITS)
@@ -177,6 +173,7 @@ class OrganizationPanRen(GameControl):
                     logger.info(f'Target credit {target_credit} reached!')
                     break
                 time.reset()
+
 
 
 

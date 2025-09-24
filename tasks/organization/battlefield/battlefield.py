@@ -154,10 +154,10 @@ class BattleField(UI):
                 continue
             if self.appear_then_click(DUEL_FIGHT_FAIL,interval=0):
                 logger.info('Battle Field Fight End Detected')
+                occupied=False
                 continue
             if self.appear_then_click(CHARACTER_CONFIRM,interval=0):
                 logger.info('Character Confirm Detected')
-                occupied=False
                 continue
             if self.appear(BATTLE_FIELD_CHECK) and ocr_interval.reached():
                 credits=OCR.ocr_single_line(self.device.image)
