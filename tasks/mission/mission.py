@@ -238,6 +238,3 @@ class Mission(UI):
 
     def _task_strategy(self, tasks):
         return tasks
-az=Mission('ns',task='Alas')
-az.device.screenshot()
-az.handle_mission()
