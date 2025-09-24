@@ -13,6 +13,7 @@ from tasks.base.task_tab.task_keyword import OrganizationKeyword
 from tasks.base.ui import UI
 from tasks.organization.assets.assets_organization_battlefield import *
 from tasks.organization.assets.assets_organization_fortress import ORGANIZATION_MAIN_PAGE, ORGANIZATION_ENTER
+from tasks.organization.assets.assets_organization_pan_ren import CHARACTER_SELECT_CONFIRM
 from tasks.organization.assets.assets_organization_pray import ORGANIZATION_PANEL
 from tasks.organization.battlefield.switch import CHARACTER_TAB
 from toolkit.Lib.datetime import datetime
@@ -158,10 +159,13 @@ class BattleField(UI):
                     logger.info('Credits reached 1600')
                     break
                 ocr_interval.reset()
-            if self.ui_get_current_page()!= page_battle_field and self.appear_then_click(DUEL_FIGHT_FAIL,interval=0):
-                logger.info('Battle Field Fight End Detected')
-                occupied=False
-                continue
+            if self.ui_get_current_page()!= page_battle_field:
+                if self.appear_then_click(DUEL_FIGHT_FAIL,interval=0):
+                    logger.info('Battle Field Fight End Detected')
+                    continue
+                elif self.appear_then_click(CHARACTER_CONFIRM,interval=0):
+                    occupied=False
+                    continue
             if occupied==False and ocr.matched_ocr(self.device.image,keyword_classes=AccountNameKeyword,direct_ocr=True):
                 occupied=True
                 logger.info('Occupied Detected')
