@@ -144,7 +144,7 @@ class BattleField(UI):
         account_name=self.config.stored.AccountName.value
         AccountNameKeyword.cn=account_name
         OCR=Digit(BATTLE_FIELD_CREDITS)
-        ocr_interval=Timer(30).start()
+        ocr_interval=Timer(10).start()
         occupied=False
         ocr=Ocr(FULL_SCREEN)
         for _ in self.loop():
@@ -152,20 +152,20 @@ class BattleField(UI):
                 break
             if self.appear(DUEL_IS_IN_FIGHT):
                 continue
-            if self.ui_get_current_page()== page_battle_field and ocr_interval.reached():
+            if self.appear_then_click(DUEL_FIGHT_FAIL,interval=0):
+                logger.info('Battle Field Fight End Detected')
+                continue
+            if self.appear_then_click(CHARACTER_CONFIRM,interval=0):
+                logger.info('Character Confirm Detected')
+                occupied=False
+                continue
+            if self.appear(BATTLE_FIELD_CHECK) and ocr_interval.reached():
                 credits=OCR.ocr_single_line(self.device.image)
                 logger.info(f'Credits: {credits}')
                 if credits>1600:
                     logger.info('Credits reached 1600')
                     break
                 ocr_interval.reset()
-            if self.ui_get_current_page()!= page_battle_field:
-                if self.appear_then_click(DUEL_FIGHT_FAIL,interval=0):
-                    logger.info('Battle Field Fight End Detected')
-                    continue
-                elif self.appear_then_click(CHARACTER_CONFIRM,interval=0):
-                    occupied=False
-                    continue
             if occupied==False and ocr.matched_ocr(self.device.image,keyword_classes=AccountNameKeyword,direct_ocr=True):
                 occupied=True
                 logger.info('Occupied Detected')
