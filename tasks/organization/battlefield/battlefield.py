@@ -17,7 +17,7 @@ from tasks.organization.assets.assets_organization_pray import ORGANIZATION_PANE
 from tasks.organization.battlefield.switch import CHARACTER_TAB
 from toolkit.Lib.datetime import datetime
 from tasks.organization.battlefield.name_keywords import AccountNameKeyword
-from tasks.duel.assets.assets_duel import DUEL_FIGHT_FAIL
+from tasks.duel.assets.assets_duel import DUEL_FIGHT_FAIL, DUEL_IS_IN_FIGHT
 from tasks.base.assets.assets_base_page import FULL_SCREEN
 class BattleField(UI):
     def run(self):
@@ -149,6 +149,8 @@ class BattleField(UI):
         for _ in self.loop():
             if self.appear(BATTLE_FIELD_FINISHED):
                 break
+            if self.appear(DUEL_IS_IN_FIGHT):
+                continue
             if self.ui_get_current_page()== page_battle_field and ocr_interval.reached():
                 credits=OCR.ocr_single_line(self.device.image)
                 logger.info(f'Credits: {credits}')
@@ -156,7 +158,7 @@ class BattleField(UI):
                     logger.info('Credits reached 1600')
                     break
                 ocr_interval.reset()
-            if self.ui_get_current_page()!= page_battle_field!=page_battle_field and self.appear_then_click(DUEL_FIGHT_FAIL,interval=0):
+            if self.ui_get_current_page()!= page_battle_field and self.appear_then_click(DUEL_FIGHT_FAIL,interval=0):
                 logger.info('Battle Field Fight End Detected')
                 occupied=False
                 continue
