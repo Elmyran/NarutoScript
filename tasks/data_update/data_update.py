@@ -15,7 +15,6 @@ class DataUpdate(UI):
         self.config.task_stop()
     def handle_data_update(self):
         self._coins_and_gold()
-        self._recruit_tikit()
         self._fame()
     def _coins_and_gold(self):
         self.ui_ensure(page_main)
