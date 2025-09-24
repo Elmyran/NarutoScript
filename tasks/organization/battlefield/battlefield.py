@@ -165,7 +165,7 @@ class BattleField(UI):
                 logger.info('Occupied Detected')
                 continue
             BATTLE_FIELD_EMPTY.load_search(FULL_SCREEN.area)
-            if occupied==False and self.appear_then_clcik(BATTLE_FIELD_EMPTY,interval=0):
+            if occupied==False and self.appear_then_click(BATTLE_FIELD_EMPTY,interval=0):
                 continue
             
 
