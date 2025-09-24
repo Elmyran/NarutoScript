@@ -59,7 +59,6 @@ class StoredGenerated:
     BattleOrderTaskProgress = StoredBattleOrderTaskProgress("BattleOrder.BattleOrderStorage.BattleOrderTaskProgress")
     TiLi = StoredTiLi("DataUpdate.ItemStorage.TiLi")
     Golds = StoredInt("DataUpdate.ItemStorage.Golds")
-    Tickets = StoredInt("DataUpdate.ItemStorage.Tickets")
     Coins = StoredInt("DataUpdate.ItemStorage.Coins")
     Fame = StoredInt("DataUpdate.ItemStorage.Fame")
     PanRenFinishCount = StoredPanRenCount("PanRen.PanRen.PanRenFinishCount")

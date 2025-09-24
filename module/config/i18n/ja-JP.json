@@ -610,10 +610,6 @@
       "name": "ItemStorage.Golds.name",
       "help": "ItemStorage.Golds.help"
     },
-    "Tickets": {
-      "name": "ItemStorage.Tickets.name",
-      "help": "ItemStorage.Tickets.help"
-    },
     "Coins": {
       "name": "ItemStorage.Coins.name",
       "help": "ItemStorage.Coins.help"

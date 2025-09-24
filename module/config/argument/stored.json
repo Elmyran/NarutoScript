@@ -24,18 +24,6 @@
     "order": 2,
     "color": "#FFD700"
   },
-  "Tickets": {
-    "name": "Tickets",
-    "path": "DataUpdate.ItemStorage.Tickets",
-    "i18n": "ItemStorage.Tickets.name",
-    "stored": "StoredInt",
-    "attrs": {
-      "time": "2020-01-01 00:00:00",
-      "value": 0
-    },
-    "order": 3,
-    "color": "#000000"
-  },
   "Coins": {
     "name": "Coins",
     "path": "DataUpdate.ItemStorage.Coins",
@@ -45,7 +33,7 @@
       "time": "2020-01-01 00:00:00",
       "value": 0
     },
-    "order": 4,
+    "order": 3,
     "color": "#D2B48C"
   },
   "Fame": {
@@ -57,7 +45,7 @@
       "time": "2020-01-01 00:00:00",
       "value": 0
     },
-    "order": 5,
+    "order": 4,
     "color": "#32CD32"
   },
   "MissionAccept": {

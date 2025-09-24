@@ -838,20 +838,12 @@
         "order": 2,
         "color": "#FFD700"
       },
-      "Tickets": {
-        "type": "stored",
-        "value": {},
-        "display": "display",
-        "stored": "StoredInt",
-        "order": 3,
-        "color": "#000000"
-      },
       "Coins": {
         "type": "stored",
         "value": {},
         "display": "display",
         "stored": "StoredInt",
-        "order": 4,
+        "order": 3,
         "color": "#D2B48C"
       },
       "Fame": {
@@ -859,7 +851,7 @@
         "value": {},
         "display": "display",
         "stored": "StoredInt",
-        "order": 5,
+        "order": 4,
         "color": "#32CD32"
       }
     }

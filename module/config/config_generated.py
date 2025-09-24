@@ -131,7 +131,6 @@ class GeneratedConfig:
     # Group `ItemStorage`
     ItemStorage_TiLi = {}
     ItemStorage_Golds = {}
-    ItemStorage_Tickets = {}
     ItemStorage_Coins = {}
     ItemStorage_Fame = {}
 
