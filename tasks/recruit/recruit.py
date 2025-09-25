@@ -3,7 +3,8 @@ from tasks.base.page import page_recruit
 from tasks.base.ui import UI
 from tasks.recruit.assets.assets_recruit import *
 
-from tasks.recruit.switch import SWITCH_RECRUIT_TAB, RecruitDuration
+from tasks.recruit.keywords import AdvancedRecruitment, NormalRecruitment
+from tasks.recruit.draglist import SWITCH_RECRUIT_TAB, RecruitDuration, RecruitTabList
 
 
 class Recruit(UI):
@@ -20,7 +21,7 @@ class Recruit(UI):
         self.config.task_stop()
     def _premium_recruit(self):
         self.ui_ensure(page_recruit)
-        SWITCH_RECRUIT_TAB.set('高级招募', main=self)
+        RecruitTabList.search_rows(main=self, keyword=AdvancedRecruitment)
         for _ in self.loop():
             if self.appear(PREMIUM_RECRUIT_FREE_DONE):
                 break
@@ -37,7 +38,7 @@ class Recruit(UI):
 
     def _normal_recruit(self):
         self.ui_ensure(page_recruit)
-        SWITCH_RECRUIT_TAB.set('普通招募', main=self)
+        RecruitTabList.search_rows(main=self, keyword=NormalRecruitment)
         for _ in self.loop():
             if self.appear(NORMAL_RECRUIT_FREE_DONE, interval=1):
                 break
