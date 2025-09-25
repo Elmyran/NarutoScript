@@ -69,6 +69,10 @@ Daily:
       - MonthlySignIn
       - InformationClub
       - YiLeLaMian
+    StorePurchase:
+      - Scheduler
+      - PrivilegeStore
+
     BattleOrder:
       - Scheduler
       - BattleOrder

@@ -98,6 +98,9 @@ class StarRailCopilot(AzurLaneAutoScript):
     def battle_field(self):
         from  tasks.organization.battlefield.battlefield import BattleField
         BattleField(config=self.config,device=self.device).run()
+    def store_purchase(self):
+        from tasks.store_purchase.store_purchase import StorePurchase
+        StorePurchase(config=self.config, device=self.device).run()
 
 
 if __name__ == '__main__':

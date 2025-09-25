@@ -70,6 +70,10 @@
       "name": "Task.Freebies.name",
       "help": "Task.Freebies.help"
     },
+    "StorePurchase": {
+      "name": "Task.StorePurchase.name",
+      "help": "Task.StorePurchase.help"
+    },
     "BattleOrder": {
       "name": "Task.BattleOrder.name",
       "help": "Task.BattleOrder.help"
@@ -551,6 +555,16 @@
       "水门": "水门",
       "大蛇丸": "大蛇丸",
       "自来也": "自来也"
+    }
+  },
+  "PrivilegeStore": {
+    "_info": {
+      "name": "PrivilegeStore._info.name",
+      "help": "PrivilegeStore._info.help"
+    },
+    "DailyFreeCoins": {
+      "name": "PrivilegeStore.DailyFreeCoins.name",
+      "help": "PrivilegeStore.DailyFreeCoins.help"
     }
   },
   "CultivationRoad": {

@@ -29,6 +29,7 @@ class ManualConfig:
     > QiuRiJi
     > BattleOrder
     > Freebies
+    > StorePurchase
     > DataUpdate
     """
 

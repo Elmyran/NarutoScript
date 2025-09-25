@@ -228,14 +228,13 @@ TASK_ACCPET_BUTTON_AREA = ButtonWrapper(
 )
 TASK_AREA = ButtonWrapper(
     name='TASK_AREA',
-    cn=Button(
-        file='./assets/cn/mission/TASK_AREA.png',
+    share=Button(
+        file='./assets/share/mission/TASK_AREA.png',
         area=(518, 199, 594, 549),
         search=(498, 179, 614, 569),
         color=(64, 48, 52),
         button=(518, 199, 594, 549),
     ),
-    en=None,
 )
 TASK_BOX_BLUE = ButtonWrapper(
     name='TASK_BOX_BLUE',

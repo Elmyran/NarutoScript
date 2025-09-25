@@ -391,5 +391,8 @@ class StoredZhaoCaiFinishCount(StoredCounter,StoredExpiredAt0500):
 class StoredYiLeLaMianClaimCount(StoredCounter,StoredExpiredAt0500):
     value = 0
     FIXED_TOTAL = 1
+class StoredPrivilegeStoreFinishCount(StoredCounter,StoredExpiredAt0500):
+    value = 0
+    FIXED_TOTAL = 1
    
     

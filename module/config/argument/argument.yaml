@@ -279,7 +279,14 @@ BattleOrder:
     '大蛇丸',
     '自来也'
     ]
-
+PrivilegeStore:
+  PrivilegeStoreFinishCount:
+    stored: StoredPrivilegeStoreFinishCount
+    vlaue: {}
+    display: hide
+  DailyFreeCoins:
+    type: checkbox
+    value: true
 # ==================== Weekly ====================
 CultivationRoad:
   ClearRedDot:

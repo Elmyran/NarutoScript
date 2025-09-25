@@ -70,6 +70,10 @@
       "name": "白嫖奖励",
       "help": ""
     },
+    "StorePurchase": {
+      "name": "商店购买",
+      "help": ""
+    },
     "BattleOrder": {
       "name": "忍法帖",
       "help": ""
@@ -551,6 +555,16 @@
       "水门": "水门",
       "大蛇丸": "大蛇丸",
       "自来也": "自来也"
+    }
+  },
+  "PrivilegeStore": {
+    "_info": {
+      "name": "特权商店",
+      "help": ""
+    },
+    "DailyFreeCoins": {
+      "name": "领取免费铜币",
+      "help": ""
     }
   },
   "CultivationRoad": {

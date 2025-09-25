@@ -1,10 +1,8 @@
 from tasks.base.ui import UI
-from tasks.base.page import page_store
-from tasks.store_purchase.store_draglist import StoreTabList,SubsidiaryStoreTabList
-from tasks.store_purchase.store_keyword import *
-
-
 class StorePurchase(UI):
     def run(self):
-        pass
+        from tasks.store_purchase.privilege_store.privilege_store import PrivilegeStorePurchase
+        PrivilegeStorePurchase(config=self.config,device=self.device).run()
+        self.config.task_delay(server_update=True)
+        self.config.task_stop()
 
