@@ -2,9 +2,8 @@
 from tasks.base.page import page_recruit
 from tasks.base.ui import UI
 from tasks.recruit.assets.assets_recruit import *
-
 from tasks.recruit.keywords import AdvancedRecruitment, NormalRecruitment
-from tasks.recruit.draglist import SWITCH_RECRUIT_TAB, RecruitDuration, RecruitTabList
+from tasks.recruit.draglist import RecruitDuration, RecruitTabList
 
 
 class Recruit(UI):
@@ -52,7 +51,6 @@ class Recruit(UI):
         if res and res!="0:00:00":
             return res
         else:
-
             return None
 
 

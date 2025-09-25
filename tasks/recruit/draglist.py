@@ -28,7 +28,7 @@ RecruitTabList= RecruitDragList(
     ocr_class=Ocr,
     search_button=RECRUIT_TAB_SEARCH,
     check_row_order=False,
-    active_color=(247, 255, 173),
+    active_color=(243,230,203),
     drag_direction="down"
 )
 class RecruitDuration(Duration):
