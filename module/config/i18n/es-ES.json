@@ -576,6 +576,10 @@
       "name": "OrganizationStore._info.name",
       "help": "OrganizationStore._info.help"
     },
+    "MeritExchange": {
+      "name": "OrganizationStore.MeritExchange.name",
+      "help": "OrganizationStore.MeritExchange.help"
+    },
     "MeritExchangeFilter": {
       "name": "OrganizationStore.MeritExchangeFilter.name",
       "help": "OrganizationStore.MeritExchangeFilter.help",

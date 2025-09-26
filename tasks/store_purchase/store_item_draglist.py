@@ -4,10 +4,10 @@ from module.ocr.ocr import Ocr
 from module.ui.draggable_list import DraggableList
 from module.logger import logger
 from tasks.store_purchase.organization_store import keywords
-from tasks.store_purchase.organization_store.preset import MeritExchangeItem
+from tasks.store_purchase.organization_store.keywords import MeritExchangeItem
 
 class ItemDragList(DraggableList):
-    current_keyword=None
+   
     def load_rows(self, main):
         """重写 load_rows 方法以适应商店界面"""
         super().load_rows(main=main)
@@ -19,8 +19,8 @@ class ItemDragList(DraggableList):
         self.current_keyword=keyword
         if StoreItemList.insight_row(keyword, main=main):
             logger.info('Successfully navigated to'+keyword.cn)
-            if StoreItemList.select_row(keyword, main=main):
-                logger.info('Successfully selected '+keyword.cn)
+            return True
+            
     def is_row_selected(self, button, main):
         return True
     

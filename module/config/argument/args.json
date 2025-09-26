@@ -749,6 +749,10 @@
       }
     },
     "OrganizationStore": {
+      "MeritExchange": {
+        "type": "checkbox",
+        "value": true
+      },
       "MeritExchangeFilter": {
         "type": "select",
         "value": "preset",
@@ -759,7 +763,7 @@
       },
       "CustomMeritExchangeFilter": {
         "type": "textarea",
-        "value": "组织饰品礼盒 > 铜币 > 轮回石 > 忍玉"
+        "value": "GiftBox > Coins > ReincarnationStone > Jade"
       }
     }
   },

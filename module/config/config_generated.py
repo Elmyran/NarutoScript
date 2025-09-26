@@ -121,8 +121,9 @@ class GeneratedConfig:
     PrivilegeStore_DailyFreeCoins = True
 
     # Group `OrganizationStore`
+    OrganizationStore_MeritExchange = True
     OrganizationStore_MeritExchangeFilter = 'preset'  # preset, custom
-    OrganizationStore_CustomMeritExchangeFilter = '组织饰品礼盒 > 铜币 > 轮回石 > 忍玉'
+    OrganizationStore_CustomMeritExchangeFilter = 'GiftBox > Coins > ReincarnationStone > Jade'
 
     # Group `CultivationRoad`
     CultivationRoad_ClearRedDot = True

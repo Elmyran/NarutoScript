@@ -1,77 +1,264 @@
+
 import numpy as np
 
+import cv2
+from shapely import is_valid
+from module.base.button import Button, ClickButton
+from module.base.timer import Timer
+from module.base.utils.utils import area_offset, crop, rgb2gray
+from module.exception import ScriptError
 from module.logger import logger
+from module.ocr import ocr
 from module.ocr.keyword import Keyword
-from module.ocr.ocr import OcrResultButton
-
-
+from module.ocr.ocr import Digit, DigitCounter, Ocr, OcrResultButton
+from tasks.base.assets.assets_base_page import STORE_CHECK
+from tasks.mission.mission_ocr import MissionDigit
+from tasks.store_purchase.assets.assets_store_purchase import BUY_BUTTON, BUY_REACH_TOP, PURCHASE_POPUP, STORE_CURRENCY_NOT_ENOUGH, STORE_ITEM_PURCHASE_AMOUNT_AREA
+from tasks.store_purchase.ocr import StorePriceDigit
+from tasks.store_purchase.store_item_draglist import StoreItemList
 class StoreSelector:
-    """
-    An Interface used in blessing, curio, and other ui selection in rogue
-    """
-
     def __init__(self, main):
         self.main = main
         self.filter_ = None
         self.ocr_results = []
-
-    def recognition(self):
+        self.currency=0
+        self.relative_areas = None
+    def search(self, keyword):
+        ...
+    def recognition(self,keyword):
         ...
 
-    def ui_select(self, target: OcrResultButton | None, skip_first_screenshot=True):
-        ...
 
-    def try_select(self, option: OcrResultButton | str):
-        ...
 
     def load_filter(self):
         ...
 
-    def perform_selection(self, priority):
-        if not self.ocr_results:
-            logger.warning('No blessing recognized, randomly choose one')
-            self.ui_select(None)
+
+    def get_priority_keywords_from_filter(self):  
+        if not self.filter_:  
+            return []  
+        return self.filter_.filter_raw
+    def purchase_items(self,keyword_class):  
+        """
+        Usage: purchase items based on the priority
+        """
+        self.load_filter()  
+        priority_name = self.filter_.filter_raw
+        priority_keyword = []  
+        for name in priority_name:  
+            try:  
+                instance = keyword_class.find_name(name)  
+                priority_keyword.append(instance)  
+            except ScriptError:  
+                print(f"找不到名为 {name} 的 keyword 实例")
+        
+        logger.info(f"Purchase priority: {priority_keyword}")
+        for keyword in priority_keyword:  
+            if not self.search(keyword): 
+                logger.warning(f"No item found for {keyword.cn}") 
+                continue
+            item=self.recognition(keyword)
+            if self.purchase_single_item(item):
+                break
+            
+        
+        
+    def purchase_single_item(self, item):
+        if not item : 
             return False
-
-        if not len(priority):
-            logger.info('No blessing project satisfies current filter, randomly choose one')
-            choose = np.random.choice(self.ocr_results)
-            self.ui_select(choose)
+        if item.amount==0:  
+            logger.info(f"Currency not enough to purchase {item.name}")
+            return True
+        if item.amount==1:
+            ocr=Digit(ClickButton(area=self.relative_areas['currency_area'],name='CurrencyDigit'))
+            click_interval=Timer(1).start()
+            pre_currency=self.currency
+            for _ in self.main.loop():  
+                currency=ocr.ocr_single_line(self.main.device.image)
+                if currency<item.price :
+                    logger.info(f"Currency not enough to purchase {item.name}")
+                    return True
+                elif pre_currency!=currency and item.total==item.sold+1:
+                    logger.info(f"{item.name} have been purchased")
+                    break
+                if click_interval.reached():  
+                    self.main.device.click(item)  
+                    click_interval.reset()
             return False
+        logger.info(f"Purchasing item: {item}")
+        click_interval=Timer(1).start()
+        for _ in self.main.loop():
+            if self.main.appear(PURCHASE_POPUP):
+                logger.info("Detected purchase popup.")
+                break
+            if click_interval.reached():
+                self.main.device.click(item)
+                click_interval.reset()
+        amount_ocr=Ocr(STORE_ITEM_PURCHASE_AMOUNT_AREA)
+        for _ in self.main.loop():
+            amount=amount_ocr.ocr_single_line(self.main.device.image)
+            if amount==item.amount or self.main.appear(BUY_REACH_TOP):
+                break
+            if self.main.appear_then_click(PURCHASE_POPUP,interval=2):  
+                continue
+        for _ in self.main.loop():
+            if self.main.match_template_color(STORE_CHECK):  
+                break
+            if self.main.appear_then_click(BUY_BUTTON,interval=1):  
+                continue
+        
+        return False
+            
+    def ocr_item_price_and_amount(self, price_area,amount_area):  
+        price_ocr=StorePriceDigit(
+            ClickButton(
+                area=price_area,
+                name='ItemPriceDigit'
+        ))
+        price=price_ocr.ocr_single_line(self.main.device.image)
+        amount_ocr=DigitCounter(
+             ClickButton(
+                area=amount_area,
+                name='ItemAmountDigit'
+                )
+        )
+        current,remain,total=amount_ocr.ocr_single_line(self.main.device.image)
+        if total!=0:
+            return price,current,remain,total
+        return price,0,0,0
+    def ocr_currency(self,area):  
+        currency_ocr=Digit(
+            ClickButton(
+                area=area,
+                name='CurrencyDigit'
+            )
+        )
+        currency=currency_ocr.ocr_single_line(self.main.device.image)
+        self.currency=currency
+        
+    def create_shop_item_from_ocr(self,button):  
+        # 1. OCR识别商品名称  
+        
+        if not button:  
+            return None  
 
-        for option in priority:
-            logger.info(f"Try to choose option: {option}")
-            if self.try_select(option):
-                return True
-            else:
-                logger.info(f"Can not choose option: {option}")
+        self.calculate_relative_areas(button.area)
+        # 2. 计算相对区域  
+        relative_areas = self.relative_areas
+        
+        # 3. 创建Item对象  
+        item_button = Button(  
+            search=button.search,
+            file=None,
+            area=relative_areas['soldout_check_area'],  
+            color=(),  
+            button=relative_areas['click_area']  
+        )  
+        
+        item = Item(self.main.device.image, item_button)  
+        item.name = button.text 
+        if not item.is_valid:
+            logger.info(f'{item.name} sold out')
+            return 
+        # 5. OCR价格信息  
+        price,current,remain,total = self.ocr_item_price_and_amount(price_area=relative_areas['price_area'],amount_area=relative_areas['amount_area'])  
+        currency=self.currency
+        item.price = price
+        afford_amount=int(currency/price)
+        item.amount=min(remain,afford_amount)
+        item.sold=current
+        item.total=total
+        return item
+class Item:
+    IMAGE_SHAPE = (96, 96)
 
-    def apply_filter(self) -> list[Keyword | str]:
-        def match_ocr_result(matched_keyword: Keyword):
-            for result in self.ocr_results:
-                if result.matched_keyword == matched_keyword:
-                    return result
-            return None
-
-        if self.filter_:
-            keywords = [result.matched_keyword for result in self.ocr_results]
-            priority = self.filter_.apply(keywords)
-            priority = [option if isinstance(option, str) else match_ocr_result(option) for option in priority]
+    def __init__(self, image, button):
+        """
+        Args:
+            image:
+            button:
+        """
+        self.image_raw = image
+        self._button = button
+        image = crop(image, button.area)
+        if image.shape == self.IMAGE_SHAPE:
+            self.image = image
         else:
-            logger.warning("No filter loaded")
-            priority = []
-        priority = self.after_process(priority)
-        return priority
+            self.image = cv2.resize(image, self.IMAGE_SHAPE, interpolation=cv2.INTER_CUBIC)
+        self.is_valid = self.predict_valid()
+        self._name = 'DefaultItem'
+        self.amount = 1
+        self._cost = 'DefaultCost'
+        self.price = 0
+        self.tag = None
+        self.total = 0
+        self.sold=0
 
-    def after_process(self, priority) -> list[Keyword | str]:
-        """
-        Usage: add extra logics to modify the priority
-        """
-        return priority
 
-    def recognize_and_select(self):
-        self.recognition()
-        self.load_filter()
-        priority = self.apply_filter()
-        logger.info(f"Priority: {priority}")
-        self.perform_selection(priority)
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, value):
+        """
+        Args:
+            value (str): Item name, such as 'PlateGeneralT3'. Suffix in name will be ignore.
+                For example, 'Javelin' and 'Javelin_2' are different templates, but have same output name 'Javelin'.
+        """
+        if '_' in value:
+            pre, suffix = value.rsplit('_', 1)
+            if suffix.isdigit():
+                value = pre
+        self._name = value
+
+    @property
+    def cost(self):
+        return self._cost
+
+    @cost.setter
+    def cost(self, value):
+        if '_' in value:
+            pre, suffix = value.rsplit('_', 1)
+            if suffix.isdigit():
+                value = pre
+        self._cost = value
+
+    def is_known_item(self):
+        if self.name == 'DefaultItem':
+            return False
+        elif self.name.isdigit():
+            return False
+        else:
+            return True
+
+    def __str__(self):
+        if self.name != 'DefaultItem' and self.cost == 'DefaultCost':
+            name = f'{self.name}_x{self.amount}'
+        elif self.name == 'DefaultItem' and self.cost != 'DefaultCost':
+            name = f'{self.cost}_x{self.price}'
+        else:
+            name = f'{self.name}_x{self.amount}_{self.cost}_x{self.price}'
+
+        if self.tag is not None:
+            name = f'{name}_{self.tag}'
+
+        return name
+
+    def predict_valid(self):
+        return np.mean(rgb2gray(self.image) > 127) > 0.1
+
+    @property
+    def button(self):
+        return self._button.button
+
+    def crop(self, area):
+        return crop(self.image_raw, area_offset(area, offset=self._button.area[:2]))
+
+    def __eq__(self, other):
+        # For de-redundancy in Filter.apply()
+        return str(self) == str(other)
+
+    def __hash__(self):
+        # For de-redundancy in merging two get items images
+        return hash(self.name)

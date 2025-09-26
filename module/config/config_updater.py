@@ -649,6 +649,23 @@ class ConfigUpdater:
         # Commented for performance issue
         # self.write_file(config_name, new)
         return new
+    def iter_hidden_args(self, data) -> t.Iterator[str]:
+        """
+        Args:
+            data (dict): config
+
+        Yields:
+            str: Arg path that should be hidden
+        """
+        if deep_get(data, 'StorePurchase.OrganizationStore.MeritExchangeFilter') != 'custom':  
+            yield 'StorePurchase.OrganizationStore.CustomMeritExchangeFilter'
+    def get_hidden_args(self, data) -> t.Set[str]:
+        """
+        Return a set of hidden args
+        """
+
+        out = list(self.iter_hidden_args(data))
+        return set(out)
 
     @staticmethod
     def write_file(config_name, data, mod_name='alas'):

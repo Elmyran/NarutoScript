@@ -221,8 +221,9 @@
       "DailyFreeCoins": true
     },
     "OrganizationStore": {
+      "MeritExchange": true,
       "MeritExchangeFilter": "preset",
-      "CustomMeritExchangeFilter": "组织饰品礼盒 > 铜币 > 轮回石 > 忍玉"
+      "CustomMeritExchangeFilter": "GiftBox > Coins > ReincarnationStone > Jade"
     }
   },
   "BattleOrder": {

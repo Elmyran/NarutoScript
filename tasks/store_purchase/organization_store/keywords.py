@@ -11,54 +11,54 @@ class MeritExchangeItem(Keyword):
     def item_name(self):  
         return [self.__getattribute__(f"{server}_parsed")  
                 for server in UI_LANGUAGES if hasattr(self, f"{server}_parsed")]
-AsumaFragment = MeritExchangeItem(
+Asuma = MeritExchangeItem(
     id=1,
-    name='AsumaFragment',
+    name='Asuma',
     cn='阿斯玛碎片',
     cht='阿斯瑪碎片',
     en='Asuma Fragment',
     jp='アスマの欠片',
     es='Fragmento de Asuma',
 )
-ShippudenNarutoFragment = MeritExchangeItem(
+Naruto = MeritExchangeItem(
     id=2,
-    name='ShippudenNarutoFragment',
+    name='Naruto',
     cn='疾风传鸣人碎片',
     cht='疾風傳鳴人碎片',
     en='Shippuden Naruto Fragment',
     jp='疾風伝ナルトの欠片',
     es='Fragmento de Naruto Shippuden',
 )
-ShippudenSakuraFragment = MeritExchangeItem(
+Sakura = MeritExchangeItem(
     id=3,
-    name='ShippudenSakuraFragment',
+    name='Sakura',
     cn='疾风传樱碎片',
     cht='疾風傳櫻碎片',
     en='Shippuden Sakura Fragment',
     jp='疾風伝サクラの欠片',
     es='Fragmento de Sakura Shippuden',
 )
-ShippudenInoFragment = MeritExchangeItem(
+Ino= MeritExchangeItem(
     id=4,
-    name='ShippudenInoFragment',
+    name='Ino',
     cn='疾风传井野碎片',
     cht='疾風傳井野碎片',
     en='Shippuden Ino Fragment',
     jp='疾風伝イノの欠片',
     es='Fragmento de Ino Shippuden',
 )
-RandomNinjaFragment = MeritExchangeItem(
+RandomFragment = MeritExchangeItem(
     id=5,
-    name='RandomNinjaFragment',
+    name='RandomFragment',
     cn='随机忍者碎片',
     cht='隨機忍者碎片',
     en='Random Ninja Fragment',
     jp='ランダム忍者の欠片',
     es='Fragmento de Ninja Aleatorio',
 )
-OrganizationGiftBox = MeritExchangeItem(  
+GiftBox = MeritExchangeItem(  
     id=6,  
-    name='OrganizationGiftBox',  
+    name='GiftBox',  
     cn='组织饰品礼盒',  
     cht='組織飾品禮盒',  
     en='Organization Gift Box',  

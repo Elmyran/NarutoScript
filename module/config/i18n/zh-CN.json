@@ -573,18 +573,22 @@
   },
   "OrganizationStore": {
     "_info": {
-      "name": "OrganizationStore._info.name",
-      "help": "OrganizationStore._info.help"
+      "name": "组织商店",
+      "help": ""
+    },
+    "MeritExchange": {
+      "name": "功勋兑换",
+      "help": ""
     },
     "MeritExchangeFilter": {
-      "name": "OrganizationStore.MeritExchangeFilter.name",
-      "help": "OrganizationStore.MeritExchangeFilter.help",
-      "preset": "preset",
-      "custom": "custom"
+      "name": "功勋兑换过滤器",
+      "help": "预设 饰品礼盒 > 铜币 > 轮回石 > 忍玉",
+      "preset": "预设",
+      "custom": "自定义"
     },
     "CustomMeritExchangeFilter": {
-      "name": "OrganizationStore.CustomMeritExchangeFilter.name",
-      "help": "OrganizationStore.CustomMeritExchangeFilter.help"
+      "name": "自定义功勋兑换过滤器",
+      "help": "\"仅在'功勋兑换过滤器'设置为\"自定义\"时生效\""
     }
   },
   "CultivationRoad": {

@@ -1,27 +1,30 @@
-from module.base.filter import Filter
+
 from tasks.base.ui import UI
 from tasks.base.page import *
-from tasks.store_purchase.organization_store.keywords import Coins
+from tasks.store_purchase.organization_store.keywords import Asuma, Coins, GiftBox, MeritExchangeItem
 from tasks.store_purchase.store_item_draglist import StoreItemList
 from tasks.store_purchase.store_tab_draglist import StoreTabList, SubsidiaryStoreTabList
 from tasks.store_purchase.store_keyword import PlayStore,OrganizationStoreKeyWord
 from tasks.store_purchase.organization_store.preset import MERIT_EXCHANGE_FILTER, MeritExchangePreset, MeritExchangeSelector
 
 
-class OrganizationStore(UI,MeritExchangeSelector):
+class OrganizationStore(UI):
     def run(self):
-        ...
+        if self.config.OrganizationStore_MeritExchange:
+            self.handle_organization_store_purchase()
     def handle_organization_store_purchase(self):
         self.ui_ensure(page_store)
         self.merit_exchange()
     def merit_exchange(self):
         StoreTabList.search_rows(self,PlayStore)
         SubsidiaryStoreTabList.search_rows(self, OrganizationStoreKeyWord)
-        self.recognition()
-    
-az=OrganizationStore('ns',task='Alas')
-az.device.screenshot()
-StoreItemList.search_rows(main=az,keyword=Coins)
+        selector=MeritExchangeSelector(main=self)
+        selector.purchase_items(keyword_class=MeritExchangeItem)
+
+        
+   
+
+
 
         
         

@@ -3,6 +3,28 @@ from module.base.button import Button, ButtonWrapper
 # This file was auto-generated, do not modify it manually. To generate:
 # ``` python -m dev_tools.button_extract ```
 
+BUY_BUTTON = ButtonWrapper(
+    name='BUY_BUTTON',
+    cn=Button(
+        file='./assets/cn/store_purchase/BUY_BUTTON.png',
+        area=(566, 456, 715, 507),
+        search=(546, 436, 735, 527),
+        color=(205, 140, 16),
+        button=(566, 456, 715, 507),
+    ),
+    en=None,
+)
+BUY_REACH_TOP = ButtonWrapper(
+    name='BUY_REACH_TOP',
+    cn=Button(
+        file='./assets/cn/store_purchase/BUY_REACH_TOP.png',
+        area=(536, 336, 745, 376),
+        search=(516, 316, 765, 396),
+        color=(80, 84, 88),
+        button=(536, 336, 745, 376),
+    ),
+    en=None,
+)
 LIMITED_TIME_SALE_SELECTED = ButtonWrapper(
     name='LIMITED_TIME_SALE_SELECTED',
     cn=Button(
@@ -25,6 +47,17 @@ PLAY_STORE_SELECTED = ButtonWrapper(
     ),
     en=None,
 )
+PURCHASE_POPUP = ButtonWrapper(
+    name='PURCHASE_POPUP',
+    cn=Button(
+        file='./assets/cn/store_purchase/PURCHASE_POPUP.png',
+        area=(746, 357, 792, 406),
+        search=(726, 337, 812, 426),
+        color=(49, 101, 127),
+        button=(746, 357, 792, 406),
+    ),
+    en=None,
+)
 RECOMMENDATION_SELECTED = ButtonWrapper(
     name='RECOMMENDATION_SELECTED',
     cn=Button(
@@ -35,6 +68,27 @@ RECOMMENDATION_SELECTED = ButtonWrapper(
         button=(31, 214, 191, 268),
     ),
     en=None,
+)
+STORE_CURRENCY_NOT_ENOUGH = ButtonWrapper(
+    name='STORE_CURRENCY_NOT_ENOUGH',
+    cn=Button(
+        file='./assets/cn/store_purchase/STORE_CURRENCY_NOT_ENOUGH.png',
+        area=(542, 339, 731, 380),
+        search=(522, 319, 751, 400),
+        color=(70, 72, 76),
+        button=(542, 339, 731, 380),
+    ),
+    en=None,
+)
+STORE_ITEM_PURCHASE_AMOUNT_AREA = ButtonWrapper(
+    name='STORE_ITEM_PURCHASE_AMOUNT_AREA',
+    share=Button(
+        file='./assets/share/store_purchase/STORE_ITEM_PURCHASE_AMOUNT_AREA.png',
+        area=(591, 360, 691, 404),
+        search=(571, 340, 711, 424),
+        color=(164, 149, 122),
+        button=(591, 360, 691, 404),
+    ),
 )
 STORE_ITEM_SEARCH_AREA = ButtonWrapper(
     name='STORE_ITEM_SEARCH_AREA',
