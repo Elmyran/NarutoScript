@@ -7,9 +7,9 @@ from tasks.store_purchase.store_keyword import PrivilegeStore, Store
 
 class PrivilegeStorePurchase(UI):
     def run(self):
-        if self.config.stored.PrivilegPackageFinishCount.is_expired():
-            self.config.stored.PrivilegPackageFinishCount.clear()
-        if self.config.stored.PrivilegPackageFinishCount.is_full():
+        if self.config.stored.PrivilegeStoreFinishCount.is_expired():
+            self.config.stored.PrivilegeStoreFinishCount.clear()
+        if self.config.stored.PrivilegeStoreFinishCount.is_full():
             return
         self.handle_privilege_store_purchase()
     def handle_privilege_store_purchase(self):
