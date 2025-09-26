@@ -26,6 +26,7 @@ from module.config.stored.classes import (
     StoredPanRenCount,
     StoredPlanner,
     StoredPlannerOverall,
+    StoredPrivilegeStoreFinishCount,
     StoredPrivilegeWeeklyPackageClaimCount,
     StoredTiLi,
     StoredTrailblazePower,
@@ -54,6 +55,7 @@ class StoredGenerated:
     MonthlySignInFinishCount = StoredMonthlySignInCount("Freebies.MonthlySignIn.MonthlySignInFinishCount")
     InformationClubSignInCount = StoredInformationClubSignInCount("Freebies.InformationClub.InformationClubSignInCount")
     YiLeLaMianFinishCount = StoredYiLeLaMianClaimCount("Freebies.YiLeLaMian.YiLeLaMianFinishCount")
+    PrivilegeStoreFinishCount = StoredPrivilegeStoreFinishCount("StorePurchase.PrivilegeStore.PrivilegeStoreFinishCount")
     BattleOrderRank = StoredBattleOrderRank("BattleOrder.BattleOrderStorage.BattleOrderRank")
     BattleOrderActivityPoints = StoredBattleOrderActivityPoints("BattleOrder.BattleOrderStorage.BattleOrderActivityPoints")
     BattleOrderTaskProgress = StoredBattleOrderTaskProgress("BattleOrder.BattleOrderStorage.BattleOrderTaskProgress")

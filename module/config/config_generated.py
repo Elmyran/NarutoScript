@@ -117,7 +117,12 @@ class GeneratedConfig:
     BattleOrder_CharacterFragments = '秽土长门'  # 秽土解斑, 永恒佐助, 忍战樱, 九喇嘛鸣人, 死门凯, 秽土柱间, 秽土鼬, 仙人兜, 秽土斑, 白面具, 秽土扉间, 百豪纲手, 秽土水门, 秽土日斩, 秽土长门, 斑, 柱间, 四代目雷影, 扉间, 神秘面具男, 须佐能乎鼬, 天道佩恩, 水门, 大蛇丸, 自来也
 
     # Group `PrivilegeStore`
+    PrivilegeStore_PrivilegeStoreFinishCount = {}
     PrivilegeStore_DailyFreeCoins = True
+
+    # Group `OrganizationStore`
+    OrganizationStore_MeritExchangeFilter = 'preset'  # preset, custom
+    OrganizationStore_CustomMeritExchangeFilter = '组织饰品礼盒 > 铜币 > 轮回石 > 忍玉'
 
     # Group `CultivationRoad`
     CultivationRoad_ClearRedDot = True

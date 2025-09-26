@@ -217,7 +217,12 @@
       "ServerUpdate": "05:00"
     },
     "PrivilegeStore": {
+      "PrivilegeStoreFinishCount": {},
       "DailyFreeCoins": true
+    },
+    "OrganizationStore": {
+      "MeritExchangeFilter": "preset",
+      "CustomMeritExchangeFilter": "组织饰品礼盒 > 铜币 > 轮回石 > 忍玉"
     }
   },
   "BattleOrder": {

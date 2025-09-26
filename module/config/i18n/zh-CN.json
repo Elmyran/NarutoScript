@@ -562,9 +562,29 @@
       "name": "特权商店",
       "help": ""
     },
+    "PrivilegeStoreFinishCount": {
+      "name": "PrivilegeStore.PrivilegeStoreFinishCount.name",
+      "help": "PrivilegeStore.PrivilegeStoreFinishCount.help"
+    },
     "DailyFreeCoins": {
       "name": "领取免费铜币",
       "help": ""
+    }
+  },
+  "OrganizationStore": {
+    "_info": {
+      "name": "OrganizationStore._info.name",
+      "help": "OrganizationStore._info.help"
+    },
+    "MeritExchangeFilter": {
+      "name": "OrganizationStore.MeritExchangeFilter.name",
+      "help": "OrganizationStore.MeritExchangeFilter.help",
+      "preset": "preset",
+      "custom": "custom"
+    },
+    "CustomMeritExchangeFilter": {
+      "name": "OrganizationStore.CustomMeritExchangeFilter.name",
+      "help": "OrganizationStore.CustomMeritExchangeFilter.help"
     }
   },
   "CultivationRoad": {

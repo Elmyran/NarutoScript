@@ -36,6 +36,16 @@ RECOMMENDATION_SELECTED = ButtonWrapper(
     ),
     en=None,
 )
+STORE_ITEM_SEARCH_AREA = ButtonWrapper(
+    name='STORE_ITEM_SEARCH_AREA',
+    share=Button(
+        file='./assets/share/store_purchase/STORE_ITEM_SEARCH_AREA.png',
+        area=(233, 144, 1273, 630),
+        search=(213, 124, 1280, 650),
+        color=(161, 127, 70),
+        button=(233, 144, 1273, 630),
+    ),
+)
 STORE_SELECTED = ButtonWrapper(
     name='STORE_SELECTED',
     cn=Button(

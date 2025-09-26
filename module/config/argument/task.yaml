@@ -72,6 +72,7 @@ Daily:
     StorePurchase:
       - Scheduler
       - PrivilegeStore
+      - OrganizationStore
 
     BattleOrder:
       - Scheduler

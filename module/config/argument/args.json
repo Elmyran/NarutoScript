@@ -736,9 +736,30 @@
       }
     },
     "PrivilegeStore": {
+      "PrivilegeStoreFinishCount": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredPrivilegeStoreFinishCount",
+        "vlaue": {}
+      },
       "DailyFreeCoins": {
         "type": "checkbox",
         "value": true
+      }
+    },
+    "OrganizationStore": {
+      "MeritExchangeFilter": {
+        "type": "select",
+        "value": "preset",
+        "option": [
+          "preset",
+          "custom"
+        ]
+      },
+      "CustomMeritExchangeFilter": {
+        "type": "textarea",
+        "value": "组织饰品礼盒 > 铜币 > 轮回石 > 忍玉"
       }
     }
   },
