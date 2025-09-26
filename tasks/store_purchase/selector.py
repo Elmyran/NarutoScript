@@ -149,7 +149,7 @@ class StoreSelector:
         # 3. 创建Item对象  
         item_button = Button(  
             search=button.search,
-            file=None,
+            file="temp_click", 
             area=relative_areas['soldout_check_area'],  
             color=(),  
             button=relative_areas['click_area']  
