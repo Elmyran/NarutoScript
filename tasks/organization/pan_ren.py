@@ -115,14 +115,14 @@ class OrganizationPanRen(GameControl):
                     logger.info('Not Detect PanRen Start ')
                     return True
                 count+=1
-                logger.info("Waiting for Pan Ren to start")
+                self._try_click_to_refresh()
                 time.reset()
-            if not start and PAN_REN_ABOUT_TO_START.match_template(self.device.image,direct_match=True):
+            if not start and PAN_REN_ABOUT_TO_START.match_template(self.device.image,direct_match=True,similarity=0.7):
                 logger.info('Pan Ren is about to start')
                 time.clear()
                 start=True
                 continue
-            if PAN_REN_HAVE_START.match_template(self.device.image,direct_match=True):
+            if PAN_REN_HAVE_START.match_template(self.device.image,direct_match=True,similarity=0.7):
                 logger.info('Pan Ren have start')
                 break
         return False
@@ -173,10 +173,19 @@ class OrganizationPanRen(GameControl):
                     logger.info(f'Target credit {target_credit} reached!')
                     break
                 time.reset()
-
-
-
-
+    def _try_click_to_refresh(self):
+        logger.info('Trying to click to refresh...')
+        for _ in self.loop():
+            if self.appear(PAN_REN_DETAIL_CHECK):
+                break
+            ORGANIZATION_GOTO_PAN_REN.load_search(FULL_SCREEN.area)
+            if self.appear_then_click(ORGANIZATION_GOTO_PAN_REN,interval=1):
+                continue
+        for _ in self.loop():
+            if self.match_template_color(ORGANIZATION):
+                break
+            if self.appear_then_click(PAN_REN_DETAIL_CHECK,interval=1):
+                continue
 
 
 

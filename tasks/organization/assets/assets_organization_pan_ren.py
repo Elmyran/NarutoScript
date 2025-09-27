@@ -91,6 +91,16 @@ PAN_REN_CREDITS = ButtonWrapper(
     ),
     en=None,
 )
+PAN_REN_DETAIL_CHECK = ButtonWrapper(
+    name='PAN_REN_DETAIL_CHECK',
+    share=Button(
+        file='./assets/share/organization/pan_ren/PAN_REN_DETAIL_CHECK.png',
+        area=(285, 261, 482, 481),
+        search=(265, 241, 502, 501),
+        color=(105, 114, 100),
+        button=(803, 13, 929, 59),
+    ),
+)
 PAN_REN_HAVE_START = ButtonWrapper(
     name='PAN_REN_HAVE_START',
     cn=Button(
