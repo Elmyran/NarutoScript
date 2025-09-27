@@ -85,7 +85,6 @@ xmltodict==0.13.0         # via apkutils2
 flask
 gunicorn
 onnxruntime==1.14.1
-onnxruntime-directml
 scikit-image
 imgaug
 lmdb
