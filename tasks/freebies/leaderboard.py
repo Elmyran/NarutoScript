@@ -15,6 +15,7 @@ class LeaderBoard(UI):
         if not self.handle_leader_board():
             return False
         self.config.stored.LeaderBoardFinishCount.add()  
+        return True
     def handle_leader_board(self):
         self.device.click_record_clear()
         self.ui_ensure(page_main)
