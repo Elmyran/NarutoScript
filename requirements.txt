@@ -84,6 +84,7 @@ wrapt==1.15.0             # via -r requirements-in.txt, deprecated
 xmltodict==0.13.0         # via apkutils2
 flask
 gunicorn
+onnxruntime==1.17.1
 onnxruntime-directml
 scikit-image
 imgaug
