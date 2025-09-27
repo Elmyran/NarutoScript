@@ -70,15 +70,15 @@ class StoreSelector:
             logger.info(f"Currency not enough to purchase {item.name}")
             return True
         if item.amount==1:
-            ocr=Digit(ClickButton(area=self.relative_areas['currency_area'],name='CurrencyDigit'))
+            self.ocr_currency(self.relative_areas['currency_area'])
             click_interval=Timer(1).start()
             pre_currency=self.currency
             for _ in self.main.loop():  
-                currency=ocr.ocr_single_line(self.main.device.image)
-                if currency<item.price :
+                self.ocr_currency(self.relative_areas['currency_area'])
+                if self.currency<item.price :
                     logger.info(f"Currency not enough to purchase {item.name}")
                     return True
-                elif pre_currency!=currency and item.total==item.sold+1:
+                elif pre_currency!=self.currency and item.total==item.sold+1:
                     logger.info(f"{item.name} have been purchased")
                     break
                 if click_interval.reached():  
@@ -162,6 +162,7 @@ class StoreSelector:
             return 
         # 5. OCR价格信息  
         price,current,remain,total = self.ocr_item_price_and_amount(price_area=relative_areas['price_area'],amount_area=relative_areas['amount_area'])  
+        self.ocr_currency(self.relative_areas['currency_area'])
         currency=self.currency
         item.price = price
         afford_amount=int(currency/price)
