@@ -236,6 +236,17 @@ TASK_AREA = ButtonWrapper(
         button=(518, 199, 594, 549),
     ),
 )
+TASK_BAR_IS_EMPTY = ButtonWrapper(
+    name='TASK_BAR_IS_EMPTY',
+    cn=Button(
+        file='./assets/cn/mission/TASK_BAR_IS_EMPTY.png',
+        area=(561, 140, 914, 186),
+        search=(541, 120, 934, 206),
+        color=(74, 67, 75),
+        button=(561, 140, 914, 186),
+    ),
+    en=None,
+)
 TASK_BOX_BLUE = ButtonWrapper(
     name='TASK_BOX_BLUE',
     cn=Button(

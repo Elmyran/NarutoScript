@@ -1,4 +1,5 @@
 
+
 from module.base.button import ClickButton
 from module.base.timer import Timer
 from module.exception import GameStuckError
@@ -120,6 +121,8 @@ class Mission(UI):
         click_interval=Timer(0.5).start()
         for _ in self.loop():
             if time.reached():
+                break
+            if self.appear(TASK_BAR_IS_EMPTY):
                 break
             if self.appear_then_click(MISSION_REWARD_CLAIM_ALL,interval=0.5):
                 continue
