@@ -1,28 +1,35 @@
-import time
-import cv2
-import re
-from module.base.utils import area2corner, corner2area, area_in_area
-from module.base.decorator import cached_property, del_cached_property
 
 import argparse
-import sys
-
-from module.ocr.onnxocr.onnx_paddleocr import ONNXPaddleOcr
-
+from module.base.decorator import cached_property, del_cached_property
+from module.ocr.onnxocr.predict_system import TextSystem as TextSystem_
+from module.ocr.onnxocr.utils import infer_args as init_args 
+class TextSystem(TextSystem_):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.text_recognizer.rec_batch_num=1
 
 class CustomOcrModel:
-    def __init__(self):
-        self._model = None
+   
 
     @cached_property
     def model(self):
-        return ONNXPaddleOcr(use_angle_cls=True, use_gpu=False)
+         # 默认参数
+       # 默认参数
+   
+        parser = init_args()
+        inference_args_dict = {action.dest: action.default for action in parser._actions}
+        params = argparse.Namespace(**inference_args_dict)
+
+        # 修改默认参数
+        params.rec_image_shape = "3, 48, 320"
+        params.use_angle_cls = True
+
+        # 初始化 TextSystem
+        return TextSystem(params)
 
     def resource_release(self):
         """释放OCR模型资源"""
-        if hasattr(self, 'model') and self.model is not None:
-            self.model.resource_release()
         del_cached_property(self, 'model')
 
     # 保持与原项目兼容的全局实例名称
-OCR_MODEL = CustomOcrModel()
+CUSTOM_OCR_MODEL = CustomOcrModel()
