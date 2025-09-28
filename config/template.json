@@ -224,6 +224,11 @@
       "MeritExchange": true,
       "MeritExchangeFilter": "preset",
       "CustomMeritExchangeFilter": "GiftBox > Coins > ReincarnationStone > Jade"
+    },
+    "SurvivalStore": {
+      "SurvivalStoreExchange": true,
+      "SurvivalStoreExchangeFilter": "preset",
+      "CustomSurvivalStoreFilter": "TsuchikuraFragment > ReincarnationStone"
     }
   },
   "BattleOrder": {

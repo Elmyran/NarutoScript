@@ -153,7 +153,7 @@ ScoreStore=SubsidiaryStoreKeyword(
     jp='ランクストア',
     es='Tienda de Rango',
 )
-OrganizationStoreKeyWord=SubsidiaryStoreKeyword(
+OrganizationStore=SubsidiaryStoreKeyword(
     id=13,
     name='OrganizationStore',
     cn='组织商店',

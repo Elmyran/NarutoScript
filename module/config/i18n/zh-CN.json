@@ -591,6 +591,26 @@
       "help": "\"仅在'功勋兑换过滤器'设置为\"自定义\"时生效\""
     }
   },
+  "SurvivalStore": {
+    "_info": {
+      "name": "生存商店",
+      "help": ""
+    },
+    "SurvivalStoreExchange": {
+      "name": "生存商店兑换",
+      "help": ""
+    },
+    "SurvivalStoreExchangeFilter": {
+      "name": "生存商店兑换过滤器",
+      "help": "预设 土台 > 轮回石",
+      "preset": "预设",
+      "custom": "自定义"
+    },
+    "CustomSurvivalStoreFilter": {
+      "name": "自定义生存商店兑换过滤器",
+      "help": "\"仅在'生存商店兑换过滤器'设置为\"自定义\"时生效\""
+    }
+  },
   "CultivationRoad": {
     "_info": {
       "name": "修行之路",

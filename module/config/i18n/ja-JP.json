@@ -591,6 +591,26 @@
       "help": "OrganizationStore.CustomMeritExchangeFilter.help"
     }
   },
+  "SurvivalStore": {
+    "_info": {
+      "name": "SurvivalStore._info.name",
+      "help": "SurvivalStore._info.help"
+    },
+    "SurvivalStoreExchange": {
+      "name": "SurvivalStore.SurvivalStoreExchange.name",
+      "help": "SurvivalStore.SurvivalStoreExchange.help"
+    },
+    "SurvivalStoreExchangeFilter": {
+      "name": "SurvivalStore.SurvivalStoreExchangeFilter.name",
+      "help": "SurvivalStore.SurvivalStoreExchangeFilter.help",
+      "preset": "preset",
+      "custom": "custom"
+    },
+    "CustomSurvivalStoreFilter": {
+      "name": "SurvivalStore.CustomSurvivalStoreFilter.name",
+      "help": "SurvivalStore.CustomSurvivalStoreFilter.help"
+    }
+  },
   "CultivationRoad": {
     "_info": {
       "name": "CultivationRoad._info.name",

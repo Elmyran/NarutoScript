@@ -659,6 +659,8 @@ class ConfigUpdater:
         """
         if deep_get(data, 'StorePurchase.OrganizationStore.MeritExchangeFilter') != 'custom':  
             yield 'StorePurchase.OrganizationStore.CustomMeritExchangeFilter'
+        if deep_get(data, 'StorePurchase.SurvivalStore.SurvivalStoreExchangeFilter') != 'custom':  
+            yield 'StorePurchase.SurvivalStore.CustomSurvivalStoreFilter'
     def get_hidden_args(self, data) -> t.Set[str]:
         """
         Return a set of hidden args

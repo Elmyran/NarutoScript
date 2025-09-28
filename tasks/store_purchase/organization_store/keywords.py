@@ -1,4 +1,3 @@
-
 from dev_tools.keywords.base import UI_LANGUAGES
 from dataclasses import dataclass
 from module.ocr.keyword import Keyword

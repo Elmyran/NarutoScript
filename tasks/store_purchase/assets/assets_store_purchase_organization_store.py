@@ -13,6 +13,16 @@ MERIT_AREA = ButtonWrapper(
         button=(645, 14, 773, 57),
     ),
 )
+ORGANIZATION_STORE_ITEM_SEARCH_AREA = ButtonWrapper(
+    name='ORGANIZATION_STORE_ITEM_SEARCH_AREA',
+    share=Button(
+        file='./assets/share/store_purchase/organization_store/ORGANIZATION_STORE_ITEM_SEARCH_AREA.png',
+        area=(233, 144, 1273, 630),
+        search=(213, 124, 1280, 650),
+        color=(161, 127, 70),
+        button=(233, 144, 1273, 630),
+    ),
+)
 SAFE_DRAG_AREA = ButtonWrapper(
     name='SAFE_DRAG_AREA',
     share=Button(
