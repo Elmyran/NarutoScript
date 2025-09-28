@@ -1,11 +1,11 @@
 
+
 from tasks.base.ui import UI
 from tasks.base.page import *
-from tasks.store_purchase.organization_store.keywords import Asuma, Coins, GiftBox, MeritExchangeItem
-from tasks.store_purchase.store_item_draglist import StoreItemList
+from tasks.store_purchase.organization_store.keywords import  MeritExchangeItem
 from tasks.store_purchase.store_tab_draglist import StoreTabList, SubsidiaryStoreTabList
 from tasks.store_purchase.store_keyword import PlayStore,OrganizationStoreKeyWord
-from tasks.store_purchase.organization_store.preset import MERIT_EXCHANGE_FILTER, MeritExchangePreset, MeritExchangeSelector
+from tasks.store_purchase.organization_store.preset import  MeritExchangeSelector
 
 
 class OrganizationStore(UI):
