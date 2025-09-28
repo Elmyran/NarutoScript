@@ -2,30 +2,29 @@
 from module.base.filter import MultiLangFilter  
 import re
 from module.ocr.ocr import Ocr
-from tasks.store_purchase.assets.assets_store_purchase_organization_store import ORGANIZATION_STORE_ITEM_SEARCH_AREA
-from tasks.store_purchase.assets.assets_store_purchase_organization_store import MERIT_AREA
+from tasks.store_purchase.assets.assets_store_purchase_survival_store import HEAVEN_EARTH_SCROLL_AREA, SURVIVAL_STORE_ITEM_SEARCH_AREA
 from tasks.store_purchase.ocr import StoreDetailOcr
 from tasks.store_purchase.selector import StoreSelector
-from tasks.store_purchase.store_item_draglist import OrganizationStoreItemList  
+from tasks.store_purchase.store_item_draglist import SurvivalStoreItemList  
 
-MERIT_EXCHANGE_ATTR='merit_exchange'
-MERIT_EXCHANGE_FILTER_PRESET = ('reset')  
-MERIT_EXCHANGE_FILTER_ATTR = (MERIT_EXCHANGE_ATTR,) 
-MERIT_EXCHANGE_FILTER = MultiLangFilter(  
+SURVIVAL_STORE_ATTR='survival_store'
+SURVIVAL_STORE_FILTER_PRESET = ('reset')  
+SURVIVAL_STORE_FILTER_ATTR = (SURVIVAL_STORE_ATTR,) 
+SURVIVAL_STORE_FILTER = MultiLangFilter(  
     re.compile(r"(.*)"),  
-    MERIT_EXCHANGE_FILTER_ATTR,  
-    MERIT_EXCHANGE_FILTER_PRESET  
+    SURVIVAL_STORE_FILTER_ATTR,  
+    SURVIVAL_STORE_FILTER_PRESET  
 )
-MeritExchangePreset="""
-GiftBox > Coins > ReincarnationStone > Jade
+SurvivalStorePreset="""
+TsuchikuraFragment > ReincarnationStone
 """ 
-class MeritExchangeSelector(StoreSelector):
+class SurvivalStoreSelector(StoreSelector):
     def search(self, keyword):
-        if not OrganizationStoreItemList.search_rows(main=self.main,keyword=keyword):
+        if not SurvivalStoreItemList.search_rows(main=self.main,keyword=keyword):
             return False
         return True
     def recognition(self,keyword):
-        ocr=StoreDetailOcr(ORGANIZATION_STORE_ITEM_SEARCH_AREA)
+        ocr=StoreDetailOcr(SURVIVAL_STORE_ITEM_SEARCH_AREA)
         buttons=ocr.matched_ocr(image=self.main.device.image,keyword_classes=[keyword])
         target_button=None
         lang=self.main.config.LANG
@@ -48,18 +47,18 @@ class MeritExchangeSelector(StoreSelector):
         'price_area': (x1-20, y1+172, x2+20, y2+172),    
         'click_area': (x1-20, y1+172, x2+20, y2+172) ,
         'amount_area': (x1, y1+123, x2+80, y2+123),
-        'currency_area': MERIT_AREA.area,
+        'currency_area': HEAVEN_EARTH_SCROLL_AREA.area,
     }  
         
         
     def load_filter(self):
-        filter_ = MERIT_EXCHANGE_FILTER
+        filter_ = SURVIVAL_STORE_FILTER
         string = ""
-        match self.main.config.OrganizationStore_MeritExchangeFilter:
+        match self.main.config.SurvivalStore_SurvivalStoreExchangeFilter:
             case 'preset':
-                string=MeritExchangePreset
+                string=SurvivalStorePreset
             case 'custom':
-                string = self.main.config.OrganizationStore_CustomMeritExchangeFilter
+                string = self.main.config.SurvivalStore_CustomSurvivalStoreFilter
         filter_.load(string)
         self.filter_=filter_
 

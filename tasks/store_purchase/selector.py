@@ -1,21 +1,16 @@
 
 import numpy as np
-
 import cv2
-from shapely import is_valid
 from module.base.button import Button, ClickButton
 from module.base.timer import Timer
 from module.base.utils.utils import area_offset, crop, rgb2gray
 from module.exception import ScriptError
 from module.logger import logger
-from module.ocr import ocr
-from module.ocr.keyword import Keyword
-from module.ocr.ocr import Digit, DigitCounter, Ocr, OcrResultButton
-from tasks.base.assets.assets_base_page import STORE_CHECK
-from tasks.mission.mission_ocr import MissionDigit
-from tasks.store_purchase.assets.assets_store_purchase import BUY_BUTTON, BUY_REACH_TOP, PURCHASE_POPUP, STORE_CURRENCY_NOT_ENOUGH, STORE_ITEM_PURCHASE_AMOUNT_AREA
-from tasks.store_purchase.ocr import StorePriceDigit
-from tasks.store_purchase.store_item_draglist import StoreItemList
+from module.ocr.ocr import Digit, DigitCounter, Ocr
+from tasks.base.assets.assets_base_page import FULL_SCREEN, STORE_CHECK
+from tasks.store_purchase.assets.assets_store_purchase import BUY_BUTTON, BUY_REACH_TOP, PURCHASE_POPUP, STORE_ITEM_PURCHASE_AMOUNT_AREA
+from tasks.store_purchase.ocr import StoreDetailOcr, StoreDigitCounter, StorePriceDigit
+
 class StoreSelector:
     def __init__(self, main):
         self.main = main
@@ -94,7 +89,7 @@ class StoreSelector:
             if click_interval.reached():
                 self.main.device.click(item)
                 click_interval.reset()
-        amount_ocr=Ocr(STORE_ITEM_PURCHASE_AMOUNT_AREA)
+        amount_ocr=StorePriceDigit(STORE_ITEM_PURCHASE_AMOUNT_AREA)
         for _ in self.main.loop():
             amount=amount_ocr.ocr_single_line(self.main.device.image)
             if amount==item.amount or self.main.appear(BUY_REACH_TOP):
@@ -116,7 +111,7 @@ class StoreSelector:
                 name='ItemPriceDigit'
         ))
         price=price_ocr.ocr_single_line(self.main.device.image)
-        amount_ocr=DigitCounter(
+        amount_ocr=StoreDigitCounter(
              ClickButton(
                 area=amount_area,
                 name='ItemAmountDigit'
@@ -127,7 +122,7 @@ class StoreSelector:
             return price,current,remain,total
         return price,0,0,0
     def ocr_currency(self,area):  
-        currency_ocr=Digit(
+        currency_ocr=StorePriceDigit(
             ClickButton(
                 area=area,
                 name='CurrencyDigit'

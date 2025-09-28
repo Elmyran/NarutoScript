@@ -1,5 +1,4 @@
 import time
-import cv2
 import re
 from pponnxcr.predict_system import BoxedResult
 from module.base.base import ModuleBase
@@ -10,7 +9,7 @@ from module.base.utils.utils import area_offset, crop, float2str
 from module.exception import ScriptError
 from module.logger import logger
 from module.ocr.ocr import OcrResultButton
-from module.ocr.utils import merge_buttons
+from module.ocr.onnxmodels import CUSTOM_OCR_MODEL
 from .predict_system import TextSystem
 from .utils import infer_args as init_args
 from .utils import  draw_ocr
@@ -19,64 +18,32 @@ import argparse
 from module.base.decorator import cached_property, del_cached_property
 
 
-class ONNXPaddleOcr(TextSystem,ModuleBase):
+class ONNXPaddleOcr:
     merge_thres_x = 0
     merge_thres_y = 0
-    def __init__(self,button:ButtonWrapper, name=None,**kwargs):
-        # 默认参数
-        parser = init_args()
-        inference_args_dict = {}
-        for action in parser._actions:
-            inference_args_dict[action.dest] = action.default
-        params = argparse.Namespace(**inference_args_dict)
-        # params.rec_image_shape = "3, 32, 320"
-        params.rec_image_shape = "3, 48, 320"
-        # 根据传入的参数覆盖更新默认参数
-        params.__dict__.update(**kwargs)
-        self.button=button
-        if name!=None:
-            self.name=name
-        else:
-            self.name=self.button.name
-        # 初始化模型
-        super().__init__(params)
+    def __init__(self, button: ButtonWrapper, name=None, **kwargs):
+        self.button = button
+        self.name = name or self.button.name
+       
 
-    def resource_release(self):
-        """
-        释放OCR模型占用的资源
-        """
-        # 释放文本检测器资源
-        if hasattr(self, 'text_detector') and self.text_detector is not None:
-            if hasattr(self.text_detector, 'predictor'):
-                del self.text_detector.predictor
-            del self.text_detector
-            self.text_detector = None
+   
 
-            # 释放文本识别器资源
-        if hasattr(self, 'text_recognizer') and self.text_recognizer is not None:
-            if hasattr(self.text_recognizer, 'predictor'):
-                del self.text_recognizer.predictor
-            del self.text_recognizer
-            self.text_recognizer = None
+    @cached_property
+    def model(self):
+        
+        return CUSTOM_OCR_MODEL.model
 
-            # 释放角度分类器资源
-        if hasattr(self, 'text_classifier') and self.text_classifier is not None:
-            if hasattr(self.text_classifier, 'predictor'):
-                del self.text_classifier.predictor
-            del self.text_classifier
-            self.text_classifier = None
 
-            # 强制垃圾回收
-        import gc
-        gc.collect()
+    
     def pre_process(self, img):
 
         return img
     def after_process(self, img):
         return img
-    def ocr(self, img, det=True, rec=True, cls=True,direct_ocr=False):
+    def ocr_single_line(self, img, det=True, rec=True, cls=True,direct_ocr=False):
+      
         start_time = time.time()
-        if cls == True and self.use_angle_cls == False:
+        if cls == True and self.model.use_angle_cls == False:
             print(
                 "Since the angle classifier is not initialized, the angle classifier will not be uesd during the forward process"
             )
@@ -86,13 +53,13 @@ class ONNXPaddleOcr(TextSystem,ModuleBase):
         img=self.pre_process(img)
         if det and rec:
             ocr_res = []
-            dt_boxes, rec_res = self.__call__(img, cls)
+            dt_boxes, rec_res = self.model.__call__(img, cls)
             tmp_res = [[box.tolist(), res] for box, res in zip(dt_boxes, rec_res)]
             ocr_res.append(tmp_res)
             
         elif det and not rec:
             ocr_res = []
-            dt_boxes = self.text_detector(img)
+            dt_boxes = self.model.text_detector(img)
             tmp_res = [box.tolist() for box in dt_boxes]
             ocr_res.append(tmp_res)
             
@@ -102,11 +69,11 @@ class ONNXPaddleOcr(TextSystem,ModuleBase):
 
             if not isinstance(img, list):
                 img = [img]
-            if self.use_angle_cls and cls:
-                img, cls_res_tmp = self.text_classifier(img)
+            if self.model.use_angle_cls and cls:
+                img, cls_res_tmp = self.model.text_classifier(img)
                 if not rec:
                     cls_res.append(cls_res_tmp)
-            rec_res = self.text_recognizer(img)
+            rec_res = self.model.text_recognizer(img)
             ocr_res.append(rec_res)
 
          # 将 ocr_res 转换为 BoxedResult 列表
@@ -147,7 +114,7 @@ class ONNXPaddleOcr(TextSystem,ModuleBase):
             List of matched OcrResultButton.
             OCR result which didn't matched known keywords will be dropped.
         """
-        results = self.ocr(image, direct_ocr=direct_ocr)
+        results = self.ocr_single_line(image, direct_ocr=direct_ocr)
 
         results = [self._product_button(result, keyword_classes) for result in results]
         results = [result for result in results if result.is_keyword_matched]
@@ -247,22 +214,7 @@ class ONNXPaddleOcr(TextSystem,ModuleBase):
             boxed_results.append(boxed_result)  
         return boxed_results
 
-# 创建全局OCR模型实例
-class CustomOcrModel:
-    def __init__(self):
-        self._model = None
 
-    @cached_property
-    def model(self):
-        return ONNXPaddleOcr(use_angle_cls=True, use_gpu=False)
-
-    def resource_release(self):
-        """释放OCR模型资源"""
-        if hasattr(self, '_model') and self._model is not None:
-            self._model.resource_release()
-        del_cached_property(self, 'model')
-    # 全局OCR模型实例
-CUSTOM_OCR_MODEL = CustomOcrModel()
 
 
 

@@ -765,6 +765,24 @@
         "type": "textarea",
         "value": "GiftBox > Coins > ReincarnationStone > Jade"
       }
+    },
+    "SurvivalStore": {
+      "SurvivalStoreExchange": {
+        "type": "checkbox",
+        "value": true
+      },
+      "SurvivalStoreExchangeFilter": {
+        "type": "select",
+        "value": "preset",
+        "option": [
+          "preset",
+          "custom"
+        ]
+      },
+      "CustomSurvivalStoreFilter": {
+        "type": "textarea",
+        "value": "TsuchikuraFragment > ReincarnationStone"
+      }
     }
   },
   "BattleOrder": {

@@ -73,6 +73,7 @@ Daily:
       - Scheduler
       - PrivilegeStore
       - OrganizationStore
+      - SurvivalStore
 
     BattleOrder:
       - Scheduler

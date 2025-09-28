@@ -125,6 +125,11 @@ class GeneratedConfig:
     OrganizationStore_MeritExchangeFilter = 'preset'  # preset, custom
     OrganizationStore_CustomMeritExchangeFilter = 'GiftBox > Coins > ReincarnationStone > Jade'
 
+    # Group `SurvivalStore`
+    SurvivalStore_SurvivalStoreExchange = True
+    SurvivalStore_SurvivalStoreExchangeFilter = 'preset'  # preset, custom
+    SurvivalStore_CustomSurvivalStoreFilter = 'TsuchikuraFragment > ReincarnationStone'
+
     # Group `CultivationRoad`
     CultivationRoad_ClearRedDot = True
 

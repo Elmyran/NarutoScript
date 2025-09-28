@@ -1,17 +1,28 @@
-# NarutoScript
+<div align="center">
+<img alt="LOGO" src="./webapp/buildResources/icon.png" width="256" height="256" />
 
-NarutoScript 是一款基于 [崩坏:星穹铁道 StarRailCopilot](https://github.com/LmeSzinc/StarRailCopilot) 开发的《火影忍者手游》自动化脚本，专为 7x24 运行的场景而设计。通过智能化脚本逻辑，接管绝大部分游戏玩法，轻松完成日常任务与资源收集，让游戏体验更轻松惬意。
+# NarutoScript
+火影忍者手游自动化日常脚本
+</div>
+
+
 ## 核心功能
-- [x] **日常**：小队突袭，丰饶之间，组织祈福，生存试炼，装备扫荡，任务集会所，秘境挑战等
+- [x] **日常**：小队突袭，丰饶之间，组织祈福，生存试炼，装备扫荡，任务集会所，秘境挑战，商店购买等
 - [x] **收获**：招财，情报社，排行榜，活跃度宝箱，每月签到，忍法帖，每日分享，邮件，赠送体力，招募等
-- [x] **周常**：修行之路，追击晓组织，叛忍来袭
+- [x] **周常**：修行之路，追击晓组织，叛忍来袭，组织要塞
+- [x] **限时活动**：丁次烤肉，樱花季
+- [x] **数据面板**:金币，铜币,任务集会所等显示
 
 ## 扩展功能
-- [ ] **商店购买**:组织商店，积分商店，生存商店
-- [x] **组织要塞**:自动刷人机(40分就跑)
+- [ ] **商店购买**:积分商店
 - [ ] **天地战场**:自动挂机找位子(1600分就跑)
-- [x] **数据面板**:金币，招募券，粉尘，绿瓶等显示
-- [x] **限时活动**：丁次烤肉
+
+## 修改设置
+- **分辨率**：1280×720（理论支持所有16:9分辨率，未全面测试）  
+- **站街角色**：体型较小的忍者（如笕堇），避免遮挡屏幕视野
+## GUI预览
+<img alt="GUI" src="./doc/README.assets/gui.png"  />
+
 
 ## 如何上报bug How to Report Bugs
 
@@ -25,8 +36,8 @@ NarutoScript 是一款基于 [崩坏:星穹铁道 StarRailCopilot](https://githu
 
 NarutoScript 基于 Alas 生态开发，以下项目可供参考：  
 👉 [AzurLaneAutoScript](https://github.com/LmeSzinc/AzurLaneAutoScript) - 碧蓝航线自动化脚本  
-👉 [StarRailCopilot](https://github.com/LmeSzinc/StarRailCopilot) - 星铁速溶茶，崩坏：星穹铁道脚本，基于下一代Alas框架
-
+👉 [StarRailCopilot](https://github.com/LmeSzinc/StarRailCopilot) - 星铁速溶茶，崩坏：星穹铁道脚本，基于下一代Alas框架  
+👉 [OnnxOCR](https://github.com/jingsongliujing/OnnxOCR) - OCR
 
 ## 许可证
 
