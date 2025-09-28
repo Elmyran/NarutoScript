@@ -1,3 +1,4 @@
+from module.base.timer import Timer
 from tasks.store_purchase.assets.assets_store_purchase import *
 from module.ocr.ocr import Ocr
 from module.ui.draggable_list import DraggableList
@@ -49,17 +50,17 @@ class SubsidiaryStoreDragList(DraggableList):
         self.current_keyword=keyword
         if SubsidiaryStoreTabList.insight_row(keyword, main=main):
             logger.info('Successfully navigated to'+keyword.cn)
+            main.wait_until_stable(  
+                    self.search_button,  
+                    timer=Timer(0.3, count=2),  # 连续0.3秒稳定  
+                    timeout=Timer(2, count=4)   # 最多等待2秒  
+                )  
             if SubsidiaryStoreTabList.select_row(keyword, main=main):
                 logger.info('Successfully selected '+keyword.cn)
-    def is_row_selected(self, button, main):
-        text_area = button.area
-        top_line_area = (text_area[0], text_area[1] - 15, text_area[2], text_area[1])  
-        bottom_line_area = (text_area[0], text_area[3], text_area[2], text_area[3] + 15)  
-        top_has_gold = main.image_color_count(top_line_area, color=self.active_color, threshold=221, count=40)  
-        bottom_has_gold = main.image_color_count(bottom_line_area, color=self.active_color, threshold=221, count=40) 
-        if top_has_gold and  bottom_has_gold:
-            return True
-        return False
+    
+            
+
+       
     
         
 StoreTabList= StoreDragList(
@@ -77,6 +78,6 @@ SubsidiaryStoreTabList= SubsidiaryStoreDragList(
     ocr_class=Ocr,
     search_button=STORE_TAB_LIST_AREA,
     check_row_order=False,
-    active_color=(255,255,165),
+    active_color=(218,30,31),
     drag_direction="down"
 )
