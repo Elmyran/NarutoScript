@@ -41,7 +41,7 @@ class ONNXPaddleOcr:
     def after_process(self, img):
         return img
     def ocr_single_line(self, img, det=True, rec=True, cls=True,direct_ocr=False):
-        logger.warning('ONNXOCR: %s' % self.name)
+      
         start_time = time.time()
         if cls == True and self.model.use_angle_cls == False:
             print(
