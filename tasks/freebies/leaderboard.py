@@ -26,6 +26,7 @@ class LeaderBoard(UI):
                 break
             if self.appear_then_click(LEADER_BOARD_LIKE_BUTTON,interval=1):
                 continue
+        return True
         
 
 
