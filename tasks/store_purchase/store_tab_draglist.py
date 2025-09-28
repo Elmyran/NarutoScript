@@ -3,6 +3,7 @@ from tasks.store_purchase.assets.assets_store_purchase import *
 from module.ocr.ocr import Ocr
 from module.ui.draggable_list import DraggableList
 from module.logger import logger
+from tasks.store_purchase.ocr import StoreDetailOcr
 from tasks.store_purchase.store_keyword import StoreKeyword,SubsidiaryStoreKeyword
 class StoreDragList(DraggableList):
     current_keyword=None
@@ -66,7 +67,7 @@ class SubsidiaryStoreDragList(DraggableList):
 StoreTabList= StoreDragList(
     name='StoreTabList',
     keyword_class=StoreKeyword,
-    ocr_class=Ocr,
+    ocr_class=StoreDetailOcr,
     search_button=STORE_TAB_LIST_AREA,
     check_row_order=False,
     active_color=(247, 255, 173),
@@ -75,7 +76,7 @@ StoreTabList= StoreDragList(
 SubsidiaryStoreTabList= SubsidiaryStoreDragList(
     name='SubsidiaryStoreTabList',
     keyword_class=SubsidiaryStoreKeyword,
-    ocr_class=Ocr,
+    ocr_class=StoreDetailOcr,
     search_button=STORE_TAB_LIST_AREA,
     check_row_order=False,
     active_color=(218,30,31),

@@ -2,9 +2,9 @@ import numpy as np
 from module.base.base import ModuleBase
 from module.base.utils.utils import area_size, random_rectangle_vector_opted
 from tasks.store_purchase.assets.assets_store_purchase import *
-from module.ocr.ocr import Ocr
 from module.ui.draggable_list import DraggableList
 from module.logger import logger
+from tasks.store_purchase.ocr import StoreDetailOcr
 from tasks.store_purchase.organization_store.keywords import MeritExchangeItem
 from tasks.store_purchase.assets.assets_store_purchase_organization_store import ORGANIZATION_STORE_ITEM_SEARCH_AREA, SAFE_DRAG_AREA
 from tasks.store_purchase.survival_store.keywords import SurvivalStoreItem
@@ -53,12 +53,11 @@ class ItemDragList(DraggableList):
         if self.insight_row(keyword, main=main):
             logger.info('Successfully navigated to'+keyword.cn)
             return True
-            
 
 OrganizationStoreItemList= ItemDragList(
     name='OrganizationStoreItemList',
     keyword_class=MeritExchangeItem,
-    ocr_class=Ocr,
+    ocr_class=StoreDetailOcr,
     search_button=ORGANIZATION_STORE_ITEM_SEARCH_AREA,
     check_row_order=False,
     drag_direction="right",
@@ -67,7 +66,7 @@ OrganizationStoreItemList= ItemDragList(
 SurvivalStoreItemList= ItemDragList(
     name='SurvivalStoreItemList',
     keyword_class=SurvivalStoreItem,
-    ocr_class=Ocr,
+    ocr_class=StoreDetailOcr,
     search_button=SURVIVAL_STORE_ITEM_SEARCH_AREA,
     check_row_order=False,
     drag_direction="right",

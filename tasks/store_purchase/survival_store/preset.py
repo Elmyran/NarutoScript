@@ -3,6 +3,7 @@ from module.base.filter import MultiLangFilter
 import re
 from module.ocr.ocr import Ocr
 from tasks.store_purchase.assets.assets_store_purchase_survival_store import HEAVEN_EARTH_SCROLL_AREA, SURVIVAL_STORE_ITEM_SEARCH_AREA
+from tasks.store_purchase.ocr import StoreDetailOcr
 from tasks.store_purchase.selector import StoreSelector
 from tasks.store_purchase.store_item_draglist import SurvivalStoreItemList  
 
@@ -23,7 +24,7 @@ class SurvivalStoreSelector(StoreSelector):
             return False
         return True
     def recognition(self,keyword):
-        ocr=Ocr(SURVIVAL_STORE_ITEM_SEARCH_AREA)
+        ocr=StoreDetailOcr(SURVIVAL_STORE_ITEM_SEARCH_AREA)
         buttons=ocr.matched_ocr(image=self.main.device.image,keyword_classes=[keyword])
         target_button=None
         lang=self.main.config.LANG
@@ -53,11 +54,11 @@ class SurvivalStoreSelector(StoreSelector):
     def load_filter(self):
         filter_ = SURVIVAL_STORE_FILTER
         string = ""
-        match self.main.config.OrganizationStore_MeritExchangeFilter:
+        match self.main.config.SurvivalStore_SurvivalStoreExchangeFilter:
             case 'preset':
                 string=SurvivalStorePreset
             case 'custom':
-                string = self.main.config.OrganizationStore_CustomMeritExchangeFilter
+                string = self.main.config.SurvivalStore_CustomSurvivalStoreFilter
         filter_.load(string)
         self.filter_=filter_
 

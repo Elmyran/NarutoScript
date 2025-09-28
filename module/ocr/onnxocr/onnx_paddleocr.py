@@ -1,5 +1,4 @@
 import time
-import cv2
 import re
 from pponnxcr.predict_system import BoxedResult
 from module.base.base import ModuleBase
@@ -10,7 +9,7 @@ from module.base.utils.utils import area_offset, crop, float2str
 from module.exception import ScriptError
 from module.logger import logger
 from module.ocr.ocr import OcrResultButton
-from module.ocr.utils import merge_buttons
+from module.ocr.onnxmodels import CUSTOM_OCR_MODEL
 from .predict_system import TextSystem
 from .utils import infer_args as init_args
 from .utils import  draw_ocr
@@ -19,18 +18,22 @@ import argparse
 from module.base.decorator import cached_property, del_cached_property
 
 
-class ONNXPaddleOcr(TextSystem,ModuleBase):
+class ONNXPaddleOcr(TextSystem):
     merge_thres_x = 0
     merge_thres_y = 0
     def __init__(self,button:ButtonWrapper, name=None,**kwargs):
         # 默认参数
+       # 默认参数
         parser = init_args()
         inference_args_dict = {}
         for action in parser._actions:
             inference_args_dict[action.dest] = action.default
         params = argparse.Namespace(**inference_args_dict)
+        
+
         # params.rec_image_shape = "3, 32, 320"
         params.rec_image_shape = "3, 48, 320"
+
         # 根据传入的参数覆盖更新默认参数
         params.__dict__.update(**kwargs)
         self.button=button
@@ -38,8 +41,17 @@ class ONNXPaddleOcr(TextSystem,ModuleBase):
             self.name=name
         else:
             self.name=self.button.name
+        params.use_angle_cls = True
         # 初始化模型
         super().__init__(params)
+
+   
+
+    @cached_property
+    def model(self):
+        
+        return CUSTOM_OCR_MODEL.model
+
 
     def resource_release(self):
         """
@@ -74,7 +86,8 @@ class ONNXPaddleOcr(TextSystem,ModuleBase):
         return img
     def after_process(self, img):
         return img
-    def ocr(self, img, det=True, rec=True, cls=True,direct_ocr=False):
+    def ocr_single_line(self, img, det=True, rec=True, cls=True,direct_ocr=False):
+        logger.warning('ONNXOCR: %s' % self.name)
         start_time = time.time()
         if cls == True and self.use_angle_cls == False:
             print(
@@ -147,7 +160,7 @@ class ONNXPaddleOcr(TextSystem,ModuleBase):
             List of matched OcrResultButton.
             OCR result which didn't matched known keywords will be dropped.
         """
-        results = self.ocr(image, direct_ocr=direct_ocr)
+        results = self.ocr_single_line(image, direct_ocr=direct_ocr)
 
         results = [self._product_button(result, keyword_classes) for result in results]
         results = [result for result in results if result.is_keyword_matched]
@@ -247,22 +260,7 @@ class ONNXPaddleOcr(TextSystem,ModuleBase):
             boxed_results.append(boxed_result)  
         return boxed_results
 
-# 创建全局OCR模型实例
-class CustomOcrModel:
-    def __init__(self):
-        self._model = None
 
-    @cached_property
-    def model(self):
-        return ONNXPaddleOcr(use_angle_cls=True, use_gpu=False)
-
-    def resource_release(self):
-        """释放OCR模型资源"""
-        if hasattr(self, '_model') and self._model is not None:
-            self._model.resource_release()
-        del_cached_property(self, 'model')
-    # 全局OCR模型实例
-CUSTOM_OCR_MODEL = CustomOcrModel()
 
 
 

@@ -4,6 +4,7 @@ import re
 from module.ocr.ocr import Ocr
 from tasks.store_purchase.assets.assets_store_purchase_organization_store import ORGANIZATION_STORE_ITEM_SEARCH_AREA
 from tasks.store_purchase.assets.assets_store_purchase_organization_store import MERIT_AREA
+from tasks.store_purchase.ocr import StoreDetailOcr
 from tasks.store_purchase.selector import StoreSelector
 from tasks.store_purchase.store_item_draglist import OrganizationStoreItemList  
 
@@ -24,7 +25,7 @@ class MeritExchangeSelector(StoreSelector):
             return False
         return True
     def recognition(self,keyword):
-        ocr=Ocr(ORGANIZATION_STORE_ITEM_SEARCH_AREA)
+        ocr=StoreDetailOcr(ORGANIZATION_STORE_ITEM_SEARCH_AREA)
         buttons=ocr.matched_ocr(image=self.main.device.image,keyword_classes=[keyword])
         target_button=None
         lang=self.main.config.LANG
