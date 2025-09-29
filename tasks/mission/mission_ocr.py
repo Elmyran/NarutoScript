@@ -36,14 +36,13 @@ class MissionOcr(Ocr):
     
         logger.attr(name=f'{self.name} matched', text=results)  
         return results
-class MissionDigit(OcrWhiteLetterOnComplexBackground, Digit):  
+class MissionDigit(Digit,OcrWhiteLetterOnComplexBackground):  
     min_box = (1, 1)  # 确保小数字也能被检测到  
       
     def pre_process(self, img):  
         result = OcrWhiteLetterOnComplexBackground.pre_process(self, img)
         return result
-    def after_process(self, result):
-        return Digit.format_result(result)
+    
 class MissionWhiteLetterOcr(ONNXPaddleOcr,OcrWhiteLetterOnComplexBackground):
     def pre_process(self, img):
         return OcrWhiteLetterOnComplexBackground.pre_process(self, img)
