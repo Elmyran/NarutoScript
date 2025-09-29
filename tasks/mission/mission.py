@@ -181,7 +181,7 @@ class Mission(UI):
         """根据箱子类型和魂玉数量选择最高优先级任务"""
         if not tasks:
             logger.warning("没有可用任务")
-            return None
+            return []
 
             # 按优先级排序：先按箱子类型（RED=1, BLUE=2, GREEN=3），再按魂玉数量（降序）
         sorted_tasks = sorted(tasks, key=lambda x: (x.priority.value, -x.soul_jade_amount))
