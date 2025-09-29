@@ -5,7 +5,6 @@ from pponnxcr.predict_system import BoxedResult
 from module.base.button import ButtonWrapper
 from module.logger import logger
 from module.ocr.ocr import Ocr, OcrWhiteLetterOnComplexBackground
-from module.ocr.ocrutils import OCR
 from module.ocr.onnxocr.onnx_paddleocr import ONNXPaddleOcr
 from tasks.base.assets.assets_base_page import MAIN_GOTO_TASK_SEARCH_AREA
 

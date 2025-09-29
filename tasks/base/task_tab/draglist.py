@@ -4,7 +4,6 @@ from module.base.button import ButtonWrapper
 from module.base.timer import Timer
 from module.logger import logger
 from module.ocr.keyword import Keyword
-from module.ocr.ocrutils import OCR
 from tasks.base.task_tab.ocr import TaskOcr
 from module.ui.draggable_list import DraggableList
 from tasks.base.assets.assets_base_page import MAIN_GOTO_TASK_SEARCH_AREA, JI_FEN_SAI_CHECK, REN_ZHE_TIAO_ZHAN_CHECK, \
