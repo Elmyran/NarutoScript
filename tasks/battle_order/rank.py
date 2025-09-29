@@ -2,6 +2,7 @@ from module.base.timer import Timer
 from module.device.app_control import AppControl
 from module.exception import GameStuckError
 from module.logger import logger
+from tasks.base.assets.assets_base_page import FULL_SCREEN
 from tasks.base.page import  page_battle_order_rank
 from tasks.base.ui import UI
 from tasks.battle_order.assets.assets_battle_order_rank import *
@@ -33,6 +34,7 @@ class BattleOrderRank(UI):
                 raise GameStuckError('BATTLE ORDER RANK SHARE  STUCK')
             if self.appear_then_click(BATTLE_ORDER_SHARE_GOTO_QQ):
                 continue
+            BATTLE_ORDER_RANK_GOTO_SHARE.load_search(FULL_SCREEN.area)
             if self.appear_then_click(BATTLE_ORDER_RANK_GOTO_SHARE,interval=0):
                 continue
             current_app = self.device.app_current()

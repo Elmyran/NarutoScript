@@ -8,16 +8,31 @@ import cv2
 import numpy as np
 
 class PopupHandler(ModuleBase):
-    def handle_exit(self, interval=5)-> bool:
+    def handle_confirm(self, interval=5)-> bool:
         if self.appear_then_click(EXIT_ORGANIZATION_FROG_PURSE,interval=interval):
             return True
         if self.appear_then_click(EXIT_CONFIRM,interval=interval):
+            return True  
+        if self.appear_then_click(ADVERTISE_BATTLE_ORDER,interval=interval):
             return True
-        if self.appear_then_click(EXIT_ORGANIZATION_RED_ENVELOPE,interval=interval):
+        
+        return False
+    def handle_popup(self,interval=5) -> bool:
+        if self.appear_then_click(SHORTAGE,interval=interval):
             return True
         if self.appear_then_click(POPUP_CLOSE,interval=interval):
             return True
+        return False
+    def handle_popup_page(self,interval=5) -> bool:
+        if self.appear_then_click(POPUP_DUEL_FAME,interval=interval):
+            return True
+        if self.appear_then_click(POPUP_MI_JING_BOX,interval=interval):
+            return True
+        if self.appear_then_click(EXIT_ORGANIZATION_RED_ENVELOPE,interval=interval):
+            return True
         if self.appear_then_click(DING_CI_KAO_ROU_REWARD,interval=interval):
+            return True
+        if self.appear_then_click(POPUP_BATTLE_FIELD_REWARD,interval=interval):
             return True
         if self.appear_then_click(POPUP_EQUIPMENT_STUFF,interval=interval):
             return True
@@ -25,12 +40,6 @@ class PopupHandler(ModuleBase):
             return True
         if self.appear_then_click(EXIT_ORGANIZATION_REPLACEMENT,interval=interval):
             return  True
-        if self.appear_then_click(POPUP_MI_JING_BOX,interval=interval):
-            return True
-        if self.appear_then_click(SHORTAGE,interval=interval):
-            return True
-        if self.appear_then_click(POPUP_BATTLE_FIELD_REWARD,interval=interval):
-            return True
         return False
 
     def reward_appear(self) -> bool:

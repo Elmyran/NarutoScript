@@ -13,6 +13,7 @@ from tasks.base.task_tab.task_keyword import DuelKeyword
 from tasks.base.ui import UI
 from tasks.duel.assets.assets_duel import *
 from module.ocr.ocr import Digit
+from tasks.duel.duel import Duel
 class DuelDaily(UI):
     def handle_duel_daily(self):
         if self.config.stored.CurrentVictoryCount.is_expired():
@@ -192,3 +193,6 @@ class DuelDaily(UI):
                 x, y = ensure_int(x, y)
                 self.device.click_maatouch(x, y)
                 idx = (idx + 1) % other_count
+az=DuelDaily('ns',task='Alas')
+az.image_file=r"C:\Users\liuzy\Documents\MuMu共享文件夹\Screenshots\MuMu12-20250929-105925.png"
+az.ui_ensure(page_ninjutsu)
