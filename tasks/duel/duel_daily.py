@@ -193,6 +193,3 @@ class DuelDaily(UI):
                 x, y = ensure_int(x, y)
                 self.device.click_maatouch(x, y)
                 idx = (idx + 1) % other_count
-az=DuelDaily('ns',task='Alas')
-az.image_file=r"C:\Users\liuzy\Documents\MuMu共享文件夹\Screenshots\MuMu12-20250929-105925.png"
-az.ui_ensure(page_ninjutsu)

@@ -6,7 +6,7 @@ from tasks.base.assets.assets_base_page import FULL_SCREEN
 from tasks.base.page import  page_battle_order_rank
 from tasks.base.ui import UI
 from tasks.battle_order.assets.assets_battle_order_rank import *
-from tasks.freebies.assets.assets_freebies_dailyshare import QQ_MENU
+from tasks.freebies.assets.assets_freebies_dailyshare import QQ_MENU, SHARE_GOTO_QQ
 
 
 class BattleOrderRank(UI):
