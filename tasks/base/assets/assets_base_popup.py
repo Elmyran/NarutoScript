@@ -158,10 +158,10 @@ GET_REWARD = ButtonWrapper(
         ),
         Button(
             file='./assets/share/base/popup/GET_REWARD.4.png',
-            area=(0, 0, 1280, 720),
-            search=(0, 0, 1280, 720),
-            color=(49, 44, 35),
-            button=(0, 0, 1280, 720),
+            area=(530, 114, 809, 173),
+            search=(510, 94, 829, 193),
+            color=(165, 118, 15),
+            button=(530, 114, 809, 173),
         ),
     ],
 )

@@ -51,10 +51,10 @@ BATTLE_ORDER_SHARE_GOTO_QQ = ButtonWrapper(
     name='BATTLE_ORDER_SHARE_GOTO_QQ',
     cn=Button(
         file='./assets/cn/battle_order/rank/BATTLE_ORDER_SHARE_GOTO_QQ.png',
-        area=(1144, 581, 1227, 664),
-        search=(1124, 561, 1247, 684),
-        color=(92, 64, 53),
-        button=(1144, 581, 1227, 664),
+        area=(1153, 592, 1210, 662),
+        search=(1133, 572, 1230, 682),
+        color=(99, 80, 77),
+        button=(1153, 592, 1210, 662),
     ),
     en=None,
 )

@@ -29,7 +29,7 @@ class BattleOrderRank(UI):
 
     def _handle_battle_order_share(self):
         for _ in self.loop():
-            BATTLE_ORDER_RANK_GOTO_SHARE.load_search(FULL_SCREEN.area)
+
             if self.appear_then_click(BATTLE_ORDER_SHARE_GOTO_QQ):
                 continue
             BATTLE_ORDER_RANK_GOTO_SHARE.load_search(FULL_SCREEN.area)
