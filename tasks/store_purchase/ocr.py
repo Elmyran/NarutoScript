@@ -2,17 +2,17 @@ from module.ocr.ocr import Digit, DigitCounter, OcrWhiteLetterOnComplexBackgroun
 from module.ocr.onnxocr.onnx_paddleocr import ONNXPaddleOcr
 class StoreDetailOcr(ONNXPaddleOcr,OcrWhiteLetterOnComplexBackground):
     min_box = (1, 1)
-    def after_process(self, result):
-        return OcrWhiteLetterOnComplexBackground.after_process(self, result)
+    def pre_process(self, result):
+        return OcrWhiteLetterOnComplexBackground.pre_process(self, result)
 class StoreDigitCounter(DigitCounter):
     def after_process(self, result):  
-        result = OcrWhiteLetterOnComplexBackground.after_process(self, result)
-        return result
+        return super().after_process(result)
 
 class StorePriceDigit(OcrWhiteLetterOnComplexBackground, Digit):  
     min_box = (1, 1)  # 确保小数字也能被检测到  
       
-    def after_process(self, result):  
-        result = OcrWhiteLetterOnComplexBackground.after_process(self, result)
-        
+    def pre_process(self, result):  
+        result = OcrWhiteLetterOnComplexBackground.pre_process(self, result)
         return result
+    def after_process(self, result):  
+        return Digit.format_result(self, result)

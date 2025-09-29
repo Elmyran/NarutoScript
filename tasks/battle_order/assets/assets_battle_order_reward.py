@@ -7,10 +7,10 @@ BATTLE_ORDER_ACTIVE_POINTS_1_CHECKED = ButtonWrapper(
     name='BATTLE_ORDER_ACTIVE_POINTS_1_CHECKED',
     cn=Button(
         file='./assets/cn/battle_order/reward/BATTLE_ORDER_ACTIVE_POINTS_1_CHECKED.png',
-        area=(333, 257, 425, 346),
-        search=(313, 237, 445, 366),
-        color=(81, 59, 28),
-        button=(333, 257, 425, 346),
+        area=(331, 259, 420, 349),
+        search=(311, 239, 440, 369),
+        color=(78, 57, 27),
+        button=(331, 259, 420, 349),
     ),
     en=None,
 )
@@ -18,10 +18,10 @@ BATTLE_ORDER_ACTIVE_POINTS_2_CHECKED = ButtonWrapper(
     name='BATTLE_ORDER_ACTIVE_POINTS_2_CHECKED',
     cn=Button(
         file='./assets/cn/battle_order/reward/BATTLE_ORDER_ACTIVE_POINTS_2_CHECKED.png',
-        area=(461, 281, 554, 374),
-        search=(441, 261, 574, 394),
-        color=(85, 63, 32),
-        button=(461, 281, 554, 374),
+        area=(508, 282, 596, 372),
+        search=(488, 262, 616, 392),
+        color=(79, 57, 26),
+        button=(508, 282, 596, 372),
     ),
     en=None,
 )
@@ -29,10 +29,10 @@ BATTLE_ORDER_ACTIVE_POINTS_3_CHECKED = ButtonWrapper(
     name='BATTLE_ORDER_ACTIVE_POINTS_3_CHECKED',
     cn=Button(
         file='./assets/cn/battle_order/reward/BATTLE_ORDER_ACTIVE_POINTS_3_CHECKED.png',
-        area=(642, 312, 731, 403),
-        search=(622, 292, 751, 423),
-        color=(79, 57, 26),
-        button=(642, 312, 731, 403),
+        area=(677, 312, 768, 403),
+        search=(657, 292, 788, 423),
+        color=(81, 60, 30),
+        button=(677, 312, 768, 403),
     ),
     en=None,
 )
@@ -40,10 +40,10 @@ BATTLE_ORDER_ACTIVE_POINTS_4_CHECKED = ButtonWrapper(
     name='BATTLE_ORDER_ACTIVE_POINTS_4_CHECKED',
     cn=Button(
         file='./assets/cn/battle_order/reward/BATTLE_ORDER_ACTIVE_POINTS_4_CHECKED.png',
-        area=(821, 276, 917, 366),
-        search=(801, 256, 937, 386),
-        color=(86, 65, 33),
-        button=(821, 276, 917, 366),
+        area=(856, 278, 944, 366),
+        search=(836, 258, 964, 386),
+        color=(78, 56, 24),
+        button=(856, 278, 944, 366),
     ),
     en=None,
 )
@@ -62,10 +62,10 @@ BATTLE_ORDER_WEEKLY_REWARD_ACTIVITY_POINTS = ButtonWrapper(
     name='BATTLE_ORDER_WEEKLY_REWARD_ACTIVITY_POINTS',
     cn=Button(
         file='./assets/cn/battle_order/reward/BATTLE_ORDER_WEEKLY_REWARD_ACTIVITY_POINTS.png',
-        area=(626, 133, 792, 185),
-        search=(606, 113, 812, 205),
-        color=(182, 161, 113),
-        button=(626, 133, 792, 185),
+        area=(596, 139, 825, 183),
+        search=(576, 119, 845, 203),
+        color=(184, 172, 135),
+        button=(596, 139, 825, 183),
     ),
     en=None,
 )
