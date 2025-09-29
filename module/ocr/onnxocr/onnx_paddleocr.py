@@ -95,10 +95,9 @@ class ONNXPaddleOcr:
         filtered_results = [result for result in processed_results if self.filter_detected(result)]
         #merged_results = merge_buttons(filtered_results, thres_x=self.merge_thres_x, thres_y=self.merge_thres_y)
         merged_results=filtered_results
-    
-      
-        merged_results = self.after_process( merged_results)  
-        
+
+        for result in merged_results:
+            result.ocrtext=self.after_process(result.ocrtext)
         logger.attr(name='%s %ss' % (self.name, float2str(time.time() - start_time)),
                     text=str([result.ocr_text for result in merged_results]))
         
