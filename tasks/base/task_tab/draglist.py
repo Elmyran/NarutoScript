@@ -103,6 +103,7 @@ class DraggableTaskTabList(DraggableList):
         click_retry_count = 0  
         
         while click_retry_count < max_click_retries:  
+            main.ui_ensure(page_main)
             button = self.keyword2button(row)  
             if button is None:  
                 logger.warning(f'Keyword {row} is not in current rows of {self}')  
@@ -159,7 +160,7 @@ class DraggableTaskTabList(DraggableList):
             if main.appear(check_button):
                 logger.info(f'Detected task interface: {check_button.name}')
                 return True
-        main.ui_ensure(page_main)
+        
         return False
 
 
