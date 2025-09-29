@@ -97,7 +97,7 @@ class ONNXPaddleOcr:
         merged_results=filtered_results
 
         for result in merged_results:
-            result.ocrtext=self.after_process(result.ocrtext)
+            result.ocr_text=self.after_process(result.ocr_text)
         logger.attr(name='%s %ss' % (self.name, float2str(time.time() - start_time)),
                     text=str([result.ocr_text for result in merged_results]))
         
@@ -122,7 +122,7 @@ class ONNXPaddleOcr:
             List of matched OcrResultButton.
             OCR result which didn't matched known keywords will be dropped.
         """
-        results = self.ocr_single_line(image, direct_ocr=direct_ocr)
+        results = self.ocr_multiple_lines(image, direct_ocr=direct_ocr)
 
         results = [self._product_button(result, keyword_classes) for result in results]
         results = [result for result in results if result.is_keyword_matched]
