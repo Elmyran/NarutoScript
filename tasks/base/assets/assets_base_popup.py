@@ -3,6 +3,35 @@ from module.base.button import Button, ButtonWrapper
 # This file was auto-generated, do not modify it manually. To generate:
 # ``` python -m dev_tools.button_extract ```
 
+ADVERTISE_BATTLE_ORDER = ButtonWrapper(
+    name='ADVERTISE_BATTLE_ORDER',
+    share=[
+        Button(
+            file='./assets/share/base/popup/ADVERTISE_BATTLE_ORDER.png',
+            area=(40, 28, 328, 52),
+            search=(20, 8, 348, 72),
+            color=(94, 87, 80),
+            button=(40, 28, 328, 52),
+        ),
+        Button(
+            file='./assets/share/base/popup/ADVERTISE_BATTLE_ORDER.2.png',
+            area=(1090, 67, 1161, 109),
+            search=(1070, 47, 1181, 129),
+            color=(127, 126, 120),
+            button=(1090, 67, 1161, 109),
+        ),
+    ],
+)
+BATTLE_ORDER_UNLOCK = ButtonWrapper(
+    name='BATTLE_ORDER_UNLOCK',
+    share=Button(
+        file='./assets/share/base/popup/BATTLE_ORDER_UNLOCK.png',
+        area=(528, 116, 816, 180),
+        search=(508, 96, 836, 200),
+        color=(168, 123, 16),
+        button=(528, 116, 816, 180),
+    ),
+)
 COPPER_COINS_SHORTAGE = ButtonWrapper(
     name='COPPER_COINS_SHORTAGE',
     share=Button(
@@ -127,6 +156,13 @@ GET_REWARD = ButtonWrapper(
             color=(209, 135, 14),
             button=(545, 599, 731, 659),
         ),
+        Button(
+            file='./assets/share/base/popup/GET_REWARD.4.png',
+            area=(530, 114, 809, 173),
+            search=(510, 94, 829, 193),
+            color=(165, 118, 15),
+            button=(530, 114, 809, 173),
+        ),
     ],
 )
 POPUP_BATTLE_FIELD_REWARD = ButtonWrapper(
@@ -155,6 +191,25 @@ POPUP_CLOSE = ButtonWrapper(
             search=(817, 171, 937, 269),
             color=(67, 45, 49),
             button=(837, 191, 917, 249),
+        ),
+    ],
+)
+POPUP_DUEL_FAME = ButtonWrapper(
+    name='POPUP_DUEL_FAME',
+    share=[
+        Button(
+            file='./assets/share/base/popup/POPUP_DUEL_FAME.png',
+            area=(538, 631, 736, 704),
+            search=(518, 611, 756, 720),
+            color=(28, 108, 138),
+            button=(538, 631, 736, 704),
+        ),
+        Button(
+            file='./assets/share/base/popup/POPUP_DUEL_FAME.2.png',
+            area=(323, 635, 521, 703),
+            search=(303, 615, 541, 720),
+            color=(31, 115, 144),
+            button=(323, 635, 521, 703),
         ),
     ],
 )

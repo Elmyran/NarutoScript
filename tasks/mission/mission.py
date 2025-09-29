@@ -143,7 +143,7 @@ class Mission(UI):
    
         ocr = MissionWhiteLetterOcr(button=TASK_AREA,use_angle_cls=True)
         # 任务名称识别
-        task_name_boxes = ocr.ocr_single_line(self.device.image, TASK_AREA.area)
+        task_name_boxes = ocr.ocr_multiple_lines(self.device.image, TASK_AREA.area)
         task_name=[]
         for box in task_name_boxes:  # 遍历列表中的每个 BoxedResult  
             button = ocr._product_button(boxed_result=box, keyword_classes=[])  

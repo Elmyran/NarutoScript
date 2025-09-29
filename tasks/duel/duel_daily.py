@@ -13,6 +13,7 @@ from tasks.base.task_tab.task_keyword import DuelKeyword
 from tasks.base.ui import UI
 from tasks.duel.assets.assets_duel import *
 from module.ocr.ocr import Digit
+from tasks.duel.duel import Duel
 class DuelDaily(UI):
     def handle_duel_daily(self):
         if self.config.stored.CurrentVictoryCount.is_expired():

@@ -1,7 +1,7 @@
 import time
 import re
 from pponnxcr.predict_system import BoxedResult
-from module.base.base import ModuleBase
+
 from module.base.button import ButtonWrapper
 from module.base.utils import corner2area
 
@@ -10,10 +10,10 @@ from module.exception import ScriptError
 from module.logger import logger
 from module.ocr.ocr import OcrResultButton
 from module.ocr.onnxmodels import CUSTOM_OCR_MODEL
-from .predict_system import TextSystem
+
 from .utils import infer_args as init_args
 from .utils import  draw_ocr
-import argparse
+
 
 from module.base.decorator import cached_property, del_cached_property
 
@@ -38,10 +38,15 @@ class ONNXPaddleOcr:
     def pre_process(self, img):
 
         return img
-    def after_process(self, img):
-        return img
+    def after_process(self, result):
+        return result
     def ocr_single_line(self, img, det=True, rec=True, cls=True,direct_ocr=False):
-      
+        res=self.ocr_multiple_lines(img, det, rec, cls, direct_ocr)
+        result=self.format_result(res[0].ocr_text)
+        print(result)
+        return result
+        
+    def ocr_multiple_lines(self, img, det=True, rec=True, cls=True, direct_ocr=False): 
         start_time = time.time()
         if cls == True and self.model.use_angle_cls == False:
             print(
@@ -90,14 +95,17 @@ class ONNXPaddleOcr:
         filtered_results = [result for result in processed_results if self.filter_detected(result)]
         #merged_results = merge_buttons(filtered_results, thres_x=self.merge_thres_x, thres_y=self.merge_thres_y)
         merged_results=filtered_results
-    
-        # 后处理文本
-        for result in merged_results :
-            result.ocr_text = self.after_process(result.ocr_text)
 
+        for result in merged_results:
+            result.ocr_text=self.after_process(result.ocr_text)
         logger.attr(name='%s %ss' % (self.name, float2str(time.time() - start_time)),
                     text=str([result.ocr_text for result in merged_results]))
-        return merged_results
+        
+        return merged_results 
+    
+   
+    def format_result(self, results):
+        return results
     def filter_detected(self, result: BoxedResult) -> bool:
         """
         Return False to drop result.
@@ -114,7 +122,7 @@ class ONNXPaddleOcr:
             List of matched OcrResultButton.
             OCR result which didn't matched known keywords will be dropped.
         """
-        results = self.ocr_single_line(image, direct_ocr=direct_ocr)
+        results = self.ocr_multiple_lines(image, direct_ocr=direct_ocr)
 
         results = [self._product_button(result, keyword_classes) for result in results]
         results = [result for result in results if result.is_keyword_matched]

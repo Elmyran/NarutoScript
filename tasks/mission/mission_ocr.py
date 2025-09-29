@@ -39,11 +39,12 @@ class MissionOcr(Ocr):
 class MissionDigit(OcrWhiteLetterOnComplexBackground, Digit):  
     min_box = (1, 1)  # 确保小数字也能被检测到  
       
-    def after_process(self, result):  
-        result = super(OcrWhiteLetterOnComplexBackground, self).after_process(result)  
-        
+    def pre_process(self, img):  
+        result = OcrWhiteLetterOnComplexBackground.pre_process(self, img)
         return result
+    def after_process(self, result):
+        return Digit.format_result(result)
 class MissionWhiteLetterOcr(ONNXPaddleOcr,OcrWhiteLetterOnComplexBackground):
     def pre_process(self, img):
-        return img
+        return OcrWhiteLetterOnComplexBackground.pre_process(self, img)
 

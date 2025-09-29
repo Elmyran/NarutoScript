@@ -1,13 +1,11 @@
-from imp import SEARCH_ERROR
+
 from module.base.base import ModuleBase
 from module.base.button import ButtonWrapper
 from module.base.timer import Timer
 from module.logger import logger
 from module.ocr.keyword import Keyword
-from tasks.base.task_tab.ocr import TaskOcr
 from module.ui.draggable_list import DraggableList
-from tasks.base.assets.assets_base_page import MAIN_GOTO_TASK_SEARCH_AREA, JI_FEN_SAI_CHECK, REN_ZHE_TIAO_ZHAN_CHECK, \
-    MAIN_GOTO_TASK_DRAG_AREA
+from tasks.base.assets.assets_base_page import MAIN_GOTO_TASK_SEARCH_AREA, JI_FEN_SAI_CHECK, REN_ZHE_TIAO_ZHAN_CHECK
 from tasks.base.task_tab.task_keyword import TaskTab
 from tasks.base.task_tab.ocr import TaskTabOcr
 from tasks.duel.assets.assets_duel import DUEL_CHECK
@@ -17,6 +15,8 @@ from tasks.mission.assets.assets_mission import MISSION_CHECK
 from tasks.organization.assets.assets_organization_pray import  ORGANIZATION_PANEL
 from tasks.squadraid.assets.assets_squadraid_fight import SQUAD_RAID_CHECK
 from tasks.trail.assets.assets_trail import TRAIL_SURVIVAL_CHECK
+from tasks.base.page import page_main
+from tasks.base.popup import POPUP_DUEL_FAME
 
 
 class DraggableTaskTabList(DraggableList):
@@ -103,6 +103,7 @@ class DraggableTaskTabList(DraggableList):
         click_retry_count = 0  
         
         while click_retry_count < max_click_retries:  
+            main.ui_ensure(page_main)
             button = self.keyword2button(row)  
             if button is None:  
                 logger.warning(f'Keyword {row} is not in current rows of {self}')  
@@ -118,7 +119,7 @@ class DraggableTaskTabList(DraggableList):
                 main.device.screenshot()  
     
                 # 检测是否进入了任何任务界面  
-                if self._is_in_any_task_interface(main):  
+                if self._is_in_any_task_interface(main,row):  
                     logger.info(f'Successfully entered task interface for {row.name}')  
                     return True  
     
@@ -132,25 +133,34 @@ class DraggableTaskTabList(DraggableList):
         logger.error(f'Failed to enter task interface after {max_click_retries} click attempts for {row.name}')  
         return False
 
-    def _is_in_any_task_interface(self, main: ModuleBase) -> bool:
+    def _is_in_any_task_interface(self, main: ModuleBase,keyword) -> bool:
         """检测是否在任何任务界面中"""
-        task_checks = [
-            JI_FEN_SAI_CHECK,
-            MISSION_CHECK,
-            ORGANIZATION_PANEL,
-            LEADER_BOARD_CHECK,
-            DUEL_CHECK,
-            FENG_RAO_CHECK,
-            TRAIL_SURVIVAL_CHECK,
-            SQUAD_RAID_CHECK,
-            REN_ZHE_TIAO_ZHAN_CHECK
-        ]
-
+        JiFenSai=[JI_FEN_SAI_CHECK]
+        Mission=[MISSION_CHECK]
+        Organization=[ORGANIZATION_PANEL]
+        LeaderBoard=[LEADER_BOARD_CHECK]
+        Duel=[DUEL_CHECK,POPUP_DUEL_FAME]
+        FengRao=[FENG_RAO_CHECK]
+        Trail=[TRAIL_SURVIVAL_CHECK]
+        SquadRaid=[SQUAD_RAID_CHECK]
+        RenZheTiaoZhan=[REN_ZHE_TIAO_ZHAN_CHECK]
+        task_map={
+            "JiFenSaiKeyword":JiFenSai,
+            "MissionKeyword":Mission,
+            "OrganizationKeyword":Organization,
+            "LeaderBoardKeyword":LeaderBoard,
+            "DuelKeyword":Duel,
+            "FengRaoKeyword":FengRao,
+            "TrailKeyword":Trail,
+            "SquadRaidKeyword":SquadRaid,
+            "RenZheTiaoZhanKeyword":RenZheTiaoZhan
+        }
+        task_checks = task_map.get(keyword.name, [])
         for check_button in task_checks:
             if main.appear(check_button):
                 logger.info(f'Detected task interface: {check_button.name}')
                 return True
-
+        
         return False
 
 

@@ -92,6 +92,12 @@ class UI(MainPage):
             if self.ui_additional():
                 timeout.reset()
                 continue
+            if self.handle_popup(interval=1):
+                timeout.reset()
+                return True
+            if self.handle_popup_page(interval=1):
+                timeout.reset()
+                return True
 
             if self.handle_login_confirm():
                 continue
@@ -350,13 +356,10 @@ class UI(MainPage):
         Returns:
             If handled any popup.
         """
-        if self.handle_exit(interval=1):
+        if self.handle_confirm(interval=1):
             return True
         if self.handle_reward(interval=1):
             return True
-
-
-
 
         return False
 
