@@ -51,4 +51,4 @@ class TaskTabOcr(ONNXPaddleOcr,OcrWhiteLetterOnComplexBackground):
             result='忍者挑战'
         return result
     
-TaskOcr=OCR(button=MAIN_GOTO_TASK_SEARCH_AREA, use_angle_cls=True,use_gpu=True)
+TaskOcr=ONNXPaddleOcr(button=MAIN_GOTO_TASK_SEARCH_AREA, use_angle_cls=True,use_gpu=False)
