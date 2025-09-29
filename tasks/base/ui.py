@@ -98,7 +98,6 @@ class UI(MainPage):
             if self.handle_popup_page(interval=1):
                 timeout.reset()
                 return True
-
             if self.handle_login_confirm():
                 continue
 
