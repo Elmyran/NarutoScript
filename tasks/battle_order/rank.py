@@ -28,10 +28,8 @@ class BattleOrderRank(UI):
                 continue
 
     def _handle_battle_order_share(self):
-        time=Timer(30,count=30).start()
         for _ in self.loop():
-            if time.reached():
-                raise GameStuckError('BATTLE ORDER RANK SHARE  STUCK')
+            BATTLE_ORDER_RANK_GOTO_SHARE.load_search(FULL_SCREEN.area)
             if self.appear_then_click(BATTLE_ORDER_SHARE_GOTO_QQ):
                 continue
             BATTLE_ORDER_RANK_GOTO_SHARE.load_search(FULL_SCREEN.area)
@@ -53,8 +51,7 @@ class BattleOrderRank(UI):
 
         click_interval=Timer(2).start()
         for _   in self.loop():
-            if time.reached():
-                raise GameStuckError('BATTLE ORDER RANK SHARE BACK TO GAME STUCK')
+   
             if self.ui_page_appear(page_battle_order_rank):
                 break
             if click_interval.reached():
