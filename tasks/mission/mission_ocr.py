@@ -46,5 +46,5 @@ class MissionDigit(Digit,OcrWhiteLetterOnComplexBackground):
     
 class MissionWhiteLetterOcr(onnx_paddleocr):
     def pre_process(self, img):
-        return self.pre_process(img)
+        return img
 
