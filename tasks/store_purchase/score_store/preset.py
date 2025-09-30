@@ -9,7 +9,7 @@ import re
 from module.logger import logger
 from tasks.store_purchase.assets.assets_store_purchase_score_store import SCORE_MEDAL_AREA, SCORE_STORE_ITEM_SEARCH_AREA
 from tasks.store_purchase.ocr import StoreDetailOcr
-from tasks.store_purchase.score_store.keywords import ScoreStoreChest
+from tasks.store_purchase.score_store.keywords import AdvancedSummoningScrollFragment, ScoreStoreChest
 from tasks.store_purchase.selector import Item, StoreSelector
 from tasks.store_purchase.store_item_draglist import ScoreStoreItemList
 
@@ -73,7 +73,12 @@ class ScoreStoreSelector(StoreSelector):
         self.ocr_currency(self.relative_areas['currency_area'])
         currency=self.currency
         item.price = price
-        afford_amount=int(currency/price)
+        if button.matched_keyword is not AdvancedSummoningScrollFragment:
+            afford_amount = int((currency - 1000) / price)
+            afford_amount=max(0,afford_amount)
+        else :
+            afford_amount = int(currency / price)
+
         if  button.matched_keyword is ScoreStoreChest:
             preset_max_amount=self.main.config.ScoreStore_ScoreStoreChestPurchaseTimes
             if current>=preset_max_amount:  
