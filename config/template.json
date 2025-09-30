@@ -229,6 +229,12 @@
       "SurvivalStoreExchange": true,
       "SurvivalStoreExchangeFilter": "preset",
       "CustomSurvivalStoreFilter": "TsuchikuraFragment > ReincarnationStone"
+    },
+    "ScoreStore": {
+      "ScoreStoreExchange": true,
+      "ScoreStoreChestPurchaseTimes": 1,
+      "ScoreStoreExchangeFilter": "preset",
+      "CustomScoreStoreFilter": "AdvancedSummoningScrollFragment > ScoreStoreChest"
     }
   },
   "BattleOrder": {

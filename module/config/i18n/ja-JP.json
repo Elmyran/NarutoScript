@@ -611,6 +611,40 @@
       "help": "SurvivalStore.CustomSurvivalStoreFilter.help"
     }
   },
+  "ScoreStore": {
+    "_info": {
+      "name": "ScoreStore._info.name",
+      "help": "ScoreStore._info.help"
+    },
+    "ScoreStoreExchange": {
+      "name": "ScoreStore.ScoreStoreExchange.name",
+      "help": "ScoreStore.ScoreStoreExchange.help"
+    },
+    "ScoreStoreChestPurchaseTimes": {
+      "name": "ScoreStore.ScoreStoreChestPurchaseTimes.name",
+      "help": "ScoreStore.ScoreStoreChestPurchaseTimes.help",
+      "1": "1",
+      "2": "2",
+      "3": "3",
+      "4": "4",
+      "5": "5",
+      "6": "6",
+      "7": "7",
+      "8": "8",
+      "9": "9",
+      "10": "10"
+    },
+    "ScoreStoreExchangeFilter": {
+      "name": "ScoreStore.ScoreStoreExchangeFilter.name",
+      "help": "ScoreStore.ScoreStoreExchangeFilter.help",
+      "preset": "preset",
+      "custom": "custom"
+    },
+    "CustomScoreStoreFilter": {
+      "name": "ScoreStore.CustomScoreStoreFilter.name",
+      "help": "ScoreStore.CustomScoreStoreFilter.help"
+    }
+  },
   "CultivationRoad": {
     "_info": {
       "name": "CultivationRoad._info.name",

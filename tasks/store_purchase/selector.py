@@ -73,7 +73,7 @@ class StoreSelector:
                 if self.currency<item.price :
                     logger.info(f"Currency not enough to purchase {item.name}")
                     return True
-                elif pre_currency!=self.currency and item.total==item.sold+1:
+                elif pre_currency!=self.currency :
                     logger.info(f"{item.name} have been purchased")
                     break
                 if click_interval.reached():  

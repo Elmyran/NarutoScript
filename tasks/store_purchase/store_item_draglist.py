@@ -7,9 +7,11 @@ from module.logger import logger
 from tasks.store_purchase.ocr import StoreDetailOcr
 from tasks.store_purchase.organization_store.keywords import MeritExchangeItem
 from tasks.store_purchase.assets.assets_store_purchase_organization_store import ORGANIZATION_STORE_ITEM_SEARCH_AREA, SAFE_DRAG_AREA
+from tasks.store_purchase.score_store.keywords import ScoreStoreItem
+from tasks.store_purchase.store_keyword import ScoreStore
 from tasks.store_purchase.survival_store.keywords import SurvivalStoreItem
 from tasks.store_purchase.assets.assets_store_purchase_survival_store import SURVIVAL_STORE_ITEM_SEARCH_AREA, SURVIVAL_STORE_SAFE_DRAG_AREA
-
+from tasks.store_purchase.assets.assets_store_purchase_score_store import SCORE_STORE_ITEM_SEARCH_AREA, SCORE_STORE_SAFE_DRAG_AREA
 class ItemDragList(DraggableList):
     
     def __init__(self, name, keyword_class, ocr_class, search_button, check_row_order = True, active_color = ..., drag_direction = "right",safe_drag_area = SAFE_DRAG_AREA):
@@ -71,4 +73,13 @@ SurvivalStoreItemList= ItemDragList(
     check_row_order=False,
     drag_direction="right",
     safe_drag_area=SURVIVAL_STORE_SAFE_DRAG_AREA
+)
+ScoreStoreItemList= ItemDragList(
+    name='ScoreStoreItemList',
+    keyword_class=ScoreStoreItem,
+    ocr_class=StoreDetailOcr,
+    search_button=SCORE_STORE_ITEM_SEARCH_AREA,
+    check_row_order=False,
+    drag_direction="right",
+    safe_drag_area=SCORE_STORE_SAFE_DRAG_AREA
 )

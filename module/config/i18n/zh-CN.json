@@ -611,6 +611,40 @@
       "help": "\"仅在'生存商店兑换过滤器'设置为\"自定义\"时生效\""
     }
   },
+  "ScoreStore": {
+    "_info": {
+      "name": "积分赛商店",
+      "help": ""
+    },
+    "ScoreStoreExchange": {
+      "name": "积分赛商店兑换",
+      "help": ""
+    },
+    "ScoreStoreChestPurchaseTimes": {
+      "name": "积分赛宝箱购买次数",
+      "help": "",
+      "1": "1",
+      "2": "2",
+      "3": "3",
+      "4": "4",
+      "5": "5",
+      "6": "6",
+      "7": "7",
+      "8": "8",
+      "9": "9",
+      "10": "10"
+    },
+    "ScoreStoreExchangeFilter": {
+      "name": "积分赛商店兑换过滤器",
+      "help": "预设 高级通灵卷轴碎片 > 积分赛宝箱",
+      "preset": "预设",
+      "custom": "自定义"
+    },
+    "CustomScoreStoreFilter": {
+      "name": "自定义积分赛商店兑换过滤器",
+      "help": "\"仅在'积分赛商店兑换过滤器'设置为\"自定义\"时生效\""
+    }
+  },
   "CultivationRoad": {
     "_info": {
       "name": "修行之路",
