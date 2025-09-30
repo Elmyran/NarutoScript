@@ -20,8 +20,7 @@ class PopupHandler(ModuleBase):
     def handle_popup(self,interval=5) -> bool:
         if self.appear_then_click(SHORTAGE,interval=interval):
             return True
-        if self.appear_then_click(POPUP_CLOSE,interval=interval):
-            return True
+        
         return False
     def handle_popup_page(self,interval=5) -> bool:
         if self.appear_then_click(POPUP_DUEL_FAME,interval=interval):
