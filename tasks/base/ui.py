@@ -92,12 +92,7 @@ class UI(MainPage):
             if self.ui_additional():
                 timeout.reset()
                 continue
-            if self.handle_popup(interval=1):
-                timeout.reset()
-                return True
-            if self.handle_popup_page(interval=1):
-                timeout.reset()
-                return True
+            
             if self.handle_login_confirm():
                 continue
 
@@ -359,7 +354,10 @@ class UI(MainPage):
             return True
         if self.handle_reward(interval=1):
             return True
-
+        if self.handle_popup(interval=1):
+            return True
+        if self.handle_popup_page(interval=1):
+             return True
         return False
 
     def _ui_button_confirm(
