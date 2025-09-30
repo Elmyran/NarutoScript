@@ -7,6 +7,8 @@ class StorePurchase(UI):
         OrganizationStorePurchase(config=self.config,device=self.device).run()
         from tasks.store_purchase.survival_store.survival_store import SurvivalStorePurchase
         SurvivalStorePurchase(config=self.config,device=self.device).run()
+        from tasks.store_purchase.score_store.score_store import ScoreStorePurchase
+        ScoreStorePurchase(config=self.config,device=self.device).run()
         self.config.task_delay(server_update=True)
         self.config.task_stop()
 

@@ -74,6 +74,7 @@ Daily:
       - PrivilegeStore
       - OrganizationStore
       - SurvivalStore
+      - ScoreStore
 
     BattleOrder:
       - Scheduler

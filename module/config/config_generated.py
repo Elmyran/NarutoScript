@@ -130,6 +130,12 @@ class GeneratedConfig:
     SurvivalStore_SurvivalStoreExchangeFilter = 'preset'  # preset, custom
     SurvivalStore_CustomSurvivalStoreFilter = 'TsuchikuraFragment > ReincarnationStone'
 
+    # Group `ScoreStore`
+    ScoreStore_ScoreStoreExchange = True
+    ScoreStore_ScoreStoreChestPurchaseTimes = 1  # 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+    ScoreStore_ScoreStoreExchangeFilter = 'preset'  # preset, custom
+    ScoreStore_CustomScoreStoreFilter = 'AdvancedSummoningScrollFragment > ScoreStoreChest'
+
     # Group `CultivationRoad`
     CultivationRoad_ClearRedDot = True
 
