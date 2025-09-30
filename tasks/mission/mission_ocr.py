@@ -2,7 +2,7 @@
 
 from module.logger import logger
 from module.ocr.ocr import Digit, Ocr, OcrResultButton, OcrWhiteLetterOnComplexBackground
-from module.ocr.onnxocr import onnx_paddleocr
+
 from module.ocr.onnxocr.onnx_paddleocr import ONNXPaddleOcr
 
 
@@ -44,7 +44,7 @@ class MissionDigit(Digit,OcrWhiteLetterOnComplexBackground):
         result = OcrWhiteLetterOnComplexBackground.pre_process(self, img)
         return result
     
-class MissionWhiteLetterOcr(onnx_paddleocr):
+class MissionWhiteLetterOcr(ONNXPaddleOcr):
     def pre_process(self, img):
         return img
 
