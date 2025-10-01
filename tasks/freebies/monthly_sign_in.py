@@ -8,7 +8,11 @@ from tasks.activity.activity_keyword import  MeiYueQianDaoKeyword
 from tasks.base.page import  page_activity
 from tasks.base.ui import UI
 from module.base.timer import Timer
-
+from tasks.freebies.assets.assets_freebies_yi_le_la_mian import RAMEN_TAB_CHECK
+class MonthlySignInOcr(DigitCounter):
+    def after_process(self, result):
+        result=result.replace('V','')
+        return result
 
 class MonthlySignIn(UI):
     def handle_monthly_sign_in(self):
@@ -18,8 +22,13 @@ class MonthlySignIn(UI):
             return True
         self.device.click_record_clear()
         self.ui_ensure(page_activity)
+        self.wait_until_stable(  
+                    RAMEN_TAB_CHECK,  
+                    timer=Timer(0, count=0),  
+                    timeout=Timer(1.5, count=5)  
+                )   
         ACTIVITY_TAB_LIST.search_rows(main=self,keyword=MeiYueQianDaoKeyword)
-        ocr=DigitCounter(SIGN_IN_PROGRESS)
+        ocr=MonthlySignInOcr(SIGN_IN_PROGRESS)
         click_interval=Timer(1).start()
         for _ in self.loop():
             if self.appear(MONTHLY_SIGN_IN_TITLE_HAVE_CLAIM):
@@ -36,8 +45,3 @@ class MonthlySignIn(UI):
                 break
         self.ui_goto_main()
         self.config.stored.MailRewardFinishCount.add()
-
-
-
-
-

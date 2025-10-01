@@ -4,7 +4,7 @@ from module.logger import logger
 from module.ocr.keyword import Keyword
 from module.ocr.ocr import Ocr
 from module.ui.draggable_list import DraggableList
-from tasks.activity.assets.assets_activity import ACTIVITY_LIST_AREA
+from tasks.activity.assets.assets_activity import ACTIVITY_CHECK, ACTIVITY_LIST_AREA
 from tasks.activity.assets.assets_activity_ui import MONTHLY_SIGN_IN_CHECK
 from tasks.activity.activity_keyword import ActivityTab
 
@@ -36,7 +36,7 @@ class DraggableActivityTabList(DraggableList):
             return False  
   
     def load_rows(self, main: ModuleBase):  
-          
+        
         # 调用父类方法  
         super().load_rows(main=main)  
           
@@ -45,54 +45,46 @@ class DraggableActivityTabList(DraggableList):
             logger.info(f'Tab {i}: {button.matched_keyword}')  
       
     def insight_row(self, row: Keyword, main: ModuleBase, skip_first_screenshot=True) -> bool:  
-    
-        row_index = self.keyword2index(row)  
-        if not row_index:  
-            logger.warning(f'Insight row {row} but index unknown')  
-            return False  
-  
-        logger.info(f'Insight activity tab: {row}, index={row_index}')  
-        last_buttons = None  
-        bottom_check = Timer(3, count=5).start()  
-          
-        while True:  
-            if skip_first_screenshot:  
-                skip_first_screenshot = False  
-            else:  
-                main.device.screenshot()  
-  
-            self.load_rows(main=main)  
-  
-            # 检查是否找到目标  
-            if self.cur_buttons and self.cur_min <= row_index <= self.cur_max:  
-                return True  
-  
-            # 拖拽页面  
-            if row_index < self.cur_min:  
-                self.drag_page(self.reverse_direction(self.drag_direction), main=main)  
-            elif self.cur_max < row_index:  
+        logger.info(f'Insight activity tab : {row}')  
+      
+        for _ in range(3):  # 最多重试3次  
+            visited = set()  
+            end_count = 0  
+            
+            while True:  
+                visited_count = len(visited) 
+               
+                self.load_rows(main=main)  
+                
+                # 检查是否找到目标  
+                for button in self.cur_buttons:  
+                    if button.matched_keyword == row:  
+                        logger.info(f'Found activity tab {row}')  
+                        return True  
+                
+                # 检查是否到达末尾  
+                for button in self.cur_buttons:  
+                    if button.matched_keyword:  
+                        visited.add(button.matched_keyword.name)  
+                
+                if len(visited) <= visited_count:  
+                    end_count += 1  
+                    if end_count >= 3:  
+                        logger.error('Activity list reached end but target not found')  
+                        break  
+                else:  
+                    end_count = 0  
+                
+                # 继续滚动  
                 self.drag_page(self.drag_direction, main=main)  
-  
-            # 等待底部出现
-            self.wait_bottom_appear(main, skip_first_screenshot=False)  
-            main.wait_until_stable(  
-                self.search_button,   
-                timer=Timer(0, count=0),  
-                timeout=Timer(1.5, count=5)  
-            )  
-              
-            skip_first_screenshot = True  
-              
-            # 检查是否到达列表末尾  
-            if self.cur_buttons and last_buttons == set(self.cur_buttons):  
-                if bottom_check.reached():  
-                    logger.warning(f'No more rows in {self}, target {row} not found')  
-                    return False  
-            else:  
-                bottom_check.reset()  
-            last_buttons = set(self.cur_buttons)  
-  
-        return True  
+                self.wait_bottom_appear(main, skip_first_screenshot=False)  
+                main.wait_until_stable(  
+                    self.search_button,  
+                    timer=Timer(0, count=0),  
+                    timeout=Timer(1.5, count=5)  
+                )  
+        
+        return False
   
     def search_rows(self, main, keyword):  
         """搜索并选择指定的活动标签"""  
@@ -102,7 +94,7 @@ class DraggableActivityTabList(DraggableList):
                 logger.info(f'Successfully selected {keyword.name} tab')  
                 return True  
         return False  
-  
+   
   
 # 创建活动标签页列表实例  
 ACTIVITY_TAB_LIST = DraggableActivityTabList(  
