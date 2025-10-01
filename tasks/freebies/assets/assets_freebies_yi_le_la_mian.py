@@ -30,6 +30,17 @@ RAMEN_CLAIM = ButtonWrapper(
     ],
     en=None,
 )
+RAMEN_TAB_CHECK = ButtonWrapper(
+    name='RAMEN_TAB_CHECK',
+    cn=Button(
+        file='./assets/cn/freebies/yi_le_la_mian/RAMEN_TAB_CHECK.png',
+        area=(1, 121, 166, 192),
+        search=(0, 101, 186, 212),
+        color=(176, 166, 136),
+        button=(1, 121, 166, 192),
+    ),
+    en=None,
+)
 REMEN_CLAIM_DONE = ButtonWrapper(
     name='REMEN_CLAIM_DONE',
     cn=[
