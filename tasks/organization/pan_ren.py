@@ -86,7 +86,7 @@ class OrganizationPanRen(GameControl):
         finally:
             self.device.screenshot_interval_set()
             self.device.stuck_timer=Timer(60, count=60).start()
-
+        return True
 
     def _organization_enter(self):
         time = Timer(10, count=10).start()
