@@ -7,19 +7,30 @@ from tasks.base.assets.assets_base_popup import *
 import cv2
 import numpy as np
 
+
+
 class PopupHandler(ModuleBase):
     def handle_confirm(self, interval=5)-> bool:
         if self.appear_then_click(EXIT_ORGANIZATION_FROG_PURSE,interval=interval):
             return True
         if self.appear_then_click(EXIT_CONFIRM,interval=interval):
             return True  
-        if self.appear_then_click(ADVERTISE_BATTLE_ORDER,interval=interval):
+        if self.appear_then_click(DUEL_RANK_PROMOTION_REWARD_CONFIRM,interval=interval):
             return True
+        
         
         return False
     def handle_popup(self,interval=5) -> bool:
         if self.appear_then_click(SHORTAGE,interval=interval):
             return True
+        if self.appear_then_click(TI_LI_SHORTAGE,interval=interval):
+            return True
+        if self.appear_then_click(DUEL_RANK_PROMOTION_REWARD,interval=interval):
+            return True
+        if self.appear_then_click(JI_FEN_SAI_SEASON_END_REWARD,interval=interval):
+            return True
+        
+        
         
         return False
     def handle_popup_page(self,interval=5) -> bool:
@@ -39,6 +50,8 @@ class PopupHandler(ModuleBase):
             return True
         if self.appear_then_click(EXIT_ORGANIZATION_REPLACEMENT,interval=interval):
             return  True
+        if self.appear_then_click(ADVERTISE_BATTLE_ORDER,interval=interval):
+            return True
         return False
 
     def reward_appear(self) -> bool:

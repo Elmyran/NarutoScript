@@ -1,5 +1,6 @@
 from module.base.base import ModuleBase
 from module.base.timer import Timer
+
 from tasks.base.assets.assets_base_page import MAIN_GOTO_CHARACTER
 from tasks.base.page import page_main
 from tasks.base.ui import UI
@@ -44,7 +45,7 @@ class GameInPopup(ModuleBase):
             bool: If clicked
         """
         # CN user agreement popup
-
+        
         timer=Timer(2,count=2)
         for _ in  self.loop():
             if self.appear(GAME_MAIN_ANNOUNCEMENT):
