@@ -52,6 +52,26 @@ DING_CI_KAO_ROU_REWARD = ButtonWrapper(
         button=(1177, 5, 1266, 81),
     ),
 )
+DUEL_RANK_PROMOTION_REWARD = ButtonWrapper(
+    name='DUEL_RANK_PROMOTION_REWARD',
+    share=Button(
+        file='./assets/share/base/popup/DUEL_RANK_PROMOTION_REWARD.png',
+        area=(545, 597, 730, 661),
+        search=(525, 577, 750, 681),
+        color=(201, 129, 13),
+        button=(545, 597, 730, 661),
+    ),
+)
+DUEL_RANK_PROMOTION_REWARD_CONFIRM = ButtonWrapper(
+    name='DUEL_RANK_PROMOTION_REWARD_CONFIRM',
+    share=Button(
+        file='./assets/share/base/popup/DUEL_RANK_PROMOTION_REWARD_CONFIRM.png',
+        area=(546, 597, 726, 661),
+        search=(526, 577, 746, 681),
+        color=(215, 142, 9),
+        button=(546, 597, 726, 661),
+    ),
+)
 EXIT_CONFIRM = ButtonWrapper(
     name='EXIT_CONFIRM',
     share=[
@@ -164,6 +184,16 @@ GET_REWARD = ButtonWrapper(
             button=(530, 114, 809, 173),
         ),
     ],
+)
+JI_FEN_SAI_SEASON_END_REWARD = ButtonWrapper(
+    name='JI_FEN_SAI_SEASON_END_REWARD',
+    share=Button(
+        file='./assets/share/base/popup/JI_FEN_SAI_SEASON_END_REWARD.png',
+        area=(540, 130, 881, 197),
+        search=(520, 110, 901, 217),
+        color=(140, 85, 17),
+        button=(540, 130, 881, 197),
+    ),
 )
 POPUP_BATTLE_FIELD_REWARD = ButtonWrapper(
     name='POPUP_BATTLE_FIELD_REWARD',
@@ -280,5 +310,15 @@ SHORTAGE = ButtonWrapper(
         search=(330, 125, 953, 552),
         color=(174, 170, 150),
         button=(841, 147, 929, 211),
+    ),
+)
+TI_LI_SHORTAGE = ButtonWrapper(
+    name='TI_LI_SHORTAGE',
+    share=Button(
+        file='./assets/share/base/popup/TI_LI_SHORTAGE.png',
+        area=(361, 188, 919, 533),
+        search=(341, 168, 939, 553),
+        color=(165, 160, 141),
+        button=(845, 192, 912, 246),
     ),
 )
