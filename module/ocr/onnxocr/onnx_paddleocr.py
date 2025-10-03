@@ -40,10 +40,12 @@ class ONNXPaddleOcr:
         return img
     def after_process(self, result):
         return result
+    def format_result(self, result):
+       
+        return result
     def ocr_single_line(self, img, det=True, rec=True, cls=True,direct_ocr=False):
         res=self.ocr_multiple_lines(img, det, rec, cls, direct_ocr)
         result=self.format_result(res[0].ocr_text)
-        print(result)
         return result
         
     def ocr_multiple_lines(self, img, det=True, rec=True, cls=True, direct_ocr=False): 
@@ -104,8 +106,7 @@ class ONNXPaddleOcr:
         return merged_results 
     
    
-    def format_result(self, results):
-        return results
+   
     def filter_detected(self, result: BoxedResult) -> bool:
         """
         Return False to drop result.
