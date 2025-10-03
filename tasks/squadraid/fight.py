@@ -13,7 +13,7 @@ from tasks.squadraid.benefit import HelpBattleBenefit
 class SquadRaidFight(UI):
     def handle_squad_raid(self):
         self.device.click_record_clear()
-
+        self.ui_ensure(page_squad)
         for _ in self.loop():
            if not self._squad_raid_fight():
                break
