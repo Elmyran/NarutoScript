@@ -9,7 +9,7 @@ from module.logger import logger
 from module.ocr.ocr import Digit
 from tasks.base.assets.assets_base_code_second import CODE_SECOND_PASSWORD
 from tasks.base.assets.assets_base_page import FULL_SCREEN
-from tasks.base.page import page_main
+from tasks.base.page import page_organization_panel
 from tasks.base.task_tab.draglist import TASK_TAB_LIST
 from tasks.base.task_tab.task_keyword import OrganizationKeyword
 from tasks.organization.assets.assets_organization import *
@@ -63,9 +63,7 @@ class OrganizationPanRen(GameControl):
     def handle_organization_pan_ren(self):
         self.device.click_record_clear()
         self.device.stuck_record_clear()
-        self.ui_ensure(page_main)
-        if not TASK_TAB_LIST.search_rows(main=self,keyword=OrganizationKeyword):
-            raise GameStuckError(' Organization Not Found')
+        self.ui_ensure(page_organization_panel)
         self._organization_enter()
         self.device.stuck_timer = Timer(900, count=900).start()
         end_early=True

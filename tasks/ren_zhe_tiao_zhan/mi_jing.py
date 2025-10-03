@@ -15,9 +15,7 @@ class MiJing(UI):
             self.config.stored.MiJingCount.clear()
         pre_count=self.config.stored.MiJingCount.value
         self.device.click_record_clear()
-        self.ui_ensure(page_main)
-        if not TASK_TAB_LIST.search_rows(main=self,keyword=RenZheTiaoZhanKeyword):
-            return False
+
         self.ui_ensure(page_mi_jing_room)
         self._mi_jing_fight()
         if (self.config.stored.MiJingCount.value >= 6 > pre_count) or (
@@ -64,7 +62,7 @@ class MiJing(UI):
                 continue
             if self.appear_then_click(MI_JING_START_CONFIRM,interval=1):
                 continue
-            if self.appear(MI_JING_ROOM_CHECK,interval=1):
+            if self.appear(MI_JING_ROOM_START_FIGHT,interval=1):
                 time=Timer(1,count=3).start()
                 flag=True
                 while flag:
@@ -72,8 +70,8 @@ class MiJing(UI):
                         return 'End'
                     remain_tickets=ticket.ocr_single_line(self.device.image)
                     if remain_tickets>0:
-                        self.device.click_record_remove(MI_JING_ROOM_CHECK)
-                        self.device.click(MI_JING_ROOM_CHECK)
+                        self.device.click_record_remove(MI_JING_ROOM_START_FIGHT)
+                        self.device.click(MI_JING_ROOM_START_FIGHT)
                         flag=False
         for _ in self.loop():
             if self.appear(MI_JING_ROOM_CHECK,interval=1):

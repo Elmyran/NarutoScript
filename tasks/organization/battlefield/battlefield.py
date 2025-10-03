@@ -61,10 +61,6 @@ class BattleField(UI):
             return False
         return True
     def handle_battle_field(self):
-        self.ui_ensure(page_main)
-        if not TASK_TAB_LIST.search_rows(main=self,keyword=OrganizationKeyword):
-            raise GameStuckError(' Organization Not Found')
-        self._organization_page_enter()
         self.ui_ensure(page_battle_field_select)
         self._battle_field_type_select()
         self._character_select()

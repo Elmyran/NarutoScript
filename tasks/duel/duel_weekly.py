@@ -17,9 +17,7 @@ class DuelWeekly(UI):
     def handle_duel_weekly(self):
         self.device.click_record_clear()
         self.device.stuck_record_clear()
-        self.ui_ensure(page_main)
-        if not TASK_TAB_LIST.search_rows(main=self,keyword=DuelKeyword):
-            raise GameStuckError(' Duel  Tab Not Found')
+  
         self.ui_ensure(page_ninjutsu)
         #上一局输赢
         success=True

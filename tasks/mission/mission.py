@@ -7,7 +7,7 @@ from module.logger.logger import logger
 from module.ocr.ocr import   DigitCounter
 from module.ocr.utils import pair_buttons
 from tasks.base.assets.assets_base_page import FULL_SCREEN
-from tasks.base.page import page_main
+from tasks.base.page import page_mission
 from tasks.base.task_tab.draglist import TASK_TAB_LIST
 from tasks.base.task_tab.task_keyword import MissionKeyword
 from tasks.base.ui import UI
@@ -34,9 +34,8 @@ class Mission(UI):
 
     def handle_mission(self):
         self.device.click_record_clear()
-        self.ui_ensure(page_main)
-        if not TASK_TAB_LIST.search_rows(main=self,keyword=MissionKeyword):
-            raise GameStuckError(' Mission Tab Not Found')
+        self.ui_ensure(page_mission)
+   
         self._mission_reward_claim()
         try:
             self.device.stuck_timer=Timer(180,count=180).start()

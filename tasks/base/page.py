@@ -9,6 +9,7 @@ from tasks.duel.assets.assets_duel import *
 from tasks.duel.assets.assets_duel_ninjutsu import *
 from tasks.freebies.assets.assets_freebies_information_club import *
 from tasks.freebies.assets.assets_freebies_leaderboard import *
+from tasks.organization.assets.assets_organization import ORGANIZATION_PANEL_GOTO_PAGE
 from tasks.organization.assets.assets_organization_akatsuki import AKATSUKI_CHECK
 from tasks.organization.assets.assets_organization_battlefield import *
 from tasks.organization.assets.assets_organization_fortress import *
@@ -129,7 +130,8 @@ page_zhaocai.link(ZHAO_CAI_GOTO_MAIN,destination=page_main)
 page_organization_panel=Page(ORGANIZATION_PANEL)
 page_organization=Page(ORGANIZATION)
 page_pray=Page(ORGANIZATION_PRAY_CHECK)
-page_pray.link(PRAY_EXIT,destination=page_organization)
+page_organization_panel.link(ORGANIZATION_PANEL_GOTO_PAGE,destination=page_organization)
+page_pray.link(CLOSE,destination=page_organization)
 page_organization.link(ORGANIZATION_EXIT,destination=page_main)
 #Akatsuki
 page_akatsuki=Page(AKATSUKI_CHECK)
@@ -161,14 +163,14 @@ page_daily.link(CLOSE,destination=page_main)
 
 #SquadRaid
 page_squad=Page(SQUAD_RAID_CHECK)
-page_main.link(MAIN_GOTO_SQUAD_RAID,destination=page_squad)
 page_squad_help_battle=Page(HELP_BATTLE_GOTO_MINE)
 page_squad_help_battle_mine=Page(HELP_BATTLE_MINE_CHECK)
+page_main.link(MAIN_GOTO_SQUAD_RAID,destination=page_squad)
 page_squad.link(SQUAD_GOTO_HELP_BATTLE,destination=page_squad_help_battle)
 page_squad_help_battle.link(HELP_BATTLE_GOTO_MINE,destination=page_squad_help_battle_mine)
-page_squad_help_battle_mine.link(HELP_BATTLE_MINE_EXIT,destination=page_squad_help_battle)
-page_squad_help_battle.link(SQUAD_RAID_EXIT,destination=page_squad)
-page_squad.link(SQUAD_RAID_EXIT,destination=page_main)
+page_squad_help_battle_mine.link(CLOSE,destination=page_squad_help_battle)
+page_squad_help_battle.link(CLOSE,destination=page_squad)
+page_squad.link(CLOSE,destination=page_main)
 #FengRao
 page_feng_rao=Page(FENG_RAO_CHECK)
 page_main.link(MAIN_GOTO_FENG_RAO,destination=page_feng_rao)
@@ -176,9 +178,10 @@ page_feng_rao.link(FENG_RAO_EXIT,destination=page_main)
 #SurvivalTrail
 page_trail=Page(TRAIL_SURVIVAL_CHECK)
 page_survival_trail=Page(SURVIVAL_PAGE_CHECK)
+page_main.link(MAIN_GOTO_TRAIL,destination=page_trail)
 page_trail.link(TRAIL_SURVIVAL_CHECK,destination=page_survival_trail)
-page_survival_trail.link(SURVIVAL_EXIT,destination=page_trail)
-page_trail.link(TRAIL_EXIT,destination=page_main)
+page_survival_trail.link(CLOSE,destination=page_trail)
+page_trail.link(CLOSE,destination=page_main)
 #CultivationRoad
 page_cultivation=Page(CULTIVATION_PAGE_CHECK)
 page_cultivation_box=Page(CULTIVATION_BOX_CHECK)

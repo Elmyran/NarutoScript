@@ -13,15 +13,13 @@ from tasks.squadraid.benefit import HelpBattleBenefit
 class SquadRaidFight(UI):
     def handle_squad_raid(self):
         self.device.click_record_clear()
-        self.ui_ensure(page_main)
-        if not TASK_TAB_LIST.search_rows(main=self,keyword=SquadRaidKeyword):
-            raise GameStuckError(' SquadRaid Not Found')
+
         for _ in self.loop():
            if not self._squad_raid_fight():
                break
         if self.config.SquadRaid_SquadRaidBenefit:
             HelpBattleBenefit(self.config,self.device).handle_help_battle_benefit()
-        self.ui_goto_main()
+
     def _squad_raid_fight(self):
         time=Timer(10,count=20).start()
         for _ in  self.loop():

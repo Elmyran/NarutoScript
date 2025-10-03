@@ -1,7 +1,7 @@
 from module.base.timer import Timer
 from module.exception import GameStuckError
 from tasks.base.assets.assets_base_page import *
-from tasks.base.page import page_main
+from tasks.base.page import page_ji_fen_sai
 from tasks.base.task_tab.draglist import TASK_TAB_LIST
 from tasks.base.task_tab.task_keyword import JiFenSaiKeyword
 from tasks.base.ui import UI
@@ -13,11 +13,10 @@ class JiFenSaiClaim(UI):
     def handle_ji_fen_sai_claim(self):
         self.device.click_record_clear()
         self.device.stuck_record_clear()
-        self.ui_ensure(page_main)
-        if not TASK_TAB_LIST.search_rows(main=self,keyword=JiFenSaiKeyword):
-            return False
+        self.ui_ensure(page_ji_fen_sai)
+      
         self._claim_daily_reward()
-        self.ui_goto_main()
+
         return True
     def _claim_daily_reward(self):
         time=Timer(30,count=30).start()

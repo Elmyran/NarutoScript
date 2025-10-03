@@ -8,16 +8,15 @@ from tasks.base.task_tab.task_keyword import FengRaoKeyword
 from tasks.base.ui import UI
 from tasks.fengrao.assets.assets_fengrao import FENG_RAO_RED_DOT, MAIN_GOTO_FENG_RAO, FENG_RAO_CHECK, \
     FENG_RAO_START_FIGHT_BUTTON, FENG_RAO_FIGHT_STATUS, FENG_RAO_FIGHT_SUCCESS, FENG_RAO_HAVE_DONE, FENG_RAO_EXIT
-import time
+
 
 class FengRaoFight(UI):
     def handle_feng_rao(self):
         self.device.click_record_clear()
-        self.ui_ensure(page_main)
-        if not TASK_TAB_LIST.search_rows(main=self,keyword=FengRaoKeyword):
-            raise GameStuckError(' FengRao Task Tab Not Found')
+        self.ui_ensure(page_feng_rao)
+       
         self._feng_rao_fight()
-        self.ui_goto_main()
+
     def _feng_rao_fight(self):
         for _ in self.loop():
             if self.appear(FENG_RAO_HAVE_DONE):

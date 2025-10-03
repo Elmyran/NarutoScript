@@ -1,5 +1,5 @@
 
-from tasks.base.page import page_main
+from tasks.base.page import page_leader_board
 from tasks.base.task_tab.draglist import TASK_TAB_LIST
 from tasks.base.task_tab.task_keyword import LeaderBoardKeyword
 from tasks.base.ui import UI
@@ -18,9 +18,7 @@ class LeaderBoard(UI):
         return True
     def handle_leader_board(self):
         self.device.click_record_clear()
-        self.ui_ensure(page_main)
-        if not TASK_TAB_LIST.search_rows(main=self,keyword=LeaderBoardKeyword):
-            return False
+        self.ui_ensure(page_leader_board)
         for _ in self.loop():
             if LEADER_BOARD_HAVE_LIKED.match_template_luma(self.device.image,direct_match=True):
                 break

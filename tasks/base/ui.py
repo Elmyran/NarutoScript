@@ -10,7 +10,9 @@ from tasks.base.assets.assets_base_page import MAIN_GOTO_CHARACTER, FULL_SCREEN
 
 from tasks.base.main_page import MainPage
 from tasks.base.page import Page, page_main
+from tasks.base.task_tab.draglist import TASK_TAB_LIST
 from tasks.login.assets.assets_login import ACCOUNT_CONFIRM
+from tasks.base.page import *
 
 
 from tasks.base.popup import PopupHandler
@@ -147,11 +149,18 @@ class UI(MainPage):
                     self.handle_lang_check(page)
                     if self.ui_page_confirm(page):
                         logger.info(f'Page arrive confirm {page}')
-                    button = page.links[page.parent]
-                    self.device.click(button)
-                    self.ui_button_interval_reset(button)
-                    clicked = True
-                    break
+                    if page==page_main and self._is_special_page(page.parent):  
+                        # 特殊页面：先到 page_main，然后使用 DraggableList 搜索  
+                        
+                            TASK_TAB_LIST.search_rows(main=self,page=page.parent)
+                            clicked = True  
+                            break  
+                    else:  
+                        button = page.links[page.parent]
+                        self.device.click(button)
+                        self.ui_button_interval_reset(button)
+                        clicked = True
+                        break
             if clicked:
                 continue
 
@@ -164,6 +173,28 @@ class UI(MainPage):
 
         # Reset connection
         Page.clear_connection()
+    def _is_special_page(self, page):
+        """
+        Args:
+            page (Page):
+
+        Returns:
+            bool:
+        """
+        pages=[page_organization,
+               page_ji_fen_sai,
+               page_trail,
+               page_feng_rao,
+               page_mission,
+               page_leader_board,
+               page_duel,
+               page_ren_zhe_tiao_zhan,
+               page_squad,
+        ]
+
+
+
+        return page in pages
 
     def ui_ensure(self, destination, acquire_lang_checked=False, skip_first_screenshot=True):
         """
