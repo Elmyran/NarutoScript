@@ -181,7 +181,7 @@ class UI(MainPage):
         Returns:
             bool:
         """
-        pages=[page_organization,
+        pages=[page_organization_panel,
                page_ji_fen_sai,
                page_trail,
                page_feng_rao,
