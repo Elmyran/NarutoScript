@@ -51,7 +51,7 @@ class DraggableTaskTabList(DraggableList):
             logger.error(f'Failed to find {keyword.name} in task list')
             return False
     def search_rows(self, main, page:Page):
-        pages={page_organization:OrganizationKeyword,
+        pages={page_organization_panel:OrganizationKeyword,
                page_ji_fen_sai:JiFenSaiKeyword,
                page_trail:TrailKeyword,
                page_feng_rao:FengRaoKeyword,
