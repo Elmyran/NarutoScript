@@ -238,6 +238,16 @@ MAIN_GOTO_MAIL = ButtonWrapper(
         button=(25, 253, 90, 307),
     ),
 )
+MAIN_GOTO_MISSION = ButtonWrapper(
+    name='MAIN_GOTO_MISSION',
+    share=Button(
+        file='./assets/share/base/page/MAIN_GOTO_MISSION.png',
+        area=(496, 422, 527, 571),
+        search=(476, 402, 547, 591),
+        color=(128, 124, 112),
+        button=(496, 422, 527, 571),
+    ),
+)
 MAIN_GOTO_PANEL = ButtonWrapper(
     name='MAIN_GOTO_PANEL',
     share=Button(
