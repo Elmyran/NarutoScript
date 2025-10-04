@@ -1,5 +1,7 @@
 import re
 
+
+
 from module.base.decorator import cached_property
 
 
@@ -70,6 +72,8 @@ def release_resources(next_task=''):
         OCR_MODEL.resource_release()
         from module.ocr.onnxmodels import CUSTOM_OCR_MODEL
         CUSTOM_OCR_MODEL.resource_release()
+        from module.ocr.yolomodel import YOLO_MODEL
+        YOLO_MODEL.resource_release()
 
     # Release assets cache
     # module.ui has about 80 assets and takes about 3MB
