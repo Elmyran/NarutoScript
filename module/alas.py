@@ -295,6 +295,9 @@ class AzurLaneAutoScript:
             # Get task
             task = self.get_next_task()
             # Init device and change server
+            if self.config.should_reload():  
+                del_cached_property(self, 'config')  
+                continue 
             _ = self.device
             self.device.config = self.config
             # Skip first restart
