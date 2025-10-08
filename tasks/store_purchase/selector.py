@@ -128,7 +128,7 @@ class StoreSelector:
                 name='ItemAmountDigit'
                 )
         )
-        price=0
+        price=99999
         total=0
         for _ in self.main.loop():
             if price!=0 and total!=0:  
