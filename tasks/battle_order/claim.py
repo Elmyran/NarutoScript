@@ -8,7 +8,7 @@ from tasks.base.assets.assets_base_page import BATTLE_ORDER_CHECK
 from tasks.base.page import page_battle_order
 from tasks.base.ui import UI
 from tasks.battle_order.assets.assets_battle_order_claim import *
-
+import cv2
 from tasks.battle_order.draglist import CHARACTER_TAB_LIST
 from tasks.base.character_keyword import CharacterTab
 from tasks.battle_order.switch import BATTLE_ORDER_TAB
@@ -92,7 +92,7 @@ class BattleOrderClaim(UI):
 
         
     def detect_reward_boxes(self, image, button, low=100, high=300):
-        import cv2
+
        
         
         x1, y1, x2, y2 = button.area
@@ -126,8 +126,10 @@ class BattleOrderClaim(UI):
             print(f"检测到轮廓: 面积={area}, 宽高比={ratio:.2f}, 顶点数={len(approx)}")
             # 矩形度过滤
             extent = cv2.contourArea(cnt) / float(w * h)
-            if extent < 0.85 or extent > 1.05:
-                continue
+            print(f"矩形度: {extent:.2f}")
+            if extent < 0.7 or extent > 1.05:
+               continue
+            
             ratio = w / float(h)
             if ratio > 1.05:
                 continue
@@ -150,6 +152,7 @@ class BattleOrderClaim(UI):
             #  把 ROI 坐标平移回全图
             #box=(x + x1, box_upper,min(predicted_right, detected_right),box_lower)
             box = (x + x1, y + y1, x + x1 + w, y + y1 + h)
+            print(f"检测到可领取按钮: {box}")
             if self.is_claimable_single_frame(image=image, roi=box):
                 click_button = ClickButton(area=box) 
                 boxes.append(click_button)
