@@ -7,12 +7,12 @@ from tasks.store_purchase.store_keyword import PrivilegeStore, Store
 
 class PrivilegeStorePurchase(UI):
     def run(self):
+        self.handle_privilege_store_purchase()
+    def handle_privilege_store_purchase(self):
         if self.config.stored.PrivilegeStoreFinishCount.is_expired():
             self.config.stored.PrivilegeStoreFinishCount.clear()
         if self.config.stored.PrivilegeStoreFinishCount.is_full():
             return
-        self.handle_privilege_store_purchase()
-    def handle_privilege_store_purchase(self):
         self.ui_ensure(page_store)
         if self.config.PrivilegeStore_DailyFreeCoins:
             self.handle_daily_free_coins()
@@ -25,4 +25,5 @@ class PrivilegeStorePurchase(UI):
                 break
             if self.appear_then_click(DAILY_FREE_COINS, interval=1):
                 continue
+        self.config.stored.PrivilegeStoreFinishCount.add()
 
