@@ -1,9 +1,10 @@
 
+from re import A
 from module.base.timer import Timer
 from module.config.utils import get_server_next_monday_update
 from module.exception import GameStuckError
 from module.logger import logger
-from tasks.base.page import page_organization_panel
+from tasks.base.page import page_organization_panel,page_main
 
 from tasks.base.ui import UI
 from tasks.organization.assets.assets_organization_akatsuki import *
@@ -21,7 +22,7 @@ class Akatsuki(UI):
         self._organization_play_panel_enter()
         self._enter_akatsuki_page()
         self._reward_claim()
-        self.ui_goto_main()
+       
 
     def _organization_play_panel_enter(self):
         time = Timer(10, count=10).start()
@@ -65,21 +66,3 @@ class Akatsuki(UI):
             REWARD_CLAIM_BUTTON.load_search(REWARD_CLAIM_PANEL.area)
             if self.appear_then_click(REWARD_CLAIM_BUTTON,interval=1):
                 continue
-    def _akatsuki_exit(self):
-        self.device.click_record_clear()
-        time=Timer(10, count=10).start()
-        for _ in self.loop():
-            if time.reached():
-                raise GameStuckError("Akatsuki Exit Stucked")
-            if self.ui_page_appear(page_main):
-                break
-            if self.appear(REWARD_PANEL_EXIT):
-                self.device.click(REWARD_PANEL_EXIT)
-                continue
-            if self.appear(AKATSUKI_EXIT):
-                self.device.click(AKATSUKI_EXIT)
-                continue
-            if self.appear(ORGANIZATION_EXIT):
-                self.device.click(ORGANIZATION_EXIT)
-                continue
-
