@@ -18,6 +18,8 @@ from .utils import  draw_ocr
 from module.base.decorator import cached_property, del_cached_property
 
 
+
+
 class ONNXPaddleOcr:
     merge_thres_x = 0
     merge_thres_y = 0
@@ -45,8 +47,10 @@ class ONNXPaddleOcr:
         return result
     def ocr_single_line(self, img, det=True, rec=True, cls=True,direct_ocr=False):
         res=self.ocr_multiple_lines(img, det, rec, cls, direct_ocr)
-        result=self.format_result(res[0].ocr_text)
-        return result
+        if res:
+            result=self.format_result(res[0].ocr_text)
+            return result
+        return res
         
     def ocr_multiple_lines(self, img, det=True, rec=True, cls=True, direct_ocr=False): 
         start_time = time.time()

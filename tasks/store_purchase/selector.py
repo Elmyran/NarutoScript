@@ -92,6 +92,8 @@ class StoreSelector:
         amount_ocr=StorePriceDigit(STORE_ITEM_PURCHASE_AMOUNT_AREA)
         for _ in self.main.loop():
             amount=amount_ocr.ocr_single_line(self.main.device.image)
+            if not amount:
+                continue
             if amount==item.amount or self.main.appear(BUY_REACH_TOP):
                 break
             if self.main.appear_then_click(PURCHASE_POPUP,interval=2):  

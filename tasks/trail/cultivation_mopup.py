@@ -41,6 +41,7 @@ class CultivationMopUp(UI):
                     return 'MOP_UP_SUCCESS'
             if self.appear(CULTIVATION_RESET_MOP_UP_RUNNING):
                 break
+        return 'MOP_UP_SUCCESS'
 
     def _cultivation_reset(self):
         for _ in self.loop():

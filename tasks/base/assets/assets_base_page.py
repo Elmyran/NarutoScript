@@ -110,6 +110,16 @@ DAILY_CHECK = ButtonWrapper(
         button=(1, 0, 267, 125),
     ),
 )
+DRAMA_CHECK = ButtonWrapper(
+    name='DRAMA_CHECK',
+    share=Button(
+        file='./assets/share/base/page/DRAMA_CHECK.png',
+        area=(1125, 599, 1239, 707),
+        search=(1105, 579, 1259, 720),
+        color=(117, 99, 98),
+        button=(1125, 599, 1239, 707),
+    ),
+)
 FIGHT_CLOSE = ButtonWrapper(
     name='FIGHT_CLOSE',
     share=Button(

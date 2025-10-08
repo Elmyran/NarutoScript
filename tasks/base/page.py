@@ -187,6 +187,7 @@ page_trail.link(CLOSE,destination=page_main)
 #CultivationRoad
 page_cultivation=Page(CULTIVATION_PAGE_CHECK)
 page_cultivation_box=Page(CULTIVATION_BOX_CHECK)
+page_cultivation.link(CLOSE,destination=page_main)
 page_trail.link(TRAIL_CULTIVATION_CHECK,destination=page_cultivation)
 page_cultivation_box.link(CLOSE,page_cultivation)
 page_cultivation.link(CULTIVATION_BOX,destination=page_cultivation_box)
@@ -261,7 +262,9 @@ page_ji_fen_sai.link(CLOSE,destination=page_main)
 page_store=Page(STORE_CHECK)
 page_main.link(MAIN_GOTO_STORE,destination=page_store)
 page_store.link(CLOSE,destination=page_main)
-
+#Drama
+page_drama=Page(DRAMA_CHECK)
+page_drama.link(CLOSE,destination=page_main)
 #Activity
 page_activity=Page(ACTIVITY_CHECK)
 page_main.link(MAIN_GOTO_ACTIVITY,destination=page_activity)
