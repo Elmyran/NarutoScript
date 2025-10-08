@@ -9,10 +9,13 @@ class StoreDigitCounter(DigitCounter):
         return super().after_process(result)
 
 class StorePriceDigit(ONNXPaddleOcr, OcrWhiteLetterOnComplexBackground,Digit):  
-    min_box = (1, 1)  # 确保小数字也能被检测到  
+
       
     def pre_process(self, result):  
         result = OcrWhiteLetterOnComplexBackground.pre_process(self, result)
+        return result
+    def after_process(self, result):  
+        result=result.replace('A', '')
         return result
     def format_result(self, result):
         return Digit.format_result(self,result)
