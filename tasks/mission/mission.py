@@ -7,7 +7,7 @@ from module.logger.logger import logger
 from module.ocr.ocr import   DigitCounter
 from module.ocr.utils import pair_buttons
 from tasks.base.assets.assets_base_page import FULL_SCREEN
-from tasks.base.page import page_main
+from tasks.base.page import page_mission
 from tasks.base.task_tab.draglist import TASK_TAB_LIST
 from tasks.base.task_tab.task_keyword import MissionKeyword
 from tasks.base.ui import UI
@@ -34,9 +34,8 @@ class Mission(UI):
 
     def handle_mission(self):
         self.device.click_record_clear()
-        self.ui_ensure(page_main)
-        if not TASK_TAB_LIST.search_rows(main=self,keyword=MissionKeyword):
-            raise GameStuckError(' Mission Tab Not Found')
+        self.ui_ensure(page_mission)
+   
         self._mission_reward_claim()
         try:
             self.device.stuck_timer=Timer(180,count=180).start()
@@ -60,7 +59,12 @@ class Mission(UI):
         select=DigitCounter(TASK_SELECT_REAMIN_TIMES)
         task_select_number=0
         time=Timer(60,count=60).start()
+        skip_first_screenshot = True  
         for task in tasks:
+            if skip_first_screenshot:  
+                skip_first_screenshot = False  
+            else:  
+                self.device.screenshot()  
             if time.reached():
                 raise GameStuckError(' Mission Task  Select Stuck')
             current,remain,total=select.ocr_single_line(self.device.image)
@@ -77,13 +81,18 @@ class Mission(UI):
             self.config.stored.MissionAccept.value=task_select_number
         return True
     def _single_task_select(self,task):
+        click_interval=Timer(1).start()
         for _ in self.loop():
             if CHARACTER_UNSELECTED.match_template(self.device.image, direct_match=True):
                 if self.character_select():
                     return True
                 else:
                     return False
-            self.device.click(task)
+            if click_interval.reached():
+                self.device.click(task)
+                click_interval.reset()
+                continue
+            
     def _task_refresh(self):
         refresh=DigitCounter(TASK_REFRESH_REMAIN_TIMES)
         current,remain,total=refresh.ocr_single_line(self.device.image)
@@ -95,22 +104,26 @@ class Mission(UI):
             if self.appear(TASK_REFRESH_TIMES_SHORTAGE):
                 return False
             # todo 超影免费刷新button
-    def character_select(self):
-        time=Timer(20,count=30).start()
-        for _ in self.loop():
-            if time.reached():
-                raise GameStuckError("Character selected Stucked")
-            if THE_TASKBAR_IS_FULL.match_template(self.device.image):
-                return False
-            else:
-                if self.appear(MISSION_CHECK):
-                    return True
-            if self.appear(CHARACTER_SELECTED_AUTO) and CHARACTER_UNSELECTED.match_template(self.device.image, direct_match=True):
-                self.device.click(CHARACTER_SELECTED_AUTO)
-            elif CHARACTER_UNSELECTED.match_template(self.device.image, direct_match=True):
-                self.device.click(CHARACTER_FIRST)
-            if CHARACTER_SELECTED.match_template(self.device.image, direct_match=True):
-                self.appear_then_click(TASK_ACCEPT,interval=2)
+    def character_select(self):  
+        for _ in self.loop():  
+            if THE_TASKBAR_IS_FULL.match_template(self.device.image):  
+                logger.info('Taskbar is full')  
+                return False  
+            if self.appear(MISSION_CHECK):  
+                logger.info('Mission check appeared')  
+                return True  
+                
+
+            if self.appear(CHARACTER_SELECTED_AUTO)  and CHARACTER_UNSELECTED.match_template(self.device.image, direct_match=True): 
+                self.device.click(CHARACTER_SELECTED_AUTO)  
+                continue  
+            if CHARACTER_SELECTED.match_template(self.device.image, direct_match=True):  
+                if self.appear_then_click(TASK_ACCEPT, interval=2):  
+                    continue
+            if CHARACTER_UNSELECTED.match_template(self.device.image, direct_match=True):  
+                self.device.click(CHARACTER_FIRST)  
+                continue  
+            
     def _mission_reward_claim(self):
         ocr = MissionOcr(MISSION_TASK_CLAIMED_LIST, lang='cn')
         res = ocr.matched_ocr(self.device.image, MissionClaimable)
@@ -191,7 +204,7 @@ class Mission(UI):
     def _get_task_reward_detail(self, task):
         
         time = Timer(1, 3).start()
-        box_type=TaskPriority.GREEN
+        box_type=None
         soul_jade=0
         for _ in self.loop():
             if time.reached():
@@ -224,8 +237,9 @@ class Mission(UI):
                     res = ocr.ocr_single_line(self.device.image)
                     if res:
                         soul_jade=int(res)
+       
         task.soul_jade_amount=soul_jade
-        task.priority=box_type
+        task.priority = box_type if box_type is not None else TaskPriority.GREEN
 
     def _parse_time_to_minutes(self, time_str: str) -> int:
         """解析时间字符串为分钟数，并修正为60的倍数"""

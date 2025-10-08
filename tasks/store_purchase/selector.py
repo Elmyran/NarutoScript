@@ -92,6 +92,8 @@ class StoreSelector:
         amount_ocr=StorePriceDigit(STORE_ITEM_PURCHASE_AMOUNT_AREA)
         for _ in self.main.loop():
             amount=amount_ocr.ocr_single_line(self.main.device.image)
+            if not amount:
+                continue
             if amount==item.amount or self.main.appear(BUY_REACH_TOP):
                 break
             if self.main.appear_then_click(PURCHASE_POPUP,interval=2):  
@@ -110,14 +112,21 @@ class StoreSelector:
                 area=price_area,
                 name='ItemPriceDigit'
         ))
-        price=price_ocr.ocr_single_line(self.main.device.image)
+        
         amount_ocr=StoreDigitCounter(
              ClickButton(
                 area=amount_area,
                 name='ItemAmountDigit'
                 )
         )
-        current,remain,total=amount_ocr.ocr_single_line(self.main.device.image)
+        price=0
+        total=0
+        for _ in self.main.loop():
+            if price!=0 and total!=0:  
+                break
+            price=price_ocr.ocr_single_line(self.main.device.image)
+            current,remain,total=amount_ocr.ocr_single_line(self.main.device.image)
+        
         if total!=0:
             return price,current,remain,total
         return price,0,0,0
@@ -128,7 +137,14 @@ class StoreSelector:
                 name='CurrencyDigit'
             )
         )
-        currency=currency_ocr.ocr_single_line(self.main.device.image)
+        currency=0
+        timeout=Timer(1,3).start()
+        for _ in self.main.loop():
+            if timeout.reached():  
+                break
+            if currency!=0:  
+                break
+            currency=currency_ocr.ocr_single_line(self.main.device.image)
         self.currency=currency
         
     def create_shop_item_from_ocr(self,button):  

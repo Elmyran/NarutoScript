@@ -34,17 +34,6 @@ TRAIL_CULTIVATION_CHECK = ButtonWrapper(
     ),
     en=None,
 )
-TRAIL_EXIT = ButtonWrapper(
-    name='TRAIL_EXIT',
-    cn=Button(
-        file='./assets/cn/trail/TRAIL_EXIT.png',
-        area=(1189, 0, 1280, 83),
-        search=(1169, 0, 1280, 103),
-        color=(98, 61, 40),
-        button=(1189, 0, 1280, 83),
-    ),
-    en=None,
-)
 TRAIL_RED_DOT = ButtonWrapper(
     name='TRAIL_RED_DOT',
     cn=[

@@ -110,6 +110,16 @@ DAILY_CHECK = ButtonWrapper(
         button=(1, 0, 267, 125),
     ),
 )
+DRAMA_CHECK = ButtonWrapper(
+    name='DRAMA_CHECK',
+    share=Button(
+        file='./assets/share/base/page/DRAMA_CHECK.png',
+        area=(1125, 599, 1239, 707),
+        search=(1105, 579, 1259, 720),
+        color=(117, 99, 98),
+        button=(1125, 599, 1239, 707),
+    ),
+)
 FIGHT_CLOSE = ButtonWrapper(
     name='FIGHT_CLOSE',
     share=Button(
@@ -236,6 +246,16 @@ MAIN_GOTO_MAIL = ButtonWrapper(
         search=(5, 233, 110, 327),
         color=(162, 155, 86),
         button=(25, 253, 90, 307),
+    ),
+)
+MAIN_GOTO_MISSION = ButtonWrapper(
+    name='MAIN_GOTO_MISSION',
+    share=Button(
+        file='./assets/share/base/page/MAIN_GOTO_MISSION.png',
+        area=(496, 422, 527, 571),
+        search=(476, 402, 547, 591),
+        color=(128, 124, 112),
+        button=(496, 422, 527, 571),
     ),
 )
 MAIN_GOTO_PANEL = ButtonWrapper(

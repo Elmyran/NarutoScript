@@ -9,6 +9,7 @@ from tasks.duel.assets.assets_duel import *
 from tasks.duel.assets.assets_duel_ninjutsu import *
 from tasks.freebies.assets.assets_freebies_information_club import *
 from tasks.freebies.assets.assets_freebies_leaderboard import *
+from tasks.organization.assets.assets_organization import ORGANIZATION_PANEL_GOTO_PAGE
 from tasks.organization.assets.assets_organization_akatsuki import AKATSUKI_CHECK
 from tasks.organization.assets.assets_organization_battlefield import *
 from tasks.organization.assets.assets_organization_fortress import *
@@ -110,8 +111,9 @@ page_mail.link(MAIL_EXIT,destination=page_main)
 page_main.link(MAIN_GOTO_MAIL,destination=page_mail)
 #Mission
 page_mission=Page(MISSION_CHECK)
-page_mission.link(CLOSE,destination=page_main)
 page_mission_character_select=Page(MISSION_CHARACTER_SELECT_CHECK)
+page_main.link(MAIN_GOTO_MISSION,destination=page_mission)
+page_mission.link(CLOSE,destination=page_main)
 page_mission_character_select.link(CLOSE,destination=page_main)
 #DailyShare
 page_panel=Page(PANEL_CHECK)
@@ -129,8 +131,10 @@ page_zhaocai.link(ZHAO_CAI_GOTO_MAIN,destination=page_main)
 page_organization_panel=Page(ORGANIZATION_PANEL)
 page_organization=Page(ORGANIZATION)
 page_pray=Page(ORGANIZATION_PRAY_CHECK)
-page_pray.link(PRAY_EXIT,destination=page_organization)
-page_organization.link(ORGANIZATION_EXIT,destination=page_main)
+page_main.link(MAIN_GOTO_ORGANIZATION,destination=page_organization_panel)
+page_organization_panel.link(ORGANIZATION_PANEL_GOTO_PAGE,destination=page_organization)
+page_pray.link(CLOSE,destination=page_organization)
+page_organization.link(CLOSE,destination=page_main)
 #Akatsuki
 page_akatsuki=Page(AKATSUKI_CHECK)
 page_akatsuki.link(CLOSE,destination=page_organization)
@@ -161,34 +165,36 @@ page_daily.link(CLOSE,destination=page_main)
 
 #SquadRaid
 page_squad=Page(SQUAD_RAID_CHECK)
-page_main.link(MAIN_GOTO_SQUAD_RAID,destination=page_squad)
 page_squad_help_battle=Page(HELP_BATTLE_GOTO_MINE)
 page_squad_help_battle_mine=Page(HELP_BATTLE_MINE_CHECK)
+page_main.link(MAIN_GOTO_SQUAD_RAID,destination=page_squad)
 page_squad.link(SQUAD_GOTO_HELP_BATTLE,destination=page_squad_help_battle)
 page_squad_help_battle.link(HELP_BATTLE_GOTO_MINE,destination=page_squad_help_battle_mine)
-page_squad_help_battle_mine.link(HELP_BATTLE_MINE_EXIT,destination=page_squad_help_battle)
-page_squad_help_battle.link(SQUAD_RAID_EXIT,destination=page_squad)
-page_squad.link(SQUAD_RAID_EXIT,destination=page_main)
+page_squad_help_battle_mine.link(CLOSE,destination=page_squad_help_battle)
+page_squad_help_battle.link(CLOSE,destination=page_squad)
+page_squad.link(CLOSE,destination=page_main)
 #FengRao
 page_feng_rao=Page(FENG_RAO_CHECK)
 page_main.link(MAIN_GOTO_FENG_RAO,destination=page_feng_rao)
-page_feng_rao.link(FENG_RAO_EXIT,destination=page_main)
+page_feng_rao.link(CLOSE,destination=page_main)
 #SurvivalTrail
 page_trail=Page(TRAIL_SURVIVAL_CHECK)
 page_survival_trail=Page(SURVIVAL_PAGE_CHECK)
+page_main.link(MAIN_GOTO_TRAIL,destination=page_trail)
 page_trail.link(TRAIL_SURVIVAL_CHECK,destination=page_survival_trail)
-page_survival_trail.link(SURVIVAL_EXIT,destination=page_trail)
-page_trail.link(TRAIL_EXIT,destination=page_main)
+page_survival_trail.link(CLOSE,destination=page_trail)
+page_trail.link(CLOSE,destination=page_main)
 #CultivationRoad
 page_cultivation=Page(CULTIVATION_PAGE_CHECK)
 page_cultivation_box=Page(CULTIVATION_BOX_CHECK)
+page_cultivation.link(CLOSE,destination=page_main)
 page_trail.link(TRAIL_CULTIVATION_CHECK,destination=page_cultivation)
-page_cultivation_box.link(CULTIVATION_EXIT,page_cultivation)
+page_cultivation_box.link(CLOSE,page_cultivation)
 page_cultivation.link(CULTIVATION_BOX,destination=page_cultivation_box)
 
 #Equipment
 page_equipment=Page(EQUIPMENT_CHECK)
-page_equipment.link(EQUIPMENT_EXIT,destination=page_main)
+page_equipment.link(CLOSE,destination=page_main)
 #TongLing
 page_tong_ling=Page(TONG_LING_CHECK)
 page_main.link(MAIN_GOTO_TONG_LING,destination=page_tong_ling)
@@ -197,10 +203,10 @@ page_tong_ling.link(CLOSE,destination=page_main)
 page_dungeon=Page(SWITCH_TO_DUNGEON)
 page_elite_dungeon=Page(CONVENIENT_SWEEP)
 page_dungeon_sweep=Page(SWEEP_BUTTON)
-page_dungeon_sweep.link(DUNGEON_EXIT,destination=page_elite_dungeon)
-page_elite_dungeon.link(DUNGEON_EXIT,destination=page_main)
+page_dungeon_sweep.link(CLOSE,destination=page_elite_dungeon)
+page_elite_dungeon.link(CLOSE,destination=page_main)
 page_dungeon.link(SWITCH_TO_DUNGEON,destination=page_elite_dungeon)
-page_dungeon.link(DUNGEON_EXIT,destination=page_main)
+page_dungeon.link(CLOSE,destination=page_main)
 page_main.link(MAIN_GOTO_DUNGEON,destination=page_dungeon)
 #DUEL
 page_duel=Page(DUEL_CHECK)
@@ -210,12 +216,12 @@ page_main.link(MAIN_GOTO_DUEL,destination=page_duel)
 page_duel.link(DUEL_CHECK,destination=page_ninjutsu)
 page_ninjutsu.link(DUEL_TASK,destination=page_task_panel)
 page_task_panel.link(DUEL_TASK_PANEL,destination=page_ninjutsu)
-page_ninjutsu.link(NINJUTSU_EXIT,destination=page_duel)
-page_duel.link(DUEL_EXIT,destination=page_main)
+page_ninjutsu.link(CLOSE,destination=page_duel)
+page_duel.link(CLOSE,destination=page_main)
 #LeaderBoard
 page_leader_board=Page(LEADER_BOARD_CHECK)
 page_main.link(MAIN_GOTO_LEADER_BOARD,destination=page_leader_board)
-page_leader_board.link(LEADER_BOARD_EXIT,destination=page_main)
+page_leader_board.link(CLOSE,destination=page_main)
 #InformationClub
 page_information_club=Page(CLUB_GOTO_WELFARE_STATION)
 page_welfare_station=Page(WELFARE_STATION_CHECK)
@@ -226,7 +232,7 @@ page_welfare_station.link(WELFARE_STATION_EXIT,destination=page_main)
 #Recruit
 page_recruit=Page(RECRUIT_CHECK)
 page_main.link(MAIN_GOTO_RECRUIT,destination=page_recruit)
-page_recruit.link(RECRUIT_EXIT,destination=page_main)
+page_recruit.link(CLOSE,destination=page_main)
 #BattleOrder
 page_battle_order=Page(BATTLE_ORDER_CHECK)
 page_main.link(MAIN_GOTO_BATTLE_ORDER,destination=page_battle_order)
@@ -242,6 +248,7 @@ page_chongzhi.link(CLOSE,destination=page_main)
 page_ren_zhe_tiao_zhan=Page(REN_ZHE_TIAO_ZHAN_CHECK)
 page_mi_jing=Page(MI_JING_CHECK)
 page_mi_jing_room=Page(MI_JING_ROOM_CHECK)
+page_main.link(MAIN_GOTO_REN_ZHE_TIAO_ZHAN,destination=page_ren_zhe_tiao_zhan)
 page_ren_zhe_tiao_zhan.link(REN_ZHE_TIAO_ZHAN_GOTO_MI_JING,destination=page_mi_jing)
 page_mi_jing.link(MI_JING_CREATE_ROOM,destination=page_mi_jing_room)
 page_mi_jing_room.link(CLOSE,destination=page_mi_jing)
@@ -249,16 +256,19 @@ page_mi_jing.link(CLOSE,destination=page_ren_zhe_tiao_zhan)
 page_ren_zhe_tiao_zhan.link(REN_ZHE_TIAO_ZHAN_CLOSE,destination=page_main)
 #JiFenSai
 page_ji_fen_sai=Page(JI_FEN_SAI_CHECK)
+page_main.link(MAIN_GOTO_JI_FEN_SAI,destination=page_ji_fen_sai)
 page_ji_fen_sai.link(CLOSE,destination=page_main)
 #Store
 page_store=Page(STORE_CHECK)
 page_main.link(MAIN_GOTO_STORE,destination=page_store)
 page_store.link(CLOSE,destination=page_main)
-
+#Drama
+page_drama=Page(DRAMA_CHECK)
+page_drama.link(CLOSE,destination=page_main)
 #Activity
 page_activity=Page(ACTIVITY_CHECK)
 page_main.link(MAIN_GOTO_ACTIVITY,destination=page_activity)
-page_activity.link(ACTIVITY_EXIT,destination=page_main)
+page_activity.link(CLOSE,destination=page_main)
 #钓鱼大师
 page_diao_yu_da_shi=Page(DIAO_YU_DA_SHI_CHECK)
 page_main.link(MAIN_GOTO_DIAO_YU_DA_SHI,destination=page_diao_yu_da_shi)

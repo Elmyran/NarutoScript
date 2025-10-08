@@ -7,7 +7,7 @@ from module.base.utils import color_similarity_2d
 from module.exception import GameStuckError
 
 from tasks.base.assets.assets_base_popup import EXIT_ORGANIZATION_RED_ENVELOPE
-from tasks.base.page import page_main
+from tasks.base.page import page_organization_panel
 from tasks.base.task_tab.draglist import TASK_TAB_LIST
 from tasks.base.task_tab.task_keyword import OrganizationKeyword
 from tasks.base.ui import UI
@@ -23,14 +23,12 @@ from tasks.organization.util import RewardUtils
 class Pray(UI,RewardUtils):
     def handle_Organization_Pray(self):
         self.device.click_record_clear()
-        self.ui_ensure(page_main)
-        if not TASK_TAB_LIST.search_rows(main=self,keyword=OrganizationKeyword):
-            raise GameStuckError(' Organization Not Found')
+        self.ui_ensure(page_organization_panel)
         self._enter_pray_panel()
         self.pray()
         self.pray_box_claim()
         self._pray_box_replacement()
-        self.ui_goto_main()
+       
 
 
     def _enter_pray_panel(self):

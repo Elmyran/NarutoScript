@@ -10,9 +10,8 @@ from module.logger import logger
 from module.ocr.ocr import Digit
 from tasks.base.assets.assets_base_move import CHOOSE_RIGHT
 from tasks.base.assets.assets_base_skill import *
-from tasks.base.page import page_main, page_fortress_select
-from tasks.base.task_tab.draglist import TASK_TAB_LIST
-from tasks.base.task_tab.task_keyword import OrganizationKeyword
+from tasks.base.page import page_organization, page_fortress_select
+
 
 from tasks.duel.assets.assets_duel import DUEL_EXCEPTION, DUEL_FIGHT_SUCCESS, DUEL_FIGHT_FAIL, \
     DUEL_FIGHT_END
@@ -53,14 +52,11 @@ class Fortress(GameControl):
         return True
     def handle_organization_fortress(self):
         self.device.click_record_clear()
-        self.ui_ensure(page_main)
-        if not TASK_TAB_LIST.search_rows(main=self,keyword=OrganizationKeyword):
-            raise GameStuckError(' Organization Not Found')
-        self._organization_page_enter()
+
         self.ui_ensure(page_fortress_select)
         self._fortress_select()
         self._fortress_goto_fight()
-        self.ui_goto_main()
+
     def _organization_page_enter(self):
         time = Timer(10, count=10).start()
         for _ in self.loop():

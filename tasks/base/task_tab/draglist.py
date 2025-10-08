@@ -6,7 +6,7 @@ from module.logger import logger
 from module.ocr.keyword import Keyword
 from module.ui.draggable_list import DraggableList
 from tasks.base.assets.assets_base_page import MAIN_GOTO_TASK_SEARCH_AREA, JI_FEN_SAI_CHECK, REN_ZHE_TIAO_ZHAN_CHECK
-from tasks.base.task_tab.task_keyword import TaskTab
+from tasks.base.task_tab.task_keyword import DuelKeyword, FengRaoKeyword, JiFenSaiKeyword, LeaderBoardKeyword, MissionKeyword, OrganizationKeyword, RenZheTiaoZhanKeyword, SquadRaidKeyword, TaskTab, TrailKeyword
 from tasks.base.task_tab.ocr import TaskTabOcr
 from tasks.duel.assets.assets_duel import DUEL_CHECK
 from tasks.fengrao.assets.assets_fengrao import FENG_RAO_CHECK
@@ -15,7 +15,7 @@ from tasks.mission.assets.assets_mission import MISSION_CHECK
 from tasks.organization.assets.assets_organization_pray import  ORGANIZATION_PANEL
 from tasks.squadraid.assets.assets_squadraid_fight import SQUAD_RAID_CHECK
 from tasks.trail.assets.assets_trail import TRAIL_SURVIVAL_CHECK
-from tasks.base.page import page_main
+from tasks.base.page import *
 from tasks.base.popup import POPUP_DUEL_FAME
 
 
@@ -39,6 +39,29 @@ class DraggableTaskTabList(DraggableList):
         self.cur_max = max(indexes)
         logger.attr(self.name, f'{self.cur_min} - {self.cur_max}')
     def search_rows(self, main, keyword):
+        if TASK_TAB_LIST.insight_row(keyword, main=main):
+            logger.info('Successfully navigated to ' + keyword.name + ' area')
+            if TASK_TAB_LIST.select_row(keyword, main=main):
+                logger.info('Successfully selected ' + keyword.name + ' tab')
+                return True
+            else:
+                logger.error(f'Failed to select {keyword.name} tab')
+                return False
+        else:
+            logger.error(f'Failed to find {keyword.name} in task list')
+            return False
+    def search_rows(self, main, page:Page):
+        pages={page_organization_panel:OrganizationKeyword,
+               page_ji_fen_sai:JiFenSaiKeyword,
+               page_trail:TrailKeyword,
+               page_feng_rao:FengRaoKeyword,
+               page_mission:MissionKeyword,
+               page_leader_board:LeaderBoardKeyword,
+               page_duel:DuelKeyword,
+               page_ren_zhe_tiao_zhan:RenZheTiaoZhanKeyword,
+               page_squad:SquadRaidKeyword
+        }
+        keyword=pages[page]
         if TASK_TAB_LIST.insight_row(keyword, main=main):
             logger.info('Successfully navigated to ' + keyword.name + ' area')
             if TASK_TAB_LIST.select_row(keyword, main=main):

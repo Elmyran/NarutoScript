@@ -116,6 +116,17 @@ MI_JING_ROOM_CHECK = ButtonWrapper(
     name='MI_JING_ROOM_CHECK',
     cn=Button(
         file='./assets/cn/ren_zhe_tiao_zhan/MI_JING_ROOM_CHECK.png',
+        area=(873, 627, 931, 682),
+        search=(853, 607, 951, 702),
+        color=(82, 106, 107),
+        button=(873, 627, 931, 682),
+    ),
+    en=None,
+)
+MI_JING_ROOM_START_FIGHT = ButtonWrapper(
+    name='MI_JING_ROOM_START_FIGHT',
+    cn=Button(
+        file='./assets/cn/ren_zhe_tiao_zhan/MI_JING_ROOM_START_FIGHT.png',
         area=(1125, 530, 1258, 711),
         search=(1105, 510, 1278, 720),
         color=(146, 111, 71),

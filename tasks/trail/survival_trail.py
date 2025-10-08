@@ -2,7 +2,7 @@ from module.base.timer import Timer
 from module.exception import GameStuckError
 from module.logger import logger
 from module.ocr.ocr import Digit
-from tasks.base.page import page_main
+from tasks.base.page import page_survival_trail
 from tasks.base.task_tab.draglist import TASK_TAB_LIST
 from tasks.base.task_tab.task_keyword import TrailKeyword
 from tasks.base.ui import UI
@@ -13,12 +13,9 @@ from tasks.trail.assets.assets_trail_survival import *
 class SurvivalTrail(UI):
     def handle_survival_trail (self):
         self.device.click_record_clear()
-        self.ui_ensure(page_main)
-        if not TASK_TAB_LIST.search_rows(main=self,keyword=TrailKeyword):
-            raise GameStuckError(' Trail Not Found')
-        self._enter_survival()
+        self.ui_ensure(page_survival_trail)
         self._mop_up()
-        self.ui_goto_main()
+
     def _enter_survival(self):
         time = Timer(10, count=10).start()
         for _ in self.loop():
