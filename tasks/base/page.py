@@ -10,7 +10,7 @@ from tasks.duel.assets.assets_duel_ninjutsu import *
 from tasks.freebies.assets.assets_freebies_information_club import *
 from tasks.freebies.assets.assets_freebies_leaderboard import *
 from tasks.organization.assets.assets_organization import ORGANIZATION_PANEL_GOTO_PAGE
-from tasks.organization.assets.assets_organization_akatsuki import AKATSUKI_CHECK
+from tasks.organization.assets.assets_organization_akatsuki import AKATSUKI_CHECK, AKATSUKI_REWARD_CHECK
 from tasks.organization.assets.assets_organization_battlefield import *
 from tasks.organization.assets.assets_organization_fortress import *
 from tasks.organization.assets.assets_organization_pan_ren import PAN_REN_CHECK
@@ -137,6 +137,8 @@ page_pray.link(CLOSE,destination=page_organization)
 page_organization.link(CLOSE,destination=page_main)
 #Akatsuki
 page_akatsuki=Page(AKATSUKI_CHECK)
+page_akatsuki_reward=Page(AKATSUKI_REWARD_CHECK)
+page_akatsuki_reward.link(AKATSUKI_REWARD_CHECK,destination=page_akatsuki)
 page_akatsuki.link(CLOSE,destination=page_organization)
 # Fortress
 page_fortress_type=Page(FORTRESS_LOCAL_SELECT)
@@ -149,7 +151,6 @@ page_fortress_select.link(CLOSE,destination=page_organization)
 #BattleField
 page_battle_field_select=Page(BATTLE_FIELD_SELECT_CHECK)
 page_organization.link(ORGANIZATION_GOTO_BATTLE_FIELD,destination=page_battle_field_select)
-
 page_battle_field=Page(BATTLE_FIELD_CHECK)
 page_battle_field.link(CLOSE,destination=page_organization)
 #PanRen

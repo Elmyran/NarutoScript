@@ -43,7 +43,7 @@ AKATSUKI_REWARD_CHECK = ButtonWrapper(
         area=(125, 52, 351, 166),
         search=(105, 32, 371, 186),
         color=(153, 90, 34),
-        button=(125, 52, 351, 166),
+        button=(1058, 99, 1137, 167),
     ),
     en=None,
 )
