@@ -9,12 +9,10 @@ class StoreDigitCounter(DigitCounter):
     def after_process(self, result):  
         return super().after_process(result)
 
-class StorePriceDigit(ONNXPaddleOcr, OcrWhiteLetterOnComplexBackground,Digit):  
+class StorePriceDigit(ONNXPaddleOcr,Digit):  
 
       
-    def pre_process(self, result):  
-        result = OcrWhiteLetterOnComplexBackground.pre_process(self, result)
-        return result
+
     def after_process(self, result):  
         result=result.replace('A', '')
         result = re.sub(r'^11(000)$', r'1\1', result) 
