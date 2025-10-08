@@ -1,4 +1,5 @@
 
+from ast import Return
 import numpy as np
 import cv2
 from module.base.button import Button, ClickButton
@@ -59,6 +60,7 @@ class StoreSelector:
         
         
     def purchase_single_item(self, item):
+        pre_currency=self.currency
         if not item : 
             return False
         if item.amount==0:  
@@ -67,7 +69,6 @@ class StoreSelector:
         if item.amount==1:
             self.ocr_currency(self.relative_areas['currency_area'])
             click_interval=Timer(1).start()
-            pre_currency=self.currency
             for _ in self.main.loop():  
                 self.ocr_currency(self.relative_areas['currency_area'])
                 if self.currency<item.price :
@@ -82,10 +83,18 @@ class StoreSelector:
             return False
         logger.info(f"Purchasing item: {item}")
         click_interval=Timer(1).start()
+        purchase_times=0
         for _ in self.main.loop():
             if self.main.appear(PURCHASE_POPUP):
                 logger.info("Detected purchase popup.")
                 break
+            if self.currency!=pre_currency:
+                self.ocr_currency(self.relative_areas['currency_area'])
+                purchase_times+=1
+                pre_currency=self.currency
+                if purchase_times>=item.amount:  
+                    return True
+                continue
             if click_interval.reached():
                 self.main.device.click(item)
                 click_interval.reset()
