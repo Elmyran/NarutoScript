@@ -20,7 +20,6 @@ class DuelDaily(UI):
             self.config.stored.CurrentVictoryCount.clear()
         self.device.click_record_clear()
         self.device.stuck_record_clear()
-       
         self.ui_ensure(page_ninjutsu)
         for _ in  self.loop():
             res=self._duel_task_detect()
@@ -105,6 +104,7 @@ class DuelDaily(UI):
         return True
 
     def start_fight(self):
+
         self.device.click_record_clear()
         for _ in self.loop():
             if self.appear(DUEL_ROUND_SWITCH):

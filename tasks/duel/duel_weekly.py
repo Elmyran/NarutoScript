@@ -17,7 +17,6 @@ class DuelWeekly(UI):
     def handle_duel_weekly(self):
         self.device.click_record_clear()
         self.device.stuck_record_clear()
-  
         self.ui_ensure(page_ninjutsu)
         #上一局输赢
         success=True
@@ -65,10 +64,10 @@ class DuelWeekly(UI):
                 return False
             if self.appear_then_click(DUEL_TASK,interval=1):
                 continue
+        ocr=Digit(DUEL_TASK_WINS_NUMBER)
         for _ in self.loop():
             if time.reached():
                 raise GameStuckError(' duel task detected stuck')
-            ocr=Digit(DUEL_TASK_WINS_NUMBER)
             res=ocr.ocr_single_line(self.device.image)
             if res is not None and res!=0:
                 self.config.stored.CurrentVictoryCount.value=res
@@ -97,6 +96,7 @@ class DuelWeekly(UI):
                 continue
 
     def start_fight(self):
+
         self.device.click_record_clear()
         self.device.stuck_record_clear()
         for _ in self.loop():

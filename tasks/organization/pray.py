@@ -28,7 +28,7 @@ class Pray(UI,RewardUtils):
         self.pray()
         self.pray_box_claim()
         self._pray_box_replacement()
-        self.ui_goto_main()
+       
 
 
     def _enter_pray_panel(self):
