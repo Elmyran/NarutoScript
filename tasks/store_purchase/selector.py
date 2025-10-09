@@ -1,5 +1,4 @@
 
-from ast import Return
 import numpy as np
 import cv2
 from module.base.button import Button, ClickButton
@@ -7,10 +6,9 @@ from module.base.timer import Timer
 from module.base.utils.utils import area_offset, crop, rgb2gray
 from module.exception import ScriptError
 from module.logger import logger
-from module.ocr.ocr import Digit, DigitCounter, Ocr
-from tasks.base.assets.assets_base_page import FULL_SCREEN, STORE_CHECK
-from tasks.store_purchase.assets.assets_store_purchase import BUY_BUTTON, BUY_REACH_TOP, PURCHASE_POPUP, STORE_ITEM_PURCHASE_AMOUNT_AREA
-from tasks.store_purchase.ocr import StoreDetailOcr, StoreDigitCounter, StorePriceDigit
+from tasks.base.assets.assets_base_page import  STORE_CHECK
+from tasks.store_purchase.assets.assets_store_purchase import BUY_BUTTON, BUY_REACH_TOP, PURCHASE_POPUP
+from tasks.store_purchase.ocr import  StoreDigitCounter, StorePriceDigit
 
 class StoreSelector:
     def __init__(self, main):
@@ -98,12 +96,9 @@ class StoreSelector:
             if click_interval.reached():
                 self.main.device.click(item)
                 click_interval.reset()
-        amount_ocr=StorePriceDigit(STORE_ITEM_PURCHASE_AMOUNT_AREA)
+        
         for _ in self.main.loop():
-            amount=amount_ocr.ocr_single_line(self.main.device.image)
-            if not amount:
-                continue
-            if amount==item.amount or self.main.appear(BUY_REACH_TOP):
+            if self.main.appear(BUY_REACH_TOP):
                 break
             if self.main.appear_then_click(PURCHASE_POPUP,interval=2):  
                 continue
