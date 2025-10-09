@@ -42,6 +42,11 @@ class Equipment(UI):
             self._synthesized_and_equipped()
             self._equipment_part_red_dot_handle()
             self.device.stuck_timer=Timer(60,count=60).start()
+        self.ui_goto_main()
+        current,remain,total=ocr.ocr_single_line(self.device.image)
+        if  total!=0:
+            self.config.stored.TiLi.value=current
+            
 
 
 

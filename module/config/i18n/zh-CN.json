@@ -514,7 +514,7 @@
       "help": ""
     },
     "SkipNormalRecruit": {
-      "name": "跳过免费招募",
+      "name": "跳过普通招募",
       "help": ""
     }
   },
