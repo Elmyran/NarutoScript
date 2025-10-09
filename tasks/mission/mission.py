@@ -104,7 +104,9 @@ class Mission(UI):
             if self.appear(TASK_REFRESH_TIMES_SHORTAGE):
                 return False
             # todo 超影免费刷新button
-    def character_select(self):  
+    def character_select(self):
+        character_first_click_interval = Timer(1).start()  
+        character_auto_select_interval = Timer(1).start()
         for _ in self.loop():  
             if THE_TASKBAR_IS_FULL.match_template(self.device.image):  
                 logger.info('Taskbar is full')  
@@ -112,17 +114,22 @@ class Mission(UI):
             if self.appear(MISSION_CHECK):  
                 logger.info('Mission check appeared')  
                 return True  
+            if self.appear(CHARACTER_SELECTED_AUTO)  and CHARACTER_UNSELECTED.match_template(self.device.image, direct_match=True): 
+                if character_auto_select_interval.reached():  
+                    self.device.click(CHARACTER_SELECTED_AUTO)  
+                    character_auto_select_interval.reset()  
+                    continue
                 
 
-            if self.appear(CHARACTER_SELECTED_AUTO)  and CHARACTER_UNSELECTED.match_template(self.device.image, direct_match=True): 
-                self.device.click(CHARACTER_SELECTED_AUTO)  
-                continue  
             if CHARACTER_SELECTED.match_template(self.device.image, direct_match=True):  
                 if self.appear_then_click(TASK_ACCEPT, interval=2):  
                     continue
             if CHARACTER_UNSELECTED.match_template(self.device.image, direct_match=True):  
-                self.device.click(CHARACTER_FIRST)  
-                continue  
+                if character_first_click_interval.reached():  
+                    self.device.click(CHARACTER_FIRST)  
+                    character_first_click_interval.reset()  
+                    continue
+              
             
     def _mission_reward_claim(self):
         ocr = MissionOcr(MISSION_TASK_CLAIMED_LIST, lang='cn')

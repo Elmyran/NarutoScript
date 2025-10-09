@@ -47,7 +47,12 @@ class StoreSelector:
                 print(f"找不到名为 {name} 的 keyword 实例")
         
         logger.info(f"Purchase priority: {priority_keyword}")
+        skip_first_screenshot = True  
         for keyword in priority_keyword:  
+            if skip_first_screenshot:  
+                skip_first_screenshot = False  
+            else:  
+                self.main.device.screenshot()  
             if not self.search(keyword): 
                 logger.warning(f"No item found for {keyword.cn}") 
                 continue
@@ -116,24 +121,27 @@ class StoreSelector:
                 area=price_area,
                 name='ItemPriceDigit'
         ))
-        
         amount_ocr=StoreDigitCounter(
              ClickButton(
                 area=amount_area,
                 name='ItemAmountDigit'
                 )
         )
-        price=99999
+        price=0
         total=0
+        timeout=Timer(1,3).start()
         for _ in self.main.loop():
+            if timeout.reached():  
+                break
             if price!=0 and total!=0:  
                 break
-            price=price_ocr.ocr_single_line(self.main.device.image)
+            price_detected=price_ocr.ocr_single_line(self.main.device.image)
+            if price_detected!=0:  
+                price=price_detected
             current,remain,total=amount_ocr.ocr_single_line(self.main.device.image)
-        
-        if total!=0:
+        if total!=0 and price!=0:
             return price,current,remain,total
-        return price,0,0,0
+        return 99999,0,0,0
     def ocr_currency(self,area):  
         currency_ocr=StorePriceDigit(
             ClickButton(

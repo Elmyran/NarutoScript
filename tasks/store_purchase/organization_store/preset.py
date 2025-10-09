@@ -45,7 +45,7 @@ class MeritExchangeSelector(StoreSelector):
         self.relative_areas = {    
         'buy_button_area': (x1-20, y1+172, x2+20, y2+172),    
         'soldout_check_area': (x1, y1, x2, y2),    
-        'price_area': (x1-20, y1+172, x2+20, y2+172),    
+        'price_area': (x1-20, y1+172, x2+20, y2+180),    
         'click_area': (x1-20, y1+172, x2+20, y2+172) ,
         'amount_area': (x1, y1+123, x2+80, y2+123),
         'currency_area': MERIT_AREA.area,

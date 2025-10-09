@@ -50,7 +50,7 @@ class ONNXPaddleOcr:
         if res:
             result=self.format_result(res[0].ocr_text)
             return result
-        return res
+        return ''
         
     def ocr_multiple_lines(self, img, det=True, rec=True, cls=True, direct_ocr=False): 
         start_time = time.time()
