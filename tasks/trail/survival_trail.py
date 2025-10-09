@@ -14,27 +14,12 @@ class SurvivalTrail(UI):
     def handle_survival_trail (self):
         self.device.click_record_clear()
         self.ui_ensure(page_survival_trail)
+        self.handle_teleport()
         self._mop_up()
-
-    def _enter_survival(self):
-        time = Timer(10, count=10).start()
+        self._mop_up_check()
+    def handle_teleport(self):
+        logger.info('handle teleport')
         for _ in self.loop():
-            if time.reached():
-                raise GameStuckError("Survival Trial Stucked")
-            if self.appear(SURVIVAL_PAGE_CHECK):
-                break
-            if self.appear(TRAIL_SURVIVAL_CHECK):
-                self.device.click(TRAIL_SURVIVAL_CHECK)
-                continue
-            if self.appear(SURVIVAL_TELEPORT):
-                break
-        logger.info(f"survival trial entered")
-
-    def _mop_up(self):
-        time = Timer(40, count=60).start()
-        for _ in self.loop():
-            if time.reached():
-                raise GameStuckError("Survival Trial Stucked")
             if self.appear_then_click(SURVIVAL_TELEPORT,interval=0):
                 continue
             if self.appear_then_click(SURVIVAL_CHAO_YING_CONFIRM,interval=0):
@@ -44,9 +29,9 @@ class SurvivalTrail(UI):
             if self.appear(SURVIVAL_HAVE_DONE):
                 break
 
+    def _mop_up(self):
+        logger.info('start mop up')
         for _ in self.loop():
-            if time.reached():
-                raise GameStuckError("Survival Trial Stucked")
             if self.appear(SURVIVAL_HAVE_DONE):
                 break
             if self.appear(SURVIVAL_MOP_UP_DONE):
@@ -66,25 +51,22 @@ class SurvivalTrail(UI):
             if self.appear(SURVIVAL_CHECK):
                 if self.appear_then_click(SURVIVAL_MOP_UP_BUTTON,interval=2):
                     continue
-
+        return True
+    def _mop_up_check(self):
         for _ in self.loop():
-            if time.reached():
-                raise GameStuckError("Survival Trial Stucked")
             ocr=Digit(SURVIVAL_MOP_UP_TIMES,lang='cn')
             times=ocr.ocr_single_line(self.device.image)
-            print(times)
+
             if times==0:
                 self.config.SurvivalTrail_SurvivalTrialResetTimes=times
                 break
             elif times==1:
                 self.config.SurvivalTrail_SurvivalTrialResetTimes=times
                 if self._survival_reset():
+                    logger.info('survival trial reset')
                     self._mop_up()
                 else :
                     break
-
-        return True
-
     def _survival_reset(self):
         time=Timer(10, count=20).start()
         for _ in self.loop():
@@ -92,9 +74,8 @@ class SurvivalTrail(UI):
                 return False
             if self.appear(SURVIVAL_RESET_FAILED):
                 return False
-            if self.appear_then_click(SURVIVAL_RESET_BUTTON):
+            if self.appear_then_click(SURVIVAL_RESET_BUTTON,interval=2):
                 continue
         return True
-
 
 

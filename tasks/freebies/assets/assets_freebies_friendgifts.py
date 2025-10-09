@@ -82,6 +82,13 @@ GIFTS_CLAIM_CHECK = ButtonWrapper(
             color=(68, 72, 73),
             button=(296, 335, 983, 383),
         ),
+        Button(
+            file='./assets/cn/freebies/friendgifts/GIFTS_CLAIM_CHECK.3.png',
+            area=(498, 338, 760, 379),
+            search=(478, 318, 780, 399),
+            color=(85, 88, 93),
+            button=(498, 338, 760, 379),
+        ),
     ],
     en=None,
 )
