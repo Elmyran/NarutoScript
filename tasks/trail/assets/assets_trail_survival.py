@@ -100,6 +100,17 @@ SURVIVAL_MOP_UP_DONE = ButtonWrapper(
     ),
     en=None,
 )
+SURVIVAL_MOP_UP_FAILED = ButtonWrapper(
+    name='SURVIVAL_MOP_UP_FAILED',
+    cn=Button(
+        file='./assets/cn/trail/survival/SURVIVAL_MOP_UP_FAILED.png',
+        area=(495, 340, 774, 380),
+        search=(475, 320, 794, 400),
+        color=(76, 80, 81),
+        button=(495, 340, 774, 380),
+    ),
+    en=None,
+)
 SURVIVAL_MOP_UP_RUNNING = ButtonWrapper(
     name='SURVIVAL_MOP_UP_RUNNING',
     cn=Button(

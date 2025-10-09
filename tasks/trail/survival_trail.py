@@ -50,7 +50,9 @@ class SurvivalTrail(UI):
             if self.appear(SURVIVAL_HAVE_DONE):
                 break
             if self.appear(SURVIVAL_MOP_UP_DONE):
-               break
+                break
+            if self.appear(SURVIVAL_MOP_UP_FAILED):
+                break
             if self.appear_then_click(SURVIVAL_MOP_UP_CHECKPOINT_VICTORY,interval=1):
                 continue
             if self.appear(SURVIVAL_MOP_UP_RUNNING):
