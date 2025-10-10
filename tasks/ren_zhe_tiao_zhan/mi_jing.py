@@ -85,30 +85,27 @@ class MiJing(UI):
 
     def _mi_jing_fight(self):
         battle=AutoBattle(config=self.config,device=self.device)
-        battle.start_services()
-        try:
-            for _ in self.loop():
-                self.device.click_record_remove(MI_JING_REWARD_EXIT)
-                self.device.click_record_remove(MI_JING_SUCCESS)
-                MI_JING_REWARD_EXIT.load_search(MI_JING_REWARD_AREA.area)
-                if self.appear(MI_JING_REWARD_EXIT,interval=1):
-                    MI_JING_REWARD_EXIT.clear_offset()
-                    self.device.click(MI_JING_REWARD_EXIT)
+        for _ in self.loop():
+            self.device.click_record_remove(MI_JING_REWARD_EXIT)
+            self.device.click_record_remove(MI_JING_SUCCESS)
+            MI_JING_REWARD_EXIT.load_search(MI_JING_REWARD_AREA.area)
+            if self.appear(MI_JING_REWARD_EXIT,interval=1):
+                MI_JING_REWARD_EXIT.clear_offset()
+                self.device.click(MI_JING_REWARD_EXIT)
+                continue
+            MI_JING_SUCCESS.load_search(MI_JING_REWARD_AREA.area)
+            if self.appear(MI_JING_SUCCESS,interval=1):
+                MI_JING_SUCCESS.clear_offset()
+                self.device.click(MI_JING_SUCCESS)
+                continue
+            if self.appear(MI_JING_ROOM_CHECK):
+                res=self._select_mi_jing()
+                if res=='End':
+                    break
+                elif res==False:
                     continue
-                MI_JING_SUCCESS.load_search(MI_JING_REWARD_AREA.area)
-                if self.appear(MI_JING_SUCCESS,interval=1):
-                    MI_JING_SUCCESS.clear_offset()
-                    self.device.click(MI_JING_SUCCESS)
-                    continue
-                if self.appear(MI_JING_ROOM_CHECK):
-                    res=self._select_mi_jing()
-                    if res=='End':
-                        break
-                    elif res==False:
-                        continue
-                    elif res==True:
-                        battle.run()
-        finally:
-            battle.stop_services()
+                elif res==True:
+                    battle.run()
+       
 
 
