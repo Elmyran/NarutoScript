@@ -135,6 +135,17 @@ EQUIPMENT_PART_DETAIL_RED_DOT = ButtonWrapper(
     ),
     en=None,
 )
+EQUIPMENT_PART_PROMOTION = ButtonWrapper(
+    name='EQUIPMENT_PART_PROMOTION',
+    cn=Button(
+        file='./assets/cn/tili/equipment/EQUIPMENT_PART_PROMOTION.png',
+        area=(1103, 525, 1236, 572),
+        search=(1083, 505, 1256, 592),
+        color=(215, 141, 13),
+        button=(1103, 525, 1236, 572),
+    ),
+    en=None,
+)
 EQUIPMENT_PART_RED_DOT = ButtonWrapper(
     name='EQUIPMENT_PART_RED_DOT',
     cn=Button(
@@ -154,6 +165,17 @@ EQUIPMENT_PART_STUFF_AREA = ButtonWrapper(
         search=(673, 380, 1264, 529),
         color=(70, 59, 38),
         button=(693, 400, 1244, 509),
+    ),
+    en=None,
+)
+EQUIPMENT_PART_UPGRADE = ButtonWrapper(
+    name='EQUIPMENT_PART_UPGRADE',
+    cn=Button(
+        file='./assets/cn/tili/equipment/EQUIPMENT_PART_UPGRADE.png',
+        area=(1100, 270, 1236, 319),
+        search=(1080, 250, 1256, 339),
+        color=(205, 133, 14),
+        button=(1100, 270, 1236, 319),
     ),
     en=None,
 )
