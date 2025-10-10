@@ -121,12 +121,14 @@ class StoreSelector:
                 area=price_area,
                 name='ItemPriceDigit'
         ))
+        logger.info(f'Item Price Area: {price_area}')
         amount_ocr=StoreDigitCounter(
              ClickButton(
                 area=amount_area,
                 name='ItemAmountDigit'
                 )
         )
+        logger.info(f'Item Amount Area: {amount_area}')
         price=0
         total=0
         timeout=Timer(1,3).start()

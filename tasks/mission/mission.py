@@ -111,6 +111,9 @@ class Mission(UI):
             if THE_TASKBAR_IS_FULL.match_template(self.device.image):  
                 logger.info('Taskbar is full')  
                 return False  
+            if CHARACTER_SELECTED.match_template(self.device.image, direct_match=True):  
+                if self.appear_then_click(TASK_ACCEPT, interval=1):  
+                    continue
             if self.appear(MISSION_CHECK):  
                 logger.info('Mission check appeared')  
                 return True  
@@ -118,17 +121,14 @@ class Mission(UI):
                 if character_auto_select_interval.reached():  
                     self.device.click(CHARACTER_SELECTED_AUTO)  
                     character_auto_select_interval.reset()  
-                    continue
-                
-
-            if CHARACTER_SELECTED.match_template(self.device.image, direct_match=True):  
-                if self.appear_then_click(TASK_ACCEPT, interval=2):  
-                    continue
-            if CHARACTER_UNSELECTED.match_template(self.device.image, direct_match=True):  
+                    continue  
+            elif CHARACTER_UNSELECTED.match_template(self.device.image, direct_match=True):  
                 if character_first_click_interval.reached():  
                     self.device.click(CHARACTER_FIRST)  
                     character_first_click_interval.reset()  
                     continue
+            
+            
               
             
     def _mission_reward_claim(self):
