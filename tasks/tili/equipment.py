@@ -27,10 +27,12 @@ class Equipment(UI):
                 return False
         self._equipment_enter()
         self.device.stuck_timer=Timer(300,count=300).start()
-
+        coins_sufficient=True
         try:
             for _ in self.loop():
-                self._equipment_part_red_dot_handle()
+                if coins_sufficient:
+                    coins_sufficient=self._equipment_part_red_dot_handle()
+                self._synthesized_and_equipped()
                 self._select_equipment_part()
                 self._synthesized_and_equipped()
                 self._select_equipment_part()
@@ -72,16 +74,17 @@ class Equipment(UI):
             if time.reached():
                 break
             if self.appear(POPUP_CLOSE, interval=0):
-                break
-            EQUIPMENT_PART_DETAIL_RED_DOT.load_search(EQUIPMENT_PART_DETAIL_AREA.area)
+                return False
+            EQUIPMENT_PART_DETAIL_RED_DOT.load_search(EQUIPMENT_PART_UPGRADE.area)
             if self.appear_then_click(EQUIPMENT_PART_DETAIL_RED_DOT, interval=1):
                 time.reset()
                 continue
-            EQUIPMENT_PART_RED_DOT.load_search(EQUIPMENT_PART_AREA.area)
-            if self.appear_then_click(EQUIPMENT_PART_RED_DOT, interval=1):
-                time.reset()
-                continue
-
+            if self.appear(EQUIPMENT_PART_PROMOTION):
+                EQUIPMENT_PART_RED_DOT.load_search(EQUIPMENT_PART_PROMOTION.area)
+                if self.appear_then_click(EQUIPMENT_PART_RED_DOT, interval=1):
+                    time.reset()
+                    continue
+        return True
     def _select_equipment_part(self):
         self.ui_ensure(page_equipment)
         self.device.click(EQUIPMENT_KNIFE)
