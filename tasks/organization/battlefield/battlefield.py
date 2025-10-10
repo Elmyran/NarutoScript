@@ -1,26 +1,23 @@
-from re import S
-from sympy import FU
+
 from module.base.timer import Timer
 from module.config.utils import get_nearest_weekday_date, get_server_weekday, server_time_offset
-from module.ocr.ocr import Ocr
 from module.exception import GameStuckError
 from module.logger import logger
 from module.ocr.ocr import Digit
 from tasks.base.assets.assets_base_character import *
-from tasks.base.page import page_main, page_character_select, page_battle_field_select, page_battle_field
-from tasks.base.task_tab.draglist import TASK_TAB_LIST
-from tasks.base.task_tab.task_keyword import OrganizationKeyword
+from tasks.base.page import  page_character_select, page_battle_field_select, page_battle_field
 from tasks.base.ui import UI
+import cv2
 from tasks.organization.assets.assets_organization_battlefield import *
 from tasks.organization.assets.assets_organization_fortress import ORGANIZATION_MAIN_PAGE, ORGANIZATION_ENTER
-from tasks.organization.assets.assets_organization_pan_ren import CHARACTER_SELECT_CONFIRM
 from tasks.organization.assets.assets_organization_pray import ORGANIZATION_PANEL
+from tasks.organization.battlefield.detecor import CharacterCircleDetector
 from tasks.organization.battlefield.switch import CHARACTER_TAB
 from toolkit.Lib.datetime import datetime
 from tasks.organization.battlefield.name_keywords import AccountNameKeyword
 from tasks.duel.assets.assets_duel import DUEL_FIGHT_FAIL, DUEL_IS_IN_FIGHT
 from tasks.base.assets.assets_base_page import FULL_SCREEN
-class BattleField(UI):
+class BattleField(UI,CharacterCircleDetector):
     def run(self):
         diff = server_time_offset()
         server_now = datetime.now() - diff
@@ -142,7 +139,7 @@ class BattleField(UI):
         OCR=Digit(BATTLE_FIELD_CREDITS)
         ocr_interval=Timer(10).start()
         occupied=False
-        ocr=Ocr(FULL_SCREEN)
+
         for _ in self.loop():
             if self.appear(BATTLE_FIELD_FINISHED):
                 break
@@ -150,10 +147,10 @@ class BattleField(UI):
                 continue
             if self.appear_then_click(DUEL_FIGHT_FAIL,interval=0):
                 logger.info('Battle Field Fight End Detected')
-                occupied=False
                 continue
             if self.appear_then_click(CHARACTER_CONFIRM,interval=0):
                 logger.info('Character Confirm Detected')
+                occupied=False
                 continue
             if self.appear(BATTLE_FIELD_CHECK) and ocr_interval.reached():
                 credits=OCR.ocr_single_line(self.device.image)
@@ -162,13 +159,16 @@ class BattleField(UI):
                     logger.info('Credits reached 1600')
                     break
                 ocr_interval.reset()
-            if occupied==False and ocr.matched_ocr(self.device.image,keyword_classes=AccountNameKeyword,direct_ocr=True):
+            if occupied==False and self.detect_character_circle(self.device.image):
                 occupied=True
                 logger.info('Occupied Detected')
                 continue
-            BATTLE_FIELD_EMPTY.load_search(FULL_SCREEN.area)
-            if occupied==False and self.appear_then_click(BATTLE_FIELD_EMPTY,interval=0):
-                continue
+            
+            if occupied==False :
+                image = cv2.bitwise_and(self.device.image, self.device.image, mask=self.mask_interact) 
+                if BATTLE_FIELD_EMPTY.match_template(image,direct_match=True):
+                    self.device.click(BATTLE_FIELD_EMPTY)
+                    continue
             
 
     def _handle_reward(self):
@@ -186,3 +186,5 @@ class BattleField(UI):
                 continue
             if self.appear_then_click(BATTLE_FIELD_REWARD_CLAIM_BUTTON,interval=1):
                 continue
+
+
