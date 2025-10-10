@@ -1,17 +1,12 @@
+
 import numpy as np
 import cv2
-import time
 import os
-import pyscrcpy
-import adbutils
-
 from module.base.utils import image_size
-from module.device.device import Device
 from module.logger import logger
 from module.base.timer import Timer
 from module.ocr.yolomodel import YOLO_MODEL
-from tasks.base.assets.assets_base_popup import GET_REWARD
-from tasks.ren_zhe_tiao_zhan.joystick import GameControl, JoystickContact
+from tasks.ren_zhe_tiao_zhan.joystick import GameControl
 from tasks.ren_zhe_tiao_zhan.assets.assets_ren_zhe_tiao_zhan import MI_JING_SUCCESS, MI_JING_REWARD_EXIT, \
     MI_JING_REWARD_AREA, MI_JING_FAIL, MI_JING_ROOM_CHECK
 
@@ -33,30 +28,9 @@ class AutoBattle(GameControl):
         self.TARGET_LOST_BUFFER_DURATION = 2.0
         self.model = YOLO_MODEL.get_model(MODEL_PATH_CONFIG,classes=CLASS_NAMES)
         logger.info("--- YOLO model loaded. ---")
-        self.client = None
-        try:
-            logger.info(f"--- Initializing scrcpy client for device {self.device.serial} ---")
-            self.client = pyscrcpy.Client(device=adbutils.device(serial=self.device.serial), max_fps=60,
-                                          bitrate=16000000, block_frame=False)
-            self.joystick = JoystickContact(self)
-            logger.info("--- Scrcpy client and Joystick initialized. ---")
-        except Exception as e:
-            logger.error(f"---Failed to initialize services: {e}")
-            raise ConnectionError(f"Scrcpy client initialization failed: {e}")
+        
     def _distance(self, p1, p2):
         return np.sqrt((p1[0] - p2[0]) ** 2 + (p1[1] - p2[1]) ** 2)
-    def start_services(self):
-        if not self.client.alive:
-            self.client.start(threaded=True)
-            while self.client.last_frame is None:
-                time.sleep(0.1)
-        logger.info("--- Services started, ready for battle. ---")
-    def stop_services(self):
-        logger.info("--- Stopping services. ---")
-        if hasattr(self, 'joystick') and self.joystick.is_downed:
-            self.joystick.up()
-        if self.client and self.client.alive:
-            self.client.stop()
     def run(self):
         attack_range = 300
         current_state = 'SEARCHING'
@@ -65,17 +39,22 @@ class AutoBattle(GameControl):
         target_lost_timer = Timer(self.TARGET_LOST_BUFFER_DURATION)
         miss_count = 0
         MISS_THRESHOLD = 5
+        skip_first_screenshot = True
         while True:
+            if skip_first_screenshot:
+                skip_first_screenshot = False
+                continue
+            else:
+                self.device.screenshot()
             self.device.click_record_clear()
             self.device.stuck_record_clear()
-            img_raw = self.client.last_frame
+            img_raw = self.device.image
             if img_raw is None:
                 continue
-            img = cv2.cvtColor(img_raw, cv2.COLOR_BGR2RGB)
-            width, height = image_size(img)
+            width, height = image_size(img_raw)
             if width != 1280 or height != 720:
-                img = cv2.resize(img, (1280, 720), interpolation=cv2.INTER_AREA)
-            self.device.image = img
+                img_raw = cv2.resize(img_raw, (1280, 720), interpolation=cv2.INTER_AREA)
+            self.device.image = img_raw
 
             MI_JING_REWARD_EXIT.load_search(MI_JING_REWARD_AREA.area)
             if  self.appear(MI_JING_REWARD_EXIT) :
@@ -91,9 +70,7 @@ class AutoBattle(GameControl):
                 self.joystick.up()
                 continue
 
-            if not self.client or not self.client.alive:
-                logger.error("Scrcpy client is not running. Aborting fight.")
-                break
+            
             results = self.model.predict(self.device.image, conf=0.6)
             self_boxes, enemy_boxes = [], []
             for r in results:
@@ -179,6 +156,5 @@ class AutoBattle(GameControl):
                     else:
                         angle = self.DIRECTION_ANGLES.get(direction, 0)
                         self.move_to_direction(angle,0.3)
-
 
 
