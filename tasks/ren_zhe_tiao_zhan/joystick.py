@@ -2,7 +2,6 @@ import math
 import cv2
 import numpy as np
 from functools import cached_property
-
 from module.device.method.maatouch import MaatouchBuilder, retry as maatouch_retry
 from module.device.method.minitouch import CommandBuilder, insert_swipe, random_normal_distribution, retry as minitouch_retry
 from module.exception import ScriptError

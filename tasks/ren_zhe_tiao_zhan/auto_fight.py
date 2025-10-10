@@ -6,7 +6,7 @@ from module.base.utils import image_size
 from module.logger import logger
 from module.base.timer import Timer
 from module.ocr.yolomodel import YOLO_MODEL
-from tasks.ren_zhe_tiao_zhan.joystick import GameControl
+from tasks.ren_zhe_tiao_zhan.joystick import GameControl,JoystickContact
 from tasks.ren_zhe_tiao_zhan.assets.assets_ren_zhe_tiao_zhan import MI_JING_SUCCESS, MI_JING_REWARD_EXIT, \
     MI_JING_REWARD_AREA, MI_JING_FAIL, MI_JING_ROOM_CHECK
 
@@ -28,7 +28,8 @@ class AutoBattle(GameControl):
         self.TARGET_LOST_BUFFER_DURATION = 2.0
         self.model = YOLO_MODEL.get_model(MODEL_PATH_CONFIG,classes=CLASS_NAMES)
         logger.info("--- YOLO model loaded. ---")
-        
+        self.joystick = JoystickContact(self)
+        logger.info("--- Joystick initialized. ---")
     def _distance(self, p1, p2):
         return np.sqrt((p1[0] - p2[0]) ** 2 + (p1[1] - p2[1]) ** 2)
     def run(self):
