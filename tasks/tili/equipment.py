@@ -72,7 +72,7 @@ class Equipment(UI):
         time = Timer(1, count=3).start()
         for _ in self.loop():
             if time.reached():
-                break
+                return False
             if self.appear(POPUP_CLOSE, interval=0):
                 return False
             EQUIPMENT_PART_DETAIL_RED_DOT.load_search(EQUIPMENT_PART_UPGRADE.area)
