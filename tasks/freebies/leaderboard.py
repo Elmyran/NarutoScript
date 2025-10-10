@@ -20,8 +20,10 @@ class LeaderBoard(UI):
         self.device.click_record_clear()
         self.ui_ensure(page_leader_board)
         for _ in self.loop():
-            if LEADER_BOARD_HAVE_LIKED.match_template_luma(self.device.image,direct_match=True):
+            LEADER_BOARD_HAVE_LIKED.load_search(LIKE_BUTTON_AREA.area)
+            if LEADER_BOARD_HAVE_LIKED.match_template_color(self.device.image):
                 break
+            LEADER_BOARD_LIKE_BUTTON.load_search(LIKE_BUTTON_AREA.area)
             if self.appear_then_click(LEADER_BOARD_LIKE_BUTTON,interval=1):
                 continue
         return True
