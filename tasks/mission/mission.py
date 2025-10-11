@@ -6,7 +6,7 @@ from module.exception import GameStuckError
 from module.logger.logger import logger
 from module.ocr.ocr import   DigitCounter
 from module.ocr.utils import pair_buttons
-from tasks.base.assets.assets_base_page import FULL_SCREEN
+
 from tasks.base.page import page_mission
 from tasks.base.task_tab.draglist import TASK_TAB_LIST
 from tasks.base.task_tab.task_keyword import MissionKeyword

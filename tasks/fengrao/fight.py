@@ -6,8 +6,8 @@ from tasks.base.page import page_manual, page_feng_rao
 from tasks.base.task_tab.draglist import TASK_TAB_LIST
 from tasks.base.task_tab.task_keyword import FengRaoKeyword
 from tasks.base.ui import UI
-from tasks.fengrao.assets.assets_fengrao import FENG_RAO_RED_DOT, MAIN_GOTO_FENG_RAO, FENG_RAO_CHECK, \
-    FENG_RAO_START_FIGHT_BUTTON, FENG_RAO_FIGHT_STATUS, FENG_RAO_FIGHT_SUCCESS, FENG_RAO_HAVE_DONE, FENG_RAO_EXIT
+from tasks.fengrao.assets.assets_fengrao import FENG_RAO_CHECK, \
+    FENG_RAO_START_FIGHT_BUTTON, FENG_RAO_FIGHT_STATUS, FENG_RAO_FIGHT_SUCCESS, FENG_RAO_HAVE_DONE
 
 
 class FengRaoFight(UI):

@@ -3,7 +3,7 @@
 from module.base.timer import Timer
 from module.exception import GameStuckError
 from module.ocr.ocr import  DigitCounter
-from tasks.base.page import page_squad, page_squad_help_battle, page_manual
+from tasks.base.page import page_squad,  page_manual
 from tasks.base.task_tab.draglist import TASK_TAB_LIST
 from tasks.base.task_tab.task_keyword import SquadRaidKeyword
 from tasks.base.ui import UI

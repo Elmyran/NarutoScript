@@ -1,5 +1,5 @@
 
-from re import A
+
 from module.base.timer import Timer
 from module.config.utils import get_server_next_monday_update
 from module.exception import GameStuckError
