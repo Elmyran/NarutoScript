@@ -371,6 +371,16 @@ STORE_CHECK = ButtonWrapper(
         button=(40, 3, 256, 88),
     ),
 )
+TALENT_CHECK = ButtonWrapper(
+    name='TALENT_CHECK',
+    share=Button(
+        file='./assets/share/base/page/TALENT_CHECK.png',
+        area=(432, 638, 567, 665),
+        search=(412, 618, 587, 685),
+        color=(100, 102, 99),
+        button=(432, 638, 567, 665),
+    ),
+)
 TONG_LING_CHECK = ButtonWrapper(
     name='TONG_LING_CHECK',
     share=Button(

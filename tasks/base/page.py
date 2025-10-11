@@ -270,6 +270,9 @@ page_store.link(CLOSE,destination=page_main)
 #Drama
 page_drama=Page(DRAMA_CHECK)
 page_drama.link(CLOSE,destination=page_main)
+#Talent
+page_talent=Page(TALENT_CHECK)
+page_talent.link(CLOSE,destination=page_main)
 #Activity
 page_activity=Page(ACTIVITY_CHECK)
 page_main.link(MAIN_GOTO_ACTIVITY,destination=page_activity)
