@@ -2,9 +2,9 @@ from module.base.timer import Timer
 from module.exception import GameStuckError
 from module.logger import logger
 from module.ocr.ocr import Digit
-from tasks.base.page import page_cultivation
+from tasks.base.page import page_cultivation,page_manual
 from tasks.base.task_tab.draglist import TASK_TAB_LIST
-from tasks.base.task_tab.task_keyword import TrailKeyword
+from tasks.base.task_tab.task_keyword import CultivationPathKeyword, TrailKeyword
 from tasks.base.ui import UI
 from tasks.trail.assets.assets_trail import *
 from tasks.trail.assets.assets_trail_cultivation import *
@@ -13,7 +13,8 @@ from tasks.trail.assets.assets_trail_cultivation import *
 class CultivationMopUp(UI):
     def handle_cultivation_mop_up(self):
         self.device.click_record_clear()
-       
+        self.ui_ensure(page_manual)
+        TASK_TAB_LIST.search_rows(main=self,keyword=CultivationPathKeyword)
         self.ui_ensure(page_cultivation)
         flag=self._cultivation_mop_up()
         if self.config.CultivationRoad_ClearRedDot and flag=='MOP_UP_SUCCESS':

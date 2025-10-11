@@ -98,6 +98,20 @@ CLOSE = ButtonWrapper(
             color=(45, 39, 17),
             button=(1212, 16, 1272, 73),
         ),
+        Button(
+            file='./assets/share/base/page/CLOSE.6.png',
+            area=(1221, 20, 1266, 57),
+            search=(1201, 0, 1280, 77),
+            color=(115, 39, 14),
+            button=(1221, 20, 1266, 57),
+        ),
+        Button(
+            file='./assets/share/base/page/CLOSE.7.png',
+            area=(1208, 13, 1273, 64),
+            search=(1188, 0, 1280, 84),
+            color=(89, 37, 20),
+            button=(1208, 13, 1273, 64),
+        ),
     ],
 )
 DAILY_CHECK = ButtonWrapper(
@@ -228,16 +242,6 @@ MAIN_GOTO_FRIEND_PANEL = ButtonWrapper(
         button=(33, 194, 81, 239),
     ),
 )
-MAIN_GOTO_JI_FEN_SAI = ButtonWrapper(
-    name='MAIN_GOTO_JI_FEN_SAI',
-    share=Button(
-        file='./assets/share/base/page/MAIN_GOTO_JI_FEN_SAI.png',
-        area=(487, 94, 519, 192),
-        search=(467, 74, 539, 212),
-        color=(140, 140, 133),
-        button=(487, 94, 519, 192),
-    ),
-)
 MAIN_GOTO_MAIL = ButtonWrapper(
     name='MAIN_GOTO_MAIL',
     share=Button(
@@ -248,14 +252,14 @@ MAIN_GOTO_MAIL = ButtonWrapper(
         button=(25, 253, 90, 307),
     ),
 )
-MAIN_GOTO_MISSION = ButtonWrapper(
-    name='MAIN_GOTO_MISSION',
+MAIN_GOTO_MANUAL = ButtonWrapper(
+    name='MAIN_GOTO_MANUAL',
     share=Button(
-        file='./assets/share/base/page/MAIN_GOTO_MISSION.png',
-        area=(496, 422, 527, 571),
-        search=(476, 402, 547, 591),
-        color=(128, 124, 112),
-        button=(496, 422, 527, 571),
+        file='./assets/share/base/page/MAIN_GOTO_MANUAL.png',
+        area=(993, 635, 1049, 682),
+        search=(973, 615, 1069, 702),
+        color=(152, 108, 65),
+        button=(993, 635, 1049, 682),
     ),
 )
 MAIN_GOTO_PANEL = ButtonWrapper(
@@ -278,26 +282,6 @@ MAIN_GOTO_STORE = ButtonWrapper(
         button=(1203, 232, 1244, 286),
     ),
 )
-MAIN_GOTO_TASK_DRAG_AREA = ButtonWrapper(
-    name='MAIN_GOTO_TASK_DRAG_AREA',
-    share=Button(
-        file='./assets/share/base/page/MAIN_GOTO_TASK_DRAG_AREA.png',
-        area=(89, 276, 1192, 409),
-        search=(69, 256, 1212, 429),
-        color=(133, 141, 102),
-        button=(89, 276, 1192, 409),
-    ),
-)
-MAIN_GOTO_TASK_SEARCH_AREA = ButtonWrapper(
-    name='MAIN_GOTO_TASK_SEARCH_AREA',
-    share=Button(
-        file='./assets/share/base/page/MAIN_GOTO_TASK_SEARCH_AREA.png',
-        area=(356, 87, 1089, 609),
-        search=(336, 67, 1109, 629),
-        color=(128, 145, 111),
-        button=(356, 87, 1089, 609),
-    ),
-)
 MAIN_GOTO_TONG_LING = ButtonWrapper(
     name='MAIN_GOTO_TONG_LING',
     share=Button(
@@ -306,6 +290,36 @@ MAIN_GOTO_TONG_LING = ButtonWrapper(
         search=(343, 610, 435, 720),
         color=(175, 141, 78),
         button=(363, 630, 415, 703),
+    ),
+)
+MANUAL_CHECK = ButtonWrapper(
+    name='MANUAL_CHECK',
+    share=Button(
+        file='./assets/share/base/page/MANUAL_CHECK.png',
+        area=(241, 524, 334, 552),
+        search=(221, 504, 354, 572),
+        color=(133, 84, 63),
+        button=(241, 524, 334, 552),
+    ),
+)
+MANUAL_GOTO_TASK_BUTTON = ButtonWrapper(
+    name='MANUAL_GOTO_TASK_BUTTON',
+    share=Button(
+        file='./assets/share/base/page/MANUAL_GOTO_TASK_BUTTON.png',
+        area=(863, 595, 975, 627),
+        search=(843, 575, 995, 647),
+        color=(94, 75, 1),
+        button=(863, 595, 975, 627),
+    ),
+)
+MANUAL_TAB_SEARCH_AREA = ButtonWrapper(
+    name='MANUAL_TAB_SEARCH_AREA',
+    share=Button(
+        file='./assets/share/base/page/MANUAL_TAB_SEARCH_AREA.png',
+        area=(73, 75, 215, 651),
+        search=(53, 55, 235, 671),
+        color=(192, 138, 83),
+        button=(73, 75, 215, 651),
     ),
 )
 MISSION_CHARACTER_SELECT_CHECK = ButtonWrapper(
@@ -346,25 +360,6 @@ REN_ZHE_TIAO_ZHAN_CHECK = ButtonWrapper(
         color=(131, 114, 92),
         button=(1199, 638, 1256, 698),
     ),
-)
-REN_ZHE_TIAO_ZHAN_CLOSE = ButtonWrapper(
-    name='REN_ZHE_TIAO_ZHAN_CLOSE',
-    share=[
-        Button(
-            file='./assets/share/base/page/REN_ZHE_TIAO_ZHAN_CLOSE.png',
-            area=(1221, 20, 1266, 57),
-            search=(1201, 0, 1280, 77),
-            color=(115, 39, 14),
-            button=(1221, 20, 1266, 57),
-        ),
-        Button(
-            file='./assets/share/base/page/REN_ZHE_TIAO_ZHAN_CLOSE.2.png',
-            area=(1208, 13, 1273, 64),
-            search=(1188, 0, 1280, 84),
-            color=(89, 37, 20),
-            button=(1208, 13, 1273, 64),
-        ),
-    ],
 )
 STORE_CHECK = ButtonWrapper(
     name='STORE_CHECK',

@@ -5,7 +5,9 @@ from module.exception import GameStuckError
 from module.logger import logger
 from module.ocr.ocr import Digit
 from tasks.base.assets.assets_base_character import *
-from tasks.base.page import  page_character_select, page_battle_field_select, page_battle_field
+from tasks.base.page import  page_character_select, page_battle_field_select, page_battle_field,page_manual
+from tasks.base.task_tab.draglist import TASK_TAB_LIST
+from tasks.base.task_tab.task_keyword import OrganizationKeyword
 from tasks.base.ui import UI
 import cv2
 from tasks.organization.assets.assets_organization_battlefield import *
@@ -16,7 +18,7 @@ from tasks.organization.battlefield.switch import CHARACTER_TAB
 from toolkit.Lib.datetime import datetime
 from tasks.organization.battlefield.name_keywords import AccountNameKeyword
 from tasks.duel.assets.assets_duel import DUEL_FIGHT_FAIL, DUEL_IS_IN_FIGHT
-from tasks.base.assets.assets_base_page import FULL_SCREEN
+
 class BattleField(UI,CharacterCircleDetector):
     def run(self):
         diff = server_time_offset()
@@ -58,6 +60,8 @@ class BattleField(UI,CharacterCircleDetector):
             return False
         return True
     def handle_battle_field(self):
+        self.ui_ensure(page_manual)
+        TASK_TAB_LIST.search_rows(self,OrganizationKeyword)
         self.ui_ensure(page_battle_field_select)
         self._battle_field_type_select()
         self._character_select()

@@ -6,9 +6,9 @@ from module.exception import GameStuckError
 from module.logger import logger
 from module.ocr.ocr import Digit
 from tasks.base.assets.assets_base_skill import *
-from tasks.base.page import page_main, page_ninjutsu
+from tasks.base.page import  page_ninjutsu,page_manual
 from tasks.base.task_tab.draglist import TASK_TAB_LIST
-from tasks.base.task_tab.task_keyword import DuelKeyword
+from tasks.base.task_tab.task_keyword import NinjaBattleKeyword
 from tasks.base.ui import UI
 from tasks.duel.assets.assets_duel import *
 
@@ -17,6 +17,8 @@ class DuelWeekly(UI):
     def handle_duel_weekly(self):
         self.device.click_record_clear()
         self.device.stuck_record_clear()
+        self.ui_ensure(page_manual)
+        TASK_TAB_LIST.search_rows(self,NinjaBattleKeyword)
         self.ui_ensure(page_ninjutsu)
         #上一局输赢
         success=True

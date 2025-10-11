@@ -1,5 +1,5 @@
 
-from re import S
+
 import time
 from module.logger import logger
 from module.base.timer import Timer
@@ -7,19 +7,21 @@ from module.base.utils import random_rectangle_point, ensure_int
 from module.exception import GameStuckError
 from tasks.base.assets.assets_base_skill import CHARACTER_ATTACK, CHARACTER_TI_SHEN, CHARACTER_SKILL_1, \
     CHARACTER_SKILL_2, CHARACTER_SKILL_3, CHARACTER_PSYCHIC, CHARACTER_SECRET_SCROLL
-from tasks.base.page import page_ninjutsu, page_main
+from tasks.base.page import page_ninjutsu
 from tasks.base.task_tab.draglist import TASK_TAB_LIST
-from tasks.base.task_tab.task_keyword import DuelKeyword
+from tasks.base.task_tab.task_keyword import NinjaBattleKeyword
 from tasks.base.ui import UI
 from tasks.duel.assets.assets_duel import *
 from module.ocr.ocr import Digit
-from tasks.duel.duel import Duel
+from tasks.base.page import page_manual
 class DuelDaily(UI):
     def handle_duel_daily(self):
         if self.config.stored.CurrentVictoryCount.is_expired():
             self.config.stored.CurrentVictoryCount.clear()
         self.device.click_record_clear()
         self.device.stuck_record_clear()
+        self.ui_ensure(page_manual)
+        TASK_TAB_LIST.search_rows(main=self,keyword=NinjaBattleKeyword)
         self.ui_ensure(page_ninjutsu)
         for _ in  self.loop():
             res=self._duel_task_detect()

@@ -4,8 +4,10 @@ from module.base.timer import Timer
 from module.config.utils import get_server_next_monday_update
 from module.exception import GameStuckError
 from module.logger import logger
-from tasks.base.page import page_organization_panel,page_main
+from tasks.base.page import page_organization_panel,page_manual
 
+from tasks.base.task_tab.draglist import TASK_TAB_LIST
+from tasks.base.task_tab.task_keyword import OrganizationKeyword
 from tasks.base.ui import UI
 from tasks.organization.assets.assets_organization_akatsuki import *
 from tasks.organization.assets.assets_organization_pray import *
@@ -18,6 +20,8 @@ class Akatsuki(UI):
         self.config.task_stop()
     def handle_pursue_akatsuki(self):
         self.device.click_record_clear()
+        self.ui_ensure(page_manual)
+        TASK_TAB_LIST.search_rows(self,OrganizationKeyword)
         self.ui_ensure(page_organization_panel)
         self._organization_play_panel_enter()
         self._enter_akatsuki_page()

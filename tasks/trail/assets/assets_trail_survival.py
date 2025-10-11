@@ -170,10 +170,10 @@ SURVIVAL_RESET_BUTTON = ButtonWrapper(
     name='SURVIVAL_RESET_BUTTON',
     cn=Button(
         file='./assets/cn/trail/survival/SURVIVAL_RESET_BUTTON.png',
-        area=(840, 599, 956, 706),
-        search=(820, 579, 976, 720),
-        color=(104, 81, 62),
-        button=(840, 599, 956, 706),
+        area=(850, 611, 941, 698),
+        search=(830, 591, 961, 718),
+        color=(130, 97, 73),
+        button=(850, 611, 941, 698),
     ),
     en=None,
 )

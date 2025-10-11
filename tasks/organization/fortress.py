@@ -8,11 +8,13 @@ from module.config.utils import get_nearest_weekday_date, get_server_weekday, se
 from module.exception import GameStuckError
 from module.logger import logger
 from module.ocr.ocr import Digit
-from tasks.base.assets.assets_base_move import CHOOSE_RIGHT
+
 from tasks.base.assets.assets_base_skill import *
-from tasks.base.page import page_organization, page_fortress_select
+from tasks.base.page import page_fortress_select,page_manual
 
 
+from tasks.base.task_tab.draglist import TASK_TAB_LIST
+from tasks.base.task_tab.task_keyword import OrganizationKeyword
 from tasks.duel.assets.assets_duel import DUEL_EXCEPTION, DUEL_FIGHT_SUCCESS, DUEL_FIGHT_FAIL, \
     DUEL_FIGHT_END
 from tasks.organization.assets.assets_organization_fortress import *
@@ -52,7 +54,8 @@ class Fortress(GameControl):
         return True
     def handle_organization_fortress(self):
         self.device.click_record_clear()
-
+        self.ui_ensure(page_manual)
+        TASK_TAB_LIST.search_rows(self,OrganizationKeyword)
         self.ui_ensure(page_fortress_select)
         self._fortress_select()
         self._fortress_goto_fight()

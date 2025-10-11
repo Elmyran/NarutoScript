@@ -1,5 +1,6 @@
 
-from tasks.base.page import page_leader_board
+from tasks.base.page import page_manual,page_leader_board
+
 from tasks.base.task_tab.draglist import TASK_TAB_LIST
 from tasks.base.task_tab.task_keyword import LeaderBoardKeyword
 from tasks.base.ui import UI
@@ -18,6 +19,8 @@ class LeaderBoard(UI):
         return True
     def handle_leader_board(self):
         self.device.click_record_clear()
+        self.ui_ensure(page_manual)
+        TASK_TAB_LIST.search_rows(self, LeaderBoardKeyword)
         self.ui_ensure(page_leader_board)
         for _ in self.loop():
             LEADER_BOARD_HAVE_LIKED.load_search(LIKE_BUTTON_AREA.area)
