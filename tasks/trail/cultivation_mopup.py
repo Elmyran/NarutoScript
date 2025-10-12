@@ -1,10 +1,9 @@
-from module.base.timer import Timer
-from module.exception import GameStuckError
-from module.logger import logger
+
+
 from module.ocr.ocr import Digit
 from tasks.base.page import page_cultivation,page_manual
 from tasks.base.task_tab.draglist import TASK_TAB_LIST
-from tasks.base.task_tab.task_keyword import CultivationPathKeyword, TrailKeyword
+from tasks.base.task_tab.task_keyword import CultivationPathKeyword
 from tasks.base.ui import UI
 from tasks.trail.assets.assets_trail import *
 from tasks.trail.assets.assets_trail_cultivation import *
