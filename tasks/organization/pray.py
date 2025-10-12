@@ -23,9 +23,9 @@ from tasks.organization.util import RewardUtils
 class Pray(UI,RewardUtils):
     def handle_Organization_Pray(self):
         self.device.click_record_clear()
-        self.ui_ensure(page_organization_panel)
         self.ui_ensure(page_manual)
         TASK_TAB_LIST.search_rows(self,OrganizationKeyword)
+        self.ui_ensure(page_organization_panel)
         self._enter_pray_panel()
         self.pray()
         self.pray_box_claim()
