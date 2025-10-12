@@ -1,7 +1,7 @@
 from module.base.timer import Timer
 from module.exception import GameStuckError
-from module.ocr.ocr import Digit, DigitCounter
-from tasks.base.assets.assets_base import TILI_REMAIN, TI_LI_REMAIN_COUNTER
+from module.ocr.ocr import  DigitCounter
+from tasks.base.assets.assets_base import TI_LI_REMAIN_COUNTER
 from tasks.base.page import page_main, page_elite_dungeon
 from tasks.base.ui import UI
 from tasks.tili.assets.assets_tili_dungeon import *
