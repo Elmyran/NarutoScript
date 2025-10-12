@@ -1,27 +1,22 @@
-
 import time
 from datetime import datetime
-
 from module.base.timer import Timer
 from module.base.utils import random_rectangle_point, ensure_int
 from module.config.utils import get_nearest_weekday_date, get_server_weekday, server_time_offset
 from module.exception import GameStuckError
 from module.logger import logger
 from module.ocr.ocr import Digit
-
 from tasks.base.assets.assets_base_skill import *
 from tasks.base.page import page_fortress_select,page_manual
-
-
 from tasks.base.task_tab.draglist import TASK_TAB_LIST
 from tasks.base.task_tab.task_keyword import OrganizationKeyword
 from tasks.duel.assets.assets_duel import DUEL_EXCEPTION, DUEL_FIGHT_SUCCESS, DUEL_FIGHT_FAIL, \
     DUEL_FIGHT_END
 from tasks.organization.assets.assets_organization_fortress import *
 from tasks.organization.assets.assets_organization_pray import  ORGANIZATION_PANEL
+from tasks.organization.fortress.keywords import EarthFortressKeyword, FireFortressKeyword, IronFortressKeyword, RainFortressKeyword, WaterFortressKeyword, WaterfallFortressKeyword
+from tasks.organization.fortress.navigation import FortressNavigation
 from tasks.ren_zhe_tiao_zhan.joystick import GameControl
-
-
 class Fortress(GameControl):
     def run(self):
         next_saturday = get_nearest_weekday_date(5)
@@ -174,4 +169,6 @@ class Fortress(GameControl):
 
 
 
-
+az=Fortress('ns',task='Alas')
+az.device.screenshot()
+FortressNavigation.insight_point(WaterFortressKeyword,az)
