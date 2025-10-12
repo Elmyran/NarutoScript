@@ -15,7 +15,7 @@ from tasks.login.assets.assets_login import ACCOUNT_CONFIRM
 from tasks.base.page import *
 
 
-from tasks.base.popup import PopupHandler
+
 
 class UI(MainPage):
     ui_current: Page
@@ -149,18 +149,11 @@ class UI(MainPage):
                     self.handle_lang_check(page)
                     if self.ui_page_confirm(page):
                         logger.info(f'Page arrive confirm {page}')
-                    if page==page_main and self._is_special_page(page.parent):  
-                        # 特殊页面：先到 page_main，然后使用 DraggableList 搜索  
-                        
-                            TASK_TAB_LIST.search_rows(main=self,page=page.parent)
-                            clicked = True  
-                            break  
-                    else:  
-                        button = page.links[page.parent]
-                        self.device.click(button)
-                        self.ui_button_interval_reset(button)
-                        clicked = True
-                        break
+                    button = page.links[page.parent]
+                    self.device.click(button)
+                    self.ui_button_interval_reset(button)
+                    clicked = True
+                    break
             if clicked:
                 continue
 
@@ -173,28 +166,7 @@ class UI(MainPage):
 
         # Reset connection
         Page.clear_connection()
-    def _is_special_page(self, page):
-        """
-        Args:
-            page (Page):
-
-        Returns:
-            bool:
-        """
-        pages=[page_organization_panel,
-               page_ji_fen_sai,
-               page_trail,
-               page_feng_rao,
-               page_mission,
-               page_leader_board,
-               page_duel,
-               page_ren_zhe_tiao_zhan,
-               page_squad,
-        ]
-
-
-
-        return page in pages
+    
 
     def ui_ensure(self, destination, acquire_lang_checked=False, skip_first_screenshot=True):
         """
@@ -333,11 +305,12 @@ class UI(MainPage):
 
         if interval and not self.interval_is_reached(MAIN_GOTO_CHARACTER, interval=interval):
             return False
-
         appear = False
         if MAIN_GOTO_CHARACTER.match_template_luma(self.device.image):
-            if self.image_color_count(MAIN_GOTO_CHARACTER, color=(235, 235, 235), threshold=234, count=400):
-                appear = True
+            self.wait_until_stable(MAIN_GOTO_CHARACTER, timer=Timer(0.5, count=1))
+            if MAIN_GOTO_CHARACTER.match_template_luma(self.device.image):
+                if self.image_color_count(MAIN_GOTO_CHARACTER, color=(235, 235, 235), threshold=234, count=400):
+                    appear = True
 
 
         if appear and interval:

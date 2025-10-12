@@ -1,5 +1,5 @@
 from module.base.timer import Timer
-from module.exception import GameStuckError
+
 
 from tasks.base.page import page_squad_help_battle_mine
 from tasks.base.ui import UI
@@ -15,9 +15,6 @@ class HelpBattleBenefit(UI):
         for _ in self.loop():
             if time.reached():
                 break
-          
-            
-
             if self.appear(HELP_BATTLE_MINE_BENEFIT_CLAIM_DONE):
                 break
             if self.appear(HELP_BATTLE_MINE_BENEFIT_CLAIM,interval=1):
