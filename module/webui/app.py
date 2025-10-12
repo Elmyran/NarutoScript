@@ -1183,6 +1183,7 @@ class AlasGUI(Frame):
             NarutoScript is a free open source software, if you paid for NS from any channel, please refund.
             NarutoScript 是一款免费开源软件，如果你在任何渠道付费购买了NS，请退款。
             Project repository 项目地址：`https://github.com/Elmyran/NarutoScript`
+            QQ群:921572302,有问题可以进群反馈
             """
             ).style("text-align: center")
 
