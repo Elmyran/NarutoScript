@@ -2,6 +2,7 @@ import time
 import re
 from pponnxcr.predict_system import BoxedResult
 
+
 from module.base.button import ButtonWrapper
 from module.base.utils import corner2area
 
@@ -11,18 +12,18 @@ from module.logger import logger
 from module.ocr.ocr import OcrResultButton
 from module.ocr.onnxmodels import CUSTOM_OCR_MODEL
 
-from .utils import infer_args as init_args
+
 from .utils import  draw_ocr
 
 
-from module.base.decorator import cached_property, del_cached_property
-
+from module.base.decorator import cached_property
 
 
 
 class ONNXPaddleOcr:
     merge_thres_x = 0
     merge_thres_y = 0
+    box_thresh =None
     def __init__(self, button: ButtonWrapper, name=None, **kwargs):
         self.button = button
         self.name = name or self.button.name
@@ -32,14 +33,14 @@ class ONNXPaddleOcr:
 
     @cached_property
     def model(self):
-        
+        CUSTOM_OCR_MODEL.box_tresh=self.box_thresh
         return CUSTOM_OCR_MODEL.model
 
 
     
-    def pre_process(self, img):
+    def pre_process(self, image):
 
-        return img
+        return image
     def after_process(self, result):
         return result
     def format_result(self, result):
