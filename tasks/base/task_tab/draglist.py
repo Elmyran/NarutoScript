@@ -1,6 +1,7 @@
 
 
 
+from module.base.timer import Timer
 from tasks.base.task_tab.ocr import TaskTabOcr
 from module.ui.draggable_list import DraggableList
 from tasks.base.page import *
@@ -30,6 +31,9 @@ class DraggableTaskTabList(DraggableList):
     def adapt_special_ui(self, main):
         if main.appear(BACK_GAME_CHECK):
             self.search_button=MANUAL_TAB_SEARCH_AREA_FOR_BACK_GAME
+            main.wait_until_stable(self.search_button,
+                                   timer=Timer(0, count=0),
+                timeout=Timer(1.5, count=5))
         
 
 
