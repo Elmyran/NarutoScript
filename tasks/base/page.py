@@ -3,6 +3,7 @@ import traceback
 from tasks.activity.assets.assets_activity_diao_yu_da_shi import *
 from tasks.base.assets.assets_base_page import *
 
+from tasks.base.assets.assets_base_task_tab import BACK_GAME_GOTO_MANUAL, MANUAL_GOTO_TASK_BUTTON
 from tasks.freebies.assets.assets_freebies_daily_daily import *
 from tasks.freebies.assets.assets_freebies_daily_weekly import  *
 from tasks.duel.assets.assets_duel import *
