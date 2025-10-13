@@ -1,5 +1,4 @@
 
-
 from typing import Optional
 from module.base.base import ModuleBase
 import numpy as np
@@ -58,6 +57,26 @@ class MapNavigation:
         Parse current rows to get list position.
         """
         results= self.ocr.matched_ocr(main.device.image, self.keyword_class)
+        scale_x = 1280 / 2560  # 0.5  
+        scale_y = 720 / 1920   # 0.375  
+        
+        # 缩放每个结果的坐标  
+        for result in results:  
+            x1, y1, x2, y2 = result.button  
+            result.button = (  
+                int(x1 * scale_x),  
+                int(y1 * scale_y),  
+                int(x2 * scale_x),  
+                int(y2 * scale_y)  
+            )  
+            # 同样需要缩放area和search属性  
+            x1, y1, x2, y2 = result.area  
+            result.area = (  
+                int(x1 * scale_x),  
+                int(y1 * scale_y),  
+                int(x2 * scale_x),  
+                int(y2 * scale_y)  
+            )
        
         self.cur_buttons = results
     def calculate_direction(self, target:Keyword):
@@ -158,6 +177,9 @@ class MapNavigation:
 
             # Click
             if interval.reached():
+                print(f'origin button: {button.button}')
+                button.button = (button.area[0]-50, button.area[1], button.area[2]-50, button.area[3])
+                print(f'adjusted button: {button.button}')
                 main.device.click(button)
                 interval.reset()
         

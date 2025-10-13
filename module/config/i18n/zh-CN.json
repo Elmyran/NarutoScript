@@ -96,11 +96,11 @@
     },
     "Fortress": {
       "name": "本服要塞",
-      "help": "当前仅支持火要塞"
+      "help": ""
     },
     "BattleField": {
       "name": "天地战场",
-      "help": "只支持挂机，找位子和奖励领取未实现"
+      "help": "只支持固定屏幕挂机"
     },
     "DingCiKaoRou": {
       "name": "丁次烤肉",
