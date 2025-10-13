@@ -307,7 +307,7 @@ class UI(MainPage):
             return False
         appear = False
         if MAIN_GOTO_CHARACTER.match_template_luma(self.device.image):
-            self.wait_until_stable(MAIN_GOTO_CHARACTER, timer=Timer(0.5, count=1))
+            self.wait_until_stable(MAIN_GOTO_CHARACTER, timer=Timer(1, count=3))
             if MAIN_GOTO_CHARACTER.match_template_luma(self.device.image):
                 if self.image_color_count(MAIN_GOTO_CHARACTER, color=(235, 235, 235), threshold=234, count=400):
                     appear = True
