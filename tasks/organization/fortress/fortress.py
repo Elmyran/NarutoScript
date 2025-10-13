@@ -169,6 +169,4 @@ class Fortress(GameControl):
 
 
 
-az=Fortress('ns',task='Alas')
-az.device.screenshot()
-FortressNavigation.insight_point(WaterFortressKeyword,az)
+
