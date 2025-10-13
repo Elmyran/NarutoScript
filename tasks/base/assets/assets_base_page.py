@@ -3,14 +3,14 @@ from module.base.button import Button, ButtonWrapper
 # This file was auto-generated, do not modify it manually. To generate:
 # ``` python -m dev_tools.button_extract ```
 
-BACK_GAME_GOTO_MANUAL = ButtonWrapper(
-    name='BACK_GAME_GOTO_MANUAL',
+BACK_GAME_CHECK = ButtonWrapper(
+    name='BACK_GAME_CHECK',
     share=Button(
-        file='./assets/share/base/page/BACK_GAME_GOTO_MANUAL.png',
-        area=(15, 637, 150, 673),
-        search=(0, 617, 170, 693),
-        color=(122, 89, 53),
-        button=(15, 637, 150, 673),
+        file='./assets/share/base/page/BACK_GAME_CHECK.png',
+        area=(1, 0, 161, 114),
+        search=(0, 0, 181, 134),
+        color=(104, 84, 45),
+        button=(1, 0, 161, 114),
     ),
 )
 BATTLE_ORDER_CHECK = ButtonWrapper(
@@ -314,33 +314,22 @@ MAIN_GOTO_TONG_LING = ButtonWrapper(
 )
 MANUAL_CHECK = ButtonWrapper(
     name='MANUAL_CHECK',
-    share=Button(
-        file='./assets/share/base/page/MANUAL_CHECK.png',
-        area=(241, 524, 334, 552),
-        search=(221, 504, 354, 572),
-        color=(133, 84, 63),
-        button=(241, 524, 334, 552),
-    ),
-)
-MANUAL_GOTO_TASK_BUTTON = ButtonWrapper(
-    name='MANUAL_GOTO_TASK_BUTTON',
-    share=Button(
-        file='./assets/share/base/page/MANUAL_GOTO_TASK_BUTTON.png',
-        area=(863, 595, 975, 627),
-        search=(843, 575, 995, 647),
-        color=(94, 75, 1),
-        button=(863, 595, 975, 627),
-    ),
-)
-MANUAL_TAB_SEARCH_AREA = ButtonWrapper(
-    name='MANUAL_TAB_SEARCH_AREA',
-    share=Button(
-        file='./assets/share/base/page/MANUAL_TAB_SEARCH_AREA.png',
-        area=(73, 75, 215, 651),
-        search=(53, 55, 235, 671),
-        color=(192, 138, 83),
-        button=(73, 75, 215, 651),
-    ),
+    share=[
+        Button(
+            file='./assets/share/base/page/MANUAL_CHECK.png',
+            area=(241, 524, 334, 552),
+            search=(221, 504, 354, 572),
+            color=(133, 84, 63),
+            button=(241, 524, 334, 552),
+        ),
+        Button(
+            file='./assets/share/base/page/MANUAL_CHECK.2.png',
+            area=(441, 509, 524, 535),
+            search=(421, 489, 544, 555),
+            color=(124, 77, 67),
+            button=(441, 509, 524, 535),
+        ),
+    ],
 )
 MISSION_CHARACTER_SELECT_CHECK = ButtonWrapper(
     name='MISSION_CHARACTER_SELECT_CHECK',
