@@ -1,7 +1,5 @@
 
 import argparse
-
-from shapely import box
 from module.base.decorator import cached_property, del_cached_property
 from module.ocr.onnxocr.predict_system import TextSystem as TextSystem_
 from module.ocr.onnxocr.utils import infer_args as init_args 
