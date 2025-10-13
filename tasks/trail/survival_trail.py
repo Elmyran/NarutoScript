@@ -1,5 +1,5 @@
-from module.base.timer import Timer
 
+from module.base.timer import Timer
 from module.logger import logger
 from module.ocr.ocr import Digit
 from tasks.base.page import page_survival_trail,page_manual
@@ -26,10 +26,9 @@ class SurvivalTrail(UI):
                 continue
             if self.appear_then_click(SURVIVAL_CHAO_YING_CONFIRM,interval=0):
                 continue
-            if self.appear(SURVIVAL_CHECK):
+            if self.match_template_color(SURVIVAL_CHECK):
                 break
-            if self.appear(SURVIVAL_HAVE_DONE):
-                break
+            
 
     def _mop_up(self):
         logger.info('start mop up')
@@ -50,9 +49,9 @@ class SurvivalTrail(UI):
                 continue
             if self.appear_then_click(SURVIVAL_READY,interval=1):
                 continue
-            if self.appear(SURVIVAL_CHECK):
-                if self.appear_then_click(SURVIVAL_MOP_UP_BUTTON,interval=2):
-                    continue
+            if self.match_template_color(SURVIVAL_MOP_UP_BUTTON,interval=2):
+                self.device.click(SURVIVAL_MOP_UP_BUTTON)
+                continue
         return True
     def _mop_up_check(self):
         for _ in self.loop():
