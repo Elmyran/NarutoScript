@@ -16,13 +16,22 @@ MAIN_GOTO_PANEL = ButtonWrapper(
 )
 PANEL_CHECK = ButtonWrapper(
     name='PANEL_CHECK',
-    cn=Button(
-        file='./assets/cn/freebies/dailyshare/PANEL_CHECK.png',
-        area=(26, 9, 269, 106),
-        search=(6, 0, 289, 126),
-        color=(152, 100, 52),
-        button=(26, 9, 269, 106),
-    ),
+    cn=[
+        Button(
+            file='./assets/cn/freebies/dailyshare/PANEL_CHECK.png',
+            area=(26, 9, 269, 106),
+            search=(6, 0, 289, 126),
+            color=(152, 100, 52),
+            button=(26, 9, 269, 106),
+        ),
+        Button(
+            file='./assets/cn/freebies/dailyshare/PANEL_CHECK.2.png',
+            area=(1001, 119, 1092, 164),
+            search=(981, 99, 1112, 184),
+            color=(215, 142, 14),
+            button=(1001, 119, 1092, 164),
+        ),
+    ],
     en=None,
 )
 PANEL_GOTO_MAIN = ButtonWrapper(
