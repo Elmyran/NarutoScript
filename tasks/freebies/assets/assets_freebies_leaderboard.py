@@ -60,10 +60,10 @@ LEADER_BOARD_LIKE_BUTTON = ButtonWrapper(
     name='LEADER_BOARD_LIKE_BUTTON',
     cn=Button(
         file='./assets/cn/freebies/leaderboard/LEADER_BOARD_LIKE_BUTTON.png',
-        area=(1151, 154, 1231, 225),
-        search=(1131, 134, 1251, 245),
-        color=(183, 163, 100),
-        button=(1151, 154, 1231, 225),
+        area=(1165, 175, 1226, 219),
+        search=(1145, 155, 1246, 239),
+        color=(141, 134, 111),
+        button=(1165, 175, 1226, 219),
     ),
     en=None,
 )
