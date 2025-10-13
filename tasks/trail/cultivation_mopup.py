@@ -22,6 +22,7 @@ class CultivationMopUp(UI):
         return flag
    
     def _cultivation_mop_up(self):
+        detect_count=0
         for _ in self.loop():
             if self.appear(CULTIVATION_MOP_UP_REWARD_CLAIM):
                 self.device.click(CULTIVATION_MOP_UP_REWARD_CLAIM)
@@ -39,6 +40,16 @@ class CultivationMopUp(UI):
                     return self._cultivation_reset()
                 elif times==0:
                     return 'MOP_UP_SUCCESS'
+            else:
+                detect_count+=1
+                if detect_count>4:
+                    ocr=Digit(CULTIVATION_MOP_UP_RESET_TIMES,lang='cn')
+                    times=ocr.ocr_single_line(self.device.image)
+                    if times==1:
+                        return self._cultivation_reset()
+                    elif times==0:
+                        return 'MOP_UP_SUCCESS'
+
             if self.appear(CULTIVATION_RESET_MOP_UP_RUNNING):
                 break
         return 'MOP_UP_SUCCESS'

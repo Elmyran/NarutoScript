@@ -175,10 +175,10 @@ DUEL_TASK_NOT_ACHIEVED_BUTTON = ButtonWrapper(
     name='DUEL_TASK_NOT_ACHIEVED_BUTTON',
     cn=Button(
         file='./assets/cn/duel/DUEL_TASK_NOT_ACHIEVED_BUTTON.png',
-        area=(1085, 159, 1186, 215),
-        search=(1065, 139, 1206, 235),
-        color=(183, 171, 131),
-        button=(1085, 159, 1186, 215),
+        area=(1101, 174, 1170, 200),
+        search=(1081, 154, 1190, 220),
+        color=(132, 114, 46),
+        button=(1101, 174, 1170, 200),
     ),
     en=None,
 )

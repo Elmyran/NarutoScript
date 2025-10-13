@@ -1,5 +1,7 @@
 
 import argparse
+
+from shapely import box
 from module.base.decorator import cached_property, del_cached_property
 from module.ocr.onnxocr.predict_system import TextSystem as TextSystem_
 from module.ocr.onnxocr.utils import infer_args as init_args 
@@ -9,17 +11,18 @@ class TextSystem(TextSystem_):
         self.text_recognizer.rec_batch_num=1
 
 class CustomOcrModel:
-   
+    box_tresh=None
 
     @cached_property
     def model(self):
-         # 默认参数
+
        # 默认参数
    
         parser = init_args()
         inference_args_dict = {action.dest: action.default for action in parser._actions}
         params = argparse.Namespace(**inference_args_dict)
-
+        if  self.box_tresh is not  None: 
+            params.drop_score = self.box_tresh
         # 修改默认参数
         params.rec_image_shape = "3, 48, 320"
         params.use_angle_cls = True
