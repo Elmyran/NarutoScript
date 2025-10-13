@@ -71,7 +71,7 @@ class DuelWeekly(UI):
             if time.reached():
                 raise GameStuckError(' duel task detected stuck')
             res=ocr.ocr_single_line(self.device.image)
-            if res is not None and res!=0:
+            if res is not None:
                 self.config.stored.CurrentVictoryCount.value=res
                 target=self.config.Duel_TargetVictoryNumber
                 if res < target:
