@@ -36,6 +36,17 @@ AKATSUKI_EXIT = ButtonWrapper(
     ),
     en=None,
 )
+AKATSUKI_GOTO_REWARD = ButtonWrapper(
+    name='AKATSUKI_GOTO_REWARD',
+    cn=Button(
+        file='./assets/cn/organization/akatsuki/AKATSUKI_GOTO_REWARD.png',
+        area=(472, 612, 531, 687),
+        search=(452, 592, 551, 707),
+        color=(156, 112, 71),
+        button=(472, 612, 531, 687),
+    ),
+    en=None,
+)
 AKATSUKI_REWARD_CHECK = ButtonWrapper(
     name='AKATSUKI_REWARD_CHECK',
     cn=Button(

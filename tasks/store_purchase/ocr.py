@@ -5,6 +5,11 @@ class StoreDetailOcr(ONNXPaddleOcr,OcrWhiteLetterOnComplexBackground):
     min_box = (1, 1)
     def pre_process(self, img):
         return OcrWhiteLetterOnComplexBackground.pre_process(self, img)
+    def after_process(self, result):
+        result=result.replace('砖', '卷')
+        if '高级通灵' in result:
+            result='高级通灵卷轴碎片'
+        return super().after_process(result)
 class StoreDigitCounter(DigitCounter):
     def after_process(self, result):  
         return super().after_process(result)
