@@ -107,6 +107,11 @@ page_main=Page(MAIN_GOTO_CHARACTER)
 page_manual=Page(MANUAL_CHECK)
 page_main.link(MAIN_GOTO_MANUAL,destination=page_manual)
 page_manual.link(CLOSE,destination=page_main)
+#BackGame
+page_back_game=Page(BACK_GAME_GOTO_MANUAL)
+page_main.link(MAIN_GOTO_BACK_GAME,destination=page_back_game)
+page_back_game.link(BACK_GAME_GOTO_MANUAL,destination=page_manual)
+page_back_game.link(CLOSE,destination=page_main)
 #Character_Select
 page_character_select=Page(CHARACTER_SELECT_PAGE)
 #Mail

@@ -3,6 +3,16 @@ from module.base.button import Button, ButtonWrapper
 # This file was auto-generated, do not modify it manually. To generate:
 # ``` python -m dev_tools.button_extract ```
 
+BACK_GAME_GOTO_MANUAL = ButtonWrapper(
+    name='BACK_GAME_GOTO_MANUAL',
+    share=Button(
+        file='./assets/share/base/page/BACK_GAME_GOTO_MANUAL.png',
+        area=(15, 637, 150, 673),
+        search=(0, 617, 170, 693),
+        color=(122, 89, 53),
+        button=(15, 637, 150, 673),
+    ),
+)
 BATTLE_ORDER_CHECK = ButtonWrapper(
     name='BATTLE_ORDER_CHECK',
     share=Button(
@@ -181,6 +191,16 @@ JI_FEN_SAI_CHECK = ButtonWrapper(
         search=(81, 2, 418, 158),
         color=(149, 87, 36),
         button=(101, 22, 398, 138),
+    ),
+)
+MAIN_GOTO_BACK_GAME = ButtonWrapper(
+    name='MAIN_GOTO_BACK_GAME',
+    share=Button(
+        file='./assets/share/base/page/MAIN_GOTO_BACK_GAME.png',
+        area=(1021, 641, 1059, 702),
+        search=(1001, 621, 1079, 720),
+        color=(122, 113, 85),
+        button=(1021, 641, 1059, 702),
     ),
 )
 MAIN_GOTO_BATTLE_ORDER = ButtonWrapper(
