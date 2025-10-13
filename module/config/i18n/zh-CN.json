@@ -96,11 +96,11 @@
     },
     "Fortress": {
       "name": "本服要塞",
-      "help": "当前仅支持火要塞"
+      "help": ""
     },
     "BattleField": {
       "name": "天地战场",
-      "help": "只支持挂机，找位子和奖励领取未实现"
+      "help": "只支持固定屏幕挂机"
     },
     "DingCiKaoRou": {
       "name": "丁次烤肉",
@@ -687,6 +687,34 @@
     "BattleFieldFinishCount": {
       "name": "BattleField.BattleFieldFinishCount.name",
       "help": "BattleField.BattleFieldFinishCount.help"
+    }
+  },
+  "Fortress": {
+    "_info": {
+      "name": "设置",
+      "help": ""
+    },
+    "FortressSelect": {
+      "name": "选择要塞",
+      "help": "",
+      "火之要塞": "火之要塞",
+      "水之要塞": "水之要塞",
+      "雷之要塞": "雷之要塞",
+      "风之要塞": "风之要塞",
+      "土之要塞": "土之要塞",
+      "铁之要塞": "铁之要塞",
+      "田之要塞": "田之要塞",
+      "熊之要塞": "熊之要塞",
+      "汤之要塞": "汤之要塞",
+      "涡之要塞": "涡之要塞",
+      "霜之要塞": "霜之要塞",
+      "雨之要塞": "雨之要塞",
+      "草之要塞": "草之要塞",
+      "川之要塞": "川之要塞",
+      "海之要塞": "海之要塞",
+      "泷之要塞": "泷之要塞",
+      "云之要塞": "云之要塞",
+      "鸟之要塞": "鸟之要塞"
     }
   },
   "ItemStorage": {

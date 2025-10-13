@@ -71,13 +71,22 @@ PREMIUM_RECRUIT_FREE_BUTTON = ButtonWrapper(
 )
 PREMIUM_RECRUIT_FREE_DONE = ButtonWrapper(
     name='PREMIUM_RECRUIT_FREE_DONE',
-    cn=Button(
-        file='./assets/cn/recruit/PREMIUM_RECRUIT_FREE_DONE.png',
-        area=(796, 548, 939, 601),
-        search=(776, 528, 959, 621),
-        color=(103, 97, 56),
-        button=(796, 548, 939, 601),
-    ),
+    cn=[
+        Button(
+            file='./assets/cn/recruit/PREMIUM_RECRUIT_FREE_DONE.png',
+            area=(796, 548, 939, 601),
+            search=(776, 528, 959, 621),
+            color=(103, 97, 56),
+            button=(796, 548, 939, 601),
+        ),
+        Button(
+            file='./assets/cn/recruit/PREMIUM_RECRUIT_FREE_DONE.2.png',
+            area=(675, 559, 806, 604),
+            search=(655, 539, 826, 624),
+            color=(107, 102, 58),
+            button=(675, 559, 806, 604),
+        ),
+    ],
     en=None,
 )
 PREMIUM_RECRUIT_REMAIN_TIMES = ButtonWrapper(

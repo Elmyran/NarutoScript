@@ -1,4 +1,6 @@
 
+from sympy import prem
+from module.logger import logger
 from tasks.base.page import page_recruit
 from tasks.base.ui import UI
 from tasks.recruit.assets.assets_recruit import *
@@ -8,16 +10,21 @@ from tasks.recruit.draglist import RecruitDuration, RecruitTabList
 
 class Recruit(UI):
     def run(self):
-        self.handle_recruit()
-    def handle_recruit(self):
-        premium_delay_time = self._premium_recruit()
-        if not self.config.Recruit_SkipNormalRecruit:
-            normal_delay_time=self._normal_recruit()
-            self.config.task_delay(target=[premium_delay_time, normal_delay_time])
-        else:
+        premium_delay_time=self.handle_premium_recruit()
+        if self.config.Recruit_SkipNormalRecruit:
             self.config.task_delay(target=premium_delay_time)
-        self.ui_goto_main()
+        else:    
+            normal_delay_time=self.handle_normal_recruit()
+            self.config.task_delay(target=[premium_delay_time, normal_delay_time])
         self.config.task_stop()
+    def handle_premium_recruit(self):
+        logger.hr("Premium Recruit)",level=1)
+        premium_delay_time = self._premium_recruit()
+        return premium_delay_time
+    def handle_normal_recruit(self):
+        logger.hr("Normal Recruit)",level=1)
+        normal_delay_time=self._normal_recruit()
+        return normal_delay_time
     def _premium_recruit(self):
         self.ui_ensure(page_recruit)
         RecruitTabList.search_rows(main=self, keyword=AdvancedRecruitment)
@@ -52,5 +59,4 @@ class Recruit(UI):
             return res
         else:
             return None
-
 

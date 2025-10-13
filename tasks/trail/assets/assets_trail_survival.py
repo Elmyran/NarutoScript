@@ -16,22 +16,13 @@ SURVIVAL_CHAO_YING_CONFIRM = ButtonWrapper(
 )
 SURVIVAL_CHECK = ButtonWrapper(
     name='SURVIVAL_CHECK',
-    cn=[
-        Button(
-            file='./assets/cn/trail/survival/SURVIVAL_CHECK.png',
-            area=(542, 226, 691, 337),
-            search=(522, 206, 711, 357),
-            color=(96, 81, 53),
-            button=(542, 226, 691, 337),
-        ),
-        Button(
-            file='./assets/cn/trail/survival/SURVIVAL_CHECK.2.png',
-            area=(815, 156, 938, 278),
-            search=(795, 136, 958, 298),
-            color=(148, 123, 67),
-            button=(815, 156, 938, 278),
-        ),
-    ],
+    cn=Button(
+        file='./assets/cn/trail/survival/SURVIVAL_CHECK.png',
+        area=(125, 31, 469, 128),
+        search=(105, 11, 489, 148),
+        color=(175, 98, 33),
+        button=(125, 31, 469, 128),
+    ),
     en=None,
 )
 SURVIVAL_EXIT = ButtonWrapper(

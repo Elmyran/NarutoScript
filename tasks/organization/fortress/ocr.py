@@ -8,11 +8,9 @@ import re
 import cv2
 import numpy as np
 class FortressOcr(ONNXPaddleOcr,OcrWhiteLetterOnComplexBackground):
-    box_thresh=0.1
+    box_thresh=0.2
     def pre_process(self, image):
-        
-        h, w = image.shape[:2]
-        image = cv2.resize(image, (w*2, h*2), interpolation=cv2.INTER_CUBIC)
+        image = cv2.resize(image, (2560, 1920), interpolation=cv2.INTER_CUBIC)
         hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
         mask = cv2.inRange(hsv, np.array([20,100,100]), np.array([40,255,255]))
         image[mask > 0] = [255,255,255]
@@ -20,7 +18,7 @@ class FortressOcr(ONNXPaddleOcr,OcrWhiteLetterOnComplexBackground):
         clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
         image = clahe.apply(gray)
         image = cv2.cvtColor(gray, cv2.COLOR_GRAY2BGR)
-        return super().pre_process(image)
+        return OcrWhiteLetterOnComplexBackground.pre_process(self,image)
     def after_process(self, result):
         result=result.replace('商','汤')
         result=result.replace('溺','汤')
@@ -106,7 +104,6 @@ class FortressOcr(ONNXPaddleOcr,OcrWhiteLetterOnComplexBackground):
         filtered_results = [result for result in processed_results if self.filter_detected(result)]
         #merged_results = merge_buttons(filtered_results, thres_x=self.merge_thres_x, thres_y=self.merge_thres_y)
         merged_results=filtered_results
-        logger.info(f'OCR detected {len(merged_results)} results: {[res.ocr_text for res in merged_results]}')
         for result in merged_results:
             result.ocr_text=self.after_process(result.ocr_text)
         for result in merged_results:  

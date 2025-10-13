@@ -14,7 +14,7 @@ from tasks.duel.assets.assets_duel import DUEL_EXCEPTION, DUEL_FIGHT_SUCCESS, DU
     DUEL_FIGHT_END
 from tasks.organization.assets.assets_organization_fortress import *
 from tasks.organization.assets.assets_organization_pray import  ORGANIZATION_PANEL
-from tasks.organization.fortress.keywords import EarthFortressKeyword, FireFortressKeyword, IronFortressKeyword, RainFortressKeyword, WaterFortressKeyword, WaterfallFortressKeyword
+from tasks.organization.fortress.keywords import FortressNameKeyword
 from tasks.organization.fortress.navigation import FortressNavigation
 from tasks.ren_zhe_tiao_zhan.joystick import GameControl
 class Fortress(GameControl):
@@ -68,15 +68,20 @@ class Fortress(GameControl):
 
         logger.info(f"Organization Page entered")
     def _fortress_select(self):
+        fortress = self.config.Fortress_FortressSelect  
+        for item in FortressNameKeyword.instances.values():  
+            if item.cn == fortress:  
+                fortress = item  
+                break
+        FortressNavigation.search_points(self,fortress)
         for  _ in self.loop():
             if self.appear(FORTRESS_PAGE):
                 break
             if self.appear(FORTRESS_ENTER_CONFIRM):
                 self.device.click(FORTRESS_ENTER_CONFIRM)
                 continue
-            if self.appear(FORTRESS_FIRE):
-                self.device.click(FORTRESS_FIRE)
-                continue
+        logger.info(f"Fortress {fortress} entered")
+            
 
     def _fortress_goto_fight(self):
         ocr=Digit(FORTRESS_SCORE)
@@ -165,8 +170,4 @@ class Fortress(GameControl):
                 idx = (idx + 1) % other_count
         self.device.stuck_record_clear()
         self.device.stuck_timer=original
-
-
-
-
 

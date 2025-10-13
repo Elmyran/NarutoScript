@@ -14,10 +14,16 @@ from tasks.organization.assets.assets_organization_pray import *
 
 class Akatsuki(UI):
     def run(self):
-        self.handle_pursue_akatsuki()
-        monday = get_server_next_monday_update(self.config.Scheduler_ServerUpdate)
-        self.config.task_delay(target=monday)
+        if self.handle_pursue_akatsuki():
+            monday = get_server_next_monday_update(self.config.Scheduler_ServerUpdate)
+            self.config.task_delay(target=monday)
+        else:
+            self.config.task_delay(server_update=True)
         self.config.task_stop()
+
+   
+        
+       
     def handle_pursue_akatsuki(self):
         self.device.click_record_clear()
         self.ui_ensure(page_manual)
@@ -25,7 +31,7 @@ class Akatsuki(UI):
         self.ui_ensure(page_organization_panel)
         self._organization_play_panel_enter()
         self._enter_akatsuki_page()
-        self._reward_claim()
+        return self._reward_claim()
        
 
     def _organization_play_panel_enter(self):
@@ -54,19 +60,21 @@ class Akatsuki(UI):
         self.device.click_record_clear()
         time=Timer(3, count=5).start()
         for _ in self.loop():
-            if time.reached() and self.appear(AKATSUKI_DONE):
-                return True
-            elif time.reached():
-                return  False
-            if self.appear(AKATSUKI_REWARD_CHECK):
-                break
-            if self.appear(AKATSUKI_REWARD_RED_DOT):
-                self.device.click(AKATSUKI_REWARD_RED_DOT)
-        for _ in self.loop():
+            if time.reached():
+                return False
             if self.appear(REWARD_HAVE_CLAIMED):
-                break
+                return True
             if self.appear_then_click(REWARD_CLAIM_ALL,interval=0):
+                time.reset()
                 continue
             REWARD_CLAIM_BUTTON.load_search(REWARD_CLAIM_PANEL.area)
             if self.appear_then_click(REWARD_CLAIM_BUTTON,interval=1):
+                time.reset()
                 continue
+            if self.appear_then_click(AKATSUKI_GOTO_REWARD,interval=1):
+                time.reset()
+                continue
+            
+            
+            
+    
