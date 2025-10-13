@@ -13,23 +13,23 @@ class ManualConfig:
     > BattleField
     > Fortress 
     > PanRen
-    > Recruit
-    > DingCiKaoRou
-    > TiLi
-    > JiFenSai
     > CultivationRoad 
     > Akatsuki 
     > SquadRaid
     > FengRao
     > Organization
     > SurvivalTrail
+    > JiFenSai
+    > BattleOrder
+    > Recruit
+    > Freebies
+    > DingCiKaoRou
+    > QiuRiJi
+    > TiLi
+    > StorePurchase
+    > Duel
     > MiJing
     > Mission
-    > Duel
-    > QiuRiJi
-    > BattleOrder
-    > Freebies
-    > StorePurchase
     > DataUpdate
     """
 

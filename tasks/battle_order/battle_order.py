@@ -17,7 +17,6 @@ class BattleOrder(UI):
         BattleOrderWeeklyReward(config=self.config, device=self.device).handle_battle_order_weekly_reward()
         from  tasks.battle_order.claim import BattleOrderClaim
         BattleOrderClaim(config=self.config, device=self.device).handle_battle_order_claim()
-        self.config.task_call('TiLi')
         self.config.task_delay(server_update=True)
         self.config.task_stop()
 
