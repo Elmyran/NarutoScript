@@ -148,6 +148,9 @@ class GeneratedConfig:
     BattleField_Type = '天之战场'  # 天之战场, 地之战场
     BattleField_BattleFieldFinishCount = {}
 
+    # Group `Fortress`
+    Fortress_FortressSelect = '火之要塞'  # 火之要塞, 水之要塞, 雷之要塞, 风之要塞, 土之要塞, 铁之要塞, 田之要塞, 熊之要塞, 汤之要塞, 涡之要塞, 霜之要塞, 雨之要塞, 草之要塞, 川之要塞, 海之要塞, 泷之要塞, 云之要塞, 鸟之要塞
+
     # Group `ItemStorage`
     ItemStorage_TiLi = {}
     ItemStorage_Golds = {}

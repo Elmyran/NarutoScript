@@ -306,6 +306,9 @@
       "NextRun": "2020-01-01 00:00:00",
       "Command": "Fortress",
       "ServerUpdate": "05:00"
+    },
+    "Fortress": {
+      "FortressSelect": "火之要塞"
     }
   },
   "BattleField": {

@@ -3,19 +3,18 @@
 from typing import Optional
 from module.base.base import ModuleBase
 import numpy as np
-
 from module.base.button import ButtonWrapper
 from module.base.decorator import cached_property
 from module.base.timer import Timer
-from module.base.utils.utils import color_similarity_2d, crop
+from module.exception import GameStuckError
 from module.logger import logger
 from module.ocr.keyword import Keyword
 from module.ocr.ocr import OcrResultButton
-from module.ocr.onnxocr.onnx_paddleocr import ONNXPaddleOcr
 from tasks.base.assets.assets_base_page import FULL_SCREEN
+from tasks.organization.assets.assets_organization_fortress import FORTRESS_ENTER_CONFIRM
 from tasks.organization.fortress.keywords import FortressNameKeyword
 from tasks.organization.fortress.ocr import FortressOcr
-import cv2
+
 class MapNavigation:
 
     def __init__(self,
@@ -116,29 +115,70 @@ class MapNavigation:
         )  
         
         main.device.drag(p1, p2, name=f'{self.name}_DRAG_TO_TARGET')
-    
+    def is_point_selected(self, button: OcrResultButton, main: ModuleBase) -> bool:
+        # Having gold letters
+        if main.appear(FORTRESS_ENTER_CONFIRM):
+            return True
 
-    def insight_point(self, target: Keyword, main: ModuleBase, skip_first_screenshot=True) -> bool:
-        """
-        Args:
-            row:
-            main:
-            skip_first_screenshot:
+        return False
 
-        Returns:
-            If success
-        """
-       
-
-
-        
-        bottom_check = Timer(3, count=5).start()
+    def select_point(self, target: Keyword, main: ModuleBase, insight=True, skip_first_screenshot=True):
+        if insight:
+            result = self.insight_point(
+                target, main=main, skip_first_screenshot=skip_first_screenshot)
+            if not result:
+                return False
+        logger.info(f'Select point: {target}')
+        skip_first_screenshot = True
+        interval = Timer(5)
+        skip_first_load_points = True
+        load_points_interval = Timer(1)
         while 1:
             if skip_first_screenshot:
                 skip_first_screenshot = False
             else:
                 main.device.screenshot()
 
+            if skip_first_load_points:
+                skip_first_load_points = False
+                load_points_interval.reset()
+            else:
+                if load_points_interval.reached():
+                    self.load_points(main=main)
+                    load_points_interval.reset()
+
+            button = self.keyword2button(target)
+            if not button:
+                return False
+
+            # End
+            if self.is_point_selected(button, main=main):
+                logger.info(f'point selected at {target}')
+                return True
+
+            # Click
+            if interval.reached():
+                main.device.click(button)
+                interval.reset()
+        
+    def insight_point(self, target: Keyword, main: ModuleBase, skip_first_screenshot=True) -> bool:
+        """
+        Args:
+            point:
+            main:
+            skip_first_screenshot:
+
+        Returns:
+            If success
+        """
+        timeout = Timer(30, count=30).start()
+        while 1:
+            if skip_first_screenshot:
+                skip_first_screenshot = False
+            else:
+                main.device.screenshot()
+            if timeout.reached():
+                raise GameStuckError(f"{target.name} Navigation Stucked")
             self.load_points(main=main)
             button=self.keyword2button(target, show_warning=False)
             if button:
@@ -150,10 +190,15 @@ class MapNavigation:
                 timeout=Timer(1.5, count=5)
             )
             skip_first_screenshot = True
-            
-            
 
         return True
+    def search_points(self, main, keyword):  
+        if self.insight_point(keyword, main=main):  
+            logger.info(f'Successfully navigated to {keyword.name} ')  
+            if self.select_point(keyword, main=main):  
+                logger.info(f'Successfully selected {keyword.name} ')  
+                return True  
+        return False  
     
    
     
