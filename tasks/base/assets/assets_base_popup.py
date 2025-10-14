@@ -302,6 +302,16 @@ POPUP_TITLE_TIP = ButtonWrapper(
         button=(620, 245, 659, 272),
     ),
 )
+POPUP_UPGRADE = ButtonWrapper(
+    name='POPUP_UPGRADE',
+    share=Button(
+        file='./assets/share/base/popup/POPUP_UPGRADE.png',
+        area=(506, 544, 621, 579),
+        search=(486, 524, 641, 599),
+        color=(90, 89, 89),
+        button=(506, 544, 621, 579),
+    ),
+)
 SHORTAGE = ButtonWrapper(
     name='SHORTAGE',
     share=Button(

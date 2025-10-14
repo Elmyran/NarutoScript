@@ -29,6 +29,8 @@ class PopupHandler(ModuleBase):
             return True
         if self.appear_then_click(JI_FEN_SAI_SEASON_END_REWARD,interval=interval):
             return True
+        if self.appear_then_click(POPUP_UPGRADE,interval=interval):
+            return True
         
         
         
