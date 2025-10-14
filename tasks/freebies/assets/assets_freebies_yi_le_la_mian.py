@@ -15,10 +15,10 @@ RAMEN_CLAIM = ButtonWrapper(
         ),
         Button(
             file='./assets/cn/freebies/yi_le_la_mian/RAMEN_CLAIM.2.png',
-            area=(515, 265, 655, 441),
-            search=(495, 245, 675, 461),
-            color=(157, 137, 124),
-            button=(515, 265, 655, 441),
+            area=(521, 351, 613, 439),
+            search=(501, 331, 633, 459),
+            color=(168, 120, 103),
+            button=(521, 351, 613, 439),
         ),
         Button(
             file='./assets/cn/freebies/yi_le_la_mian/RAMEN_CLAIM.3.png',
