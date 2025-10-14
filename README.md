@@ -2,7 +2,8 @@
 <img alt="LOGO" src="./webapp/buildResources/icon.png" width="256" height="256" />
 
 # NarutoScript
-火影忍者手游自动化日常脚本
+火影忍者手游自动化日常脚本   
+如果觉得有帮助，请帮我点个 ⭐ Star 支持一下吧
 </div>
 
 
