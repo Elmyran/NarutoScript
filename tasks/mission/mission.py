@@ -108,8 +108,9 @@ class Mission(UI):
                 return False
             # todo 超影免费刷新button
     def character_select(self):
-        character_first_click_interval = Timer(1).start()  
+        character_first_click_interval = Timer(2).start()  
         character_auto_select_interval = Timer(1).start()
+        select_auto=False
         for _ in self.loop():  
             if THE_TASKBAR_IS_FULL.match_template(self.device.image):  
                 logger.info('Taskbar is full')  
@@ -120,16 +121,19 @@ class Mission(UI):
             if self.appear(MISSION_CHECK):  
                 logger.info('Mission check appeared')  
                 return True  
-            if self.appear(CHARACTER_SELECTED_AUTO)  and CHARACTER_UNSELECTED.match_template(self.device.image, direct_match=True): 
-                if character_auto_select_interval.reached():  
-                    self.device.click(CHARACTER_SELECTED_AUTO)  
-                    character_auto_select_interval.reset()  
-                    continue  
-            elif CHARACTER_UNSELECTED.match_template(self.device.image, direct_match=True):  
-                if character_first_click_interval.reached():  
-                    self.device.click(CHARACTER_FIRST)  
-                    character_first_click_interval.reset()  
-                    continue
+            if CHARACTER_UNSELECTED.match_template(self.device.image, direct_match=True):
+                if self.appear(CHARACTER_SELECTED_AUTO):
+                    select_auto=True
+                    if character_auto_select_interval.reached():  
+                        self.device.click(CHARACTER_SELECTED_AUTO)  
+                        character_auto_select_interval.reset()
+                        continue  
+            
+                if not select_auto :
+                    if character_first_click_interval.reached():  
+                        self.device.click(CHARACTER_FIRST)  
+                        character_first_click_interval.reset()  
+                        continue
             
             
               
