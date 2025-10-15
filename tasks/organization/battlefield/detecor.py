@@ -1,14 +1,8 @@
+from module.logger import logger
 import cv2  
-import numpy as np
-
-from module.base.decorator import cached_property
-from module.base.utils.utils import color_similarity_2d, load_image  
-  
 class CharacterCircleDetector:  
    
-    @cached_property
-    def mask_interact(self):
-        return load_image('./assets/share/organization/battlefield/BATTLE_FIELD_MASK.png')
+    
     def detect_character_circle(self, image):  
         """  
         检测角色脚底的光圈  
@@ -21,14 +15,28 @@ class CharacterCircleDetector:
             bool: 是否检测到角色脚底光圈  
               
         """  
-        if self.mask_interact is not None:  
-            image = cv2.bitwise_and(image, image, mask=self.mask_interact)  
+       
         target_color = (110, 247, 253)  
-        similarity = color_similarity_2d(image, color=target_color)  
-        mask = cv2.inRange(similarity, 221, 255)  
-        # 统计白色像素数量  
+        mask = cv2.inRange(image, target_color, target_color)
         white_pixels = cv2.countNonZero(mask)  
-        
-        if white_pixels > 200:  # 设置一个阈值  
-            print(f"检测到蓝色光圈,匹配像素数: {white_pixels}")
+        if white_pixels > 100:  # 调整阈值  
             return True  
+        return False
+    def show_detection(self,image,  show_window=True):  
+        """可视化检测结果"""  
+        target_color = (110, 247, 253)  
+        # 方案 1: G 通道过滤 + 颜色相似度  
+        mask = cv2.inRange(image, target_color, target_color)  
+        white_pixels = cv2.countNonZero(mask)  
+        logger.info(f'White pixels count: {white_pixels}')
+        
+        # 可视化调试  
+        debug_image = image.copy()  
+        debug_image[mask > 0] = (0, 255, 0)  
+        cv2.imshow('G-filtered result', cv2.cvtColor(debug_image, cv2.COLOR_RGB2BGR))  
+        cv2.waitKey(0)  
+        cv2.destroyAllWindows()
+        if white_pixels > 100:  # 调整阈值  
+            return True
+        return False
+        
