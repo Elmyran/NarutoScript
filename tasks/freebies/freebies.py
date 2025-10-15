@@ -63,5 +63,4 @@ class Freebies(ModuleBase):
             DailyRewardClaim(config=self.config, device=self.device).handle_daily_reward()
         
         self.config.task_delay(target=delay_time)
-        self.config.task_call('TiLi')
         self.config.task_stop()

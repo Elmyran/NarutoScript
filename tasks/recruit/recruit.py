@@ -1,5 +1,3 @@
-
-from sympy import prem
 from module.logger import logger
 from tasks.base.page import page_recruit
 from tasks.base.ui import UI
@@ -59,4 +57,3 @@ class Recruit(UI):
             return res
         else:
             return None
-
