@@ -8,7 +8,7 @@ class CharacterCircleDetector:
    
     @cached_property
     def mask_interact(self):
-        return load_image('./assets/shared/organization/battlefield/BATTLE_FIELD_MASK.png')
+        return load_image('./assets/share/organization/battlefield/BATTLE_FIELD_MASK.png')
     def detect_character_circle(self, image):  
         """  
         检测角色脚底的光圈  
