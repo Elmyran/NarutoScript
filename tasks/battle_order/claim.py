@@ -2,6 +2,7 @@
 
 
 
+
 from module.logger.logger import logger 
 from module.base.timer import Timer
 from tasks.base.assets.assets_base_page import BATTLE_ORDER_CHECK
@@ -9,8 +10,8 @@ from tasks.base.page import page_battle_order
 from tasks.base.ui import UI
 from tasks.battle_order.assets.assets_battle_order_claim import *
 import cv2
-from tasks.battle_order.draglist import CHARACTER_TAB_LIST
-from tasks.base.character_keyword import CharacterTab
+from tasks.battle_order.draglist import *
+from tasks.base.character_keyword import ACharacterTab,  OcrCharacterTab, SCharacterTab
 from tasks.battle_order.switch import BATTLE_ORDER_TAB
 from module.base.button import ClickButton  
 from datetime import datetime  
@@ -43,9 +44,19 @@ class BattleOrderClaim(UI):
                         self.interval_reset('claimable_click', interval=0.5)
                         time.reset()
     def _character_fragments_select(self):
-        name=self.config.BattleOrder_CharacterFragments
+        ocr=OcrCharacterTab(BATTLE_ORDER_CHARACTER_LIST_AREA)
+        name=self.config.BattleOrder_SCharacterFragments
+        draglist=S_CHARACTER_TAB_LIST
+        if ocr.matched_ocr(self.device.image,SCharacterTab):
+            pass
+        elif ocr.matched_ocr(self.device.image,ACharacterTab):
+            name=self.config.BattleOrder_ACharacterFragments
+            draglist=A_CHARACTER_TAB_LIST
+        else:
+            name= self.config.BattleOrder_CCharacterFragments
+            draglist=C_CHARACTER_TAB_LIST
         keyword=self.find_character_by_cn(name)
-        CHARACTER_TAB_LIST.search_rows(main=self,keyword=keyword)
+        draglist.search_rows(main=self,keyword=keyword)
         for _ in self.loop():
             if BATTLE_ORDER_CHECK.match_color(self.device.image):
                 break
@@ -56,7 +67,13 @@ class BattleOrderClaim(UI):
 
         # 通过中文名称查找对应的关键词对象
     def find_character_by_cn(self,chinese_name):
-        for character in CharacterTab.instances.values():
+        for character in SCharacterTab.instances.values():
+            if character.cn == chinese_name:
+                return character
+        for character in ACharacterTab.instances.values():
+            if character.cn == chinese_name:
+                return character
+        for character in CCharacterTab.instances.values():
             if character.cn == chinese_name:
                 return character
         return None
@@ -174,4 +191,3 @@ class BattleOrderClaim(UI):
         }) 
         self.screenshot_tracking_add()
         return boxes,image
-

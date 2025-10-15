@@ -114,7 +114,9 @@ class GeneratedConfig:
 
     # Group `BattleOrder`
     BattleOrder_LikeAndShare = True
-    BattleOrder_CharacterFragments = '秽土长门'  # 秽土解斑, 永恒佐助, 忍战樱, 九喇嘛鸣人, 死门凯, 秽土柱间, 秽土鼬, 仙人兜, 秽土斑, 白面具, 秽土扉间, 百豪纲手, 秽土水门, 秽土日斩, 秽土长门, 斑, 柱间, 四代目雷影, 扉间, 神秘面具男, 须佐能乎鼬, 天道佩恩, 水门, 大蛇丸, 自来也
+    BattleOrder_SCharacterFragments = '秽土长门'  # 秽土解斑, 永恒佐助, 忍战樱, 九喇嘛鸣人, 死门凯, 秽土柱间, 秽土鼬, 仙人兜, 秽土斑, 白面具, 秽土扉间, 百豪纲手, 秽土水门, 秽土日斩, 秽土长门, 斑, 柱间, 四代目雷影, 扉间, 神秘面具男, 须佐能乎鼬, 天道佩恩, 水门, 大蛇丸, 自来也
+    BattleOrder_ACharacterFragments = '青年水门'  # 桃式显现博人, 忍战宁次, 博人传长十郎, 青年长门, 青年艾, 博人传达鲁伊, 青年水门, 忍战奇拉比, 博人传黑土, 须佐佐助, 秽土迪达拉, 博人传木叶丸, 九尾鸣人, 半蛇斗篷兜, 忍战我爱罗, 晓大蛇丸, 百豪樱, 照美冥, 鹰小队佐助, 奇拉比, 仙人鸣人, 神威卡卡西, 止水, 小南, 迪达拉, 鼬, 凯
+    BattleOrder_CCharacterFragments = '左近右近'  # 左近右近, 火花, 学员鸣人, 山城青叶, 鬼童丸, 青, 萨克镫, 托斯砧
 
     # Group `PrivilegeStore`
     PrivilegeStore_PrivilegeStoreFinishCount = {}
