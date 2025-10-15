@@ -28,7 +28,7 @@ class LeaderBoard(UI):
             if time.reached():
                 break
             LEADER_BOARD_LIKE_BUTTON.load_search(LIKE_BUTTON_AREA.area)
-            if self.match_template_color(LEADER_BOARD_LIKE_BUTTON,interval=1):
+            if self.match_template_color(LEADER_BOARD_LIKE_BUTTON):
                 self.device.click(LEADER_BOARD_LIKE_BUTTON)
                 time.reset()
                 continue
