@@ -22,14 +22,14 @@ class ManualConfig:
     > JiFenSai
     > BattleOrder
     > Recruit
-    > Freebies
     > DingCiKaoRou
-    > QiuRiJi
-    > TiLi
+    > QiuRiJi 
     > StorePurchase
     > Duel
     > MiJing
     > Mission
+    > Freebies
+    > TiLi
     > DataUpdate
     """
 
