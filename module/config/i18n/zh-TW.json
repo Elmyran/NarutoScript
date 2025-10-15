@@ -527,9 +527,9 @@
       "name": "BattleOrder.LikeAndShare.name",
       "help": "BattleOrder.LikeAndShare.help"
     },
-    "CharacterFragments": {
-      "name": "BattleOrder.CharacterFragments.name",
-      "help": "BattleOrder.CharacterFragments.help",
+    "SCharacterFragments": {
+      "name": "BattleOrder.SCharacterFragments.name",
+      "help": "BattleOrder.SCharacterFragments.help",
       "秽土解斑": "秽土解斑",
       "永恒佐助": "永恒佐助",
       "忍战樱": "忍战樱",
@@ -555,6 +555,49 @@
       "水门": "水门",
       "大蛇丸": "大蛇丸",
       "自来也": "自来也"
+    },
+    "ACharacterFragments": {
+      "name": "BattleOrder.ACharacterFragments.name",
+      "help": "BattleOrder.ACharacterFragments.help",
+      "桃式显现博人": "桃式显现博人",
+      "忍战宁次": "忍战宁次",
+      "博人传长十郎": "博人传长十郎",
+      "青年长门": "青年长门",
+      "青年艾": "青年艾",
+      "博人传达鲁伊": "博人传达鲁伊",
+      "青年水门": "青年水门",
+      "忍战奇拉比": "忍战奇拉比",
+      "博人传黑土": "博人传黑土",
+      "须佐佐助": "须佐佐助",
+      "秽土迪达拉": "秽土迪达拉",
+      "博人传木叶丸": "博人传木叶丸",
+      "九尾鸣人": "九尾鸣人",
+      "半蛇斗篷兜": "半蛇斗篷兜",
+      "忍战我爱罗": "忍战我爱罗",
+      "晓大蛇丸": "晓大蛇丸",
+      "百豪樱": "百豪樱",
+      "照美冥": "照美冥",
+      "鹰小队佐助": "鹰小队佐助",
+      "奇拉比": "奇拉比",
+      "仙人鸣人": "仙人鸣人",
+      "神威卡卡西": "神威卡卡西",
+      "止水": "止水",
+      "小南": "小南",
+      "迪达拉": "迪达拉",
+      "鼬": "鼬",
+      "凯": "凯"
+    },
+    "CCharacterFragments": {
+      "name": "BattleOrder.CCharacterFragments.name",
+      "help": "BattleOrder.CCharacterFragments.help",
+      "左近右近": "左近右近",
+      "火花": "火花",
+      "学员鸣人": "学员鸣人",
+      "山城青叶": "山城青叶",
+      "鬼童丸": "鬼童丸",
+      "青": "青",
+      "萨克镫": "萨克镫",
+      "托斯砧": "托斯砧"
     }
   },
   "PrivilegeStore": {

@@ -1,10 +1,6 @@
 from module.logger import logger
-from module.ocr.ocr import Ocr
 from module.ui.draggable_list import DraggableList
-
-from tasks.activity.assets.assets_activity_ui import MONTHLY_SIGN_IN_CHECK
-
-from tasks.base.character_keyword import CharacterTab, OcrCharacterTab
+from tasks.base.character_keyword import ACharacterTab, CCharacterTab,OcrCharacterTab, SCharacterTab
 from tasks.battle_order.assets.assets_battle_order_claim import BATTLE_ORDER_CHARACTER_LIST_AREA, \
     BATTLE_ORDER_CHECK_STATUS
 
@@ -31,15 +27,33 @@ class DraggableCharacterTabList(DraggableList):
         for i, button in enumerate(self.cur_buttons):
             logger.info(f'Tab {i}: {button.matched_keyword}')
     def search_rows(self, main,keyword):
-        if CHARACTER_TAB_LIST.insight_row(keyword, main=main):
+        if self.insight_row(keyword, main=main):
             logger.info('Successfully navigated to'+keyword.cn)
-            if CHARACTER_TAB_LIST.select_row(keyword, main=main):
+            if self.select_row(keyword, main=main):
                 logger.info('Successfully selected '+keyword.cn)
 
         # 创建活动标签页列表实例
-CHARACTER_TAB_LIST = DraggableCharacterTabList(
-    name='CharacterTabList',
-    keyword_class=CharacterTab,
+S_CHARACTER_TAB_LIST = DraggableCharacterTabList(
+    name='SLevelCharacterTabList',
+    keyword_class=SCharacterTab,
+    ocr_class=OcrCharacterTab,
+    search_button=BATTLE_ORDER_CHARACTER_LIST_AREA,
+    check_row_order=False,
+    active_color=(247, 255, 173),
+    drag_direction="down"
+)
+A_CHARACTER_TAB_LIST = DraggableCharacterTabList(
+    name='ALevelCharacterTabList',
+    keyword_class=ACharacterTab,
+    ocr_class=OcrCharacterTab,
+    search_button=BATTLE_ORDER_CHARACTER_LIST_AREA,
+    check_row_order=False,
+    active_color=(247, 255, 173),
+    drag_direction="down"
+)
+C_CHARACTER_TAB_LIST = DraggableCharacterTabList(
+    name='CLevelCharacterTabList',
+    keyword_class=CCharacterTab,
     ocr_class=OcrCharacterTab,
     search_button=BATTLE_ORDER_CHARACTER_LIST_AREA,
     check_row_order=False,

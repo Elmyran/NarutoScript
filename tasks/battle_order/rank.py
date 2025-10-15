@@ -1,5 +1,5 @@
+import time
 from module.base.timer import Timer
-from module.device.app_control import AppControl
 from module.exception import GameStuckError
 from module.logger import logger
 from tasks.base.assets.assets_base_page import FULL_SCREEN
@@ -16,20 +16,21 @@ class BattleOrderRank(UI):
         self._handle_battle_order_rank_like()
         self._handle_battle_order_share()
     def _handle_battle_order_rank_like(self):
-        time=Timer(20,count=20).start()
+        time=Timer(2,4).start()
         for _ in self.loop():
             if time.reached():
-                raise GameStuckError("BATTLE ORDER RANK LIKE STUCK")
-            if BATTLE_ORDER_RANK_HAVE_LIKED.match_template_luma(self.device.image,direct_match=True):
                 break
-            if self.appear_then_click(BATTLE_ORDER_RANK_LIKE_BUTTON,interval=0):
-                continue
-            if self.appear_then_click(BATTLE_ORDER_GOTO_RANK,interval=0):
+            if self.match_template_color(BATTLE_ORDER_RANK_LIKE_BUTTON,interval=0):
+                self.device.click(BATTLE_ORDER_RANK_LIKE_BUTTON)
+                time.reset()
                 continue
 
     def _handle_battle_order_share(self):
+        packages = self.device.list_package() 
+        if not 'com.tencent.mobileqq' in packages:
+           logger.info('QQ not installed')  
+           return True
         for _ in self.loop():
-
             if self.appear_then_click(BATTLE_ORDER_SHARE_GOTO_QQ):
                 continue
             BATTLE_ORDER_RANK_GOTO_SHARE.load_search(FULL_SCREEN.area)
@@ -51,7 +52,6 @@ class BattleOrderRank(UI):
 
         click_interval=Timer(2).start()
         for _   in self.loop():
-   
             if self.ui_page_appear(page_battle_order_rank):
                 break
             if click_interval.reached():

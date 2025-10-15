@@ -16,13 +16,22 @@ ACTIVITY_GOTO_MONTHLY_SIGN_IN = ButtonWrapper(
 )
 MONTHLY_SIGN_IN_BUTTON = ButtonWrapper(
     name='MONTHLY_SIGN_IN_BUTTON',
-    cn=Button(
-        file='./assets/cn/freebies/monthly_sign_in/MONTHLY_SIGN_IN_BUTTON.png',
-        area=(1107, 549, 1267, 608),
-        search=(1087, 529, 1280, 628),
-        color=(207, 135, 11),
-        button=(1107, 549, 1267, 608),
-    ),
+    cn=[
+        Button(
+            file='./assets/cn/freebies/monthly_sign_in/MONTHLY_SIGN_IN_BUTTON.png',
+            area=(1107, 549, 1267, 608),
+            search=(1087, 529, 1280, 628),
+            color=(207, 135, 11),
+            button=(1107, 549, 1267, 608),
+        ),
+        Button(
+            file='./assets/cn/freebies/monthly_sign_in/MONTHLY_SIGN_IN_BUTTON.2.png',
+            area=(1111, 549, 1262, 603),
+            search=(1091, 529, 1280, 623),
+            color=(214, 142, 13),
+            button=(1111, 549, 1262, 603),
+        ),
+    ],
     en=None,
 )
 MONTHLY_SIGN_IN_HAVE_DONE = ButtonWrapper(
@@ -34,6 +43,26 @@ MONTHLY_SIGN_IN_HAVE_DONE = ButtonWrapper(
         color=(206, 178, 121),
         button=(1138, 552, 1246, 608),
     ),
+    en=None,
+)
+MONTHLY_SIGN_IN_NOT_REACH_REQUIRE = ButtonWrapper(
+    name='MONTHLY_SIGN_IN_NOT_REACH_REQUIRE',
+    cn=[
+        Button(
+            file='./assets/cn/freebies/monthly_sign_in/MONTHLY_SIGN_IN_NOT_REACH_REQUIRE.png',
+            area=(1120, 583, 1256, 616),
+            search=(1100, 563, 1276, 636),
+            color=(167, 155, 132),
+            button=(1120, 583, 1256, 616),
+        ),
+        Button(
+            file='./assets/cn/freebies/monthly_sign_in/MONTHLY_SIGN_IN_NOT_REACH_REQUIRE.2.png',
+            area=(1108, 549, 1266, 606),
+            search=(1088, 529, 1280, 626),
+            color=(213, 140, 11),
+            button=(1108, 549, 1266, 606),
+        ),
+    ],
     en=None,
 )
 MONTHLY_SIGN_IN_TITLE_HAVE_CLAIM = ButtonWrapper(

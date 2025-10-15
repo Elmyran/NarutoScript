@@ -246,7 +246,9 @@
     },
     "BattleOrder": {
       "LikeAndShare": true,
-      "CharacterFragments": "秽土长门"
+      "SCharacterFragments": "秽土长门",
+      "ACharacterFragments": "青年水门",
+      "CCharacterFragments": "左近右近"
     },
     "BattleOrderStorage": {
       "BattleOrderRank": {},

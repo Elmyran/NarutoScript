@@ -47,6 +47,16 @@ BATTLE_FIELD_FINISHED = ButtonWrapper(
     ),
     en=None,
 )
+BATTLE_FIELD_MASK = ButtonWrapper(
+    name='BATTLE_FIELD_MASK',
+    share=Button(
+        file='./assets/share/organization/battlefield/BATTLE_FIELD_MASK.png',
+        area=(0, 0, 1280, 720),
+        search=(0, 0, 1280, 720),
+        color=(38, 36, 36),
+        button=(0, 0, 1280, 720),
+    ),
+)
 BATTLE_FIELD_REWARD_CHECK = ButtonWrapper(
     name='BATTLE_FIELD_REWARD_CHECK',
     cn=Button(
@@ -134,16 +144,6 @@ BATTLE_FIELD_TYPE_CONFIRM = ButtonWrapper(
         button=(426, 416, 618, 485),
     ),
     en=None,
-)
-BATTLE_FILED_MASK = ButtonWrapper(
-    name='BATTLE_FILED_MASK',
-    share=Button(
-        file='./assets/share/organization/battlefield/BATTLE_FILED_MASK.png',
-        area=(0, 0, 1280, 720),
-        search=(0, 0, 1280, 720),
-        color=(38, 36, 36),
-        button=(0, 0, 1280, 720),
-    ),
 )
 INSPIRED_BUTTON = ButtonWrapper(
     name='INSPIRED_BUTTON',

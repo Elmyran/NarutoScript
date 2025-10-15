@@ -169,8 +169,7 @@ class BattleField(UI,CharacterCircleDetector):
                 continue
             
             if occupied==False :
-                image = cv2.bitwise_and(self.device.image, self.device.image, mask=self.mask_interact) 
-                if BATTLE_FIELD_EMPTY.match_template(image,direct_match=True):
+                if BATTLE_FIELD_EMPTY.match_template(self.device.image,direct_match=True):
                     self.device.click(BATTLE_FIELD_EMPTY)
                     continue
             

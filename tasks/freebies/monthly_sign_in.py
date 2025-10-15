@@ -1,7 +1,6 @@
 
 
 from module.ocr.ocr import DigitCounter
-from tasks.activity.assets.assets_activity import ACTIVITY_CHECK
 from tasks.freebies.assets.assets_freebies_monthly_sign_in import *
 from tasks.activity.draglist import ACTIVITY_TAB_LIST
 from tasks.activity.activity_keyword import  MeiYueQianDaoKeyword
@@ -28,20 +27,26 @@ class MonthlySignIn(UI):
                     timeout=Timer(1.5, count=5)  
                 )   
         ACTIVITY_TAB_LIST.search_rows(main=self,keyword=MeiYueQianDaoKeyword)
+        self._sign_in()
+        self._monthly_title_claim()
+        self.config.stored.MonthlySignInFinishCount.add()
+    def _sign_in(self):
+        for _ in self.loop():
+            if self.appear(MONTHLY_SIGN_IN_NOT_REACH_REQUIRE):
+                break
+            if self.appear(MONTHLY_SIGN_IN_HAVE_DONE):
+                break
+            if self.appear_then_click(MONTHLY_SIGN_IN_BUTTON,interval=1):
+                continue
+    def _monthly_title_claim(self):
         ocr=MonthlySignInOcr(SIGN_IN_PROGRESS)
         click_interval=Timer(1).start()
         for _ in self.loop():
             if self.appear(MONTHLY_SIGN_IN_TITLE_HAVE_CLAIM):
                 break
-            if self.appear_then_click(MONTHLY_SIGN_IN_BUTTON,interval=0):
-                continue
             current,remain,total=ocr.ocr_single_line(self.device.image)
             if remain==0 and total!=0:
                 if click_interval.reached():
                     self.device.click(SIGN_IN_PROGRESS)
                     click_interval.reset()
                 continue
-            if self.appear(MONTHLY_SIGN_IN_HAVE_DONE):
-                break
-        self.ui_goto_main()
-        self.config.stored.MailRewardFinishCount.add()

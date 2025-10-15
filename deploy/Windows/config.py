@@ -123,7 +123,7 @@ class DeployConfig(ConfigModel):
         """
         # Bypass webui.config.DeployConfig.__setattr__()
         # Don't write these into deploy.yaml
-        super().__setattr__('GitOverCdn', self.Repository in ['cn'])
+        #super().__setattr__('GitOverCdn', self.Repository in ['cn'])
         if self.Repository in ['global', 'cn']:
             super().__setattr__('Repository', 'https://gitee.com/Elmyran/NarutoScript')
 
