@@ -13,9 +13,15 @@ class DailyShare(UI):
             self.config.stored.DailyShareFinishCount.clear()
         if self.config.stored.DailyShareFinishCount.is_full():
             return True
+        self._share()
+        self.config.stored.DailyShareFinishCount.add()
+    def _share(self):
+        packages = self.device.list_package() 
+        if not 'com.tencent.mobileqq' in packages:  
+           logger.info('QQ not installed')
+           return True
         self.device.click_record_clear()
         self.ui_ensure(page_panel)
-
         time=Timer(30,count=30).start()
         for _ in self.loop():
             if time.reached():
@@ -50,10 +56,7 @@ class DailyShare(UI):
             if click_interval.reached():
                 self.device.click(SHARE_GOTO_QQ)
                 click_interval.reset()
-        self.ui_goto_main()
-        self.config.stored.DailyShareFinishCount.add()
         
-
 
 
 
