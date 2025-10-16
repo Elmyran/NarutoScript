@@ -39,7 +39,6 @@ class Freebies(ModuleBase):
             logger.hr('Zhao Cai Free', level=1)
             from tasks.freebies.zhaocai import ZhaoCaiFree
             ZhaoCaiFree(config=self.config, device=self.device).handle_zhao_cai()
-        
         if self.config.LeaderBoard_LeaderBoardclaim:
             logger.hr('Leader Board', level=1)
             from tasks.freebies.leaderboard import LeaderBoard
@@ -47,16 +46,16 @@ class Freebies(ModuleBase):
             if not res:
                 five_minutes_later = datetime.now() + timedelta(minutes=5)
                 delay_time = nearest_future([delay_time, five_minutes_later])        
-        if self.config.MonthlySignIn_MonthlySignIn:
-            logger.hr('Monthly Sign In', level=1)
-            from tasks.freebies.monthly_sign_in import MonthlySignIn
-            MonthlySignIn(config=self.config, device=self.device).handle_monthly_sign_in()
         if self.config.YiLeLaMian_YiLeLaMianClaim:
             logger.hr('Yi Le La Mian', level=1)
             from tasks.freebies.yi_le_la_mian import YiLeLaMian
             if not YiLeLaMian(config=self.config, device=self.device).handle_la_mian():
                 time = future_time("11:00")  
                 delay_time = nearest_future([delay_time, time])  
+        if self.config.MonthlySignIn_MonthlySignIn:
+            logger.hr('Monthly Sign In', level=1)
+            from tasks.freebies.monthly_sign_in import MonthlySignIn
+            MonthlySignIn(config=self.config, device=self.device).handle_monthly_sign_in()
         if self.config.DailyReward_Daily:
             logger.hr('Daily Reward', level=1)
             from tasks.freebies.dailyreward import DailyRewardClaim
