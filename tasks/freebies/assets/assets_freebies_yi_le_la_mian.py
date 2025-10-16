@@ -41,23 +41,47 @@ RAMEN_TAB_CHECK = ButtonWrapper(
     ),
     en=None,
 )
-REMEN_CLAIM_DONE = ButtonWrapper(
-    name='REMEN_CLAIM_DONE',
-    cn=[
-        Button(
-            file='./assets/cn/freebies/yi_le_la_mian/REMEN_CLAIM_DONE.png',
-            area=(218, 271, 381, 468),
-            search=(198, 251, 401, 488),
-            color=(167, 129, 82),
-            button=(218, 271, 381, 468),
-        ),
-        Button(
-            file='./assets/cn/freebies/yi_le_la_mian/REMEN_CLAIM_DONE.2.png',
-            area=(212, 266, 405, 470),
-            search=(192, 246, 425, 490),
-            color=(161, 122, 75),
-            button=(212, 266, 405, 470),
-        ),
-    ],
+REMEN_CLAIM_DONE_1 = ButtonWrapper(
+    name='REMEN_CLAIM_DONE_1',
+    cn=Button(
+        file='./assets/cn/freebies/yi_le_la_mian/REMEN_CLAIM_DONE_1.png',
+        area=(258, 330, 321, 437),
+        search=(238, 310, 341, 457),
+        color=(194, 181, 143),
+        button=(258, 330, 321, 437),
+    ),
+    en=None,
+)
+REMEN_CLAIM_DONE_2 = ButtonWrapper(
+    name='REMEN_CLAIM_DONE_2',
+    cn=Button(
+        file='./assets/cn/freebies/yi_le_la_mian/REMEN_CLAIM_DONE_2.png',
+        area=(548, 326, 609, 438),
+        search=(528, 306, 629, 458),
+        color=(195, 181, 143),
+        button=(548, 326, 609, 438),
+    ),
+    en=None,
+)
+REMEN_CLAIM_DONE_3 = ButtonWrapper(
+    name='REMEN_CLAIM_DONE_3',
+    cn=Button(
+        file='./assets/cn/freebies/yi_le_la_mian/REMEN_CLAIM_DONE_3.png',
+        area=(838, 330, 895, 437),
+        search=(818, 310, 915, 457),
+        color=(190, 177, 140),
+        button=(838, 330, 895, 437),
+    ),
+    en=None,
+)
+REMEN_SOLD_OUT = ButtonWrapper(
+    name='REMEN_SOLD_OUT',
+    cn=Button(
+        file='./assets/cn/freebies/yi_le_la_mian/REMEN_SOLD_OUT.png',
+        area=(212, 266, 405, 470),
+        search=(192, 246, 425, 490),
+        color=(161, 122, 75),
+        button=(212, 266, 405, 470),
+    ),
     en=None,
 )

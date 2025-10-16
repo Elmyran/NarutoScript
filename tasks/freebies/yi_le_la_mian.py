@@ -18,8 +18,8 @@ class YiLeLaMian(UI):
             self.config.stored.YiLeLaMianFinishCount.clear()
         if self.config.stored.YiLeLaMianFinishCount.is_full():
             return True
-        self._claim()
-        self.config.stored.YiLeLaMianFinishCount.add()
+        if self._claim():
+            self.config.stored.YiLeLaMianFinishCount.add()
         return True
     def _claim(self):
         self.ui_ensure(page_activity)
@@ -27,15 +27,15 @@ class YiLeLaMian(UI):
         time=Timer(10,20).start()
         for _ in  self.loop():
             if time.reached():
-                break
-            REMEN_CLAIM_DONE.load_search(ACTIVITY_DETAIL_AREA.area)
-            res=REMEN_CLAIM_DONE.match_multi_template(self.device.image,similarity=0.9)
-            if res and len(res)==3:
+                logger.info(f'Ramen Claim  timeout')
+                return False
+            if self.is_claim_done():
                 break
             if self.appear_then_click(RAMEN_CLAIM,interval=1):
                 continue
-        
         return True
+    def is_claim_done(self):
+        return self.appear(REMEN_CLAIM_DONE_1) and self.appear(REMEN_CLAIM_DONE_2) and self.appear(REMEN_CLAIM_DONE_3)
 
 
 
