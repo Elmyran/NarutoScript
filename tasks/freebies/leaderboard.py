@@ -1,4 +1,5 @@
 
+from re import L
 from module.base.timer import Timer
 from tasks.base.page import page_manual,page_leader_board
 
@@ -23,16 +24,17 @@ class LeaderBoard(UI):
         self.ui_ensure(page_manual)
         TASK_TAB_LIST.search_rows(self, LeaderBoardKeyword)
         self.ui_ensure(page_leader_board)
-        time=Timer(2, count=4).start()    
         for _ in self.loop():
-            if time.reached():
+            if not self.image_color_count(LIKE_BUTTON_AREA,color=(65,103,149)):
                 break
             LEADER_BOARD_LIKE_BUTTON.load_search(LIKE_BUTTON_AREA.area)
             if self.match_template_color(LEADER_BOARD_LIKE_BUTTON):
                 self.device.click(LEADER_BOARD_LIKE_BUTTON)
-                time.reset()
                 continue
         return True
+
+
+
 
 
 

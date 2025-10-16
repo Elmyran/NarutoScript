@@ -36,26 +36,6 @@ LEADER_BOARD_EXIT = ButtonWrapper(
     ),
     en=None,
 )
-LEADER_BOARD_HAVE_LIKED = ButtonWrapper(
-    name='LEADER_BOARD_HAVE_LIKED',
-    cn=[
-        Button(
-            file='./assets/cn/freebies/leaderboard/LEADER_BOARD_HAVE_LIKED.png',
-            area=(1145, 148, 1247, 223),
-            search=(1125, 128, 1267, 243),
-            color=(195, 140, 65),
-            button=(1145, 148, 1247, 223),
-        ),
-        Button(
-            file='./assets/cn/freebies/leaderboard/LEADER_BOARD_HAVE_LIKED.2.png',
-            area=(1162, 171, 1215, 207),
-            search=(1142, 151, 1235, 227),
-            color=(155, 73, 43),
-            button=(1162, 171, 1215, 207),
-        ),
-    ],
-    en=None,
-)
 LEADER_BOARD_LIKE_BUTTON = ButtonWrapper(
     name='LEADER_BOARD_LIKE_BUTTON',
     cn=Button(
@@ -76,25 +56,5 @@ LIKE_BUTTON_AREA = ButtonWrapper(
         color=(154, 152, 125),
         button=(1141, 144, 1243, 560),
     ),
-    en=None,
-)
-MAIN_GOTO_LEADER_BOARD = ButtonWrapper(
-    name='MAIN_GOTO_LEADER_BOARD',
-    cn=[
-        Button(
-            file='./assets/cn/freebies/leaderboard/MAIN_GOTO_LEADER_BOARD.png',
-            area=(774, 109, 815, 201),
-            search=(754, 89, 835, 221),
-            color=(108, 114, 114),
-            button=(774, 109, 815, 201),
-        ),
-        Button(
-            file='./assets/cn/freebies/leaderboard/MAIN_GOTO_LEADER_BOARD.2.png',
-            area=(742, 114, 777, 209),
-            search=(722, 94, 797, 229),
-            color=(80, 88, 100),
-            button=(742, 114, 777, 209),
-        ),
-    ],
     en=None,
 )
