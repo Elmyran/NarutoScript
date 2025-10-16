@@ -85,6 +85,28 @@ MI_JING_REWARD_AREA = ButtonWrapper(
     ),
     en=None,
 )
+MI_JING_REWARD_CLAIM = ButtonWrapper(
+    name='MI_JING_REWARD_CLAIM',
+    cn=Button(
+        file='./assets/cn/ren_zhe_tiao_zhan/MI_JING_REWARD_CLAIM.png',
+        area=(260, 280, 318, 354),
+        search=(240, 260, 338, 374),
+        color=(149, 91, 85),
+        button=(15, 660, 147, 715),
+    ),
+    en=None,
+)
+MI_JING_REWARD_CLIAM_AREA = ButtonWrapper(
+    name='MI_JING_REWARD_CLIAM_AREA',
+    cn=Button(
+        file='./assets/cn/ren_zhe_tiao_zhan/MI_JING_REWARD_CLIAM_AREA.png',
+        area=(215, 230, 1036, 518),
+        search=(195, 210, 1056, 538),
+        color=(39, 32, 35),
+        button=(215, 230, 1036, 518),
+    ),
+    en=None,
+)
 MI_JING_REWARD_EXIT = ButtonWrapper(
     name='MI_JING_REWARD_EXIT',
     cn=[
