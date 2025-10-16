@@ -277,18 +277,21 @@ class NemuIpcImpl:
                 
                 # connect_id == 0,IPC 服务未就绪    
                 if attempt < RETRY_TRIES - 1:  
-                    delay = retry_sleep(attempt)  
+                    delay = retry_sleep(attempt)
+                    if attempt==RETRY_TRIES - 2:
+                        delay+=RETRY_TRIES  
                     logger.warning(    
                         f'NemuIpc connection attempt {attempt + 1}/{RETRY_TRIES} failed, '    
                         f'retrying in {delay:.1f}s...'    
-                    )    
-                    time.sleep(delay)    
+                    )
+                    time.sleep(delay)
+                
                     
             except JobTimeout:    
                 if attempt < RETRY_TRIES - 1:  
                     delay = retry_sleep(attempt)  
                     logger.warning(f'NemuIpc connection timeout, retrying in {delay:.1f}s...')    
-                    time.sleep(delay)    
+                    time.sleep(delay)
                 else:    
                     raise NemuIpcError('Connection timeout after retries')    
         
