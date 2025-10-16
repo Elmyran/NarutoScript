@@ -90,10 +90,15 @@ class MiJing(UI):
         for _ in self.loop():
             self.device.click_record_remove(MI_JING_REWARD_EXIT)
             self.device.click_record_remove(MI_JING_SUCCESS)
+            self.device.click_record_remove(MI_JING_REWARD_CLAIM)
             MI_JING_REWARD_EXIT.load_search(MI_JING_REWARD_AREA.area)
             if self.appear(MI_JING_REWARD_EXIT,interval=1):
                 MI_JING_REWARD_EXIT.clear_offset()
                 self.device.click(MI_JING_REWARD_EXIT)
+                continue
+            if self.appear(MI_JING_REWARD_CLAIM,interval=1):
+                MI_JING_REWARD_CLAIM.clear_offset()
+                self.device.click(MI_JING_REWARD_CLAIM)
                 continue
             MI_JING_SUCCESS.load_search(MI_JING_REWARD_AREA.area)
             if self.appear(MI_JING_SUCCESS,interval=1):
