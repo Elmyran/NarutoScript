@@ -1,5 +1,6 @@
 
 
+from sympy import rem
 from module.ocr.ocr import DigitCounter
 from tasks.freebies.assets.assets_freebies_monthly_sign_in import *
 from tasks.activity.draglist import ACTIVITY_TAB_LIST
@@ -50,3 +51,5 @@ class MonthlySignIn(UI):
                     self.device.click(SIGN_IN_PROGRESS)
                     click_interval.reset()
                 continue
+            elif remain!=0 and total!=0:
+                break
