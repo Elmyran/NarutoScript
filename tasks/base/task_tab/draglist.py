@@ -16,6 +16,8 @@ class DraggableTaskTabList(DraggableList):
         return super().is_row_selected(button, main)
 
     def search_rows(self, main, keyword):
+        if not keyword:
+            return False
         self.adapt_special_ui(main)
         if TASK_TAB_LIST.insight_row(keyword, main=main):
             logger.info('Successfully navigated to ' + keyword.name + ' area')
