@@ -1,10 +1,6 @@
 import datetime
 from module.base.base import ModuleBase
 from module.logger import logger
-
-
-
-
 from module.config.utils import get_server_next_update, nearest_future 
 from module.base.timer import future_time  
 from datetime import datetime, timedelta  
@@ -22,15 +18,20 @@ class Freebies(ModuleBase):
             logger.hr('Daily Share', level=1)
             from tasks.freebies.dailyshare import DailyShare
             DailyShare(config=self.config, device=self.device).handle_daily_share()
-        if self.config.InformationClub_InformationClubSignIn:
-            logger.hr('Information Club', level=1)
-            from tasks.freebies.information_club import InformationClub
-            InformationClub(config=self.config, device=self.device).handle_information_club()
         if self.config.FriendGifts_FriendGiftsStart:
             logger.hr('Friend Gifts', level=1)
             from tasks.freebies.friendgifts import FriendGifts
             FriendGifts(config=self.config, device=self.device).handle_friend_gifts()
-        # To actually get RedemptionCode rewards, you need to receive the mail
+        if self.config.YiLeLaMian_YiLeLaMianClaim:
+            logger.hr('Yi Le La Mian', level=1)
+            from tasks.freebies.yi_le_la_mian import YiLeLaMian
+            if not YiLeLaMian(config=self.config, device=self.device).handle_la_mian():
+                time = future_time("11:00")  
+                delay_time = nearest_future([delay_time, time])
+        if self.config.InformationClub_InformationClubSignIn:
+            logger.hr('Information Club', level=1)
+            from tasks.freebies.information_club import InformationClub
+            InformationClub(config=self.config, device=self.device).handle_information_club()
         if  self.config.MailReward_MailRewardClaim:
             logger.hr('Mail Reward', level=1)
             from tasks.freebies.mail import MailReward
@@ -46,12 +47,6 @@ class Freebies(ModuleBase):
             if not res:
                 five_minutes_later = datetime.now() + timedelta(minutes=5)
                 delay_time = nearest_future([delay_time, five_minutes_later])        
-        if self.config.YiLeLaMian_YiLeLaMianClaim:
-            logger.hr('Yi Le La Mian', level=1)
-            from tasks.freebies.yi_le_la_mian import YiLeLaMian
-            if not YiLeLaMian(config=self.config, device=self.device).handle_la_mian():
-                time = future_time("11:00")  
-                delay_time = nearest_future([delay_time, time])  
         if self.config.MonthlySignIn_MonthlySignIn:
             logger.hr('Monthly Sign In', level=1)
             from tasks.freebies.monthly_sign_in import MonthlySignIn
