@@ -2,19 +2,16 @@
 from module.base.timer import Timer
 from module.logger import logger
 from module.ocr.ocr import Digit
-from tasks.base.page import page_survival_trail,page_manual
-from tasks.base.task_tab.draglist import TASK_TAB_LIST
-from tasks.base.task_tab.task_keyword import SurvivalChallengeKeyword
-from tasks.base.ui import UI
+from tasks.base.page import page_survival_trail
+from tasks.base.taskui import TaskUI
 from tasks.trail.assets.assets_trail import *
 from tasks.trail.assets.assets_trail_survival import *
 
 
-class SurvivalTrail(UI):
+
+class SurvivalTrail(TaskUI):
     def handle_survival_trail (self):
         self.device.click_record_clear()
-        self.ui_ensure(page_manual)
-        TASK_TAB_LIST.search_rows(main=self,keyword=SurvivalChallengeKeyword)
         self.ui_ensure(page_survival_trail)
         self.handle_teleport()
         self._mop_up()
@@ -78,5 +75,3 @@ class SurvivalTrail(UI):
             if self.appear_then_click(SURVIVAL_RESET_BUTTON,interval=2):
                 continue
         return True
-
-

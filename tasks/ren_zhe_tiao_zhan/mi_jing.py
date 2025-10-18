@@ -1,24 +1,17 @@
 from module.base.timer import Timer
-
 from module.ocr.ocr import Digit
 from tasks.base.assets.assets_base_page import FIGHT_CLOSE_CONFIRM, FIGHT_CLOSE
-from tasks.base.page import  page_mi_jing_room,page_manual
-
-
-from tasks.base.task_tab.draglist import TASK_TAB_LIST
-from tasks.base.task_tab.task_keyword import SecretRealmExplorationKeyword
-from tasks.base.ui import UI
+from tasks.base.page import  page_mi_jing_room
+from tasks.base.taskui import TaskUI
 from tasks.ren_zhe_tiao_zhan.assets.assets_ren_zhe_tiao_zhan import *
 from tasks.ren_zhe_tiao_zhan.auto_fight import AutoBattle
 from tasks.ren_zhe_tiao_zhan.ocr import MiJingOcr
-class MiJing(UI):
+class MiJing(TaskUI):
     def handle_mi_jing(self):
         if self.config.stored.MiJingCount.is_expired():
             self.config.stored.MiJingCount.clear()
         pre_count=self.config.stored.MiJingCount.value
         self.device.click_record_clear()
-        self.ui_ensure(page_manual)
-        TASK_TAB_LIST.search_rows(self,SecretRealmExplorationKeyword)
         self.ui_ensure(page_mi_jing_room)
         self._mi_jing_fight()
         if (self.config.stored.MiJingCount.value >= 6 > pre_count) or (

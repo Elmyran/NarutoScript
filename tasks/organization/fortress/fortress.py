@@ -7,9 +7,8 @@ from module.exception import GameStuckError
 from module.logger import logger
 from module.ocr.ocr import Digit
 from tasks.base.assets.assets_base_skill import *
-from tasks.base.page import page_fortress_select,page_manual
-from tasks.base.task_tab.draglist import TASK_TAB_LIST
-from tasks.base.task_tab.task_keyword import OrganizationKeyword
+from tasks.base.page import page_fortress_select
+from tasks.base.taskui import TaskUI
 from tasks.duel.assets.assets_duel import DUEL_EXCEPTION, DUEL_FIGHT_SUCCESS, DUEL_FIGHT_FAIL, \
     DUEL_FIGHT_END
 from tasks.organization.assets.assets_organization_fortress import *
@@ -17,7 +16,7 @@ from tasks.organization.assets.assets_organization_pray import  ORGANIZATION_PAN
 from tasks.organization.fortress.keywords import FortressNameKeyword
 from tasks.organization.fortress.navigation import FortressNavigation
 from tasks.ren_zhe_tiao_zhan.joystick import GameControl
-class Fortress(GameControl):
+class Fortress(GameControl,TaskUI):
     def run(self):
         next_saturday = get_nearest_weekday_date(5)
         saturday_8pm = next_saturday.replace(hour=20, minute=0, second=0, microsecond=0)
@@ -49,8 +48,6 @@ class Fortress(GameControl):
         return True
     def handle_organization_fortress(self):
         self.device.click_record_clear()
-        self.ui_ensure(page_manual)
-        TASK_TAB_LIST.search_rows(self,OrganizationKeyword)
         self.ui_ensure(page_fortress_select)
         self._fortress_select()
         self._fortress_goto_fight()

@@ -1,22 +1,16 @@
-
-from tasks.base.task_tab.task_keyword import MissionKeyword
 from module.base.button import ClickButton
 from module.base.timer import Timer
 from module.exception import GameStuckError
 from module.logger.logger import logger
 from module.ocr.ocr import   DigitCounter
 from module.ocr.utils import pair_buttons
-
 from tasks.base.page import page_mission
-from tasks.base.task_tab.draglist import TASK_TAB_LIST
-from tasks.base.task_tab.task_keyword import MissionKeyword
-from tasks.base.ui import UI
-from tasks.base.page import page_manual
+from tasks.base.taskui import TaskUI
 from tasks.mission.assets.assets_mission import *
 from tasks.mission.mission_keyword import Acceptable, MissionClaimable, TaskTime
 from tasks.mission.mission_ocr import  MissionDigit, MissionWhiteLetterOcr, MissionOcr
 from tasks.mission.priority import MissionTask, TaskPriority
-class Mission(UI):
+class Mission(TaskUI):
    
     def run(self):
         if self.config.stored.MissionAccept.is_expired():
@@ -35,10 +29,7 @@ class Mission(UI):
 
     def handle_mission(self):
         self.device.click_record_clear()
-        self.ui_ensure(page_manual)
-        TASK_TAB_LIST.search_rows(self,MissionKeyword)
         self.ui_ensure(page_mission)
-   
         self._mission_reward_claim()
         try:
             self.device.stuck_timer=Timer(180,count=180).start()
