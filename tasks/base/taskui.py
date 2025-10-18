@@ -53,8 +53,13 @@ class TaskUI(UI):
                     page_main.link(MAIN_GOTO_BACK_GAME, destination=page_back_game)  
                     page_back_game.link(BACK_GAME_GOTO_MANUAL, destination=page_manual) 
                     Page.init_connection(destination)
-                    current_page = self.ui_get_current_page()  
-                    next_page = current_page.parent 
+                elif self.appear(MAIN_GOTO_MANUAL):
+                    if page_back_game in page_main.links: 
+                         del page_main.links[page_back_game]
+                    page_main.link(MAIN_GOTO_MANUAL, destination=page_manual)
+                    Page.init_connection(destination)
+                current_page = self.ui_get_current_page()  
+                next_page = current_page.parent
                 return_player=True  
             if self.ui_page_appear(next_page): 
                 current_page = next_page 
