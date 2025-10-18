@@ -1,6 +1,5 @@
 import configparser
 import os
-
 from deploy.Windows.config import DeployConfig
 from deploy.Windows.logger import Progress, logger
 from deploy.Windows.utils import cached_property
