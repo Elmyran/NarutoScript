@@ -5,13 +5,22 @@ from module.base.button import Button, ButtonWrapper
 
 BACK_GAME_GOTO_MANUAL = ButtonWrapper(
     name='BACK_GAME_GOTO_MANUAL',
-    cn=Button(
-        file='./assets/cn/base/task_tab/BACK_GAME_GOTO_MANUAL.png',
-        area=(15, 637, 150, 673),
-        search=(0, 617, 170, 693),
-        color=(122, 89, 53),
-        button=(15, 637, 150, 673),
-    ),
+    cn=[
+        Button(
+            file='./assets/cn/base/task_tab/BACK_GAME_GOTO_MANUAL.png',
+            area=(15, 637, 150, 673),
+            search=(0, 617, 170, 693),
+            color=(122, 89, 53),
+            button=(15, 637, 150, 673),
+        ),
+        Button(
+            file='./assets/cn/base/task_tab/BACK_GAME_GOTO_MANUAL.2.png',
+            area=(50, 639, 145, 670),
+            search=(30, 619, 165, 690),
+            color=(114, 90, 60),
+            button=(50, 639, 145, 670),
+        ),
+    ],
     en=None,
 )
 MANUAL_GOTO_TASK_BUTTON = ButtonWrapper(

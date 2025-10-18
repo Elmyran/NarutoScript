@@ -5,13 +5,22 @@ from module.base.button import Button, ButtonWrapper
 
 BACK_GAME_CHECK = ButtonWrapper(
     name='BACK_GAME_CHECK',
-    share=Button(
-        file='./assets/share/base/page/BACK_GAME_CHECK.png',
-        area=(1, 0, 161, 114),
-        search=(0, 0, 181, 134),
-        color=(104, 84, 45),
-        button=(1, 0, 161, 114),
-    ),
+    share=[
+        Button(
+            file='./assets/share/base/page/BACK_GAME_CHECK.png',
+            area=(1, 0, 161, 114),
+            search=(0, 0, 181, 134),
+            color=(104, 84, 45),
+            button=(1, 0, 161, 114),
+        ),
+        Button(
+            file='./assets/share/base/page/BACK_GAME_CHECK.2.png',
+            area=(873, 690, 969, 718),
+            search=(853, 670, 989, 720),
+            color=(105, 84, 1),
+            button=(873, 690, 969, 718),
+        ),
+    ],
 )
 BATTLE_ORDER_CHECK = ButtonWrapper(
     name='BATTLE_ORDER_CHECK',

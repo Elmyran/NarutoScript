@@ -109,7 +109,7 @@ page_manual=Page(MANUAL_CHECK)
 page_main.link(MAIN_GOTO_MANUAL,destination=page_manual)
 page_manual.link(CLOSE,destination=page_main)
 #BackGame
-page_back_game=Page(BACK_GAME_GOTO_MANUAL)
+page_back_game=Page(BACK_GAME_CHECK)
 page_main.link(MAIN_GOTO_BACK_GAME,destination=page_back_game)
 page_back_game.link(BACK_GAME_GOTO_MANUAL,destination=page_manual)
 page_back_game.link(CLOSE,destination=page_main)
