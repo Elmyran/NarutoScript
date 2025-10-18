@@ -75,7 +75,3 @@ class CultivationMopUp(TaskUI):
             if self.appear(CULTIVATION_BOX):
                 self.device.click(CULTIVATION_BOX)
                 continue
-az=CultivationMopUp('ns',task='Alas')
-az.device.screenshot()
-from tasks.base.assets.assets_base_task_tab import BACK_GAME_GOTO_MANUAL
-print(az.match_template_color(BACK_GAME_GOTO_MANUAL))
