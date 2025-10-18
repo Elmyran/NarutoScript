@@ -1,6 +1,3 @@
-
-
-from sympy import rem
 from module.ocr.ocr import DigitCounter
 from tasks.freebies.assets.assets_freebies_monthly_sign_in import *
 from tasks.activity.draglist import ACTIVITY_TAB_LIST

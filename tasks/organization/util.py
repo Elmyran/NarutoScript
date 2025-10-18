@@ -1,5 +1,4 @@
 import numpy as np
-
 from module.base.base import ModuleBase
 
   

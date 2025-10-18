@@ -1,5 +1,4 @@
 from tasks.base.ui import UI
-
 from tasks.organization.pray import Pray
 
 

@@ -1,4 +1,3 @@
-
 from module.logger import logger
 from tasks.base.page import page_leader_board
 from tasks.base.taskui import TaskUI
