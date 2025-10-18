@@ -23,6 +23,17 @@ BACK_GAME_GOTO_MANUAL = ButtonWrapper(
     ],
     en=None,
 )
+BACK_GAME_MANUAL_CHECK = ButtonWrapper(
+    name='BACK_GAME_MANUAL_CHECK',
+    cn=Button(
+        file='./assets/cn/base/task_tab/BACK_GAME_MANUAL_CHECK.png',
+        area=(47, 635, 151, 672),
+        search=(27, 615, 171, 692),
+        color=(156, 142, 115),
+        button=(47, 635, 151, 672),
+    ),
+    en=None,
+)
 MANUAL_GOTO_TASK_BUTTON = ButtonWrapper(
     name='MANUAL_GOTO_TASK_BUTTON',
     cn=[
@@ -39,6 +50,13 @@ MANUAL_GOTO_TASK_BUTTON = ButtonWrapper(
             search=(911, 565, 1052, 635),
             color=(98, 80, 7),
             button=(931, 585, 1032, 615),
+        ),
+        Button(
+            file='./assets/cn/base/task_tab/MANUAL_GOTO_TASK_BUTTON.3.png',
+            area=(931, 584, 1036, 616),
+            search=(911, 564, 1056, 636),
+            color=(93, 76, 9),
+            button=(931, 584, 1036, 616),
         ),
     ],
     en=None,

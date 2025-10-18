@@ -17,6 +17,7 @@ class DraggableTaskTabList(DraggableList):
 
     def search_rows(self, main, keyword):
         if not keyword:
+            logger.info('No keyword provided')
             return False
         self.adapt_special_ui(main)
         if TASK_TAB_LIST.insight_row(keyword, main=main):
@@ -31,7 +32,8 @@ class DraggableTaskTabList(DraggableList):
             logger.error(f'Failed to find {keyword.name} in task list')
             return False
     def adapt_special_ui(self, main):
-        if main.appear(BACK_GAME_CHECK):
+        if main.appear(BACK_GAME_MANUAL_CHECK):
+            logger.info('Adapt special ui for return player')
             self.search_button=MANUAL_TAB_SEARCH_AREA_FOR_BACK_GAME
             main.wait_until_stable(self.search_button,
                                    timer=Timer(0, count=0),

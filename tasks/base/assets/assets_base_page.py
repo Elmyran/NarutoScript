@@ -8,17 +8,17 @@ BACK_GAME_CHECK = ButtonWrapper(
     share=[
         Button(
             file='./assets/share/base/page/BACK_GAME_CHECK.png',
-            area=(1, 0, 161, 114),
-            search=(0, 0, 181, 134),
-            color=(104, 84, 45),
-            button=(1, 0, 161, 114),
-        ),
-        Button(
-            file='./assets/share/base/page/BACK_GAME_CHECK.2.png',
             area=(873, 690, 969, 718),
             search=(853, 670, 989, 720),
             color=(105, 84, 1),
             button=(873, 690, 969, 718),
+        ),
+        Button(
+            file='./assets/share/base/page/BACK_GAME_CHECK.2.png',
+            area=(1023, 690, 1151, 717),
+            search=(1003, 670, 1171, 720),
+            color=(100, 80, 3),
+            button=(1023, 690, 1151, 717),
         ),
     ],
 )
@@ -206,10 +206,10 @@ MAIN_GOTO_BACK_GAME = ButtonWrapper(
     name='MAIN_GOTO_BACK_GAME',
     share=Button(
         file='./assets/share/base/page/MAIN_GOTO_BACK_GAME.png',
-        area=(1021, 641, 1059, 702),
-        search=(1001, 621, 1079, 720),
-        color=(122, 113, 85),
-        button=(1021, 641, 1059, 702),
+        area=(976, 683, 1073, 710),
+        search=(956, 663, 1093, 720),
+        color=(106, 100, 34),
+        button=(976, 683, 1073, 710),
     ),
 )
 MAIN_GOTO_BATTLE_ORDER = ButtonWrapper(

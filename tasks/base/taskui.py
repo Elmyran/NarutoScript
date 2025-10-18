@@ -12,7 +12,7 @@ page_cultivation:CultivationPathKeyword,
 page_feng_rao:FengRaoKeyword,
 page_mi_jing:SecretRealmExplorationKeyword,
 page_leader_board:LeaderBoardKeyword,
-page_organization:OrganizationKeyword,
+page_organization_panel:OrganizationKeyword,
 page_ninjutsu:NinjaBattleKeyword,
 page_squad:SquadRaidKeyword,
 page_mission:MissionKeyword,
@@ -29,11 +29,10 @@ class TaskUI(UI):
         # Create connection
         Page.init_connection(destination)
         self.interval_clear(list(Page.iter_check_buttons()))
-        current_page=self.ui_get_current_page()
-        next_page = current_page.parent
         logger.hr(f"UI goto {destination}")
         draglist_once=False
-        return_player=False
+        current_page = self.ui_get_current_page()
+        next_page = current_page.parent
         while 1:
             if skip_first_screenshot:
                 skip_first_screenshot = False
@@ -46,21 +45,12 @@ class TaskUI(UI):
                 if self.ui_page_confirm(destination):
                     logger.info(f'Page arrive confirm {destination}')
                 break
-            if not return_player and self.ui_page_appear(page_main):
-                if self.appear(MAIN_GOTO_BACK_GAME):
-                    if page_manual in page_main.links:
-                        del page_main.links[page_manual] 
-                    page_main.link(MAIN_GOTO_BACK_GAME, destination=page_back_game)  
-                    page_back_game.link(BACK_GAME_GOTO_MANUAL, destination=page_manual) 
-                    Page.init_connection(destination)
-                elif self.appear(MAIN_GOTO_MANUAL):
-                    if page_back_game in page_main.links: 
-                         del page_main.links[page_back_game]
-                    page_main.link(MAIN_GOTO_MANUAL, destination=page_manual)
-                    Page.init_connection(destination)
-                current_page = self.ui_get_current_page()  
-                next_page = current_page.parent
-                return_player=True  
+            if current_page == page_main and next_page == page_manual:
+                if self.appear_then_click(MAIN_GOTO_BACK_GAME):
+                    continue
+                if self.match_template_color(BACK_GAME_GOTO_MANUAL,interval=5):
+                    self.device.click(BACK_GAME_GOTO_MANUAL)
+                    continue                   
             if self.ui_page_appear(next_page): 
                 current_page = next_page 
                 next_page = current_page.parent
