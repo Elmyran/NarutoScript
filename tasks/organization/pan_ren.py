@@ -1,7 +1,5 @@
 
 from datetime import datetime
-
-
 from module.base.timer import Timer
 from module.config.utils import get_nearest_weekday_date, get_server_weekday, server_time_offset
 from module.exception import GameStuckError
@@ -9,14 +7,13 @@ from module.logger import logger
 from module.ocr.ocr import Digit
 from tasks.base.assets.assets_base_code_second import CODE_SECOND_PASSWORD
 from tasks.base.assets.assets_base_page import FULL_SCREEN
-from tasks.base.page import page_organization_panel,page_manual
-from tasks.base.task_tab.draglist import TASK_TAB_LIST
-from tasks.base.task_tab.task_keyword import OrganizationKeyword
+from tasks.base.page import page_organization_panel
+from tasks.base.taskui import TaskUI
 from tasks.organization.assets.assets_organization import *
 from tasks.organization.assets.assets_organization_pan_ren import *
 from tasks.organization.assets.assets_organization_pray import *
 from tasks.ren_zhe_tiao_zhan.joystick import GameControl
-class OrganizationPanRen(GameControl):
+class OrganizationPanRen(GameControl,TaskUI):
     def run(self):
         next_wednesday = get_nearest_weekday_date(2)
         next_saturday = get_nearest_weekday_date(5)
@@ -63,8 +60,6 @@ class OrganizationPanRen(GameControl):
     def handle_organization_pan_ren(self):
         self.device.click_record_clear()
         self.device.stuck_record_clear()
-        self.ui_ensure(page_manual)
-        TASK_TAB_LIST.search_rows(self,OrganizationKeyword)
         self.ui_ensure(page_organization_panel)
         self._organization_enter()
         self.device.stuck_timer = Timer(900, count=900).start()

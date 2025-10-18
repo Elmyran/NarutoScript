@@ -1,20 +1,14 @@
-
-
 from module.base.timer import Timer
 from module.exception import GameStuckError
 from module.ocr.ocr import  DigitCounter
-from tasks.base.page import page_squad,  page_manual
-from tasks.base.task_tab.draglist import TASK_TAB_LIST
-from tasks.base.task_tab.task_keyword import SquadRaidKeyword
-from tasks.base.ui import UI
+from tasks.base.page import page_squad
+from tasks.base.taskui import TaskUI
 from tasks.squadraid.assets.assets_squadraid_fight import *
 from tasks.squadraid.benefit import HelpBattleBenefit
 
-class SquadRaidFight(UI):
+class SquadRaidFight(TaskUI):
     def handle_squad_raid(self):
         self.device.click_record_clear()
-        self.ui_ensure(page_manual)
-        TASK_TAB_LIST.search_rows(self,SquadRaidKeyword)
         self.ui_ensure(page_squad)
         for _ in self.loop():
            if not self._squad_raid_fight():

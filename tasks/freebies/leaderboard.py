@@ -1,15 +1,10 @@
-
-from re import L
-from module.base.timer import Timer
-from tasks.base.page import page_manual,page_leader_board
-
-from tasks.base.task_tab.draglist import TASK_TAB_LIST
-from tasks.base.task_tab.task_keyword import LeaderBoardKeyword
-from tasks.base.ui import UI
+from module.logger import logger
+from tasks.base.page import page_leader_board
+from tasks.base.taskui import TaskUI
 from tasks.freebies.assets.assets_freebies_leaderboard import *
 
 
-class LeaderBoard(UI):
+class LeaderBoard(TaskUI):
     def run(self):
         if self.config.stored.LeaderBoardFinishCount.is_expired():
             self.config.stored.LeaderBoardFinishCount.clear()
@@ -21,9 +16,12 @@ class LeaderBoard(UI):
         return True
     def handle_leader_board(self):
         self.device.click_record_clear()
-        self.ui_ensure(page_manual)
-        TASK_TAB_LIST.search_rows(self, LeaderBoardKeyword)
         self.ui_ensure(page_leader_board)
+        for _ in self.loop():
+            LEADER_BOARD_LIKE_BUTTON.load_search(LIKE_BUTTON_AREA.area)
+            if self.appear(LEADER_BOARD_LIKE_BUTTON):
+                logger.info('waiting for like button')
+                break
         for _ in self.loop():
             if not self.image_color_count(LIKE_BUTTON_AREA,color=(65,103,149)):
                 break
@@ -32,6 +30,9 @@ class LeaderBoard(UI):
                 self.device.click(LEADER_BOARD_LIKE_BUTTON)
                 continue
         return True
+
+
+
 
 
 

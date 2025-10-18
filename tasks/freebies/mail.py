@@ -1,9 +1,6 @@
-from module.base import button
 from module.base.timer import Timer
-from module.exception import GameStuckError
 from module.logger import logger
-
-from tasks.base.page import  page_main, page_mail
+from tasks.base.page import page_mail
 from tasks.base.ui import UI
 from tasks.freebies.assets.assets_freebies_mail import *
 

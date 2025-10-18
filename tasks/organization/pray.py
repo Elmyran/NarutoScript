@@ -1,16 +1,11 @@
 import cv2
 import numpy as np
-
 from module.base.timer import Timer
 from module.base.utils import color_similarity_2d
-
 from module.exception import GameStuckError
-
 from tasks.base.assets.assets_base_popup import EXIT_ORGANIZATION_RED_ENVELOPE
-from tasks.base.page import page_organization_panel,page_manual
-from tasks.base.task_tab.draglist import TASK_TAB_LIST
-from tasks.base.task_tab.task_keyword import OrganizationKeyword
-from tasks.base.ui import UI
+from tasks.base.page import page_organization_panel
+from tasks.base.taskui import TaskUI
 from tasks.organization.assets.assets_organization_pray import *
 from tasks.organization.assets.assets_organization_boxclaim import *
 from tasks.organization.assets.assets_organization_replacement import *
@@ -20,11 +15,9 @@ from tasks.organization.util import RewardUtils
 
 
 
-class Pray(UI,RewardUtils):
+class Pray(TaskUI,RewardUtils):
     def handle_Organization_Pray(self):
         self.device.click_record_clear()
-        self.ui_ensure(page_manual)
-        TASK_TAB_LIST.search_rows(self,OrganizationKeyword)
         self.ui_ensure(page_organization_panel)
         self._enter_pray_panel()
         self.pray()
