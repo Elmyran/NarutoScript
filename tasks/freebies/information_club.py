@@ -1,5 +1,3 @@
-from ast import If
-from module.alas import AzurLaneAutoScript
 from module.base.timer import Timer
 from module.exception import GameStuckError
 from tasks.base.page import page_welfare_station

@@ -7,10 +7,8 @@ from module.logger import logger
 from module.ocr.ocr import Ocr
 from tasks.base.assets.assets_base_code_second import *
 from tasks.base.assets.assets_base_page import MAIN_GOTO_CHARACTER, FULL_SCREEN
-
 from tasks.base.main_page import MainPage
 from tasks.base.page import Page, page_main
-from tasks.base.task_tab.draglist import TASK_TAB_LIST
 from tasks.login.assets.assets_login import ACCOUNT_CONFIRM
 from tasks.base.page import *
 

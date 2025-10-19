@@ -1,6 +1,4 @@
-from module.exception import GamePageUnknownError
 from module.logger import logger
-from tasks.base.assets.assets_base_page import MAIN_GOTO_CHARACTER
 from tasks.base.page import *
 from tasks.base.task_tab.draglist import TASK_TAB_LIST
 from tasks.base.ui import UI
