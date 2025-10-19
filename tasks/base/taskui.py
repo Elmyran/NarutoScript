@@ -63,8 +63,8 @@ class TaskUI(UI):
                 draglist_once=True
                 # Other pages
             clicked = False
-            if current_page.parent is not None:  
-                if self.ui_page_appear(current_page): 
+            if current_page.parent is not None and current_page.check_button is None:  
+                if self.ui_page_appear(current_page,interval=2): 
                     logger.info(f'Page switch: {current_page} -> {next_page}')  
                     self.handle_lang_check(current_page)  
                     if self.ui_page_confirm(current_page):  
