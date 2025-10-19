@@ -192,7 +192,7 @@ page_trail=Page(TRAIL_SURVIVAL_CHECK)
 page_survival_trail=Page(SURVIVAL_PAGE_CHECK)
 page_manual.link(MANUAL_GOTO_TASK_BUTTON,destination=page_survival_trail)
 page_trail.link(TRAIL_SURVIVAL_CHECK,destination=page_survival_trail)
-page_survival_trail.link(CLOSE,destination=page_trail)
+page_survival_trail.link(CLOSE,destination=page_main)
 page_trail.link(CLOSE,destination=page_main)
 #CultivationRoad
 page_cultivation=Page(CULTIVATION_PAGE_CHECK)
