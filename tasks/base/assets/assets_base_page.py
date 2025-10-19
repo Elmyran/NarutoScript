@@ -54,13 +54,36 @@ BATTLE_ORDER_RANK_CHECK = ButtonWrapper(
 )
 CHARACTER_SELECT_PAGE = ButtonWrapper(
     name='CHARACTER_SELECT_PAGE',
-    share=Button(
-        file='./assets/share/base/page/CHARACTER_SELECT_PAGE.png',
-        area=(798, 91, 952, 136),
-        search=(778, 71, 972, 156),
-        color=(210, 205, 191),
-        button=(798, 91, 952, 136),
-    ),
+    share=[
+        Button(
+            file='./assets/share/base/page/CHARACTER_SELECT_PAGE.png',
+            area=(706, 87, 794, 238),
+            search=(686, 67, 814, 258),
+            color=(211, 201, 160),
+            button=(706, 87, 794, 238),
+        ),
+        Button(
+            file='./assets/share/base/page/CHARACTER_SELECT_PAGE.2.png',
+            area=(720, 93, 781, 202),
+            search=(700, 73, 801, 222),
+            color=(113, 99, 65),
+            button=(720, 93, 781, 202),
+        ),
+        Button(
+            file='./assets/share/base/page/CHARACTER_SELECT_PAGE.3.png',
+            area=(725, 327, 783, 438),
+            search=(705, 307, 803, 458),
+            color=(216, 209, 178),
+            button=(725, 327, 783, 438),
+        ),
+        Button(
+            file='./assets/share/base/page/CHARACTER_SELECT_PAGE.4.png',
+            area=(725, 348, 781, 442),
+            search=(705, 328, 801, 462),
+            color=(122, 107, 73),
+            button=(725, 348, 781, 442),
+        ),
+    ],
 )
 CHONG_ZHI_CHECK = ButtonWrapper(
     name='CHONG_ZHI_CHECK',
