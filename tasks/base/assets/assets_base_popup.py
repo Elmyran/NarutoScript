@@ -281,6 +281,16 @@ POPUP_EQUIPMENT_SWEEP = ButtonWrapper(
         ),
     ],
 )
+POPUP_FENG_RAO_CHAO_YING = ButtonWrapper(
+    name='POPUP_FENG_RAO_CHAO_YING',
+    share=Button(
+        file='./assets/share/base/popup/POPUP_FENG_RAO_CHAO_YING.png',
+        area=(626, 171, 739, 208),
+        search=(606, 151, 759, 228),
+        color=(118, 118, 103),
+        button=(1192, 140, 1252, 182),
+    ),
+)
 POPUP_MI_JING_BOX = ButtonWrapper(
     name='POPUP_MI_JING_BOX',
     share=Button(

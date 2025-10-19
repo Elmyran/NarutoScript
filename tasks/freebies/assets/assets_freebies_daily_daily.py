@@ -70,6 +70,46 @@ DAILY_REWARD = ButtonWrapper(
     ],
     en=None,
 )
+DAILY_REWARD_CLAIMED_10 = ButtonWrapper(
+    name='DAILY_REWARD_CLAIMED_10',
+    share=Button(
+        file='./assets/share/freebies/daily/daily/DAILY_REWARD_CLAIMED_10.png',
+        area=(478, 536, 548, 591),
+        search=(458, 516, 568, 611),
+        color=(137, 127, 47),
+        button=(478, 536, 548, 591),
+    ),
+)
+DAILY_REWARD_CLAIMED_100 = ButtonWrapper(
+    name='DAILY_REWARD_CLAIMED_100',
+    share=Button(
+        file='./assets/share/freebies/daily/daily/DAILY_REWARD_CLAIMED_100.png',
+        area=(1150, 534, 1217, 583),
+        search=(1130, 514, 1237, 603),
+        color=(189, 139, 45),
+        button=(1150, 534, 1217, 583),
+    ),
+)
+DAILY_REWARD_CLAIMED_40 = ButtonWrapper(
+    name='DAILY_REWARD_CLAIMED_40',
+    share=Button(
+        file='./assets/share/freebies/daily/daily/DAILY_REWARD_CLAIMED_40.png',
+        area=(703, 534, 774, 590),
+        search=(683, 514, 794, 610),
+        color=(126, 146, 114),
+        button=(703, 534, 774, 590),
+    ),
+)
+DAILY_REWARD_CLAIMED_80 = ButtonWrapper(
+    name='DAILY_REWARD_CLAIMED_80',
+    share=Button(
+        file='./assets/share/freebies/daily/daily/DAILY_REWARD_CLAIMED_80.png',
+        area=(988, 536, 1057, 584),
+        search=(968, 516, 1077, 604),
+        color=(168, 130, 70),
+        button=(988, 536, 1057, 584),
+    ),
+)
 DAILY_REWARD_DETAIL = ButtonWrapper(
     name='DAILY_REWARD_DETAIL',
     cn=Button(
@@ -79,39 +119,5 @@ DAILY_REWARD_DETAIL = ButtonWrapper(
         color=(33, 32, 21),
         button=(455, 643, 682, 706),
     ),
-    en=None,
-)
-DAILY_REWARD_HAVE_CLAIMED = ButtonWrapper(
-    name='DAILY_REWARD_HAVE_CLAIMED',
-    cn=[
-        Button(
-            file='./assets/cn/freebies/daily/daily/DAILY_REWARD_HAVE_CLAIMED.png',
-            area=(451, 507, 559, 601),
-            search=(431, 487, 579, 621),
-            color=(110, 95, 47),
-            button=(451, 507, 559, 601),
-        ),
-        Button(
-            file='./assets/cn/freebies/daily/daily/DAILY_REWARD_HAVE_CLAIMED.2.png',
-            area=(679, 512, 781, 598),
-            search=(659, 492, 801, 618),
-            color=(96, 115, 99),
-            button=(679, 512, 781, 598),
-        ),
-        Button(
-            file='./assets/cn/freebies/daily/daily/DAILY_REWARD_HAVE_CLAIMED.3.png',
-            area=(963, 505, 1069, 594),
-            search=(943, 485, 1089, 614),
-            color=(121, 94, 66),
-            button=(963, 505, 1069, 594),
-        ),
-        Button(
-            file='./assets/cn/freebies/daily/daily/DAILY_REWARD_HAVE_CLAIMED.4.png',
-            area=(1129, 507, 1222, 598),
-            search=(1109, 487, 1242, 618),
-            color=(155, 112, 45),
-            button=(1129, 507, 1222, 598),
-        ),
-    ],
     en=None,
 )

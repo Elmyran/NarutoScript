@@ -1,4 +1,5 @@
 from ast import If
+from module.alas import AzurLaneAutoScript
 from module.base.timer import Timer
 from module.exception import GameStuckError
 from tasks.base.page import page_welfare_station
@@ -15,16 +16,18 @@ class InformationClub(UI):
         if self.config.stored.InformationClubSignInCount.is_full():
             return True
         self.device.click_record_clear()
+        self._sign_in_information_club()
+        self.config.stored.InformationClubSignInCount.add()
+    def _sign_in_information_club(self):
         self.ui_ensure(page_welfare_station)
         time=Timer(20,30).start()
         for _ in  self.loop():
             if time.reached():
                 raise GameStuckError('Information club claim stuck')
-            if self.appear_then_click(DAILY_SIGN_IN_SUCCESS,similarity=0.7):
-                continue
-            if self.appear_then_click(DAILY_SIGN_IN_BUTTON,similarity=0.7):
-                continue
-            if self.appear(DAILY_SIGN_IN_HAVE_DONE,interval=1,similarity=0.7):
+            if self.match_template_color(DAILY_SIGN_IN_HAVE_DONE):
                 break
-        self.ui_goto_main()
-        self.config.stored.InformationClubSignInCount.add()
+            if self.appear_then_click(DAILY_SIGN_IN_SUCCESS,interval=1):
+                continue
+            if self.appear_then_click(DAILY_SIGN_IN_BUTTON,interval=1):
+                continue
+

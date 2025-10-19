@@ -31,8 +31,8 @@ class PopupHandler(ModuleBase):
             return True
         if self.appear_then_click(POPUP_UPGRADE,interval=interval):
             return True
-        
-        
+        if self.appear_then_click(POPUP_FENG_RAO_CHAO_YING,interval=interval):
+            return True   
         
         return False
     def handle_popup_page(self,interval=5) -> bool:
