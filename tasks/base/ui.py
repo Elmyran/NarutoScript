@@ -7,10 +7,8 @@ from module.logger import logger
 from module.ocr.ocr import Ocr
 from tasks.base.assets.assets_base_code_second import *
 from tasks.base.assets.assets_base_page import MAIN_GOTO_CHARACTER, FULL_SCREEN
-
 from tasks.base.main_page import MainPage
 from tasks.base.page import Page, page_main
-from tasks.base.task_tab.draglist import TASK_TAB_LIST
 from tasks.login.assets.assets_login import ACCOUNT_CONFIRM
 from tasks.base.page import *
 
@@ -307,12 +305,8 @@ class UI(MainPage):
             return False
         appear = False
         if MAIN_GOTO_CHARACTER.match_template_luma(self.device.image):
-            self.wait_until_stable(MAIN_GOTO_CHARACTER, timer=Timer(0.5, count=3))
-            if MAIN_GOTO_CHARACTER.match_template_luma(self.device.image):
-                if self.image_color_count(MAIN_GOTO_CHARACTER, color=(235, 235, 235), threshold=234, count=400):
-                    appear = True
-
-
+            if self.image_color_count(MAIN_GOTO_CHARACTER, color=(235, 235, 235), threshold=234, count=400):
+                appear = True
         if appear and interval:
             self.interval_reset(MAIN_GOTO_CHARACTER, interval=interval)
 

@@ -1,4 +1,5 @@
 from module.base.timer import Timer
+from module.logger import logger
 from tasks.base.page import  page_daily
 from tasks.base.ui import UI
 from tasks.freebies.assets.assets_freebies_daily_daily import *
@@ -26,18 +27,18 @@ class DailyRewardClaim(UI):
                 break
 
     def _reward_daily_claim(self):
-        timer = Timer(20,30).start()
+        timer = Timer(10,10).start()
         for _ in self.loop():
             if timer.reached():
+                logger.info('Daily Reward Claim Ttimeout')
                 break
-            res=DAILY_REWARD_HAVE_CLAIMED.match_multi_template(self.device.image)
-            if res and len(res)==4:
+            if self.is_reward_claimed_all():
                 break
             if self.appear_then_click(DAILY_REWARD_DETAIL,interval=1,similarity=0.9):
                 continue
-            if self.appear_then_click(DAILY_REWARD,interval=0,similarity=0.9):
+            if self.appear_then_click(DAILY_REWARD,interval=1,similarity=0.9):
                 continue
-
-
+    def is_reward_claimed_all(self):
+        return self.appear(DAILY_REWARD_CLAIMED_10) and self.appear(DAILY_REWARD_CLAIMED_40) and self.appear(DAILY_REWARD_CLAIMED_80) and self. appear(DAILY_REWARD_CLAIMED_100)
 
 

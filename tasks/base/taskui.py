@@ -1,6 +1,4 @@
-from module.exception import GamePageUnknownError
 from module.logger import logger
-from tasks.base.assets.assets_base_page import MAIN_GOTO_CHARACTER
 from tasks.base.page import *
 from tasks.base.task_tab.draglist import TASK_TAB_LIST
 from tasks.base.ui import UI
@@ -30,9 +28,6 @@ class TaskUI(UI):
         Page.init_connection(destination)
         self.interval_clear(list(Page.iter_check_buttons()))
         logger.hr(f"UI goto {destination}")
-        draglist_once=False
-        current_page = self.ui_get_current_page()
-        next_page = current_page.parent
         while 1:
             if skip_first_screenshot:
                 skip_first_screenshot = False
@@ -45,36 +40,23 @@ class TaskUI(UI):
                 if self.ui_page_confirm(destination):
                     logger.info(f'Page arrive confirm {destination}')
                 break
-            if current_page == page_main and next_page == page_manual:
-                if self.appear_then_click(MAIN_GOTO_BACK_GAME):
-                    continue
-                if self.match_template_color(BACK_GAME_GOTO_MANUAL,interval=5):
-                    self.device.click(BACK_GAME_GOTO_MANUAL)
-                    continue                   
-            if self.ui_page_appear(next_page): 
-                current_page = next_page 
-                next_page = current_page.parent
-                self.handle_lang_check(current_page)  
-                continue 
-            if current_page == page_manual and next_page != page_main:
-                if not draglist_once:
-                    if not TASK_TAB_LIST.search_rows(self,Page2Keyword.get(next_page)):
-                        raise GamePageUnknownError(f'Cannot find {Page2Keyword.get(next_page)} in manual')
-                draglist_once=True
-                # Other pages
+            # Other pages
             clicked = False
-            if current_page.parent is not None and current_page.check_button is not None:  
-                if self.ui_page_appear(current_page,interval=2): 
-                    logger.info(f'Page switch: {current_page} -> {next_page}')  
-                    self.handle_lang_check(current_page)  
-                    if self.ui_page_confirm(current_page):  
-                        logger.info(f'Page arrive confirm {current_page}')  
-                    button = current_page.links[next_page]  
-                    self.device.click(button)  
-                    self.ui_button_interval_reset(button)  
-                    # 点击后更新当前页面为下一页面  
+            for page in Page.iter_pages():
+                if page.parent is None or page.check_button is None:
+                    continue
+                if self.ui_page_appear(page, interval=5):
+                    logger.info(f'Page switch: {page} -> {page.parent}')
+                    self.handle_lang_check(page)
+                    if self.ui_page_confirm(page):
+                        logger.info(f'Page arrive confirm {page}')
+                    if self.ui_page_appear(page_manual) and page.parent != page_main:
+                        TASK_TAB_LIST.search_rows(self,Page2Keyword.get(page.parent))
+                    button = page.links[page.parent]
+                    self.device.click(button)
+                    self.ui_button_interval_reset(button)
                     clicked = True
-                    continue  
+                    break
             if clicked:
                 continue
 
@@ -87,18 +69,6 @@ class TaskUI(UI):
 
         # Reset connection
         Page.clear_connection()
-    def is_in_main(self, interval=0):
-        self.device.stuck_record_add(MAIN_GOTO_CHARACTER)
 
-        if interval and not self.interval_is_reached(MAIN_GOTO_CHARACTER, interval=interval):
-            return False
-        appear = False
-        if MAIN_GOTO_CHARACTER.match_template_luma(self.device.image):
-            if self.image_color_count(MAIN_GOTO_CHARACTER, color=(235, 235, 235), threshold=234, count=400):
-                appear = True
-        if appear and interval:
-            self.interval_reset(MAIN_GOTO_CHARACTER, interval=interval)
-
-        return appear
 
         
