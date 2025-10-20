@@ -26,6 +26,6 @@ class InformationClub(UI):
                 break
             if self.appear_then_click(DAILY_SIGN_IN_SUCCESS,interval=1):
                 continue
-            if self.appear_then_click(DAILY_SIGN_IN_BUTTON,interval=1):
+            if self.match_template_color(DAILY_SIGN_IN_BUTTON,interval=1):
+                self.device.click(DAILY_SIGN_IN_BUTTON)
                 continue
-
