@@ -5,7 +5,7 @@ from module.exception import GameStuckError
 from module.logger import logger
 from module.ocr.ocr import Digit, Ocr, DigitCounter
 
-from tasks.base.assets.assets_base import TILI_REMAIN, TI_LI_REMAIN_COUNTER
+from tasks.base.assets.assets_base import  TI_LI_REMAIN_COUNTER
 from tasks.base.assets.assets_base_popup import *
 from tasks.base.page import *
 from tasks.base.ui import UI
@@ -30,15 +30,15 @@ class Equipment(UI):
         coins_sufficient=True
         try:
             for _ in self.loop():
+                self._select_equipment_part(check_status=False)
+                self._synthesized_and_equipped()
                 if coins_sufficient:
                     coins_sufficient=self._equipment_part_red_dot_handle()
-                self._synthesized_and_equipped()
-                self._select_equipment_part()
-                self._synthesized_and_equipped()
                 self._select_equipment_part()
                 res=self._start_sweep()
                 if res:
                     break
+
         finally:
             self.ui_ensure(page_equipment)
             self._synthesized_and_equipped()
@@ -79,13 +79,13 @@ class Equipment(UI):
             if self.appear_then_click(EQUIPMENT_PART_DETAIL_RED_DOT, interval=1):
                 time.reset()
                 continue
-            if self.appear(EQUIPMENT_PART_PROMOTION):
-                EQUIPMENT_PART_RED_DOT.load_search(EQUIPMENT_PART_PROMOTION.area)
-                if self.appear_then_click(EQUIPMENT_PART_RED_DOT, interval=1):
-                    time.reset()
-                    continue
+            if self.appear_then_click(EQUIPMENT_PART_PROMOTION, interval=1):
+                time.reset()
+                continue
+            
+            
         return True
-    def _select_equipment_part(self):
+    def _select_equipment_part(self,check_status=True):
         self.ui_ensure(page_equipment)
         self.device.click(EQUIPMENT_KNIFE)
         """按顺序尝试装备部件，直到找到可升级的为止"""
@@ -100,13 +100,19 @@ class Equipment(UI):
             if not self._switch_equipment_with_verification(button, max_retries=3):
                 logger.warning(f"Failed to select {button} after retries, moving to next part")
                 continue  # 切换失败，直接下一个装备
-            res = self._check_part_status()
-            if res and len(res) > 0:
-                logger.info(f"Equipment Part Stuff Select Success")
-                break
+            if check_status:
+                res = self._check_part_status()
+                if res and len(res) > 0:
+                    logger.info(f"Equipment Part Stuff Select Success")
+                    break
+                else:
+                    logger.info(f"{button} cannot be mopup, moving to next part")
+                    continue  # 不可扫荡，继续下一个
             else:
-                logger.info(f"{button} cannot be upgraded, moving to next part")
-                continue  # 不可扫荡，继续下一个
+                break
+
+                
+            
         return True
        
 
@@ -158,7 +164,6 @@ class Equipment(UI):
     def _check_part_status(self):
         time = Timer(1, count=3).start()
         ocr = Ocr(EQUIPMENT_PART_STUFF_AREA)
-
         for _ in self.loop():
             if time.reached():
                 return False
