@@ -258,8 +258,3 @@ class Equipment(UI):
                         continue
                     if self.appear_then_click(STUFF_EQUIPMENT,interval=1):
                         continue
-
-
-
-
-
