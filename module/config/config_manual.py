@@ -20,7 +20,6 @@ class ManualConfig:
     > Organization
     > SurvivalTrail
     > JiFenSai
-    > BattleOrder
     > Recruit
     > DingCiKaoRou
     > QiuRiJi 
@@ -29,6 +28,7 @@ class ManualConfig:
     > MiJing
     > Mission
     > Freebies
+    > BattleOrder
     > TiLi
     > DataUpdate
     """
