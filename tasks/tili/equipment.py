@@ -69,7 +69,7 @@ class Equipment(UI):
                 continue
 
     def _equipment_part_red_dot_handle(self):
-        time = Timer(1, count=3).start()
+        time = Timer(2, count=3).start()
         for _ in self.loop():
             if time.reached():
                 break
