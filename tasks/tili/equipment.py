@@ -247,7 +247,11 @@ class Equipment(UI):
                         raise GameStuckError('Synthesized Stuff Select Click Error ')
                     if self.appear(STUFF_CHECK):
                         break
-                    self.device.click(synthetic_buttons[0])
+
+                    button=synthetic_buttons[0]
+                    if self.appear(button, interval=1): 
+                        self.device.click(button)
+                        self.device.click_record_remove(button)
                 for _ in self.loop():
                     select_time.reset()
                     if time.reached():

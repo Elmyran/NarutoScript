@@ -69,21 +69,7 @@ class StoreSelector:
         if item.amount==0:  
             logger.info(f"Currency not enough to purchase {item.name}")
             return True
-        if item.amount==1:
-            self.ocr_currency(self.relative_areas['currency_area'])
-            click_interval=Timer(1).start()
-            for _ in self.main.loop():  
-                self.ocr_currency(self.relative_areas['currency_area'])
-                if self.currency<item.price :
-                    logger.info(f"Currency not enough to purchase {item.name}")
-                    return True
-                elif pre_currency!=self.currency :
-                    logger.info(f"{item.name} have been purchased")
-                    break
-                if click_interval.reached():  
-                    self.main.device.click(item)  
-                    click_interval.reset()
-            return False
+        self.ocr_currency(self.relative_areas['currency_area'])
         logger.info(f"Purchasing item: {item}")
         click_interval=Timer(1).start()
         purchase_times=0
@@ -91,8 +77,8 @@ class StoreSelector:
             if self.main.appear(PURCHASE_POPUP):
                 logger.info("Detected purchase popup.")
                 break
+            self.ocr_currency(self.relative_areas['currency_area'])
             if self.currency!=pre_currency:
-                self.ocr_currency(self.relative_areas['currency_area'])
                 purchase_times+=1
                 pre_currency=self.currency
                 if purchase_times>=item.amount:  

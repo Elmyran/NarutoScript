@@ -1,6 +1,4 @@
-import time
 from module.base.timer import Timer
-from module.exception import GameStuckError
 from module.logger import logger
 from tasks.base.assets.assets_base_page import FULL_SCREEN
 from tasks.base.page import  page_battle_order_rank
