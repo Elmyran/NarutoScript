@@ -150,7 +150,7 @@ class GameControl(UI):
     def execute_skill2(self):
         if self.is_skill_ready("SKILL2"):
             button_pos = self.SKILL_BUTTONS["SKILL2"]
-            self.device.click(button_pos)
+            self.device.long_click(button_pos,duration=5)
             logger.info("执行二技能")
             return True
         return False

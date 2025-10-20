@@ -60,7 +60,7 @@ class AutoBattle(GameControl):
             MI_JING_REWARD_EXIT.load_search(MI_JING_REWARD_AREA.area)
             MI_JING_REWARD_CLAIM.load_search(MI_JING_REWARD_CLIAM_AREA.area)
             if  self.appear(MI_JING_REWARD_EXIT) or self.appear(MI_JING_REWARD_CLAIM):
-                logger.info("--- Battle finished (MI_JING_SUCCESS detected). ---")
+                logger.info("--- Battle finished (MI_JING_REWARD_CLAIM or MI_JING_REWARD_EXIT  detected). ---")
                 self.config.stored.MiJingCount.add(1)
                 self.joystick.up()
                 break
@@ -68,7 +68,7 @@ class AutoBattle(GameControl):
                 break
             MI_JING_SUCCESS.load_search(MI_JING_REWARD_AREA.area)
             if self.appear_then_click(MI_JING_FAIL) or self.appear_then_click(MI_JING_SUCCESS)  :
-                logger.info("--- Battle finished (MI_JING_FAIL detected). ---")
+                logger.info("--- Battle finished (MI_JING_FAIL or MI_JING_SUCCESS detected). ---")
                 self.joystick.up()
                 continue
 
@@ -158,5 +158,3 @@ class AutoBattle(GameControl):
                     else:
                         angle = self.DIRECTION_ANGLES.get(direction, 0)
                         self.move_to_direction(angle,0.3)
-
-
