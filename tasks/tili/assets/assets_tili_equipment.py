@@ -139,10 +139,10 @@ EQUIPMENT_PART_PROMOTION = ButtonWrapper(
     name='EQUIPMENT_PART_PROMOTION',
     cn=Button(
         file='./assets/cn/tili/equipment/EQUIPMENT_PART_PROMOTION.png',
-        area=(1103, 525, 1236, 572),
-        search=(1083, 505, 1256, 592),
-        color=(215, 141, 13),
-        button=(1103, 525, 1236, 572),
+        area=(1143, 534, 1195, 569),
+        search=(1123, 514, 1215, 589),
+        color=(195, 148, 30),
+        button=(1143, 534, 1195, 569),
     ),
     en=None,
 )
