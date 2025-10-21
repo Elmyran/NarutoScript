@@ -22,6 +22,7 @@ class LeaderBoard(TaskUI):
             if self.appear(LEADER_BOARD_LIKE_BUTTON):
                 logger.info('waiting for like button')
                 break
+        self.wait_until_stable(LIKE_BUTTON_AREA)
         for _ in self.loop():
             if not self.image_color_count(LIKE_BUTTON_AREA,color=(65,103,149)):
                 break
@@ -30,8 +31,6 @@ class LeaderBoard(TaskUI):
                 self.device.click(LEADER_BOARD_LIKE_BUTTON)
                 continue
         return True
-
-
 
 
 
