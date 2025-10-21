@@ -1,4 +1,3 @@
-from module.base.timer import Timer
 from tasks.activity.activity_keyword import YiLeWaiMaiKeyword
 from tasks.activity.assets.assets_activity import *
 from tasks.activity.draglist import ACTIVITY_TAB_LIST
@@ -18,24 +17,20 @@ class YiLeLaMian(UI):
             self.config.stored.YiLeLaMianFinishCount.clear()
         if self.config.stored.YiLeLaMianFinishCount.is_full():
             return True
-        if self._claim():
-            self.config.stored.YiLeLaMianFinishCount.add()
+        self._claim()
+        self.config.stored.YiLeLaMianFinishCount.add()
         return True
     def _claim(self):
         self.ui_ensure(page_activity)
         ACTIVITY_TAB_LIST.search_rows(main=self,keyword=YiLeWaiMaiKeyword)
-        time=Timer(10,20).start()
         for _ in  self.loop():
-            if time.reached():
-                logger.info(f'Ramen Claim  timeout')
-                return False
             if self.is_claim_done():
                 break
             if self.appear_then_click(RAMEN_CLAIM,interval=1):
                 continue
         return True
     def is_claim_done(self):
-        return self.appear(REMEN_CLAIM_DONE_1) and self.appear(REMEN_CLAIM_DONE_2) and self.appear(REMEN_CLAIM_DONE_3)
+        return self.appear(RAMEN_CLAIM_DONE_1) and self.appear(RAMEN_CLAIM_DONE_2) and self.appear(RAMEN_CLAIM_DONE_3)
 
 
 
