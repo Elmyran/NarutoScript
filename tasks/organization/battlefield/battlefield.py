@@ -4,6 +4,7 @@ from module.exception import GameStuckError
 from module.logger import logger
 from module.ocr.ocr import Digit
 from tasks.base.assets.assets_base_character import *
+from tasks.base.assets.assets_base_page import FULL_SCREEN
 from tasks.base.page import  page_character_select, page_battle_field_select, page_battle_field
 from tasks.base.taskui import TaskUI
 from tasks.organization.assets.assets_organization_battlefield import *
@@ -100,13 +101,13 @@ class BattleField(TaskUI,CharacterCircleDetector):
             if self.appear(CHARACTER_SELECTED):
                 logger.info('Character Selected')
                 break
-            if self.appear(CHARACTER_UNSELECTED):
+            if self.appear(CHARACTER_UNSELECTED,interval=1):
                 self.device.click(CHARACTER_FIRST)
         CHARACTER_TAB.set('秘卷',main=self)
         for _ in  self.loop():
             if self.appear(MI_JUAN_SELECTED):
                 break
-            if self.appear(MI_JUAN_UNSELECTED):
+            if self.appear(MI_JUAN_UNSELECTED,interval=1):
                 self.device.click(CHARACTER_FIRST)
         CHARACTER_TAB.set('通灵',main=self)
         for _ in self.loop():
@@ -116,7 +117,8 @@ class BattleField(TaskUI,CharacterCircleDetector):
                 self.device.click(TONG_LING_SECOND)
             elif self.appear(TONG_LING_THIRD_UNSELECTED):
                 self.device.click(TONG_LING_THIRD)
-            else: break
+            else: 
+                break
         for _ in self.loop():
             if self.ui_get_current_page()!=page_character_select:
                 break
@@ -137,7 +139,7 @@ class BattleField(TaskUI,CharacterCircleDetector):
         OCR=Digit(BATTLE_FIELD_CREDITS)
         ocr_interval=Timer(10).start()
         occupied=False
-
+        empty_click_interval=Timer(1).start()
         for _ in self.loop():
             if self.appear(BATTLE_FIELD_FINISHED):
                 break
@@ -163,9 +165,10 @@ class BattleField(TaskUI,CharacterCircleDetector):
                 continue
             
             if occupied==False :
-                if BATTLE_FIELD_EMPTY.match_template(self.device.image,direct_match=True):
-                    self.device.click(BATTLE_FIELD_EMPTY)
-                    continue
+                BATTLE_FIELD_EMPTY.load_search(FULL_SCREEN.area)
+                if self.appear_then_click(BATTLE_FIELD_EMPTY,interval=1):
+                    self.device.click_record_remove(BATTLE_FIELD_EMPTY)   
+                continue
             
 
     def _handle_reward(self):
