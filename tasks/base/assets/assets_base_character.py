@@ -27,10 +27,10 @@ CHARACTER_SELECTED = ButtonWrapper(
     name='CHARACTER_SELECTED',
     share=Button(
         file='./assets/share/base/character/CHARACTER_SELECTED.png',
-        area=(270, 201, 297, 229),
-        search=(250, 181, 317, 249),
-        color=(176, 139, 41),
-        button=(270, 201, 297, 229),
+        area=(270, 204, 291, 226),
+        search=(250, 184, 311, 246),
+        color=(160, 128, 37),
+        button=(270, 204, 291, 226),
     ),
 )
 CHARACTER_UNSELECTED = ButtonWrapper(

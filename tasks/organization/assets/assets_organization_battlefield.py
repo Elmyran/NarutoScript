@@ -29,10 +29,10 @@ BATTLE_FIELD_EMPTY = ButtonWrapper(
     name='BATTLE_FIELD_EMPTY',
     cn=Button(
         file='./assets/cn/organization/battlefield/BATTLE_FIELD_EMPTY.png',
-        area=(499, 234, 557, 305),
-        search=(479, 214, 577, 325),
-        color=(70, 61, 43),
-        button=(499, 234, 557, 305),
+        area=(505, 234, 551, 284),
+        search=(485, 214, 571, 304),
+        color=(77, 66, 33),
+        button=(505, 234, 551, 284),
     ),
     en=None,
 )
