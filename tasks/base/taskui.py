@@ -1,3 +1,4 @@
+from module.base.timer import Timer
 from module.logger import logger
 from tasks.base.page import *
 from tasks.base.task_tab.draglist import TASK_TAB_LIST
@@ -48,8 +49,12 @@ class TaskUI(UI):
                 if self.ui_page_appear(page, interval=5):
                     logger.info(f'Page switch: {page} -> {page.parent}')
                     self.handle_lang_check(page)
-                    if self.ui_page_confirm(page):
-                        logger.info(f'Page arrive confirm {page}')
+                    if page == page_main:  
+                        if not self.ui_page_confirm(page):  
+                            logger.warning(f'Page confirm failed for {page}, skip clicking')  
+                            continue  
+                        else:
+                            logger.info(f'Page arrive confirm {page}')  
                     if self.ui_page_appear(page_manual) and page.parent != page_main:
                         TASK_TAB_LIST.search_rows(self,Page2Keyword.get(page.parent))
                     button = page.links[page.parent]
@@ -70,5 +75,43 @@ class TaskUI(UI):
         # Reset connection
         Page.clear_connection()
 
+    def _ui_button_confirm(
+            self,
+            button,
+            confirm=Timer(0.1, count=0),
+            timeout=Timer(2, count=6),
+            skip_first_screenshot=True
+    ):
+        confirm.reset()
+        timeout.reset()
+        while 1:
+            if skip_first_screenshot:
+                skip_first_screenshot = False
+            else:
+                self.device.screenshot()
+
+            if timeout.reached():
+                logger.warning(f'_ui_button_confirm({button}) timeout')
+                return False
+
+            if self.appear(button):
+                if confirm.reached():
+                    break
+            else:
+                confirm.reset()
+        return True
+    def ui_page_confirm(self, page):
+        """
+        Args:
+            page (Page):
+
+        Returns:
+            bool: If handled
+        """
+        if page == page_main:
+            if self._ui_button_confirm(page.check_button):
+                return True
+
+        return False
 
         
