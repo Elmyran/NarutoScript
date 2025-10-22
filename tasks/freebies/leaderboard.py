@@ -1,3 +1,5 @@
+from module.base.timer import Timer
+from module.exception import GameStuckError
 from module.logger import logger
 from tasks.base.page import page_leader_board
 from tasks.base.taskui import TaskUI
@@ -23,8 +25,15 @@ class LeaderBoard(TaskUI):
                 logger.info('waiting for like button')
                 break
         self.wait_until_stable(LIKE_BUTTON_AREA)
+        timeout = Timer(2, count=4)
         for _ in self.loop():
-            if not self.image_color_count(LIKE_BUTTON_AREA,color=(65,103,149)):
+            if timeout.reached():
+                if self.image_color_count(LEADER_BOARD_LIKED,color=(110,110,110)):
+                    logger.info('may be liked manuly')  
+                    break
+                else:
+                    raise GameStuckError('Leaderboard stuck')
+            if self.appear(LEADER_BOARD_LIKED_FLAG):
                 break
             LEADER_BOARD_LIKE_BUTTON.load_search(LIKE_BUTTON_AREA.area)
             if self.match_template_color(LEADER_BOARD_LIKE_BUTTON):

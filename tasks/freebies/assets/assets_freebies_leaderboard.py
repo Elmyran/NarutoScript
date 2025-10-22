@@ -36,15 +36,76 @@ LEADER_BOARD_EXIT = ButtonWrapper(
     ),
     en=None,
 )
+LEADER_BOARD_LIKED = ButtonWrapper(
+    name='LEADER_BOARD_LIKED',
+    cn=[
+        Button(
+            file='./assets/cn/freebies/leaderboard/LEADER_BOARD_LIKED.png',
+            area=(1178, 347, 1213, 387),
+            search=(1158, 327, 1233, 407),
+            color=(147, 125, 113),
+            button=(1178, 347, 1213, 387),
+        ),
+        Button(
+            file='./assets/cn/freebies/leaderboard/LEADER_BOARD_LIKED.2.png',
+            area=(1180, 252, 1212, 291),
+            search=(1160, 232, 1232, 311),
+            color=(140, 142, 149),
+            button=(1180, 252, 1212, 291),
+        ),
+        Button(
+            file='./assets/cn/freebies/leaderboard/LEADER_BOARD_LIKED.3.png',
+            area=(1180, 446, 1213, 483),
+            search=(1160, 426, 1233, 503),
+            color=(100, 141, 126),
+            button=(1180, 446, 1213, 483),
+        ),
+    ],
+    en=None,
+)
+LEADER_BOARD_LIKED_FLAG = ButtonWrapper(
+    name='LEADER_BOARD_LIKED_FLAG',
+    cn=Button(
+        file='./assets/cn/freebies/leaderboard/LEADER_BOARD_LIKED_FLAG.png',
+        area=(1146, 160, 1236, 217),
+        search=(1126, 140, 1256, 237),
+        color=(179, 116, 58),
+        button=(1146, 160, 1236, 217),
+    ),
+    en=None,
+)
 LEADER_BOARD_LIKE_BUTTON = ButtonWrapper(
     name='LEADER_BOARD_LIKE_BUTTON',
-    cn=Button(
-        file='./assets/cn/freebies/leaderboard/LEADER_BOARD_LIKE_BUTTON.png',
-        area=(1165, 175, 1226, 219),
-        search=(1145, 155, 1246, 239),
-        color=(141, 134, 111),
-        button=(1165, 175, 1226, 219),
-    ),
+    cn=[
+        Button(
+            file='./assets/cn/freebies/leaderboard/LEADER_BOARD_LIKE_BUTTON.png',
+            area=(1178, 156, 1212, 194),
+            search=(1158, 136, 1232, 214),
+            color=(155, 144, 101),
+            button=(1178, 156, 1212, 194),
+        ),
+        Button(
+            file='./assets/cn/freebies/leaderboard/LEADER_BOARD_LIKE_BUTTON.2.png',
+            area=(1178, 254, 1211, 290),
+            search=(1158, 234, 1231, 310),
+            color=(133, 140, 154),
+            button=(1178, 254, 1211, 290),
+        ),
+        Button(
+            file='./assets/cn/freebies/leaderboard/LEADER_BOARD_LIKE_BUTTON.3.png',
+            area=(1177, 351, 1214, 386),
+            search=(1157, 331, 1234, 406),
+            color=(143, 126, 120),
+            button=(1177, 351, 1214, 386),
+        ),
+        Button(
+            file='./assets/cn/freebies/leaderboard/LEADER_BOARD_LIKE_BUTTON.4.png',
+            area=(1176, 447, 1214, 484),
+            search=(1156, 427, 1234, 504),
+            color=(96, 139, 131),
+            button=(1176, 447, 1214, 484),
+        ),
+    ],
     en=None,
 )
 LIKE_BUTTON_AREA = ButtonWrapper(
