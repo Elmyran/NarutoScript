@@ -19,17 +19,17 @@ DAILY_SIGN_IN_BUTTON = ButtonWrapper(
     cn=[
         Button(
             file='./assets/cn/freebies/information_club/DAILY_SIGN_IN_BUTTON.png',
-            area=(584, 532, 699, 575),
-            search=(564, 512, 719, 595),
-            color=(209, 84, 78),
-            button=(584, 532, 699, 575),
+            area=(601, 541, 681, 565),
+            search=(581, 521, 701, 585),
+            color=(216, 111, 105),
+            button=(601, 541, 681, 565),
         ),
         Button(
             file='./assets/cn/freebies/information_club/DAILY_SIGN_IN_BUTTON.2.png',
-            area=(584, 73, 663, 112),
-            search=(564, 53, 683, 132),
-            color=(219, 123, 117),
-            button=(584, 73, 663, 112),
+            area=(590, 81, 659, 102),
+            search=(570, 61, 679, 122),
+            color=(215, 107, 102),
+            button=(590, 81, 659, 102),
         ),
         Button(
             file='./assets/cn/freebies/information_club/DAILY_SIGN_IN_BUTTON.3.png',
@@ -38,6 +38,13 @@ DAILY_SIGN_IN_BUTTON = ButtonWrapper(
             color=(215, 107, 102),
             button=(601, 541, 682, 566),
         ),
+        Button(
+            file='./assets/cn/freebies/information_club/DAILY_SIGN_IN_BUTTON.4.png',
+            area=(586, 80, 658, 105),
+            search=(566, 60, 678, 125),
+            color=(212, 98, 92),
+            button=(586, 80, 658, 105),
+        ),
     ],
     en=None,
 )
@@ -45,10 +52,10 @@ DAILY_SIGN_IN_HAVE_DONE = ButtonWrapper(
     name='DAILY_SIGN_IN_HAVE_DONE',
     cn=Button(
         file='./assets/cn/freebies/information_club/DAILY_SIGN_IN_HAVE_DONE.png',
-        area=(586, 76, 664, 108),
-        search=(566, 56, 684, 128),
-        color=(199, 186, 172),
-        button=(586, 76, 664, 108),
+        area=(586, 80, 657, 104),
+        search=(566, 60, 677, 124),
+        color=(197, 185, 171),
+        button=(586, 80, 657, 104),
     ),
     en=None,
 )
@@ -57,17 +64,17 @@ DAILY_SIGN_IN_SUCCESS = ButtonWrapper(
     cn=[
         Button(
             file='./assets/cn/freebies/information_club/DAILY_SIGN_IN_SUCCESS.png',
-            area=(583, 557, 697, 597),
-            search=(563, 537, 717, 617),
-            color=(209, 85, 78),
-            button=(583, 557, 697, 597),
+            area=(600, 564, 679, 589),
+            search=(580, 544, 699, 609),
+            color=(215, 108, 102),
+            button=(600, 564, 679, 589),
         ),
         Button(
             file='./assets/cn/freebies/information_club/DAILY_SIGN_IN_SUCCESS.2.png',
-            area=(584, 532, 699, 574),
-            search=(564, 512, 719, 594),
-            color=(111, 111, 111),
-            button=(584, 532, 699, 574),
+            area=(601, 539, 680, 565),
+            search=(581, 519, 700, 585),
+            color=(132, 132, 132),
+            button=(601, 539, 680, 565),
         ),
         Button(
             file='./assets/cn/freebies/information_club/DAILY_SIGN_IN_SUCCESS.3.png',
