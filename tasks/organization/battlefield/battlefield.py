@@ -139,7 +139,6 @@ class BattleField(TaskUI,CharacterCircleDetector):
         OCR=Digit(BATTLE_FIELD_CREDITS)
         ocr_interval=Timer(10).start()
         occupied=False
-        empty_click_interval=Timer(1).start()
         for _ in self.loop():
             if self.appear(BATTLE_FIELD_FINISHED):
                 break
