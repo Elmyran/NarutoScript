@@ -85,25 +85,24 @@ class Pray(TaskUI,RewardUtils):
 
 
     def _pray_box_replacement(self):
-        time=Timer(3, count=5).start()
+        time=Timer(2, count=4).start()
         for _ in self.loop():
             if time.reached():
                 logger.info('organization box replacement not detected')
                 return
             if self.appear(PRAY_BOX_REPLACEMENT_CHECK):
                 break
-            if self.appear_then_click(PRAY_BOX_REPLACEMENT,interval=1):
+            if self.appear_then_click(PRAY_BOX_REPLACEMENT,interval=0):
+                time.reset()
                 continue
-        claim_time=Timer(30, count=40).start()
+        claim_time=Timer(2, count=4).start()
         for _ in self.loop():
             if claim_time.reached():
-                raise GameStuckError("Organization Box Replacement Claim Stuck ")
-            PRAY_BOX_REPLACEMENT_HAVE_CLAIMED.load_search(PRAY_BOX_REPLACEMENT_LIST.area)
-            success = PRAY_BOX_REPLACEMENT_HAVE_CLAIMED.match_multi_template(self.device.image)
-            if success and len(success) == 3:
+                logger.info('pray box replacement not detected')
                 break
             PRAY_BOX_REPLACEMENT_BUTTON.load_search(PRAY_BOX_REPLACEMENT_LIST.area)
-            if self.appear_then_click(PRAY_BOX_REPLACEMENT_BUTTON,interval=1):
+            if self.appear_then_click(PRAY_BOX_REPLACEMENT_BUTTON,interval=0):
+                claim_time.reset()
                 continue
 
 
