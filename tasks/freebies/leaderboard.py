@@ -25,7 +25,7 @@ class LeaderBoard(TaskUI):
                 logger.info('waiting for like button')
                 break
         self.wait_until_stable(LIKE_BUTTON_AREA)
-        timeout = Timer(2, count=4)
+        timeout = Timer(2, count=4).start()
         for _ in self.loop():
             if timeout.reached():
                 if self.image_color_count(LEADER_BOARD_LIKED,color=(110,110,110)):
