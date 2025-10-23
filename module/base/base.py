@@ -1,5 +1,4 @@
 import module.config.server as server_
-from deploy.Windows.utils import cached_property
 from module.base.button import Button, ButtonWrapper, ClickButton, match_template
 from module.base.timer import Timer
 from module.base.utils import *
@@ -8,7 +7,6 @@ from module.device.device import Device
 from module.device.method.utils import HierarchyButton
 from module.exception import GameStuckError
 from module.logger import logger
-from module.ocr.yolomodel import YOLO_MODEL
 from module.webui.setting import cached_class_property
 import time
 
@@ -16,9 +14,7 @@ import time
 class ModuleBase:
     config: AzurLaneConfig
     device: Device
-    @cached_property
-    def yolo_model(self):
-        return YOLO_MODEL.get_model(input_size=(1280,720))
+
     def __init__(self, config, device=None, task=None):
         """
         Args:
@@ -98,7 +94,11 @@ class ModuleBase:
                 skip_first = False
             else:
                 self.device.screenshot()
-            yield self.device.image
+            try:
+                yield self.device.image
+            except AttributeError:
+                self.device.screenshot()
+                yield self.device.image
 
     def loop_hierarchy(self, skip_first=True):
         """
@@ -216,56 +216,7 @@ class ModuleBase:
             self.interval_reset(button, interval=interval)
 
         return appear
-    def detect_claimable_buttons(self,image, button: ButtonWrapper = None, similarity=0.85, encourage=10):
-        """
-        检测图片中所有可领取奖励，返回 ClickButton 对象列表
-        支持多个类别同时识别
-        """
-        import time
-        start_time = time.time()
-        # 获取图片
-        if isinstance(image, str):
-            img = cv2.imread(image)
-        else:
-            img = self.device.image
 
-        # 确定 ROI 区域
-        if not button:
-            x1, y1, x2, y2 = 0, 0, 1280, 720
-        else:
-            x1, y1, x2, y2 = button.area
-
-        # 遮掩法：只保留 ROI
-        mask_img = np.zeros_like(img)
-        mask_img[y1:y2, x1:x2] = img[y1:y2, x1:x2]
-        # YOLO 检测
-        model = self.yolo_model
-        results = model.predict(mask_img, conf=similarity)  # 返回列表
-        print(results)
-        claimable_buttons = []
-
-        for result in results:
-            cls_id = result.class_id
-            conf = result.score
-            bx1, by1, bw, bh = result.box
-            cx, cy = int(bx1 + bw/2), int(by1 + bh/2)
-
-            if conf < similarity or cls_id != 0:
-                continue
-
-            button_area = (int(bx1), int(by1), int(bx1 + bw), int(by1 + bh))
-            click_area = area_offset((-encourage, -encourage, encourage, encourage), offset=(cx, cy))
-
-            claimable_buttons.append(ClickButton(
-                area=button_area,
-                button=click_area,
-                name=f'YOLO_CLAIMABLE_cls{cls_id}'
-            ))
-
-        elapsed_time = time.time() - start_time
-        logger.attr(f'YOLO Detection {elapsed_time:.1f}s', f'{len(claimable_buttons)} claimable buttons')
-
-        return claimable_buttons
 
     def match_template_color(self, button, interval=0, similarity=0.85, threshold=30):
         """
