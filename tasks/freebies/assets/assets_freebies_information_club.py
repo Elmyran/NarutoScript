@@ -50,13 +50,22 @@ DAILY_SIGN_IN_BUTTON = ButtonWrapper(
 )
 DAILY_SIGN_IN_HAVE_DONE = ButtonWrapper(
     name='DAILY_SIGN_IN_HAVE_DONE',
-    cn=Button(
-        file='./assets/cn/freebies/information_club/DAILY_SIGN_IN_HAVE_DONE.png',
-        area=(586, 80, 657, 104),
-        search=(566, 60, 677, 124),
-        color=(197, 185, 171),
-        button=(586, 80, 657, 104),
-    ),
+    cn=[
+        Button(
+            file='./assets/cn/freebies/information_club/DAILY_SIGN_IN_HAVE_DONE.png',
+            area=(586, 80, 657, 104),
+            search=(566, 60, 677, 124),
+            color=(197, 185, 171),
+            button=(586, 80, 657, 104),
+        ),
+        Button(
+            file='./assets/cn/freebies/information_club/DAILY_SIGN_IN_HAVE_DONE.2.png',
+            area=(587, 77, 658, 108),
+            search=(567, 57, 678, 128),
+            color=(195, 182, 167),
+            button=(587, 77, 658, 108),
+        ),
+    ],
     en=None,
 )
 DAILY_SIGN_IN_SUCCESS = ButtonWrapper(
