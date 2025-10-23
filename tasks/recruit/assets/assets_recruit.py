@@ -58,6 +58,17 @@ NORMAL_RECRUIT_REMAIN_TIMES = ButtonWrapper(
     ),
     en=None,
 )
+PREMIUM_RECRUIT_100_BUTTON = ButtonWrapper(
+    name='PREMIUM_RECRUIT_100_BUTTON',
+    cn=Button(
+        file='./assets/cn/recruit/PREMIUM_RECRUIT_100_BUTTON.png',
+        area=(1118, 553, 1219, 590),
+        search=(1098, 533, 1239, 610),
+        color=(86, 82, 71),
+        button=(1118, 553, 1219, 590),
+    ),
+    en=None,
+)
 PREMIUM_RECRUIT_FREE_BUTTON = ButtonWrapper(
     name='PREMIUM_RECRUIT_FREE_BUTTON',
     cn=Button(
@@ -97,6 +108,17 @@ PREMIUM_RECRUIT_REMAIN_TIMES = ButtonWrapper(
         search=(762, 587, 980, 655),
         color=(98, 114, 116),
         button=(782, 607, 960, 635),
+    ),
+    en=None,
+)
+PREMIUM_RECRUIT_REMAIN_TIMES_100_BUTTON_STATUS = ButtonWrapper(
+    name='PREMIUM_RECRUIT_REMAIN_TIMES_100_BUTTON_STATUS',
+    cn=Button(
+        file='./assets/cn/recruit/PREMIUM_RECRUIT_REMAIN_TIMES_100_BUTTON_STATUS.png',
+        area=(670, 607, 814, 634),
+        search=(650, 587, 834, 654),
+        color=(142, 127, 89),
+        button=(670, 607, 814, 634),
     ),
     en=None,
 )

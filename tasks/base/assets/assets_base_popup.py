@@ -39,7 +39,7 @@ COPPER_COINS_SHORTAGE = ButtonWrapper(
         area=(363, 188, 918, 534),
         search=(343, 168, 938, 554),
         color=(163, 156, 137),
-        button=(363, 188, 918, 534),
+        button=(843, 188, 913, 243),
     ),
 )
 DING_CI_KAO_ROU_REWARD = ButtonWrapper(

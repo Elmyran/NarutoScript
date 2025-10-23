@@ -35,6 +35,8 @@ class Recruit(UI):
             if self.appear_then_click(PREMIUM_RECRUIT_FREE_BUTTON, interval=1):
                 continue
         ocr = RecruitDuration(PREMIUM_RECRUIT_REMAIN_TIMES)
+        if self.appear(PREMIUM_RECRUIT_100_BUTTON):
+            ocr = RecruitDuration(PREMIUM_RECRUIT_REMAIN_TIMES_100_BUTTON_STATUS)
         res = ocr.ocr_single_line(self.device.image)
         if res and res!="0:00:00":
             return res
