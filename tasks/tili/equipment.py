@@ -228,6 +228,7 @@ class Equipment(UI):
         ocr=Ocr(EQUIPMENT_PART_STUFF_AREA)
         time=Timer(30, count=30).start()
         select_time=Timer(1, count=3).start()
+        click_interval = Timer(1).start()
         for _ in self.loop():
             if select_time.reached():
                 logger.info("Not Select Synthesized Stuff")
@@ -249,9 +250,12 @@ class Equipment(UI):
                         break
 
                     button=synthetic_buttons[0]
-                    if self.appear(button, interval=1): 
+                    if click_interval.reached():
                         self.device.click(button)
                         self.device.click_record_remove(button)
+                        click_interval.reset()
+                        continue
+                        
                 for _ in self.loop():
                     select_time.reset()
                     if time.reached():
