@@ -172,6 +172,17 @@ SQUAD_RAID_FIGHTING = ButtonWrapper(
     ),
     en=None,
 )
+SQUAD_RAID_FIGHT_LOADING = ButtonWrapper(
+    name='SQUAD_RAID_FIGHT_LOADING',
+    cn=Button(
+        file='./assets/cn/squadraid/fight/SQUAD_RAID_FIGHT_LOADING.png',
+        area=(678, 613, 760, 635),
+        search=(658, 593, 780, 655),
+        color=(99, 98, 97),
+        button=(678, 613, 760, 635),
+    ),
+    en=None,
+)
 SQUAD_RAID_FIGHT_SUCCESS = ButtonWrapper(
     name='SQUAD_RAID_FIGHT_SUCCESS',
     cn=Button(

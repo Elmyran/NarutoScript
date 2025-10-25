@@ -3,6 +3,8 @@ from module.exception import GameStuckError
 from module.ocr.ocr import  DigitCounter
 from tasks.base.page import page_squad
 from tasks.base.taskui import TaskUI
+from tasks.combat.assets.assets_combat_support import COMBAT_SUPPORT_SAME_CHARACTER_NOTIFY
+from tasks.combat.support import SUPPORT_LIST
 from tasks.squadraid.assets.assets_squadraid_fight import *
 from tasks.squadraid.benefit import HelpBattleBenefit
 
@@ -32,25 +34,7 @@ class SquadRaidFight(TaskUI):
 
         return True
     def _help_battle_select(self):
-        time=Timer(10,count=20).start()
-        for _ in self.loop():
-            if time.reached():
-                raise GameStuckError("HELP_BATTLE_SELECT_STUCK")
-            if self.appear_then_click(SQUAD_GOTO_HELP_BATTLE,interval=2):
-                continue
-            HELP_BATTLE_SELECTED.load_search(HELP_BATTLE_LIST.area)
-            if HELP_BATTLE_SELECTED.match_template(self.device.image):
-                break
-            HELP_BATTLE_NOT_BE_SELECTED.load_search(HELP_BATTLE_LIST.area)
-            wrong_buttons=HELP_BATTLE_NOT_BE_SELECTED.match_multi_template(self.device.image)
-            if wrong_buttons and len(wrong_buttons)==5:
-                self.device.swipe( [263,594],[270,182])
-                time.reset()
-                continue
-            if self.appear_then_click(HELP_BATTLE_SELECT_BUTTON,interval=1):
-                continue
-
-
+        SUPPORT_LIST.select_first_support_character(self)
     def _start_fight(self):
         self.device.click_record_remove(HELP_BATTLE_START_FIGHT)
         self.device.click_record_remove(SQUAD_RAID_FIGHT_SUCCESS)
@@ -58,7 +42,9 @@ class SquadRaidFight(TaskUI):
         for _ in self.loop():
             if time.reached():
                 raise GameStuckError("SQUAD_RAID_FIGHT_STUCK")
-            if self.appear_then_click(HELP_BATTLE_START_FIGHT,interval=0):
+            if self.appear(COMBAT_SUPPORT_SAME_CHARACTER_NOTIFY):
+                SUPPORT_LIST.select_next_support_character(self)
+            if self.appear_then_click(HELP_BATTLE_START_FIGHT,interval=1):
                 continue
             if self.appear(SQUAD_RAID_FIGHTING):
                 continue
@@ -69,6 +55,8 @@ class SquadRaidFight(TaskUI):
 
 
         return True
+
+
 
 
 
