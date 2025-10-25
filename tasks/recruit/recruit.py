@@ -1,3 +1,4 @@
+from module.base.timer import Timer
 from module.logger import logger
 from tasks.base.page import page_recruit
 from tasks.base.ui import UI
@@ -26,6 +27,7 @@ class Recruit(UI):
     def _premium_recruit(self):
         self.ui_ensure(page_recruit)
         RecruitTabList.search_rows(main=self, keyword=AdvancedRecruitment)
+        self.wait_until_stable(PREMIUM_RECRUIT_FREE_BUTTON,timeout=Timer(1, count=3))
         for _ in self.loop():
             if self.appear(PREMIUM_RECRUIT_FREE_DONE):
                 break
@@ -45,6 +47,7 @@ class Recruit(UI):
     def _normal_recruit(self):
         self.ui_ensure(page_recruit)
         RecruitTabList.search_rows(main=self, keyword=NormalRecruitment)
+        self.wait_until_stable(NORMAL_RECRUIT_FREE_BUTTON,timeout=Timer(1, count=3))
         for _ in self.loop():
             if self.appear(NORMAL_RECRUIT_FREE_DONE, interval=1):
                 break
