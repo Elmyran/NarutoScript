@@ -6,13 +6,13 @@ from tasks.freebies.assets.assets_freebies_daily_daily import *
 from tasks.freebies.assets.assets_freebies_daily_weekly import  *
 
 
-class DailyRewardClaim(UI):
+class ActivityRewardClaim(UI):
     def handle_daily_reward(self):
         self.device.click_record_clear()
         self.ui_ensure(page_daily)
         self._reward_daily_claim()
         self._reward_weekly_claim()
-        self.ui_goto_main()
+
     def _reward_weekly_claim(self):
 
         time=Timer(5,10).start()

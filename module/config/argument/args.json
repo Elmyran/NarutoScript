@@ -601,7 +601,7 @@
         "display": "hide"
       }
     },
-    "FriendGifts": {
+    "Freebies": {
       "FriendGiftsStart": {
         "type": "checkbox",
         "value": true
@@ -611,9 +611,7 @@
         "value": {},
         "display": "hide",
         "stored": "StoredFriendGiftsFinishCount"
-      }
-    },
-    "DailyShare": {
+      },
       "DailyShareStart": {
         "type": "checkbox",
         "value": true
@@ -623,9 +621,7 @@
         "value": {},
         "display": "hide",
         "stored": "StoredDailyShareFinishCount"
-      }
-    },
-    "MailReward": {
+      },
       "MailRewardClaim": {
         "type": "checkbox",
         "value": true
@@ -635,6 +631,50 @@
         "value": {},
         "display": "hide",
         "stored": "StoredMailRewardClaimCount"
+      },
+      "LeaderBoardclaim": {
+        "type": "checkbox",
+        "value": true
+      },
+      "LeaderBoardFinishCount": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredLeaderBoardLikeCount"
+      },
+      "InformationClubSignIn": {
+        "type": "checkbox",
+        "value": true
+      },
+      "InformationClubSignInCount": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredInformationClubSignInCount"
+      },
+      "YiLeLaMianClaim": {
+        "type": "checkbox",
+        "value": true
+      },
+      "YiLeLaMianFinishCount": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredYiLeLaMianClaimCount"
+      },
+      "MonthlySignIn": {
+        "type": "checkbox",
+        "value": true
+      },
+      "MonthlySignInFinishCount": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredMonthlySignInCount"
+      },
+      "ActivityReward": {
+        "type": "checkbox",
+        "value": true
       }
     },
     "PrivilegeWeeklyPackage": {
@@ -659,60 +699,6 @@
         "value": {},
         "display": "hide",
         "stored": "StoredZhaoCaiFinishCount"
-      }
-    },
-    "DailyReward": {
-      "Daily": {
-        "type": "checkbox",
-        "value": true
-      }
-    },
-    "LeaderBoard": {
-      "LeaderBoardclaim": {
-        "type": "checkbox",
-        "value": true
-      },
-      "LeaderBoardFinishCount": {
-        "type": "stored",
-        "value": {},
-        "display": "hide",
-        "stored": "StoredLeaderBoardLikeCount"
-      }
-    },
-    "MonthlySignIn": {
-      "MonthlySignIn": {
-        "type": "checkbox",
-        "value": true
-      },
-      "MonthlySignInFinishCount": {
-        "type": "stored",
-        "value": {},
-        "display": "hide",
-        "stored": "StoredMonthlySignInCount"
-      }
-    },
-    "InformationClub": {
-      "InformationClubSignIn": {
-        "type": "checkbox",
-        "value": true
-      },
-      "InformationClubSignInCount": {
-        "type": "stored",
-        "value": {},
-        "display": "hide",
-        "stored": "StoredInformationClubSignInCount"
-      }
-    },
-    "YiLeLaMian": {
-      "YiLeLaMianClaim": {
-        "type": "checkbox",
-        "value": true
-      },
-      "YiLeLaMianFinishCount": {
-        "type": "stored",
-        "value": {},
-        "display": "hide",
-        "stored": "StoredYiLeLaMianClaimCount"
       }
     }
   },

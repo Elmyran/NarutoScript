@@ -67,7 +67,7 @@
       "help": "当前仅支持奖励领取，挑战功能后续支持"
     },
     "Freebies": {
-      "name": "白嫖奖励",
+      "name": "奖励领取",
       "help": ""
     },
     "StorePurchase": {
@@ -377,46 +377,84 @@
       "help": ""
     }
   },
-  "FriendGifts": {
+  "Freebies": {
     "_info": {
-      "name": "体力赠送",
+      "name": "奖励领取设置",
       "help": ""
     },
     "FriendGiftsStart": {
-      "name": "体力赠送",
+      "name": "体力互赠",
       "help": ""
     },
     "FriendGiftsFinishCount": {
-      "name": "FriendGifts.FriendGiftsFinishCount.name",
-      "help": "FriendGifts.FriendGiftsFinishCount.help"
-    }
-  },
-  "DailyShare": {
-    "_info": {
-      "name": "每日分享",
-      "help": ""
+      "name": "Freebies.FriendGiftsFinishCount.name",
+      "help": "Freebies.FriendGiftsFinishCount.help"
     },
     "DailyShareStart": {
       "name": "每日分享",
       "help": ""
     },
     "DailyShareFinishCount": {
-      "name": "DailyShare.DailyShareFinishCount.name",
-      "help": "DailyShare.DailyShareFinishCount.help"
-    }
-  },
-  "MailReward": {
-    "_info": {
-      "name": "邮件奖励",
-      "help": ""
+      "name": "Freebies.DailyShareFinishCount.name",
+      "help": "Freebies.DailyShareFinishCount.help"
     },
     "MailRewardClaim": {
-      "name": "领取邮件",
+      "name": "邮件领取",
       "help": ""
     },
     "MailRewardFinishCount": {
-      "name": "MailReward.MailRewardFinishCount.name",
-      "help": "MailReward.MailRewardFinishCount.help"
+      "name": "Freebies.MailRewardFinishCount.name",
+      "help": "Freebies.MailRewardFinishCount.help"
+    },
+    "LeaderBoardclaim": {
+      "name": "排行榜点赞",
+      "help": ""
+    },
+    "LeaderBoardFinishCount": {
+      "name": "Freebies.LeaderBoardFinishCount.name",
+      "help": "Freebies.LeaderBoardFinishCount.help"
+    },
+    "InformationClubSignIn": {
+      "name": "情报社签到",
+      "help": ""
+    },
+    "InformationClubSignInCount": {
+      "name": "Freebies.InformationClubSignInCount.name",
+      "help": "Freebies.InformationClubSignInCount.help"
+    },
+    "YiLeLaMianClaim": {
+      "name": "一乐拉面领取",
+      "help": ""
+    },
+    "YiLeLaMianFinishCount": {
+      "name": "Freebies.YiLeLaMianFinishCount.name",
+      "help": "Freebies.YiLeLaMianFinishCount.help"
+    },
+    "MonthlySignIn": {
+      "name": "每月签到",
+      "help": ""
+    },
+    "MonthlySignInFinishCount": {
+      "name": "Freebies.MonthlySignInFinishCount.name",
+      "help": "Freebies.MonthlySignInFinishCount.help"
+    },
+    "ActivityReward": {
+      "name": "活跃度奖励",
+      "help": ""
+    }
+  },
+  "ZhaoCai": {
+    "_info": {
+      "name": "招财",
+      "help": ""
+    },
+    "ZhaoCaiFree": {
+      "name": "免费招财",
+      "help": ""
+    },
+    "ZhaoCaiFinishCount": {
+      "name": "ZhaoCai.ZhaoCaiFinishCount.name",
+      "help": "ZhaoCai.ZhaoCaiFinishCount.help"
     }
   },
   "PrivilegeWeeklyPackage": {
@@ -431,86 +469,6 @@
     "PrivilegPackageFinishCount": {
       "name": "PrivilegeWeeklyPackage.PrivilegPackageFinishCount.name",
       "help": "PrivilegeWeeklyPackage.PrivilegPackageFinishCount.help"
-    }
-  },
-  "ZhaoCai": {
-    "_info": {
-      "name": "招财",
-      "help": ""
-    },
-    "ZhaoCaiFree": {
-      "name": "每日免费招财",
-      "help": ""
-    },
-    "ZhaoCaiFinishCount": {
-      "name": "ZhaoCai.ZhaoCaiFinishCount.name",
-      "help": "ZhaoCai.ZhaoCaiFinishCount.help"
-    }
-  },
-  "DailyReward": {
-    "_info": {
-      "name": "活跃度奖励",
-      "help": ""
-    },
-    "Daily": {
-      "name": "每日活跃奖励",
-      "help": ""
-    }
-  },
-  "LeaderBoard": {
-    "_info": {
-      "name": "排行榜",
-      "help": ""
-    },
-    "LeaderBoardclaim": {
-      "name": "排行榜点赞",
-      "help": ""
-    },
-    "LeaderBoardFinishCount": {
-      "name": "LeaderBoard.LeaderBoardFinishCount.name",
-      "help": "LeaderBoard.LeaderBoardFinishCount.help"
-    }
-  },
-  "MonthlySignIn": {
-    "_info": {
-      "name": "每月签到",
-      "help": ""
-    },
-    "MonthlySignIn": {
-      "name": "每月签到",
-      "help": ""
-    },
-    "MonthlySignInFinishCount": {
-      "name": "MonthlySignIn.MonthlySignInFinishCount.name",
-      "help": "MonthlySignIn.MonthlySignInFinishCount.help"
-    }
-  },
-  "InformationClub": {
-    "_info": {
-      "name": "情报社",
-      "help": ""
-    },
-    "InformationClubSignIn": {
-      "name": "情报社签到",
-      "help": ""
-    },
-    "InformationClubSignInCount": {
-      "name": "InformationClub.InformationClubSignInCount.name",
-      "help": "InformationClub.InformationClubSignInCount.help"
-    }
-  },
-  "YiLeLaMian": {
-    "_info": {
-      "name": "一乐拉面",
-      "help": ""
-    },
-    "YiLeLaMianClaim": {
-      "name": "拉面领取",
-      "help": ""
-    },
-    "YiLeLaMianFinishCount": {
-      "name": "YiLeLaMian.YiLeLaMianFinishCount.name",
-      "help": "YiLeLaMian.YiLeLaMianFinishCount.help"
     }
   },
   "Recruit": {

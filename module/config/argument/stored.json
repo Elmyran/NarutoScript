@@ -162,8 +162,8 @@
   },
   "FriendGiftsFinishCount": {
     "name": "FriendGiftsFinishCount",
-    "path": "Freebies.FriendGifts.FriendGiftsFinishCount",
-    "i18n": "FriendGifts.FriendGiftsFinishCount.name",
+    "path": "Freebies.Freebies.FriendGiftsFinishCount",
+    "i18n": "Freebies.FriendGiftsFinishCount.name",
     "stored": "StoredFriendGiftsFinishCount",
     "attrs": {
       "time": "2020-01-01 00:00:00",
@@ -175,8 +175,8 @@
   },
   "DailyShareFinishCount": {
     "name": "DailyShareFinishCount",
-    "path": "Freebies.DailyShare.DailyShareFinishCount",
-    "i18n": "DailyShare.DailyShareFinishCount.name",
+    "path": "Freebies.Freebies.DailyShareFinishCount",
+    "i18n": "Freebies.DailyShareFinishCount.name",
     "stored": "StoredDailyShareFinishCount",
     "attrs": {
       "time": "2020-01-01 00:00:00",
@@ -188,9 +188,61 @@
   },
   "MailRewardFinishCount": {
     "name": "MailRewardFinishCount",
-    "path": "Freebies.MailReward.MailRewardFinishCount",
-    "i18n": "MailReward.MailRewardFinishCount.name",
+    "path": "Freebies.Freebies.MailRewardFinishCount",
+    "i18n": "Freebies.MailRewardFinishCount.name",
     "stored": "StoredMailRewardClaimCount",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 1,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "LeaderBoardFinishCount": {
+    "name": "LeaderBoardFinishCount",
+    "path": "Freebies.Freebies.LeaderBoardFinishCount",
+    "i18n": "Freebies.LeaderBoardFinishCount.name",
+    "stored": "StoredLeaderBoardLikeCount",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 1,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "InformationClubSignInCount": {
+    "name": "InformationClubSignInCount",
+    "path": "Freebies.Freebies.InformationClubSignInCount",
+    "i18n": "Freebies.InformationClubSignInCount.name",
+    "stored": "StoredInformationClubSignInCount",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 1,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "YiLeLaMianFinishCount": {
+    "name": "YiLeLaMianFinishCount",
+    "path": "Freebies.Freebies.YiLeLaMianFinishCount",
+    "i18n": "Freebies.YiLeLaMianFinishCount.name",
+    "stored": "StoredYiLeLaMianClaimCount",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 1,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "MonthlySignInFinishCount": {
+    "name": "MonthlySignInFinishCount",
+    "path": "Freebies.Freebies.MonthlySignInFinishCount",
+    "i18n": "Freebies.MonthlySignInFinishCount.name",
+    "stored": "StoredMonthlySignInCount",
     "attrs": {
       "time": "2020-01-01 00:00:00",
       "total": 1,
@@ -217,58 +269,6 @@
     "path": "Freebies.ZhaoCai.ZhaoCaiFinishCount",
     "i18n": "ZhaoCai.ZhaoCaiFinishCount.name",
     "stored": "StoredZhaoCaiFinishCount",
-    "attrs": {
-      "time": "2020-01-01 00:00:00",
-      "total": 1,
-      "value": 0
-    },
-    "order": 0,
-    "color": "#777777"
-  },
-  "LeaderBoardFinishCount": {
-    "name": "LeaderBoardFinishCount",
-    "path": "Freebies.LeaderBoard.LeaderBoardFinishCount",
-    "i18n": "LeaderBoard.LeaderBoardFinishCount.name",
-    "stored": "StoredLeaderBoardLikeCount",
-    "attrs": {
-      "time": "2020-01-01 00:00:00",
-      "total": 1,
-      "value": 0
-    },
-    "order": 0,
-    "color": "#777777"
-  },
-  "MonthlySignInFinishCount": {
-    "name": "MonthlySignInFinishCount",
-    "path": "Freebies.MonthlySignIn.MonthlySignInFinishCount",
-    "i18n": "MonthlySignIn.MonthlySignInFinishCount.name",
-    "stored": "StoredMonthlySignInCount",
-    "attrs": {
-      "time": "2020-01-01 00:00:00",
-      "total": 1,
-      "value": 0
-    },
-    "order": 0,
-    "color": "#777777"
-  },
-  "InformationClubSignInCount": {
-    "name": "InformationClubSignInCount",
-    "path": "Freebies.InformationClub.InformationClubSignInCount",
-    "i18n": "InformationClub.InformationClubSignInCount.name",
-    "stored": "StoredInformationClubSignInCount",
-    "attrs": {
-      "time": "2020-01-01 00:00:00",
-      "total": 1,
-      "value": 0
-    },
-    "order": 0,
-    "color": "#777777"
-  },
-  "YiLeLaMianFinishCount": {
-    "name": "YiLeLaMianFinishCount",
-    "path": "Freebies.YiLeLaMian.YiLeLaMianFinishCount",
-    "i18n": "YiLeLaMian.YiLeLaMianFinishCount.name",
-    "stored": "StoredYiLeLaMianClaimCount",
     "attrs": {
       "time": "2020-01-01 00:00:00",
       "total": 1,

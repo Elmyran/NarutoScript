@@ -71,44 +71,30 @@ class GeneratedConfig:
     MiJingType_GangTi = True
     MiJingType_LeiTing = True
 
-    # Group `FriendGifts`
-    FriendGifts_FriendGiftsStart = True
-    FriendGifts_FriendGiftsFinishCount = {}
-
-    # Group `DailyShare`
-    DailyShare_DailyShareStart = True
-    DailyShare_DailyShareFinishCount = {}
-
-    # Group `MailReward`
-    MailReward_MailRewardClaim = True
-    MailReward_MailRewardFinishCount = {}
-
-    # Group `PrivilegeWeeklyPackage`
-    PrivilegeWeeklyPackage_PrivilegeWeeklyPackageClaim = True
-    PrivilegeWeeklyPackage_PrivilegPackageFinishCount = {}
+    # Group `Freebies`
+    Freebies_FriendGiftsStart = True
+    Freebies_FriendGiftsFinishCount = {}
+    Freebies_DailyShareStart = True
+    Freebies_DailyShareFinishCount = {}
+    Freebies_MailRewardClaim = True
+    Freebies_MailRewardFinishCount = {}
+    Freebies_LeaderBoardclaim = True
+    Freebies_LeaderBoardFinishCount = {}
+    Freebies_InformationClubSignIn = True
+    Freebies_InformationClubSignInCount = {}
+    Freebies_YiLeLaMianClaim = True
+    Freebies_YiLeLaMianFinishCount = {}
+    Freebies_MonthlySignIn = True
+    Freebies_MonthlySignInFinishCount = {}
+    Freebies_ActivityReward = True
 
     # Group `ZhaoCai`
     ZhaoCai_ZhaoCaiFree = True
     ZhaoCai_ZhaoCaiFinishCount = {}
 
-    # Group `DailyReward`
-    DailyReward_Daily = True
-
-    # Group `LeaderBoard`
-    LeaderBoard_LeaderBoardclaim = True
-    LeaderBoard_LeaderBoardFinishCount = {}
-
-    # Group `MonthlySignIn`
-    MonthlySignIn_MonthlySignIn = True
-    MonthlySignIn_MonthlySignInFinishCount = {}
-
-    # Group `InformationClub`
-    InformationClub_InformationClubSignIn = True
-    InformationClub_InformationClubSignInCount = {}
-
-    # Group `YiLeLaMian`
-    YiLeLaMian_YiLeLaMianClaim = True
-    YiLeLaMian_YiLeLaMianFinishCount = {}
+    # Group `PrivilegeWeeklyPackage`
+    PrivilegeWeeklyPackage_PrivilegeWeeklyPackageClaim = True
+    PrivilegeWeeklyPackage_PrivilegPackageFinishCount = {}
 
     # Group `Recruit`
     Recruit_SkipNormalRecruit = False

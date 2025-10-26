@@ -169,16 +169,14 @@ MiJingType:
 
 
 # ==================== Rewards ====================
-
-FriendGifts:
+Freebies:
   FriendGiftsStart:
-    type: checkbox
-    value: true
+      type: checkbox
+      value: true
   FriendGiftsFinishCount:
-    stored: StoredFriendGiftsFinishCount
-    value: {}
-    display: hide
-DailyShare:
+      stored: StoredFriendGiftsFinishCount
+      value: {}
+      display: hide
   DailyShareStart:
     type: checkbox
     value: true
@@ -186,12 +184,51 @@ DailyShare:
     stored: StoredDailyShareFinishCount
     value: {}
     display: hide
-MailReward:
   MailRewardClaim:
     type: checkbox
     value: true
   MailRewardFinishCount:
     stored: StoredMailRewardClaimCount
+    value: {}
+    display: hide
+  LeaderBoardclaim:
+    type: checkbox
+    value: true
+  LeaderBoardFinishCount:
+    stored: StoredLeaderBoardLikeCount
+    value: {}
+    display: hide
+  InformationClubSignIn:
+    type: checkbox
+    value: true
+  InformationClubSignInCount:
+    stored: StoredInformationClubSignInCount
+    value: {}
+    display: hide
+  YiLeLaMianClaim:
+    type: checkbox
+    value: true
+  YiLeLaMianFinishCount:
+    stored: StoredYiLeLaMianClaimCount
+    value: {}
+    display: hide
+  MonthlySignIn:
+    type: checkbox
+    value: true
+  MonthlySignInFinishCount:
+    stored: StoredMonthlySignInCount
+    value: {}
+    display: hide
+  ActivityReward:
+    type: checkbox
+    value: true
+
+ZhaoCai:
+  ZhaoCaiFree:
+    type: checkbox
+    value:  true
+  ZhaoCaiFinishCount:
+    stored: StoredZhaoCaiFinishCount
     value: {}
     display: hide
 PrivilegeWeeklyPackage:
@@ -201,58 +238,17 @@ PrivilegeWeeklyPackage:
   PrivilegPackageFinishCount:
     stored: StoredPrivilegeWeeklyPackageClaimCount
     value: {}
-    display: hide
-ZhaoCai:
-  ZhaoCaiFree:
-    type: checkbox
-    value:  true
-  ZhaoCaiFinishCount:
-    stored: StoredZhaoCaiFinishCount
-    value: {}
-    display: hide
-DailyReward:
-  Daily:
-    type: checkbox
-    value: true
-
-LeaderBoard:
-  LeaderBoardclaim:
-    type: checkbox
-    value: true
-  LeaderBoardFinishCount:
-    stored: StoredLeaderBoardLikeCount
-    value: {}
-    display: hide
-MonthlySignIn:
-  MonthlySignIn:
-    type: checkbox
-    value: true
-  MonthlySignInFinishCount:
-    stored: StoredMonthlySignInCount
-    value: {}
-    display: hide
-InformationClub:
-  InformationClubSignIn:
-    type: checkbox
-    value: true
-  InformationClubSignInCount:
-    stored: StoredInformationClubSignInCount
-    value: {}
-    display: hide
+    display: hide 
 
 
-YiLeLaMian:
-  YiLeLaMianClaim:
-    type: checkbox
-    value: true
-  YiLeLaMianFinishCount:
-    stored: StoredYiLeLaMianClaimCount
-    value: {}
-    display: hide
+  
+
+
+  
 Recruit:
   SkipNormalRecruit:
     type: checkbox
-    value: false
+    value: False
 BattleOrder:
   LikeAndShare:
     type: checkbox
