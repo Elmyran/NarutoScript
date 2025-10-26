@@ -1,7 +1,7 @@
 from module.base.timer import Timer
 from module.exception import GameStuckError
 from module.ocr.ocr import  DigitCounter
-from tasks.base.page import page_squad
+from tasks.base.page import page_squad_help_battle
 from tasks.base.taskui import TaskUI
 from tasks.combat.assets.assets_combat_support import COMBAT_SUPPORT_SAME_CHARACTER_NOTIFY
 from tasks.combat.support import SUPPORT_LIST
@@ -34,6 +34,7 @@ class SquadRaidFight(TaskUI):
 
         return True
     def _help_battle_select(self):
+        self.ui_ensure(page_squad_help_battle)
         SUPPORT_LIST.select_first_support_character(self)
     def _start_fight(self):
         self.device.click_record_remove(HELP_BATTLE_START_FIGHT)
