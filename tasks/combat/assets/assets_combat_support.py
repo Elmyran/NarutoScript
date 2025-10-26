@@ -5,13 +5,22 @@ from module.base.button import Button, ButtonWrapper
 
 COMBAT_SUPPORT_ADD = ButtonWrapper(
     name='COMBAT_SUPPORT_ADD',
-    share=Button(
-        file='./assets/share/combat/support/COMBAT_SUPPORT_ADD.png',
-        area=(358, 344, 437, 419),
-        search=(338, 324, 457, 439),
-        color=(90, 82, 78),
-        button=(358, 344, 437, 419),
-    ),
+    share=[
+        Button(
+            file='./assets/share/combat/support/COMBAT_SUPPORT_ADD.png',
+            area=(358, 344, 437, 419),
+            search=(338, 324, 457, 439),
+            color=(90, 82, 78),
+            button=(358, 344, 437, 419),
+        ),
+        Button(
+            file='./assets/share/combat/support/COMBAT_SUPPORT_ADD.2.png',
+            area=(360, 455, 438, 530),
+            search=(340, 435, 458, 550),
+            color=(90, 83, 78),
+            button=(360, 455, 438, 530),
+        ),
+    ],
 )
 COMBAT_SUPPORT_ADD_LIMITED = ButtonWrapper(
     name='COMBAT_SUPPORT_ADD_LIMITED',

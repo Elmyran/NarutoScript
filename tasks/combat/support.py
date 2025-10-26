@@ -63,7 +63,28 @@ class NextSupportCharacter:
             return None
 
 
-
+    def get_next_support_character_base_area(self, screenshot,area) -> ClickButton | None:
+        SUPPORT_SELECTED.load_search(area)
+        if SUPPORT_SELECTED.match_template(screenshot, similarity=0.75):
+            area = SUPPORT_SELECTED.button
+            area = area_offset((-10, 65,75, 145), offset=area[:2])
+            if area[3] < COMBAT_SUPPORT_LIST_GRID.area[3]:
+                return ClickButton(area, name=self.name)
+            else:
+                # Out of list
+                logger.info('Next character is out of list')
+                return None
+        COMBAT_SUPPORT_ADD_LIMITED.load_search(area)
+        if COMBAT_SUPPORT_ADD_LIMITED.match_template(screenshot, similarity=0.75):
+            # Move area to the next character card center
+            area = COMBAT_SUPPORT_ADD_LIMITED.button
+            area = area_offset((0, 75, 85, 155), offset=area[:2])
+            if area[3] < COMBAT_SUPPORT_LIST_GRID.area[3]:
+                return ClickButton(area, name=self.name)
+            else:
+                # Out of list
+                logger.info('Next character is out of list')
+                return None   
 
     def is_next_support_character_selected(self, screenshot) -> bool:
         if self.button is None:
@@ -123,27 +144,63 @@ class SupportSelectList:
     
     def get_next_support_character_button_until_available(self, main:ModuleBase):
         """Returns the next support character button in the support list."""
-
+        darg_interval=Timer(2,4)
         for _ in main.loop():
             COMBAT_SUPPORT_ADD.load_search(COMBAT_SUPPORT_ADD_SEARCH.area)
             buttons=COMBAT_SUPPORT_ADD.match_multi_template(main.device.image)
             if buttons:  
                 return buttons[0]
+            if darg_interval.reached():  
+                self.drag_page(self.drag_direction, main=main)
+                main.wait_until_stable(  
+                        self.search_button,  
+                        timer=Timer(0, count=0),  
+                        timeout=Timer(1.5, count=5)  
+                )
+                darg_interval.reset()
+    
+    def get_next_available_support_character_button_base_selected(self, main:ModuleBase):
+        """Returns the next support character button in the support list."""
+        next=NextSupportCharacter(main.device.image)
+        button=next.get_next_support_character_button_base_selected(main.device.image)
+        if not button:
             self.drag_page(self.drag_direction, main=main)
             main.wait_until_stable(  
                     self.search_button,  
                     timer=Timer(0, count=0),  
                     timeout=Timer(1.5, count=5)  
             )
+            button=next.get_next_support_character_button_base_selected(main.device.image)
             
+ 
+        COMBAT_SUPPORT_ADD.load_search(button.area)  
+        if COMBAT_SUPPORT_ADD.match_template(main.device.image, similarity=0.55):
             
-
-            
+            return button
+        COMBAT_SUPPORT_ADD_LIMITED.load_search(button.area)
+        if COMBAT_SUPPORT_ADD_LIMITED.match_template(main.device.image, similarity=0.75):
+            next_button=next.get_next_support_character_base_area(button.area)
+            drag_interval=Timer(2,4)
+            for _ in main.loop():
+                if not next_button and drag_interval.reached():
+                    self.drag_page(self.drag_direction, main=main)
+                    main.wait_until_stable(  
+                            self.search_button,  
+                            timer=Timer(0, count=0),  
+                            timeout=Timer(1.5, count=5)  
+                    )
+                    drag_interval.reset()
+                    next_button=next.get_next_support_character_base_area(button.area)
+                    continue
+                COMBAT_SUPPORT_ADD.load_search(next_button.area) 
+                if COMBAT_SUPPORT_ADD.match_template(main.device.image, similarity=0.65):
+                    print(next_button.area)
+                    return next_button
+                next_button=next.get_next_support_character_base_area(next_button.area)
     def select_first_support_character(self, main:ModuleBase):
         button=self.get_next_support_character_button_until_available(main)
         click_interval=Timer(2)
         for _ in main.loop():
-            logger.info(f'first character button: {button.area}')
             SUPPORT_SELECTED.load_search(button.area)
             if main.match_template(SUPPORT_SELECTED):
                 break
@@ -160,23 +217,11 @@ class SupportSelectList:
             if main.appear(COMBAT_SUPPORT_SAME_CHARACTER_NOTIFY):
                 timeout.reset()
                 continue
-        next=NextSupportCharacter(main.device.image)
-        button=next.get_next_support_character_button_base_selected(main.device.image)
-        if button is None:  
-            self.drag_page(self.drag_direction, main=main)
-            main.wait_until_stable(  
-                            self.search_button,  
-                            timer=Timer(0, count=0),  
-                            timeout=Timer(1.5, count=5)  
-                    )
-            button=next.get_next_support_character_button_base_selected(main.device.image)
-
+        button=self.get_next_available_support_character_button_base_selected(main)
         click_interval=Timer(2)
         
         for _ in main.loop():               
-            area=button.area
-            logger.info(f'Next character button: {area}')
-            SUPPORT_SELECTED.load_search(area)
+            SUPPORT_SELECTED.load_search(button.area)
             if main.appear(SUPPORT_SELECTED,similarity=0.55):
                 break
             if main.match_template(SQUAD_RAID_FIGHT_LOADING):

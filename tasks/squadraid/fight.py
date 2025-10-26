@@ -3,7 +3,7 @@ from module.exception import GameStuckError
 from module.ocr.ocr import  DigitCounter
 from tasks.base.page import page_squad_help_battle,page_squad
 from tasks.base.taskui import TaskUI
-from tasks.combat.assets.assets_combat_support import COMBAT_SUPPORT_SAME_CHARACTER_NOTIFY
+from tasks.combat.assets.assets_combat_support import  COMBAT_SUPPORT_SAME_CHARACTER_NOTIFY
 from tasks.combat.support import SUPPORT_LIST
 from tasks.squadraid.assets.assets_squadraid_fight import *
 from tasks.squadraid.benefit import HelpBattleBenefit
@@ -56,8 +56,6 @@ class SquadRaidFight(TaskUI):
 
 
         return True
-
-
 
 
 
