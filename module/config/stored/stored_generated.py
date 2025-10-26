@@ -28,6 +28,7 @@ from module.config.stored.classes import (
     StoredPlannerOverall,
     StoredPrivilegeStoreFinishCount,
     StoredPrivilegeWeeklyPackageClaimCount,
+    StoredSquadRaidFinishCount,
     StoredTiLi,
     StoredTrailblazePower,
     StoredYiLeLaMianClaimCount,
@@ -42,19 +43,20 @@ class StoredGenerated:
     AccountName = StoredAccountName("Restart.AccountStorage.AccountName")
     DuelDaily = StoredDuel("Duel.Duel.DuelDaily")
     CurrentVictoryCount = StoredDuelCurrentVictory("Duel.Duel.CurrentVictoryCount")
+    SquadRaidFinishedCount = StoredSquadRaidFinishCount("SquadRaid.SquadRaid.SquadRaidFinishedCount")
     Dungeon = StoredDungeon("TiLi.TiLiStorage.Dungeon")
     MissionAccept = StoredMissionAccept("Mission.MissionStorage.MissionAccept")
     MiJingCount = StoredMiJingCount("MiJing.MiJingStorage.MiJingCount")
     JiFenSaiDailyRewardClaim = StoredJiFenSaiRewardClaimCount("JiFenSai.JiFenSaiStorage.JiFenSaiDailyRewardClaim")
-    FriendGiftsFinishCount = StoredFriendGiftsFinishCount("Freebies.FriendGifts.FriendGiftsFinishCount")
-    DailyShareFinishCount = StoredDailyShareFinishCount("Freebies.DailyShare.DailyShareFinishCount")
-    MailRewardFinishCount = StoredMailRewardClaimCount("Freebies.MailReward.MailRewardFinishCount")
+    FriendGiftsFinishCount = StoredFriendGiftsFinishCount("Freebies.Freebies.FriendGiftsFinishCount")
+    DailyShareFinishCount = StoredDailyShareFinishCount("Freebies.Freebies.DailyShareFinishCount")
+    MailRewardFinishCount = StoredMailRewardClaimCount("Freebies.Freebies.MailRewardFinishCount")
+    LeaderBoardFinishCount = StoredLeaderBoardLikeCount("Freebies.Freebies.LeaderBoardFinishCount")
+    InformationClubSignInCount = StoredInformationClubSignInCount("Freebies.Freebies.InformationClubSignInCount")
+    YiLeLaMianFinishCount = StoredYiLeLaMianClaimCount("Freebies.Freebies.YiLeLaMianFinishCount")
+    MonthlySignInFinishCount = StoredMonthlySignInCount("Freebies.Freebies.MonthlySignInFinishCount")
     PrivilegPackageFinishCount = StoredPrivilegeWeeklyPackageClaimCount("Freebies.PrivilegeWeeklyPackage.PrivilegPackageFinishCount")
     ZhaoCaiFinishCount = StoredZhaoCaiFinishCount("Freebies.ZhaoCai.ZhaoCaiFinishCount")
-    LeaderBoardFinishCount = StoredLeaderBoardLikeCount("Freebies.LeaderBoard.LeaderBoardFinishCount")
-    MonthlySignInFinishCount = StoredMonthlySignInCount("Freebies.MonthlySignIn.MonthlySignInFinishCount")
-    InformationClubSignInCount = StoredInformationClubSignInCount("Freebies.InformationClub.InformationClubSignInCount")
-    YiLeLaMianFinishCount = StoredYiLeLaMianClaimCount("Freebies.YiLeLaMian.YiLeLaMianFinishCount")
     PrivilegeStoreFinishCount = StoredPrivilegeStoreFinishCount("StorePurchase.PrivilegeStore.PrivilegeStoreFinishCount")
     BattleOrderRank = StoredBattleOrderRank("BattleOrder.BattleOrderStorage.BattleOrderRank")
     BattleOrderActivityPoints = StoredBattleOrderActivityPoints("BattleOrder.BattleOrderStorage.BattleOrderActivityPoints")

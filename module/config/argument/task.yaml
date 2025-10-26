@@ -58,17 +58,10 @@ Daily:
       - JiFenSaiStorage
     Freebies:
       - Scheduler
-      - FriendGifts
-      - DailyShare
-      - MailReward
+      - Freebies
       - PrivilegeWeeklyPackage
       - ZhaoCai
-      - FreebiesStorage
-      - DailyReward
-      - LeaderBoard
-      - MonthlySignIn
-      - InformationClub
-      - YiLeLaMian
+
     StorePurchase:
       - Scheduler
       - PrivilegeStore

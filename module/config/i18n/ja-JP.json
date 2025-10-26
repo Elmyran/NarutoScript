@@ -287,7 +287,12 @@
     "SquadRaidFight": {
       "name": "SquadRaid.SquadRaidFight.name",
       "help": "SquadRaid.SquadRaidFight.help",
-      "SquadHelp": "SquadHelp"
+      "SquadSupport": "SquadSupport",
+      "SquadMatch": "SquadMatch"
+    },
+    "SquadRaidFinishedCount": {
+      "name": "SquadRaid.SquadRaidFinishedCount.name",
+      "help": "SquadRaid.SquadRaidFinishedCount.help"
     }
   },
   "SurvivalTrail": {
@@ -372,60 +377,70 @@
       "help": "MiJingType.LeiTing.help"
     }
   },
-  "FriendGifts": {
+  "Freebies": {
     "_info": {
-      "name": "FriendGifts._info.name",
-      "help": "FriendGifts._info.help"
+      "name": "Freebies._info.name",
+      "help": "Freebies._info.help"
     },
     "FriendGiftsStart": {
-      "name": "FriendGifts.FriendGiftsStart.name",
-      "help": "FriendGifts.FriendGiftsStart.help"
+      "name": "Freebies.FriendGiftsStart.name",
+      "help": "Freebies.FriendGiftsStart.help"
     },
     "FriendGiftsFinishCount": {
-      "name": "FriendGifts.FriendGiftsFinishCount.name",
-      "help": "FriendGifts.FriendGiftsFinishCount.help"
-    }
-  },
-  "DailyShare": {
-    "_info": {
-      "name": "DailyShare._info.name",
-      "help": "DailyShare._info.help"
+      "name": "Freebies.FriendGiftsFinishCount.name",
+      "help": "Freebies.FriendGiftsFinishCount.help"
     },
     "DailyShareStart": {
-      "name": "DailyShare.DailyShareStart.name",
-      "help": "DailyShare.DailyShareStart.help"
+      "name": "Freebies.DailyShareStart.name",
+      "help": "Freebies.DailyShareStart.help"
     },
     "DailyShareFinishCount": {
-      "name": "DailyShare.DailyShareFinishCount.name",
-      "help": "DailyShare.DailyShareFinishCount.help"
-    }
-  },
-  "MailReward": {
-    "_info": {
-      "name": "MailReward._info.name",
-      "help": "MailReward._info.help"
+      "name": "Freebies.DailyShareFinishCount.name",
+      "help": "Freebies.DailyShareFinishCount.help"
     },
     "MailRewardClaim": {
-      "name": "MailReward.MailRewardClaim.name",
-      "help": "MailReward.MailRewardClaim.help"
+      "name": "Freebies.MailRewardClaim.name",
+      "help": "Freebies.MailRewardClaim.help"
     },
     "MailRewardFinishCount": {
-      "name": "MailReward.MailRewardFinishCount.name",
-      "help": "MailReward.MailRewardFinishCount.help"
-    }
-  },
-  "PrivilegeWeeklyPackage": {
-    "_info": {
-      "name": "PrivilegeWeeklyPackage._info.name",
-      "help": "PrivilegeWeeklyPackage._info.help"
+      "name": "Freebies.MailRewardFinishCount.name",
+      "help": "Freebies.MailRewardFinishCount.help"
     },
-    "PrivilegeWeeklyPackageClaim": {
-      "name": "PrivilegeWeeklyPackage.PrivilegeWeeklyPackageClaim.name",
-      "help": "PrivilegeWeeklyPackage.PrivilegeWeeklyPackageClaim.help"
+    "LeaderBoardclaim": {
+      "name": "Freebies.LeaderBoardclaim.name",
+      "help": "Freebies.LeaderBoardclaim.help"
     },
-    "PrivilegPackageFinishCount": {
-      "name": "PrivilegeWeeklyPackage.PrivilegPackageFinishCount.name",
-      "help": "PrivilegeWeeklyPackage.PrivilegPackageFinishCount.help"
+    "LeaderBoardFinishCount": {
+      "name": "Freebies.LeaderBoardFinishCount.name",
+      "help": "Freebies.LeaderBoardFinishCount.help"
+    },
+    "InformationClubSignIn": {
+      "name": "Freebies.InformationClubSignIn.name",
+      "help": "Freebies.InformationClubSignIn.help"
+    },
+    "InformationClubSignInCount": {
+      "name": "Freebies.InformationClubSignInCount.name",
+      "help": "Freebies.InformationClubSignInCount.help"
+    },
+    "YiLeLaMianClaim": {
+      "name": "Freebies.YiLeLaMianClaim.name",
+      "help": "Freebies.YiLeLaMianClaim.help"
+    },
+    "YiLeLaMianFinishCount": {
+      "name": "Freebies.YiLeLaMianFinishCount.name",
+      "help": "Freebies.YiLeLaMianFinishCount.help"
+    },
+    "MonthlySignIn": {
+      "name": "Freebies.MonthlySignIn.name",
+      "help": "Freebies.MonthlySignIn.help"
+    },
+    "MonthlySignInFinishCount": {
+      "name": "Freebies.MonthlySignInFinishCount.name",
+      "help": "Freebies.MonthlySignInFinishCount.help"
+    },
+    "ActivityReward": {
+      "name": "Freebies.ActivityReward.name",
+      "help": "Freebies.ActivityReward.help"
     }
   },
   "ZhaoCai": {
@@ -442,70 +457,18 @@
       "help": "ZhaoCai.ZhaoCaiFinishCount.help"
     }
   },
-  "DailyReward": {
+  "PrivilegeWeeklyPackage": {
     "_info": {
-      "name": "DailyReward._info.name",
-      "help": "DailyReward._info.help"
+      "name": "PrivilegeWeeklyPackage._info.name",
+      "help": "PrivilegeWeeklyPackage._info.help"
     },
-    "Daily": {
-      "name": "DailyReward.Daily.name",
-      "help": "DailyReward.Daily.help"
-    }
-  },
-  "LeaderBoard": {
-    "_info": {
-      "name": "LeaderBoard._info.name",
-      "help": "LeaderBoard._info.help"
+    "PrivilegeWeeklyPackageClaim": {
+      "name": "PrivilegeWeeklyPackage.PrivilegeWeeklyPackageClaim.name",
+      "help": "PrivilegeWeeklyPackage.PrivilegeWeeklyPackageClaim.help"
     },
-    "LeaderBoardclaim": {
-      "name": "LeaderBoard.LeaderBoardclaim.name",
-      "help": "LeaderBoard.LeaderBoardclaim.help"
-    },
-    "LeaderBoardFinishCount": {
-      "name": "LeaderBoard.LeaderBoardFinishCount.name",
-      "help": "LeaderBoard.LeaderBoardFinishCount.help"
-    }
-  },
-  "MonthlySignIn": {
-    "_info": {
-      "name": "MonthlySignIn._info.name",
-      "help": "MonthlySignIn._info.help"
-    },
-    "MonthlySignIn": {
-      "name": "MonthlySignIn.MonthlySignIn.name",
-      "help": "MonthlySignIn.MonthlySignIn.help"
-    },
-    "MonthlySignInFinishCount": {
-      "name": "MonthlySignIn.MonthlySignInFinishCount.name",
-      "help": "MonthlySignIn.MonthlySignInFinishCount.help"
-    }
-  },
-  "InformationClub": {
-    "_info": {
-      "name": "InformationClub._info.name",
-      "help": "InformationClub._info.help"
-    },
-    "InformationClubSignIn": {
-      "name": "InformationClub.InformationClubSignIn.name",
-      "help": "InformationClub.InformationClubSignIn.help"
-    },
-    "InformationClubSignInCount": {
-      "name": "InformationClub.InformationClubSignInCount.name",
-      "help": "InformationClub.InformationClubSignInCount.help"
-    }
-  },
-  "YiLeLaMian": {
-    "_info": {
-      "name": "YiLeLaMian._info.name",
-      "help": "YiLeLaMian._info.help"
-    },
-    "YiLeLaMianClaim": {
-      "name": "YiLeLaMian.YiLeLaMianClaim.name",
-      "help": "YiLeLaMian.YiLeLaMianClaim.help"
-    },
-    "YiLeLaMianFinishCount": {
-      "name": "YiLeLaMian.YiLeLaMianFinishCount.name",
-      "help": "YiLeLaMian.YiLeLaMianFinishCount.help"
+    "PrivilegPackageFinishCount": {
+      "name": "PrivilegeWeeklyPackage.PrivilegPackageFinishCount.name",
+      "help": "PrivilegeWeeklyPackage.PrivilegPackageFinishCount.help"
     }
   },
   "Recruit": {

@@ -68,7 +68,8 @@
     },
     "SquadRaid": {
       "SquadRaidBenefit": true,
-      "SquadRaidFight": "SquadHelp"
+      "SquadRaidFight": "SquadSupport",
+      "SquadRaidFinishedCount": {}
     }
   },
   "Organization": {
@@ -169,17 +170,22 @@
       "Command": "Freebies",
       "ServerUpdate": "05:00"
     },
-    "FriendGifts": {
+    "Freebies": {
       "FriendGiftsStart": true,
-      "FriendGiftsFinishCount": {}
-    },
-    "DailyShare": {
+      "FriendGiftsFinishCount": {},
       "DailyShareStart": true,
-      "DailyShareFinishCount": {}
-    },
-    "MailReward": {
+      "DailyShareFinishCount": {},
       "MailRewardClaim": true,
-      "MailRewardFinishCount": {}
+      "MailRewardFinishCount": {},
+      "LeaderBoardclaim": true,
+      "LeaderBoardFinishCount": {},
+      "InformationClubSignIn": true,
+      "InformationClubSignInCount": {},
+      "YiLeLaMianClaim": true,
+      "YiLeLaMianFinishCount": {},
+      "MonthlySignIn": true,
+      "MonthlySignInFinishCount": {},
+      "ActivityReward": true
     },
     "PrivilegeWeeklyPackage": {
       "PrivilegeWeeklyPackageClaim": true,
@@ -188,25 +194,6 @@
     "ZhaoCai": {
       "ZhaoCaiFree": true,
       "ZhaoCaiFinishCount": {}
-    },
-    "DailyReward": {
-      "Daily": true
-    },
-    "LeaderBoard": {
-      "LeaderBoardclaim": true,
-      "LeaderBoardFinishCount": {}
-    },
-    "MonthlySignIn": {
-      "MonthlySignIn": true,
-      "MonthlySignInFinishCount": {}
-    },
-    "InformationClub": {
-      "InformationClubSignIn": true,
-      "InformationClubSignInCount": {}
-    },
-    "YiLeLaMian": {
-      "YiLeLaMianClaim": true,
-      "YiLeLaMianFinishCount": {}
     }
   },
   "StorePurchase": {
