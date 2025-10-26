@@ -68,7 +68,8 @@
     },
     "SquadRaid": {
       "SquadRaidBenefit": true,
-      "SquadRaidFight": "SquadHelp"
+      "SquadRaidFight": "SquadSupport",
+      "SquadRaidFinishedCount": {}
     }
   },
   "Organization": {

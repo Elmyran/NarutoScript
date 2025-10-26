@@ -1,6 +1,4 @@
 from module.base.timer import Timer
-
-
 from tasks.base.page import page_squad_help_battle_mine
 from tasks.base.ui import UI
 from tasks.squadraid.assets.assets_squadraid_benefit import  *

@@ -1,11 +1,14 @@
-
 from tasks.base.ui import UI
 
-from tasks.squadraid.fight import SquadRaidFight
+
+
 
 class SquadRaid(UI):
     def run(self):
-        if self.config.SquadRaid_SquadRaidFight:
-            SquadRaidFight(self.config,self.device).handle_squad_raid()
+        from tasks.squadraid.fight import SquadRaidFight
+        SquadRaidFight(self.config,self.device).run()
+        if self.config.SquadRaid_SquadRaidBenefit:
+            from tasks.squadraid.benefit import HelpBattleBenefit
+            HelpBattleBenefit(self.config,self.device).handle_help_battle_benefit()
         self.config.task_delay(server_update=True)
         self.config.task_stop()

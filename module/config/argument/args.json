@@ -282,10 +282,17 @@
       },
       "SquadRaidFight": {
         "type": "select",
-        "value": "SquadHelp",
+        "value": "SquadSupport",
         "option": [
-          "SquadHelp"
+          "SquadSupport",
+          "SquadMatch"
         ]
+      },
+      "SquadRaidFinishedCount": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredSquadRaidFinishCount"
       }
     }
   },

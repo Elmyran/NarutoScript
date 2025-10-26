@@ -287,7 +287,12 @@
     "SquadRaidFight": {
       "name": "SquadRaid.SquadRaidFight.name",
       "help": "SquadRaid.SquadRaidFight.help",
-      "SquadHelp": "SquadHelp"
+      "SquadSupport": "SquadSupport",
+      "SquadMatch": "SquadMatch"
+    },
+    "SquadRaidFinishedCount": {
+      "name": "SquadRaid.SquadRaidFinishedCount.name",
+      "help": "SquadRaid.SquadRaidFinishedCount.help"
     }
   },
   "SurvivalTrail": {

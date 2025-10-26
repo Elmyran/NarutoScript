@@ -108,6 +108,19 @@
     "order": 0,
     "color": "#777777"
   },
+  "SquadRaidFinishedCount": {
+    "name": "SquadRaidFinishedCount",
+    "path": "SquadRaid.SquadRaid.SquadRaidFinishedCount",
+    "i18n": "SquadRaid.SquadRaidFinishedCount.name",
+    "stored": "StoredSquadRaidFinishCount",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 1,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
   "Dungeon": {
     "name": "Dungeon",
     "path": "TiLi.TiLiStorage.Dungeon",

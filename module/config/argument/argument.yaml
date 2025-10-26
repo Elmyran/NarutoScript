@@ -103,8 +103,16 @@ SquadRaid:
     value: true
   SquadRaidFight:
     type: select
-    value: SquadHelp
-    option: [SquadHelp]
+    value: SquadSupport
+    option: [SquadSupport,
+            SquadMatch
+    
+    ]
+  SquadRaidFinishedCount:
+    stored: StoredSquadRaidFinishCount
+    value: { }
+    display: hide
+
 SurvivalTrail:
   SurvivalTrialResetTimes:
     type: input

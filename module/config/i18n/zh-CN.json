@@ -287,7 +287,12 @@
     "SquadRaidFight": {
       "name": "小队突袭",
       "help": "",
-      "SquadHelp": "组织助战"
+      "SquadSupport": "组织助战",
+      "SquadMatch": "匹配"
+    },
+    "SquadRaidFinishedCount": {
+      "name": "SquadRaid.SquadRaidFinishedCount.name",
+      "help": "SquadRaid.SquadRaidFinishedCount.help"
     }
   },
   "SurvivalTrail": {

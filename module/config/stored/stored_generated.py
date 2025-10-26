@@ -28,6 +28,7 @@ from module.config.stored.classes import (
     StoredPlannerOverall,
     StoredPrivilegeStoreFinishCount,
     StoredPrivilegeWeeklyPackageClaimCount,
+    StoredSquadRaidFinishCount,
     StoredTiLi,
     StoredTrailblazePower,
     StoredYiLeLaMianClaimCount,
@@ -42,6 +43,7 @@ class StoredGenerated:
     AccountName = StoredAccountName("Restart.AccountStorage.AccountName")
     DuelDaily = StoredDuel("Duel.Duel.DuelDaily")
     CurrentVictoryCount = StoredDuelCurrentVictory("Duel.Duel.CurrentVictoryCount")
+    SquadRaidFinishedCount = StoredSquadRaidFinishCount("SquadRaid.SquadRaid.SquadRaidFinishedCount")
     Dungeon = StoredDungeon("TiLi.TiLiStorage.Dungeon")
     MissionAccept = StoredMissionAccept("Mission.MissionStorage.MissionAccept")
     MiJingCount = StoredMiJingCount("MiJing.MiJingStorage.MiJingCount")
