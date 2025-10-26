@@ -90,8 +90,5 @@ class SquadRaidFight(TaskUI):
                 return True
         return True
 
-az=SquadRaidFight('ns',task='Alas')
-az.device.screenshot()
-az._squad_raid_match()
 
 
