@@ -3,10 +3,10 @@ from module.exception import GameStuckError
 from module.ocr.ocr import  DigitCounter
 from tasks.base.assets.assets_base import TI_LI_REMAIN_COUNTER
 from tasks.base.page import page_main, page_elite_dungeon
-from tasks.base.ui import UI
+from tasks.base.taskui import TaskUI
 from tasks.tili.assets.assets_tili_dungeon import *
 
-class Dungeon(UI):
+class Dungeon(TaskUI):
     def handle_dungeon(self):
         self.device.click_record_clear()
         self.device.stuck_record_clear()

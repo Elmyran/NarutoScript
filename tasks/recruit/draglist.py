@@ -21,6 +21,12 @@ class RecruitDragList(DraggableList):
             logger.info('Successfully navigated to'+keyword.cn)
             if RecruitTabList.select_row(keyword, main=main):
                 logger.info('Successfully selected '+keyword.cn)
+    def is_row_selected(self, button, main):
+        if main.image_color_count(button, color=self.active_color, threshold=221, count=100):
+            return True
+        return False
+
+        
    
 RecruitTabList= RecruitDragList(
     name='RecruitTabList',
@@ -28,7 +34,7 @@ RecruitTabList= RecruitDragList(
     ocr_class=Ocr,
     search_button=RECRUIT_TAB_SEARCH,
     check_row_order=False,
-    active_color=(243,230,203),
+    active_color=(241,231,209),
     drag_direction="down"
 )
 class RecruitDuration(Duration):
