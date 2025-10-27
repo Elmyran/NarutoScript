@@ -33,8 +33,6 @@ class OrganizationPanRen(GameControl,TaskUI):
             return False
         self.config.stored.PanRenFinishCount.add()
         self.config.task_delay(target=[wednesday_target_time, saturday_target_time])
-        if self.config.PanRen_SecondPassword:
-            self.config.task_call('Restart')
         self.config.task_stop()
     def _check_time(self):
         server_weekday = get_server_weekday()
@@ -148,7 +146,8 @@ class OrganizationPanRen(GameControl,TaskUI):
             if self.appear_then_click(PAN_REN_AUTO_FIGHT_CONFIRM, interval=0):
                 continue
             if self.appear(CODE_SECOND_PASSWORD):
-                self.handle_second_password()
+                code=self.config.PanRen_SecondPassword
+                self.handle_second_password(code)
                 continue
             if self.appear_then_click(PAN_REN_AUTO_FIGHT,interval=1):
                 continue

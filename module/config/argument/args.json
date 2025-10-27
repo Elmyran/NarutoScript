@@ -280,6 +280,10 @@
         "type": "checkbox",
         "value": true
       },
+      "SquadQuadrupleReward": {
+        "type": "checkbox",
+        "value": false
+      },
       "SquadRaidFight": {
         "type": "select",
         "value": "SquadSupport",
@@ -293,6 +297,11 @@
         "value": {},
         "display": "hide",
         "stored": "StoredSquadRaidFinishCount"
+      },
+      "SecondPassword": {
+        "type": "input",
+        "value": "",
+        "valuetype": "str"
       }
     }
   },

@@ -606,11 +606,14 @@ class ConfigUpdater:
             str: Key path to set config json, such as "Main.Emotion.Fleet1Record"
             any: Value to set, such as "2020-01-01 00:00:00"
         """
-
+        from module.logger import logger
         if key == 'Alas.Emulator.GameClient' and value == 'cloud_android':
             yield 'Alas.Emulator.PackageName', 'CN-Official'
             yield 'Alas.Optimization.WhenTaskQueueEmpty', 'close_game'
-        # Sync Dungeon.TrailblazePower and Ornament.TrailblazePower
+        if key == 'SquadRaid.SquadRaid.SecondPassword':  
+            yield 'PanRen.PanRen.SecondPassword', value  
+        if key == 'PanRen.PanRen.SecondPassword':  
+            yield 'SquadRaid.SquadRaid.SecondPassword', value
 
 
     def iter_hidden_args(self, data) -> t.Iterator[str]:

@@ -68,8 +68,10 @@
     },
     "SquadRaid": {
       "SquadRaidBenefit": true,
+      "SquadQuadrupleReward": false,
       "SquadRaidFight": "SquadSupport",
-      "SquadRaidFinishedCount": {}
+      "SquadRaidFinishedCount": {},
+      "SecondPassword": null
     }
   },
   "Organization": {

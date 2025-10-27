@@ -172,6 +172,17 @@ SQUAD_RAID_FIGHTING = ButtonWrapper(
     ),
     en=None,
 )
+SQUAD_RAID_FIGHT_CONFIRM = ButtonWrapper(
+    name='SQUAD_RAID_FIGHT_CONFIRM',
+    cn=Button(
+        file='./assets/cn/squadraid/fight/SQUAD_RAID_FIGHT_CONFIRM.png',
+        area=(447, 385, 601, 438),
+        search=(427, 365, 621, 458),
+        color=(199, 137, 22),
+        button=(447, 385, 601, 438),
+    ),
+    en=None,
+)
 SQUAD_RAID_FIGHT_LOADING = ButtonWrapper(
     name='SQUAD_RAID_FIGHT_LOADING',
     cn=Button(
@@ -224,6 +235,28 @@ SQUAD_RAID_NEED_FIGHT = ButtonWrapper(
         search=(510, 600, 738, 677),
         color=(74, 70, 65),
         button=(530, 620, 718, 657),
+    ),
+    en=None,
+)
+SQUAD_RAID_QUADRUPLE_REWARD_BUTTON = ButtonWrapper(
+    name='SQUAD_RAID_QUADRUPLE_REWARD_BUTTON',
+    cn=Button(
+        file='./assets/cn/squadraid/fight/SQUAD_RAID_QUADRUPLE_REWARD_BUTTON.png',
+        area=(483, 660, 522, 695),
+        search=(463, 640, 542, 715),
+        color=(64, 62, 45),
+        button=(483, 660, 522, 695),
+    ),
+    en=None,
+)
+SQUAD_RAID_QUADRUPLE_REWARD_CHECK = ButtonWrapper(
+    name='SQUAD_RAID_QUADRUPLE_REWARD_CHECK',
+    cn=Button(
+        file='./assets/cn/squadraid/fight/SQUAD_RAID_QUADRUPLE_REWARD_CHECK.png',
+        area=(484, 658, 522, 696),
+        search=(464, 638, 542, 716),
+        color=(57, 93, 62),
+        button=(484, 658, 522, 696),
     ),
     en=None,
 )
