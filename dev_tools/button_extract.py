@@ -19,7 +19,36 @@ from module.logger import logger
 SHARE_SERVER = 'share'
 ASSET_SERVER = [SHARE_SERVER] + VALID_LANG
 
-
+def merge_grid(dic_rect,distance_threshold=30):  
+    """  
+    Merge overlapping or nearby grid cells  
+      
+    Args:  
+        dic_rect: dict with center as key, area as value  
+        thres_x: Horizontal merge threshold in pixels  
+        thres_y: Vertical merge threshold in pixels  
+          
+    Returns:  
+        dict: Merged dic_rect  
+    """  
+    if not dic_rect:  
+        return {}  
+      
+    merged_dict = {}  
+    for center, area in dic_rect.items():  
+        # 检查是否与已有框太接近  
+        is_duplicate = False  
+        for existing_center in merged_dict.keys():  
+            distance = np.sqrt((center[0] - existing_center[0])**2 +   
+                             (center[1] - existing_center[1])**2)  
+            if distance < distance_threshold:  
+                is_duplicate = True  
+                break  
+          
+        if not is_duplicate:  
+            merged_dict[center] = area  
+      
+    return merged_dict
 def parse_grid(image):
     """
     Args:
@@ -33,12 +62,18 @@ def parse_grid(image):
     contours, _ = cv2.findContours(image, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
     dic_rect = {}
     for corners in contours:
-        area = corner2area(corners.reshape(4, 2)) + (0, 0, 1, 1)
+        x, y, w, h = cv2.boundingRect(corners)  
+        area_size = w * h  
+          
+        if area_size < 4900 or area_size > 6200:  
+            continue  
+        area = (x, y, x + w, y + h)  
+        
         center = area_center(area)
         dic_rect[center] = area
     # for k, v in dic_rect.items():
     #     print(k, v)
-
+    dic_rect = merge_grid(dic_rect)  
     dic_grid = {}
     prev_y = -100
     grid_y = -1
@@ -46,13 +81,13 @@ def parse_grid(image):
     for center in sorted(dic_rect.keys(), key=lambda x: x[1]):
         if center[1] > prev_y + 3:
             for x, c in enumerate(sorted(stack_center, key=lambda x: x[0])):
-                dic_grid[(x, grid_y)] = tuple(dic_rect[c].astype(int))
+                dic_grid[(x, grid_y)] = tuple(dic_rect[c])
             grid_y += 1
             stack_center = []
         stack_center.append(center)
         prev_y = center[1]
     for x, c in enumerate(sorted(stack_center, key=lambda x: x[0])):
-        dic_grid[(x, grid_y)] = tuple(dic_rect[c].astype(int))
+        dic_grid[(x, grid_y)] = tuple(dic_rect[c])
     # for k, v in dic_grid.items():
     #     print(k, v)
     return dic_grid

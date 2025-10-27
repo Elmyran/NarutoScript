@@ -37,7 +37,7 @@ from tasks.freebies.assets.assets_freebies_friendgifts import *
 from tasks.login.assets.assets_login import *
 from tasks.activity.assets.assets_activity import *
 from tasks.base.assets.assets_base_page import *
-
+from tasks.duel.assets.assets_duel_extended_play import *
 class Page:
     # Key: str, page name like "page_main"
     # Value: Page, page instance
@@ -229,6 +229,14 @@ page_ninjutsu.link(DUEL_TASK,destination=page_task_panel)
 page_task_panel.link(DUEL_TASK_PANEL,destination=page_ninjutsu)
 page_ninjutsu.link(CLOSE,destination=page_duel)
 page_duel.link(CLOSE,destination=page_main)
+#ExtendedPlay
+page_extended_play=Page(EXTENDED_CHECK)
+page_no_restricted_battle=Page(NO_RESTRICTED_BATTLE_CHECK)
+page_duel.link(DUEL_GOTO_EXTENDED_PLAY,destination=page_extended_play)
+page_extended_play.link(EXTENDED_GOTO_NO_RESTRICTED_BATTLE,destination=page_no_restricted_battle)
+page_no_restricted_battle.link(CLOSE,destination=page_duel)
+page_extended_play.link(CLOSE,destination=page_duel)
+
 #LeaderBoard
 page_leader_board=Page(LEADER_BOARD_CHECK)
 page_manual.link(MANUAL_GOTO_TASK_BUTTON,destination=page_leader_board)
