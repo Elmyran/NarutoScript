@@ -1,7 +1,7 @@
 from  module.base.timer import Timer
 from module.exception import GameStuckError
 from module.logger import logger
-
+from tasks.base.assets.assets_base_page import CLOSE
 from tasks.base.page import page_main, page_panel
 from tasks.base.ui import UI
 from tasks.freebies.assets.assets_freebies_dailyshare import SHARE_BUTTON, SHARE_GOTO_QQ
@@ -18,7 +18,7 @@ class DailyShare(UI):
     def _share(self):
         packages = self.device.list_package() 
         if not 'com.tencent.mobileqq' in packages:  
-           logger.info('QQ not installed')
+           logger.warning('QQ not installed')
            return True
         self.device.click_record_clear()
         self.ui_ensure(page_panel)
@@ -45,18 +45,17 @@ class DailyShare(UI):
                 if self.device.app_current() == 'com.tencent.mobileqq':
                     logger.info('Could not verify QQ closure')
                     continue
-                else: break
+                else: 
+                    break
 
-        click_interval=Timer(2).start()
         for _   in self.loop():
             if time.reached():
                 raise GameStuckError('BATTLE ORDER RANK SHARE BACK TO GAME STUCK')
             if self.ui_page_appear(page_main):
                 break
-            if click_interval.reached():
-                self.device.click(SHARE_GOTO_QQ)
-                click_interval.reset()
-        
+            if self.appear_then_click(SHARE_GOTO_QQ,interval=2):
+                continue
+
 
 
 

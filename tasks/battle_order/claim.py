@@ -178,7 +178,6 @@ class BattleOrderClaim(UI):
             
         # 按 x 坐标排序
         boxes.sort(key=lambda b: b.button[0])
-        image=cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
         if not self.config.Error_SaveError:  
             return boxes,image
         self.device.screenshot_deque.append({  
