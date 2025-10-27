@@ -437,8 +437,7 @@ class UI(MainPage):
                     break
             if 1:
                 clicked = True
-    def handle_second_password(self):
-        code=self.config.PanRen_SecondPassword
+    def handle_second_password(self,code):
         if code is None:
             raise RequestHumanTakeover('SecondPassword need to fill')
         for _ in  self.loop():
@@ -448,7 +447,7 @@ class UI(MainPage):
             if self.appear_then_click(CODE_SECOND_PASSWORD,interval=2):
                 continue
         if hasattr(self.device, 'u2'):
-            self.device.u2.send_keys(code)
+            self.device.u2.send_keys(str(code))
         time=Timer(3,count=6).start()
         for _ in self.loop():
             if time.reached():
