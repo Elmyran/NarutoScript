@@ -4,7 +4,7 @@ from tasks.base.page import page_recruit
 from tasks.base.ui import UI
 from tasks.recruit.assets.assets_recruit import *
 from tasks.recruit.keywords import AdvancedRecruitment, NormalRecruitment
-from tasks.recruit.draglist import RecruitDragList, RecruitDuration, RecruitTabList
+from tasks.recruit.draglist import RecruitDuration, RecruitTabList
 
 
 class Recruit(UI):
@@ -62,8 +62,4 @@ class Recruit(UI):
             return res
         else:
             return None
-az=Recruit('ns',task='Alas')
-az.device.screenshot()
-RecruitTabList.insight_row(NormalRecruitment,az)
-res=RecruitTabList.is_row_selected(RecruitTabList.keyword2button(NormalRecruitment),az)
-print(res)
+
