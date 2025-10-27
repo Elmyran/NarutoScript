@@ -48,6 +48,7 @@ class GeneratedConfig:
     SquadRaid_SquadQuadrupleReward = False
     SquadRaid_SquadRaidFight = 'SquadSupport'  # SquadSupport, SquadMatch
     SquadRaid_SquadRaidFinishedCount = {}
+    SquadRaid_SecondPassword = None
 
     # Group `SurvivalTrail`
     SurvivalTrail_SurvivalTrialResetTimes = 0

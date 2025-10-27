@@ -33,8 +33,6 @@ class OrganizationPanRen(GameControl,TaskUI):
             return False
         self.config.stored.PanRenFinishCount.add()
         self.config.task_delay(target=[wednesday_target_time, saturday_target_time])
-        if self.config.PanRen_SecondPassword:
-            self.config.task_call('Restart')
         self.config.task_stop()
     def _check_time(self):
         server_weekday = get_server_weekday()

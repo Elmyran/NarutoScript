@@ -297,6 +297,11 @@
         "value": {},
         "display": "hide",
         "stored": "StoredSquadRaidFinishCount"
+      },
+      "SecondPassword": {
+        "type": "input",
+        "value": "",
+        "valuetype": "str"
       }
     }
   },

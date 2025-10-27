@@ -297,6 +297,10 @@
     "SquadRaidFinishedCount": {
       "name": "SquadRaid.SquadRaidFinishedCount.name",
       "help": "SquadRaid.SquadRaidFinishedCount.help"
+    },
+    "SecondPassword": {
+      "name": "二级密码",
+      "help": ""
     }
   },
   "SurvivalTrail": {

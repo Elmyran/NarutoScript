@@ -117,8 +117,8 @@ SquadRaid:
     display: hide
   SecondPassword:
     type: input
-    value:  null
-    display: display
+    value: ''
+    valuetype: str
 
 SurvivalTrail:
   SurvivalTrialResetTimes:
