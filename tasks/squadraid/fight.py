@@ -25,7 +25,7 @@ class SquadRaidFight(TaskUI):
         if not self.have_sufficient_times():
             logger.info('SquadRaid Have Done')
             return False
-        self._triple_reward()
+        self._quadruple_reward()
         if self.config.SquadRaid_SquadRaidFight == 'SquadMatch':
             self._squad_raid_match()
         elif self.config.SquadRaid_SquadRaidFight == 'SquadSupport':
@@ -60,6 +60,8 @@ class SquadRaidFight(TaskUI):
             if self.appear(CODE_SECOND_PASSWORD):
                 self.handle_second_password()
                 continue
+            if self.appear_then_click(SQUAD_RAID_FIGHT_CONFIRM,interval=1):
+                continue
             if self.match_template_color(SQUAD_RAID_MATCH_BUTTON,interval=1):
                 self.device.click(SQUAD_RAID_MATCH_BUTTON)
                 continue
@@ -91,6 +93,8 @@ class SquadRaidFight(TaskUI):
                 SUPPORT_LIST.select_next_support_character(self)
             if self.appear(CODE_SECOND_PASSWORD):
                 self.handle_second_password()
+                continue
+            if self.appear_then_click(SQUAD_RAID_FIGHT_CONFIRM,interval=1):
                 continue
             if self.appear_then_click(HELP_BATTLE_START_FIGHT,interval=1):
                 continue
