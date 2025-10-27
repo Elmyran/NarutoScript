@@ -19,7 +19,7 @@ class MiJing(TaskUI):
                 self.config.stored.MiJingCount.value >= 21 > pre_count):
             from tasks.ren_zhe_tiao_zhan.mi_jing_box_claim import MiJingBoxClaim
             MiJingBoxClaim(config=self.config,device=self.device).handle_mi_jing_box_claim()
-        self.ui_goto_main()
+
         return True
     def _select_mi_jing(self):
         ocr=MiJingOcr(MI_JING_TYPE)
