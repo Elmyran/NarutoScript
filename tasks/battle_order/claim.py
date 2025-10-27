@@ -1,8 +1,3 @@
-
-
-
-
-
 from module.logger.logger import logger 
 from module.base.timer import Timer
 from tasks.base.assets.assets_base_page import BATTLE_ORDER_CHECK
@@ -21,7 +16,8 @@ class BattleOrderClaim(UI):
         self.device.click_record_clear()
         self.ui_ensure(page_battle_order)
         BATTLE_ORDER_TAB.set('奖励',main=self)
-        time=Timer(1,3).start()
+        click_interval=Timer(1)
+        time=Timer(2,4).start()
         for _ in self.loop():
             if time.reached():
                 break
@@ -36,13 +32,13 @@ class BattleOrderClaim(UI):
             if self.appear_then_click(BATTLE_ORDER_REWARD_CLAIM_SUCCESS,interval=0):
                 time.reset()
                 continue
-            if self.interval_is_reached('claimable_click', interval=0.5):
-                res,_=self.detect_reward_boxes(image=self.device.image,button=BATTLE_ORDER_REWARD_CLAIM_AREA)
-                if res and len(res)!=0:
-                        logger.info(f"Detect {len(res)} Claimable Reward ")
-                        self.device.click(res[0])
-                        self.interval_reset('claimable_click', interval=0.5)
-                        time.reset()
+            res,_=self.detect_reward_boxes(image=self.device.image,button=BATTLE_ORDER_REWARD_CLAIM_AREA)
+            if res and len(res)!=0:
+                logger.info(f"Detect {len(res)} Claimable Reward ")
+                if click_interval.reached():
+                    self.device.click(res[0])
+                    click_interval.reset()          
+                time.reset()
     def _character_fragments_select(self):
         ocr=OcrCharacterTab(BATTLE_ORDER_CHARACTER_LIST_AREA)
         name=self.config.BattleOrder_SCharacterFragments
