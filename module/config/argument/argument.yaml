@@ -101,6 +101,9 @@ SquadRaid:
   SquadRaidBenefit:
     type: checkbox
     value: true
+  SquadQuadrupleReward:
+    type: checkbox
+    value: False
   SquadRaidFight:
     type: select
     value: SquadSupport
@@ -112,6 +115,10 @@ SquadRaid:
     stored: StoredSquadRaidFinishCount
     value: { }
     display: hide
+  SecondPassword:
+    type: input
+    value:  null
+    display: display
 
 SurvivalTrail:
   SurvivalTrialResetTimes:

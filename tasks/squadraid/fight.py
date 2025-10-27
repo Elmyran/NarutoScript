@@ -2,6 +2,7 @@ from module.base.timer import Timer
 from module.exception import GameStuckError
 from module.logger import logger
 from module.ocr.ocr import  DigitCounter
+from tasks.base.assets.assets_base_code_second import CODE_SECOND_PASSWORD
 from tasks.base.page import page_squad_help_battle,page_squad
 from tasks.base.taskui import TaskUI
 from tasks.combat.assets.assets_combat_support import  COMBAT_SUPPORT_SAME_CHARACTER_NOTIFY
@@ -42,8 +43,13 @@ class SquadRaidFight(TaskUI):
             if self.appear(SQUAD_RAID_HAVE_DONE):
                 return False
         return True
-    def _triple_reward(self):
-
+    def _quadruple_reward(self):
+        if self.config.SquadRaid_SquadQuadrupleReward:
+            for _ in self.loop():
+                if self.appear(SQUAD_RAID_QUADRUPLE_REWARD_CHECK):
+                    break
+                if self.appear_then_click(SQUAD_RAID_QUADRUPLE_REWARD_BUTTON,interval=1):
+                    continue
         return True
 
     def _squad_raid_match(self):
@@ -51,6 +57,9 @@ class SquadRaidFight(TaskUI):
         self.device.click_record_remove(HELP_BATTLE_START_FIGHT)
         self.device.click_record_remove(SQUAD_RAID_FIGHT_SUCCESS)
         for _ in self.loop():
+            if self.appear(CODE_SECOND_PASSWORD):
+                self.handle_second_password()
+                continue
             if self.match_template_color(SQUAD_RAID_MATCH_BUTTON,interval=1):
                 self.device.click(SQUAD_RAID_MATCH_BUTTON)
                 continue
@@ -80,6 +89,9 @@ class SquadRaidFight(TaskUI):
                 raise GameStuckError("SQUAD_RAID_FIGHT_STUCK")
             if self.appear(COMBAT_SUPPORT_SAME_CHARACTER_NOTIFY):
                 SUPPORT_LIST.select_next_support_character(self)
+            if self.appear(CODE_SECOND_PASSWORD):
+                self.handle_second_password()
+                continue
             if self.appear_then_click(HELP_BATTLE_START_FIGHT,interval=1):
                 continue
             if self.appear(SQUAD_RAID_FIGHTING):

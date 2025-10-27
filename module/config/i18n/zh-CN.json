@@ -284,6 +284,10 @@
       "name": "领取功勋奖励",
       "help": ""
     },
+    "SquadQuadrupleReward": {
+      "name": "四倍奖励",
+      "help": ""
+    },
     "SquadRaidFight": {
       "name": "小队突袭",
       "help": "",

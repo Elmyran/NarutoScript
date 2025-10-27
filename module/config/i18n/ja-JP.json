@@ -284,6 +284,10 @@
       "name": "SquadRaid.SquadRaidBenefit.name",
       "help": "SquadRaid.SquadRaidBenefit.help"
     },
+    "SquadQuadrupleReward": {
+      "name": "SquadRaid.SquadQuadrupleReward.name",
+      "help": "SquadRaid.SquadQuadrupleReward.help"
+    },
     "SquadRaidFight": {
       "name": "SquadRaid.SquadRaidFight.name",
       "help": "SquadRaid.SquadRaidFight.help",

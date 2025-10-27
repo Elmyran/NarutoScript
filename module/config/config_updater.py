@@ -610,7 +610,10 @@ class ConfigUpdater:
         if key == 'Alas.Emulator.GameClient' and value == 'cloud_android':
             yield 'Alas.Emulator.PackageName', 'CN-Official'
             yield 'Alas.Optimization.WhenTaskQueueEmpty', 'close_game'
-        # Sync Dungeon.TrailblazePower and Ornament.TrailblazePower
+        if key == 'SquadRaid.SecondPassword':  
+            yield 'PanRen.SecondPassword', value  
+        if key == 'PanRen.SecondPassword':  
+            yield 'SquadRaid.SecondPassword', value
 
 
     def iter_hidden_args(self, data) -> t.Iterator[str]:
