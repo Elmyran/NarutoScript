@@ -4,7 +4,6 @@ from module.base.utils import crop
 from module.exception import GameStuckError
 from module.logger import logger
 from module.ocr.ocr import Digit, Ocr, DigitCounter
-
 from tasks.base.assets.assets_base import  TI_LI_REMAIN_COUNTER
 from tasks.base.assets.assets_base_popup import *
 from tasks.base.page import *
