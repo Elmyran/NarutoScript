@@ -68,7 +68,7 @@ class DuelDaily(TaskUI):
             if self.appear(DUEL_TASK_RECALLED_BUTTON) and have_recall_card:
                 self.device.click(DUEL_TASK_RECALLED_BUTTON)
                 continue
-            if self.appear_then_click(DUEL_TASK_REWARD_CLAIM_BUTTON,interval=0):
+            if self.appear_then_click(DUEL_TASK_REWARD_CLAIM_BUTTON,interval=1):
                 continue
         
         #任务完成检测

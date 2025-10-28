@@ -87,6 +87,7 @@ class Equipment(UI):
     def _select_equipment_part(self,check_status=True):
         self.ui_ensure(page_equipment)
         self.device.click(EQUIPMENT_KNIFE)
+        self.device.click_record_clear(EQUIPMENT_KNIFE)
         """按顺序尝试装备部件，直到找到可升级的为止"""
         valid_parts = self._get_valid_equipment_parts()
         if not valid_parts:

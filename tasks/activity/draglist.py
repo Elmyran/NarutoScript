@@ -4,8 +4,7 @@ from module.logger import logger
 from module.ocr.keyword import Keyword
 from module.ocr.ocr import Ocr
 from module.ui.draggable_list import DraggableList
-from tasks.activity.assets.assets_activity import ACTIVITY_CHECK, ACTIVITY_LIST_AREA
-from tasks.activity.assets.assets_activity_ui import MONTHLY_SIGN_IN_CHECK
+from tasks.activity.assets.assets_activity import ACTIVITY_LIST_AREA
 from tasks.activity.activity_keyword import ActivityTab
 
 class DraggableActivityTabList(DraggableList):   
@@ -18,7 +17,6 @@ class DraggableActivityTabList(DraggableList):
         """  
         logger.info('activity_list_wait_list_end')  
         timeout = Timer(1, count=3).start()  
-        empty = False  
           
         while True:  
             if skip_first_screenshot:  
@@ -85,6 +83,11 @@ class DraggableActivityTabList(DraggableList):
                 )  
         
         return False
+    def is_row_selected(self, button, main):
+        if main.image_color_count(button, color=self.active_color, threshold=240, count=100):
+            return True
+
+        return False
   
     def search_rows(self, main, keyword):  
         """搜索并选择指定的活动标签"""  
@@ -103,6 +106,6 @@ ACTIVITY_TAB_LIST = DraggableActivityTabList(
     ocr_class=Ocr,  
     search_button=ACTIVITY_LIST_AREA,  
     check_row_order=False,  
-    active_color=(212, 190, 143),  
+    active_color=(221, 199, 161),  
     drag_direction="down"  
 )

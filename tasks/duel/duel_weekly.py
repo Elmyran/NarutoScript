@@ -70,7 +70,7 @@ class DuelWeekly(TaskUI):
                 self.config.stored.CurrentVictoryCount.value=res
                 target=self.config.Duel_TargetVictoryNumber
                 if res < target:
-                    self.appear_then_click(DUEL_TASK_PANEL)
+                    self.appear_then_click(DUEL_TASK_PANEL,interval=1)
                     return False
                 elif res<10:
                     return False
@@ -89,7 +89,7 @@ class DuelWeekly(TaskUI):
             if res and len(res)==4:
                 logger.info('DUEL_TASK_WEEKLY_REWARD HAVE CLAIMED')
                 break
-            if self.appear_then_click(DUEL_TASK_WEEKLY_REWARD,similarity=0.88,interval=0.5):
+            if self.appear_then_click(DUEL_TASK_WEEKLY_REWARD,similarity=0.88,interval=1):
                 continue
 
     def start_fight(self):

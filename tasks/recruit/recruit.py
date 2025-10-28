@@ -62,4 +62,3 @@ class Recruit(UI):
             return res
         else:
             return None
-
