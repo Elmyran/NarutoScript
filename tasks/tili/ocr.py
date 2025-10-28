@@ -28,7 +28,6 @@ class StuffOcr(OcrWhiteLetterOnComplexBackground,DigitCounter):
         result = super().after_process(result)
         result = re.sub(r'V', '/', result)
         result = re.sub(r'(\d)1(\d+)$', r'\1/\2', result)
-        result=result.replace('集', '荡')
         result=result.replace('装', '荡')
         result=result.replace('满', '荡')
         result=result.replace('芳', '荡')
