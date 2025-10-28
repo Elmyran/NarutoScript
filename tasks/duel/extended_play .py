@@ -1,10 +1,6 @@
-
-from operator import is_
-from unittest import skip
 from module.base.utils.utils import get_color
 from module.logger import logger
 from tasks.base.taskui import TaskUI
-from tasks.duel.assets.assets_duel import DUEL_START_FIGHT
 from tasks.duel.assets.assets_duel_extended_play import *
 from tasks.base.page import page_no_restricted_battle
 
@@ -114,16 +110,6 @@ class ExtendedPlay(TaskUI):
             logger.info(f"区域已选中:{button.posi}")
             return True  
         return False
-        
-    def test(self):
-        for character in EXTENDED_SELECT_CHARACTER.buttons:
-            if self.is_selected(character):
-                    logger.info(f'{character.name} is selected')
-                    continue
-            
-
-                
-
        
        
 az=ExtendedPlay('ns',task='Alas')

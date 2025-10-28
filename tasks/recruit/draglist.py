@@ -1,5 +1,6 @@
 import re
 from datetime import timedelta, datetime
+from module.config.utils import get_server_next_update
 from module.ocr.ocr import Duration
 from module.ui.draggable_list import DraggableList
 from tasks.recruit.assets.assets_recruit_ui import *
@@ -22,7 +23,7 @@ class RecruitDragList(DraggableList):
             if RecruitTabList.select_row(keyword, main=main):
                 logger.info('Successfully selected '+keyword.cn)
     def is_row_selected(self, button, main):
-        if main.image_color_count(button, color=self.active_color, threshold=221, count=100):
+        if main.image_color_count(button, color=self.active_color, threshold=240, count=100):
             return True
         return False
 
@@ -38,21 +39,26 @@ RecruitTabList= RecruitDragList(
     drag_direction="down"
 )
 class RecruitDuration(Duration):
-    @classmethod
-    def timedelta_regex(cls, lang):
-        if lang == 'cn':
-            # 专门匹配 "HH:MM:SS后免费" 格式
-            return re.compile(r'(?P<hours>\d{1,2}):(?P<minutes>\d{1,2}):(?P<seconds>\d{1,2})后.*?免费')
-        return super().timedelta_regex(lang)
-
+   
+    def after_process(self, result):    
+        result = super().after_process(result)       
+        # 7:5959 -> 7:59:59    
+        # 27:0959 -> 27:09:59    
+        result = re.sub(r'(\d{1,2}):(\d{2})(\d{2})', r'\1:\2:\3', result)    
+          
+        # 转换为标准格式    
+        if self.lang == 'cn':    
+            result = re.sub(r'(\d+):(\d+):(\d+)', r'\1小时\2分钟\3秒', result)    
+        else:    
+            result = re.sub(r'(\d+):(\d+):(\d+)', r'\1h\2m\3s', result)    
+          
+        return result  
     def format_result(self, result: str) -> datetime:
         matched = self.timedelta_regex(self.lang).search(result)
-        if not matched:
-            return datetime.now()  # Return current time if no match
-
         hours = self._sanitize_number(matched.group('hours'))
         minutes = self._sanitize_number(matched.group('minutes'))
         seconds = self._sanitize_number(matched.group('seconds'))
-
+        if hours == 0 and minutes == 0 and seconds == 0:
+            return get_server_next_update('05:00')  
         # Return future datetime when recruit will be available
         return datetime.now() + timedelta(hours=hours, minutes=minutes, seconds=seconds)
