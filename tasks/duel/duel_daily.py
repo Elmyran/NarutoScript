@@ -45,7 +45,7 @@ class DuelDaily(TaskUI):
 
     def _duel_task_detect(self):
         self.device.click_record_clear()
-        self.config.stored.CurrentVictoryCount.total=self.config.Duel_TargetVictoryNumber
+        self.config.stored.CurrentVictoryCount.total=self.config.DuelWeekly_TargetVictoryNumber
         time=Timer(30, count=30).start()
         #进入任务面板
         for _ in self.loop():
