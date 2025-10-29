@@ -25,6 +25,7 @@ class ExtendedPlay(Combat):
 
     def enter_extended_play(self):
         self.ui_ensure(page_daily)
+        self.wait_until_stable(ACTIVITY_REWARD_GOTO_PLAY_SEARCH)
         click_interval=Timer(2)
         drag=True
         drag_interval=Timer(2)
