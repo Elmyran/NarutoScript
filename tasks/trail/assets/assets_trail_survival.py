@@ -117,10 +117,10 @@ SURVIVAL_MOP_UP_TIMES = ButtonWrapper(
     name='SURVIVAL_MOP_UP_TIMES',
     cn=Button(
         file='./assets/cn/trail/survival/SURVIVAL_MOP_UP_TIMES.png',
-        area=(564, 610, 609, 645),
-        search=(544, 590, 629, 665),
-        color=(45, 50, 21),
-        button=(564, 610, 609, 645),
+        area=(457, 615, 603, 646),
+        search=(437, 595, 623, 666),
+        color=(86, 87, 73),
+        button=(457, 615, 603, 646),
     ),
     en=None,
 )

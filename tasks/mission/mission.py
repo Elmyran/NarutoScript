@@ -260,5 +260,4 @@ class Mission(TaskUI):
 
     def _task_strategy(self, tasks):
         return tasks
-    
 

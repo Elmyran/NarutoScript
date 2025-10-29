@@ -11,7 +11,6 @@ class FengRaoFight(TaskUI):
     def handle_feng_rao(self):
         self.device.click_record_clear()
         self.ui_ensure(page_feng_rao)
-    
         self._feng_rao_fight()
 
     def _feng_rao_fight(self):

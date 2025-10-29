@@ -1,8 +1,6 @@
-
-
 from module.logger import logger
-from module.ocr.ocr import Digit, Ocr, OcrResultButton, OcrWhiteLetterOnComplexBackground
-
+from module.ocr.ocr import  Ocr, OcrResultButton, OcrWhiteLetterOnComplexBackground
+import cv2
 from module.ocr.onnxocr.onnx_paddleocr import ONNXPaddleOcr
 
 
@@ -37,14 +35,21 @@ class MissionOcr(Ocr):
     
         logger.attr(name=f'{self.name} matched', text=results)  
         return results
-class MissionDigit(Digit,OcrWhiteLetterOnComplexBackground):  
+class MissionDigit(ONNXPaddleOcr,OcrWhiteLetterOnComplexBackground):  
     min_box = (1, 1)  # 确保小数字也能被检测到  
       
-    def pre_process(self, img):  
-        result = OcrWhiteLetterOnComplexBackground.pre_process(self, img)
+    def pre_process(self, image):
+        image = cv2.resize(image, (640, 480))
+    
+        result = OcrWhiteLetterOnComplexBackground.pre_process(self, image)
         return result
     
-class MissionWhiteLetterOcr(ONNXPaddleOcr):
-    def pre_process(self, img):
-        return img
+    
+class MissionWhiteLetterOcr(ONNXPaddleOcr,OcrWhiteLetterOnComplexBackground):
+    def pre_process(self, image):
+        
+      
+
+        return OcrWhiteLetterOnComplexBackground.pre_process(self, image)
+    
 

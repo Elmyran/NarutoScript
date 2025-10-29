@@ -1,11 +1,13 @@
-from module.base.utils.utils import get_color
+from module.base.utils.utils import color_similarity_2d, get_color
 from module.logger import logger
-from tasks.base.taskui import TaskUI
+from tasks.base.assets.assets_base_skill import CHARACTER_SKILL_3
+from tasks.combat.combat import Combat
+from tasks.duel.assets.assets_duel import DUEL_FIGHT_END, DUEL_FIGHT_FAIL, DUEL_FIGHT_SUCCESS, DUEL_ROUND_SWITCH
 from tasks.duel.assets.assets_duel_extended_play import *
 from tasks.base.page import page_no_restricted_battle
 
 
-class ExtendedPlay(TaskUI):
+class ExtendedPlay(Combat):
     def run(self):
        self.handle_extended_play()
        
@@ -14,6 +16,11 @@ class ExtendedPlay(TaskUI):
         self.start_fight()
         self.character_select()
         self.secrect_scroll_select()
+        for _ in self.loop():
+            if self.appear(DUEL_FIGHT_SUCCESS) or self.appear(DUEL_FIGHT_FAIL):
+                break
+            if self.appear(DUEL_ROUND_SWITCH):
+                self.no_restricted_battle_click(end_check=DUEL_FIGHT_END)
 
     def start_fight(self):
         for _ in self.loop():
@@ -110,11 +117,10 @@ class ExtendedPlay(TaskUI):
             logger.info(f"区域已选中:{button.posi}")
             return True  
         return False
+    def test(self):
+        self.no_restricted_battle_click(end_check=AWAITING_SELF_SECRECT_SCROLL_SELECT)
        
-       
+
 az=ExtendedPlay('ns',task='Alas')
-az.run()
-
-
-
-
+az.device.screenshot()
+az.no_restricted_battle_click(end_check=DUEL_FIGHT_END)

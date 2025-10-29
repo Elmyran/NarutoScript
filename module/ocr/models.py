@@ -1,6 +1,8 @@
+import threading
 from pponnxcr import TextSystem as TextSystem_
-from module.base.decorator import cached_property, del_cached_property
+from module.base.decorator import cached_property, del_cached_property, has_cached_property
 from module.exception import ScriptError
+from module.logger import logger
 
 DIC_LANG_TO_MODEL = {
     'cn': 'zhs',
@@ -42,6 +44,7 @@ class TextSystem(TextSystem_):
 
 
 class OcrModel:
+    _model_init_thread = None
     def get_by_model(self, model: str) -> TextSystem:
         try:
             return self.__getattribute__(model)
@@ -76,8 +79,34 @@ class OcrModel:
     @cached_property
     def zht(self):
         return TextSystem('zht')
-
-
+    def early_model_init(self):  
+      
+        model = lang2model('cn')  
+        if has_cached_property(self, model):  
+            return  
+        logger.info('Early ocr model init')
+        def early_model_init_func():  
+            model = self.get_by_lang('cn') 
+            try:
+                import numpy as np
+                dummy_img = np.zeros((48, 320, 3), dtype=np.uint8)
+                _ = model.__call__(dummy_img)
+                logger.info('Early custom ocr model init success.') 
+            except Exception as e:
+                logger.info('Early custom ocr model init failed.')  
+  
+        thread = threading.Thread(target=early_model_init_func, daemon=True)  
+        self._model_init_thread = thread  
+        thread.start()  
+  
+    @property  
+    def model_ready(self):  
+       
+        if self._model_init_thread is not None:  
+            self._model_init_thread.join()  
+            self._model_init_thread = None
+            logger.info('Early ocr model init success')  
+        return self
 
 
 OCR_MODEL = OcrModel()
