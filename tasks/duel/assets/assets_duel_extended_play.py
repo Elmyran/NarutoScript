@@ -312,6 +312,16 @@ EXTENDED_TASK_PANEL_CHECK = ButtonWrapper(
     ),
     en=None,
 )
+EXTENDED_TASK_PANEL_EXIT_BUTTON = ButtonWrapper(
+    name='EXTENDED_TASK_PANEL_EXIT_BUTTON',
+    share=Button(
+        file='./assets/share/duel/extended_play/EXTENDED_TASK_PANEL_EXIT_BUTTON.png',
+        area=(1204, 172, 1265, 240),
+        search=(1184, 152, 1280, 260),
+        color=(11, 6, 2),
+        button=(1204, 172, 1265, 240),
+    ),
+)
 EXTENDED_TASK_SCORE_AREA = ButtonWrapper(
     name='EXTENDED_TASK_SCORE_AREA',
     share=Button(

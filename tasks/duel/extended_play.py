@@ -76,9 +76,16 @@ class ExtendedPlay(Combat):
         if not self.score_reached():
             return False
         self.reward_claim()
+        for _ in self.loop():
+            if self.match_template_color(NO_RESTRICTED_BATTLE_CHECK):
+                logger.info("Extended task panel exited")
+                break
+            if self.appear_then_click(EXTENDED_TASK_PANEL_EXIT_BUTTON,interval=1):
+                continue
         return True
         
     def score_reached(self):
+        logger.info("Checking score")
         counter=DigitCounter(EXTENDED_TASK_SCORE_AREA)
         current_score=0
         target_score=2100
@@ -103,6 +110,7 @@ class ExtendedPlay(Combat):
         
 
     def no_restricted_battle_flow(self):
+        logger.info("no_restricted_battle_flow")
         self.ui_ensure(page_no_restricted_battle)
         self.start_fight()
         self.character_select()
@@ -110,6 +118,7 @@ class ExtendedPlay(Combat):
         self.multi_round_combat()
         return True
     def start_fight(self):
+        logger.info("start fight")
         for _ in self.loop():
             if self.appear(NO_RESTRICTED_CHARACTER_SELECT_CHECK):
                 break
@@ -117,6 +126,7 @@ class ExtendedPlay(Combat):
                 self.device.click(NO_RESTRICTED_START_FIGHT)
                 continue
     def character_select(self):
+        logger.info("Character select...")
         for _ in self.loop():
             if self.appear(AWAITING_SELF_SECRECT_SCROLL_SELECT):
                 break
@@ -155,6 +165,7 @@ class ExtendedPlay(Combat):
                 continue
         return True
     def secrect_scroll_select(self):
+        logger.info('Secrect scroll select...')
         for _ in self.loop():
             if self.appear(AWATING_FIGHT_START):
                 break

@@ -37,7 +37,7 @@ class Combat(GameControl):
                       psychic=True,
                       timeout=400):
        
-
+        logger.info('Starting multi-round combat')
      
         for _ in self.loop():
             end=self._is_combat_end(success_check,fail_check)
