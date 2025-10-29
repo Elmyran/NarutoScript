@@ -46,7 +46,6 @@ class Combat(GameControl):
                 return True
             if not self.single_round_combat(round_check, skill, scroll, psychic, timeout):
                 continue
-            logger.info('Round End')
             self.device.stuck_record_clear()
      
 
@@ -92,9 +91,11 @@ class Combat(GameControl):
         for _ in self.loop():
 
             if time.time() - start_time > timeout or self.appear(end_check):
+                logger.info("click_script end_check")
                 self.press_up(buttons)
                 break
             if self._is_exception():
+                logger.info("click_script exception")
                 self.press_up(buttons)
                 break
             
@@ -103,13 +104,16 @@ class Combat(GameControl):
             return True
         return False
     def _is_in_combat(self):
-        return self.appear(DUEL_IS_IN_FIGHT) or self.appear(CHARACTER_ATTACK) 
+        return self.appear(DUEL_IS_IN_FIGHT) or self.appear(CHARACTER_ATTACK) or self.appear(DUEL_ROUND_SWITCH)
     def _is_combat_end(self,success_check=DUEL_FIGHT_SUCCESS,fail_check=DUEL_FIGHT_FAIL):
         if self.appear(success_check):
+            logger.info('Fight success')
             return 'success'
         if self.appear(fail_check):
+            logger.info('Fight fail')
             return 'fail'
         if self._is_exception():
+            logger.info('Fight exception')
             return 'success'
         return False
 

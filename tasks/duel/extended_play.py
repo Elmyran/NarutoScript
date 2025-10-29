@@ -1,16 +1,17 @@
 from datetime import datetime,timedelta
 from module.base.button import ClickButton
 from module.base.timer import Timer
-from module.base.utils.utils import  get_color
-from module.config.utils import get_server_next_monday_update
+from module.base.utils.utils import  area_size, get_color
+from module.config.utils import get_server_next_monday_update, get_server_next_update
 from module.logger import logger
 from module.ocr.ocr import DigitCounter
 from tasks.combat.combat import Combat
 from tasks.duel.assets.assets_duel import DUEL_EXCEPTION, DUEL_FIGHT_FAIL, DUEL_FIGHT_SUCCESS
 from tasks.duel.assets.assets_duel_extended_play import *
-from tasks.base.page import page_no_restricted_battle,page_daily,page_extended_play
+from tasks.base.page import page_no_restricted_battle,page_daily
 from tasks.freebies.assets.assets_freebies_daily_daily import ACTIVITY_REWARD_GOTO_PLAY_SEARCH
-
+from tasks.freebies.assets.assets_freebies_daily import ACTIVITY_TASK_HAVE_DONE
+from module.base.utils import random_rectangle_vector_opted  
 class ExtendedPlay(Combat):
     def run(self):
         if self.config.stored.ExtendedCurrentScore.is_expired():
@@ -20,7 +21,8 @@ class ExtendedPlay(Combat):
         self.config.get_next_task()
         if len(self.config.pending_task)>1:
             return datetime.now()+timedelta(minutes=10)
-        self.handle_extended_play()
+        if not self.handle_extended_play():
+            return get_server_next_update(self.config.Scheduler_ServerUpdate)
         return get_server_next_monday_update(self.config.Scheduler_ServerUpdate)
     
 
@@ -29,7 +31,7 @@ class ExtendedPlay(Combat):
         self.wait_until_stable(ACTIVITY_REWARD_GOTO_PLAY_SEARCH)
         click_interval=Timer(2)
         drag=True
-        drag_interval=Timer(2)
+ 
         for _ in self.loop():
             if self.appear(EXTENDED_CHECK):
                 break
@@ -37,28 +39,33 @@ class ExtendedPlay(Combat):
             if ACTIVITY_REWARD_GOTO_EXTENDED_PLAY.match_template(self.device.image):
                 button_area=ACTIVITY_REWARD_GOTO_EXTENDED_PLAY.button
                 button=ClickButton(area=(button_area[0],button_area[1]+110,button_area[2],button_area[3]+110))
+                ACTIVITY_TASK_HAVE_DONE.load_search((button.area[0]-20,button.area[1]-20,button.area[2]+20,button.area[3]+20))
+                if ACTIVITY_TASK_HAVE_DONE.match_template(self.device.image):
+                    return False
                 if click_interval.reached():
                     self.device.click(button)
                     click_interval.reset()
                 drag=False
                 continue
-            if drag and drag_interval.reached():
-                from module.base.utils import random_rectangle_vector_opted  
+            if drag :
+                width, height = area_size(ACTIVITY_REWARD_GOTO_PLAY_SEARCH.button)
+                vector = (-0.7 * width, 0)  
                 p1, p2 = random_rectangle_vector_opted(  
-                    0.5,  
-                    box=ACTIVITY_REWARD_GOTO_PLAY_SEARCH.button,  
-                    padding=20  
-                )  
+                                    vector,  
+                                    box=ACTIVITY_REWARD_GOTO_PLAY_SEARCH.button,  
+                                )  
                 self.device.drag(p1, p2, name=f'ACTIVITY_REWARD_DRAG_GOTO_EXTENDED_PLAY')
-                
+                self.wait_until_stable(ACTIVITY_REWARD_GOTO_PLAY_SEARCH)
             continue
+        return True
 
 
 
 
        
     def handle_extended_play(self):
-        self.enter_extended_play()
+        if not self.enter_extended_play():
+            return False
         self.ui_ensure(page_no_restricted_battle)
         ready_fight=False
         for _ in self.loop():
@@ -71,10 +78,9 @@ class ExtendedPlay(Combat):
            if ready_fight and self.no_restricted_battle_flow():
                ready_fight=False
     def back_to_no_restructed_battle_page(self):
-        
+        logger.info("Back to no restricted battle  page")
         for _ in self.loop():
             if self.match_template_color(NO_RESTRICTED_BATTLE_CHECK):
-                logger.info("Back to no restricted battle  page")
                 break
             if self.appear_then_click(DUEL_FIGHT_SUCCESS,interval=1):
                 continue
@@ -247,4 +253,6 @@ class ExtendedPlay(Combat):
             return True  
         return False
 
-
+az=ExtendedPlay('ns',task='Alas')
+az.device.screenshot()
+az.enter_extended_play()
