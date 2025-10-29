@@ -66,6 +66,22 @@ class ExtendedPlay(Combat):
            if ready_fight and self.no_restricted_battle_flow():
                ready_fight=False
     def is_task_finished(self):
+        self.task_panel_enter()
+        if not self.score_reached():
+            self.task_panel_exit()
+            return False   
+        self.reward_claim()
+        self.task_panel_exit()
+        return True
+    def task_panel_exit(self):
+        for _ in self.loop():
+            if self.match_template_color(NO_RESTRICTED_BATTLE_CHECK):
+                logger.info("Extended task panel exited")
+                break
+            if self.appear_then_click(EXTENDED_TASK_PANEL_EXIT_BUTTON,interval=1):
+                continue
+
+    def task_panel_enter(self):
         self.ui_ensure(page_no_restricted_battle)
         for _ in self.loop():
             if self.appear(EXTENDED_TASK_PANEL_CHECK):
@@ -73,16 +89,6 @@ class ExtendedPlay(Combat):
                 break
             if self.appear_then_click(EXTENDED_GOTO_TASK_PANEL,interval=1):
                 continue
-        if not self.score_reached():
-            return False
-        self.reward_claim()
-        for _ in self.loop():
-            if self.match_template_color(NO_RESTRICTED_BATTLE_CHECK):
-                logger.info("Extended task panel exited")
-                break
-            if self.appear_then_click(EXTENDED_TASK_PANEL_EXIT_BUTTON,interval=1):
-                continue
-        return True
         
     def score_reached(self):
         logger.info("Checking score")
