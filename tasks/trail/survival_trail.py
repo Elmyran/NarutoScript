@@ -51,8 +51,9 @@ class SurvivalTrail(TaskUI):
                 continue
         return True
     def _mop_up_check(self):
+        ocr=Digit(SURVIVAL_MOP_UP_TIMES,lang='cn')
         for _ in self.loop():
-            ocr=Digit(SURVIVAL_MOP_UP_TIMES,lang='cn')
+            
             times=ocr.ocr_single_line(self.device.image)
 
             if times==0:
@@ -62,16 +63,24 @@ class SurvivalTrail(TaskUI):
                 self.config.SurvivalTrail_SurvivalTrialResetTimes=times
                 if self._survival_reset():
                     logger.info('survival trial reset')
+                    self.handle_teleport()
                     self._mop_up()
                 else :
                     break
     def _survival_reset(self):
         time=Timer(10, count=20).start()
+        ocr=Digit(SURVIVAL_MOP_UP_TIMES,lang='cn')
         for _ in self.loop():
             if time.reached():
                 return False
+            times=ocr.ocr_single_line(self.device.image)
+            if times==0:
+                self.config.SurvivalTrail_SurvivalTrialResetTimes=times
+                break
             if self.appear(SURVIVAL_RESET_FAILED):
                 return False
+            if self.appear_then_click(SURVIVAL_RESET_CONFIRM,interval=1):
+                continue
             if self.appear_then_click(SURVIVAL_RESET_BUTTON,interval=2):
                 continue
         return True

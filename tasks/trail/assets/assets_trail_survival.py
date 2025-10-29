@@ -168,6 +168,26 @@ SURVIVAL_RESET_BUTTON = ButtonWrapper(
     ),
     en=None,
 )
+SURVIVAL_RESET_CONFIRM = ButtonWrapper(
+    name='SURVIVAL_RESET_CONFIRM',
+    cn=[
+        Button(
+            file='./assets/cn/trail/survival/SURVIVAL_RESET_CONFIRM.png',
+            area=(602, 431, 679, 474),
+            search=(582, 411, 699, 494),
+            color=(196, 150, 33),
+            button=(602, 431, 679, 474),
+        ),
+        Button(
+            file='./assets/cn/trail/survival/SURVIVAL_RESET_CONFIRM.2.png',
+            area=(481, 430, 563, 475),
+            search=(461, 410, 583, 495),
+            color=(202, 153, 30),
+            button=(481, 430, 563, 475),
+        ),
+    ],
+    en=None,
+)
 SURVIVAL_RESET_FAILED = ButtonWrapper(
     name='SURVIVAL_RESET_FAILED',
     cn=Button(
