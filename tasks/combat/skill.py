@@ -82,23 +82,28 @@ class SkillContact:
                     self._downed_skills.discard(button)    
         self.with_retry(_long_press)
     def press_down(self, buttons):
-        builders=self.builders
-        for button in buttons:  
-                builder = builders.get(button)
-                if not builder:  
-                    continue
-                x, y = button.button[:2] 
-                builder.down(x, y).commit()  
-                builder.send()  
+        def _press_down(_self):
+            builders=self.builders
+            for button in buttons:  
+                    builder = builders.get(button)
+                    if not builder:  
+                        continue
+                    x, y = button.button[:2] 
+                    builder.down(x, y).commit()  
+                    builder.send()  
+        self.with_retry(_press_down)
     def press_up(self, buttons):
-        builders=self.builders
-        for button in buttons:  
-                builder = builders.get(button)
-                if not builder:  
-                    continue
-                builder.up() 
-                builder.commit()
-                builder.send()
+        def _press_up(_self):
+            builders=self.builders
+            for button in buttons:  
+                    builder = builders.get(button)
+                    if not builder:  
+                        continue
+                    builder.up() 
+                    builder.commit()
+                    builder.send()
+        self.with_retry(_press_up)
+        
 
         
     def up_all(self):  

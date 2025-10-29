@@ -88,7 +88,7 @@ class Combat(GameControl):
         if psychic:
             buttons.append(CHARACTER_PSYCHIC)
         start_time = time.time()
-        
+        self.press_down(buttons)
         for _ in self.loop():
 
             if time.time() - start_time > timeout or self.appear(end_check):
@@ -97,7 +97,7 @@ class Combat(GameControl):
             if self._is_exception():
                 self.press_up(buttons)
                 break
-            self.press_down(buttons)
+            
     def _is_exception(self):
         if self.appear(DUEL_EXCEPTION):
             return True
