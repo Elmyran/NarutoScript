@@ -3,6 +3,16 @@ from module.base.button import Button, ButtonWrapper
 # This file was auto-generated, do not modify it manually. To generate:
 # ``` python -m dev_tools.button_extract ```
 
+ACTIVITY_REWARD_GOTO_PLAY_SEARCH = ButtonWrapper(
+    name='ACTIVITY_REWARD_GOTO_PLAY_SEARCH',
+    share=Button(
+        file='./assets/share/freebies/daily/daily/ACTIVITY_REWARD_GOTO_PLAY_SEARCH.png',
+        area=(192, 118, 1280, 500),
+        search=(172, 98, 1280, 520),
+        color=(160, 135, 77),
+        button=(192, 118, 1280, 500),
+    ),
+)
 DAILY_BAR = ButtonWrapper(
     name='DAILY_BAR',
     cn=Button(

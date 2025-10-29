@@ -1,27 +1,102 @@
-from module.base.utils.utils import color_similarity_2d, get_color
+import click
+from module.base.button import ClickButton
+from module.base.timer import Timer
+from module.base.utils.utils import  get_color
 from module.logger import logger
-from tasks.base.assets.assets_base_skill import CHARACTER_SKILL_3
+from module.ocr.ocr import DigitCounter
 from tasks.combat.combat import Combat
-from tasks.duel.assets.assets_duel import DUEL_FIGHT_END, DUEL_FIGHT_FAIL, DUEL_FIGHT_SUCCESS, DUEL_ROUND_SWITCH
 from tasks.duel.assets.assets_duel_extended_play import *
-from tasks.base.page import page_no_restricted_battle
-
+from tasks.base.page import page_no_restricted_battle,page_daily,page_extended_play
+from tasks.freebies.assets.assets_freebies_daily_daily import ACTIVITY_REWARD_GOTO_PLAY_SEARCH
 
 class ExtendedPlay(Combat):
     def run(self):
        self.handle_extended_play()
+    
+
+    def enter_extended_play(self):
+        self.ui_ensure(page_daily)
+        click_interval=Timer(2)
+        drag=True
+        drag_interval=Timer(2)
+        for _ in self.loop():
+            if self.ui_page_appear(page_extended_play):
+                break
+            ACTIVITY_REWARD_GOTO_EXTENDED_PLAY.load_search(ACTIVITY_REWARD_GOTO_PLAY_SEARCH.area)
+            if ACTIVITY_REWARD_GOTO_EXTENDED_PLAY.match_template(self.device.image):
+                button_area=ACTIVITY_REWARD_GOTO_EXTENDED_PLAY.button
+                button=ClickButton(area=(button_area[0],button_area[1]+110,button_area[2],button_area[3]+110))
+                if click_interval.reached():
+                    self.device.click(button)
+                    click_interval.reset()
+                drag=False
+                continue
+            if drag and drag_interval.reached():
+                from module.base.utils import random_rectangle_vector_opted  
+                p1, p2 = random_rectangle_vector_opted(  
+                    0.5,  
+                    box=ACTIVITY_REWARD_GOTO_PLAY_SEARCH.button,  
+                    padding=20  
+                )  
+                self.device.drag(p1, p2, name=f'ACTIVITY_REWARD_DRAG_GOTO_EXTENDED_PLAY')
+                continue 
+
+
+
+
        
     def handle_extended_play(self):
+        self.enter_extended_play()
+        ready_fight=False
+        for _ in self.loop():
+           if not ready_fight and self.is_task_finished():
+               break
+           else:
+               ready_fight=True
+            
+           if ready_fight and self.no_restricted_battle_flow():
+               ready_fight=False
+    def is_task_finished(self):
+        self.ui_ensure(page_no_restricted_battle)
+        for _ in self.loop():
+            if self.appear(EXTENDED_TASK_PANEL_CHECK):
+                logger.info("Extended task panel entered")
+                break
+            if self.appear_then_click(EXTENDED_GOTO_TASK_PANEL,interval=1):
+                continue
+        if not self.score_reached():
+            return False
+        self.reward_claim()
+        return True
+        
+    def score_reached(self):
+        counter=DigitCounter(EXTENDED_TASK_SCORE_AREA)
+        current_score=0
+        target_score=2100
+        for _ in self.loop():
+            score,reamin,total=counter.ocr_single_line(self.device.image)
+            if total==2100:
+                current_score=score
+                break
+        if target_score>=current_score:
+            return True
+        return False
+    def reward_claim(self):
+        return True
+
+            
+
+        
+        
+        
+
+    def no_restricted_battle_flow(self):
         self.ui_ensure(page_no_restricted_battle)
         self.start_fight()
         self.character_select()
         self.secrect_scroll_select()
-        for _ in self.loop():
-            if self.appear(DUEL_FIGHT_SUCCESS) or self.appear(DUEL_FIGHT_FAIL):
-                break
-            if self.appear(DUEL_ROUND_SWITCH):
-                self.no_restricted_battle_click(end_check=DUEL_FIGHT_END)
-
+        self.multi_round_combat()
+        return True
     def start_fight(self):
         for _ in self.loop():
             if self.appear(NO_RESTRICTED_CHARACTER_SELECT_CHECK):
@@ -117,10 +192,7 @@ class ExtendedPlay(Combat):
             logger.info(f"区域已选中:{button.posi}")
             return True  
         return False
-    def test(self):
-        self.no_restricted_battle_click(end_check=AWAITING_SELF_SECRECT_SCROLL_SELECT)
-       
 
-az=ExtendedPlay('ns',task='Alas')
-az.device.screenshot()
-az.no_restricted_battle_click(end_check=DUEL_FIGHT_END)
+
+
+

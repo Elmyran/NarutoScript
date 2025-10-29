@@ -3,6 +3,17 @@ from module.base.button import Button, ButtonWrapper
 # This file was auto-generated, do not modify it manually. To generate:
 # ``` python -m dev_tools.button_extract ```
 
+ACTIVITY_REWARD_GOTO_EXTENDED_PLAY = ButtonWrapper(
+    name='ACTIVITY_REWARD_GOTO_EXTENDED_PLAY',
+    cn=Button(
+        file='./assets/cn/duel/extended_play/ACTIVITY_REWARD_GOTO_EXTENDED_PLAY.png',
+        area=(976, 311, 1163, 345),
+        search=(956, 291, 1183, 365),
+        color=(146, 131, 98),
+        button=(976, 311, 1163, 345),
+    ),
+    en=None,
+)
 AWAITING_OPPONENT_SELECT = ButtonWrapper(
     name='AWAITING_OPPONENT_SELECT',
     cn=Button(
@@ -106,6 +117,17 @@ EXTENDED_GOTO_NO_RESTRICTED_BATTLE = ButtonWrapper(
         search=(39, 152, 137, 430),
         color=(126, 108, 87),
         button=(59, 172, 117, 410),
+    ),
+    en=None,
+)
+EXTENDED_GOTO_TASK_PANEL = ButtonWrapper(
+    name='EXTENDED_GOTO_TASK_PANEL',
+    cn=Button(
+        file='./assets/cn/duel/extended_play/EXTENDED_GOTO_TASK_PANEL.png',
+        area=(865, 627, 917, 671),
+        search=(845, 607, 937, 691),
+        color=(163, 92, 48),
+        button=(865, 627, 917, 671),
     ),
     en=None,
 )
@@ -278,6 +300,27 @@ EXTENDED_SELECT_SECRECT_SCROLL_GRID = ButtonWrapper(
             button=(688, 491, 772, 571),
         ),
     ],
+)
+EXTENDED_TASK_PANEL_CHECK = ButtonWrapper(
+    name='EXTENDED_TASK_PANEL_CHECK',
+    cn=Button(
+        file='./assets/cn/duel/extended_play/EXTENDED_TASK_PANEL_CHECK.png',
+        area=(591, 74, 745, 116),
+        search=(571, 54, 765, 136),
+        color=(134, 136, 124),
+        button=(591, 74, 745, 116),
+    ),
+    en=None,
+)
+EXTENDED_TASK_SCORE_AREA = ButtonWrapper(
+    name='EXTENDED_TASK_SCORE_AREA',
+    share=Button(
+        file='./assets/share/duel/extended_play/EXTENDED_TASK_SCORE_AREA.png',
+        area=(203, 599, 386, 629),
+        search=(183, 579, 406, 649),
+        color=(94, 84, 45),
+        button=(203, 599, 386, 629),
+    ),
 )
 NO_RESTRICTED_BATTLE_CHECK = ButtonWrapper(
     name='NO_RESTRICTED_BATTLE_CHECK',
