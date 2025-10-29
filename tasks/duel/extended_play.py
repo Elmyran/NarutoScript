@@ -1,11 +1,12 @@
 from datetime import datetime,timedelta
-from module.base.button import ClickButton
+from module.base.button import ClickButton, match_template
 from module.base.timer import Timer
 from module.base.utils.utils import  get_color
 from module.config.utils import get_server_next_monday_update
 from module.logger import logger
 from module.ocr.ocr import DigitCounter
 from tasks.combat.combat import Combat
+from tasks.duel.assets.assets_duel import DUEL_EXCEPTION, DUEL_FIGHT_FAIL, DUEL_FIGHT_SUCCESS
 from tasks.duel.assets.assets_duel_extended_play import *
 from tasks.base.page import page_no_restricted_battle,page_daily,page_extended_play
 from tasks.freebies.assets.assets_freebies_daily_daily import ACTIVITY_REWARD_GOTO_PLAY_SEARCH
@@ -59,6 +60,7 @@ class ExtendedPlay(Combat):
         self.enter_extended_play()
         ready_fight=False
         for _ in self.loop():
+           self.back_to_no_restructed_battle_page()
            if not ready_fight and self.is_task_finished():
                break
            else:
@@ -66,6 +68,18 @@ class ExtendedPlay(Combat):
             
            if ready_fight and self.no_restricted_battle_flow():
                ready_fight=False
+    def back_to_no_restructed_battle_page(self):
+        for _ in self.loop():
+            if self.match_template_color(NO_RESTRICTED_BATTLE_CHECK):
+                logger.info("Back to no restricted battle  page")
+                break
+            if self.appear_then_click(DUEL_FIGHT_SUCCESS,interval=1):
+                continue
+            if self.appear_then_click(DUEL_FIGHT_FAIL,interval=1):
+                continue
+            if self.appear_then_click(DUEL_EXCEPTION,interval=1):
+                continue
+        
     def is_task_finished(self):
         self.task_panel_enter()
         if not self.score_reached():
@@ -120,8 +134,10 @@ class ExtendedPlay(Combat):
         logger.info("no_restricted_battle_flow")
         self.ui_ensure(page_no_restricted_battle)
         self.start_fight()
-        self.character_select()
-        self.secrect_scroll_select()
+        if not self.character_select():
+            return True
+        if not self.secrect_scroll_select():
+            return True
         self.multi_round_combat()
         return True
     def start_fight(self):
@@ -135,6 +151,8 @@ class ExtendedPlay(Combat):
     def character_select(self):
         logger.info("Character select...")
         for _ in self.loop():
+            if self._is_exception():
+                return False
             if self.appear(AWAITING_SELF_SECRECT_SCROLL_SELECT):
                 break
             if self.appear(AWAITING_OPPONENT_SELECT):
@@ -151,7 +169,7 @@ class ExtendedPlay(Combat):
                         continue
                     if self.single_character_select(character):
                         break
-                   
+        return True          
                     
     def single_character_select(self,button):
         for _ in self.loop():
@@ -174,6 +192,8 @@ class ExtendedPlay(Combat):
     def secrect_scroll_select(self):
         logger.info('Secrect scroll select...')
         for _ in self.loop():
+            if self._is_exception():
+                return False
             if self.appear(AWATING_FIGHT_START):
                 break
             if self.appear(AWAITING_OPPONENT_SELECT):
@@ -190,6 +210,7 @@ class ExtendedPlay(Combat):
                         continue
                     if self.single_secrect_scroll_select(scroll):
                         break
+        return True
     def single_secrect_scroll_select(self,button):
         for _ in self.loop():
             if self.appear(AWATING_FIGHT_START):
