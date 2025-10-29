@@ -100,13 +100,22 @@ EXTENDED_CHARACTER_SELECTED = ButtonWrapper(
 )
 EXTENDED_CHECK = ButtonWrapper(
     name='EXTENDED_CHECK',
-    cn=Button(
-        file='./assets/cn/duel/extended_play/EXTENDED_CHECK.png',
-        area=(58, 169, 110, 408),
-        search=(38, 149, 130, 428),
-        color=(127, 109, 88),
-        button=(58, 169, 110, 408),
-    ),
+    cn=[
+        Button(
+            file='./assets/cn/duel/extended_play/EXTENDED_CHECK.png',
+            area=(58, 169, 110, 408),
+            search=(38, 149, 130, 428),
+            color=(127, 109, 88),
+            button=(58, 169, 110, 408),
+        ),
+        Button(
+            file='./assets/cn/duel/extended_play/EXTENDED_CHECK.2.png',
+            area=(114, 41, 408, 123),
+            search=(94, 21, 428, 143),
+            color=(63, 61, 52),
+            button=(114, 41, 408, 123),
+        ),
+    ],
     en=None,
 )
 EXTENDED_GOTO_NO_RESTRICTED_BATTLE = ButtonWrapper(

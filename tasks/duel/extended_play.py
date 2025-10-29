@@ -1,5 +1,5 @@
 from datetime import datetime,timedelta
-from module.base.button import ClickButton, match_template
+from module.base.button import ClickButton
 from module.base.timer import Timer
 from module.base.utils.utils import  get_color
 from module.config.utils import get_server_next_monday_update
@@ -31,7 +31,7 @@ class ExtendedPlay(Combat):
         drag=True
         drag_interval=Timer(2)
         for _ in self.loop():
-            if self.ui_page_appear(page_extended_play):
+            if self.appear(EXTENDED_CHECK):
                 break
             ACTIVITY_REWARD_GOTO_EXTENDED_PLAY.load_search(ACTIVITY_REWARD_GOTO_PLAY_SEARCH.area)
             if ACTIVITY_REWARD_GOTO_EXTENDED_PLAY.match_template(self.device.image):
@@ -50,7 +50,8 @@ class ExtendedPlay(Combat):
                     padding=20  
                 )  
                 self.device.drag(p1, p2, name=f'ACTIVITY_REWARD_DRAG_GOTO_EXTENDED_PLAY')
-                continue 
+                
+            continue
 
 
 
@@ -58,6 +59,7 @@ class ExtendedPlay(Combat):
        
     def handle_extended_play(self):
         self.enter_extended_play()
+        self.ui_ensure(page_no_restricted_battle)
         ready_fight=False
         for _ in self.loop():
            self.back_to_no_restructed_battle_page()
@@ -69,6 +71,7 @@ class ExtendedPlay(Combat):
            if ready_fight and self.no_restricted_battle_flow():
                ready_fight=False
     def back_to_no_restructed_battle_page(self):
+        
         for _ in self.loop():
             if self.match_template_color(NO_RESTRICTED_BATTLE_CHECK):
                 logger.info("Back to no restricted battle  page")
@@ -97,7 +100,7 @@ class ExtendedPlay(Combat):
                 continue
 
     def task_panel_enter(self):
-        self.ui_ensure(page_no_restricted_battle)
+        
         for _ in self.loop():
             if self.appear(EXTENDED_TASK_PANEL_CHECK):
                 logger.info("Extended task panel entered")
@@ -243,7 +246,5 @@ class ExtendedPlay(Combat):
             logger.info(f"区域已选中:{button.posi}")
             return True  
         return False
-
-
 
 
