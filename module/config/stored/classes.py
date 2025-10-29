@@ -397,5 +397,9 @@ class StoredPrivilegeStoreFinishCount(StoredCounter,StoredExpiredAt0500):
 class StoredSquadRaidFinishCount(StoredCounter,StoredExpiredAt0500):
     value = 0
     FIXED_TOTAL = 1
+class StoredDuelExtendedScore(StoredCounter,StoredExpiredAtMonday0500):
+    value = 0
+    FIXED_TOTAL = 2100
+
    
     

@@ -327,26 +327,45 @@
       "help": "TiLi.DungeonFirst.help"
     }
   },
-  "Duel": {
+  "DuelWeekly": {
     "_info": {
-      "name": "Duel._info.name",
-      "help": "Duel._info.help"
+      "name": "DuelWeekly._info.name",
+      "help": "DuelWeekly._info.help"
     },
     "DuelWeeklyStatus": {
-      "name": "Duel.DuelWeeklyStatus.name",
-      "help": "Duel.DuelWeeklyStatus.help"
+      "name": "DuelWeekly.DuelWeeklyStatus.name",
+      "help": "DuelWeekly.DuelWeeklyStatus.help"
     },
     "DuelDaily": {
-      "name": "Duel.DuelDaily.name",
-      "help": "Duel.DuelDaily.help"
+      "name": "DuelWeekly.DuelDaily.name",
+      "help": "DuelWeekly.DuelDaily.help"
     },
     "CurrentVictoryCount": {
-      "name": "Duel.CurrentVictoryCount.name",
-      "help": "Duel.CurrentVictoryCount.help"
+      "name": "DuelWeekly.CurrentVictoryCount.name",
+      "help": "DuelWeekly.CurrentVictoryCount.help"
     },
     "TargetVictoryNumber": {
-      "name": "Duel.TargetVictoryNumber.name",
-      "help": "Duel.TargetVictoryNumber.help"
+      "name": "DuelWeekly.TargetVictoryNumber.name",
+      "help": "DuelWeekly.TargetVictoryNumber.help"
+    }
+  },
+  "DuelExtended": {
+    "_info": {
+      "name": "DuelExtended._info.name",
+      "help": "DuelExtended._info.help"
+    },
+    "DuelExtendedStatus": {
+      "name": "DuelExtended.DuelExtendedStatus.name",
+      "help": "DuelExtended.DuelExtendedStatus.help"
+    },
+    "DuelExtendedType": {
+      "name": "DuelExtended.DuelExtendedType.name",
+      "help": "DuelExtended.DuelExtendedType.help",
+      "NoRestrictedBattle": "NoRestrictedBattle"
+    },
+    "ExtendedCurrentScore": {
+      "name": "DuelExtended.ExtendedCurrentScore.name",
+      "help": "DuelExtended.ExtendedCurrentScore.help"
     }
   },
   "JiFenSai": {

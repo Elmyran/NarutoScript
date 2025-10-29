@@ -1,7 +1,8 @@
-import click
+from datetime import datetime,timedelta
 from module.base.button import ClickButton
 from module.base.timer import Timer
 from module.base.utils.utils import  get_color
+from module.config.utils import get_server_next_monday_update
 from module.logger import logger
 from module.ocr.ocr import DigitCounter
 from tasks.combat.combat import Combat
@@ -11,7 +12,15 @@ from tasks.freebies.assets.assets_freebies_daily_daily import ACTIVITY_REWARD_GO
 
 class ExtendedPlay(Combat):
     def run(self):
-       self.handle_extended_play()
+        if self.config.stored.ExtendedCurrentScore.is_expired():
+           self.config.stored.ExtendedCurrentScore.clear()
+        if  self.config.stored.ExtendedCurrentScore.is_full():
+            return get_server_next_monday_update(self.config.Scheduler_ServerUpdate)
+        self.config.get_next_task()
+        if len(self.config.pending_task)>1:
+            return datetime.now()+timedelta(minutes=10)
+        self.handle_extended_play()
+        return get_server_next_monday_update(self.config.Scheduler_ServerUpdate)
     
 
     def enter_extended_play(self):
@@ -78,7 +87,10 @@ class ExtendedPlay(Combat):
             if total==2100:
                 current_score=score
                 break
-        if target_score>=current_score:
+        record=self.config.stored.ExtendedCurrentScore.value
+        if current_score>record:
+            self.config.stored.ExtendedCurrentScore.set(value=current_score)
+        if current_score>=target_score:
             return True
         return False
     def reward_claim(self):

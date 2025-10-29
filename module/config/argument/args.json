@@ -199,7 +199,7 @@
         "display": "hide"
       }
     },
-    "Duel": {
+    "DuelWeekly": {
       "DuelWeeklyStatus": {
         "type": "checkbox",
         "value": true
@@ -219,6 +219,25 @@
       "TargetVictoryNumber": {
         "type": "input",
         "value": 10
+      }
+    },
+    "DuelExtended": {
+      "DuelExtendedStatus": {
+        "type": "checkbox",
+        "value": true
+      },
+      "DuelExtendedType": {
+        "type": "select",
+        "value": "NoRestrictedBattle",
+        "option": [
+          "NoRestrictedBattle"
+        ]
+      },
+      "ExtendedCurrentScore": {
+        "type": "stored",
+        "value": {},
+        "display": "display",
+        "stored": "StoredDuelExtendedScore"
       }
     }
   },

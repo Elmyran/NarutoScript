@@ -1,15 +1,28 @@
+from datetime import datetime, timedelta
 import time
+from module.config.utils import get_server_next_update
 from module.logger import logger
 from module.base.timer import Timer
 from module.base.utils import random_rectangle_point, ensure_int
 from module.exception import GameStuckError
-from tasks.base.assets.assets_base_skill import CHARACTER_ATTACK, CHARACTER_TI_SHEN, CHARACTER_SKILL_1, \
-    CHARACTER_SKILL_2, CHARACTER_SKILL_3, CHARACTER_PSYCHIC, CHARACTER_SECRET_SCROLL
+from tasks.base.assets.assets_base_skill import *
 from tasks.base.page import page_ninjutsu
 from tasks.base.taskui import TaskUI
 from tasks.duel.assets.assets_duel import *
 from module.ocr.ocr import Digit
 class DuelDaily(TaskUI):
+    def run(self):
+        if self.config.stored.DuelDaily.is_expired():
+            self.config.stored.DuelDaily.clear()
+        if self.config.stored.DuelDaily.is_full():
+            return get_server_next_update(self.config.Scheduler_ServerUpdate)
+        delay=self.handle_duel_daily()
+        if delay=='Delay 5 Minute':
+            return datetime.now()+timedelta(minutes=5)
+        self.config.stored.DuelDaily.add()
+        return get_server_next_update(self.config.Scheduler_ServerUpdate)
+
+
     def handle_duel_daily(self):
         if self.config.stored.CurrentVictoryCount.is_expired():
             self.config.stored.CurrentVictoryCount.clear()
@@ -28,6 +41,7 @@ class DuelDaily(TaskUI):
 
             else:
                 break
+        return True
 
     def _duel_task_detect(self):
         self.device.click_record_clear()

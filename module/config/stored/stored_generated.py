@@ -11,6 +11,7 @@ from module.config.stored.classes import (
     StoredDailyShareFinishCount,
     StoredDuel,
     StoredDuelCurrentVictory,
+    StoredDuelExtendedScore,
     StoredDungeon,
     StoredExpiredAt0500,
     StoredExpiredAtMonday0500,
@@ -41,8 +42,9 @@ from module.config.stored.classes import (
 
 class StoredGenerated:
     AccountName = StoredAccountName("Restart.AccountStorage.AccountName")
-    DuelDaily = StoredDuel("Duel.Duel.DuelDaily")
-    CurrentVictoryCount = StoredDuelCurrentVictory("Duel.Duel.CurrentVictoryCount")
+    DuelDaily = StoredDuel("Duel.DuelWeekly.DuelDaily")
+    CurrentVictoryCount = StoredDuelCurrentVictory("Duel.DuelWeekly.CurrentVictoryCount")
+    ExtendedCurrentScore = StoredDuelExtendedScore("Duel.DuelExtended.ExtendedCurrentScore")
     SquadRaidFinishedCount = StoredSquadRaidFinishCount("SquadRaid.SquadRaid.SquadRaidFinishedCount")
     Dungeon = StoredDungeon("TiLi.TiLiStorage.Dungeon")
     MissionAccept = StoredMissionAccept("Mission.MissionStorage.MissionAccept")
