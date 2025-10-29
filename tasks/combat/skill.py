@@ -8,13 +8,7 @@ from tasks.base.assets.assets_base_skill import CHARACTER_ATTACK, CHARACTER_PSYC
 class SkillContact:    
     def __init__(self, main):    
     
-        self.main = main # 添加 main 引用,指向 device  
-          
-        
-            
-        # 设置零延迟    
-        
-              
+        self.main = main           
         # 跟踪哪些技能当前处于按下状态  
         self._downed_skills = set()  
                 

@@ -57,6 +57,17 @@ BATTLE_FIELD_MASK = ButtonWrapper(
         button=(0, 0, 1280, 720),
     ),
 )
+BATTLE_FIELD_OCCUPIED = ButtonWrapper(
+    name='BATTLE_FIELD_OCCUPIED',
+    cn=Button(
+        file='./assets/cn/organization/battlefield/BATTLE_FIELD_OCCUPIED.png',
+        area=(481, 343, 798, 373),
+        search=(461, 323, 818, 393),
+        color=(104, 108, 113),
+        button=(481, 343, 798, 373),
+    ),
+    en=None,
+)
 BATTLE_FIELD_REWARD_CHECK = ButtonWrapper(
     name='BATTLE_FIELD_REWARD_CHECK',
     cn=Button(

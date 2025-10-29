@@ -10,7 +10,7 @@ from module.logger import logger
 from tasks.base.assets.assets_base_move import JOYSTICK
 from tasks.base.assets.assets_base_skill import CHARACTER_ATTACK, CHARACTER_SKILL_1, CHARACTER_SKILL_2, CHARACTER_SKILL_3
 from tasks.base.taskui import TaskUI
-from tasks.base.ui import UI
+from tasks.combat.skill import SkillContact
 
 class JoystickContact:
 
@@ -115,11 +115,14 @@ class GameControl(TaskUI):
 
         self.BRIGHTNESS_THRESHOLD = 100.0
         self.SATURATION_THRESHOLD = 100.0
+        self._skill_contact=None
      
 
     @cached_property
     def joystick_center(self) -> tuple[int, int]:
         return JoystickContact.CENTER
+    
+    
 
     def is_skill_ready(self, skill_name):
         """
@@ -183,3 +186,23 @@ class GameControl(TaskUI):
         """
         with JoystickContact(self) as contact:
             contact.up()
+    def multi_long_press(self, buttons, duration=0):  
+        with SkillContact(self) as contact:  
+            contact.long_press(buttons, duration=duration)
+    def press_down(self, buttons):
+        if self._skill_contact is None:  
+            self._skill_contact = SkillContact(self)  
+            self._skill_contact.__enter__()
+        self._skill_contact.press_down(buttons)
+    def press_up(self, buttons):
+        if self._skill_contact is None:  
+            return
+        self._skill_contact.press_up(buttons)
+
+    def stop_long_press(self):
+        with SkillContact(self) as contact:  
+            contact.up_all()
+    def is_skill_downed(self):
+        return self._skill_contact.is_downed
+
+
