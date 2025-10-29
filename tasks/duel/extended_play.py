@@ -253,6 +253,3 @@ class ExtendedPlay(Combat):
             return True  
         return False
 
-az=ExtendedPlay('ns',task='Alas')
-az.device.screenshot()
-az.enter_extended_play()
