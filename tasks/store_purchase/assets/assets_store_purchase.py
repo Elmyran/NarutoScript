@@ -90,6 +90,17 @@ STORE_ITEM_PURCHASE_AMOUNT_AREA = ButtonWrapper(
         button=(591, 360, 691, 404),
     ),
 )
+STORE_PURCHASE_LIMITED = ButtonWrapper(
+    name='STORE_PURCHASE_LIMITED',
+    cn=Button(
+        file='./assets/cn/store_purchase/STORE_PURCHASE_LIMITED.png',
+        area=(539, 341, 743, 374),
+        search=(519, 321, 763, 394),
+        color=(95, 100, 104),
+        button=(539, 341, 743, 374),
+    ),
+    en=None,
+)
 STORE_SELECTED = ButtonWrapper(
     name='STORE_SELECTED',
     cn=Button(
