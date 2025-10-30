@@ -76,9 +76,11 @@ class ExtendedPlay(Combat):
                break
            else:
                ready_fight=True
+               
             
            if ready_fight and self.no_restricted_battle_flow():
                ready_fight=False
+               continue
     def back_to_no_restructed_battle_page(self):
         logger.info("Back to no restricted battle  page")
         for _ in self.loop():
@@ -184,6 +186,8 @@ class ExtendedPlay(Combat):
                     
     def single_character_select(self,button):
         for _ in self.loop():
+            if self._is_exception():
+                return True
             if self.appear(AWAITING_SELF_SECRECT_SCROLL_SELECT):
                 break
             if self.appear(AWAITING_OPPONENT_SELECT):
@@ -224,6 +228,8 @@ class ExtendedPlay(Combat):
         return True
     def single_secrect_scroll_select(self,button):
         for _ in self.loop():
+            if self._is_exception():
+                return True
             if self.appear(AWATING_FIGHT_START):
                 break
             if self.appear(AWAITING_OPPONENT_SELECT):
@@ -254,4 +260,3 @@ class ExtendedPlay(Combat):
             logger.info(f"区域已选中:{button.posi}")
             return True  
         return False
-
