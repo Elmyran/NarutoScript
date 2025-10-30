@@ -14,8 +14,7 @@ class Combat(GameControl):
                       scroll=True,
                       psychic=True,
                       timeout=120):
-        if not self.waiting_combat_start():
-            return False
+    
         try :
             self.device.stuck_timer=Timer(timeout).start()
             self._click_script(
@@ -40,37 +39,14 @@ class Combat(GameControl):
         logger.info('Starting multi-round combat')
      
         for _ in self.loop():
+            self.device.stuck_record_clear()
             end=self._is_combat_end(success_check,fail_check)
             if end:
                 logger.info('Combat end: '+end) 
                 return True
-            if not self.single_round_combat(round_check, skill, scroll, psychic, timeout):
+            if self._is_round_start():
+                self.single_round_combat(round_check, skill, scroll, psychic, timeout)
                 continue
-            self.device.stuck_record_clear()
-     
-
-
-
-        
-        
-        
-        
-        
-    
-     
- 
-
-    def waiting_combat_start(self):
-        log_interval=Timer(10)
-        for _ in self.loop():
-            if log_interval.reached():
-                logger.info("Waiting for combat start...")
-                log_interval.reset()
-            if self._is_in_combat():
-                break
-            if self._is_combat_end():
-                return False
-        return True
 
     def _click_script(self,
                       end_check,
@@ -103,17 +79,16 @@ class Combat(GameControl):
         if self.appear(DUEL_EXCEPTION):
             return True
         return False
+    def _is_round_start(self):
+        return self.appear(DUEL_ROUND_SWITCH)
     def _is_in_combat(self):
         return self.appear(DUEL_IS_IN_FIGHT) or self.appear(CHARACTER_ATTACK) or self.appear(DUEL_ROUND_SWITCH)
     def _is_combat_end(self,success_check=DUEL_FIGHT_SUCCESS,fail_check=DUEL_FIGHT_FAIL):
         if self.appear(success_check):
-            logger.info('Fight success')
             return 'success'
         if self.appear(fail_check):
-            logger.info('Fight fail')
             return 'fail'
         if self._is_exception():
-            logger.info('Fight exception')
             return 'success'
         return False
 
