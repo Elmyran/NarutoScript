@@ -27,10 +27,10 @@ If you still encounter the error after you have checked all the previous solutio
 
 ```
 INFO | No task pending
-INFO | Wait until 2021-10-27 21:10:54 for task `Commission`
+INFO | Wait until 2021-10-27 21:10:54 for task `Duel`
 ```
 
-因为 NarutoScript 已经完成了所有任务，现在无事可干，只能等待委托科研等结束。
+因为 NarutoScript 已经完成了所有任务，现在无事可干.
 
 ```
 CRITICAL | No task waiting or pending
@@ -51,3 +51,18 @@ CRITICAL | Please enable at least one task
   如果你使用傻瓜式安装包安装的NarutoScript, 找到位于 `<你的NarutoScript安装目录>\toolkit\Lib\site-packages\adbutils\binaries` 下的ADB. 如果你使用的高级方法安装的NarutoScript, 找到位于环境变量中的ADB, 把它替换为你自己的.
 
   以夜神模拟器为例, 夜神模拟器安装目录下有两个ADB,  `adb.exe` 和 `nox_adb.exe` 备份它们并删除. 复制两份 `adb.exe` 到夜神模拟器安装目录, 重命名为 `adb.exe` 和 `nox_adb.exe`.
+## 为什么我打开会卡在15%
+<img width="1280"  alt="726f81463b55b36bcc7aab64d4961527" src="https://github.com/user-attachments/assets/229993c1-d23e-424c-bc78-53a6678a96ed" />
+
+注意当前仓库为global 
+
+国内用户 : 前往 config/deploy.yaml 文件下将 global改为cn 
+
+
+
+国外或开代理 : 将cn 改为global 
+
+## 为什么切换账号后任务不执行
+
+因为一个配置文件对应一个账号的任务执行情况，如果需要多账号运行，需要创建多个配置文件。
+
