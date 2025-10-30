@@ -1,4 +1,4 @@
-from module.ocr.ocr import Digit, DigitCounter,OcrWhiteLetterOnComplexBackground
+from module.ocr.ocr import  DigitCounter,OcrWhiteLetterOnComplexBackground
 import re
 
 from module.ocr.onnxocr.onnx_paddleocr import ONNXPaddleOcr
