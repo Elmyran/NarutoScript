@@ -131,7 +131,7 @@ TiLi:
   DungeonFirst:
     type: checkbox
     value: true
-Duel:
+DuelWeekly:
   DuelWeeklyStatus:
     type: checkbox
     value:  true
@@ -146,6 +146,23 @@ Duel:
   TargetVictoryNumber:
     type: input
     value: 10
+DuelExtended:
+  DuelExtendedStatus:
+    type: checkbox
+    value: true
+  DuelExtendedType:
+    type: select
+    value: 'NoRestrictedBattle'
+    option: [
+      'NoRestrictedBattle',
+  ]
+  ExtendedCurrentScore:
+    stored: StoredDuelExtendedScore
+    value: { }
+    display: display
+
+
+
 JiFenSai:
   DailyRewardClaim:
     type: checkbox

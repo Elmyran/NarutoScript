@@ -33,7 +33,7 @@ class LeaderBoard(TaskUI):
                     break
                 else:
                     raise GameStuckError('Leaderboard stuck')
-            if self.appear(LEADER_BOARD_LIKED_FLAG):
+            if self.match_template_color(LEADER_BOARD_LIKED_FLAG):
                 logger.info('Leaderboard liked')
                 break
             LEADER_BOARD_LIKE_BUTTON.load_search(LIKE_BUTTON_AREA.area)

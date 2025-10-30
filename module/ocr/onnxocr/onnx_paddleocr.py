@@ -34,7 +34,7 @@ class ONNXPaddleOcr:
     @cached_property
     def model(self):
         CUSTOM_OCR_MODEL.box_tresh=self.box_thresh
-        return CUSTOM_OCR_MODEL.model
+        return CUSTOM_OCR_MODEL.model_ready.model
 
 
     

@@ -7,7 +7,7 @@ from module.base.utils.utils import area_offset, crop, rgb2gray
 from module.exception import ScriptError
 from module.logger import logger
 from tasks.base.assets.assets_base_page import  STORE_CHECK
-from tasks.store_purchase.assets.assets_store_purchase import BUY_BUTTON, BUY_REACH_TOP, PURCHASE_POPUP
+from tasks.store_purchase.assets.assets_store_purchase import BUY_BUTTON, BUY_REACH_TOP, PURCHASE_POPUP, STORE_CURRENCY_NOT_ENOUGH, STORE_PURCHASE_LIMITED
 from tasks.store_purchase.ocr import  StoreDigitCounter, StorePriceDigit
 
 class StoreSelector:
@@ -119,6 +119,9 @@ class StoreSelector:
         total=0
         timeout=Timer(1,3).start()
         for _ in self.main.loop():
+            if self.main.appear(STORE_CURRENCY_NOT_ENOUGH) or self.main.appear(STORE_PURCHASE_LIMITED):
+                timeout.reset()
+                continue
             if timeout.reached():  
                 break
             if price!=0 and total!=0:  

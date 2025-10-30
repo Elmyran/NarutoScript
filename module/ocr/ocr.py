@@ -80,7 +80,7 @@ class Ocr:
 
     @cached_property
     def model(self) -> TextSystem:
-        return OCR_MODEL.get_by_lang(self.lang)
+        return OCR_MODEL.model_ready.get_by_lang('cn')
 
     def pre_process(self, image):
         """

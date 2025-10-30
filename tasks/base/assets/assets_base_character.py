@@ -25,13 +25,22 @@ CHARACTER_FIRST = ButtonWrapper(
 )
 CHARACTER_SELECTED = ButtonWrapper(
     name='CHARACTER_SELECTED',
-    share=Button(
-        file='./assets/share/base/character/CHARACTER_SELECTED.png',
-        area=(270, 204, 291, 226),
-        search=(250, 184, 311, 246),
-        color=(160, 128, 37),
-        button=(270, 204, 291, 226),
-    ),
+    share=[
+        Button(
+            file='./assets/share/base/character/CHARACTER_SELECTED.png',
+            area=(270, 204, 291, 226),
+            search=(250, 184, 311, 246),
+            color=(160, 128, 37),
+            button=(270, 204, 291, 226),
+        ),
+        Button(
+            file='./assets/share/base/character/CHARACTER_SELECTED.2.png',
+            area=(271, 202, 296, 227),
+            search=(251, 182, 316, 247),
+            color=(141, 108, 38),
+            button=(271, 202, 296, 227),
+        ),
+    ],
 )
 CHARACTER_UNSELECTED = ButtonWrapper(
     name='CHARACTER_UNSELECTED',

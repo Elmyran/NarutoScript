@@ -25,7 +25,8 @@ Daily:
   tasks:
     Duel:
       - Scheduler
-      - Duel
+      - DuelWeekly
+      - DuelExtended
     FengRao:
       - Scheduler
       - FengRao

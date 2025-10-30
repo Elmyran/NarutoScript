@@ -92,13 +92,22 @@ HELP_BATTLE_SELECT_BUTTON = ButtonWrapper(
 )
 HELP_BATTLE_START_FIGHT = ButtonWrapper(
     name='HELP_BATTLE_START_FIGHT',
-    cn=Button(
-        file='./assets/cn/squadraid/fight/HELP_BATTLE_START_FIGHT.png',
-        area=(1122, 561, 1249, 708),
-        search=(1102, 541, 1269, 720),
-        color=(158, 124, 72),
-        button=(1122, 561, 1249, 708),
-    ),
+    cn=[
+        Button(
+            file='./assets/cn/squadraid/fight/HELP_BATTLE_START_FIGHT.png',
+            area=(1122, 561, 1249, 708),
+            search=(1102, 541, 1269, 720),
+            color=(158, 124, 72),
+            button=(1122, 561, 1249, 708),
+        ),
+        Button(
+            file='./assets/cn/squadraid/fight/HELP_BATTLE_START_FIGHT.2.png',
+            area=(1135, 609, 1231, 704),
+            search=(1115, 589, 1251, 720),
+            color=(146, 118, 58),
+            button=(1135, 609, 1231, 704),
+        ),
+    ],
     en=None,
 )
 MAIN_GOTO_SQUAD_RAID = ButtonWrapper(
@@ -218,13 +227,22 @@ SQUAD_RAID_HAVE_DONE = ButtonWrapper(
 )
 SQUAD_RAID_MATCH_BUTTON = ButtonWrapper(
     name='SQUAD_RAID_MATCH_BUTTON',
-    cn=Button(
-        file='./assets/cn/squadraid/fight/SQUAD_RAID_MATCH_BUTTON.png',
-        area=(1119, 595, 1207, 677),
-        search=(1099, 575, 1227, 697),
-        color=(162, 130, 66),
-        button=(1119, 595, 1207, 677),
-    ),
+    cn=[
+        Button(
+            file='./assets/cn/squadraid/fight/SQUAD_RAID_MATCH_BUTTON.png',
+            area=(1119, 595, 1207, 677),
+            search=(1099, 575, 1227, 697),
+            color=(162, 130, 66),
+            button=(1119, 595, 1207, 677),
+        ),
+        Button(
+            file='./assets/cn/squadraid/fight/SQUAD_RAID_MATCH_BUTTON.2.png',
+            area=(1144, 610, 1234, 705),
+            search=(1124, 590, 1254, 720),
+            color=(142, 115, 56),
+            button=(1144, 610, 1234, 705),
+        ),
+    ],
     en=None,
 )
 SQUAD_RAID_NEED_FIGHT = ButtonWrapper(

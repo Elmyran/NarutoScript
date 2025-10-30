@@ -57,11 +57,16 @@ class GeneratedConfig:
     TiLi_LevelRestrictions = 72
     TiLi_DungeonFirst = True
 
-    # Group `Duel`
-    Duel_DuelWeeklyStatus = True
-    Duel_DuelDaily = {}
-    Duel_CurrentVictoryCount = {}
-    Duel_TargetVictoryNumber = 10
+    # Group `DuelWeekly`
+    DuelWeekly_DuelWeeklyStatus = True
+    DuelWeekly_DuelDaily = {}
+    DuelWeekly_CurrentVictoryCount = {}
+    DuelWeekly_TargetVictoryNumber = 10
+
+    # Group `DuelExtended`
+    DuelExtended_DuelExtendedStatus = True
+    DuelExtended_DuelExtendedType = 'NoRestrictedBattle'  # NoRestrictedBattle
+    DuelExtended_ExtendedCurrentScore = {}
 
     # Group `JiFenSai`
     JiFenSai_DailyRewardClaim = True

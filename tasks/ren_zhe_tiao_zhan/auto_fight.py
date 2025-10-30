@@ -106,24 +106,24 @@ class AutoBattle(GameControl):
                     is_in_blind_spot = self.FACING_BLIND_SPOT_X[0] < dx < self.FACING_BLIND_SPOT_X[1]
                     if is_in_blind_spot and is_in_sweet_spot_y:
                         self.joystick.up()
-                        if self.execute_skill2():
+                        if self.execute_skill('SKILL2'):
                             pass
-                        elif self.execute_skill1():
+                        elif self.execute_skill('SKILL1'):
                             pass
                         else:
-                            self.execute_attack()
+                            self.execute_skill('ATTACK')
                     elif not is_in_sweet_spot_y:
                         angle = 180 if dy > 0 else 0
                         self.move_to_direction(angle,0.3)
                     elif is_in_sweet_spot_x and not is_in_blind_spot:
                         if np.random.rand() < 0.7:
                             self.joystick.up()
-                            if self.execute_skill2():
+                            if self.execute_skill('SKILL2'):
                                 pass
-                            elif self.execute_skill1():
+                            elif self.execute_skill('SKILL1'):
                                 pass
                             else:
-                                self.execute_attack()
+                                self.execute_skill('ATTACK')
                         else:
                             angle = 90 if dx > 0 else -90
                             self.move_to_direction(angle,0.3)

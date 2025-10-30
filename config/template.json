@@ -44,11 +44,16 @@
       "Command": "Duel",
       "ServerUpdate": "05:00"
     },
-    "Duel": {
+    "DuelWeekly": {
       "DuelWeeklyStatus": true,
       "DuelDaily": {},
       "CurrentVictoryCount": {},
       "TargetVictoryNumber": 10
+    },
+    "DuelExtended": {
+      "DuelExtendedStatus": true,
+      "DuelExtendedType": "NoRestrictedBattle",
+      "ExtendedCurrentScore": {}
     }
   },
   "FengRao": {

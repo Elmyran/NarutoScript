@@ -98,7 +98,7 @@ class BattleField(TaskUI,CharacterCircleDetector):
     def _character_select(self):
         CHARACTER_TAB.set('忍者',main=self)
         for _ in self.loop():
-            if self.appear(CHARACTER_SELECTED):
+            if self.appear(CHARACTER_SELECTED,similarity=0.7):
                 logger.info('Character Selected')
                 break
             if self.appear(CHARACTER_UNSELECTED,interval=1):

@@ -84,8 +84,8 @@
   },
   "DuelDaily": {
     "name": "DuelDaily",
-    "path": "Duel.Duel.DuelDaily",
-    "i18n": "Duel.DuelDaily.name",
+    "path": "Duel.DuelWeekly.DuelDaily",
+    "i18n": "DuelWeekly.DuelDaily.name",
     "stored": "StoredDuel",
     "attrs": {
       "time": "2020-01-01 00:00:00",
@@ -97,12 +97,25 @@
   },
   "CurrentVictoryCount": {
     "name": "CurrentVictoryCount",
-    "path": "Duel.Duel.CurrentVictoryCount",
-    "i18n": "Duel.CurrentVictoryCount.name",
+    "path": "Duel.DuelWeekly.CurrentVictoryCount",
+    "i18n": "DuelWeekly.CurrentVictoryCount.name",
     "stored": "StoredDuelCurrentVictory",
     "attrs": {
       "time": "2020-01-01 00:00:00",
       "total": 0,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "ExtendedCurrentScore": {
+    "name": "ExtendedCurrentScore",
+    "path": "Duel.DuelExtended.ExtendedCurrentScore",
+    "i18n": "DuelExtended.ExtendedCurrentScore.name",
+    "stored": "StoredDuelExtendedScore",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 2100,
       "value": 0
     },
     "order": 0,

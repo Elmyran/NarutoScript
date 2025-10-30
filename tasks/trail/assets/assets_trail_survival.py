@@ -117,10 +117,10 @@ SURVIVAL_MOP_UP_TIMES = ButtonWrapper(
     name='SURVIVAL_MOP_UP_TIMES',
     cn=Button(
         file='./assets/cn/trail/survival/SURVIVAL_MOP_UP_TIMES.png',
-        area=(564, 610, 609, 645),
-        search=(544, 590, 629, 665),
-        color=(45, 50, 21),
-        button=(564, 610, 609, 645),
+        area=(457, 615, 603, 646),
+        search=(437, 595, 623, 666),
+        color=(86, 87, 73),
+        button=(457, 615, 603, 646),
     ),
     en=None,
 )
@@ -166,6 +166,26 @@ SURVIVAL_RESET_BUTTON = ButtonWrapper(
         color=(130, 97, 73),
         button=(850, 611, 941, 698),
     ),
+    en=None,
+)
+SURVIVAL_RESET_CONFIRM = ButtonWrapper(
+    name='SURVIVAL_RESET_CONFIRM',
+    cn=[
+        Button(
+            file='./assets/cn/trail/survival/SURVIVAL_RESET_CONFIRM.png',
+            area=(602, 431, 679, 474),
+            search=(582, 411, 699, 494),
+            color=(196, 150, 33),
+            button=(602, 431, 679, 474),
+        ),
+        Button(
+            file='./assets/cn/trail/survival/SURVIVAL_RESET_CONFIRM.2.png',
+            area=(481, 430, 563, 475),
+            search=(461, 410, 583, 495),
+            color=(202, 153, 30),
+            button=(481, 430, 563, 475),
+        ),
+    ],
     en=None,
 )
 SURVIVAL_RESET_FAILED = ButtonWrapper(

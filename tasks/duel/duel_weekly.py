@@ -1,6 +1,8 @@
+from datetime import datetime, timedelta  
 import time
 from module.base.timer import Timer
 from module.base.utils import random_rectangle_point, ensure_int
+from module.config.utils import get_server_next_monday_update
 from module.exception import GameStuckError
 from module.logger import logger
 from module.ocr.ocr import Digit
@@ -11,6 +13,17 @@ from tasks.duel.assets.assets_duel import *
 
 
 class DuelWeekly(TaskUI):
+    def run(self):
+        current_victory_count=self.config.stored.CurrentVictoryCount.value
+        target_victory_count=self.config.DuelWeekly_TargetVictoryNumber
+        if self.config.DuelWeekly_DuelWeeklyStatus and current_victory_count > target_victory_count:
+            return get_server_next_monday_update(self.config.Scheduler_ServerUpdate)
+        self.config.get_next_task()
+        if len(self.config.pending_task) >1 :
+            return datetime.now() + timedelta(minutes=10)
+        self.handle_duel_weekly()
+        return get_server_next_monday_update(self.config.Scheduler_ServerUpdate)
+
     def handle_duel_weekly(self):
         self.device.click_record_clear()
         self.device.stuck_record_clear()
@@ -49,7 +62,7 @@ class DuelWeekly(TaskUI):
     def _duel_task_detect(self):
         self.device.click_record_clear()
         self.device.stuck_record_clear()
-        self.config.stored.CurrentVictoryCount.total=self.config.Duel_TargetVictoryNumber
+        self.config.stored.CurrentVictoryCount.total=self.config.DuelWeekly_TargetVictoryNumber
         time=Timer(30, count=30).start()
         #进入任务面板
         for _ in self.loop():
@@ -68,7 +81,7 @@ class DuelWeekly(TaskUI):
             res=ocr.ocr_single_line(self.device.image)
             if res is not None:
                 self.config.stored.CurrentVictoryCount.value=res
-                target=self.config.Duel_TargetVictoryNumber
+                target=self.config.DuelWeekly_TargetVictoryNumber
                 if res < target:
                     self.appear_then_click(DUEL_TASK_PANEL,interval=1)
                     return False

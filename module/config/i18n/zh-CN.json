@@ -327,7 +327,7 @@
       "help": ""
     }
   },
-  "Duel": {
+  "DuelWeekly": {
     "_info": {
       "name": "周胜设置",
       "help": ""
@@ -346,6 +346,25 @@
     },
     "TargetVictoryNumber": {
       "name": "目标胜场",
+      "help": ""
+    }
+  },
+  "DuelExtended": {
+    "_info": {
+      "name": "更多玩法设置",
+      "help": ""
+    },
+    "DuelExtendedStatus": {
+      "name": "开启更多玩法",
+      "help": "没有其他任务时，继续进行更多玩法"
+    },
+    "DuelExtendedType": {
+      "name": "玩法类型",
+      "help": "",
+      "NoRestrictedBattle": "无差别对战"
+    },
+    "ExtendedCurrentScore": {
+      "name": "当前积分",
       "help": ""
     }
   },
