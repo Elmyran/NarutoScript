@@ -92,6 +92,13 @@ DAILY_SIGN_IN_SUCCESS = ButtonWrapper(
             color=(214, 103, 97),
             button=(223, 67, 278, 107),
         ),
+        Button(
+            file='./assets/cn/freebies/information_club/DAILY_SIGN_IN_SUCCESS.4.png',
+            area=(586, 196, 694, 227),
+            search=(566, 176, 714, 247),
+            color=(242, 138, 103),
+            button=(223, 67, 278, 107),
+        ),
     ],
     en=None,
 )

@@ -160,16 +160,14 @@ class GameControl(TaskUI):
     
 
     def execute_skill(self,skill_name):
-        if skill_name=='SKILL3':
-            if  self.is_skill_3_ready() and self.is_skill_ready(skill_name):
-                button_pos = self.SKILL_BUTTONS[skill_name]
-                self.device.click(button_pos)
-                logger.info("execute:{skill_name}")
-                return True     
-        elif self.is_skill_ready(skill_name):
+        
+        if self.is_skill_ready(skill_name):
             button_pos = self.SKILL_BUTTONS[skill_name]
-            self.device.click(button_pos)
-            logger.info("execute:{skill_name}")
+            if skill_name == 'SKILL2':
+                self.device.long_click(button_pos, duration=5)
+            else :
+                self.device.click(button_pos)
+            
             return True
         return False
     def move_to_direction(self, direction, duration=0.5):
