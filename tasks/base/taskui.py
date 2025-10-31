@@ -1,5 +1,6 @@
 from module.base.timer import Timer
 from module.logger import logger
+from tasks.base.assets.assets_base_task_tab import MANUAL_TAB_SEARCH_AREA
 from tasks.base.page import *
 from tasks.base.task_tab.draglist import TASK_TAB_LIST
 from tasks.base.ui import UI
@@ -56,6 +57,7 @@ class TaskUI(UI):
                         else:
                             logger.info(f'Page arrive confirm {page}')  
                     if self.ui_page_appear(page_manual) and page.parent != page_main:
+                        self.wait_until_stable(MANUAL_TAB_SEARCH_AREA, timer=Timer(0, count=0), timeout=Timer(1, count=3))
                         TASK_TAB_LIST.search_rows(self,Page2Keyword.get(page.parent))
                     button = page.links[page.parent]
                     self.device.click(button)
