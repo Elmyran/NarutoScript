@@ -30,6 +30,7 @@ class TaskUI(UI):
         Page.init_connection(destination)
         self.interval_clear(list(Page.iter_check_buttons()))
         logger.hr(f"UI goto {destination}")
+        first_reach_manual = True
         while 1:
             if skip_first_screenshot:
                 skip_first_screenshot = False
@@ -56,9 +57,9 @@ class TaskUI(UI):
                             continue  
                         else:
                             logger.info(f'Page arrive confirm {page}')  
-                    if self.ui_page_appear(page_manual) and page.parent != page_main:
-                        self.wait_until_stable(MANUAL_TAB_SEARCH_AREA, timer=Timer(0, count=0), timeout=Timer(1, count=3))
-                        TASK_TAB_LIST.search_rows(self,Page2Keyword.get(page.parent))
+                    if first_reach_manual and self.ui_page_appear(page_manual) and page.parent != page_main:
+                         TASK_TAB_LIST.search_rows(self,Page2Keyword.get(page.parent))
+                         first_reach_manual = False
                     button = page.links[page.parent]
                     self.device.click(button)
                     self.ui_button_interval_reset(button)
