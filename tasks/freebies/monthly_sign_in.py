@@ -4,11 +4,16 @@ from tasks.activity.draglist import ACTIVITY_TAB_LIST
 from tasks.activity.activity_keyword import  MeiYueQianDaoKeyword
 from tasks.base.page import  page_activity
 from tasks.base.ui import UI
+import re
 from module.base.timer import Timer
 from tasks.freebies.assets.assets_freebies_yi_le_la_mian import RAMEN_TAB_CHECK
 class MonthlySignInOcr(DigitCounter):
     def after_process(self, result):
         result=result.replace('V','')
+        result = re.sub(r'(\d)30$', r'\1/30', result)
+        result = re.sub(r'(\d)31$', r'\1/31', result)
+        result = re.sub(r'(\d)31$', r'\1/29', result)
+        result = re.sub(r'(\d)31$', r'\1/28', result)
         return result
 
 class MonthlySignIn(UI):

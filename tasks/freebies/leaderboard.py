@@ -37,8 +37,7 @@ class LeaderBoard(TaskUI):
                     logger.info('Learderboard liked')   
                     break
             LEADER_BOARD_LIKE_BUTTON.load_search(LIKE_BUTTON_AREA.area)
-            if self.match_template_color(LEADER_BOARD_LIKE_BUTTON):
-                self.device.click(LEADER_BOARD_LIKE_BUTTON)
+            if self.appear_then_click(LEADER_BOARD_LIKE_BUTTON,interval=1):
                 continue
         return True
     def is_liked(self,button, threshold=255, count=200):  
@@ -52,7 +51,7 @@ class LeaderBoard(TaskUI):
         mask = cv2.bitwise_and(mask1, mask2)  
         sum_ = cv2.countNonZero(mask)  
         return sum_ > count
-        
+
 
 
 
