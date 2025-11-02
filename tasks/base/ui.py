@@ -446,8 +446,9 @@ class UI(MainPage):
                 break
             if self.appear_then_click(CODE_SECOND_PASSWORD,interval=2):
                 continue
-        if hasattr(self.device, 'u2'):
-            self.device.u2.send_keys(str(code))
+        if not self.code_input(code):
+            raise RequestHumanTakeover('Second code input failed')
+
         time=Timer(3,count=6).start()
         for _ in self.loop():
             if time.reached():
@@ -456,3 +457,35 @@ class UI(MainPage):
                 continue
             if self.appear(CODE_SECOND_PASSWORD):
                 self.appear_then_click(CODE_SECOND_PASSWORD_CONFIRM,interval=1)
+        
+    def code_input(self,code):
+        if self.device._scrcpy_alive:  
+            logger.info('Trying scrcpy')  
+            try:  
+                self.device._scrcpy_control.text(str(code))  
+                return True  
+            except Exception as e:  
+                logger.warning(f'scrcpy failed: {e}')  
+      
+  
+        if hasattr(self.device, 'u2'):  
+            logger.info('Trying u2')  
+            try:  
+                self.device.u2.send_keys(str(code))  
+                return True  
+            except Exception as e:  
+                logger.warning(f'u2 failed: {e}')  
+                from module.base.decorator import del_cached_property  
+                del_cached_property(self.device, 'u2')  
+        
+
+        logger.info('Using adb shell input')  
+        try:  
+     
+            self.device.adb_shell(['input', 'text', str(code)])  
+            return True  
+        except Exception as e:  
+            logger.error(f'All input methods failed: {e}')  
+            return False
+
+       
