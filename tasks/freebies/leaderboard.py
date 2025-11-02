@@ -27,11 +27,13 @@ class LeaderBoard(TaskUI):
         timeout = Timer(2, count=4).start()
         for _ in self.loop():
             if timeout.reached():
+                LEADER_BOARD_LIKED.load_search(LIKE_BUTTON_AREA.area)
                 if self.match_template_luma(LEADER_BOARD_LIKED):
                     if self.is_liked(LEADER_BOARD_LIKED):
                         logger.info('may be liked manuly')  
                         break
                     timeout.reset()
+            LEADER_BOARD_LIKED_FLAG.load_search(LIKE_BUTTON_AREA.area)
             if self.match_template_luma(LEADER_BOARD_LIKED_FLAG):
                 if self.image_color_count(LEADER_BOARD_LIKED_FLAG,color=(226,84,56)):
                     logger.info('Learderboard liked')   
