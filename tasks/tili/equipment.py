@@ -22,7 +22,7 @@ class Equipment(UI):
         current,remain,total=ocr.ocr_single_line(self.device.image)
         if current>0 and total==200:
             self.config.stored.TiLi.value=current
-            if current<5 and total==200:
+            if current<10 and total==200:
                 return False
         self._equipment_enter()
         self.device.stuck_timer=Timer(300,count=300).start()
