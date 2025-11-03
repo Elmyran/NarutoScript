@@ -6,11 +6,11 @@ import re
 from module.ocr.ocr import Ocr
 class OcrCharacterTab(Ocr):
     def after_process(self, result):
-        # 移除常见后缀
+
         result = result.replace('碎片', '')
         result = result.replace('移', '秽')
-        result = re.sub('^托斯', '托斯砧')
-        result = re.sub('^萨克', '萨克镫')
+        result = re.sub('^托斯', '托斯砧', result)  
+        result = re.sub('^萨克', '萨克镫', result)
         result = result.strip()
         return super().after_process(result)
 @dataclass

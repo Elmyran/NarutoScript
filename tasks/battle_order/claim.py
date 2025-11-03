@@ -89,11 +89,11 @@ class BattleOrderClaim(UI):
         s = hsv[:, :, 1]
         v = hsv[:, :, 2]
 
-        # 高亮像素比例（未排白）
+        # 高亮像素比例
         high_mask = v > v_thresh
         ratio = np.sum(high_mask) / high_mask.size if high_mask.size > 0 else 0.0
 
-        # 平均亮度（排除白色区域）
+        # 平均亮度
         valid_mask = ~((s < 30) & (v > 220))
         mean_v = np.mean(v[valid_mask]) if np.any(valid_mask) else np.mean(v)
 
@@ -110,18 +110,14 @@ class BattleOrderClaim(UI):
         
         x1, y1, x2, y2 = button.area
         roi = image[y1:y2, x1:x2]   
-        
         # 转灰度 + 高斯模糊
         gray = cv2.cvtColor(roi, cv2.COLOR_RGB2GRAY)
-        blur = cv2.GaussianBlur(gray, (5, 5), 0)
-
+        blur = cv2.GaussianBlur(gray, (9, 9), 0)
         # 边缘检测
         edges = cv2.Canny(blur, low, high)
-
         # 闭运算，连通边缘
         kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (25, 25))
         closed = cv2.morphologyEx(edges, cv2.MORPH_CLOSE, kernel)
-
         # 找轮廓（在 ROI 内）
         contours, _ = cv2.findContours(closed, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         box_width=80
@@ -136,7 +132,8 @@ class BattleOrderClaim(UI):
             max_w, max_h = 90, 80  
             peri = cv2.arcLength(cnt, True)
             approx = cv2.approxPolyDP(cnt, 0.02 * peri, True)
-            print(f"检测到轮廓: 面积={area}, 宽高比={ratio:.2f}, 顶点数={len(approx)}")
+            box = (x + x1, y + y1, x + x1 + w, y + y1 + h)
+            print(f"检测到轮廓:,区域={box}, 面积={area}, 宽高比={ratio:.2f}, 顶点数={len(approx)}")
             # 矩形度过滤
             extent = cv2.contourArea(cnt) / float(w * h)
             print(f"矩形度: {extent:.2f}")
@@ -162,17 +159,12 @@ class BattleOrderClaim(UI):
                 h -= over
             detected_right = x + x1 + w
             predicted_right = x + x1+ box_width
-            #  把 ROI 坐标平移回全图
-            #box=(x + x1, box_upper,min(predicted_right, detected_right),box_lower)
             box = (x + x1, y + y1, x + x1 + w, y + y1 + h)
-            print(f"检测到可领取按钮: {box}")
             if self.is_claimable_single_frame(image=image, roi=box):
                 click_button = ClickButton(area=box) 
                 boxes.append(click_button)
-                #cv2.rectangle(image, (x + x1, box_upper), (x + x1 +box_width, box_lower), (0, 255, 0), 2)
                 cv2.rectangle(image, (x + x1, y + y1), ( x + x1 + w, y + y1 + h), (0, 255, 0), 2)
             else:
-                #cv2.rectangle(image, (x + x1, box_upper), (x + x1 +box_width, box_lower), (255, 0, 0), 2)
                 cv2.rectangle(image, (x + x1, y + y1), ( x + x1 + w, y + y1 + h), (255, 0, 0), 2)
             
             
