@@ -7,6 +7,7 @@ from tasks.battle_order.assets.assets_battle_order_claim import *
 import cv2
 from tasks.battle_order.draglist import *
 from tasks.base.character_keyword import ACharacterTab,  OcrCharacterTab, SCharacterTab
+from tasks.battle_order.keywords import ExperienceCard
 from tasks.battle_order.switch import BATTLE_ORDER_TAB
 from module.base.button import ClickButton  
 from datetime import datetime  
@@ -41,12 +42,21 @@ class BattleOrderClaim(UI):
                 time.reset()
     def _character_fragments_select(self):
         ocr=OcrCharacterTab(BATTLE_ORDER_CHARACTER_LIST_AREA)
-        name=self.config.BattleOrder_SCharacterFragments
-        draglist=S_CHARACTER_TAB_LIST
+        experience_card=False
+        if ocr.matched_ocr(self.device.image,ExperienceCard):
+            experience_card=True
+        
         if ocr.matched_ocr(self.device.image,SCharacterTab):
-            pass
+            if experience_card:
+                name=self.config.BattleOrder_SExperienceCard
+            else:
+                name=self.config.BattleOrder_SCharacterFragments
+            draglist=S_CHARACTER_TAB_LIST
         elif ocr.matched_ocr(self.device.image,ACharacterTab):
-            name=self.config.BattleOrder_ACharacterFragments
+            if experience_card:
+                name=self.config.BattleOrder_AExperienceCard
+            else:
+                name=self.config.BattleOrder_ACharacterFragments
             draglist=A_CHARACTER_TAB_LIST
         else:
             name= self.config.BattleOrder_CCharacterFragments

@@ -242,7 +242,9 @@
       "LikeAndShare": true,
       "SCharacterFragments": "秽土长门",
       "ACharacterFragments": "青年水门",
-      "CCharacterFragments": "左近右近"
+      "CCharacterFragments": "左近右近",
+      "SExperienceCard": "秽土长门",
+      "AExperienceCard": "青年水门"
     },
     "BattleOrderStorage": {
       "BattleOrderRank": {},
