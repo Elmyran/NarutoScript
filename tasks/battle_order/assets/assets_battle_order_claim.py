@@ -93,12 +93,21 @@ BATTLE_ORDER_REWARD_CLAIM_AREA = ButtonWrapper(
 )
 BATTLE_ORDER_REWARD_CLAIM_SUCCESS = ButtonWrapper(
     name='BATTLE_ORDER_REWARD_CLAIM_SUCCESS',
-    cn=Button(
-        file='./assets/cn/battle_order/claim/BATTLE_ORDER_REWARD_CLAIM_SUCCESS.png',
-        area=(494, 65, 787, 143),
-        search=(474, 45, 807, 163),
-        color=(163, 92, 11),
-        button=(494, 65, 787, 143),
-    ),
+    cn=[
+        Button(
+            file='./assets/cn/battle_order/claim/BATTLE_ORDER_REWARD_CLAIM_SUCCESS.png',
+            area=(494, 65, 787, 143),
+            search=(474, 45, 807, 163),
+            color=(163, 92, 11),
+            button=(494, 65, 787, 143),
+        ),
+        Button(
+            file='./assets/cn/battle_order/claim/BATTLE_ORDER_REWARD_CLAIM_SUCCESS.2.png',
+            area=(487, 65, 782, 138),
+            search=(467, 45, 802, 158),
+            color=(168, 101, 14),
+            button=(487, 65, 782, 138),
+        ),
+    ],
     en=None,
 )

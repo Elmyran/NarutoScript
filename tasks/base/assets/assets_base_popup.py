@@ -72,6 +72,16 @@ DUEL_RANK_PROMOTION_REWARD_CONFIRM = ButtonWrapper(
         button=(546, 597, 726, 661),
     ),
 )
+DUEL_WEEKLY_TITLE_CONFIRM = ButtonWrapper(
+    name='DUEL_WEEKLY_TITLE_CONFIRM',
+    share=Button(
+        file='./assets/share/base/popup/DUEL_WEEKLY_TITLE_CONFIRM.png',
+        area=(541, 637, 735, 701),
+        search=(521, 617, 755, 720),
+        color=(27, 116, 145),
+        button=(541, 637, 735, 701),
+    ),
+)
 EXIT_CONFIRM = ButtonWrapper(
     name='EXIT_CONFIRM',
     share=[

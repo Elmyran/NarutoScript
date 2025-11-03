@@ -166,6 +166,16 @@ DAILY_CHECK = ButtonWrapper(
         button=(1, 0, 267, 125),
     ),
 )
+DAILY_SHARE_PAGE_CHECK = ButtonWrapper(
+    name='DAILY_SHARE_PAGE_CHECK',
+    share=Button(
+        file='./assets/share/base/page/DAILY_SHARE_PAGE_CHECK.png',
+        area=(943, 673, 1027, 699),
+        search=(923, 653, 1047, 719),
+        color=(35, 36, 41),
+        button=(943, 673, 1027, 699),
+    ),
+)
 DRAMA_CHECK = ButtonWrapper(
     name='DRAMA_CHECK',
     share=Button(
