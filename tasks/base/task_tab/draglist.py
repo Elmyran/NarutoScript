@@ -1,6 +1,4 @@
-
-
-
+from module.base.decorator import set_cached_property
 from module.base.timer import Timer
 from tasks.base.task_tab.ocr import TaskTabOcr
 from module.ui.draggable_list import DraggableList
@@ -35,6 +33,8 @@ class DraggableTaskTabList(DraggableList):
         if main.appear(BACK_GAME_MANUAL_CHECK):
             logger.info('Adapt special ui for return player')
             self.search_button=MANUAL_TAB_SEARCH_AREA_FOR_BACK_GAME
+            ocr=self.ocr_class(self.search_button)
+            set_cached_property(self, 'ocr', ocr)
             main.wait_until_stable(self.search_button,
                                    timer=Timer(0, count=0),
                 timeout=Timer(1.5, count=5))
