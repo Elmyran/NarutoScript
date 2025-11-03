@@ -146,7 +146,8 @@ class ExtendedPlay(Combat):
     def no_restricted_battle_flow(self):
         logger.info("no_restricted_battle_flow")
         self.ui_ensure(page_no_restricted_battle)
-        self.start_fight()
+        if not self.start_fight():
+            return True
         if not self.character_select():
             return True
         if not self.secrect_scroll_select():
@@ -158,6 +159,8 @@ class ExtendedPlay(Combat):
         for _ in self.loop():
             if self.appear(NO_RESTRICTED_CHARACTER_SELECT_CHECK):
                 break
+            if self.appear(DUEL_EXCEPTION):
+                return False
             if self.match_template_color(NO_RESTRICTED_START_FIGHT,interval=1):
                 self.device.click(NO_RESTRICTED_START_FIGHT)
                 continue
