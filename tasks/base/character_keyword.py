@@ -1,11 +1,12 @@
-from module.ocr.keyword import Keyword
+from module.base.decorator import cached_property
+from module.config import server
+from module.ocr.keyword import Keyword, parse_name
 from dataclasses import dataclass
 from typing import ClassVar
 import re
 from module.ocr.ocr import Ocr
 class OcrCharacterTab(Ocr):
     def after_process(self, result):
-
         result = result.replace('碎片', '')
         result = result.replace('移', '秽')
         result = re.sub('^托斯', '托斯砧', result)  
@@ -16,7 +17,59 @@ class OcrCharacterTab(Ocr):
 class SCharacterTab(Keyword):
     card: str
     instances: ClassVar = {}
-# 重新排列后的 SCharacterTab 实例，id 从 1 开始顺序递增
+    @cached_property
+    def card_parsed(self) -> str:
+        return parse_name(self.card)
+    def _keywords_to_find(self, lang: str = None, ignore_punctuation=True):
+        if lang is None:
+            lang = server.lang
+
+        if lang in server.VALID_LANG:
+            match lang:
+                case 'cn':
+                    if ignore_punctuation:
+                        return [self.cn_parsed]
+                    else:
+                        return [self.cn]
+                case 'en':
+                    if ignore_punctuation:
+                        return [self.en_parsed]
+                    else:
+                        return [self.en]
+                case 'jp':
+                    if ignore_punctuation:
+                        return [self.jp_parsed]
+                    else:
+                        return [self.jp]
+                case 'cht':
+                    if ignore_punctuation:
+                        return [self.cht_parsed]
+                    else:
+                        return [self.cht]
+                case 'es':
+                    if ignore_punctuation:
+                        return [self.es_parsed]
+                    else:
+                        return [self.es]
+        else:
+            if ignore_punctuation:
+                return [
+                    self.cn_parsed,
+                    self.en_parsed,
+                    self.jp_parsed,
+                    self.cht_parsed,
+                    self.es_parsed,
+                    self.card_parsed
+                ]
+            else:
+                return [
+                    self.cn,
+                    self.en,
+                    self.jp,
+                    self.cht,
+                    self.es,
+                    self.card
+                ]
 SRenZhanAi = SCharacterTab(
     id=1,
     name='RenZhanAi',
@@ -317,6 +370,59 @@ SZiLaiYe = SCharacterTab(
 class ACharacterTab(Keyword):
     card: str
     instances: ClassVar = {}
+    @cached_property
+    def card_parsed(self) -> str:
+        return parse_name(self.card)
+    def _keywords_to_find(self, lang: str = None, ignore_punctuation=True):
+        if lang is None:
+            lang = server.lang
+
+        if lang in server.VALID_LANG:
+            match lang:
+                case 'cn':
+                    if ignore_punctuation:
+                        return [self.cn_parsed]
+                    else:
+                        return [self.cn]
+                case 'en':
+                    if ignore_punctuation:
+                        return [self.en_parsed]
+                    else:
+                        return [self.en]
+                case 'jp':
+                    if ignore_punctuation:
+                        return [self.jp_parsed]
+                    else:
+                        return [self.jp]
+                case 'cht':
+                    if ignore_punctuation:
+                        return [self.cht_parsed]
+                    else:
+                        return [self.cht]
+                case 'es':
+                    if ignore_punctuation:
+                        return [self.es_parsed]
+                    else:
+                        return [self.es]
+        else:
+            if ignore_punctuation:
+                return [
+                    self.cn_parsed,
+                    self.en_parsed,
+                    self.jp_parsed,
+                    self.cht_parsed,
+                    self.es_parsed,
+                    self.card_parsed
+                ]
+            else:
+                return [
+                    self.cn,
+                    self.en,
+                    self.jp,
+                    self.cht,
+                    self.es,
+                    self.card
+                ]
 
 TaoShiXianBoRen = ACharacterTab(
     id=1,
