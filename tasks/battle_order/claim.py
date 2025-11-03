@@ -183,10 +183,3 @@ class BattleOrderClaim(UI):
         }) 
         self.screenshot_tracking_add()
         return boxes,image
-az=BattleOrderClaim('ns',task='Alas')
-az.device.screenshot()
-ocr=OcrCharacterTab(BATTLE_ORDER_CHARACTER_LIST_AREA)
-name=az.config.BattleOrder_SCharacterFragments
-draglist=S_CHARACTER_TAB_LIST
-if ocr.matched_ocr(az.device.image,SCharacterTab):
-    pass
