@@ -10,7 +10,7 @@ class CultivationMopUp(TaskUI):
         self.device.click_record_clear()
         self.ui_ensure(page_cultivation)
         flag=self._cultivation_mop_up()
-        if self.config.CultivationRoad_ClearRedDot and flag=='MOP_UP_SUCCESS':
+        if self.config.CultivationRoad_ClearRedDot and flag:
             self._red_dot_clear()
         
         return flag
@@ -33,7 +33,7 @@ class CultivationMopUp(TaskUI):
                 if times==1:
                     return self._cultivation_reset()
                 elif times==0:
-                    return 'MOP_UP_SUCCESS'
+                    return True
             else:
                 detect_count+=1
                 if detect_count>4:
@@ -42,11 +42,11 @@ class CultivationMopUp(TaskUI):
                     if times==1:
                         return self._cultivation_reset()
                     elif times==0:
-                        return 'MOP_UP_SUCCESS'
+                        return True
 
             if self.appear(CULTIVATION_RESET_MOP_UP_RUNNING):
                 break
-        return 'MOP_UP_SUCCESS'
+        return False
 
     def _cultivation_reset(self):
         for _ in self.loop():
