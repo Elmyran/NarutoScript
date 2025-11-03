@@ -8,6 +8,7 @@ from module.ocr.keyword import Keyword
 class ExperienceCard(Keyword):
     instances: ClassVar = {}
 Owned=ExperienceCard(
+    id=1,
     name='Owned',
     cn='已拥有',
     en='Owned',
@@ -16,6 +17,7 @@ Owned=ExperienceCard(
     es='Obtenido',
 )
 Unowned=ExperienceCard(
+    id=2,
     name='Unowned',
     cn='未拥有',
     en='Unowned',
