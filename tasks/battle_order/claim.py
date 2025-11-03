@@ -104,7 +104,7 @@ class BattleOrderClaim(UI):
         return (ratio > ratio_thresh) and (mean_v > mean_v_thresh)
 
         
-    def detect_reward_boxes(self, image, button, low=100, high=300):
+    def detect_reward_boxes(self, image, button, low=150, high=300):
 
        
         
@@ -112,11 +112,12 @@ class BattleOrderClaim(UI):
         roi = image[y1:y2, x1:x2]   
         # 转灰度 + 高斯模糊
         gray = cv2.cvtColor(roi, cv2.COLOR_RGB2GRAY)
-        blur = cv2.GaussianBlur(gray, (9, 9), 0)
+        gray = cv2.equalizeHist(gray)
+        blur = cv2.GaussianBlur(gray, (3, 3), 0)
         # 边缘检测
         edges = cv2.Canny(blur, low, high)
         # 闭运算，连通边缘
-        kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (25, 25))
+        kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (7, 7))
         closed = cv2.morphologyEx(edges, cv2.MORPH_CLOSE, kernel)
         # 找轮廓（在 ROI 内）
         contours, _ = cv2.findContours(closed, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
@@ -141,7 +142,7 @@ class BattleOrderClaim(UI):
                continue
             
             ratio = w / float(h)
-            if ratio > 1.05:
+            if ratio > 1.05 or ratio < 0.1:
                 continue
             # 过滤条件
             if w > 95:
