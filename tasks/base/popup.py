@@ -17,6 +17,8 @@ class PopupHandler(ModuleBase):
             return True  
         if self.appear_then_click(DUEL_RANK_PROMOTION_REWARD_CONFIRM,interval=interval):
             return True
+        if self.appear_then_click(DUEL_WEEKLY_TITLE_CONFIRM,interval=interval):
+            return True
         
         
         return False
