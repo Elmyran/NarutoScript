@@ -66,8 +66,12 @@ class BattleOrderClaim(UI):
         for character in SCharacterTab.instances.values():
             if character.cn == chinese_name:
                 return character
+            if character.card == chinese_name:
+                return character
         for character in ACharacterTab.instances.values():
             if character.cn == chinese_name:
+                return character
+            if character.card == chinese_name:
                 return character
         for character in CCharacterTab.instances.values():
             if character.cn == chinese_name:
@@ -179,3 +183,10 @@ class BattleOrderClaim(UI):
         }) 
         self.screenshot_tracking_add()
         return boxes,image
+az=BattleOrderClaim('ns',task='Alas')
+az.device.screenshot()
+ocr=OcrCharacterTab(BATTLE_ORDER_CHARACTER_LIST_AREA)
+name=az.config.BattleOrder_SCharacterFragments
+draglist=S_CHARACTER_TAB_LIST
+if ocr.matched_ocr(az.device.image,SCharacterTab):
+    pass

@@ -2,7 +2,7 @@ Deploy:
   Git:
     # URL of AzurLaneAutoScript repository
     # [CN user] Use 'cn' to get update from git-over-cdn service
-    # [Other] Use 'global' to get update from https://github.com/LmeSzinc/StarRailCopilot
+    # [Other] Use 'global' to get update from https://github.com/Elmyran/NarutoScript
     Repository: {{repository}}
     # Branch of Alas
     # [Developer] Use 'dev', 'app', etc, to try new features
@@ -129,7 +129,7 @@ Deploy:
     # --port. Port to listen
     # You will be able to access webui via `http://{host}:{port}`
     # [In most cases] Default to 22367
-    WebuiPort: 22367
+    WebuiPort: 22368
     # Language to use on web ui
     # 'zh-CN' for Chinese simplified
     # 'en-US' for English

@@ -1,4 +1,3 @@
-
 from module.ocr.keyword import Keyword
 from dataclasses import dataclass
 from typing import ClassVar
@@ -15,12 +14,25 @@ class OcrCharacterTab(Ocr):
         return super().after_process(result)
 @dataclass
 class SCharacterTab(Keyword):
+    card: str
     instances: ClassVar = {}
+# 重新排列后的 SCharacterTab 实例，id 从 1 开始顺序递增
+SRenZhanAi = SCharacterTab(
+    id=1,
+    name='RenZhanAi',
+    cn='忍战艾',
+    card='艾忍界大战',
+    cht='忍战艾',
+    en='忍战艾',
+    jp='忍战艾',
+    es='忍战艾',
+)
 
 SHuiTuJieBan = SCharacterTab(
-    id=1,
+    id=2,
     name='HuiTuJieBan',
     cn='秽土解斑',
+    card='宇智波斑秽土转生解',
     cht='穢土解斑',
     en='Edo Tensei Madara',
     jp='穢土転生斑',
@@ -28,9 +40,10 @@ SHuiTuJieBan = SCharacterTab(
 )
 
 SYongHengZuoZhu = SCharacterTab(
-    id=2,
+    id=3,
     name='YongHengZuoZhu',
     cn='永恒佐助',
+    card='宇智波佐助永恒万花筒',
     cht='永恆佐助',
     en='Eternal Sasuke',
     jp='永遠のサスケ',
@@ -38,9 +51,10 @@ SYongHengZuoZhu = SCharacterTab(
 )
 
 SRenZhanYing = SCharacterTab(
-    id=3,
+    id=4,
     name='RenZhanYing',
     cn='忍战樱',
+    card='春野樱忍界大战',
     cht='忍戰櫻',
     en='Ninja War Sakura',
     jp='忍界大戦サクラ',
@@ -48,9 +62,10 @@ SRenZhanYing = SCharacterTab(
 )
 
 SJiuLaMaMingRen = SCharacterTab(
-    id=4,
+    id=5,
     name='JiuLaMaMingRen',
     cn='九喇嘛鸣人',
+    card='漩涡鸣人九喇嘛连结',
     cht='九喇嘛鳴人',
     en='Nine-Tails Naruto',
     jp='九喇嘛ナルト',
@@ -58,19 +73,32 @@ SJiuLaMaMingRen = SCharacterTab(
 )
 
 SSiMenKai = SCharacterTab(
-    id=5,
+    id=6,
     name='SiMenKai',
     cn='死门凯',
+    card='迈特凯死门',
     cht='死門凱',
     en='Eight Gates Guy',
     jp='八門ガイ',
     es='Guy Ocho Puertas',
 )
 
+SRenZhanDaiTu = SCharacterTab(
+    id=7,
+    name='RenZhanDaiTu',
+    cn='忍战带土',
+    card='宇智波带土忍界大战',
+    cht='忍戰带土',
+    en='忍战带土',
+    jp='宇智波大土',
+    es='忍战带土',
+)
+
 SHuiTuZhuJian = SCharacterTab(
-    id=6,
+    id=8,
     name='HuiTuZhuJian',
     cn='秽土柱间',
+    card='千手柱间秽土转生',
     cht='穢土柱間',
     en='Edo Tensei Hashirama',
     jp='穢土転生柱間',
@@ -78,9 +106,10 @@ SHuiTuZhuJian = SCharacterTab(
 )
 
 SHuiTuShu = SCharacterTab(
-    id=7,
+    id=9,
     name='HuiTuShu',
     cn='秽土鼬',
+    card='宇智波鼬秽土转生',
     cht='穢土鼬',
     en='Edo Tensei Itachi',
     jp='穢土転生イタチ',
@@ -88,9 +117,10 @@ SHuiTuShu = SCharacterTab(
 )
 
 SXianRenDou = SCharacterTab(
-    id=8,
+    id=10,
     name='XianRenDou',
     cn='仙人兜',
+    card='药师兜仙人模式',
     cht='仙人兜',
     en='Sage Kabuto',
     jp='仙人カブト',
@@ -98,9 +128,10 @@ SXianRenDou = SCharacterTab(
 )
 
 SHuiTuBan = SCharacterTab(
-    id=9,
+    id=11,
     name='HuiTuBan',
     cn='秽土斑',
+    card='宇智波斑秽土转生',
     cht='穢土斑',
     en='Edo Tensei Madara',
     jp='穢土転生マダラ',
@@ -108,9 +139,10 @@ SHuiTuBan = SCharacterTab(
 )
 
 SBaiMianJu = SCharacterTab(
-    id=10,
+    id=12,
     name='BaiMianJu',
     cn='白面具',
+    card='宇智波斑白面具',
     cht='白面具',
     en='White Mask',
     jp='白い仮面',
@@ -118,9 +150,10 @@ SBaiMianJu = SCharacterTab(
 )
 
 SHuiTuFeiJian = SCharacterTab(
-    id=11,
+    id=13,
     name='HuiTuFeiJian',
     cn='秽土扉间',
+    card='千手扉间秽土转生',
     cht='穢土扉間',
     en='Edo Tensei Tobirama',
     jp='穢土転生扉間',
@@ -128,9 +161,10 @@ SHuiTuFeiJian = SCharacterTab(
 )
 
 SBaiHaoGangShou = SCharacterTab(
-    id=12,
+    id=14,
     name='BaiHaoGangShou',
     cn='百豪纲手',
+    card='纲手百豪',
     cht='百豪綱手',
     en='Hundred Healings Tsunade',
     jp='百豪の術綱手',
@@ -138,9 +172,10 @@ SBaiHaoGangShou = SCharacterTab(
 )
 
 SHuiTuShuiMen = SCharacterTab(
-    id=13,
+    id=15,
     name='HuiTuShuiMen',
     cn='秽土水门',
+    card='波风水门秽土转生',
     cht='穢土水門',
     en='Edo Tensei Minato',
     jp='穢土転生ミナト',
@@ -148,9 +183,10 @@ SHuiTuShuiMen = SCharacterTab(
 )
 
 SHuiTuRiZhan = SCharacterTab(
-    id=14,
+    id=16,
     name='HuiTuRiZhan',
     cn='秽土日斩',
+    card='猿飞日斩秽土转生',
     cht='穢土日斬',
     en='Edo Tensei Hiruzen',
     jp='穢土転生ヒルゼン',
@@ -158,9 +194,10 @@ SHuiTuRiZhan = SCharacterTab(
 )
 
 SHuiTuChangMen = SCharacterTab(
-    id=15,
+    id=17,
     name='HuiTuChangMen',
     cn='秽土长门',
+    card='长门秽土转生',
     cht='穢土長門',
     en='Edo Tensei Nagato',
     jp='穢土転生長門',
@@ -168,9 +205,10 @@ SHuiTuChangMen = SCharacterTab(
 )
 
 SBan = SCharacterTab(
-    id=16,
+    id=18,
     name='Ban',
     cn='斑',
+    card='宇智波斑',
     cht='斑',
     en='Madara',
     jp='マダラ',
@@ -178,9 +216,10 @@ SBan = SCharacterTab(
 )
 
 SZhuJian = SCharacterTab(
-    id=17,
+    id=19,
     name='ZhuJian',
     cn='柱间',
+    card='千手柱间',
     cht='柱間',
     en='Hashirama',
     jp='柱間',
@@ -188,9 +227,10 @@ SZhuJian = SCharacterTab(
 )
 
 SSiDaiMuLeiYing = SCharacterTab(
-    id=18,
+    id=20,
     name='SiDaiMuLeiYing',
     cn='四代目雷影',
+    card='艾四代目雷影',
     cht='四代目雷影',
     en='Fourth Raikage',
     jp='四代目雷影',
@@ -198,9 +238,10 @@ SSiDaiMuLeiYing = SCharacterTab(
 )
 
 SFeiJian = SCharacterTab(
-    id=19,
+    id=21,
     name='FeiJian',
     cn='扉间',
+    card='千手扉间',
     cht='扉間',
     en='Tobirama',
     jp='扉間',
@@ -208,9 +249,10 @@ SFeiJian = SCharacterTab(
 )
 
 SShenMiMianJuNan = SCharacterTab(
-    id=20,
+    id=22,
     name='ShenMiMianJuNan',
     cn='神秘面具男',
+    card='神秘面具男',
     cht='神秘面具男',
     en='Masked Man',
     jp='仮面の男',
@@ -218,9 +260,10 @@ SShenMiMianJuNan = SCharacterTab(
 )
 
 SXuZuoNengHuShu = SCharacterTab(
-    id=21,
+    id=23,
     name='XuZuoNengHuShu',
     cn='须佐能乎鼬',
+    card='宇智波鼬须佐能乎',
     cht='須佐能乎鼬',
     en='Susanoo Itachi',
     jp='須佐能乎イタチ',
@@ -228,9 +271,10 @@ SXuZuoNengHuShu = SCharacterTab(
 )
 
 STianDaoPeiEn = SCharacterTab(
-    id=22,
+    id=24,
     name='TianDaoPeiEn',
     cn='天道佩恩',
+    card='佩恩天道',
     cht='天道佩恩',
     en='Tendo Pain',
     jp='天道ペイン',
@@ -238,9 +282,10 @@ STianDaoPeiEn = SCharacterTab(
 )
 
 SShuiMen = SCharacterTab(
-    id=23,
+    id=25,
     name='ShuiMen',
     cn='水门',
+    card='波风水门',
     cht='水門',
     en='Minato',
     jp='ミナト',
@@ -248,9 +293,10 @@ SShuiMen = SCharacterTab(
 )
 
 SDaSheWan = SCharacterTab(
-    id=24,
+    id=26,
     name='DaSheWan',
     cn='大蛇丸',
+    card='大蛇丸',
     cht='大蛇丸',
     en='Orochimaru',
     jp='大蛇丸',
@@ -258,9 +304,10 @@ SDaSheWan = SCharacterTab(
 )
 
 SZiLaiYe = SCharacterTab(
-    id=25,
+    id=27,
     name='ZiLaiYe',
     cn='自来也',
+    card='自来也',
     cht='自來也',
     en='Jiraiya',
     jp='自来也',
@@ -268,12 +315,14 @@ SZiLaiYe = SCharacterTab(
 )
 @dataclass
 class ACharacterTab(Keyword):
+    card: str
     instances: ClassVar = {}
 
 TaoShiXianBoRen = ACharacterTab(
     id=1,
     name='TaoShiXianBoRen',
     cn='桃式显现博人',
+    card='漩涡博人桃式显现',
     cht='桃式顯現博人',
     en='Tao Manifestation Boruto',
     jp='桃式顕現ボルト',
@@ -284,6 +333,7 @@ RenZhanNingCi = ACharacterTab(
     id=2,
     name='RenZhanNingCi',
     cn='忍战宁次',
+    card='日向宁次忍界大战',
     cht='忍戰寧次',
     en='Ninja War Neji',
     jp='忍界大戦ネジ',
@@ -294,6 +344,7 @@ BoRenChuanChangShiLang = ACharacterTab(
     id=3,
     name='BoRenChuanChangShiLang',
     cn='博人传长十郎',
+    card='长十郎六代目水影',
     cht='博人傳長十郎',
     en='Boruto Era Chōjūrō',
     jp='ボルト伝チョウジュロウ',
@@ -304,6 +355,7 @@ QingNianChangMen = ACharacterTab(
     id=4,
     name='QingNianChangMen',
     cn='青年长门',
+    card='长门青年',
     cht='青年長門',
     en='Young Nagato',
     jp='青年長門',
@@ -314,6 +366,7 @@ QingNianAi = ACharacterTab(
     id=5,
     name='QingNianAi',
     cn='青年艾',
+    card='艾青年',
     cht='青年艾',
     en='Young A',
     jp='青年エー',
@@ -324,6 +377,7 @@ BoRenChuanDaLuYi = ACharacterTab(
     id=6,
     name='BoRenChuanDaLuYi',
     cn='博人传达鲁伊',
+    card='达鲁伊五代目雷影',
     cht='博人傳達魯伊',
     en='Boruto Era Darui',
     jp='ボルト伝ダルイ',
@@ -334,6 +388,7 @@ QingNianShuiMen = ACharacterTab(
     id=7,
     name='QingNianShuiMen',
     cn='青年水门',
+    card='波风水门青年',
     cht='青年水門',
     en='Young Minato',
     jp='青年ミナト',
@@ -344,6 +399,7 @@ RenZhanQiLaBi = ACharacterTab(
     id=8,
     name='RenZhanQiLaBi',
     cn='忍战奇拉比',
+    card='奇拉比忍界大战',
     cht='忍戰奇拉比',
     en='Ninja War Killer B',
     jp='忍界大戦キラービー',
@@ -354,6 +410,7 @@ BoRenChuanHeiTU = ACharacterTab(
     id=9,
     name='BoRenChuanHeiTU',
     cn='博人传黑土',
+    card='黑土四代目土影',
     cht='博人傳黑土',
     en='Boruto Era Kurotsuchi',
     jp='ボルト伝黒土',
@@ -364,6 +421,7 @@ XuZuoZuoZhu = ACharacterTab(
     id=10,
     name='XuZuoZuoZhu',
     cn='须佐佐助',
+    card='宇智波佐助须佐能乎',
     cht='須佐佐助',
     en='Susanoo Sasuke',
     jp='須佐能乎サスケ',
@@ -374,6 +432,7 @@ HuiTuDiDaLa = ACharacterTab(
     id=11,
     name='HuiTuDiDaLa',
     cn='秽土迪达拉',
+    card='迪达拉秽土转生',
     cht='穢土迪達拉',
     en='Edo Tensei Deidara',
     jp='穢土転生デイダラ',
@@ -384,6 +443,7 @@ BoRenChuanMuYeWan = ACharacterTab(
     id=12,
     name='BoRenChuanMuYeWan',
     cn='博人传木叶丸',
+    card='猿飞木叶丸',
     cht='博人傳木葉丸',
     en='Boruto Era Konohamaru',
     jp='ボルト伝コノハマル',
@@ -394,6 +454,7 @@ JiuWeiMingRen = ACharacterTab(
     id=13,
     name='JiuWeiMingRen',
     cn='九尾鸣人',
+    card='漩涡鸣人九尾查克拉',
     cht='九尾鳴人',
     en='Nine-Tails Naruto',
     jp='九喇嘛ナルト',
@@ -404,6 +465,7 @@ BanSheDouPengDunDou = ACharacterTab(
     id=14,
     name='BanSheDouPengDunDou',
     cn='半蛇斗篷兜',
+    card='药师兜半蛇斗蓬',
     cht='半蛇斗篷兜',
     en='Half-Snake Cloak Kabuto',
     jp='半蛇斗篷カブト',
@@ -414,6 +476,7 @@ RenZhanWoAiLuo = ACharacterTab(
     id=15,
     name='RenZhanWoAiLuo',
     cn='忍战我爱罗',
+    card='我爱罗忍界大战',
     cht='忍戰我愛羅',
     en='Ninja War Gaara',
     jp='忍界大戦ガアラ',
@@ -424,6 +487,7 @@ XiaoDaSheWan = ACharacterTab(
     id=16,
     name='XiaoDaSheWan',
     cn='晓大蛇丸',
+    card='大蛇丸晓',
     cht='曉大蛇丸',
     en='Akatsuki Orochimaru',
     jp='暁の大蛇丸',
@@ -434,6 +498,7 @@ BaiHaoYing = ACharacterTab(
     id=17,
     name='BaiHaoYing',
     cn='百豪樱',
+    card='春野樱百豪',
     cht='百豪櫻',
     en='Hundred Healings Sakura',
     jp='百豪の術サクラ',
@@ -444,6 +509,7 @@ ZhaoMeiMing = ACharacterTab(
     id=18,
     name='ZhaoMeiMing',
     cn='照美冥',
+    card='照美冥五代目水影',
     cht='照美冥',
     en='Terumi Mei',
     jp='テルミ・メイ',
@@ -454,6 +520,7 @@ YingXiaoDuiZuoZhu = ACharacterTab(
     id=19,
     name='YingXiaoDuiZuoZhu',
     cn='鹰小队佐助',
+    card='鹰小队佐助',
     cht='鷹小隊佐助',
     en='Hawk Team Sasuke',
     jp='鷹小隊サスケ',
@@ -464,6 +531,7 @@ QiLaBi = ACharacterTab(
     id=20,
     name='QiLaBi',
     cn='奇拉比',
+    card='奇拉比',
     cht='奇拉比',
     en='Killer B',
     jp='キラービー',
@@ -474,6 +542,7 @@ XianRenMingRen = ACharacterTab(
     id=21,
     name='XianRenMingRen',
     cn='仙人鸣人',
+    card='漩涡鸣人仙人模式',
     cht='仙人鳴人',
     en='Sage Naruto',
     jp='仙人モードナルト',
@@ -484,6 +553,7 @@ ShenWeiKaKaXi = ACharacterTab(
     id=22,
     name='ShenWeiKaKaXi',
     cn='神威卡卡西',
+    card='旗木卡卡西神威',
     cht='神威卡卡西',
     en='Kamui Kakashi',
     jp='神威カカシ',
@@ -494,6 +564,7 @@ ZhiShui = ACharacterTab(
     id=23,
     name='ZhiShui',
     cn='止水',
+    card='宇智波止水',
     cht='止水',
     en='Shisui',
     jp='シスイ',
@@ -504,6 +575,7 @@ XiaoNan = ACharacterTab(
     id=24,
     name='XiaoNan',
     cn='小南',
+    card='小南',
     cht='小南',
     en='Konan',
     jp='コナン',
@@ -514,6 +586,7 @@ DiDaLa = ACharacterTab(
     id=25,
     name='DiDaLa',
     cn='迪达拉',
+    card='迪达拉',
     cht='迪達拉',
     en='Deidara',
     jp='デイダラ',
@@ -524,6 +597,7 @@ You = ACharacterTab(
     id=26,
     name='You',
     cn='鼬',
+    card='宇智波鼬',
     cht='鼬',
     en='Itachi',
     jp='イタチ',
@@ -534,6 +608,7 @@ Kai = ACharacterTab(
     id=27,
     name='Kai',
     cn='凯',
+    card='迈特凯',
     cht='凱',
     en='Guy',
     jp='ガイ',
