@@ -72,9 +72,6 @@ class DailyShare(TaskUI):
         return False
 
 
-az=DailyShare('ns',task='Alas')
-az.ui_ensure(page_daily_share)
-
 
 
 

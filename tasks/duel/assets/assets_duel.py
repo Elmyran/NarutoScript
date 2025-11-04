@@ -67,13 +67,22 @@ DUEL_FIGHT_END = ButtonWrapper(
 )
 DUEL_FIGHT_FAIL = ButtonWrapper(
     name='DUEL_FIGHT_FAIL',
-    cn=Button(
-        file='./assets/cn/duel/DUEL_FIGHT_FAIL.png',
-        area=(518, 370, 766, 545),
-        search=(498, 350, 786, 565),
-        color=(65, 71, 96),
-        button=(518, 370, 766, 545),
-    ),
+    cn=[
+        Button(
+            file='./assets/cn/duel/DUEL_FIGHT_FAIL.png',
+            area=(518, 370, 766, 545),
+            search=(498, 350, 786, 565),
+            color=(65, 71, 96),
+            button=(518, 370, 766, 545),
+        ),
+        Button(
+            file='./assets/cn/duel/DUEL_FIGHT_FAIL.2.png',
+            area=(628, 390, 776, 534),
+            search=(608, 370, 796, 554),
+            color=(74, 80, 110),
+            button=(628, 390, 776, 534),
+        ),
+    ],
     en=None,
 )
 DUEL_FIGHT_SUCCESS = ButtonWrapper(

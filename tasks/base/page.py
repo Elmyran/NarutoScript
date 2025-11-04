@@ -128,10 +128,10 @@ page_mission_character_select.link(CLOSE,destination=page_main)
 #DailyShare
 page_panel=Page(PANEL_CHECK)
 page_daily_share=Page(DAILY_SHARE_PAGE_CHECK)
-page_panel.link(SHARE_BUTTON,destination=page_daily_share)
 page_main.link(MAIN_GOTO_PANEL,destination=page_panel)
-page_panel.link(PANEL_GOTO_MAIN,destination=page_main)
+page_panel.link(SHARE_BUTTON,destination=page_daily_share)
 page_daily_share.link(CLOSE,destination=page_main)
+page_panel.link(CLOSE,destination=page_main)
 #FriendGifts
 page_friend_panel=Page(FRIEND_PANEL_CHECK)
 page_main.link(MAIN_GOTO_FRIEND_PANEL,destination=page_friend_panel)

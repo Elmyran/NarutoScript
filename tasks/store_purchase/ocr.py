@@ -18,6 +18,12 @@ class StorePriceDigit(ONNXPaddleOcr,Digit,OcrWhiteLetterOnComplexBackground):
     def after_process(self, result):  
         result=result.replace('A', '')
         result = re.sub(r'^11(000)$', r'1\1', result) 
+        if '万' in result:
+            match = re.search(r'(\d+)万', result)  
+            if match:  
+                num = int(match.group(1))  
+                # 乘以10000  
+                result = result.replace(match.group(0), str(num * 10000))
         return result
     def pre_process(self, img):
         return OcrWhiteLetterOnComplexBackground.pre_process(self, img)
