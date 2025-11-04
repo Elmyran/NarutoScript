@@ -28,13 +28,16 @@ class Recruit(UI):
         self.ui_ensure(page_recruit)
         RecruitTabList.search_rows(main=self, keyword=AdvancedRecruitment)
         self.wait_until_stable(PREMIUM_RECRUIT_FREE_BUTTON,timeout=Timer(1, count=3))
+        wait_recruit_end=True
         for _ in self.loop():
-            if self.appear(PREMIUM_RECRUIT_FREE_DONE):
+            if wait_recruit_end and self.appear(PREMIUM_RECRUIT_FREE_DONE):
                 break
             RECRUIT_FREE_CONFIRM.load_search(FREE_BUTTON_CONFIRM_AREA.area)
             if self.appear_then_click(RECRUIT_FREE_CONFIRM, interval=1):
+                wait_recruit_end=True
                 continue
             if self.appear_then_click(PREMIUM_RECRUIT_FREE_BUTTON, interval=1):
+                wait_recruit_end=False
                 continue
         ocr = RecruitDuration(PREMIUM_RECRUIT_REMAIN_TIMES)
         if self.appear(PREMIUM_RECRUIT_100_BUTTON):
@@ -48,14 +51,17 @@ class Recruit(UI):
         self.ui_ensure(page_recruit)
         RecruitTabList.search_rows(main=self, keyword=NormalRecruitment)
         self.wait_until_stable(NORMAL_RECRUIT_FREE_BUTTON,timeout=Timer(1, count=3))
+        wait_recruit_end=True
         for _ in self.loop():
-            if self.appear(NORMAL_RECRUIT_FREE_DONE, interval=1):
+            if wait_recruit_end and self.appear(NORMAL_RECRUIT_FREE_DONE):
                 break
             RECRUIT_FREE_CONFIRM.load_search(FREE_BUTTON_CONFIRM_AREA.area)
             if self.appear_then_click(RECRUIT_FREE_CONFIRM, interval=1):
+                wait_recruit_end=True
                 continue
             if self.appear_then_click(NORMAL_RECRUIT_FREE_BUTTON, interval=1):
-                continue
+                wait_recruit_end = False
+                continue   
         ocr = RecruitDuration(NORMAL_RECRUIT_REMAIN_TIMES)
         res = ocr.ocr_single_line(self.device.image)
         if res and res!="0:00:00":

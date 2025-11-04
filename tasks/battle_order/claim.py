@@ -11,7 +11,7 @@ from tasks.battle_order.keywords import ExperienceCard
 from tasks.battle_order.switch import BATTLE_ORDER_TAB
 from module.base.button import ClickButton  
 from datetime import datetime  
-
+import numpy as np
 class BattleOrderClaim(UI):
     def handle_battle_order_claim(self):
         self.device.click_record_clear()
@@ -33,11 +33,11 @@ class BattleOrderClaim(UI):
             if self.appear_then_click(BATTLE_ORDER_REWARD_CLAIM_SUCCESS,interval=0):
                 time.reset()
                 continue
-            res,_=self.detect_reward_boxes(image=self.device.image,button=BATTLE_ORDER_REWARD_CLAIM_AREA)
-            if res and len(res)!=0:
-                logger.info(f"Detect {len(res)} Claimable Reward ")
+            rewards=self.detect_reward_boxes(image=self.device.image,button=BATTLE_ORDER_REWARD_CLAIM_AREA)
+            if rewards and len(rewards)!=0:
+                logger.info(f"Detect {len(rewards)} Claimable Reward ")
                 if click_interval.reached():
-                    self.device.click(res[0])
+                    self.device.click(rewards[0])
                     click_interval.reset()          
                 time.reset()
     def _character_fragments_select(self):
@@ -87,13 +87,8 @@ class BattleOrderClaim(UI):
             if character.cn == chinese_name:
                 return character
         return None
-    def is_claimable_single_frame(self, image, roi, v_thresh=125, ratio_thresh=0.4, mean_v_thresh=125):
-        """
-        平均亮度 + 白色过滤
-        """
-        import cv2
-        import numpy as np
-
+    def is_claimable_single_frame(self, image, roi, v_thresh=125, ratio_thresh=0.4, mean_v_thresh=125,debug=False):
+        
         x1, y1, x2, y2 = roi
         image = image[y1:y2, x1:x2]
         if image.size == 0:
@@ -110,86 +105,97 @@ class BattleOrderClaim(UI):
         # 平均亮度
         valid_mask = ~((s < 30) & (v > 220))
         mean_v = np.mean(v[valid_mask]) if np.any(valid_mask) else np.mean(v)
+        if debug:
+            logger.info(f"奖励区域: {roi}")
+            logger.info(f"高亮像素占比: {ratio:.2f}, 平均亮度: {mean_v:.2f}")
 
-      
-        print(f"高亮像素占比: {ratio:.2f}, 平均亮度: {mean_v:.2f}")
-
-        #  双条件判定
         return (ratio > ratio_thresh) and (mean_v > mean_v_thresh)
 
-        
-    def detect_reward_boxes(self, image, button, low=150, high=300):
 
-       
-        
+  
+    def detect_reward_boxes(self, image, button, debug=False):
+        """
+        检测可领取奖励按钮并返回原图坐标列表
+        """
+        edges=self.image_preprocess(image,button)
+        # 获取可领取轮廓
+        boxes = self.filter_contours(edges=edges,button=button,debug=debug)
+
+        if debug:
+            image_debug = cv2.cvtColor(image.copy(), cv2.COLOR_RGB2BGR)
+            for box in boxes:
+                cv2.rectangle(image_debug, (box.button[0],box.button[1]),(box.button[2],box.button[3]), (0, 255, 0), 2)
+            cv2.imshow("Edges", edges)
+            cv2.imshow("Detected Boxes", image_debug)
+            cv2.waitKey(0)
+        # 保存截图到队列
+        if self.config.Error_SaveError:
+            self.device.screenshot_deque.append({
+                'time': datetime.now(),
+                'image': image.copy()
+            })
+            self.screenshot_tracking_add()
+
+        return boxes
+    def image_preprocess(self,image,button):
         x1, y1, x2, y2 = button.area
-        roi = image[y1:y2, x1:x2]   
-        # 转灰度 + 高斯模糊
-        gray = cv2.cvtColor(roi, cv2.COLOR_RGB2GRAY)
-        gray = cv2.equalizeHist(gray)
-        blur = cv2.GaussianBlur(gray, (3, 3), 0)
-        # 边缘检测
-        edges = cv2.Canny(blur, low, high)
-        # 闭运算，连通边缘
-        kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (7, 7))
+        row=image.copy()
+        image = row[y1:y2, x1:x2] 
+        
+        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        blur = cv2.GaussianBlur(gray, (1,1), 0)   
+        # Canny 检测边缘
+        edges = cv2.Canny(blur, 50, 150)
+        kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3,3))
         closed = cv2.morphologyEx(edges, cv2.MORPH_CLOSE, kernel)
-        # 找轮廓（在 ROI 内）
+        # 3. 找轮廓
         contours, _ = cv2.findContours(closed, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-        box_width=80
-        box_upper=525
-        box_lower=603
-        boxes = []
+        mask = np.zeros_like(closed)
         for cnt in contours:
+            hull = cv2.convexHull(cnt)
+            cv2.drawContours(mask, [hull], -1, 255, thickness=1)  
+        return mask
+      
+    def filter_contours(self,edges,button,min_area=2000,max_area=7500,min_rect_ratio=0.7,debug=False):
+        bx1, by1, bx2, by2 = button.area
+        contours, _ = cv2.findContours(edges, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        filtered = []
+        for cnt in contours:
+            area = cv2.contourArea(cnt)
+            if area < min_area :
+                if debug:
+                    print(f"skip small area: {area}")
+                continue
+            if area  > max_area:
+                if debug:
+                    print(f"skip large area: {area}")
+                continue
+            rect = cv2.minAreaRect(cnt)
+            box = cv2.boxPoints(rect)
+            box_area = cv2.contourArea(np.int0(box))
+            if box_area == 0:
+                continue
+            rect_ratio = area / box_area
+            if rect_ratio < min_rect_ratio:
+                print(f"skip small rect: {rect_ratio}")
+                continue
+
+            # 轮廓在局部图像坐标
             x, y, w, h = cv2.boundingRect(cnt)
-            area = w * h
-            ratio = w / float(h)
-            
-            max_w, max_h = 90, 80  
-            peri = cv2.arcLength(cnt, True)
-            approx = cv2.approxPolyDP(cnt, 0.02 * peri, True)
-            box = (x + x1, y + y1, x + x1 + w, y + y1 + h)
-            print(f"检测到轮廓:,区域={box}, 面积={area}, 宽高比={ratio:.2f}, 顶点数={len(approx)}")
-            # 矩形度过滤
-            extent = cv2.contourArea(cnt) / float(w * h)
-            print(f"矩形度: {extent:.2f}")
-            if extent < 0.7 or extent > 1.05:
-               continue
-            
-            ratio = w / float(h)
-            if ratio > 1.05 or ratio < 0.1:
-                continue
-            # 过滤条件
-            if w > 95:
-                continue
-            if h < 70 or h > 90:
-                continue
-            # 调整略大的框
-            if w > max_w:
-                over = w - max_w
-                x += over // 2
-                w -= over
-            if h > max_h:
-                over = h - max_h
-                y += over // 2
-                h -= over
-            detected_right = x + x1 + w
-            predicted_right = x + x1+ box_width
-            box = (x + x1, y + y1, x + x1 + w, y + y1 + h)
-            if self.is_claimable_single_frame(image=image, roi=box):
-                click_button = ClickButton(area=box) 
-                boxes.append(click_button)
-                cv2.rectangle(image, (x + x1, y + y1), ( x + x1 + w, y + y1 + h), (0, 255, 0), 2)
-            else:
-                cv2.rectangle(image, (x + x1, y + y1), ( x + x1 + w, y + y1 + h), (255, 0, 0), 2)
-            
-            
-        # 按 x 坐标排序
-        boxes.sort(key=lambda b: b.button[0])
-        if not self.config.Error_SaveError:  
-            return boxes,image
-        self.device.screenshot_deque.append({  
-        'time': datetime.now(),  
-        'image': image
-        }) 
-        self.screenshot_tracking_add()
-        return boxes,image
+
+            # 原图坐标
+            x1_abs = x + bx1
+            y1_abs = y + by1
+            x2_abs = x + w + bx1
+            y2_abs = y + h + by1
+            button_area=(x1_abs, y1_abs, x2_abs, y2_abs)
+            if self.is_claimable_single_frame(self.device.image, button_area,debug):
+                button=ClickButton(area=button_area)
+                if debug:
+                    logger.info(f'矩形:{rect_ratio}')
+                filtered.append(button)
+        filtered.sort(key=lambda b: b.area[0])
+        return filtered
+    
+
+

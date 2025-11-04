@@ -56,6 +56,13 @@ CHARACTER_SELECTED = ButtonWrapper(
             color=(133, 74, 50),
             button=(258, 323, 327, 382),
         ),
+        Button(
+            file='./assets/cn/mission/CHARACTER_SELECTED.5.png',
+            area=(274, 331, 309, 374),
+            search=(254, 311, 329, 394),
+            color=(202, 167, 38),
+            button=(274, 331, 309, 374),
+        ),
     ],
     en=None,
 )
