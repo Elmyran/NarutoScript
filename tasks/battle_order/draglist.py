@@ -10,11 +10,12 @@ class DraggableCharacterTabList(DraggableList):
         """检测标签页是否被选中且页面已加载"""
         # 检查页面是否已加载（这是最重要的判断条件）
         check_box_area = (
-            button.area[2] + 50,   # 选中框左边界 (名字右边+70)
-            button.area[1] - 10,   # 选中框上边界 (名字上边-10)
-            button.area[2] + 118,  # 选中框右边界 (名字右边+118)
-            button.area[3]  +10    # 选中框下边界 (名字下边+8)
+            button.area[2] ,  
+            button.area[1] ,  
+            button.area[2] + 200, 
+            button.area[3]  +40 
         )
+        logger.info(f"selected check area:{check_box_area}")
         BATTLE_ORDER_CHECK_STATUS.load_search(check_box_area)
         if main.appear(BATTLE_ORDER_CHECK_STATUS):
             return True
