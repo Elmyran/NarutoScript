@@ -6,7 +6,7 @@ from tasks.base.ui import UI
 from tasks.battle_order.assets.assets_battle_order_claim import *
 import cv2
 from tasks.battle_order.draglist import *
-from tasks.base.character_keyword import ACharacterTab,  OcrCharacterTab, SCharacterTab
+from tasks.base.character_keyword import ACharacterTab,  OcrCharacterTab, QingNianShuiMen, SCharacterTab
 from tasks.battle_order.keywords import ExperienceCard
 from tasks.battle_order.switch import BATTLE_ORDER_TAB
 from module.base.button import ClickButton  
@@ -19,8 +19,11 @@ class BattleOrderClaim(UI):
         BATTLE_ORDER_TAB.set('奖励',main=self)
         click_interval=Timer(1)
         time=Timer(2,4).start()
+        self.screenshot_tracking_add()  
         for _ in self.loop():
             if time.reached():
+                logger.info('Battle Order Reward Claim Timeout')
+                self.screenshot_tracking_add()  
                 break
             if self.appear(BATTLE_ORDER_CHARACTER_SELECT_CHECK,interval=0):
                 time.clear()
@@ -128,13 +131,7 @@ class BattleOrderClaim(UI):
             cv2.imshow("Edges", edges)
             cv2.imshow("Detected Boxes", image_debug)
             cv2.waitKey(0)
-        # 保存截图到队列
-        if self.config.Error_SaveError:
-            self.device.screenshot_deque.append({
-                'time': datetime.now(),
-                'image': image.copy()
-            })
-            self.screenshot_tracking_add()
+       
 
         return boxes
     def image_preprocess(self,image,button):
@@ -196,6 +193,3 @@ class BattleOrderClaim(UI):
                 filtered.append(button)
         filtered.sort(key=lambda b: b.area[0])
         return filtered
-    
-
-
