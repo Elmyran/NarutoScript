@@ -164,6 +164,7 @@ class ExtendedPlay(Combat):
             if self.match_template_color(NO_RESTRICTED_START_FIGHT,interval=1):
                 self.device.click(NO_RESTRICTED_START_FIGHT)
                 continue
+        return True
     def character_select(self):
         logger.info("Character select...")
         for _ in self.loop():
