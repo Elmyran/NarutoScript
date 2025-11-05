@@ -3,6 +3,7 @@ from module.base.button import ClickButton
 from module.base.timer import Timer
 from module.base.utils.utils import  area_size, get_color
 from module.config.utils import get_server_next_monday_update, get_server_next_update
+from module.exception import GameStuckError
 from module.logger import logger
 from module.ocr.ocr import DigitCounter
 from tasks.combat.combat import Combat
@@ -76,8 +77,6 @@ class ExtendedPlay(Combat):
                break
            else:
                ready_fight=True
-               
-            
            if ready_fight and self.no_restricted_battle_flow():
                ready_fight=False
                continue
@@ -135,13 +134,20 @@ class ExtendedPlay(Combat):
             return True
         return False
     def reward_claim(self):
-        return True
-
+        logger.info("Extended play reward claim...")
+        claim_timer=Timer(5,10).start()
+        for _ in self.loop():
+            if claim_timer.reached():
+                raise GameStuckError("Extended task panel reward claim stuck")
+            if self.appear(EXTENDED_TASK_PANEL_REWARD_CLAIMED):
+                break
+            if self.appear_then_click(EXTENDED_TASK_PANEL_REWARD_CLAIM_ALL,interval=0):
+                continue
+            if self.match_template_color(EXTENDED_TASK_PANEL_REWARD,interval=1):
+                self.device.click(EXTENDED_TASK_PANEL_REWARD)
+                continue
             
-
-        
-        
-        
+        return True
 
     def no_restricted_battle_flow(self):
         logger.info("no_restricted_battle_flow")

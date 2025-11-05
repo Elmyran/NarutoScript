@@ -331,6 +331,39 @@ EXTENDED_TASK_PANEL_EXIT_BUTTON = ButtonWrapper(
         button=(1204, 172, 1265, 240),
     ),
 )
+EXTENDED_TASK_PANEL_REWARD = ButtonWrapper(
+    name='EXTENDED_TASK_PANEL_REWARD',
+    cn=Button(
+        file='./assets/cn/duel/extended_play/EXTENDED_TASK_PANEL_REWARD.png',
+        area=(1028, 593, 1093, 635),
+        search=(1008, 573, 1113, 655),
+        color=(232, 163, 42),
+        button=(1028, 593, 1093, 635),
+    ),
+    en=None,
+)
+EXTENDED_TASK_PANEL_REWARD_CLAIMED = ButtonWrapper(
+    name='EXTENDED_TASK_PANEL_REWARD_CLAIMED',
+    cn=Button(
+        file='./assets/cn/duel/extended_play/EXTENDED_TASK_PANEL_REWARD_CLAIMED.png',
+        area=(1030, 581, 1098, 637),
+        search=(1010, 561, 1118, 657),
+        color=(107, 84, 39),
+        button=(1030, 581, 1098, 637),
+    ),
+    en=None,
+)
+EXTENDED_TASK_PANEL_REWARD_CLAIM_ALL = ButtonWrapper(
+    name='EXTENDED_TASK_PANEL_REWARD_CLAIM_ALL',
+    cn=Button(
+        file='./assets/cn/duel/extended_play/EXTENDED_TASK_PANEL_REWARD_CLAIM_ALL.png',
+        area=(422, 416, 616, 484),
+        search=(402, 396, 636, 504),
+        color=(215, 148, 17),
+        button=(422, 416, 616, 484),
+    ),
+    en=None,
+)
 EXTENDED_TASK_SCORE_AREA = ButtonWrapper(
     name='EXTENDED_TASK_SCORE_AREA',
     share=Button(
