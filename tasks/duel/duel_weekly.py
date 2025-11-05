@@ -14,7 +14,7 @@ from tasks.duel.assets.assets_duel import *
 
 class DuelWeekly(TaskUI):
     def run(self):
-        current_victory_count=self.config.DuelWeekly_CurrentVictoryCount
+        current_victory_count=self.config.stored.CurrentVictoryCount.value
         target_victory_count=self.config.DuelWeekly_TargetVictoryNumber
         if self.config.DuelWeekly_DuelWeeklyStatus and current_victory_count > target_victory_count:
             return get_server_next_monday_update(self.config.Scheduler_ServerUpdate)
