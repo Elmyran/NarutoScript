@@ -784,6 +784,10 @@
     "BattleFieldFinishCount": {
       "name": "BattleField.BattleFieldFinishCount.name",
       "help": "BattleField.BattleFieldFinishCount.help"
+    },
+    "BattleFieldTargetScore": {
+      "name": "目标分数",
+      "help": ""
     }
   },
   "Fortress": {
@@ -812,6 +816,10 @@
       "泷之要塞": "泷之要塞",
       "云之要塞": "云之要塞",
       "鸟之要塞": "鸟之要塞"
+    },
+    "FortressTargetScore": {
+      "name": "目标分数",
+      "help": ""
     }
   },
   "ItemStorage": {

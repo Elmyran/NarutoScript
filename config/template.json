@@ -306,7 +306,8 @@
       "ServerUpdate": "05:00"
     },
     "Fortress": {
-      "FortressSelect": "火之要塞"
+      "FortressSelect": "火之要塞",
+      "FortressTargetScore": 40
     }
   },
   "BattleField": {
@@ -318,7 +319,8 @@
     },
     "BattleField": {
       "Type": "天之战场",
-      "BattleFieldFinishCount": {}
+      "BattleFieldFinishCount": {},
+      "BattleFieldTargetScore": 1600
     }
   },
   "DingCiKaoRou": {

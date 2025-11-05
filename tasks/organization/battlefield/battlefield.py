@@ -99,6 +99,7 @@ class BattleField(TaskUI,CharacterCircleDetector):
         CHARACTER_TAB.set('忍者',main=self)
         for _ in self.loop():
             if self.appear(CHARACTER_SELECTED,similarity=0.7):
+                self.device.click_record_remove(CHARACTER_FIRST)
                 logger.info('Character Selected')
                 break
             if self.appear(CHARACTER_UNSELECTED,interval=1):
@@ -106,6 +107,7 @@ class BattleField(TaskUI,CharacterCircleDetector):
         CHARACTER_TAB.set('秘卷',main=self)
         for _ in  self.loop():
             if self.appear(MI_JUAN_SELECTED):
+                self.device.click_record_remove(CHARACTER_FIRST)
                 break
             if self.appear(MI_JUAN_UNSELECTED,interval=1):
                 self.device.click(CHARACTER_FIRST)
@@ -137,7 +139,8 @@ class BattleField(TaskUI,CharacterCircleDetector):
         account_name=self.config.stored.AccountName.value
         AccountNameKeyword.cn=account_name
         OCR=Digit(BATTLE_FIELD_CREDITS)
-        ocr_interval=Timer(10).start()
+        ocr_interval=Timer(10)
+        empty_detect_interval=Timer(1).start()
         occupied=False
         for _ in self.loop():
             if self.appear(BATTLE_FIELD_FINISHED):
@@ -154,23 +157,28 @@ class BattleField(TaskUI,CharacterCircleDetector):
             if self.appear(BATTLE_FIELD_CHECK) and ocr_interval.reached():
                 credits=OCR.ocr_single_line(self.device.image)
                 logger.info(f'Credits: {credits}')
-                if credits>1600:
-                    logger.info('Credits reached 1600')
+                if credits>=self.config.BattleField_BattleFieldTargetScore:
+                    logger.info(f'Credits reached target score: {self.config.BattleField_BattleFieldTargetScore}')
                     break
                 ocr_interval.reset()
-            if occupied==False and self.detect_character_circle(self.device.image):
-                occupied=True
-                logger.info('Occupied Detected')
-                continue
-            
+            #if occupied==False and self.detect_character_circle(self.device.image):
+            #   occupied=True
+            #   logger.info('Occupied Detected')
+            #   continue
             if occupied==False :
-                BATTLE_FIELD_EMPTY.load_search(FULL_SCREEN.area)
-                if self.appear_then_click(BATTLE_FIELD_EMPTY,interval=1):
-                    self.device.click_record_remove(BATTLE_FIELD_EMPTY)   
+                if empty_detect_interval.reached():
+                    image=self.image_process(self.device.image)
+                    BATTLE_FIELD_EMPTY.load_search(FULL_SCREEN.area)
+                    if BATTLE_FIELD_EMPTY.match_template(image):
+                        self.device.click(BATTLE_FIELD_EMPTY)
+                        self.device.click_record_remove(BATTLE_FIELD_EMPTY) 
+                    empty_detect_interval.reset()  
                 continue
             
 
     def _handle_reward(self):
+        logger.info('Battlefield reward claim')
+        self.ui_ensure(page_battle_field_select)
         self.ui_ensure(page_battle_field)
         for _ in self.loop():
             if self.appear(BATTLE_FIELD_REWARD_CHECK):
@@ -179,11 +187,13 @@ class BattleField(TaskUI,CharacterCircleDetector):
                 self.device.click(BATTLE_FIELD_CHECK)
                 continue
         for _ in self.loop():
-            if self.appear_then_click(BATTLE_FIELD_REWARD_CLAIM_DONE,interval=1):
+            if self.appear(BATTLE_FIELD_REWARD_CLAIM_DONE):
                 break
-            if self.appear_then_click(BATTLE_FIELD_REWARD_CONFIRM,interval=0.5):
+            if self.appear(BATTLE_FIELD_REWARD_UNCLAIM):
+                break 
+            if self.appear_then_click(BATTLE_FIELD_REWARD_CONFIRM,interval=0):
+                self.device.click_record_remove(BATTLE_FIELD_REWARD_CONFIRM)
+                self.device.click_record_remove(BATTLE_FIELD_REWARD_CLAIM_BUTTON)
                 continue
             if self.appear_then_click(BATTLE_FIELD_REWARD_CLAIM_BUTTON,interval=1):
                 continue
-
-
