@@ -33,12 +33,13 @@ class ActivityRewardClaim(UI):
                 logger.info('Daily Reward Claim Ttimeout')
                 break
             if self.is_reward_claimed_all():
+                logger.info('Daily Reward Claimed All')
                 break
-            if self.appear_then_click(DAILY_REWARD_DETAIL,interval=1,similarity=0.9):
+            if self.appear_then_click(DAILY_REWARD_DETAIL,interval=0):
                 continue
-            if self.appear_then_click(DAILY_REWARD,interval=1,similarity=0.9):
+            if self.appear_then_click(DAILY_REWARD,interval=1,similarity=0.95):
+                timer.reset()
                 continue
     def is_reward_claimed_all(self):
         return self.appear(DAILY_REWARD_CLAIMED_10) and self.appear(DAILY_REWARD_CLAIMED_40) and self.appear(DAILY_REWARD_CLAIMED_80) and self. appear(DAILY_REWARD_CLAIMED_100)
-
 
