@@ -1,7 +1,7 @@
 from module.base.timer import Timer
 from module.exception import GameStuckError
 from module.logger import logger
-from tasks.base.page import page_main, page_daily_share
+from tasks.base.page import page_main, page_panel
 from tasks.base.taskui import TaskUI
 from tasks.freebies.assets.assets_freebies_dailyshare import SHARE_BUTTON, SHARE_GOTO_QQ
 
@@ -25,11 +25,12 @@ class DailyShare(TaskUI):
     def _share_goto_other_app(self):
         self.device.click_record_clear()
         timeout = Timer(30, count=30).start()  
-        self.ui_ensure(page_daily_share)
+        self.ui_ensure(page_panel)
         for _ in self.loop():
             if timeout.reached():  
                 raise GameStuckError('Share goto other app timeout') 
-            self.device.click_record_clear()
+            if self.appear_then_click(SHARE_BUTTON,interval=1):
+                continue
             if self.appear(SHARE_GOTO_QQ,interval=2):
                 self.device.click(SHARE_GOTO_QQ)
                 continue
