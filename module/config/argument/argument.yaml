@@ -516,6 +516,9 @@ BattleField:
     stored: StoredBattleFieldCount
     value: {}
     display: hide
+  BattleFieldTargetScore:
+    type: input
+    value: 1600
 Fortress:
   FortressSelect:
     type: select
@@ -540,6 +543,9 @@ Fortress:
   '云之要塞',
   '鸟之要塞'
   ]
+  FortressTargetScore:
+    type: input
+    value: 40
 
 
 

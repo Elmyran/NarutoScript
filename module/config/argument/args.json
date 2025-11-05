@@ -1256,6 +1256,10 @@
           "云之要塞",
           "鸟之要塞"
         ]
+      },
+      "FortressTargetScore": {
+        "type": "input",
+        "value": 40
       }
     }
   },
@@ -1299,6 +1303,10 @@
         "value": {},
         "display": "hide",
         "stored": "StoredBattleFieldCount"
+      },
+      "BattleFieldTargetScore": {
+        "type": "input",
+        "value": 1600
       }
     }
   },

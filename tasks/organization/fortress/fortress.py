@@ -89,7 +89,7 @@ class Fortress(GameControl,TaskUI):
                 continue
             if self.appear(FORTRESS_PAGE):
                 score=ocr.ocr_single_line(self.device.image)
-                if score and score>=40:
+                if score and score>=self.config.Fortress_FortressTargetScore:
                     break
                 else:
                     self.move_to_direction(90,2)

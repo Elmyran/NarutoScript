@@ -157,8 +157,8 @@ class BattleField(TaskUI,CharacterCircleDetector):
             if self.appear(BATTLE_FIELD_CHECK) and ocr_interval.reached():
                 credits=OCR.ocr_single_line(self.device.image)
                 logger.info(f'Credits: {credits}')
-                if credits>1600:
-                    logger.info('Credits reached 1600')
+                if credits>=self.config.BattleField_BattleFieldTargetScore:
+                    logger.info(f'Credits reached target score: {self.config.BattleField_BattleFieldTargetScore}')
                     break
                 ocr_interval.reset()
             #if occupied==False and self.detect_character_circle(self.device.image):
