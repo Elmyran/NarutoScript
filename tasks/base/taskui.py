@@ -51,11 +51,12 @@ class TaskUI(UI):
                 if self.ui_page_appear(page, interval=5):
                     logger.info(f'Page switch: {page} -> {page.parent}')
                     self.handle_lang_check(page)
-                    if not self.ui_page_confirm(page):
-                        logger.warning(f'Page confirm failed for {page}, skip clicking')  
-                        continue
-                    else:
-                        logger.info(f'Page arrive confirm {page}')   
+                    if page==page_main:
+                        if not self.ui_page_confirm(page):
+                            logger.warning(f'Page confirm failed for {page}, skip clicking')  
+                            continue
+                        else:
+                            logger.info(f'Page arrive confirm {page}')   
                     if self.ui_page_appear(page_manual) and page.parent != page_main:
                          self.wait_until_stable(MANUAL_TAB_SEARCH_AREA)
                          TASK_TAB_LIST.search_rows(self,Page2Keyword.get(page.parent))
