@@ -112,6 +112,17 @@ BATTLE_FIELD_REWARD_CONFIRM = ButtonWrapper(
     ),
     en=None,
 )
+BATTLE_FIELD_REWARD_UNCLAIM = ButtonWrapper(
+    name='BATTLE_FIELD_REWARD_UNCLAIM',
+    cn=Button(
+        file='./assets/cn/organization/battlefield/BATTLE_FIELD_REWARD_UNCLAIM.png',
+        area=(693, 161, 786, 214),
+        search=(673, 141, 806, 234),
+        color=(189, 175, 148),
+        button=(693, 161, 786, 214),
+    ),
+    en=None,
+)
 BATTLE_FIELD_SELECT_CHECK = ButtonWrapper(
     name='BATTLE_FIELD_SELECT_CHECK',
     cn=Button(
