@@ -20,6 +20,13 @@ BACK_GAME_CHECK = ButtonWrapper(
             color=(100, 80, 3),
             button=(1023, 690, 1151, 717),
         ),
+        Button(
+            file='./assets/share/base/page/BACK_GAME_CHECK.3.png',
+            area=(235, 152, 286, 207),
+            search=(215, 132, 306, 227),
+            color=(128, 100, 49),
+            button=(235, 152, 286, 207),
+        ),
     ],
 )
 BATTLE_ORDER_CHECK = ButtonWrapper(
