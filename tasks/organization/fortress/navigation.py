@@ -115,7 +115,7 @@ class MapNavigation:
             return  
         
         # 限制单次滑动距离  
-        max_drag = 400  
+        max_drag = 600 
         if distance > max_drag:  
             scale = max_drag / distance  
             dx *= scale  
