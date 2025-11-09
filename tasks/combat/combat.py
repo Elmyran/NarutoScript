@@ -25,6 +25,7 @@ class Combat(GameControl):
                       timeout
                       )
         finally:
+            self.up_all()
             self.device.stuck_timer=Timer(60,count=60).start()
         return True
     def multi_round_combat(self,
