@@ -3,6 +3,17 @@ from module.base.button import Button, ButtonWrapper
 # This file was auto-generated, do not modify it manually. To generate:
 # ``` python -m dev_tools.button_extract ```
 
+ACCEPTED_BUTTON = ButtonWrapper(
+    name='ACCEPTED_BUTTON',
+    cn=Button(
+        file='./assets/cn/mission/ACCEPTED_BUTTON.png',
+        area=(1123, 228, 1222, 297),
+        search=(1103, 208, 1242, 317),
+        color=(50, 21, 28),
+        button=(1123, 228, 1222, 297),
+    ),
+    en=None,
+)
 ACCPET_BUTTON = ButtonWrapper(
     name='ACCPET_BUTTON',
     cn=Button(
@@ -114,6 +125,26 @@ MISSION_CHECK = ButtonWrapper(
     ),
     en=None,
 )
+MISSION_JADE = ButtonWrapper(
+    name='MISSION_JADE',
+    cn=[
+        Button(
+            file='./assets/cn/mission/MISSION_JADE.png',
+            area=(765, 340, 820, 411),
+            search=(745, 320, 840, 431),
+            color=(51, 121, 83),
+            button=(765, 340, 820, 411),
+        ),
+        Button(
+            file='./assets/cn/mission/MISSION_JADE.2.png',
+            area=(763, 219, 819, 299),
+            search=(743, 199, 839, 319),
+            color=(74, 135, 103),
+            button=(763, 219, 819, 299),
+        ),
+    ],
+    en=None,
+)
 MISSION_REWARD = ButtonWrapper(
     name='MISSION_REWARD',
     cn=[
@@ -178,31 +209,37 @@ REWARD_CLAIM_DONE = ButtonWrapper(
     ),
     en=None,
 )
-SOUL_JADE = ButtonWrapper(
-    name='SOUL_JADE',
-    cn=[
-        Button(
-            file='./assets/cn/mission/SOUL_JADE.png',
-            area=(768, 461, 825, 516),
-            search=(748, 441, 845, 536),
-            color=(46, 118, 91),
-            button=(768, 461, 825, 516),
-        ),
-        Button(
-            file='./assets/cn/mission/SOUL_JADE.2.png',
-            area=(762, 225, 838, 300),
-            search=(742, 205, 858, 320),
-            color=(41, 100, 64),
-            button=(762, 225, 838, 300),
-        ),
-        Button(
-            file='./assets/cn/mission/SOUL_JADE.3.png',
-            area=(763, 330, 838, 413),
-            search=(743, 310, 858, 433),
-            color=(56, 102, 75),
-            button=(763, 330, 838, 413),
-        ),
-    ],
+TASK_1_AREA = ButtonWrapper(
+    name='TASK_1_AREA',
+    cn=Button(
+        file='./assets/cn/mission/TASK_1_AREA.png',
+        area=(530, 201, 1239, 325),
+        search=(510, 181, 1259, 345),
+        color=(77, 65, 66),
+        button=(530, 201, 1239, 325),
+    ),
+    en=None,
+)
+TASK_2_AREA = ButtonWrapper(
+    name='TASK_2_AREA',
+    cn=Button(
+        file='./assets/cn/mission/TASK_2_AREA.png',
+        area=(527, 318, 1242, 435),
+        search=(507, 298, 1262, 455),
+        color=(87, 57, 64),
+        button=(527, 318, 1242, 435),
+    ),
+    en=None,
+)
+TASK_3_AREA = ButtonWrapper(
+    name='TASK_3_AREA',
+    cn=Button(
+        file='./assets/cn/mission/TASK_3_AREA.png',
+        area=(525, 426, 1239, 550),
+        search=(505, 406, 1259, 570),
+        color=(77, 65, 65),
+        button=(525, 426, 1239, 550),
+    ),
     en=None,
 )
 TASK_ACCEPT = ButtonWrapper(
@@ -277,17 +314,6 @@ TASK_BOX_RED = ButtonWrapper(
         search=(906, 429, 1022, 546),
         color=(118, 53, 69),
         button=(926, 449, 1002, 526),
-    ),
-    en=None,
-)
-TASK_HAVE_ACCEPTED = ButtonWrapper(
-    name='TASK_HAVE_ACCEPTED',
-    cn=Button(
-        file='./assets/cn/mission/TASK_HAVE_ACCEPTED.png',
-        area=(1109, 220, 1232, 314),
-        search=(1089, 200, 1252, 334),
-        color=(44, 21, 30),
-        button=(1109, 220, 1232, 314),
     ),
     en=None,
 )

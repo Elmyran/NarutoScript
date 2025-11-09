@@ -1,17 +1,15 @@
-from module.base.button import ClickButton
 from module.base.timer import Timer
 from module.exception import GameStuckError
 from module.logger.logger import logger
 from module.ocr.ocr import   DigitCounter
-from module.ocr.utils import pair_buttons
 from tasks.base.page import page_mission
 from tasks.base.taskui import TaskUI
 from tasks.mission.assets.assets_mission import *
-from tasks.mission.mission_keyword import Acceptable, MissionClaimable, TaskTime
-from tasks.mission.mission_ocr import  MissionDigit, MissionWhiteLetterOcr, MissionOcr
-from tasks.mission.priority import MissionTask, TaskPriority
+from tasks.mission.mission_keyword import MissionClaimable
+from tasks.mission.task import MissionDurationOcr, Task
 class Mission(TaskUI):
-   
+    tasks=[]
+    value:int=0
     def run(self):
         if self.config.stored.MissionAccept.is_expired():
             self.config.stored.MissionAccept.clear()
@@ -39,19 +37,23 @@ class Mission(TaskUI):
         self.ui_goto_main()
 
     def _circle_task_select(self):
-        accepted_tasks=[]
+        
         for _ in self.loop():
-            res=self._task_select(accepted_tasks)
+            res=self._task_select(self.tasks)
             if res:
                 break
             self._task_refresh()
         with self.config.multi_set():
-            self.config.stored.MissionAccept.write_missions(accepted_tasks)
+            self.config.stored.MissionAccept.write_missions(self.tasks)
     def _task_select(self,accepted_tasks):
-        tasks=self._mission_select_priority()
-        tasks=self._task_strategy(tasks)
         select=DigitCounter(TASK_SELECT_REAMIN_TIMES)
-        task_select_number=0
+        current,remain,total=select.ocr_single_line(self.device.image)
+        if remain==total:
+            return True
+        self.value=remain
+        tasks=self._tasks_recognition()
+        tasks=self.sort_tasks(tasks)
+        tasks=self._task_strategy(tasks)
         time=Timer(60,count=60).start()
         skip_first_screenshot = True  
         for task in tasks:
@@ -61,18 +63,14 @@ class Mission(TaskUI):
                 self.device.screenshot()  
             if time.reached():
                 raise GameStuckError(' Mission Task  Select Stuck')
-            current,remain,total=select.ocr_single_line(self.device.image)
-            if remain!=0 and total!=0 and remain>task_select_number:
-                task_select_number=remain
-            if total!=0 and remain==total:
-                break
             res=self._single_task_select(task)
             if not res:
                 break
             else:
+                self.value+=1
                 accepted_tasks.append(task.time)
         with self.config.multi_set():
-            self.config.stored.MissionAccept.value=task_select_number
+            self.config.stored.MissionAccept.value=self.value
         return True
     def _single_task_select(self,task):
         click_interval=Timer(1).start()
@@ -130,21 +128,21 @@ class Mission(TaskUI):
               
             
     def _mission_reward_claim(self):
-        ocr = MissionOcr(MISSION_TASK_CLAIMED_LIST, lang='cn')
+        ocr = MissionDurationOcr(MISSION_TASK_CLAIMED_LIST, lang='cn')
         res = ocr.matched_ocr(self.device.image, MissionClaimable)
         if not res:
             return
         self.device.click(res[0])
-        time = Timer(1, count=3).start()
-        click_interval=Timer(0.5).start()
+        time = Timer(2, count=3).start()
+        click_interval=Timer(1)
         for _ in self.loop():
             if time.reached():
                 break
-            if self.appear(TASK_BAR_IS_EMPTY):
-                break
-            if self.appear_then_click(MISSION_REWARD_CLAIM_ALL,interval=0.5):
+            if self.appear_then_click(MISSION_REWARD_CLAIM_ALL,interval=1):
+                time.reset()
                 continue
-            if self.appear_then_click(MISSION_REWARD,interval=0.5):
+            if self.appear_then_click(MISSION_REWARD,interval=1):
+                time.reset()
                 continue
             res = ocr.matched_ocr(self.device.image, keyword_classes=MissionClaimable)
             if res:
@@ -152,112 +150,36 @@ class Mission(TaskUI):
                     self.device.click(res[0])
                     click_interval.reset()
                 time.reset()
+            if self.match_template_color(TASK_BAR_IS_EMPTY):
+                break
 
-
-
-
-
-    def _mission_select_priority(self):
-   
-        ocr = MissionWhiteLetterOcr(button=TASK_AREA,use_angle_cls=True)
-        # 任务名称识别
-        task_name_boxes = ocr.ocr_multiple_lines(self.device.image, TASK_AREA.area)
-        task_name=[]
-        for box in task_name_boxes:  # 遍历列表中的每个 BoxedResult  
-            button = ocr._product_button(boxed_result=box, keyword_classes=[])  
-            task_name.append(button)
-
-        button=MissionOcr(TASK_ACCPET_BUTTON_AREA)
-        # 时间和按钮识别
-        task_buttons=button.matched_ocr(self.device.image, keyword_classes=Acceptable) 
-        task_time = button.matched_ocr(self.device.image,keyword_classes=TaskTime,partial_match=True)
-        # 构建当前任务列表
-        currentTask = []
-        for name, time in pair_buttons(task_name, task_time, (-100, -50, 800, 50)):
-            task=MissionTask(name=name.text, time=self._parse_time_to_minutes(time.text), area=name.area)
-            currentTask.append(task)
-
-        task_with_button = []
-        
-        for task, button in pair_buttons(currentTask, task_buttons, (-100, -50, 800, 110)):
             
-            task.button = button.button
-            task.area = (
-                task.area[0],
-                min(task.area[1], button.area[1])-10,
-                button.area[0],
-                max(task.area[3], button.area[3])+10
-            )
-            print(task.area)
-            # 获取任务奖励信息
-            self._get_task_reward_detail(task)
-            task_with_button.append(task)
-            # 直接排序并返回最高优先级任务
-        return self._select_highest_priority_task(task_with_button)
 
-    def _select_highest_priority_task(self, tasks):
-        """根据箱子类型和魂玉数量选择最高优先级任务"""
+
+
+    def _tasks_recognition(self):
+        task_areas=[TASK_1_AREA,TASK_2_AREA,TASK_3_AREA]
+        tasks=[]
+        for area in task_areas:
+            task=Task(area)
+            task.task_parse(self.device.image)
+            if task.valid:
+                tasks.append(task)
+        return tasks
+       
+
+    def sort_tasks(self, tasks):
         if not tasks:
-            logger.warning("没有可用任务")
+            logger.warning("没有可任务")
             return []
 
-            # 按优先级排序：先按箱子类型（RED=1, BLUE=2, GREEN=3），再按魂玉数量（降序）
-        sorted_tasks = sorted(tasks, key=lambda x: (x.priority.value, -x.soul_jade_amount))
+        # 按优先级排序：先按箱子类型（RED=1, BLUE=2, GREEN=3），再按魂玉数量（降序）
+        sorted_tasks = sorted(tasks, key=lambda x: (x.priority.value, -x.jade))
 
         return sorted_tasks
-
-    def _get_task_reward_detail(self, task):
-        
-        time = Timer(1, 3).start()
-        box_type=None
-        soul_jade=0
-        for _ in self.loop():
-            if time.reached():
-                break
-            if soul_jade!=0 and box_type:
-                break
-            if not box_type:
-                TASK_BOX_GREEN.load_search(task.area)
-                if self.appear(TASK_BOX_GREEN):
-                    box_type=TaskPriority.GREEN
-                TASK_BOX_BLUE.load_search(task.area)
-                if self.appear(TASK_BOX_BLUE):
-                    box_type=TaskPriority.BLUE
-                TASK_BOX_RED.load_search(task.area)
-                if self.appear(TASK_BOX_RED):
-                    box_type=TaskPriority.RED
-            if soul_jade==0:
-                SOUL_JADE.load_search(task.area)
-                if SOUL_JADE.match_template(self.device.image, similarity=0.6):
-                    # 基于匹配位置计算数字区域
-                    number_area = (
-                        800,
-                        SOUL_JADE.button[1]+30,
-                        840,  # 向右扩展包含数字
-                        SOUL_JADE.button[3] + 20  # 向下扩展包含数字
-                    )
-
-                    jade=ClickButton(area=number_area,name='jade')
-                    ocr = MissionDigit(jade)
-                    res = ocr.ocr_single_line(self.device.image)
-                    if res:
-                        soul_jade=int(res)
-       
-        task.soul_jade_amount=soul_jade
-        task.priority = box_type if box_type is not None else TaskPriority.GREEN
-
-    def _parse_time_to_minutes(self, time_str: str) -> int:
-        """解析时间字符串为分钟数，并修正为60的倍数"""
-        import re
-        hour_match = re.search(r'(\d+)时', time_str)
-        minute_match = re.search(r'(\d+)分', time_str)
-        hours = int(hour_match.group(1)) if hour_match else 0
-        minutes = int(minute_match.group(1)) if minute_match else 0
-        total_minutes = hours * 60 + minutes
-        # 添加时间修正逻辑 - 调整为最接近的60分钟倍数
-        corrected_minutes = round(total_minutes / 60) * 60
-        return corrected_minutes
 
     def _task_strategy(self, tasks):
         return tasks
 
+az=Mission('ns',task='Alas')
+az.handle_mission()
