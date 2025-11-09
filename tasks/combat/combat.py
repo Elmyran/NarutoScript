@@ -10,6 +10,7 @@ class Combat(GameControl):
     
     def single_round_combat(self,
                       end_check=DUEL_FIGHT_END,
+                      end_confirm=None,                      
                       skill=True,
                       scroll=True,
                       psychic=True,
@@ -22,7 +23,8 @@ class Combat(GameControl):
                       skill,
                       scroll,
                       psychic,
-                      timeout
+                      timeout,
+                      end_confirm=None,
                       )
         finally:
             self.up_all()
@@ -51,6 +53,7 @@ class Combat(GameControl):
 
     def _click_script(self,
                       end_check,
+                      end_confirm,
                       skill,
                       scroll,
                       psychic,
@@ -71,6 +74,11 @@ class Combat(GameControl):
                 logger.info("click_script end_check")
                 self.press_up(buttons)
                 break
+            if end_confirm:
+                if self.appear_then_click(end_confirm,interval=1):
+                    logger.info("click_script end_cofirm")
+                    self.press_up(buttons)
+                    break
             if self._is_exception():
                 logger.info("click_script exception")
                 self.press_up(buttons)
