@@ -24,7 +24,7 @@ class Combat(GameControl):
                       scroll,
                       psychic,
                       timeout,
-                      end_confirm=None,
+                      end_confirm,
                       )
         finally:
             self.up_all()
@@ -67,8 +67,13 @@ class Combat(GameControl):
         if psychic:
             buttons.append(CHARACTER_PSYCHIC)
         start_time = time.time()
+        press_interval=Timer(10).start()
         self.press_down(buttons)
         for _ in self.loop():
+            if press_interval.reached():
+                self.press_up(buttons)
+                self.press_down(buttons)
+                press_interval.reset()
 
             if time.time() - start_time > timeout or self.appear(end_check):
                 logger.info("click_script end_check")
