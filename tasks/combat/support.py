@@ -175,7 +175,6 @@ class SupportSelectList:
  
         COMBAT_SUPPORT_ADD.load_search(button.area)  
         if COMBAT_SUPPORT_ADD.match_template(main.device.image, similarity=0.55):
-            
             return button
         COMBAT_SUPPORT_ADD_LIMITED.load_search(button.area)
         if COMBAT_SUPPORT_ADD_LIMITED.match_template(main.device.image, similarity=0.75):
@@ -202,7 +201,7 @@ class SupportSelectList:
         click_interval=Timer(2)
         for _ in main.loop():
             SUPPORT_SELECTED.load_search(button.area)
-            if main.match_template(SUPPORT_SELECTED):
+            if main.match_template(SUPPORT_SELECTED,similarity=0.55):
                 break
             if click_interval.reached():  
                 main.device.click(button) 
