@@ -3,10 +3,10 @@ from module.base.button import Button, ButtonWrapper
 # This file was auto-generated, do not modify it manually. To generate:
 # ``` python -m dev_tools.button_extract ```
 
-Daily_Bonus = ButtonWrapper(
-    name='Daily_Bonus',
+DAILY_LOGIN_BONUS = ButtonWrapper(
+    name='DAILY_LOGIN_BONUS',
     cn=Button(
-        file='./assets/cn/login/popup/Daily_Bonus.png',
+        file='./assets/cn/login/popup/DAILY_LOGIN_BONUS.png',
         area=(559, 576, 716, 632),
         search=(539, 556, 736, 652),
         color=(207, 136, 7),
