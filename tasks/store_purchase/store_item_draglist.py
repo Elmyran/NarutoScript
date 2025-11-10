@@ -16,6 +16,7 @@ from tasks.store_purchase.survival_store.keywords import SurvivalStoreItem
 from tasks.store_purchase.assets.assets_store_purchase_survival_store import SURVIVAL_STORE_ITEM_SEARCH_AREA, SURVIVAL_STORE_SAFE_DRAG_AREA
 from tasks.store_purchase.assets.assets_store_purchase_score_store import SCORE_STORE_ITEM_SEARCH_AREA, SCORE_STORE_SAFE_DRAG_AREA
 class ItemDragList(DraggableList):
+    drag_vector = (0.4, 0.6)
     
     def __init__(self, name, keyword_class, ocr_class, search_button, check_row_order = True, active_color = ..., drag_direction = "right",safe_drag_area = SAFE_DRAG_AREA):
         self.safe_drag_area = safe_drag_area
