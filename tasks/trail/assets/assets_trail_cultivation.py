@@ -80,17 +80,6 @@ CULTIVATION_MOP_UP_REWARD_CLAIM = ButtonWrapper(
     ),
     en=None,
 )
-CULTIVATION_MOP_UP_RUNNING_EXIT = ButtonWrapper(
-    name='CULTIVATION_MOP_UP_RUNNING_EXIT',
-    cn=Button(
-        file='./assets/cn/trail/cultivation/CULTIVATION_MOP_UP_RUNNING_EXIT.png',
-        area=(1176, 0, 1280, 73),
-        search=(1156, 0, 1280, 93),
-        color=(58, 24, 11),
-        button=(1176, 0, 1280, 73),
-    ),
-    en=None,
-)
 CULTIVATION_MOP_UP_SUCCESS = ButtonWrapper(
     name='CULTIVATION_MOP_UP_SUCCESS',
     cn=Button(
