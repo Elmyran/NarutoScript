@@ -69,9 +69,9 @@ class BattleOrderClaim(UI):
         for _ in self.loop():
             if BATTLE_ORDER_CHECK.match_color(self.device.image):
                 break
-            if self.appear_then_click(BATTLE_ORDER_REWARD_CLAIM_SUCCESS,interval=0):
+            if self.appear_then_click(BATTLE_ORDER_REWARD_CLAIM_SUCCESS,interval=1):
                 continue
-            if self.appear_then_click(BATTLE_ORDER_CHARACTER_SELECT_CONFIRM):
+            if self.appear_then_click(BATTLE_ORDER_CHARACTER_SELECT_CONFIRM,interval=1):
                 continue
 
         # 通过中文名称查找对应的关键词对象

@@ -108,6 +108,20 @@ BATTLE_ORDER_REWARD_CLAIM_SUCCESS = ButtonWrapper(
             color=(168, 101, 14),
             button=(487, 65, 782, 138),
         ),
+        Button(
+            file='./assets/cn/battle_order/claim/BATTLE_ORDER_REWARD_CLAIM_SUCCESS.3.png',
+            area=(576, 559, 763, 616),
+            search=(556, 539, 783, 636),
+            color=(231, 165, 14),
+            button=(576, 559, 763, 616),
+        ),
+        Button(
+            file='./assets/cn/battle_order/claim/BATTLE_ORDER_REWARD_CLAIM_SUCCESS.4.png',
+            area=(542, 620, 724, 681),
+            search=(522, 600, 744, 701),
+            color=(218, 150, 14),
+            button=(542, 620, 724, 681),
+        ),
     ],
     en=None,
 )
