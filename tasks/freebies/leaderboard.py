@@ -1,3 +1,4 @@
+import datetime
 from module.base.timer import Timer
 from module.logger import logger
 from tasks.base.page import page_leader_board
@@ -7,6 +8,10 @@ import cv2
 
 class LeaderBoard(TaskUI):
     def run(self):
+        now = datetime.now() 
+        if now.hour<8:
+            logger.info(f'Not 8am yet, skip task')
+            return False
         if self.config.stored.LeaderBoardFinishCount.is_expired():
             self.config.stored.LeaderBoardFinishCount.clear()
         if self.config.stored.LeaderBoardFinishCount.is_full():
@@ -53,8 +58,5 @@ class LeaderBoard(TaskUI):
         mask = cv2.bitwise_and(mask1, mask2)  
         sum_ = cv2.countNonZero(mask)  
         return sum_ > count
-
-
-
 
 

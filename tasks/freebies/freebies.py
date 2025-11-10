@@ -45,8 +45,8 @@ class Freebies(ModuleBase):
             from tasks.freebies.leaderboard import LeaderBoard
             res=LeaderBoard(config=self.config, device=self.device).run()
             if not res:
-                five_minutes_later = datetime.now() + timedelta(minutes=5)
-                delay_time = nearest_future([delay_time, five_minutes_later])        
+                time = future_time("08:00")  
+                delay_time = nearest_future([delay_time, time])
         if self.config.Freebies_MonthlySignIn:
             logger.hr('Monthly Sign In', level=1)
             from tasks.freebies.monthly_sign_in import MonthlySignIn
