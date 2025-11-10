@@ -51,21 +51,21 @@ CULTIVATION_MOP_UP_DONE = ButtonWrapper(
     name='CULTIVATION_MOP_UP_DONE',
     cn=Button(
         file='./assets/cn/trail/cultivation/CULTIVATION_MOP_UP_DONE.png',
-        area=(452, 206, 544, 314),
-        search=(432, 186, 564, 334),
-        color=(97, 60, 31),
-        button=(452, 206, 544, 314),
+        area=(394, 338, 894, 378),
+        search=(374, 318, 914, 398),
+        color=(77, 79, 82),
+        button=(394, 338, 894, 378),
     ),
     en=None,
 )
-CULTIVATION_MOP_UP_RESET_TIMES = ButtonWrapper(
-    name='CULTIVATION_MOP_UP_RESET_TIMES',
+CULTIVATION_MOP_UP_REMAIN_TIMES = ButtonWrapper(
+    name='CULTIVATION_MOP_UP_REMAIN_TIMES',
     cn=Button(
-        file='./assets/cn/trail/cultivation/CULTIVATION_MOP_UP_RESET_TIMES.png',
-        area=(543, 651, 583, 692),
-        search=(523, 631, 603, 712),
-        color=(24, 26, 18),
-        button=(543, 651, 583, 692),
+        file='./assets/cn/trail/cultivation/CULTIVATION_MOP_UP_REMAIN_TIMES.png',
+        area=(528, 476, 730, 513),
+        search=(508, 456, 750, 533),
+        color=(39, 50, 38),
+        button=(528, 476, 730, 513),
     ),
     en=None,
 )
@@ -135,25 +135,36 @@ CULTIVATION_RESET_CONFIRM = ButtonWrapper(
     ),
     en=None,
 )
+CULTIVATION_RESET_COUNT = ButtonWrapper(
+    name='CULTIVATION_RESET_COUNT',
+    cn=Button(
+        file='./assets/cn/trail/cultivation/CULTIVATION_RESET_COUNT.png',
+        area=(431, 652, 575, 684),
+        search=(411, 632, 595, 704),
+        color=(84, 86, 83),
+        button=(431, 652, 575, 684),
+    ),
+    en=None,
+)
 CULTIVATION_RESET_MOP_UP = ButtonWrapper(
     name='CULTIVATION_RESET_MOP_UP',
     cn=Button(
         file='./assets/cn/trail/cultivation/CULTIVATION_RESET_MOP_UP.png',
-        area=(522, 263, 789, 327),
-        search=(502, 243, 809, 347),
-        color=(29, 27, 20),
+        area=(565, 516, 720, 568),
+        search=(545, 496, 740, 588),
+        color=(218, 145, 15),
         button=(565, 516, 720, 568),
     ),
     en=None,
 )
-CULTIVATION_RESET_MOP_UP_RUNNING = ButtonWrapper(
-    name='CULTIVATION_RESET_MOP_UP_RUNNING',
+CULTIVATION_RESET_MOP_UP_FINISH_NOW = ButtonWrapper(
+    name='CULTIVATION_RESET_MOP_UP_FINISH_NOW',
     cn=Button(
-        file='./assets/cn/trail/cultivation/CULTIVATION_RESET_MOP_UP_RUNNING.png',
-        area=(539, 275, 663, 321),
-        search=(519, 255, 683, 341),
-        color=(44, 44, 43),
-        button=(539, 275, 663, 321),
+        file='./assets/cn/trail/cultivation/CULTIVATION_RESET_MOP_UP_FINISH_NOW.png',
+        area=(556, 518, 711, 570),
+        search=(536, 498, 731, 590),
+        color=(203, 138, 24),
+        button=(556, 518, 711, 570),
     ),
     en=None,
 )

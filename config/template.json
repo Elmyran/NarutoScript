@@ -274,7 +274,8 @@
       "ServerUpdate": "05:00"
     },
     "CultivationRoad": {
-      "ClearRedDot": true
+      "ClearRedDot": true,
+      "CultivationFinish": false
     }
   },
   "Akatsuki": {

@@ -492,6 +492,9 @@ CultivationRoad:
   ClearRedDot:
     type: checkbox
     value:  true
+  CultivationFinish:
+    type: checkbox
+    value: False
 PanRen:
   SecondPassword:
     type: input

@@ -750,6 +750,10 @@
     "ClearRedDot": {
       "name": "清除红点",
       "help": "自动点击修行宝箱"
+    },
+    "CultivationFinish": {
+      "name": "CultivationRoad.CultivationFinish.name",
+      "help": "CultivationRoad.CultivationFinish.help"
     }
   },
   "PanRen": {
