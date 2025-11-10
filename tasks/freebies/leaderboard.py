@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 from module.base.timer import Timer
 from module.logger import logger
 from tasks.base.page import page_leader_board
@@ -8,7 +8,7 @@ import cv2
 
 class LeaderBoard(TaskUI):
     def run(self):
-        now = datetime.now() 
+        now =datetime.now() 
         if now.hour<8:
             logger.info(f'Not 8am yet, skip task')
             return False
