@@ -752,8 +752,8 @@
       "help": "自动点击修行宝箱"
     },
     "CultivationFinish": {
-      "name": "CultivationRoad.CultivationFinish.name",
-      "help": "CultivationRoad.CultivationFinish.help"
+      "name": "20金币完成",
+      "help": ""
     }
   },
   "PanRen": {
