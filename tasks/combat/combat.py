@@ -19,12 +19,13 @@ class Combat(GameControl):
         try :
             self.device.stuck_timer=Timer(timeout).start()
             self._click_script(
-                      end_check,
-                      skill,
-                      scroll,
-                      psychic,
-                      timeout,
-                      end_confirm,
+                    end_check=end_check,
+                    end_confirm=end_confirm,
+                    skill=skill,
+                    scroll=scroll,
+                    psychic=psychic,
+                    timeout=timeout
+                   
                       )
         finally:
             self.up_all()
