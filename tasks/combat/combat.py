@@ -49,7 +49,7 @@ class Combat(GameControl):
                 logger.info('Combat end: '+end) 
                 return True
             if self._is_round_start():
-                self.single_round_combat(round_check, skill, scroll, psychic, timeout)
+                self.single_round_combat(end_check=round_check, skill=skill, scroll=scroll, psychic=psychic, timeout=timeout)
                 continue
 
     def _click_script(self,
