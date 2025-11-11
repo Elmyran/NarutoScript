@@ -54,7 +54,7 @@ class Freebies(ModuleBase):
         if self.config.Freebies_ActivityReward:
             logger.hr('Daily Reward', level=1)
             from tasks.freebies.activityreward import ActivityRewardClaim
-            ActivityRewardClaim(config=self.config, device=self.device).handle_daily_reward()
+            ActivityRewardClaim(config=self.config, device=self.device).run()
         
         self.config.task_delay(target=delay_time)
         self.config.task_stop()

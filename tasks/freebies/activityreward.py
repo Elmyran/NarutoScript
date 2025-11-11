@@ -8,7 +8,6 @@ from tasks.freebies.assets.assets_freebies_daily_weekly import  *
 
 class ActivityRewardClaim(UI):
     progress=0
-    
     def run(self):
         self.device.click_record_clear()
         self.handle_daily_reward()
