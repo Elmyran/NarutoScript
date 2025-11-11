@@ -35,7 +35,7 @@ class MissionDurationOcr(ONNXPaddleOcr):
     
         logger.attr(name=f'{self.name} matched', text=results)  
         return results
-class MissionDigit(ONNXPaddleOcr,Digit):  
+class MissionDigit(ONNXPaddleOcr,Digit,OcrWhiteLetterOnComplexBackground):  
     
     def filter_detected(self, result: BoxedResult) -> bool:  
         """  
@@ -44,10 +44,10 @@ class MissionDigit(ONNXPaddleOcr,Digit):
         # 只保留包含数字的结果  
         return bool(re.search(r'\d', result.ocr_text))
     def pre_process(self, image):
-        image = cv2.resize(image, (800, 600))
+        image = cv2.resize(image, (2560, 1920))
     
 
-        return image
+        return OcrWhiteLetterOnComplexBackground.pre_process(self, image)
 
     def format_result(self, result):  
 
