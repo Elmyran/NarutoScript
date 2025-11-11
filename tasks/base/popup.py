@@ -7,6 +7,7 @@ from tasks.base.assets.assets_base_popup import *
 import cv2
 import numpy as np
 
+from tasks.login.assets.assets_login_popup import *
 
 
 class PopupHandler(ModuleBase):
@@ -37,6 +38,15 @@ class PopupHandler(ModuleBase):
             return True   
         if self.appear_then_click(COPPER_COINS_SHORTAGE,interval=interval):
             return True
+        if self.appear_then_click(GAME_MAIN_ANNOUNCEMENT,interval):
+            return True
+        if self.appear_then_click(DAILY_LOGIN_BONUS,interval):
+            return True
+        if self.appear_then_click(RANK_UP,interval):
+            return True
+              
+                
+        
         
         return False
     def handle_popup_page(self,interval=5) -> bool:

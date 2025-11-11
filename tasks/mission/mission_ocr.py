@@ -1,10 +1,10 @@
 from module.logger import logger
-from module.ocr.ocr import  Ocr, OcrResultButton, OcrWhiteLetterOnComplexBackground
+from module.ocr.ocr import  Digit, OcrResultButton, OcrWhiteLetterOnComplexBackground
 import cv2
 from module.ocr.onnxocr.onnx_paddleocr import ONNXPaddleOcr
-
-
-class MissionOcr(Ocr):
+from pponnxcr.predict_system import BoxedResult
+import re
+class MissionDurationOcr(ONNXPaddleOcr):
     def after_process(self, result):
         """对OCR结果进行修正"""
         result = super().after_process(result)
@@ -13,7 +13,7 @@ class MissionOcr(Ocr):
         
         return result
     def matched_ocr(self, image, keyword_classes, direct_ocr=False, partial_match=False) -> list[OcrResultButton]:  
-        results = self.detect_and_ocr(image, direct_ocr=direct_ocr)  
+        results = self.ocr_multiple_lines(image, direct_ocr=direct_ocr)  
         
         if partial_match:  
             matched_results = []  
@@ -35,14 +35,23 @@ class MissionOcr(Ocr):
     
         logger.attr(name=f'{self.name} matched', text=results)  
         return results
-class MissionDigit(ONNXPaddleOcr,OcrWhiteLetterOnComplexBackground):  
-    min_box = (1, 1)  # 确保小数字也能被检测到  
-      
-    def pre_process(self, image):
-        image = cv2.resize(image, (640, 480))
+class MissionDigit(ONNXPaddleOcr,Digit):  
     
-        result = OcrWhiteLetterOnComplexBackground.pre_process(self, image)
-        return result
+    def filter_detected(self, result: BoxedResult) -> bool:  
+        """  
+        过滤掉不包含数字的 OCR 结果  
+        """  
+        # 只保留包含数字的结果  
+        return bool(re.search(r'\d', result.ocr_text))
+    def pre_process(self, image):
+        image = cv2.resize(image, (800, 600))
+    
+
+        return image
+
+    def format_result(self, result):  
+
+        return Digit.format_result(self, result)  
     
     
 class MissionWhiteLetterOcr(ONNXPaddleOcr,OcrWhiteLetterOnComplexBackground):

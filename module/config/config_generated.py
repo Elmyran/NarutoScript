@@ -136,6 +136,7 @@ class GeneratedConfig:
 
     # Group `CultivationRoad`
     CultivationRoad_ClearRedDot = True
+    CultivationRoad_CultivationFinish = False
 
     # Group `PanRen`
     PanRen_SecondPassword = None

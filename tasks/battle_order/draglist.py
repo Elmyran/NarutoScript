@@ -8,16 +8,15 @@ from tasks.battle_order.assets.assets_battle_order_claim import BATTLE_ORDER_CHA
 class DraggableCharacterTabList(DraggableList):
     def is_row_selected(self, button, main):
         """检测标签页是否被选中且页面已加载"""
-        # 检查页面是否已加载（这是最重要的判断条件）
         check_box_area = (
             button.area[2] ,  
-            button.area[1] ,  
+            button.area[1]-20 ,  
             button.area[2] + 200, 
             button.area[3]  +40 
         )
         logger.info(f"selected check area:{check_box_area}")
         BATTLE_ORDER_CHECK_STATUS.load_search(check_box_area)
-        if main.appear(BATTLE_ORDER_CHECK_STATUS):
+        if main.appear(BATTLE_ORDER_CHECK_STATUS,similarity=0.6):
             return True
         return False
 

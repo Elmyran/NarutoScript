@@ -97,7 +97,7 @@ class ONNXPaddleOcr:
             if not direct_ocr:
                 result.box = area_offset(result.box, self.button.area[:2])
             processed_results.append(result)
-        
+        processed_results = [result for result in processed_results if self.filter_detected(result)]
         # 过滤和合并结果
         filtered_results = [result for result in processed_results if self.filter_detected(result)]
         #merged_results = merge_buttons(filtered_results, thres_x=self.merge_thres_x, thres_y=self.merge_thres_y)

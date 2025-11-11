@@ -750,6 +750,10 @@
     "ClearRedDot": {
       "name": "CultivationRoad.ClearRedDot.name",
       "help": "CultivationRoad.ClearRedDot.help"
+    },
+    "CultivationFinish": {
+      "name": "CultivationRoad.CultivationFinish.name",
+      "help": "CultivationRoad.CultivationFinish.help"
     }
   },
   "PanRen": {

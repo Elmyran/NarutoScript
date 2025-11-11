@@ -107,13 +107,16 @@ class SkillContact:
 
         
     def up_all(self):  
-        builders=self.builders
         """抬起所有按下的技能"""  
-        for skill_name in list(self._downed_skills):  
-            builder = builders[skill_name]  
-            builder.up().commit()  
-            builder.send()  
-        self._downed_skills.clear()  
+        def _up_all(_self):  
+            builders=self.builders
+            for skill_name in list(self._downed_skills):  
+                builder = builders[skill_name]  
+                builder.up().commit()  
+                builder.send()  
+            self._downed_skills.clear()  
+        self.with_retry(_up_all)
+       
       
     def with_retry(self, func):  
         method = self.main.config.Emulator_ControlMethod 

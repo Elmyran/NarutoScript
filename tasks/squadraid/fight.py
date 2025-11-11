@@ -30,6 +30,11 @@ class SquadRaidFight(TaskUI):
             self._squad_raid_match()
         elif self.config.SquadRaid_SquadRaidFight == 'SquadSupport':
             self._squad_raid_support()
+        try:
+            self.device.stuck_timer=Timer(120,count=120).start()
+            self.waiting_fight_end()
+        finally:
+            self.device.stuck_timer=Timer(60,count=60).start()
         return True
     def have_sufficient_times(self):
         ocr=DigitCounter(SQUAD_RAID_TIMES_COUNTER)
@@ -67,14 +72,17 @@ class SquadRaidFight(TaskUI):
                 self.device.click(SQUAD_RAID_MATCH_BUTTON)
                 continue
             if self.appear(SQUAD_RAID_FIGHTING):
-                continue
+                break
             if self.appear(SQUAD_RAID_FIGHT_SUCCESS):
                 break
+        
+    def waiting_fight_end(self):
         for _ in self.loop():
             if self.appear(SQUAD_RAID_CHECK):
-                return True
+                break
             if self.appear_then_click(SQUAD_RAID_FIGHT_SUCCESS,interval=1):
                 continue
+        return True
     def _squad_raid_support(self):
         logger.info('SquadRaidMethod:Support')
         self.ui_ensure(page_squad_help_battle)
@@ -86,10 +94,7 @@ class SquadRaidFight(TaskUI):
     def _start_fight_with_support(self):
         self.device.click_record_remove(HELP_BATTLE_START_FIGHT)
         self.device.click_record_remove(SQUAD_RAID_FIGHT_SUCCESS)
-        time=Timer(60,60).start()
         for _ in self.loop():
-            if time.reached():
-                raise GameStuckError("SQUAD_RAID_FIGHT_STUCK")
             if self.appear(COMBAT_SUPPORT_SAME_CHARACTER_NOTIFY):
                 SUPPORT_LIST.select_next_support_character(self)
             if self.appear(CODE_SECOND_PASSWORD):
@@ -101,7 +106,7 @@ class SquadRaidFight(TaskUI):
             if self.appear_then_click(HELP_BATTLE_START_FIGHT,interval=1):
                 continue
             if self.appear(SQUAD_RAID_FIGHTING):
-                continue
+                break
             if self.appear_then_click(SQUAD_RAID_FIGHT_SUCCESS,interval=1):
                 continue
             if self.appear(SQUAD_RAID_CHECK):

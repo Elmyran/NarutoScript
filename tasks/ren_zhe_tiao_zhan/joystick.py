@@ -196,6 +196,10 @@ class GameControl(TaskUI):
         if self._skill_contact is None:  
             return
         self._skill_contact.press_up(buttons)
+    def up_all(self):
+        if self._skill_contact is None:  
+            return
+        self._skill_contact.up_all()
 
     def stop_long_press(self):
         with SkillContact(self) as contact:  

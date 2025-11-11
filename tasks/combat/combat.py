@@ -10,6 +10,7 @@ class Combat(GameControl):
     
     def single_round_combat(self,
                       end_check=DUEL_FIGHT_END,
+                      end_confirm=None,                      
                       skill=True,
                       scroll=True,
                       psychic=True,
@@ -18,13 +19,16 @@ class Combat(GameControl):
         try :
             self.device.stuck_timer=Timer(timeout).start()
             self._click_script(
-                      end_check,
-                      skill,
-                      scroll,
-                      psychic,
-                      timeout
+                    end_check=end_check,
+                    end_confirm=end_confirm,
+                    skill=skill,
+                    scroll=scroll,
+                    psychic=psychic,
+                    timeout=timeout
+                   
                       )
         finally:
+            self.up_all()
             self.device.stuck_timer=Timer(60,count=60).start()
         return True
     def multi_round_combat(self,
@@ -45,11 +49,12 @@ class Combat(GameControl):
                 logger.info('Combat end: '+end) 
                 return True
             if self._is_round_start():
-                self.single_round_combat(round_check, skill, scroll, psychic, timeout)
+                self.single_round_combat(end_check=round_check, skill=skill, scroll=scroll, psychic=psychic, timeout=timeout)
                 continue
 
     def _click_script(self,
                       end_check,
+                      end_confirm,
                       skill,
                       scroll,
                       psychic,
@@ -63,13 +68,23 @@ class Combat(GameControl):
         if psychic:
             buttons.append(CHARACTER_PSYCHIC)
         start_time = time.time()
+        press_interval=Timer(10).start()
         self.press_down(buttons)
         for _ in self.loop():
+            if press_interval.reached():
+                self.press_up(buttons)
+                self.press_down(buttons)
+                press_interval.reset()
 
             if time.time() - start_time > timeout or self.appear(end_check):
                 logger.info("click_script end_check")
                 self.press_up(buttons)
                 break
+            if end_confirm:
+                if self.appear_then_click(end_confirm,interval=1):
+                    logger.info("click_script end_cofirm")
+                    self.press_up(buttons)
+                    break
             if self._is_exception():
                 logger.info("click_script exception")
                 self.press_up(buttons)

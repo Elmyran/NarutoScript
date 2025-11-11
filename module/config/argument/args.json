@@ -1132,6 +1132,10 @@
       "ClearRedDot": {
         "type": "checkbox",
         "value": true
+      },
+      "CultivationFinish": {
+        "type": "checkbox",
+        "value": false
       }
     }
   },

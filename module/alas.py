@@ -299,17 +299,17 @@ class AzurLaneAutoScript:
             # Init device and change server
             _ = self.device
             self.device.config = self.config
-            if self.config.pending_task: 
-                from module.ocr.models import OCR_MODEL
-                OCR_MODEL.early_model_init()
-                from module.ocr.onnxmodels import CUSTOM_OCR_MODEL
-                CUSTOM_OCR_MODEL.early_model_init() 
             # Skip first restart
             if self.is_first_task and task == 'Restart':
                 logger.info('Skip task `Restart` at scheduler start')
                 self.config.task_delay(server_update=True)
                 del_cached_property(self, 'config')
                 continue
+            if self.config.pending_task:
+                from module.ocr.models import OCR_MODEL
+                OCR_MODEL.early_model_init()
+                from module.ocr.onnxmodels import CUSTOM_OCR_MODEL
+                CUSTOM_OCR_MODEL.early_model_init() 
             
             # Run
             logger.info(f'Scheduler: Start task `{task}`')

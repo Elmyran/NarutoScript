@@ -2,9 +2,7 @@ import copy
 import operator
 import threading
 from datetime import datetime, timedelta
-
 import pywebio
-
 from module.base.decorator import cached_property, del_cached_property
 from module.base.filter import Filter
 from module.config.config_generated import GeneratedConfig
@@ -17,7 +15,6 @@ from module.config.utils import DEFAULT_TIME, dict_to_kv, filepath_config, path_
 from module.config.watcher import ConfigWatcher
 from module.exception import RequestHumanTakeover, ScriptError
 from module.logger import logger
-from tasks.mission.priority import TaskPriority, MissionTask
 
 
 class TaskEnd(Exception):
@@ -568,24 +565,7 @@ class AzurLaneConfig(ConfigUpdater, ManualConfig, GeneratedConfig, ConfigWatcher
         backup = ConfigBackup(config=self)
         backup.cover(**kwargs)
         return backup
-    def _get_priority_manager(self):
-        """获取或创建优先级管理器"""
-        if not hasattr(self, '_priority_manager'):
-            self._priority_manager = MissionPriorityManager()
-            # 从配置文件加载已有优先级
-            self._load_priority_from_config()
-        return self._priority_manager
-
-    def _load_priority_from_config(self):
-        """从配置文件加载优先级设置"""
-        priority_config = self.config.data.get('Mission', {}).get('Priority', {})
-        for priority_name, tasks in priority_config.items():
-            priority = TaskPriority[priority_name]
-            for task_data in tasks:
-                task = MissionTask(**task_data)
-                self._priority_manager.add_task(task)
-
-
+   
 pywebio.output.Output = OutputConfig
 pywebio.pin.Output = OutputConfig
 
