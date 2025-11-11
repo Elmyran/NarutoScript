@@ -1,10 +1,4 @@
-
-
-from calendar import c
-from re import S
 from module.base.timer import Timer
-
-from module.ocr.ocr import Digit
 from tasks.base.page import page_battle_order
 from tasks.base.ui import UI
 from tasks.battle_order.assets.assets_battle_order_reward import *
@@ -48,7 +42,6 @@ class BattleOrderWeeklyReward(UI):
                 for i, threshold in enumerate(progress):  
                     if (self.current_progress < threshold <= current_points):  
                         claimable.append(checked_buttons[i])
-                        print(f'claimable: {threshold}')
                 if claimable:
                         self.device.click(claimable[0])
                         click_timer.reset()

@@ -916,6 +916,28 @@
       "help": "AccountStorage.AccountName.help"
     }
   },
+  "ActivityProgressStorage": {
+    "_info": {
+      "name": "ActivityProgressStorage._info.name",
+      "help": "ActivityProgressStorage._info.help"
+    },
+    "ActivityProgressToday": {
+      "name": "ActivityProgressStorage.ActivityProgressToday.name",
+      "help": "ActivityProgressStorage.ActivityProgressToday.help"
+    },
+    "ActivityProgressTodayCount": {
+      "name": "ActivityProgressStorage.ActivityProgressTodayCount.name",
+      "help": "ActivityProgressStorage.ActivityProgressTodayCount.help"
+    },
+    "ActivityProgressWeekly": {
+      "name": "ActivityProgressStorage.ActivityProgressWeekly.name",
+      "help": "ActivityProgressStorage.ActivityProgressWeekly.help"
+    },
+    "ActivityProgressWeeklyCount": {
+      "name": "ActivityProgressStorage.ActivityProgressWeeklyCount.name",
+      "help": "ActivityProgressStorage.ActivityProgressWeeklyCount.help"
+    }
+  },
   "Gui": {
     "Aside": {
       "Install": "Install",

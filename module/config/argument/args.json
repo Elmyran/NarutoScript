@@ -838,6 +838,32 @@
         "type": "textarea",
         "value": "AdvancedSummoningScrollFragment > ScoreStoreChest"
       }
+    },
+    "ActivityProgressStorage": {
+      "ActivityProgressToday": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredActivityProgressToday"
+      },
+      "ActivityProgressTodayCount": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredActivityProgressTodayCount"
+      },
+      "ActivityProgressWeekly": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredActivityProgressWeekly"
+      },
+      "ActivityProgressWeeklyCount": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredActivityProgressWeeklyCount"
+      }
     }
   },
   "BattleOrder": {
