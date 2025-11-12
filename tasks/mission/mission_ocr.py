@@ -56,6 +56,7 @@ class MissionDigit(ONNXPaddleOcr,Digit,OcrWhiteLetterOnComplexBackground):
     
 class MissionWhiteLetterOcr(ONNXPaddleOcr,OcrWhiteLetterOnComplexBackground):
     def pre_process(self, image):
+        image = cv2.resize(image, (2560, 1920))
         
       
 
