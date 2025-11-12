@@ -1,8 +1,14 @@
 from module.base.base import ModuleBase
+from module.logger import logger
 
 
 class RenZheTiaoZhan(ModuleBase):
     def run(self):
+        if self.config.stored.MiJingTicket.value == 0:
+            logger.info('No MiJing  tickets available, task will stop')
+            self.config.task_delay(server_update=True)
+            self.config.task_stop()
+            return True
         pre_count=self.config.stored.MiJingCount.value
         from tasks.ren_zhe_tiao_zhan.mi_jing import MiJing
         MiJing(config=self.config,device=self.device).run()

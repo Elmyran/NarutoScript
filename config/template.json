@@ -146,7 +146,8 @@
       "ServerUpdate": "05:00"
     },
     "MiJingCount": {
-      "MiJingFightCount": 5
+      "MiJingFightCount": 5,
+      "MiJingTicket": {}
     },
     "MiJingType": {
       "LuoYan": true,

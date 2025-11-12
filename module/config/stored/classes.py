@@ -412,5 +412,8 @@ class StoredActivityProgressWeeklyCount(StoredCounter,StoredExpiredAtMonday0500)
 class StoredActivityProgressTodayCount(StoredCounter,StoredExpiredAt0500):
     value = 0
     FIXED_TOTAL = 1
+class StoredMiJingTicket(StoredCounter,StoredExpiredAt0500):
+    value = 5
+    FIXED_TOTAL = 35
    
     

@@ -147,6 +147,19 @@
     "order": 0,
     "color": "#777777"
   },
+  "MiJingTicket": {
+    "name": "MiJingTicket",
+    "path": "MiJing.MiJingCount.MiJingTicket",
+    "i18n": "MiJingCount.MiJingTicket.name",
+    "stored": "StoredMiJingTicket",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 35,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
   "MiJingCount": {
     "name": "MiJingCount",
     "path": "MiJing.MiJingStorage.MiJingCount",

@@ -187,6 +187,11 @@ MiJingCount:
   MiJingFightCount:
     type: input
     value:  5
+  MiJingTicket:
+    stored: StoredMiJingTicket
+    value: {}
+    display: hide
+
 
 
 

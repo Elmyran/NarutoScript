@@ -108,3 +108,4 @@ class MiJing(TaskUI):
     def ticket_recognition(self):
         ocr=MiJingDigit(MI_JING_REMAIN_CHALLENGE_TICKET)
         self.ticket=ocr.ocr_single_line(self.device.image)
+        self.config.stored.MiJingTicket.set(self.ticket)

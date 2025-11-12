@@ -535,6 +535,12 @@
       "MiJingFightCount": {
         "type": "input",
         "value": 5
+      },
+      "MiJingTicket": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredMiJingTicket"
       }
     },
     "MiJingType": {

@@ -412,6 +412,10 @@
     "MiJingFightCount": {
       "name": "目标场次",
       "help": ""
+    },
+    "MiJingTicket": {
+      "name": "秘境挑战券",
+      "help": ""
     }
   },
   "Freebies": {
