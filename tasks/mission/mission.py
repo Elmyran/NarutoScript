@@ -105,13 +105,13 @@ class Mission(TaskUI):
             if THE_TASKBAR_IS_FULL.match_template(self.device.image):  
                 logger.info('Taskbar is full')  
                 return False  
-            if CHARACTER_SELECTED.match_template(self.device.image,similarity=0.7,direct_match=True):  
+            if CHARACTER_SELECTED.match_template(self.device.image,similarity=0.6,direct_match=True):  
                 if self.appear_then_click(TASK_ACCEPT, interval=1):  
                     continue
             if self.appear(MISSION_CHECK):  
                 logger.info('Mission check appeared')  
                 return True  
-            if CHARACTER_UNSELECTED.match_template(self.device.image, similarity=0.7,direct_match=True):
+            if CHARACTER_UNSELECTED.match_template(self.device.image, similarity=0.6,direct_match=True):
                 if self.appear(CHARACTER_SELECTED_AUTO):
                     select_auto=True
                     if character_auto_select_interval.reached():  

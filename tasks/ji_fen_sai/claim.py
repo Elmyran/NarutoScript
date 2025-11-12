@@ -16,13 +16,14 @@ class JiFenSaiClaim(TaskUI):
 
         return True
     def _claim_daily_reward(self):
-        time=Timer(30,count=30).start()
+        time=Timer(1,count=3)
         for _ in self.loop():
             if time.reached():
-                raise GameStuckError('JI Fen Sai Claim Stuck')
-            if self.match_template_color(JI_FEN_SAI_CHECK):
                 break
             if self.appear_then_click(JI_FEN_SAI_REWARD,interval=1):
+                time.reset()
                 continue
+            
+            
 
 
