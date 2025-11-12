@@ -45,11 +45,14 @@ class Mission(TaskUI):
             self._task_refresh()
         with self.config.multi_set():
             self.config.stored.MissionAccept.write_missions(self.tasks)
-    def _task_select(self,accepted_tasks):
+            self.config.stored.MissionAccept.value=self.value
+    def _task_select(self):
         select=DigitCounter(TASK_SELECT_REAMIN_TIMES)
         current,remain,total=select.ocr_single_line(self.device.image)
         if remain==total:
             return True
+        # 清空任务列表
+        self.tasks=[]
         self.value=remain
         tasks=self._tasks_recognition()
         tasks=self.sort_tasks(tasks)
@@ -68,9 +71,7 @@ class Mission(TaskUI):
                 break
             else:
                 self.value+=1
-                accepted_tasks.append(task.time)
-        with self.config.multi_set():
-            self.config.stored.MissionAccept.value=self.value
+                self.tasks.append(task.time)           
         return True
     def _single_task_select(self,task):
         click_interval=Timer(1).start()

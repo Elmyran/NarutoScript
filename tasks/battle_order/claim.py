@@ -6,11 +6,10 @@ from tasks.base.ui import UI
 from tasks.battle_order.assets.assets_battle_order_claim import *
 import cv2
 from tasks.battle_order.draglist import *
-from tasks.base.character_keyword import ACharacterTab,  OcrCharacterTab, QingNianShuiMen, SCharacterTab
+from tasks.base.character_keyword import ACharacterTab,  OcrCharacterTab,  SCharacterTab
 from tasks.battle_order.keywords import ExperienceCard
 from tasks.battle_order.switch import BATTLE_ORDER_TAB
 from module.base.button import ClickButton  
-from datetime import datetime  
 import numpy as np
 class BattleOrderClaim(UI):
     def handle_battle_order_claim(self):
