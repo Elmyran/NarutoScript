@@ -78,10 +78,10 @@ MI_JING_REMAIN_CHALLENGE_TICKET = ButtonWrapper(
     name='MI_JING_REMAIN_CHALLENGE_TICKET',
     cn=Button(
         file='./assets/cn/ren_zhe_tiao_zhan/MI_JING_REMAIN_CHALLENGE_TICKET.png',
-        area=(450, 621, 534, 673),
-        search=(430, 601, 554, 693),
-        color=(51, 44, 39),
-        button=(450, 621, 534, 673),
+        area=(495, 623, 534, 668),
+        search=(475, 603, 554, 688),
+        color=(31, 30, 20),
+        button=(495, 623, 534, 668),
     ),
     en=None,
 )

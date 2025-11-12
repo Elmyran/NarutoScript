@@ -1,3 +1,4 @@
+from re import M
 from tasks.ren_zhe_tiao_zhan.ocr import MiJingDigit
 from tasks.base.assets.assets_base_page import FIGHT_CLOSE_CONFIRM, FIGHT_CLOSE
 from tasks.base.page import  page_mi_jing_room
@@ -14,11 +15,7 @@ class MiJing(TaskUI):
         self.pre_count=self.config.stored.MiJingCount.value
         self.device.click_record_clear()
         self.handle_mi_jing()
-        if (self.config.stored.MiJingCount.value >= 6 > self.pre_count) or (
-                self.config.stored.MiJingCount.value >= 15 > self.pre_count) or (
-                self.config.stored.MiJingCount.value >= 21 > self.pre_count):
-            from tasks.ren_zhe_tiao_zhan.mi_jing_box_claim import MiJingBoxClaim
-            MiJingBoxClaim(config=self.config,device=self.device).handle_mi_jing_box_claim()
+       
 
     def handle_mi_jing(self):
         self.ui_ensure(page_mi_jing_room)
@@ -106,5 +103,3 @@ class MiJing(TaskUI):
     def ticket_recognition(self):
         ocr=MiJingDigit(MI_JING_REMAIN_CHALLENGE_TICKET)
         self.ticket=ocr.ocr_single_line(self.device.image)
-
-
