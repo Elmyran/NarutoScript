@@ -618,6 +618,24 @@ AccountStorage:
     stored: StoredAccountName
     value: ''
     display: hide
+ActivityProgressStorage:
+  ActivityProgressToday:
+    stored: StoredActivityProgressToday
+    value: {}
+    display: hide
+  ActivityProgressTodayCount:
+    stored: StoredActivityProgressTodayCount
+    value: {}
+    display: hide
+  ActivityProgressWeekly:
+    stored: StoredActivityProgressWeekly
+    value: {}
+    display: hide
+  ActivityProgressWeeklyCount:
+    stored: StoredActivityProgressWeeklyCount
+    value: {}
+    display: hide
+
 
 # ==================== Activity ====================
 

@@ -229,6 +229,12 @@
       "ScoreStoreChestPurchaseTimes": 1,
       "ScoreStoreExchangeFilter": "preset",
       "CustomScoreStoreFilter": "AdvancedSummoningScrollFragment > ScoreStoreChest"
+    },
+    "ActivityProgressStorage": {
+      "ActivityProgressToday": {},
+      "ActivityProgressTodayCount": {},
+      "ActivityProgressWeekly": {},
+      "ActivityProgressWeeklyCount": {}
     }
   },
   "BattleOrder": {

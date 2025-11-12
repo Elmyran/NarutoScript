@@ -3,6 +3,17 @@ from module.base.button import Button, ButtonWrapper
 # This file was auto-generated, do not modify it manually. To generate:
 # ``` python -m dev_tools.button_extract ```
 
+WEEKLY_ACTIVITY_PROGRESS = ButtonWrapper(
+    name='WEEKLY_ACTIVITY_PROGRESS',
+    cn=Button(
+        file='./assets/cn/freebies/daily/weekly/WEEKLY_ACTIVITY_PROGRESS.png',
+        area=(966, 661, 1090, 705),
+        search=(946, 641, 1110, 720),
+        color=(71, 79, 92),
+        button=(966, 661, 1090, 705),
+    ),
+    en=None,
+)
 WEEKLY_CHECK = ButtonWrapper(
     name='WEEKLY_CHECK',
     cn=Button(

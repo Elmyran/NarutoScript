@@ -400,6 +400,17 @@ class StoredSquadRaidFinishCount(StoredCounter,StoredExpiredAt0500):
 class StoredDuelExtendedScore(StoredCounter,StoredExpiredAtMonday0500):
     value = 0
     FIXED_TOTAL = 2100
-
+class StoredActivityProgressToday(StoredCounter,StoredExpiredAt0500):
+    value = 0
+    total = 100
+class StoredActivityProgressWeekly(StoredCounter,StoredExpiredAtMonday0500):
+    value = 0
+    total = 500
+class StoredActivityProgressWeeklyCount(StoredCounter,StoredExpiredAtMonday0500):
+    value = 0
+    FIXED_TOTAL = 1
+class StoredActivityProgressTodayCount(StoredCounter,StoredExpiredAt0500):
+    value = 0
+    FIXED_TOTAL = 1
    
     

@@ -916,6 +916,28 @@
       "help": "AccountStorage.AccountName.help"
     }
   },
+  "ActivityProgressStorage": {
+    "_info": {
+      "name": "活跃度",
+      "help": ""
+    },
+    "ActivityProgressToday": {
+      "name": "日活跃度",
+      "help": ""
+    },
+    "ActivityProgressTodayCount": {
+      "name": "日活跃奖励领取次数",
+      "help": ""
+    },
+    "ActivityProgressWeekly": {
+      "name": "周活跃度",
+      "help": ""
+    },
+    "ActivityProgressWeeklyCount": {
+      "name": "周活跃奖励领取次数",
+      "help": ""
+    }
+  },
   "Gui": {
     "Aside": {
       "Install": "安装",

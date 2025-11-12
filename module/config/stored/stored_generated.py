@@ -1,5 +1,9 @@
 from module.config.stored.classes import (
     StoredAccountName,
+    StoredActivityProgressToday,
+    StoredActivityProgressTodayCount,
+    StoredActivityProgressWeekly,
+    StoredActivityProgressWeeklyCount,
     StoredBase,
     StoredBattleFieldCount,
     StoredBattleOrderActivityPoints,
@@ -60,6 +64,10 @@ class StoredGenerated:
     PrivilegPackageFinishCount = StoredPrivilegeWeeklyPackageClaimCount("Freebies.PrivilegeWeeklyPackage.PrivilegPackageFinishCount")
     ZhaoCaiFinishCount = StoredZhaoCaiFinishCount("Freebies.ZhaoCai.ZhaoCaiFinishCount")
     PrivilegeStoreFinishCount = StoredPrivilegeStoreFinishCount("StorePurchase.PrivilegeStore.PrivilegeStoreFinishCount")
+    ActivityProgressToday = StoredActivityProgressToday("StorePurchase.ActivityProgressStorage.ActivityProgressToday")
+    ActivityProgressTodayCount = StoredActivityProgressTodayCount("StorePurchase.ActivityProgressStorage.ActivityProgressTodayCount")
+    ActivityProgressWeekly = StoredActivityProgressWeekly("StorePurchase.ActivityProgressStorage.ActivityProgressWeekly")
+    ActivityProgressWeeklyCount = StoredActivityProgressWeeklyCount("StorePurchase.ActivityProgressStorage.ActivityProgressWeeklyCount")
     BattleOrderRank = StoredBattleOrderRank("BattleOrder.BattleOrderStorage.BattleOrderRank")
     BattleOrderActivityPoints = StoredBattleOrderActivityPoints("BattleOrder.BattleOrderStorage.BattleOrderActivityPoints")
     BattleOrderTaskProgress = StoredBattleOrderTaskProgress("BattleOrder.BattleOrderStorage.BattleOrderTaskProgress")

@@ -177,3 +177,9 @@ class GeneratedConfig:
 
     # Group `AccountStorage`
     AccountStorage_AccountName = {}
+
+    # Group `ActivityProgressStorage`
+    ActivityProgressStorage_ActivityProgressToday = {}
+    ActivityProgressStorage_ActivityProgressTodayCount = {}
+    ActivityProgressStorage_ActivityProgressWeekly = {}
+    ActivityProgressStorage_ActivityProgressWeeklyCount = {}

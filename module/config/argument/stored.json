@@ -303,6 +303,58 @@
     "order": 0,
     "color": "#777777"
   },
+  "ActivityProgressToday": {
+    "name": "ActivityProgressToday",
+    "path": "StorePurchase.ActivityProgressStorage.ActivityProgressToday",
+    "i18n": "ActivityProgressStorage.ActivityProgressToday.name",
+    "stored": "StoredActivityProgressToday",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 100,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "ActivityProgressTodayCount": {
+    "name": "ActivityProgressTodayCount",
+    "path": "StorePurchase.ActivityProgressStorage.ActivityProgressTodayCount",
+    "i18n": "ActivityProgressStorage.ActivityProgressTodayCount.name",
+    "stored": "StoredActivityProgressTodayCount",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 1,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "ActivityProgressWeekly": {
+    "name": "ActivityProgressWeekly",
+    "path": "StorePurchase.ActivityProgressStorage.ActivityProgressWeekly",
+    "i18n": "ActivityProgressStorage.ActivityProgressWeekly.name",
+    "stored": "StoredActivityProgressWeekly",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 500,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "ActivityProgressWeeklyCount": {
+    "name": "ActivityProgressWeeklyCount",
+    "path": "StorePurchase.ActivityProgressStorage.ActivityProgressWeeklyCount",
+    "i18n": "ActivityProgressStorage.ActivityProgressWeeklyCount.name",
+    "stored": "StoredActivityProgressWeeklyCount",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 1,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
   "BattleOrderRank": {
     "name": "BattleOrderRank",
     "path": "BattleOrder.BattleOrderStorage.BattleOrderRank",
