@@ -51,9 +51,10 @@ Daily:
       - Recruit
     MiJing:
       - Scheduler
+      - MiJingCount
       - MiJingType
       - MiJingStorage
-      - MiJingCount
+     
     JiFenSai:
       - Scheduler
       - JiFenSai

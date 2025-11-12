@@ -108,8 +108,3 @@ class MiJing(TaskUI):
         self.ticket=ocr.ocr_single_line(self.device.image)
 
 
-
-   
-       
-
-

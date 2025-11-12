@@ -531,6 +531,12 @@
         "display": "hide"
       }
     },
+    "MiJingCount": {
+      "MiJingFightCount": {
+        "type": "input",
+        "value": 5
+      }
+    },
     "MiJingType": {
       "LuoYan": {
         "type": "checkbox",
@@ -559,12 +565,6 @@
         "value": {},
         "display": "hide",
         "stored": "StoredMiJingCount"
-      }
-    },
-    "MiJingCount": {
-      "MiJingFightCount": {
-        "type": "input",
-        "value": 5
       }
     }
   },
