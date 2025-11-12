@@ -62,6 +62,13 @@ AWAITING_SELF_SELECT = ButtonWrapper(
             color=(253, 183, 151),
             button=(508, 196, 760, 257),
         ),
+        Button(
+            file='./assets/cn/duel/extended_play/AWAITING_SELF_SELECT.3.png',
+            area=(502, 166, 593, 267),
+            search=(482, 146, 613, 287),
+            color=(249, 177, 147),
+            button=(502, 166, 593, 267),
+        ),
     ],
     en=None,
 )
