@@ -1,4 +1,5 @@
 from re import M
+from module.logger import logger
 from tasks.ren_zhe_tiao_zhan.ocr import MiJingDigit
 from tasks.base.assets.assets_base_page import FIGHT_CLOSE_CONFIRM, FIGHT_CLOSE
 from tasks.base.page import  page_mi_jing_room
@@ -33,6 +34,7 @@ class MiJing(TaskUI):
         return True
     def is_going_to_stop(self):
         if self.config.stored.MiJingCount.value - self.pre_count == self.config.MiJingCount_MiJingFightCount:
+            logger.info(f'MiJing reached the limit: {self.config.MiJingCount_MiJingFightCount}, task will stop')
             return True
         if self.ticket==0:
             return True
