@@ -15,10 +15,10 @@ class MiJingOcr(Ocr):
         result=result.replace("显","罡")
         result=result.replace("宰","牢")
         return super().after_process(result)
-class MiJingDigit(Digit):
+class MiJingDigit(ONNXPaddleOcr,Digit):
     
     def pre_process(self, image):
-        image=cv2.resize(image, (640, 480))
+        image=cv2.resize(image, (800, 600))
         return super().pre_process(image)
     def after_process(self, result):
         result=super().after_process(result)
