@@ -404,6 +404,16 @@
       "help": "MiJingType.LeiTing.help"
     }
   },
+  "MiJingCount": {
+    "_info": {
+      "name": "MiJingCount._info.name",
+      "help": "MiJingCount._info.help"
+    },
+    "MiJingFightCount": {
+      "name": "MiJingCount.MiJingFightCount.name",
+      "help": "MiJingCount.MiJingFightCount.help"
+    }
+  },
   "Freebies": {
     "_info": {
       "name": "Freebies._info.name",

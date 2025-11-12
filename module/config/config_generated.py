@@ -78,6 +78,9 @@ class GeneratedConfig:
     MiJingType_GangTi = True
     MiJingType_LeiTing = True
 
+    # Group `MiJingCount`
+    MiJingCount_MiJingFightCount = 5
+
     # Group `Freebies`
     Freebies_FriendGiftsStart = True
     Freebies_FriendGiftsFinishCount = {}

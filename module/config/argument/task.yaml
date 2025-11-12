@@ -53,6 +53,7 @@ Daily:
       - Scheduler
       - MiJingType
       - MiJingStorage
+      - MiJingCount
     JiFenSai:
       - Scheduler
       - JiFenSai

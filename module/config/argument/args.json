@@ -560,6 +560,12 @@
         "display": "hide",
         "stored": "StoredMiJingCount"
       }
+    },
+    "MiJingCount": {
+      "MiJingFightCount": {
+        "type": "input",
+        "value": 5
+      }
     }
   },
   "JiFenSai": {

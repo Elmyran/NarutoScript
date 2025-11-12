@@ -404,6 +404,16 @@
       "help": ""
     }
   },
+  "MiJingCount": {
+    "_info": {
+      "name": "秘境设置",
+      "help": ""
+    },
+    "MiJingFightCount": {
+      "name": "目标场次",
+      "help": ""
+    }
+  },
   "Freebies": {
     "_info": {
       "name": "奖励领取设置",

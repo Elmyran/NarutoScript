@@ -1,4 +1,3 @@
-from module.base.timer import Timer
 from tasks.ren_zhe_tiao_zhan.ocr import MiJingDigit
 from tasks.base.assets.assets_base_page import FIGHT_CLOSE_CONFIRM, FIGHT_CLOSE
 from tasks.base.page import  page_mi_jing_room
@@ -8,36 +7,41 @@ from tasks.ren_zhe_tiao_zhan.auto_fight import AutoBattle
 from tasks.ren_zhe_tiao_zhan.ocr import MiJingOcr
 class MiJing(TaskUI):
     ticket:int=0
+    pre_count:int=0
     def run(self):
         if self.config.stored.MiJingCount.is_expired():
             self.config.stored.MiJingCount.clear()
-        pre_count=self.config.stored.MiJingCount.value
+        self.pre_count=self.config.stored.MiJingCount.value
+        self.device.click_record_clear()
         self.handle_mi_jing()
-        if (self.config.stored.MiJingCount.value >= 6 > pre_count) or (
-                self.config.stored.MiJingCount.value >= 15 > pre_count) or (
-                self.config.stored.MiJingCount.value >= 21 > pre_count):
+        if (self.config.stored.MiJingCount.value >= 6 > self.pre_count) or (
+                self.config.stored.MiJingCount.value >= 15 > self.pre_count) or (
+                self.config.stored.MiJingCount.value >= 21 > self.pre_count):
             from tasks.ren_zhe_tiao_zhan.mi_jing_box_claim import MiJingBoxClaim
             MiJingBoxClaim(config=self.config,device=self.device).handle_mi_jing_box_claim()
 
     def handle_mi_jing(self):
-        self.device.click_record_clear()
         self.ui_ensure(page_mi_jing_room)
-        self.ticket_recognition()
-        count=self.get_fight_count()
         battle=AutoBattle(config=self.config,device=self.device)
-        for _ in range(count):
+        for _ in self.loop():
+            self.ticket_recognition()
+            if self.is_going_to_stop():
+                break
             self.enter_mi_jing()
             if not self.is_going_fight():
                 self.back_to_mi_jing_room()
                 continue
             battle.run()
             self.back_to_mi_jing_room()
-
-
-
-        
-
         return True
+    def is_going_to_stop(self):
+        if self.config.stored.MiJingCount.value - self.pre_count == self.config.MiJingCount_MiJingFightCount:
+            return True
+        if self.ticket==0:
+            return True
+        return False
+
+
     def back_to_mi_jing_room(self):
         for _ in self.loop():
             if self.appear_then_click(MI_JING_FAIL,interval=1):
@@ -98,16 +102,11 @@ class MiJing(TaskUI):
                 continue
             if self.appear(MI_JING_FIGHT_CHECK):
                 break
-    def get_fight_count(self):
-        
-        return self.ticket
+
     def ticket_recognition(self):
         ocr=MiJingDigit(MI_JING_REMAIN_CHALLENGE_TICKET)
         self.ticket=ocr.ocr_single_line(self.device.image)
-        
-        
 
-    
 
 
    

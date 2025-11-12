@@ -154,6 +154,9 @@
     },
     "MiJingStorage": {
       "MiJingCount": {}
+    },
+    "MiJingCount": {
+      "MiJingFightCount": 5
     }
   },
   "JiFenSai": {
