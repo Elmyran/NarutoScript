@@ -1,4 +1,3 @@
-from re import M
 from module.logger import logger
 from tasks.ren_zhe_tiao_zhan.ocr import MiJingDigit
 from tasks.base.assets.assets_base_page import FIGHT_CLOSE_CONFIRM, FIGHT_CLOSE
@@ -49,9 +48,13 @@ class MiJing(TaskUI):
             if self.appear_then_click(MI_JING_SUCCESS,interval=1):
                 continue
             MI_JING_REWARD_EXIT.load_search(MI_JING_REWARD_AREA.area)
-            if self.appear_then_click(MI_JING_REWARD_EXIT,interval=1):
+            if self.appear(MI_JING_REWARD_EXIT,interval=1):
+                MI_JING_REWARD_EXIT.clear_offset()
+                self.device.click(MI_JING_REWARD_EXIT)
                 continue
-            if self.appear_then_click(MI_JING_REWARD_CLAIM,interval=1):
+            if self.appear(MI_JING_REWARD_CLAIM,interval=1):
+                MI_JING_REWARD_CLAIM.clear_offset()
+                self.device.click(MI_JING_REWARD_CLAIM)
                 continue
             if self.appear_then_click(FIGHT_CLOSE_CONFIRM,interval=0):
                 continue
