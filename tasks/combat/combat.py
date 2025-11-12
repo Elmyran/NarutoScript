@@ -63,19 +63,13 @@ class Combat(GameControl):
         buttons=[CHARACTER_ATTACK,CHARACTER_TI_SHEN]
         if skill:
             buttons.extend([CHARACTER_SKILL_1, CHARACTER_SKILL_2, CHARACTER_SKILL_3])
-        if scroll:
-            buttons.append(CHARACTER_SECRET_SCROLL)
-        if psychic:
-            buttons.append(CHARACTER_PSYCHIC)
+       
         start_time = time.time()
         press_interval=Timer(10).start()
+        secrect_scroll_interval=Timer(25)
+        psychic_interval=Timer(20)
         self.press_down(buttons)
         for _ in self.loop():
-            if press_interval.reached():
-                self.press_up(buttons)
-                self.press_down(buttons)
-                press_interval.reset()
-
             if time.time() - start_time > timeout or self.appear(end_check):
                 logger.info("click_script end_check")
                 self.press_up(buttons)
@@ -89,6 +83,25 @@ class Combat(GameControl):
                 logger.info("click_script exception")
                 self.press_up(buttons)
                 break
+            if press_interval.reached():
+                self.press_up(buttons)
+                self.press_down(buttons)
+                press_interval.reset()
+            if psychic:
+                if psychic_interval.reached() and self.is_skill_ready('PSYCHIC'):
+                    self.up_all()
+                    self.device.long_click(CHARACTER_PSYCHIC, duration=0.1)
+                    self.device.click_record_remove(CHARACTER_PSYCHIC)
+                    self.press_down(buttons)
+                    psychic_interval.reset()
+
+            if scroll :
+                if secrect_scroll_interval.reached() and self.is_skill_ready('SECRECT_SCROLL'):
+                    self.up_all()
+                    self.device.long_click(CHARACTER_SECRET_SCROLL, duration=0.1)
+                    self.device.click_record_remove(CHARACTER_SECRET_SCROLL)
+                    self.press_down(buttons)
+                    secrect_scroll_interval.reset()
             
     def _is_exception(self):
         if self.appear(DUEL_EXCEPTION):
