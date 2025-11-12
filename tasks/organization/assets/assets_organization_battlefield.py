@@ -167,6 +167,46 @@ BATTLE_FIELD_TYPE_CONFIRM = ButtonWrapper(
     ),
     en=None,
 )
+CHARACTER_SELECTED = ButtonWrapper(
+    name='CHARACTER_SELECTED',
+    share=[
+        Button(
+            file='./assets/share/organization/battlefield/CHARACTER_SELECTED.png',
+            area=(225, 362, 272, 413),
+            search=(205, 342, 292, 433),
+            color=(188, 149, 47),
+            button=(225, 362, 272, 413),
+        ),
+        Button(
+            file='./assets/share/organization/battlefield/CHARACTER_SELECTED.2.png',
+            area=(230, 360, 271, 414),
+            search=(210, 340, 291, 434),
+            color=(102, 51, 75),
+            button=(230, 360, 271, 414),
+        ),
+        Button(
+            file='./assets/share/organization/battlefield/CHARACTER_SELECTED.3.png',
+            area=(225, 356, 271, 411),
+            search=(205, 336, 291, 431),
+            color=(61, 59, 64),
+            button=(225, 356, 271, 411),
+        ),
+        Button(
+            file='./assets/share/organization/battlefield/CHARACTER_SELECTED.4.png',
+            area=(227, 362, 274, 413),
+            search=(207, 342, 294, 433),
+            color=(93, 85, 18),
+            button=(227, 362, 274, 413),
+        ),
+        Button(
+            file='./assets/share/organization/battlefield/CHARACTER_SELECTED.5.png',
+            area=(265, 235, 286, 256),
+            search=(245, 215, 306, 276),
+            color=(150, 118, 34),
+            button=(265, 235, 286, 256),
+        ),
+    ],
+)
 INSPIRED_BUTTON = ButtonWrapper(
     name='INSPIRED_BUTTON',
     cn=Button(
