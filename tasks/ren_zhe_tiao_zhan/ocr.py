@@ -1,6 +1,7 @@
 from module.logger import logger
 from module.ocr.ocr import Digit, Ocr
 from module.ocr.onnxocr.onnx_paddleocr import ONNXPaddleOcr
+from pponnxcr.predict_system import BoxedResult
 import re
 
 class MiJingOcr(Ocr):
@@ -14,6 +15,9 @@ class MiJingOcr(Ocr):
         result=result.replace("宰","牢")
         return super().after_process(result)
 class MiJingDigit(ONNXPaddleOcr,Digit):
+    def filter_detected(self, result: BoxedResult) -> bool:  
+         
+        return bool(re.search(r'\d', result.ocr_text))
     def after_process(self, result):
         result=super().after_process(result)
         return result
