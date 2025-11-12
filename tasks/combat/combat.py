@@ -68,8 +68,8 @@ class Combat(GameControl):
        
         start_time = time.time()
         press_interval=Timer(10).start()
-        secrect_scroll_interval=Timer(25)
-        psychic_interval=Timer(20)
+        secrect_scroll_interval=Timer(25).start()
+        psychic_interval=Timer(20).start()
         self.press_down(buttons)
         for _ in self.loop():
             if time.time() - start_time > timeout or self.appear(end_check):
@@ -95,17 +95,13 @@ class Combat(GameControl):
                     psychic_interval.reset()
                     continue
                 else :
-                    self.press_up(CHARACTER_PSYCHIC)
                     self.press_down(CHARACTER_PSYCHIC)
-
-
             if scroll and secrect_scroll_interval.reached():
                 if not self.is_skill_ready('SECRECT_SCROLL'):
                     self.press_up(CHARACTER_SECRET_SCROLL)
                     secrect_scroll_interval.reset()
                     continue
                 else:
-                    self.press_up(CHARACTER_SECRET_SCROLL)
                     self.press_down(CHARACTER_SECRET_SCROLL)
                     
             
