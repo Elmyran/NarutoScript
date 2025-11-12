@@ -3,18 +3,19 @@ from tasks.base.page import page_battle_order
 from tasks.base.ui import UI
 from tasks.battle_order.assets.assets_battle_order_reward import *
 from tasks.battle_order.ocr import BattleOrderOcr
-from tasks.battle_order.switch import BATTLE_ORDER_TAB
+from tasks.battle_order.ui.switch import BATTLE_ORDER_TAB
 
 class BattleOrderWeeklyReward(UI):
     current_progress=0
-
-     
-    def handle_battle_order_weekly_reward(self):
+    def run(self):
         if self.config.stored.BattleOrderActivityPoints.is_expired():
             self.config.stored.BattleOrderActivityPoints.clear()
         if self.config.stored.BattleOrderActivityPoints.is_full():
             return True
         self.device.click_record_clear()
+        self.handle_battle_order_weekly_reward()
+        return True
+    def handle_battle_order_weekly_reward(self):
         self.ui_ensure(page_battle_order)
         BATTLE_ORDER_TAB.set('周活跃',main=self)
         self._claim_weekly_reward()

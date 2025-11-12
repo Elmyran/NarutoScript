@@ -8,7 +8,7 @@ from module.device.method.minitouch import CommandBuilder, insert_swipe, random_
 from module.exception import ScriptError
 from module.logger import logger
 from tasks.base.assets.assets_base_move import JOYSTICK
-from tasks.base.assets.assets_base_skill import CHARACTER_ATTACK, CHARACTER_SKILL_1, CHARACTER_SKILL_2, CHARACTER_SKILL_3
+from tasks.base.assets.assets_base_skill import CHARACTER_ATTACK, CHARACTER_PSYCHIC, CHARACTER_SECRET_SCROLL, CHARACTER_SKILL_1, CHARACTER_SKILL_2, CHARACTER_SKILL_3
 from tasks.base.taskui import TaskUI
 from tasks.combat.skill import SkillContact
 
@@ -105,12 +105,17 @@ class GameControl(TaskUI):
             "ATTACK": CHARACTER_ATTACK,
             "SKILL1": CHARACTER_SKILL_1,
             "SKILL2": CHARACTER_SKILL_2,
-            "SKILL3": CHARACTER_SKILL_3
+            "SKILL3": CHARACTER_SKILL_3,
+            "SECRECT_SCROLL":CHARACTER_SECRET_SCROLL,
+            "PSYCHIC":CHARACTER_PSYCHIC
+            
         }
         self.SKILL_COOLDOWN_REGIONS = {
             "SKILL1": CHARACTER_SKILL_1.area,
             "SKILL2": CHARACTER_SKILL_2.area,
-            "SKILL3": CHARACTER_SKILL_3.area
+            "SKILL3": CHARACTER_SKILL_3.area,
+            "SECRECT_SCROLL":CHARACTER_SECRET_SCROLL.area,
+            "PSYCHIC":CHARACTER_PSYCHIC.area
         }
 
         self.BRIGHTNESS_THRESHOLD = 100.0
@@ -136,7 +141,6 @@ class GameControl(TaskUI):
             hsv = cv2.cvtColor(roi, cv2.COLOR_RGB2HSV)
             brightness = np.mean(hsv[:, :, 2])
             saturation = np.mean(hsv[:, :, 1])
-            logger.info(f"Skill check for '{skill_name}': brightness={brightness:.2f}, saturation={saturation:.2f}")
             return brightness > self.BRIGHTNESS_THRESHOLD and saturation > self.SATURATION_THRESHOLD
         except Exception as e:
             logger.warning(f"Skill check for '{skill_name}' failed: {e}")

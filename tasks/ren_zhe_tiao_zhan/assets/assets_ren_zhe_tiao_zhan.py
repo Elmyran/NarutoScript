@@ -63,15 +63,35 @@ MI_JING_FAIL = ButtonWrapper(
     ),
     en=None,
 )
+MI_JING_FIGHT_CHECK = ButtonWrapper(
+    name='MI_JING_FIGHT_CHECK',
+    cn=Button(
+        file='./assets/cn/ren_zhe_tiao_zhan/MI_JING_FIGHT_CHECK.png',
+        area=(35, 273, 106, 298),
+        search=(15, 253, 126, 318),
+        color=(101, 64, 60),
+        button=(35, 273, 106, 298),
+    ),
+    en=None,
+)
 MI_JING_REMAIN_CHALLENGE_TICKET = ButtonWrapper(
     name='MI_JING_REMAIN_CHALLENGE_TICKET',
-    cn=Button(
-        file='./assets/cn/ren_zhe_tiao_zhan/MI_JING_REMAIN_CHALLENGE_TICKET.png',
-        area=(323, 621, 534, 673),
-        search=(303, 601, 554, 693),
-        color=(66, 63, 59),
-        button=(323, 621, 534, 673),
-    ),
+    cn=[
+        Button(
+            file='./assets/cn/ren_zhe_tiao_zhan/MI_JING_REMAIN_CHALLENGE_TICKET.png',
+            area=(495, 623, 534, 668),
+            search=(475, 603, 554, 688),
+            color=(31, 30, 20),
+            button=(495, 623, 534, 668),
+        ),
+        Button(
+            file='./assets/cn/ren_zhe_tiao_zhan/MI_JING_REMAIN_CHALLENGE_TICKET.2.png',
+            area=(496, 632, 541, 661),
+            search=(476, 612, 561, 681),
+            color=(33, 35, 14),
+            button=(496, 632, 541, 661),
+        ),
+    ],
     en=None,
 )
 MI_JING_REWARD_AREA = ButtonWrapper(
@@ -186,6 +206,17 @@ MI_JING_SUCCESS = ButtonWrapper(
         search=(501, 128, 803, 350),
         color=(140, 84, 21),
         button=(521, 148, 783, 330),
+    ),
+    en=None,
+)
+MI_JING_TICKET_CHECK = ButtonWrapper(
+    name='MI_JING_TICKET_CHECK',
+    cn=Button(
+        file='./assets/cn/ren_zhe_tiao_zhan/MI_JING_TICKET_CHECK.png',
+        area=(455, 629, 498, 672),
+        search=(435, 609, 518, 692),
+        color=(82, 68, 61),
+        button=(455, 629, 498, 672),
     ),
     en=None,
 )

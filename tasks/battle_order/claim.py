@@ -5,10 +5,10 @@ from tasks.base.page import page_battle_order
 from tasks.base.ui import UI
 from tasks.battle_order.assets.assets_battle_order_claim import *
 import cv2
-from tasks.battle_order.draglist import *
+from tasks.battle_order.ui.draglist import *
 from tasks.base.character_keyword import ACharacterTab,  OcrCharacterTab,  SCharacterTab
-from tasks.battle_order.keywords import ExperienceCard
-from tasks.battle_order.switch import BATTLE_ORDER_TAB
+from tasks.battle_order.keyword.keywords import ExperienceCard
+from tasks.battle_order.ui.switch import BATTLE_ORDER_TAB
 from module.base.button import ClickButton  
 import numpy as np
 class BattleOrderClaim(UI):

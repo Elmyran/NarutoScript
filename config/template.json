@@ -145,6 +145,9 @@
       "Command": "MiJing",
       "ServerUpdate": "05:00"
     },
+    "MiJingCount": {
+      "MiJingFightCount": 5
+    },
     "MiJingType": {
       "LuoYan": true,
       "LieYan": true,

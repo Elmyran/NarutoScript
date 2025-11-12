@@ -67,10 +67,10 @@ class AutoBattle(GameControl):
             if self.appear(MI_JING_ROOM_CHECK):
                 break
             MI_JING_SUCCESS.load_search(MI_JING_REWARD_AREA.area)
-            if self.appear_then_click(MI_JING_FAIL) or self.appear_then_click(MI_JING_SUCCESS)  :
+            if self.appear(MI_JING_FAIL) or self.appear(MI_JING_SUCCESS):
                 logger.info("--- Battle finished (MI_JING_FAIL or MI_JING_SUCCESS detected). ---")
                 self.joystick.up()
-                continue
+                break
 
             
             results = self.model.predict(self.device.image, conf=0.6)

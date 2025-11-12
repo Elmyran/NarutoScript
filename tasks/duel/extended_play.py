@@ -158,7 +158,7 @@ class ExtendedPlay(Combat):
             return True
         if not self.secrect_scroll_select():
             return True
-        self.multi_round_combat()
+        self.multi_round_combat(psychic=False)
         return True
     def start_fight(self):
         logger.info("start fight")

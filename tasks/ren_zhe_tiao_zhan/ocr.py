@@ -1,6 +1,9 @@
+from module.logger import logger
 from module.ocr.ocr import Digit, Ocr
 from module.ocr.onnxocr.onnx_paddleocr import ONNXPaddleOcr
-
+from pponnxcr.predict_system import BoxedResult
+import re
+import cv2
 
 class MiJingOcr(Ocr):
     def after_process(self, result: str) -> str:
@@ -13,10 +16,24 @@ class MiJingOcr(Ocr):
         result=result.replace("宰","牢")
         return super().after_process(result)
 class MiJingDigit(ONNXPaddleOcr,Digit):
+    
+    def pre_process(self, image):
+        image=cv2.resize(image, (800, 600))
+        return super().pre_process(image)
     def after_process(self, result):
         result=super().after_process(result)
-        if int(result) > 35:  
-            return '0'  
         return result
     def format_result(self, result):
-        return Digit.format_result(self, result)
+        result = super().after_process(result)
+        logger.attr(name=self.name, text=str(result))
+
+        res = re.search(r'(\d+)', result)
+        if res:
+            num=int(res.group(1))
+            if num > 35:
+                logger.warning(f'Wrong digit detected in {result}')
+                return 0
+            return num
+        else:
+            logger.warning(f'No digit found in {result}')
+            return 0

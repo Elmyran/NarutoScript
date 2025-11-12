@@ -1,4 +1,6 @@
 import time
+
+import py
 from module.base.timer import Timer
 from tasks.combat.skill import *
 from tasks.duel.assets.assets_duel import DUEL_EXCEPTION, DUEL_FIGHT_END, DUEL_FIGHT_FAIL, DUEL_FIGHT_SUCCESS, DUEL_IS_IN_FIGHT, DUEL_ROUND_SWITCH
@@ -63,32 +65,49 @@ class Combat(GameControl):
         buttons=[CHARACTER_ATTACK,CHARACTER_TI_SHEN]
         if skill:
             buttons.extend([CHARACTER_SKILL_1, CHARACTER_SKILL_2, CHARACTER_SKILL_3])
-        if scroll:
-            buttons.append(CHARACTER_SECRET_SCROLL)
-        if psychic:
-            buttons.append(CHARACTER_PSYCHIC)
+       
         start_time = time.time()
         press_interval=Timer(10).start()
+        secrect_scroll_interval=Timer(25)
+        psychic_interval=Timer(20)
         self.press_down(buttons)
         for _ in self.loop():
-            if press_interval.reached():
-                self.press_up(buttons)
-                self.press_down(buttons)
-                press_interval.reset()
-
             if time.time() - start_time > timeout or self.appear(end_check):
                 logger.info("click_script end_check")
-                self.press_up(buttons)
+                self.up_all()
                 break
             if end_confirm:
                 if self.appear_then_click(end_confirm,interval=1):
                     logger.info("click_script end_cofirm")
-                    self.press_up(buttons)
+                    self.up_all()
                     break
             if self._is_exception():
                 logger.info("click_script exception")
-                self.press_up(buttons)
+                self.up_all()
                 break
+            if press_interval.reached():
+                self.press_up(buttons)
+                self.press_down(buttons)
+                press_interval.reset()
+            if psychic and psychic_interval.reached()  :
+                if not self.is_skill_ready('PSYCHIC'):
+                    self.press_up(CHARACTER_PSYCHIC)
+                    psychic_interval.reset()
+                    continue
+                else :
+                    self.press_up(CHARACTER_PSYCHIC)
+                    self.press_down(CHARACTER_PSYCHIC)
+
+
+            if scroll and secrect_scroll_interval.reached():
+                if not self.is_skill_ready('SECRECT_SCROLL'):
+                    self.press_up(CHARACTER_SECRET_SCROLL)
+                    secrect_scroll_interval.reset()
+                    continue
+                else:
+                    self.press_up(CHARACTER_SECRET_SCROLL)
+                    self.press_down(CHARACTER_SECRET_SCROLL)
+                    
             
     def _is_exception(self):
         if self.appear(DUEL_EXCEPTION):
