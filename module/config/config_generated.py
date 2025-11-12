@@ -80,6 +80,7 @@ class GeneratedConfig:
 
     # Group `MiJingCount`
     MiJingCount_MiJingFightCount = 5
+    MiJingCount_MiJingTicket = {}
 
     # Group `Freebies`
     Freebies_FriendGiftsStart = True

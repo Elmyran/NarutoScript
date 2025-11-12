@@ -26,6 +26,7 @@ from module.config.stored.classes import (
     StoredLeaderBoardLikeCount,
     StoredMailRewardClaimCount,
     StoredMiJingCount,
+    StoredMiJingTicket,
     StoredMissionAccept,
     StoredMonthlySignInCount,
     StoredPanRenCount,
@@ -52,6 +53,7 @@ class StoredGenerated:
     SquadRaidFinishedCount = StoredSquadRaidFinishCount("SquadRaid.SquadRaid.SquadRaidFinishedCount")
     Dungeon = StoredDungeon("TiLi.TiLiStorage.Dungeon")
     MissionAccept = StoredMissionAccept("Mission.MissionStorage.MissionAccept")
+    MiJingTicket = StoredMiJingTicket("MiJing.MiJingCount.MiJingTicket")
     MiJingCount = StoredMiJingCount("MiJing.MiJingStorage.MiJingCount")
     JiFenSaiDailyRewardClaim = StoredJiFenSaiRewardClaimCount("JiFenSai.JiFenSaiStorage.JiFenSaiDailyRewardClaim")
     FriendGiftsFinishCount = StoredFriendGiftsFinishCount("Freebies.Freebies.FriendGiftsFinishCount")

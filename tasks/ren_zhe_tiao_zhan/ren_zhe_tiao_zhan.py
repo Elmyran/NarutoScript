@@ -1,4 +1,5 @@
 from module.base.base import ModuleBase
+from module.logger import logger
 
 
 class RenZheTiaoZhan(ModuleBase):

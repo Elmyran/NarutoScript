@@ -412,6 +412,10 @@
     "MiJingFightCount": {
       "name": "MiJingCount.MiJingFightCount.name",
       "help": "MiJingCount.MiJingFightCount.help"
+    },
+    "MiJingTicket": {
+      "name": "MiJingCount.MiJingTicket.name",
+      "help": "MiJingCount.MiJingTicket.help"
     }
   },
   "Freebies": {

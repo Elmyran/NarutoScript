@@ -1,4 +1,3 @@
-from re import M
 from module.logger import logger
 from tasks.ren_zhe_tiao_zhan.ocr import MiJingDigit
 from tasks.base.assets.assets_base_page import FIGHT_CLOSE_CONFIRM, FIGHT_CLOSE
@@ -11,6 +10,11 @@ class MiJing(TaskUI):
     ticket:int=0
     pre_count:int=0
     def run(self):
+        if self.config.stored.MiJingTicket.is_expired():
+            self.config.stored.MiJingTicket.clear()
+        if self.config.stored.MiJingTicket.value == 0:
+            logger.info('No MiJing  tickets available, task will stop')
+            return True
         if self.config.stored.MiJingCount.is_expired():
             self.config.stored.MiJingCount.clear()
         self.pre_count=self.config.stored.MiJingCount.value
@@ -49,9 +53,13 @@ class MiJing(TaskUI):
             if self.appear_then_click(MI_JING_SUCCESS,interval=1):
                 continue
             MI_JING_REWARD_EXIT.load_search(MI_JING_REWARD_AREA.area)
-            if self.appear_then_click(MI_JING_REWARD_EXIT,interval=1):
+            if self.appear(MI_JING_REWARD_EXIT,interval=1):
+                MI_JING_REWARD_EXIT.clear_offset()
+                self.device.click(MI_JING_REWARD_EXIT)
                 continue
-            if self.appear_then_click(MI_JING_REWARD_CLAIM,interval=1):
+            if self.appear(MI_JING_REWARD_CLAIM,interval=1):
+                MI_JING_REWARD_CLAIM.clear_offset()
+                self.device.click(MI_JING_REWARD_CLAIM)
                 continue
             if self.appear_then_click(FIGHT_CLOSE_CONFIRM,interval=0):
                 continue
@@ -105,3 +113,4 @@ class MiJing(TaskUI):
     def ticket_recognition(self):
         ocr=MiJingDigit(MI_JING_REMAIN_CHALLENGE_TICKET)
         self.ticket=ocr.ocr_single_line(self.device.image)
+        self.config.stored.MiJingTicket.set(self.ticket)
