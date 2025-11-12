@@ -39,7 +39,7 @@ class Mission(TaskUI):
     def _circle_task_select(self):
         
         for _ in self.loop():
-            res=self._task_select(self.tasks)
+            res=self._task_select()
             if res:
                 break
             self._task_refresh()
