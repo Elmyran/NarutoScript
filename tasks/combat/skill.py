@@ -82,8 +82,12 @@ class SkillContact:
                     self._downed_skills.discard(button)    
         self.with_retry(_long_press)
     def press_down(self, buttons):
+        
         def _press_down(_self):
             builders=self.builders
+            nonlocal buttons
+            if not isinstance(buttons, list):
+                buttons = [buttons]
             for button in buttons:  
                     builder = builders.get(button)
                     if not builder:  
@@ -95,6 +99,9 @@ class SkillContact:
     def press_up(self, buttons):
         def _press_up(_self):
             builders=self.builders
+            nonlocal buttons
+            if not isinstance(buttons, list):
+                buttons = [buttons]
             for button in buttons:  
                     builder = builders.get(button)
                     if not builder:  
