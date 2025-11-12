@@ -3,6 +3,7 @@ from module.ocr.ocr import Digit, Ocr
 from module.ocr.onnxocr.onnx_paddleocr import ONNXPaddleOcr
 from pponnxcr.predict_system import BoxedResult
 import re
+import cv2
 
 class MiJingOcr(Ocr):
     def after_process(self, result: str) -> str:
@@ -18,6 +19,9 @@ class MiJingDigit(ONNXPaddleOcr,Digit):
     def filter_detected(self, result: BoxedResult) -> bool:  
          
         return bool(re.search(r'\d', result.ocr_text))
+    def pre_process(self, image):
+        image=cv2.resize(image, (2560, 1920))
+        return super().pre_process(image)
     def after_process(self, result):
         result=super().after_process(result)
         return result

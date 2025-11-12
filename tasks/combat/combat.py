@@ -1,4 +1,6 @@
 import time
+
+import py
 from module.base.timer import Timer
 from tasks.combat.skill import *
 from tasks.duel.assets.assets_duel import DUEL_EXCEPTION, DUEL_FIGHT_END, DUEL_FIGHT_FAIL, DUEL_FIGHT_SUCCESS, DUEL_IS_IN_FIGHT, DUEL_ROUND_SWITCH
@@ -72,36 +74,40 @@ class Combat(GameControl):
         for _ in self.loop():
             if time.time() - start_time > timeout or self.appear(end_check):
                 logger.info("click_script end_check")
-                self.press_up(buttons)
+                self.up_all()
                 break
             if end_confirm:
                 if self.appear_then_click(end_confirm,interval=1):
                     logger.info("click_script end_cofirm")
-                    self.press_up(buttons)
+                    self.up_all()
                     break
             if self._is_exception():
                 logger.info("click_script exception")
-                self.press_up(buttons)
+                self.up_all()
                 break
             if press_interval.reached():
                 self.press_up(buttons)
                 self.press_down(buttons)
                 press_interval.reset()
-            if psychic:
-                if psychic_interval.reached() and self.is_skill_ready('PSYCHIC'):
-                    self.up_all()
-                    self.device.long_click(CHARACTER_PSYCHIC, duration=0.1)
-                    self.device.click_record_remove(CHARACTER_PSYCHIC)
-                    self.press_down(buttons)
+            if psychic and psychic_interval.reached()  :
+                if not self.is_skill_ready('PSYCHIC'):
+                    self.press_up(CHARACTER_PSYCHIC)
                     psychic_interval.reset()
+                    continue
+                else :
+                    self.press_up(CHARACTER_PSYCHIC)
+                    self.press_down(CHARACTER_PSYCHIC)
 
-            if scroll :
-                if secrect_scroll_interval.reached() and self.is_skill_ready('SECRECT_SCROLL'):
-                    self.up_all()
-                    self.device.long_click(CHARACTER_SECRET_SCROLL, duration=0.1)
-                    self.device.click_record_remove(CHARACTER_SECRET_SCROLL)
-                    self.press_down(buttons)
+
+            if scroll and secrect_scroll_interval.reached():
+                if not self.is_skill_ready('SECRECT_SCROLL'):
+                    self.press_up(CHARACTER_SECRET_SCROLL)
                     secrect_scroll_interval.reset()
+                    continue
+                else:
+                    self.press_up(CHARACTER_SECRET_SCROLL)
+                    self.press_down(CHARACTER_SECRET_SCROLL)
+                    
             
     def _is_exception(self):
         if self.appear(DUEL_EXCEPTION):

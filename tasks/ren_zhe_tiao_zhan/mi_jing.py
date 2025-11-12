@@ -58,7 +58,7 @@ class MiJing(TaskUI):
                 continue
             if self.appear_then_click(FIGHT_CLOSE,interval=2):
                 continue
-            if self.appear(MI_JING_ROOM_CHECK):
+            if self.appear(MI_JING_ROOM_CHECK) and self.appear(MI_JING_TICKET_CHECK,similarity=0.6):
                 self.device.click_record_remove(FIGHT_CLOSE_CONFIRM)
                 break
         
