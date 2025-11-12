@@ -1,5 +1,5 @@
 from module.base.timer import Timer
-from module.ocr.ocr import Digit
+from tasks.ren_zhe_tiao_zhan.ocr import MiJingDigit
 from tasks.base.assets.assets_base_page import FIGHT_CLOSE_CONFIRM, FIGHT_CLOSE
 from tasks.base.page import  page_mi_jing_room
 from tasks.base.taskui import TaskUI
@@ -23,7 +23,7 @@ class MiJing(TaskUI):
         return True
     def _select_mi_jing(self):
         ocr=MiJingOcr(MI_JING_TYPE)
-        ticket=Digit(MI_JING_REMAIN_CHALLENGE_TICKET)
+        ticket=MiJingDigit(MI_JING_REMAIN_CHALLENGE_TICKET)
         enable_types=[]
         unenable_types=['毒风秘境','阴阳秘境']
         if self.config.MiJingType_LuoYan:
