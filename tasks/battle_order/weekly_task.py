@@ -6,7 +6,7 @@ from tasks.base.page import page_battle_order
 from tasks.base.ui import UI
 from tasks.battle_order.assets.assets_battle_order_task import *
 from tasks.battle_order.assets.assets_battle_order_ui import BATTLE_ORDER_DETAIL
-from tasks.battle_order.switch import BATTLE_ORDER_TAB
+from tasks.battle_order.ui.switch import BATTLE_ORDER_TAB
 class BattleOrderWeeklyTask(UI):
     def handle_battle_order_weekly_task(self):
         if self.config.stored.BattleOrderTaskProgress.is_expired():

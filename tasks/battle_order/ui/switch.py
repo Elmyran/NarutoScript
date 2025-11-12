@@ -1,6 +1,3 @@
-import re
-from datetime import timedelta, datetime
-from module.ocr.ocr import Duration
 from module.ui.switch import Switch
 from tasks.battle_order.assets.assets_battle_order_ui import BATTLE_ORDER_LIST, BATTLE_ORDER_REWARD_CHECK, \
     BATTLE_ORDER_REWARD_CLICK, BATTLE_ORDER_WEEKLY_REWARD_CHECK, BATTLE_ORDER_WEEKLY_REWARD_CLICK, \

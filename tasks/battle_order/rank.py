@@ -1,4 +1,3 @@
-import time
 from module.base.timer import Timer
 from module.exception import GameStuckError
 from module.logger import logger
@@ -9,6 +8,17 @@ from tasks.battle_order.assets.assets_battle_order_rank import *
 
 
 class BattleOrderRank(UI):
+    def run(self):
+
+        if not self.config.BattleOrder_LikeAndShare:
+            return True
+        if self.config.stored.BattleOrderRank.is_expired():
+                self.config.stored.BattleOrderRank.clear()
+        if self.config.stored.BattleOrderRank.is_full():
+            logger.info('BattleOrderRank 本周已完成，跳过')
+            return True
+        self.handle_battle_order_rank()
+        self.config.stored.BattleOrderRank.add()
     def handle_battle_order_rank(self):
         self.device.click_record_clear()
         self._handle_battle_order_rank_like()
