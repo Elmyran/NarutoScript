@@ -15,6 +15,8 @@ class FengRaoFight(Combat):
         self.single_round_combat(
             end_check=FENG_RAO_CHECK,
             end_confirm=FENG_RAO_FIGHT_SUCCESS
+            scroll=False,
+            psychic=False,
         )
         return True
     def is_feng_rao_have_done(self):
