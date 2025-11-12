@@ -19,8 +19,11 @@ class ActivityRewardClaim(UI):
             return True
         self.ui_ensure(page_daily)
         self.daily_progress_recognition()
-        self._reward_daily_claim()
-        self.config.stored.ActivityProgressTodayCount.add()
+        if self._reward_daily_claim():
+            self.config.stored.ActivityProgressTodayCount.add()
+ 
+        
+        
         
     def handle_weekly_reward(self):
         if not self.config.stored.ActivityProgressWeekly.is_full():
@@ -30,8 +33,8 @@ class ActivityRewardClaim(UI):
         if self.config.stored.ActivityProgressWeeklyCount.is_full():
             return True
         self.ui_ensure(page_daily)
-        if self._reward_weekly_claim():
-            self.config.stored.ActivityProgressWeeklyCount.add()
+        self._reward_weekly_claim()
+        self.config.stored.ActivityProgressWeeklyCount.add()
         
     def daily_progress_recognition(self):
         # Daily Progress
@@ -41,7 +44,7 @@ class ActivityRewardClaim(UI):
         # Weekly Progress
         ocr=DigitCounter(WEEKLY_ACTIVITY_PROGRESS)
         progress,_,_=ocr.ocr_single_line(self.device.image)
-        self.config.stored.ActivityProgressWeekly.set(progress)
+        self.config.stored.ActivityProgressWeekly.set(progress,500)
 
     def _reward_daily_claim(self):
         check_buttons=[DAILY_REWARD_CLAIMED_10,DAILY_REWARD_CLAIMED_40,DAILY_REWARD_CLAIMED_80,DAILY_REWARD_CLAIMED_100]
