@@ -76,7 +76,7 @@ class Mission(TaskUI):
     def _single_task_select(self,task):
         click_interval=Timer(1).start()
         for _ in self.loop():
-            if CHARACTER_UNSELECTED.match_template(self.device.image, direct_match=True):
+            if CHARACTER_UNSELECTED.match_template(self.device.image,similarity=0.7, direct_match=True):
                 if self.character_select():
                     return True
                 else:
@@ -111,7 +111,7 @@ class Mission(TaskUI):
             if self.appear(MISSION_CHECK):  
                 logger.info('Mission check appeared')  
                 return True  
-            if CHARACTER_UNSELECTED.match_template(self.device.image, direct_match=True):
+            if CHARACTER_UNSELECTED.match_template(self.device.image, similarity=0.7,direct_match=True):
                 if self.appear(CHARACTER_SELECTED_AUTO):
                     select_auto=True
                     if character_auto_select_interval.reached():  
