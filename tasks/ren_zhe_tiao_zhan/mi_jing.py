@@ -7,23 +7,59 @@ from tasks.ren_zhe_tiao_zhan.assets.assets_ren_zhe_tiao_zhan import *
 from tasks.ren_zhe_tiao_zhan.auto_fight import AutoBattle
 from tasks.ren_zhe_tiao_zhan.ocr import MiJingOcr
 class MiJing(TaskUI):
-    def handle_mi_jing(self):
+    ticket:int=0
+    def run(self):
         if self.config.stored.MiJingCount.is_expired():
             self.config.stored.MiJingCount.clear()
         pre_count=self.config.stored.MiJingCount.value
-        self.device.click_record_clear()
-        self.ui_ensure(page_mi_jing_room)
-        self._mi_jing_fight()
+        self.handle_mi_jing()
         if (self.config.stored.MiJingCount.value >= 6 > pre_count) or (
                 self.config.stored.MiJingCount.value >= 15 > pre_count) or (
                 self.config.stored.MiJingCount.value >= 21 > pre_count):
             from tasks.ren_zhe_tiao_zhan.mi_jing_box_claim import MiJingBoxClaim
             MiJingBoxClaim(config=self.config,device=self.device).handle_mi_jing_box_claim()
 
+    def handle_mi_jing(self):
+        self.device.click_record_clear()
+        self.ui_ensure(page_mi_jing_room)
+        self.ticket_recognition()
+        count=self.get_fight_count()
+        battle=AutoBattle(config=self.config,device=self.device)
+        for _ in range(count):
+            self.enter_mi_jing()
+            if not self.is_going_fight():
+                self.back_to_mi_jing_room()
+                continue
+            battle.run()
+            self.back_to_mi_jing_room()
+
+
+
+        
+
         return True
-    def _select_mi_jing(self):
+    def back_to_mi_jing_room(self):
+        for _ in self.loop():
+            if self.appear_then_click(MI_JING_FAIL,interval=1):
+                continue
+            MI_JING_SUCCESS.load_search(MI_JING_REWARD_AREA.area)
+            if self.appear_then_click(MI_JING_SUCCESS,interval=1):
+                continue
+            MI_JING_REWARD_EXIT.load_search(MI_JING_REWARD_AREA.area)
+            if self.appear_then_click(MI_JING_REWARD_EXIT,interval=1):
+                continue
+            if self.appear_then_click(MI_JING_REWARD_CLAIM,interval=1):
+                continue
+            if self.appear_then_click(FIGHT_CLOSE_CONFIRM,interval=0):
+                continue
+            if self.appear_then_click(FIGHT_CLOSE,interval=2):
+                continue
+            if self.appear(MI_JING_ROOM_CHECK):
+                self.device.click_record_remove(FIGHT_CLOSE_CONFIRM)
+                break
+        
+    def is_going_fight(self):
         ocr=MiJingOcr(MI_JING_TYPE)
-        ticket=MiJingDigit(MI_JING_REMAIN_CHALLENGE_TICKET)
         enable_types=[]
         unenable_types=['毒风秘境','阴阳秘境']
         if self.config.MiJingType_LuoYan:
@@ -46,66 +82,35 @@ class MiJing(TaskUI):
             enable_types.append('罡体秘境')
         else:
             unenable_types.append('罡体秘境')
-
-        for _ in  self.loop():
-            type=ocr.ocr_single_line(self.device.image)
-            if type and len(type)>0:
-                if type in enable_types:
-                    return True
-                elif type in unenable_types:
-                    break
+        type=ocr.ocr_single_line(self.device.image)
+        if type in enable_types:
+            return True
+        elif type in unenable_types:
+            return False
+        return False
+    def enter_mi_jing(self):
+        for _ in self.loop():
             if self.appear_then_click(MI_JING_START_NOTIFY,interval=1):
                 continue
             if self.appear_then_click(MI_JING_START_CONFIRM,interval=1):
                 continue
-            if self.appear(MI_JING_ROOM_START_FIGHT,interval=1):
-                time=Timer(1,count=3).start()
-                for _ in self.loop():
-                    if time.reached():
-                        return 'End'
-                    remain_tickets=ticket.ocr_single_line(self.device.image)
-                    if remain_tickets>0:
-                        self.device.click_record_remove(MI_JING_ROOM_START_FIGHT)
-                        self.device.click(MI_JING_ROOM_START_FIGHT)
-                        break
-        for _ in self.loop():
-            if self.appear(MI_JING_ROOM_CHECK,interval=1):
-                self.device.click_record_remove(FIGHT_CLOSE_CONFIRM)
+            if self.appear_then_click(MI_JING_ROOM_START_FIGHT,interval=1):
+                continue
+            if self.appear(MI_JING_FIGHT_CHECK):
                 break
-            if self.appear_then_click(FIGHT_CLOSE_CONFIRM,interval=0):
-                continue
-            if self.appear_then_click(FIGHT_CLOSE,interval=2,similarity=0.9):
-                continue
-        return False
+    def get_fight_count(self):
+        
+        return self.ticket
+    def ticket_recognition(self):
+        ocr=MiJingDigit(MI_JING_REMAIN_CHALLENGE_TICKET)
+        self.ticket=ocr.ocr_single_line(self.device.image)
+        
+        
 
-    def _mi_jing_fight(self):
-        battle=AutoBattle(config=self.config,device=self.device)
-        for _ in self.loop():
-            self.device.click_record_remove(MI_JING_REWARD_EXIT)
-            self.device.click_record_remove(MI_JING_SUCCESS)
-            self.device.click_record_remove(MI_JING_REWARD_CLAIM)
-            MI_JING_REWARD_EXIT.load_search(MI_JING_REWARD_AREA.area)
-            if self.appear(MI_JING_REWARD_EXIT,interval=1):
-                MI_JING_REWARD_EXIT.clear_offset()
-                self.device.click(MI_JING_REWARD_EXIT)
-                continue
-            if self.appear(MI_JING_REWARD_CLAIM,interval=1):
-                MI_JING_REWARD_CLAIM.clear_offset()
-                self.device.click(MI_JING_REWARD_CLAIM)
-                continue
-            MI_JING_SUCCESS.load_search(MI_JING_REWARD_AREA.area)
-            if self.appear(MI_JING_SUCCESS,interval=1):
-                MI_JING_SUCCESS.clear_offset()
-                self.device.click(MI_JING_SUCCESS)
-                continue
-            if self.appear(MI_JING_ROOM_CHECK):
-                res=self._select_mi_jing()
-                if res=='End':
-                    break
-                elif res==False:
-                    continue
-                elif res==True:
-                    battle.run()
+    
+
+
+   
        
 
 
