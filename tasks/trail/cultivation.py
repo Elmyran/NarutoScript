@@ -2,12 +2,13 @@ from module.config.utils import get_server_next_monday_update
 from tasks.base.taskui import TaskUI
 from datetime import datetime, timedelta
 from module.config.utils import get_server_next_monday_update
-from module.ocr.ocr import Digit, Duration
+from module.ocr.ocr import Digit
 from tasks.base.assets.assets_base_page import CLOSE
 from tasks.base.page import page_cultivation
 from tasks.trail.assets.assets_trail import *
 from tasks.trail.assets.assets_trail_cultivation import *
 from tasks.base.assets.assets_base_code_second import *
+from tasks.trail.ocr import CultivationDuration
 
 class CultivationRoad(TaskUI):
     def run(self):
@@ -22,6 +23,7 @@ class CultivationRoad(TaskUI):
         self.ui_ensure(page_cultivation)
         delay=self.is_excute_manual_before()
         if delay:
+            self.back_to_cultivation_page()
             return delay
         ocr=Digit(CULTIVATION_RESET_COUNT)
         count=ocr.ocr_single_line(self.device.image)
@@ -50,9 +52,9 @@ class CultivationRoad(TaskUI):
             self.claim_reward()
             return False
         if self.is_mop_up_running():
-            ocr=Duration(CULTIVATION_MOP_UP_REMAIN_TIMES)
+            ocr=CultivationDuration(CULTIVATION_MOP_UP_REMAIN_TIMES)
             delay_time=ocr.ocr_single_line(self.device.image)
-            return datetime.now()+delay_time
+            return delay_time
         
 
     def back_to_cultivation_page(self):
