@@ -67,7 +67,7 @@ class BattleOrderWeeklyReward(UI):
         current_progress = 0  
         # 从高到低检查每个阈值
         for i in range(len(thresholds) - 1, -1, -1):
-            if self.appear(checked_buttons[i]):  
+            if self.appear(checked_buttons[i],similarity=0.6):  
                 current_progress = thresholds[i]
                 break  # 找到最高的就停止
         if current_progress>self.current_progress:
