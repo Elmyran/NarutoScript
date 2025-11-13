@@ -70,7 +70,7 @@ class CultivationRoad(TaskUI):
         for _ in self.loop():
             if self.match_template_color(CULTIVATION_BOX):
                 break
-            if self.appear_then_click(CLOSE,interval=1):
+            if self.appear_then_click(CLOSE,similarity=0.7,interval=1):
                 continue
     def try_mop_up(self):
         logger.info("Trying to start cultivation mop-up...")
