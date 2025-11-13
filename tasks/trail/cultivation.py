@@ -11,12 +11,16 @@ from tasks.trail.assets.assets_trail import *
 from tasks.trail.assets.assets_trail_cultivation import *
 from tasks.base.assets.assets_base_code_second import *
 from tasks.trail.ocr import CultivationDuration
-
+from tasks.base.page import page_main
 class CultivationRoad(TaskUI):
+
     def run(self):
         delay_time=self.handle_cultivation_mop_up()
-        if self.config.CultivationRoad_ClearRedDot:
-            self._red_dot_clear()
+        
+        if  self.config.CultivationRoad_ClearRedDot:
+            monday=get_server_next_monday_update(self.config.Scheduler_ServerUpdate)
+            if delay_time>=monday:
+                self._red_dot_clear()
         self.config.task_delay(target=delay_time)
         self.config.task_stop()
         
@@ -68,6 +72,8 @@ class CultivationRoad(TaskUI):
     def back_to_cultivation_page(self):
         logger.info("Returning to cultivation page...")
         for _ in self.loop():
+            if self.ui_page_appear(page_main):
+                break
             if self.match_template_color(CULTIVATION_BOX):
                 break
             if self.appear_then_click(CLOSE,similarity=0.7,interval=1):
