@@ -1,4 +1,4 @@
-from venv import logger
+from module.logger import logger
 from module.base.timer import Timer
 from module.config.utils import get_server_next_monday_update
 from tasks.base.taskui import TaskUI
