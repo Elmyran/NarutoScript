@@ -1,3 +1,5 @@
+from module.logger import logger
+from module.base.timer import Timer
 from module.config.utils import get_server_next_monday_update
 from tasks.base.taskui import TaskUI
 from datetime import datetime, timedelta
@@ -48,22 +50,30 @@ class CultivationRoad(TaskUI):
             self.back_to_cultivation_page() 
             return datetime.now()+timedelta(hours=2)
     def is_excute_manual_before(self):
-        if self.is_reward_claim():
-            self.claim_reward()
-            return False
-        if self.is_mop_up_running():
-            ocr=CultivationDuration(CULTIVATION_MOP_UP_REMAIN_TIMES)
-            delay_time=ocr.ocr_single_line(self.device.image)
-            return delay_time
+        logger.info("Checking if cultivation mop-up is in progress or rewards are to be claimed...")
+        timer=Timer(1,count=3).start()
+        for _ in self.loop():
+            if timer.reached():
+                logger.info('check timeout, assuming no mop-up in progress or rewards to claim.')
+                return False
+            if self.is_reward_claim():
+                self.claim_reward()
+                return False
+            if self.is_mop_up_running():
+                ocr=CultivationDuration(CULTIVATION_MOP_UP_REMAIN_TIMES)
+                delay_time=ocr.ocr_single_line(self.device.image)
+                return delay_time
         
 
     def back_to_cultivation_page(self):
+        logger.info("Returning to cultivation page...")
         for _ in self.loop():
             if self.match_template_color(CULTIVATION_BOX):
                 break
             if self.appear_then_click(CLOSE,interval=1):
                 continue
     def try_mop_up(self):
+        logger.info("Trying to start cultivation mop-up...")
         for _ in self.loop():
             if self.appear_then_click(CULTIVATION_MOP_UP_BUTTON,interval=1):
                 continue
@@ -75,6 +85,7 @@ class CultivationRoad(TaskUI):
                 break
         return True
     def mop_up_finish(self):
+        logger.info("Checking if cultivation mop-up is finished...")
         if self.appear(CULTIVATION_CLAIM_CHAO_YING):
             self.claim_reward()
             return True
