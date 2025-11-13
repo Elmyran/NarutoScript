@@ -210,5 +210,9 @@ class GameControl(TaskUI):
             contact.up_all()
     def is_skill_downed(self):
         return self._skill_contact.is_downed
+    def is_downed(self,button):
+        if self._skill_contact is None:
+            return False
+        return button in self._skill_contact._downed_skills
 
 

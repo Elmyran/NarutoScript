@@ -94,13 +94,29 @@ CHARACTER_SELECTED_MANUAL = ButtonWrapper(
 )
 CHARACTER_UNSELECTED = ButtonWrapper(
     name='CHARACTER_UNSELECTED',
-    cn=Button(
-        file='./assets/cn/mission/CHARACTER_UNSELECTED.png',
-        area=(307, 207, 539, 629),
-        search=(287, 187, 559, 649),
-        color=(141, 100, 29),
-        button=(307, 207, 539, 629),
-    ),
+    cn=[
+        Button(
+            file='./assets/cn/mission/CHARACTER_UNSELECTED.png',
+            area=(307, 207, 539, 629),
+            search=(287, 187, 559, 649),
+            color=(141, 100, 29),
+            button=(307, 207, 539, 629),
+        ),
+        Button(
+            file='./assets/cn/mission/CHARACTER_UNSELECTED.2.png',
+            area=(152, 208, 379, 570),
+            search=(132, 188, 399, 590),
+            color=(133, 90, 26),
+            button=(152, 208, 379, 570),
+        ),
+        Button(
+            file='./assets/cn/mission/CHARACTER_UNSELECTED.3.png',
+            area=(476, 212, 695, 570),
+            search=(456, 192, 715, 590),
+            color=(148, 113, 36),
+            button=(476, 212, 695, 570),
+        ),
+    ],
     en=None,
 )
 MISSION_CHARACTER_GRID = ButtonWrapper(
