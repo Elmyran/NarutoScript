@@ -11,7 +11,10 @@ class MiJing(TaskUI):
     pre_count:int=0
     def run(self):
         if self.config.stored.MiJingTicket.is_expired():
-            self.config.stored.MiJingTicket.clear()
+            if self.config.stored.MiJingTicket.value>30:
+                self.config.stored.MiJingTicket.set(35)
+            else:
+                self.config.stored.MiJingTicket.add(5)
         if self.config.stored.MiJingTicket.value == 0:
             logger.info('No MiJing  tickets available, task will stop')
             return True
