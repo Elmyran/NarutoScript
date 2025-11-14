@@ -18,7 +18,8 @@ class Combat(GameControl):
                       timeout=120):
     
         try :
-            self.device.stuck_timer=Timer(timeout).start()
+            stuck_timer=timeout+30
+            self.device.stuck_timer=Timer(stuck_timer).start()
             self._click_script(
                     end_check=end_check,
                     end_confirm=end_confirm,
@@ -70,17 +71,20 @@ class Combat(GameControl):
        
         start_time = time.time()
         for _ in self.loop():        
-            if time.time() - start_time > timeout or self.appear(end_check):
-                logger.info("click_script end_check")
-                self.up_all()
+            if time.time() - start_time > timeout:
+                logger.info("round timeout")
+                break
+            if self.appear(end_check):
+                logger.info("round end")
+                break
+            if self._is_exception():
+                logger.info("round exception")
                 break
             if end_confirm:
                 if self.appear_then_click(end_confirm,interval=1):
-                    logger.info("click_script end_cofirm")
-                    break
-            if self._is_exception():
-                logger.info("click_script exception")
-                break
+                    logger.info("round end confirm ")
+                    continue
+            
             self.multi_button_click(buttons)
             
 
