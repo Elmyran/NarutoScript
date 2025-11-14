@@ -1,3 +1,4 @@
+from unittest import skip
 from module.base.timer import Timer
 from module.exception import GameStuckError
 from module.logger.logger import logger
@@ -88,10 +89,10 @@ class Mission(TaskUI):
             
     def _task_refresh(self):
         refresh=DigitCounter(TASK_REFRESH_REMAIN_TIMES)
-        current,remain,total=refresh.ocr_single_line(self.device.image)
+        current,_,_=refresh.ocr_single_line(self.device.image)
         pre=current
         for _ in self.loop():
-            current,remain,total=refresh.ocr_single_line(self.device.image)
+            current,_,_=refresh.ocr_single_line(self.device.image)
             if current!=pre:
                 return True
             if self.appear(TASK_REFRESH_TIMES_SHORTAGE):
@@ -161,7 +162,9 @@ class Mission(TaskUI):
     def _tasks_recognition(self):
         task_areas=[TASK_1_AREA,TASK_2_AREA,TASK_3_AREA]
         tasks=[]
+    
         for area in task_areas:
+            
             task=Task(area)
             task.task_parse(self.device.image)
             if task.valid:
