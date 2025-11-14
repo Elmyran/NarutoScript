@@ -27,6 +27,13 @@ class Task:
         button = ClickButton(area=name_area, name='TASK')
         ocr=MissionWhiteLetterOcr(button)
         self.name=ocr.ocr_single_line(image)
+        #button
+        ACCPET_BUTTON.load_search(self.area)
+        if ACCPET_BUTTON.match_template(image,similarity=0.7):
+            self.button=ACCPET_BUTTON.button
+        else:
+            self.valid=False
+            return
         #time
         time_area = (  
         self.area[2] - 140,  
@@ -38,13 +45,6 @@ class Task:
         ocr=MissionDurationOcr(button)
         time=ocr.ocr_single_line(image)
         self.time=self.time_parse(time)
-        #button
-        ACCPET_BUTTON.load_search(self.area)
-        if ACCPET_BUTTON.match_template(image):
-            self.button=ACCPET_BUTTON.button
-        elif ACCEPTED_BUTTON.match_template(image,similarity=0.7):
-            self.button=ACCEPTED_BUTTON.button
-            self.valid=False
         #jade
         MISSION_JADE.load_search(self.area)
         if MISSION_JADE.match_template(image,similarity=0.6):
