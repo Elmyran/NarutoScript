@@ -2,7 +2,7 @@ import math
 import cv2
 import numpy as np
 from functools import cached_property
-from module.base.utils.utils import color_similarity_2d
+from module.base.utils.utils import color_similarity_2d, random_rectangle_point
 from module.device.method.maatouch import MaatouchBuilder, retry as maatouch_retry
 from module.device.method.minitouch import CommandBuilder, insert_swipe, random_normal_distribution, retry as minitouch_retry
 from module.exception import ScriptError
@@ -10,7 +10,6 @@ from module.logger import logger
 from tasks.base.assets.assets_base_move import JOYSTICK
 from tasks.base.assets.assets_base_skill import CHARACTER_ATTACK, CHARACTER_PSYCHIC, CHARACTER_SECRET_SCROLL, CHARACTER_SKILL_1, CHARACTER_SKILL_2, CHARACTER_SKILL_3
 from tasks.base.taskui import TaskUI
-from tasks.combat.skill import SkillContact
 
 class JoystickContact:
 
@@ -120,7 +119,6 @@ class GameControl(TaskUI):
 
         self.BRIGHTNESS_THRESHOLD = 100.0
         self.SATURATION_THRESHOLD = 100.0
-        self._skill_contact=None
      
 
     @cached_property
@@ -188,31 +186,21 @@ class GameControl(TaskUI):
         """
         with JoystickContact(self) as contact:
             contact.up()
-    def multi_long_press(self, buttons, duration=0):  
-        with SkillContact(self) as contact:  
-            contact.long_press(buttons, duration=duration)
-    def press_down(self, buttons):
-        if self._skill_contact is None:  
-            self._skill_contact = SkillContact(self)  
-            self._skill_contact.__enter__()
-        self._skill_contact.press_down(buttons)
-    def press_up(self, buttons):
-        if self._skill_contact is None:  
-            return
-        self._skill_contact.press_up(buttons)
-    def up_all(self):
-        if self._skill_contact is None:  
-            return
-        self._skill_contact.up_all()
 
-    def stop_long_press(self):
-        with SkillContact(self) as contact:  
-            contact.up_all()
-    def is_skill_downed(self):
-        return self._skill_contact.is_downed
-    def is_downed(self,button):
-        if self._skill_contact is None:
-            return False
-        return button in self._skill_contact._downed_skills
+
+
+
+    def multi_button_click(self, buttons):
+        builder = self.device.minitouch_builder  
+        for button in buttons:  
+            x, y = random_rectangle_point(button.button)
+            builder.down(x, y).commit()
+            builder.up().commit().wait(10)  
+        builder.send()  
+
+
+
+
+
 
 
