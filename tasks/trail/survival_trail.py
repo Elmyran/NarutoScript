@@ -16,15 +16,29 @@ class SurvivalTrail(TaskUI):
         self.handle_teleport()
         self._mop_up()
         self._mop_up_check()
+ 
+
     def handle_teleport(self):
         logger.info('handle teleport')
+        confirm=False
+        timer=Timer(1, count=3)
         for _ in self.loop():
-            if self.appear_then_click(SURVIVAL_TELEPORT,interval=0):
-                continue
-            if self.appear_then_click(SURVIVAL_CHAO_YING_CONFIRM,interval=0):
-                continue
             if self.match_template_color(SURVIVAL_CHECK):
-                break
+                if confirm:
+                    break
+                else : 
+                    if not timer.started():  
+                        timer.start()  
+                    elif timer.reached():  
+                        confirm = True  
+                    continue
+            if self.appear_then_click(SURVIVAL_TELEPORT,interval=1):
+                confirm=False
+                continue
+            if self.appear_then_click(SURVIVAL_CHAO_YING_CONFIRM,interval=1):
+                confirm=False
+                continue
+            
             
 
     def _mop_up(self):
