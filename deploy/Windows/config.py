@@ -127,7 +127,7 @@ class DeployConfig(ConfigModel):
         if self.Repository in ['cn']:
             super().__setattr__('Repository', 'https://gitee.com/Elmyran/NarutoScript')
         elif self.Repository in ['global']:
-            super().__setattr__('Repository', 'https://gitee.com/Elmyran/NarutoScript')
+            super().__setattr__('Repository', 'https://github.com/Elmyran/NarutoScript')
     def filepath(self, path):
         """
         Args:
