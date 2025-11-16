@@ -440,6 +440,16 @@ REN_ZHE_TIAO_ZHAN_CHECK = ButtonWrapper(
         button=(1199, 638, 1256, 698),
     ),
 )
+RETURN = ButtonWrapper(
+    name='RETURN',
+    share=Button(
+        file='./assets/share/base/page/RETURN.png',
+        area=(37, 655, 94, 698),
+        search=(17, 635, 114, 718),
+        color=(72, 62, 22),
+        button=(37, 655, 94, 698),
+    ),
+)
 STORE_CHECK = ButtonWrapper(
     name='STORE_CHECK',
     share=Button(
