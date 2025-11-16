@@ -21,20 +21,21 @@ class StoreDragList(DraggableList):
             if StoreTabList.select_row(keyword, main=main):
                 logger.info('Successfully selected '+keyword.cn)
     def is_row_selected(self, button, main):
+        check_area=(self.search_button.area[0],button.area[1],self.search_button.area[2],self.search_button.area[3])
         if self.current_keyword.name=='Recommendation':
-            RECOMMENDATION_SELECTED.load_search(STORE_TAB_LIST_AREA.area)
+            RECOMMENDATION_SELECTED.load_search(check_area)
             if RECOMMENDATION_SELECTED.match_template(main.device.image):
                 return True
         elif self.current_keyword.name=='Store':
-            STORE_SELECTED.load_search(STORE_TAB_LIST_AREA.area)
+            STORE_SELECTED.load_search(check_area)
             if STORE_SELECTED.match_template(main.device.image):
                 return True
         elif self.current_keyword.name=='PlayStore':
-            PLAY_STORE_SELECTED.load_search(STORE_TAB_LIST_AREA.area)
+            PLAY_STORE_SELECTED.load_search(check_area)
             if PLAY_STORE_SELECTED.match_template(main.device.image):
                 return True
         elif self.current_keyword.name=='LimitedTimeSale':
-            LIMITED_TIME_SALE_SELECTED.load_search(STORE_TAB_LIST_AREA.area)
+            LIMITED_TIME_SALE_SELECTED.load_search(check_area)
             if LIMITED_TIME_SALE_SELECTED.match_template(main.device.image):
                 return True
         return False
