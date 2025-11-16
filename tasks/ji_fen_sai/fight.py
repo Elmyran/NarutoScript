@@ -17,8 +17,9 @@ class JiFenSaiFight(TaskUI):
         if not self.is_fight_count_enough():
             return True
         for _ in self.loop():
-            if not self.is_fight_count_enough():
-                break  
+            if self.ui_page_appear(page_ji_fen_sai):
+                if not self.is_fight_count_enough():
+                    break  
             self.enter_panel()
             enemy_list=self.enemy_recognition()
             enemy=self.enemy_filter(enemy_list)
@@ -31,10 +32,6 @@ class JiFenSaiFight(TaskUI):
             self.back_to_ji_fen_sai()
     def back_to_ji_fen_sai(self):
         logger.info(f'Back to Page')
-        ocr=DigitCounter(ENEMY_REFRESH_COUNT)
-        count,_,_=ocr.ocr_single_line(self.device.image)
-        if count==0:
-            return False 
         for _ in self.loop():
             if self.appear(JI_FEN_SAI_CHECK):
                 break
@@ -51,11 +48,16 @@ class JiFenSaiFight(TaskUI):
                 continue
     def refresh_enemy(self):
         logger.info(f'Refresh enemy')
+        ocr=DigitCounter(ENEMY_REFRESH_COUNT)
+        count,_,_=ocr.ocr_single_line(self.device.image)
+        if count==0:
+            return False 
         for _ in self.loop():
             if self.appear(ENEMY_REFRESH_SUCCESS):
                 break
             if self.appear_then_click(ENEMY_REFRESH,interval=2):
                 continue
+        return True
 
     def start_fight(self,enemy):
         logger.info(f'Start fight:{enemy}')
@@ -110,6 +112,7 @@ class JiFenSaiFight(TaskUI):
             
 
     def is_fight_count_enough(self):
+        
         ocr=DigitCounter(JI_FEN_SAI_FIGHT_COUNT)
         times,_,_=ocr.ocr_single_line(self.device.image)
         if times>0:
