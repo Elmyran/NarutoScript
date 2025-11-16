@@ -51,10 +51,10 @@ ENEMY_REFRESH = ButtonWrapper(
     name='ENEMY_REFRESH',
     cn=Button(
         file='./assets/cn/ji_fen_sai/ENEMY_REFRESH.png',
-        area=(208, 520, 378, 580),
-        search=(188, 500, 398, 600),
-        color=(192, 126, 27),
-        button=(208, 520, 378, 580),
+        area=(271, 526, 374, 575),
+        search=(251, 506, 394, 595),
+        color=(221, 156, 21),
+        button=(271, 526, 374, 575),
     ),
     en=None,
 )
@@ -114,6 +114,13 @@ JI_FEN_SAI_FIGHT_END_CONFIRM = ButtonWrapper(
             search=(403, 575, 635, 678),
             color=(232, 162, 11),
             button=(423, 595, 615, 658),
+        ),
+        Button(
+            file='./assets/cn/ji_fen_sai/JI_FEN_SAI_FIGHT_END_CONFIRM.4.png',
+            area=(432, 147, 857, 213),
+            search=(412, 127, 877, 233),
+            color=(61, 73, 97),
+            button=(432, 147, 857, 213),
         ),
     ],
     en=None,
