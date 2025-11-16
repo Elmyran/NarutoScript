@@ -69,7 +69,8 @@ class GeneratedConfig:
     DuelExtended_ExtendedCurrentScore = {}
 
     # Group `JiFenSai`
-    JiFenSai_DailyRewardClaim = True
+    JiFenSai_JiFenSaiSkipFight = True
+    JiFenSai_JiFenSaiFilter = 'PowerLowest'  # PowerLowest, ScoreHighest, PowerLowerThanSelfAndScoreHigher, PowerLowerThanSelfAndScoreLower
 
     # Group `MiJingType`
     MiJingType_LuoYan = True
@@ -169,9 +170,6 @@ class GeneratedConfig:
     BattleOrderStorage_BattleOrderRank = {}
     BattleOrderStorage_BattleOrderActivityPoints = {}
     BattleOrderStorage_BattleOrderTaskProgress = {}
-
-    # Group `JiFenSaiStorage`
-    JiFenSaiStorage_JiFenSaiDailyRewardClaim = {}
 
     # Group `MiJingStorage`
     MiJingStorage_MiJingCount = {}

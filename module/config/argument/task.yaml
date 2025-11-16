@@ -58,7 +58,6 @@ Daily:
     JiFenSai:
       - Scheduler
       - JiFenSai
-      - JiFenSaiStorage
     Freebies:
       - Scheduler
       - Freebies

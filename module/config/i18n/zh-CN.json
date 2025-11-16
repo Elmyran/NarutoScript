@@ -373,9 +373,17 @@
       "name": "积分赛",
       "help": ""
     },
-    "DailyRewardClaim": {
-      "name": "排名奖励领取",
+    "JiFenSaiSkipFight": {
+      "name": "跳过战斗",
       "help": ""
+    },
+    "JiFenSaiFilter": {
+      "name": "敌人选择策略",
+      "help": "",
+      "PowerLowest": "战力最低",
+      "ScoreHighest": "排名最高",
+      "PowerLowerThanSelfAndScoreHigher": "积分最多",
+      "PowerLowerThanSelfAndScoreLower": "最简单"
     }
   },
   "MiJingType": {
@@ -888,16 +896,6 @@
     "BattleOrderTaskProgress": {
       "name": "周任务经验",
       "help": ""
-    }
-  },
-  "JiFenSaiStorage": {
-    "_info": {
-      "name": "JiFenSaiStorage._info.name",
-      "help": "JiFenSaiStorage._info.help"
-    },
-    "JiFenSaiDailyRewardClaim": {
-      "name": "JiFenSaiStorage.JiFenSaiDailyRewardClaim.name",
-      "help": "JiFenSaiStorage.JiFenSaiDailyRewardClaim.help"
     }
   },
   "MiJingStorage": {

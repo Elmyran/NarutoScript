@@ -168,10 +168,8 @@
       "ServerUpdate": "05:00"
     },
     "JiFenSai": {
-      "DailyRewardClaim": true
-    },
-    "JiFenSaiStorage": {
-      "JiFenSaiDailyRewardClaim": {}
+      "JiFenSaiSkipFight": true,
+      "JiFenSaiFilter": "PowerLowest"
     }
   },
   "Freebies": {

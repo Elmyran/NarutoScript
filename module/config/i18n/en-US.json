@@ -373,9 +373,17 @@
       "name": "JiFenSai._info.name",
       "help": "JiFenSai._info.help"
     },
-    "DailyRewardClaim": {
-      "name": "JiFenSai.DailyRewardClaim.name",
-      "help": "JiFenSai.DailyRewardClaim.help"
+    "JiFenSaiSkipFight": {
+      "name": "JiFenSai.JiFenSaiSkipFight.name",
+      "help": "JiFenSai.JiFenSaiSkipFight.help"
+    },
+    "JiFenSaiFilter": {
+      "name": "JiFenSai.JiFenSaiFilter.name",
+      "help": "JiFenSai.JiFenSaiFilter.help",
+      "PowerLowest": "PowerLowest",
+      "ScoreHighest": "ScoreHighest",
+      "PowerLowerThanSelfAndScoreHigher": "PowerLowerThanSelfAndScoreHigher",
+      "PowerLowerThanSelfAndScoreLower": "PowerLowerThanSelfAndScoreLower"
     }
   },
   "MiJingType": {
@@ -888,16 +896,6 @@
     "BattleOrderTaskProgress": {
       "name": "BattleOrderStorage.BattleOrderTaskProgress.name",
       "help": "BattleOrderStorage.BattleOrderTaskProgress.help"
-    }
-  },
-  "JiFenSaiStorage": {
-    "_info": {
-      "name": "JiFenSaiStorage._info.name",
-      "help": "JiFenSaiStorage._info.help"
-    },
-    "JiFenSaiDailyRewardClaim": {
-      "name": "JiFenSaiStorage.JiFenSaiDailyRewardClaim.name",
-      "help": "JiFenSaiStorage.JiFenSaiDailyRewardClaim.help"
     }
   },
   "MiJingStorage": {
