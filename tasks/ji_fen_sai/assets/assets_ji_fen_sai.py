@@ -108,6 +108,13 @@ JI_FEN_SAI_FIGHT_END_CONFIRM = ButtonWrapper(
             color=(231, 163, 12),
             button=(548, 594, 736, 657),
         ),
+        Button(
+            file='./assets/cn/ji_fen_sai/JI_FEN_SAI_FIGHT_END_CONFIRM.3.png',
+            area=(423, 595, 615, 658),
+            search=(403, 575, 635, 678),
+            color=(232, 162, 11),
+            button=(423, 595, 615, 658),
+        ),
     ],
     en=None,
 )

@@ -78,7 +78,7 @@ class JiFenSaiFight(TaskUI):
         ocr=Digit(TEAM_POWER_SELF)
         power_self=ocr.ocr_single_line(self.device.image)
         if self.config.JiFenSai_JiFenSaiFilter=='PowerLowest':
-            return list[-1]
+            return min(list, key=lambda enemy: enemy.power)  
         if self.config.JiFenSai_JiFenSaiFilter=='ScoreHighest':
             return list[0]
         if self.config.JiFenSai_JiFenSaiFilter=='PowerLowerThanSelfAndScoreHigher':
@@ -86,8 +86,9 @@ class JiFenSaiFight(TaskUI):
                 if enemy.power<power_self and enemy.score>0:
                     return enemy
         if self.config.JiFenSai_JiFenSaiFilter=='PowerLowerThanSelfAndScoreLower':
-            if list[-1].power < power_self:  
-                return list[-1]
+            enemy=min(list, key=lambda enemy: enemy.power)  
+            if enemy.power<power_self:  
+                return enemy
             else :
                 return None 
         return list[-1]
