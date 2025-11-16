@@ -65,13 +65,22 @@ MI_JING_FAIL = ButtonWrapper(
 )
 MI_JING_FIGHT_CHECK = ButtonWrapper(
     name='MI_JING_FIGHT_CHECK',
-    cn=Button(
-        file='./assets/cn/ren_zhe_tiao_zhan/MI_JING_FIGHT_CHECK.png',
-        area=(35, 273, 106, 298),
-        search=(15, 253, 126, 318),
-        color=(101, 64, 60),
-        button=(35, 273, 106, 298),
-    ),
+    cn=[
+        Button(
+            file='./assets/cn/ren_zhe_tiao_zhan/MI_JING_FIGHT_CHECK.png',
+            area=(35, 273, 106, 298),
+            search=(15, 253, 126, 318),
+            color=(101, 64, 60),
+            button=(35, 273, 106, 298),
+        ),
+        Button(
+            file='./assets/cn/ren_zhe_tiao_zhan/MI_JING_FIGHT_CHECK.2.png',
+            area=(647, 23, 676, 52),
+            search=(627, 3, 696, 72),
+            color=(110, 82, 6),
+            button=(647, 23, 676, 52),
+        ),
+    ],
     en=None,
 )
 MI_JING_REMAIN_CHALLENGE_TICKET = ButtonWrapper(
