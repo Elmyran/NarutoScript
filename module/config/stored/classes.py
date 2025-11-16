@@ -250,8 +250,6 @@ class StoredDuelCurrentVictory(StoredCounter, StoredExpiredAtMonday0500):
 class StoredPanRenCount(StoredCounter, StoredExpiredAtMonday0500):
     FIXED_TOTAL = 2
 
-class StoredJiFenSaiRewardClaimCount(StoredCounter,StoredExpiredAt0500):
-    FIXED_TOTAL = 1
 class StoredMiJingCount(StoredCounter, StoredExpiredAtMonday0500):
     value = 0
 class StoredTiLi(StoredCounter):

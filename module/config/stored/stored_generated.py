@@ -22,7 +22,6 @@ from module.config.stored.classes import (
     StoredFriendGiftsFinishCount,
     StoredInformationClubSignInCount,
     StoredInt,
-    StoredJiFenSaiRewardClaimCount,
     StoredLeaderBoardLikeCount,
     StoredMailRewardClaimCount,
     StoredMiJingCount,
@@ -55,7 +54,6 @@ class StoredGenerated:
     MissionAccept = StoredMissionAccept("Mission.MissionStorage.MissionAccept")
     MiJingTicket = StoredMiJingTicket("MiJing.MiJingCount.MiJingTicket")
     MiJingCount = StoredMiJingCount("MiJing.MiJingStorage.MiJingCount")
-    JiFenSaiDailyRewardClaim = StoredJiFenSaiRewardClaimCount("JiFenSai.JiFenSaiStorage.JiFenSaiDailyRewardClaim")
     FriendGiftsFinishCount = StoredFriendGiftsFinishCount("Freebies.Freebies.FriendGiftsFinishCount")
     DailyShareFinishCount = StoredDailyShareFinishCount("Freebies.Freebies.DailyShareFinishCount")
     MailRewardFinishCount = StoredMailRewardClaimCount("Freebies.Freebies.MailRewardFinishCount")

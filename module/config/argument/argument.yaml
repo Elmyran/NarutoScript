@@ -164,9 +164,20 @@ DuelExtended:
 
 
 JiFenSai:
-  DailyRewardClaim:
+  JiFenSaiSkipFight:
     type: checkbox
     value: true
+  JiFenSaiFilter:
+    type: select
+    value: 'PowerLowest'
+    option: [
+    'PowerLowest',
+    'ScoreHighest',
+    'PowerLowerThanSelfAndScoreHigher',
+    'PowerLowerThanSelfAndScoreLower'
+    ]
+
+    
 MiJingType:
   LuoYan:
     type: checkbox
@@ -606,11 +617,7 @@ BattleOrderStorage:
     value: {}
     display: display
 
-JiFenSaiStorage:
-  JiFenSaiDailyRewardClaim:
-    stored: StoredJiFenSaiRewardClaimCount
-    value: {}
-    display: hide
+
 MiJingStorage:
   MiJingCount:
     stored: StoredMiJingCount

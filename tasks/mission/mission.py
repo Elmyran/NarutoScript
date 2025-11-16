@@ -162,9 +162,12 @@ class Mission(TaskUI):
     def _tasks_recognition(self):
         task_areas=[TASK_1_AREA,TASK_2_AREA,TASK_3_AREA]
         tasks=[]
-    
+        skip_first_screenshot=True
         for area in task_areas:
-            
+            if skip_first_screenshot:
+                skip_first_screenshot=False
+            else :
+                self.device.screenshot()
             task=Task(area)
             task.task_parse(self.device.image)
             if task.valid:

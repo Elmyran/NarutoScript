@@ -601,17 +601,19 @@
       }
     },
     "JiFenSai": {
-      "DailyRewardClaim": {
+      "JiFenSaiSkipFight": {
         "type": "checkbox",
         "value": true
-      }
-    },
-    "JiFenSaiStorage": {
-      "JiFenSaiDailyRewardClaim": {
-        "type": "stored",
-        "value": {},
-        "display": "hide",
-        "stored": "StoredJiFenSaiRewardClaimCount"
+      },
+      "JiFenSaiFilter": {
+        "type": "select",
+        "value": "PowerLowest",
+        "option": [
+          "PowerLowest",
+          "ScoreHighest",
+          "PowerLowerThanSelfAndScoreHigher",
+          "PowerLowerThanSelfAndScoreLower"
+        ]
       }
     }
   },
