@@ -109,7 +109,7 @@ class JiFenSaiFight(TaskUI):
 
     def is_fight_count_enough(self):
         ocr=DigitCounter(JI_FEN_SAI_FIGHT_COUNT)
-        times,_,=ocr.ocr_single_line(self.device.image)
+        times,_,_=ocr.ocr_single_line(self.device.image)
         if times>0:
             return True
         return False
