@@ -5,14 +5,14 @@ from typing import ClassVar
 class StoreKeyword(Keyword):
     instances: ClassVar = {}
 
-Recommendation=StoreKeyword(
+ThemeStore=StoreKeyword(
     id=1,
-    name='Recommendation',
-    cn='推荐',
-    cht='推薦',
-    en='Recommend',
-    jp='おすすめ',
-    es='Recomendado',
+    name='ThemeStore',
+    cn='主题商店',
+    cht='主題商店',
+    en='Theme Store',
+    jp='テーマストア',
+    es='Tienda de Temas',
 )
 Store=StoreKeyword(
     id=2,
