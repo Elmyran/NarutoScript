@@ -14,8 +14,6 @@ class JiFenSaiFight(TaskUI):
         self.handle_fight()
     def handle_fight(self):
         self.ui_ensure(page_ji_fen_sai)
-        if not self.is_fight_count_enough():
-            return True
         for _ in self.loop():
             if self.ui_page_appear(page_ji_fen_sai):
                 if not self.is_fight_count_enough():
@@ -30,6 +28,7 @@ class JiFenSaiFight(TaskUI):
             self.start_fight(enemy)
             self.skip_fight()
             self.back_to_ji_fen_sai()
+        return True
     def back_to_ji_fen_sai(self):
         logger.info(f'Back to Page')
         for _ in self.loop():
@@ -78,19 +77,19 @@ class JiFenSaiFight(TaskUI):
         ocr=Digit(TEAM_POWER_SELF)
         power_self=ocr.ocr_single_line(self.device.image)
         if self.config.JiFenSai_JiFenSaiFilter=='PowerLowest':
-            return list(len(list)-1)
+            return list[-1]
         if self.config.JiFenSai_JiFenSaiFilter=='ScoreHighest':
-            return list(0)
+            return list[0]
         if self.config.JiFenSai_JiFenSaiFilter=='PowerLowerThanSelfAndScoreHigher':
             for enemy in list:
                 if enemy.power<power_self and enemy.score>0:
                     return enemy
         if self.config.JiFenSai_JiFenSaiFilter=='PowerLowerThanSelfAndScoreLower':
-            if list(len(list)-1).pwor<power_self:
-                return list(len(list)-1)
+            if list[-1].power < power_self:  
+                return list[-1]
             else :
                 return None 
-        return list(len(list)-1)
+        return list[-1]
     def enemy_recognition(self):
         enemy_area=[ENEMY_1,ENEMY_2,ENEMY_3,ENEMY_4]
         enemy_list=[]
