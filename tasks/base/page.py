@@ -189,7 +189,7 @@ page_squad.link(CLOSE,destination=page_main)
 #FengRao
 page_feng_rao=Page(FENG_RAO_CHECK)
 page_manual.link(MANUAL_GOTO_TASK_BUTTON,destination=page_feng_rao)
-page_feng_rao.link(CLOSE,destination=page_main)
+page_feng_rao.link(RETURN,destination=page_main)
 #SurvivalTrail
 page_trail=Page(TRAIL_SURVIVAL_CHECK)
 page_survival_trail=Page(SURVIVAL_PAGE_CHECK)
