@@ -75,15 +75,15 @@ class JiFenSaiFight(TaskUI):
             raise RequestHumanTakeover(f'No enemy found')
         ocr=Digit(TEAM_POWER_SELF)
         power_self=ocr.ocr_single_line(self.device.image)
-        if self.config.JiFenSai_JiFenSaiFilter.value=='PowerLowest':
+        if self.config.JiFenSai_JiFenSaiFilter=='PowerLowest':
             return list(len(list)-1)
-        if self.config.JiFenSai_JiFenSaiFilter.value=='ScoreHighest':
+        if self.config.JiFenSai_JiFenSaiFilter=='ScoreHighest':
             return list(0)
-        if self.config.JiFenSai_JiFenSaiFilter.value=='PowerLowerThanSelfAndScoreHigher':
+        if self.config.JiFenSai_JiFenSaiFilter=='PowerLowerThanSelfAndScoreHigher':
             for enemy in list:
                 if enemy.power<power_self and enemy.score>0:
                     return enemy
-        if self.config.JiFenSai_JiFenSaiFilter.value=='PowerLowerThanSelfAndScoreLower':
+        if self.config.JiFenSai_JiFenSaiFilter=='PowerLowerThanSelfAndScoreLower':
             if list(len(list)-1).pwor<power_self:
                 return list(len(list)-1)
             else :
@@ -101,6 +101,8 @@ class JiFenSaiFight(TaskUI):
   
     def enter_panel(self):
         for _ in self.loop():
+            if self.appear(ENEMY_REFRESH_SUCCESS):
+                continue 
             if self.appear(ENEMY_REFRESH):
                 break
             if self.appear_then_click(JI_FEN_SAI_GOTO_FIGHT_PANEL,interval=1):
