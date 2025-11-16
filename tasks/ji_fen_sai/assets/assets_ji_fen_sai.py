@@ -93,13 +93,22 @@ JI_FEN_SAI_FIGHT_COUNT = ButtonWrapper(
 )
 JI_FEN_SAI_FIGHT_END_CONFIRM = ButtonWrapper(
     name='JI_FEN_SAI_FIGHT_END_CONFIRM',
-    cn=Button(
-        file='./assets/cn/ji_fen_sai/JI_FEN_SAI_FIGHT_END_CONFIRM.png',
-        area=(671, 599, 861, 659),
-        search=(651, 579, 881, 679),
-        color=(232, 164, 11),
-        button=(671, 599, 861, 659),
-    ),
+    cn=[
+        Button(
+            file='./assets/cn/ji_fen_sai/JI_FEN_SAI_FIGHT_END_CONFIRM.png',
+            area=(671, 599, 861, 659),
+            search=(651, 579, 881, 679),
+            color=(232, 164, 11),
+            button=(671, 599, 861, 659),
+        ),
+        Button(
+            file='./assets/cn/ji_fen_sai/JI_FEN_SAI_FIGHT_END_CONFIRM.2.png',
+            area=(548, 594, 736, 657),
+            search=(528, 574, 756, 677),
+            color=(231, 163, 12),
+            button=(548, 594, 736, 657),
+        ),
+    ],
     en=None,
 )
 JI_FEN_SAI_FIGHT_PANEL_CHECK = ButtonWrapper(

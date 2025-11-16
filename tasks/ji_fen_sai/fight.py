@@ -43,7 +43,8 @@ class JiFenSaiFight(TaskUI):
         for _ in self.loop():
             if self.appear(JI_FEN_SAI_FIGHT_END_CONFIRM):
                 break
-            if self.appear_then_click(JI_FEN_SAI_SKIP_FIGHT_BUTTON,interval=2):
+            if self.match_template_color(JI_FEN_SAI_SKIP_FIGHT_BUTTON,interval=2):
+                self.device.click(JI_FEN_SAI_SKIP_FIGHT_BUTTON)
                 continue
     def refresh_enemy(self):
         logger.info(f'Refresh enemy')
