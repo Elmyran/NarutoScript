@@ -5,7 +5,7 @@ from module.ocr.ocr import Digit, DigitCounter
 from tasks.base.assets.assets_base_page import JI_FEN_SAI_CHECK
 from tasks.base.taskui import TaskUI
 from tasks.base.page import page_ji_fen_sai
-from tasks.ji_fen_sai.assets.assets_ji_fen_sai import ENEMY_1, ENEMY_2, ENEMY_3, ENEMY_4, ENEMY_REFRESH, ENEMY_REFRESH_COUNT, ENEMY_REFRESH_SUCCESS, JI_FEN_SAI_FIGHT_COUNT, JI_FEN_SAI_FIGHT_END_CONFIRM, JI_FEN_SAI_FIGHT_START_BUTTON, JI_FEN_SAI_GOTO_FIGHT_PANEL, JI_FEN_SAI_IS_IN_FIGHT, JI_FEN_SAI_SKIP_FIGHT_BUTTON, TEAM_POWER_SELF
+from tasks.ji_fen_sai.assets.assets_ji_fen_sai import ENEMY_1, ENEMY_2, ENEMY_3, ENEMY_4, ENEMY_REFRESH, ENEMY_REFRESH_COUNT, ENEMY_REFRESH_SUCCESS, JI_FEN_SAI_FIGHT_COUNT, JI_FEN_SAI_FIGHT_END_CONFIRM, JI_FEN_SAI_FIGHT_PANEL_CHECK, JI_FEN_SAI_FIGHT_START_BUTTON, JI_FEN_SAI_GOTO_FIGHT_PANEL, JI_FEN_SAI_IS_IN_FIGHT, JI_FEN_SAI_SKIP_FIGHT_BUTTON, TEAM_POWER_SELF
 from tasks.ji_fen_sai.enemy import Enemy
 class JiFenSaiFight(TaskUI):
     def run(self):
@@ -106,7 +106,7 @@ class JiFenSaiFight(TaskUI):
         for _ in self.loop():
             if self.appear(ENEMY_REFRESH_SUCCESS):
                 continue 
-            if self.appear(ENEMY_REFRESH):
+            if self.appear(JI_FEN_SAI_FIGHT_PANEL_CHECK):
                 break
             if self.appear_then_click(JI_FEN_SAI_GOTO_FIGHT_PANEL,interval=1):
                 continue
