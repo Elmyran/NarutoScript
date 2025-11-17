@@ -267,7 +267,7 @@ class MaaTouch(Connection):
     @retry
     def click_maatouch(self, x, y):
         builder = self.maatouch_builder
-        builder.down(x, y).commit()
+        builder.down(x, y).commit().wait(100)
         builder.up().commit()
         builder.send()
 
