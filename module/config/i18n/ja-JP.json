@@ -180,7 +180,9 @@
       "name": "Emulator.ControlMethod.name",
       "help": "Emulator.ControlMethod.help",
       "minitouch": "minitouch",
-      "MaaTouch": "MaaTouch"
+      "MaaTouch": "MaaTouch",
+      "ADB": "ADB",
+      "uiautomator2": "uiautomator2"
     },
     "AdbRestart": {
       "name": "Emulator.AdbRestart.name",

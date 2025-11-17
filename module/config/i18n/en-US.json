@@ -180,7 +180,9 @@
       "name": "Control Method",
       "help": "Speed: MaaTouch = minitouch >>> uiautomator2 ~= ADB\nMaaTouch is recommended",
       "minitouch": "minitouch",
-      "MaaTouch": "MaaTouch"
+      "MaaTouch": "MaaTouch",
+      "ADB": "ADB",
+      "uiautomator2": "uiautomator2"
     },
     "AdbRestart": {
       "name": "Try to restart adb when no device found",

@@ -103,6 +103,7 @@ class MiJing(TaskUI):
             return False
         return False
     def enter_mi_jing(self):
+        self.device.click_record_clear()
         for _ in self.loop():
             if self.appear_then_click(MI_JING_START_NOTIFY,interval=1):
                 continue
@@ -110,7 +111,7 @@ class MiJing(TaskUI):
                 continue
             if self.appear_then_click(MI_JING_ROOM_START_FIGHT,interval=1):
                 continue
-            if self.appear(MI_JING_FIGHT_CHECK):
+            if self.appear(MI_JING_FIGHT_CHECK) and self.appear(MI_JING_TYPE_CHECK):
                 break
 
     def ticket_recognition(self):

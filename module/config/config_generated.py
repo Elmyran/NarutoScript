@@ -21,7 +21,7 @@ class GeneratedConfig:
     Emulator_PackageName = 'auto'  # auto, CN-Official
     Emulator_GameLanguage = 'auto'  # auto, cn
     Emulator_ScreenshotMethod = 'auto'  # auto, ADB, ADB_nc, uiautomator2, aScreenCap, aScreenCap_nc, DroidCast, DroidCast_raw, scrcpy, nemu_ipc, ldopengl
-    Emulator_ControlMethod = 'MaaTouch'  # minitouch, MaaTouch
+    Emulator_ControlMethod = 'minitouch'  # minitouch, MaaTouch, ADB, uiautomator2
     Emulator_AdbRestart = False
 
     # Group `EmulatorInfo`

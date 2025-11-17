@@ -48,12 +48,13 @@
       },
       "ControlMethod": {
         "type": "select",
-        "value": "MaaTouch",
+        "value": "minitouch",
         "option": [
           "minitouch",
-          "MaaTouch"
-        ],
-        "display": "hide"
+          "MaaTouch",
+          "ADB",
+          "uiautomator2"
+        ]
       },
       "AdbRestart": {
         "type": "checkbox",
