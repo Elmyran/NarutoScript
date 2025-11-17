@@ -12,6 +12,7 @@ class MiJingOcr(Ocr):
         result=result.replace("淀","境")
         result=result.replace("密","秘")
         result=result.replace("霆霆","雷霆")
+        result=result.replace("雪","雷")
         result=result.replace("显","罡")
         result=result.replace("宰","牢")
         return super().after_process(result)

@@ -48,7 +48,7 @@
       },
       "ControlMethod": {
         "type": "select",
-        "value": "MaaTouch",
+        "value": "minitouch",
         "option": [
           "minitouch",
           "MaaTouch",

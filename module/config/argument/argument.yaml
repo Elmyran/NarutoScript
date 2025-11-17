@@ -43,7 +43,7 @@ Emulator:
       ldopengl,
     ]
   ControlMethod:
-    value: MaaTouch
+    value: minitouch
     option: [ minitouch, MaaTouch,ADB,uiautomator2 ]
   AdbRestart: false
 EmulatorInfo:
