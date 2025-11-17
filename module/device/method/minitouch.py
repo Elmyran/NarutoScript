@@ -592,7 +592,7 @@ class Minitouch(Connection):
     @retry
     def click_minitouch(self, x, y):
         builder = self.minitouch_builder
-        builder.down(x, y).commit().wait(200)
+        builder.down(x, y).commit().wait(500)
         builder.up().commit()
         builder.send()
 
