@@ -194,7 +194,7 @@ class GameControl(TaskUI):
         builder = self.device.minitouch_builder  
         for button in buttons:  
             x, y = random_rectangle_point(button.button)
-            builder.down(x, y).commit()
+            builder.down(x, y).commit().wait(100)
             builder.up().commit().wait(10)  
         builder.send()  
 
