@@ -180,7 +180,9 @@
       "name": "Método de control",
       "help": "Velocidad: MaaTouch = minitouch >>> uiautomator2 ~= ADB\nMaaTouch es el recomendado.",
       "minitouch": "minitouch",
-      "MaaTouch": "MaaTouch"
+      "MaaTouch": "MaaTouch",
+      "ADB": "ADB",
+      "uiautomator2": "uiautomator2"
     },
     "AdbRestart": {
       "name": "Intentar reiniciar el ADB cuando no se encuentre ninguno.",

@@ -180,7 +180,9 @@
       "name": "模擬器控制方案",
       "help": "速度: MaaTouch = minitouch > Hermit >>> uiautomator2 ~= ADB\n建議選MaaTouch",
       "minitouch": "minitouch",
-      "MaaTouch": "MaaTouch"
+      "MaaTouch": "MaaTouch",
+      "ADB": "ADB",
+      "uiautomator2": "uiautomator2"
     },
     "AdbRestart": {
       "name": "在檢測不到設備的時候嘗試重啟adb",

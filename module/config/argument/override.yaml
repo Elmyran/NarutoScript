@@ -6,8 +6,7 @@
 # ==================== Alas ====================
 
 Alas:
-  Emulator:
-    ControlMethod: MaaTouch
+
   Optimization:
     ScreenshotInterval: 0.2
     CombatScreenshotInterval: 1.0
