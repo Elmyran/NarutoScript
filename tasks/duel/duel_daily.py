@@ -62,6 +62,7 @@ class DuelDaily(TaskUI):
         first_reach=True
         second_reach=True
         have_recall_card=True
+        click_interval=Timer(1)
         for _ in self.loop():
             if claim_time.reached():
                 if first_reach:
@@ -74,14 +75,16 @@ class DuelDaily(TaskUI):
                     second_reach=False
                 else:
                     break
-            if self.appear_then_click(DUEL_TASK_RECALLED_FAIL,interval=0):
+            if self.appear_then_click(DUEL_TASK_RECALLED_FAIL,interval=1):
                 have_recall_card=False
                 continue
             if self.appear_then_click(DUEL_TASK_RECALLED_CONFIRM,interval=0):
                 continue
             if self.appear(DUEL_TASK_RECALLED_BUTTON) and have_recall_card:
-                self.device.click(DUEL_TASK_RECALLED_BUTTON)
-                continue
+                if click_interval.reached():
+                    self.device.click(DUEL_TASK_RECALLED_BUTTON)
+                    click_interval.reset()
+                    continue
             if self.appear_then_click(DUEL_TASK_REWARD_CLAIM_BUTTON,interval=1):
                 continue
         
@@ -188,15 +191,13 @@ class DuelDaily(TaskUI):
                     break
                 last_check = time.time()
 
-            # 先点击普通攻击按钮，快速无间断
-            x, y = random_rectangle_point(attack_button.button)
-            x, y = ensure_int(x, y)
-            self.device.click_maatouch(x, y)
 
-            # 每循环一次点击一个其他按钮，轮询切换
+
+   
+            self.device.click(attack_button)
+
+
             if other_count > 0:
                 button = other_buttons[idx]
-                x, y = random_rectangle_point(button.button)
-                x, y = ensure_int(x, y)
-                self.device.click_maatouch(x, y)
+                self.device.click(button)
                 idx = (idx + 1) % other_count
