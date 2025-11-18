@@ -103,13 +103,22 @@ STORE_PURCHASE_LIMITED = ButtonWrapper(
 )
 STORE_SELECTED = ButtonWrapper(
     name='STORE_SELECTED',
-    cn=Button(
-        file='./assets/cn/store_purchase/STORE_SELECTED.png',
-        area=(27, 271, 193, 327),
-        search=(7, 251, 213, 347),
-        color=(155, 73, 50),
-        button=(27, 271, 193, 327),
-    ),
+    cn=[
+        Button(
+            file='./assets/cn/store_purchase/STORE_SELECTED.png',
+            area=(27, 271, 193, 327),
+            search=(7, 251, 213, 347),
+            color=(155, 73, 50),
+            button=(27, 271, 193, 327),
+        ),
+        Button(
+            file='./assets/cn/store_purchase/STORE_SELECTED.2.png',
+            area=(63, 340, 161, 373),
+            search=(43, 320, 181, 393),
+            color=(137, 74, 74),
+            button=(63, 340, 161, 373),
+        ),
+    ],
     en=None,
 )
 STORE_TAB_LIST_AREA = ButtonWrapper(
