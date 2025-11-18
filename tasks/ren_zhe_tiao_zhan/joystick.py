@@ -41,6 +41,12 @@ class JoystickContact:
         elif method == 'minitouch':
             _ = self.main.device.minitouch_builder
             builder = CommandBuilder(self.main.device, contact=1)
+        elif method == 'ADB':
+            _ = self.main.device.minitouch_builder
+            builder = CommandBuilder(self.main.device, contact=1)
+        elif method == 'uiautomator2':
+            _ = self.main.device.minitouch_builder
+            builder = CommandBuilder(self.main.device, contact=1)
         else:
             raise ScriptError(f'Control method {method} does not support multi-finger')
         builder.DEFAULT_DELAY = 0.
@@ -51,6 +57,10 @@ class JoystickContact:
         if method == 'MaaTouch':
             retry = maatouch_retry
         elif method == 'minitouch':
+            retry = minitouch_retry
+        elif method == 'ADB':
+            retry = minitouch_retry
+        elif method == 'uiautomator2':
             retry = minitouch_retry
         else:
             raise ScriptError(f'Control method {method} does not support multi-finger')
