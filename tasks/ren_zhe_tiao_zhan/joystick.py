@@ -41,6 +41,10 @@ class JoystickContact:
         elif method == 'minitouch':
             _ = self.main.device.minitouch_builder
             builder = CommandBuilder(self.main.device, contact=1)
+        elif method == 'ADB':
+            _ = self.main.device.minitouch_builder
+            builder = CommandBuilder(self.main.device, contact=1)
+
         else:
             raise ScriptError(f'Control method {method} does not support multi-finger')
         builder.DEFAULT_DELAY = 0.
