@@ -24,19 +24,19 @@ class StoreDragList(DraggableList):
         check_area=(self.search_button.area[0],button.area[1],self.search_button.area[2],self.search_button.area[3])
         if self.current_keyword.name=='Recommendation':
             RECOMMENDATION_SELECTED.load_search(check_area)
-            if RECOMMENDATION_SELECTED.match_template(main.device.image):
+            if RECOMMENDATION_SELECTED.match_template(main.device.image,similarity=0.7):
                 return True
         elif self.current_keyword.name=='Store':
             STORE_SELECTED.load_search(check_area)
-            if STORE_SELECTED.match_template(main.device.image):
+            if STORE_SELECTED.match_template(main.device.image,similarity=0.7):
                 return True
         elif self.current_keyword.name=='PlayStore':
             PLAY_STORE_SELECTED.load_search(check_area)
-            if PLAY_STORE_SELECTED.match_template(main.device.image):
+            if PLAY_STORE_SELECTED.match_template(main.device.image,similarity=0.7):
                 return True
         elif self.current_keyword.name=='LimitedTimeSale':
             LIMITED_TIME_SALE_SELECTED.load_search(check_area)
-            if LIMITED_TIME_SALE_SELECTED.match_template(main.device.image):
+            if LIMITED_TIME_SALE_SELECTED.match_template(main.device.image,similarity=0.7):
                 return True
         return False
 class SubsidiaryStoreDragList(DraggableList):
