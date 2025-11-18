@@ -176,15 +176,12 @@ class DuelWeekly(TaskUI):
                     break
                 last_check = time.time()
 
-            # 先点击普通攻击按钮，快速无间断
-            x, y = random_rectangle_point(attack_button.button)
-            x, y = ensure_int(x, y)
-            self.device.click_maatouch(x, y)
 
-            # 每循环一次点击一个其他按钮，轮询切换
+            
+            self.device.click(attack_button)
+
+
             if other_count > 0:
                 button = other_buttons[idx]
-                x, y = random_rectangle_point(button.button)
-                x, y = ensure_int(x, y)
-                self.device.click_maatouch(x, y)
+                self.device.click(button)
                 idx = (idx + 1) % other_count
