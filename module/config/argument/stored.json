@@ -368,11 +368,11 @@
     "order": 0,
     "color": "#777777"
   },
-  "BattleOrderActivityPoints": {
-    "name": "BattleOrderActivityPoints",
-    "path": "BattleOrder.BattleOrderStorage.BattleOrderActivityPoints",
-    "i18n": "BattleOrderStorage.BattleOrderActivityPoints.name",
-    "stored": "StoredBattleOrderActivityPoints",
+  "BattleOrderActivityProgress": {
+    "name": "BattleOrderActivityProgress",
+    "path": "BattleOrder.BattleOrderStorage.BattleOrderActivityProgress",
+    "i18n": "BattleOrderStorage.BattleOrderActivityProgress.name",
+    "stored": "StoredBattleOrderActivityProgress",
     "attrs": {
       "time": "2020-01-01 00:00:00",
       "total": 300,

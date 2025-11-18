@@ -356,7 +356,7 @@ class StoredBattleFieldCount(StoredCounter,StoredExpiredAtMonday0500):
     FIXED_TOTAL = 1
 class StoredAccountName(StoredBase):
     value = ''
-class StoredBattleOrderActivityPoints(StoredCounter,StoredExpiredAtMonday0500):
+class StoredBattleOrderActivityProgress(StoredCounter,StoredExpiredAtMonday0500):
     value = 0
     FIXED_TOTAL=300
 class StoredBattleOrderTaskProgress(StoredCounter,StoredExpiredAtMonday0500):

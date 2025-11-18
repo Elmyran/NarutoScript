@@ -256,7 +256,7 @@
     },
     "BattleOrderStorage": {
       "BattleOrderRank": {},
-      "BattleOrderActivityPoints": {},
+      "BattleOrderActivityProgress": {},
       "BattleOrderTaskProgress": {}
     }
   },

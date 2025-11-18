@@ -333,6 +333,17 @@ TASK_BOX_RED = ButtonWrapper(
     ),
     en=None,
 )
+TASK_REFRESH_FREE = ButtonWrapper(
+    name='TASK_REFRESH_FREE',
+    cn=Button(
+        file='./assets/cn/mission/TASK_REFRESH_FREE.png',
+        area=(1093, 630, 1250, 681),
+        search=(1073, 610, 1270, 701),
+        color=(208, 152, 41),
+        button=(1093, 630, 1250, 681),
+    ),
+    en=None,
+)
 TASK_REFRESH_REMAIN_TIMES = ButtonWrapper(
     name='TASK_REFRESH_REMAIN_TIMES',
     cn=Button(

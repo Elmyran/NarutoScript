@@ -891,9 +891,9 @@
       "name": "BattleOrderStorage.BattleOrderRank.name",
       "help": "BattleOrderStorage.BattleOrderRank.help"
     },
-    "BattleOrderActivityPoints": {
-      "name": "BattleOrderStorage.BattleOrderActivityPoints.name",
-      "help": "BattleOrderStorage.BattleOrderActivityPoints.help"
+    "BattleOrderActivityProgress": {
+      "name": "BattleOrderStorage.BattleOrderActivityProgress.name",
+      "help": "BattleOrderStorage.BattleOrderActivityProgress.help"
     },
     "BattleOrderTaskProgress": {
       "name": "BattleOrderStorage.BattleOrderTaskProgress.name",
