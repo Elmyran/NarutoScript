@@ -8,17 +8,20 @@ from tasks.battle_order.ui.switch import BATTLE_ORDER_TAB
 class BattleOrderWeeklyReward(UI):
     current_progress=0
     def run(self):
-        if self.config.stored.BattleOrderActivityPoints.is_expired():
-            self.config.stored.BattleOrderActivityPoints.clear()
-        if self.config.stored.BattleOrderActivityPoints.is_full():
+        if self.config.stored.BattleOrderActivityProgress.is_expired():
+            self.config.stored.BattleOrderActivityProgress.clear()
+        if self.config.stored.BattleOrderActivityProgress.is_full():
             return True
+
         self.device.click_record_clear()
         self.handle_battle_order_weekly_reward()
+        
         return True
     def handle_battle_order_weekly_reward(self):
         self.ui_ensure(page_battle_order)
         BATTLE_ORDER_TAB.set('周活跃',main=self)
         self._claim_weekly_reward()
+        self.config.stored.BattleOrderActivityProgress.set(self.current_progress)
     def _claim_weekly_reward(self):
         checked_buttons = [  
             BATTLE_ORDER_ACTIVE_POINTS_1_CHECKED,  
@@ -49,18 +52,11 @@ class BattleOrderWeeklyReward(UI):
                 else:
                     break
                     
-        self.config.stored.BattleOrderActivityPoints.value=self.current_progress
+        
     def _get_current_activity_points(self) -> int:
         ocr=BattleOrderOcr(BATTLE_ORDER_WEEKLY_REWARD_ACTIVITY_POINTS)
-        current_points=0
-        ocr_times=Timer(1,3).start()
-        for _ in self.loop():
-            if ocr_times.reached():
-                break
-            res=ocr.ocr_single_line(self.device.image)
-            if res!=0:
-                current_points=res
-                break
+        current_points=ocr.ocr_single_line(self.device.image)
+        
    
         return current_points
     def _get_current_progress(self,checked_buttons,thresholds) -> int:

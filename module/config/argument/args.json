@@ -1066,11 +1066,11 @@
         "display": "hide",
         "stored": "StoredBattleOrderRank"
       },
-      "BattleOrderActivityPoints": {
+      "BattleOrderActivityProgress": {
         "type": "stored",
         "value": {},
         "display": "display",
-        "stored": "StoredBattleOrderActivityPoints"
+        "stored": "StoredBattleOrderActivityProgress"
       },
       "BattleOrderTaskProgress": {
         "type": "stored",

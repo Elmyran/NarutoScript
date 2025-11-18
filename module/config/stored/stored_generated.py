@@ -6,7 +6,7 @@ from module.config.stored.classes import (
     StoredActivityProgressWeeklyCount,
     StoredBase,
     StoredBattleFieldCount,
-    StoredBattleOrderActivityPoints,
+    StoredBattleOrderActivityProgress,
     StoredBattleOrderRank,
     StoredBattleOrderTaskProgress,
     StoredBattlePassLevel,
@@ -69,7 +69,7 @@ class StoredGenerated:
     ActivityProgressWeekly = StoredActivityProgressWeekly("StorePurchase.ActivityProgressStorage.ActivityProgressWeekly")
     ActivityProgressWeeklyCount = StoredActivityProgressWeeklyCount("StorePurchase.ActivityProgressStorage.ActivityProgressWeeklyCount")
     BattleOrderRank = StoredBattleOrderRank("BattleOrder.BattleOrderStorage.BattleOrderRank")
-    BattleOrderActivityPoints = StoredBattleOrderActivityPoints("BattleOrder.BattleOrderStorage.BattleOrderActivityPoints")
+    BattleOrderActivityProgress = StoredBattleOrderActivityProgress("BattleOrder.BattleOrderStorage.BattleOrderActivityProgress")
     BattleOrderTaskProgress = StoredBattleOrderTaskProgress("BattleOrder.BattleOrderStorage.BattleOrderTaskProgress")
     TiLi = StoredTiLi("DataUpdate.ItemStorage.TiLi")
     Golds = StoredInt("DataUpdate.ItemStorage.Golds")

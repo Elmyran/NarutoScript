@@ -891,9 +891,9 @@
       "name": "BattleOrderStorage.BattleOrderRank.name",
       "help": "BattleOrderStorage.BattleOrderRank.help"
     },
-    "BattleOrderActivityPoints": {
-      "name": "周活跃度",
-      "help": ""
+    "BattleOrderActivityProgress": {
+      "name": "BattleOrderStorage.BattleOrderActivityProgress.name",
+      "help": "BattleOrderStorage.BattleOrderActivityProgress.help"
     },
     "BattleOrderTaskProgress": {
       "name": "周任务经验",

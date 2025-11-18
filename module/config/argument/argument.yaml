@@ -608,8 +608,8 @@ BattleOrderStorage:
     stored: StoredBattleOrderRank
     value:  {}
     display: hide
-  BattleOrderActivityPoints:
-    stored: StoredBattleOrderActivityPoints
+  BattleOrderActivityProgress:
+    stored: StoredBattleOrderActivityProgress
     value: {}
     display: display
   BattleOrderTaskProgress:

@@ -168,7 +168,7 @@ class GeneratedConfig:
 
     # Group `BattleOrderStorage`
     BattleOrderStorage_BattleOrderRank = {}
-    BattleOrderStorage_BattleOrderActivityPoints = {}
+    BattleOrderStorage_BattleOrderActivityProgress = {}
     BattleOrderStorage_BattleOrderTaskProgress = {}
 
     # Group `MiJingStorage`
