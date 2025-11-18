@@ -56,6 +56,8 @@ class JoystickContact:
             retry = maatouch_retry
         elif method == 'minitouch':
             retry = minitouch_retry
+        elif method == 'ADB':
+            retry = minitouch_retry
         else:
             raise ScriptError(f'Control method {method} does not support multi-finger')
         return retry(func)(self)
