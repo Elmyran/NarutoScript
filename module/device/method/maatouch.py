@@ -268,8 +268,11 @@ class MaaTouch(Connection):
     def click_maatouch(self, x, y):
         builder = self.maatouch_builder
         builder.down(x, y).commit()
+        builder.send()
+        time.sleep(0.02)
         builder.up().commit()
         builder.send()
+        
 
     @retry
     def long_click_maatouch(self, x, y, duration=1.0):

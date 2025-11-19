@@ -381,7 +381,7 @@
     },
     "JiFenSaiFilter": {
       "name": "敌人选择策略",
-      "help": "",
+      "help": "积分最多：选择战力低于自己且排名最高的敌人 \n最简单：自动刷新选择战力低于自己且排名最低的敌人 ",
       "PowerLowest": "战力最低",
       "ScoreHighest": "排名最高",
       "PowerLowerThanSelfAndScoreHigher": "积分最多",
@@ -892,8 +892,8 @@
       "help": "BattleOrderStorage.BattleOrderRank.help"
     },
     "BattleOrderActivityProgress": {
-      "name": "BattleOrderStorage.BattleOrderActivityProgress.name",
-      "help": "BattleOrderStorage.BattleOrderActivityProgress.help"
+      "name": "周活跃度进度",
+      "help": ""
     },
     "BattleOrderTaskProgress": {
       "name": "周任务经验",
