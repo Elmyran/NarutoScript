@@ -6,7 +6,7 @@
       "PackageName": "auto",
       "GameLanguage": "auto",
       "ScreenshotMethod": "scrcpy",
-      "ControlMethod": "minitouch",
+      "ControlMethod": "ADB",
       "AdbRestart": false
     },
     "EmulatorInfo": {
