@@ -48,7 +48,7 @@
       },
       "ControlMethod": {
         "type": "select",
-        "value": "minitouch",
+        "value": "ADB",
         "option": [
           "minitouch",
           "MaaTouch",

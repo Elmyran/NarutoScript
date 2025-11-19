@@ -87,6 +87,8 @@ class BattleField(TaskUI,CharacterCircleDetector):
         else:
             BATTLE_FIELD_TYPE=BATTLE_FIELD_SELECT_GOTO_DI
         for _ in self.loop():
+            if self.ui_page_appear(page_battle_field):
+                break
             if self.ui_page_appear(page_character_select):
                 break
             if self.appear_then_click(BATTLE_FIELD_TYPE_CONFIRM,interval=1):
@@ -156,7 +158,7 @@ class BattleField(TaskUI,CharacterCircleDetector):
                 continue
             if self.appear(BATTLE_FIELD_CHECK) and ocr_interval.reached():
                 credits=OCR.ocr_single_line(self.device.image)
-                logger.info(f'Credits: {credits}')
+                logger.attr(f'Credits',credits)
                 if credits>=self.config.BattleField_BattleFieldTargetScore:
                     logger.info(f'Credits reached target score: {self.config.BattleField_BattleFieldTargetScore}')
                     break
@@ -179,7 +181,7 @@ class BattleField(TaskUI,CharacterCircleDetector):
     def _handle_reward(self):
         logger.info('Battlefield reward claim')
         self.ui_ensure(page_battle_field_select)
-        self.ui_ensure(page_battle_field)
+        self._battle_field_type_select()
         for _ in self.loop():
             if self.appear(BATTLE_FIELD_REWARD_CHECK):
                 break
