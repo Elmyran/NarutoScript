@@ -42,17 +42,18 @@ class TaskUI(UI):
                 if self.ui_page_confirm(destination):
                     logger.info(f'Page arrive confirm {destination}')
                 break
-            if self.ui_page_appear(page_manual) and page.parent != page_main:
-                self.wait_until_stable(MANUAL_TAB_SEARCH_AREA)
-                if TASK_TAB_LIST.search_rows(self,Page2Keyword.get(page.parent)):
-                    self.interval_reset(page_main.check_button)
-                else:
-                    continue 
+            
             # Other pages
             clicked = False
             for page in Page.iter_pages():
                 if page.parent is None or page.check_button is None:
                     continue
+                if self.ui_page_appear(page_manual):
+                    self.wait_until_stable(MANUAL_TAB_SEARCH_AREA)
+                    if TASK_TAB_LIST.search_rows(self,Page2Keyword.get(page.parent)):
+                        self.interval_reset(page_main.check_button)
+                    else:
+                        continue 
                 if self.ui_page_appear(page, interval=5):
                     logger.info(f'Page switch: {page} -> {page.parent}')
                     self.handle_lang_check(page)
