@@ -1,9 +1,10 @@
-from tasks.base.ui import UI
+from module.base.base import ModuleBase
 
 
 
 
-class SquadRaid(UI):
+
+class SquadRaid(ModuleBase):
     def run(self):
         from tasks.squadraid.fight import SquadRaidFight
         SquadRaidFight(self.config,self.device).run()
