@@ -66,6 +66,7 @@ class TaskUI(UI):
                                 self.interval_reset(page_main.check_button)
                                 self.interval_reset(page_manual.check_button)
                         else:
+                            logger.info(f'Page confirm failed for {page}, skip clicking')
                             continue  
                     button = page.links[page.parent]
                     self.device.click(button)
