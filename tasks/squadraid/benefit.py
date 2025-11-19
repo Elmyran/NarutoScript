@@ -1,10 +1,10 @@
 from module.base.timer import Timer
 from tasks.base.page import page_squad_help_battle_mine
-from tasks.base.ui import UI
+from tasks.base.taskui import TaskUI
 from tasks.squadraid.assets.assets_squadraid_benefit import  *
 from tasks.squadraid.assets.assets_squadraid_fight import *
 
-class HelpBattleBenefit(UI):
+class HelpBattleBenefit(TaskUI):
     def handle_help_battle_benefit(self):
         
         self.device.click_record_clear()
