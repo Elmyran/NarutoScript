@@ -58,10 +58,12 @@ class TaskUI(UI):
                         else:
                             logger.info(f'Page arrive confirm {page}')   
                     if self.ui_page_appear(page_manual) and page.parent != page_main:
-                         self.wait_until_stable(MANUAL_TAB_SEARCH_AREA)
-                         TASK_TAB_LIST.search_rows(self,Page2Keyword.get(page.parent))
-                         self.interval_reset(page_main.check_button)
-                         self.interval_reset(page_manual.check_button)
+                        self.wait_until_stable(MANUAL_TAB_SEARCH_AREA)
+                        if TASK_TAB_LIST.search_rows(self,Page2Keyword.get(page.parent)):
+                            self.interval_reset(page_main.check_button)
+                            self.interval_reset(page_manual.check_button)
+                        else:
+                            continue 
                     button = page.links[page.parent]
                     self.device.click(button)
                     self.ui_button_interval_reset(button)
