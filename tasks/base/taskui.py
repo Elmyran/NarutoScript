@@ -48,12 +48,7 @@ class TaskUI(UI):
             for page in Page.iter_pages():
                 if page.parent is None or page.check_button is None:
                     continue
-                if self.ui_page_appear(page_manual):
-                    self.wait_until_stable(MANUAL_TAB_SEARCH_AREA)
-                    if TASK_TAB_LIST.search_rows(self,Page2Keyword.get(page.parent)):
-                        self.interval_reset(page_main.check_button)
-                    else:
-                        continue 
+                
                 if self.ui_page_appear(page, interval=5):
                     logger.info(f'Page switch: {page} -> {page.parent}')
                     self.handle_lang_check(page)
@@ -62,7 +57,15 @@ class TaskUI(UI):
                             logger.warning(f'Page confirm failed for {page}, skip clicking')  
                             continue
                         else:
-                            logger.info(f'Page arrive confirm {page}')   
+                            logger.info(f'Page arrive confirm {page}')  
+                    if page==page_manual and self.ui_page_confirm(page_manual):
+                        logger.info(f'Page arrive confirm {page}')  
+                        self.wait_until_stable(MANUAL_TAB_SEARCH_AREA)
+                        if TASK_TAB_LIST.search_rows(self,Page2Keyword.get(page.parent)):
+                            self.interval_reset(page_main.check_button)
+                            self.interval_reset(page_manual.check_button)
+                        else:
+                            continue  
                     button = page.links[page.parent]
                     self.device.click(button)
                     self.ui_button_interval_reset(button)
@@ -115,6 +118,9 @@ class TaskUI(UI):
             bool: If handled
         """
         if page == page_main:
+            if self._ui_button_confirm(page.check_button):
+                return True
+        if page== page_manual:
             if self._ui_button_confirm(page.check_button):
                 return True
 
