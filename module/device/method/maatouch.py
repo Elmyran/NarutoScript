@@ -269,7 +269,7 @@ class MaaTouch(Connection):
         builder = self.maatouch_builder
         builder.down(x, y).commit()
         builder.send()
-        time.sleep(0.5)
+        time.sleep(0.2)
         builder.up().commit()
         builder.send()
         
