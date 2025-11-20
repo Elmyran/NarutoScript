@@ -11,7 +11,7 @@ annotated-types==0.5.0    # via pydantic
 anyio==3.6.2              # via watchgod
 apkutils2==1.0.0          # via adbutils
 asgiref==3.6.0            # via uvicorn
-av==16.0.1                # via -r requirements-in.txt
+av==12.0.0               # via -r requirements-in.txt
 cached-property==1.5.2    # via uiautomator2
 certifi==2022.12.7        # via requests
 charset-normalizer==3.1.0  # via requests
