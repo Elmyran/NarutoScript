@@ -594,7 +594,7 @@ class Minitouch(Connection):
         builder = self.minitouch_builder
         builder.down(x, y).commit()
         builder.send()
-        time.sleep(0.02)
+        time.sleep(1)
         builder.up().commit()
         builder.send()
 
