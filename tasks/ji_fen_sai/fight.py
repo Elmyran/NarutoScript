@@ -108,8 +108,10 @@ class JiFenSaiFight(TaskUI):
                 continue 
             if self.appear(JI_FEN_SAI_FIGHT_PANEL_CHECK):
                 break
-            if self.appear_then_click(JI_FEN_SAI_GOTO_FIGHT_PANEL,interval=1):
+            if self.match_template_color(JI_FEN_SAI_GOTO_FIGHT_PANEL,interval=1):
+                self.device.click(JI_FEN_SAI_GOTO_FIGHT_PANEL)
                 continue
+        self.device.click_record_remove(JI_FEN_SAI_GOTO_FIGHT_PANEL)
             
 
     def is_fight_count_enough(self):

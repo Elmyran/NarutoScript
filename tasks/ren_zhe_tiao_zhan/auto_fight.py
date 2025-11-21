@@ -73,7 +73,7 @@ class AutoBattle(GameControl):
                 break
 
             
-            results = self.model.predict(self.device.image, conf=0.6)
+            results = self.model.predict(self.device.image, conf=0.5)
             self_boxes, enemy_boxes = [], []
             for r in results:
                 # r 是 YoloResult
