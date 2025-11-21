@@ -268,8 +268,6 @@ class MaaTouch(Connection):
     def click_maatouch(self, x, y):
         builder = self.maatouch_builder
         builder.down(x, y).commit()
-        builder.send()
-        time.sleep(0.5)
         builder.up().commit()
         builder.send()
         
