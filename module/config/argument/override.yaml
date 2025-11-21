@@ -6,8 +6,8 @@
 # ==================== Alas ====================
 
 Alas:
-  ControlMethod:
-    value: ADB
+  Emulator:
+    ControlMethod: ADB
   Optimization:
     ScreenshotInterval: 0.2
     CombatScreenshotInterval: 1.0
