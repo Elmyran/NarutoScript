@@ -593,8 +593,6 @@ class Minitouch(Connection):
     def click_minitouch(self, x, y):
         builder = self.minitouch_builder
         builder.down(x, y).commit()
-        builder.send()
-        time.sleep(0.2)
         builder.up().commit()
         builder.send()
 
