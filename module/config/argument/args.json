@@ -54,7 +54,8 @@
           "MaaTouch",
           "ADB",
           "uiautomator2"
-        ]
+        ],
+        "display": "hide"
       },
       "AdbRestart": {
         "type": "checkbox",
