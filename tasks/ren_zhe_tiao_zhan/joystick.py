@@ -206,7 +206,7 @@ class GameControl(TaskUI):
             x, y = random_rectangle_point(button.button)
             builder.down(x, y).commit().wait(100)
             builder.up().commit()
-            builder.send()  
+        builder.send()  
 
 
 
