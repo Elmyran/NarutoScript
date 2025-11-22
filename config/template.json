@@ -6,7 +6,7 @@
       "PackageName": "auto",
       "GameLanguage": "auto",
       "ScreenshotMethod": "scrcpy",
-      "ControlMethod": "ADB",
+      "ControlMethod": "MaaTouch",
       "AdbRestart": false
     },
     "EmulatorInfo": {
