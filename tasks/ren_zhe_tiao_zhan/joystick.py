@@ -201,14 +201,9 @@ class GameControl(TaskUI):
 
 
     def multi_button_click(self, buttons):
-        builder = self.device.minitouch_builder  
-        for button in buttons:  
-            x, y = random_rectangle_point(button.button)
-            builder.down(x, y).commit().wait(100)
-            builder.up().commit()
-            builder.send()  
-
-
+        for button in buttons:
+           
+            self.device.multi_click(button,2,interval=(0.01,0.02))
 
 
 

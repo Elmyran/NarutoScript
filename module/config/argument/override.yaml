@@ -7,7 +7,7 @@
 
 Alas:
   Emulator:
-    ControlMethod: ADB
+    ControlMethod: MaaTouch
   Optimization:
     ScreenshotInterval: 0.2
     CombatScreenshotInterval: 1.0
