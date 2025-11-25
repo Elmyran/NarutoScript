@@ -1,3 +1,4 @@
+from cmath import log
 from datetime import datetime, timedelta
 import time
 from module.config.utils import get_server_next_update
@@ -195,7 +196,7 @@ class DuelDaily(TaskUI):
 
 
    
-            self.device.click(attack_button,logger=False)
+            self.device.click(attack_button,log=False)
 
 
             if other_count > 0:
