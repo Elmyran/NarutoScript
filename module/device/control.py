@@ -26,7 +26,7 @@ class Control(Hermit, Minitouch, Scrcpy, MaaTouch, NemuIpc):
             'nemu_ipc': self.click_nemu_ipc,
         }
 
-    def click(self, button, control_check=True):
+    def click(self, button, control_check=True,logger=True):
         """Method to click a button.
 
         Args:
@@ -37,9 +37,10 @@ class Control(Hermit, Minitouch, Scrcpy, MaaTouch, NemuIpc):
             self.handle_control_check(button)
         x, y = random_rectangle_point(button.button)
         x, y = ensure_int(x, y)
-        logger.info(
-            'Click %s @ %s' % (point2str(x, y), button)
-        )
+        if logger:
+            logger.info(
+                'Click %s @ %s' % (point2str(x, y), button)
+            )
         method = self.click_methods.get(
             self.config.Emulator_ControlMethod,
             self.click_adb

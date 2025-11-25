@@ -2,9 +2,8 @@ from module.base.timer import Timer
 from tasks.base.page import page_battle_order
 from tasks.base.ui import UI
 from tasks.battle_order.assets.assets_battle_order_reward import *
-from tasks.battle_order.ocr import BattleOrderOcr
 from tasks.battle_order.ui.switch import BATTLE_ORDER_TAB
-
+from module.logger import logger
 class BattleOrderWeeklyReward(UI):
     current_progress=0
     def run(self):
@@ -54,9 +53,9 @@ class BattleOrderWeeklyReward(UI):
                     
         
     def _get_current_activity_points(self) -> int:
-        ocr=BattleOrderOcr(BATTLE_ORDER_WEEKLY_REWARD_ACTIVITY_POINTS)
-        current_points=ocr.ocr_single_line(self.device.image)
         
+        current_points=self.config.stored.ActivityProgressWeekly.value
+        logger.attr("ActivityPoints",current_points)
    
         return current_points
     def _get_current_progress(self,checked_buttons,thresholds) -> int:
@@ -68,3 +67,4 @@ class BattleOrderWeeklyReward(UI):
                 break  # 找到最高的就停止
         if current_progress>self.current_progress:
             self.current_progress=current_progress
+        logger.attr("RewardProgress",self.current_progress)

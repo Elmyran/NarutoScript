@@ -178,7 +178,7 @@ class DuelWeekly(TaskUI):
 
 
             
-            self.device.click(attack_button)
+            self.device.click(attack_button,logger=False)
 
 
             if other_count > 0:

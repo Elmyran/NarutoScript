@@ -203,7 +203,7 @@ class GameControl(TaskUI):
     def multi_button_click(self, buttons):
         for button in buttons:
            
-            self.device.multi_click(button,2,interval=(0.01,0.02))
+            self.device.multi_click(button,2,interval=(0.05,0.1),logger=False)
 
 
 

@@ -315,7 +315,7 @@ class Device(Screenshot, Control, AppControl):
         super().app_stop(package=package)
         self.stuck_record_clear()
         self.click_record_clear()
-    def click(self, button, control_check=True):
+    def click(self, button, control_check=True,logger=True):
         """Method to click a button.
 
         Args:
@@ -330,9 +330,10 @@ class Device(Screenshot, Control, AppControl):
             self.resolution_converter = ResolutionConverter(width, height)
         x,y=self.resolution_converter.convert_to_target(x,y)
         x, y = ensure_int(x, y)
-        logger.info(
-            'Click %s @ %s' % (point2str(x, y), button)
-        )
+        if logger:
+            logger.info(
+                'Click %s @ %s' % (point2str(x, y), button)
+            )
         method = self.click_methods.get(
             self.config.Emulator_ControlMethod,
             self.click_adb
