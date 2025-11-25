@@ -201,5 +201,5 @@ class DuelDaily(TaskUI):
 
             if other_count > 0:
                 button = other_buttons[idx]
-                self.device.click(button)
+                self.device.click(button,log=False)
                 idx = (idx + 1) % other_count
