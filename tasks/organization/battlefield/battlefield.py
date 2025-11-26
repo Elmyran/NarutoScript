@@ -182,6 +182,7 @@ class BattleField(TaskUI,CharacterCircleDetector):
         logger.info('Battlefield reward claim')
         self.ui_ensure(page_battle_field_select)
         self._battle_field_type_select()
+        self._character_select()
         for _ in self.loop():
             if self.appear(BATTLE_FIELD_REWARD_CHECK):
                 break
