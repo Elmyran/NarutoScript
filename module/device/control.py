@@ -47,7 +47,7 @@ class Control(Hermit, Minitouch, Scrcpy, MaaTouch, NemuIpc):
         )
         method(x, y)
 
-    def multi_click(self, button, n, interval=(0.1, 0.2)):
+    def multi_click(self, button, n, interval=(0.1, 0.2),log=True):
         self.handle_control_check(button)
         click_timer = Timer(0.1)
         for _ in range(n):
@@ -56,7 +56,7 @@ class Control(Hermit, Minitouch, Scrcpy, MaaTouch, NemuIpc):
                 self.sleep(remain)
             click_timer.reset()
 
-            self.click(button, control_check=False)
+            self.click(button, control_check=False,log=log)
 
     def long_click(self, button, duration=(1, 1.2)):
         """Method to long click a button.
