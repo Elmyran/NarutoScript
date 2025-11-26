@@ -1,3 +1,4 @@
+from cmath import log
 from datetime import datetime, timedelta
 import time
 from module.config.utils import get_server_next_update
@@ -94,6 +95,9 @@ class DuelDaily(TaskUI):
         second_reach=True
         ocr=Digit(DUEL_TASK_WINS_NUMBER)
         current_victory_count=0
+        res=ocr.ocr_single_line(self.device.image)
+        if res!=0:
+            current_victory_count=res
         for _ in self.loop():
             if time_search.reached():
                 if first_reach:
@@ -106,9 +110,7 @@ class DuelDaily(TaskUI):
                     second_reach=False
                 else:
                     break
-            res=ocr.ocr_single_line(self.device.image)
-            if res!=0:
-                current_victory_count=res
+            
             #检测到未达成
             if DUEL_TASK_NOT_ACHIEVED_BUTTON.match_template(self.device.image,direct_match=True):
                 return False
@@ -194,10 +196,10 @@ class DuelDaily(TaskUI):
 
 
    
-            self.device.click(attack_button)
+            self.device.click(attack_button,log=False)
 
 
             if other_count > 0:
                 button = other_buttons[idx]
-                self.device.click(button)
+                self.device.click(button,log=False)
                 idx = (idx + 1) % other_count
