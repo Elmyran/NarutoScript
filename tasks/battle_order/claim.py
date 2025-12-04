@@ -166,6 +166,7 @@ class BattleOrderClaim(UI):
                 if debug:
                     print(f"skip large area: {area}")
                 continue
+            
             rect = cv2.minAreaRect(cnt)
             box = cv2.boxPoints(rect)
             box_area = cv2.contourArea(np.int0(box))
@@ -178,6 +179,9 @@ class BattleOrderClaim(UI):
 
             # 轮廓在局部图像坐标
             x, y, w, h = cv2.boundingRect(cnt)
+            if h< button.button[3] - button.button[1]-5:
+                print(f"skip small height: {h}")
+                continue
 
             # 原图坐标
             x1_abs = x + bx1
@@ -192,3 +196,4 @@ class BattleOrderClaim(UI):
                 filtered.append(button)
         filtered.sort(key=lambda b: b.area[0])
         return filtered
+ 
