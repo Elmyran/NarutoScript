@@ -5,13 +5,22 @@ from module.base.button import Button, ButtonWrapper
 
 ACTIVITY_CHECK = ButtonWrapper(
     name='ACTIVITY_CHECK',
-    cn=Button(
-        file='./assets/cn/activity/ACTIVITY_CHECK.png',
-        area=(0, 3, 162, 111),
-        search=(0, 0, 182, 131),
-        color=(98, 97, 76),
-        button=(0, 3, 162, 111),
-    ),
+    cn=[
+        Button(
+            file='./assets/cn/activity/ACTIVITY_CHECK.png',
+            area=(0, 3, 162, 111),
+            search=(0, 0, 182, 131),
+            color=(98, 97, 76),
+            button=(0, 3, 162, 111),
+        ),
+        Button(
+            file='./assets/cn/activity/ACTIVITY_CHECK.2.png',
+            area=(0, 2, 144, 111),
+            search=(0, 0, 164, 131),
+            color=(106, 62, 48),
+            button=(0, 2, 144, 111),
+        ),
+    ],
     share=Button(
         file='./assets/share/activity/ACTIVITY_CHECK.png',
         area=(0, 3, 162, 111),
@@ -73,13 +82,22 @@ ACTIVITY_LIST_AREA = ButtonWrapper(
 )
 MAIN_GOTO_ACTIVITY = ButtonWrapper(
     name='MAIN_GOTO_ACTIVITY',
-    cn=Button(
-        file='./assets/cn/activity/MAIN_GOTO_ACTIVITY.png',
-        area=(1189, 18, 1255, 84),
-        search=(1169, 0, 1275, 104),
-        color=(131, 116, 104),
-        button=(1189, 18, 1255, 84),
-    ),
+    cn=[
+        Button(
+            file='./assets/cn/activity/MAIN_GOTO_ACTIVITY.png',
+            area=(1189, 18, 1255, 84),
+            search=(1169, 0, 1275, 104),
+            color=(131, 116, 104),
+            button=(1189, 18, 1255, 84),
+        ),
+        Button(
+            file='./assets/cn/activity/MAIN_GOTO_ACTIVITY.2.png',
+            area=(1198, 26, 1243, 62),
+            search=(1178, 6, 1263, 82),
+            color=(185, 132, 93),
+            button=(1198, 26, 1243, 62),
+        ),
+    ],
     share=Button(
         file='./assets/share/activity/MAIN_GOTO_ACTIVITY.png',
         area=(1189, 18, 1255, 84),
