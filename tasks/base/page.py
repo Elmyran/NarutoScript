@@ -1,8 +1,7 @@
 import traceback
-
+from tasks.activity.assets.assets_activity import ACTIVITY_CHECK, MAIN_GOTO_ACTIVITY
 from tasks.activity.assets.assets_activity_diao_yu_da_shi import *
 from tasks.base.assets.assets_base_page import *
-
 from tasks.base.assets.assets_base_task_tab import BACK_GAME_GOTO_MANUAL, MANUAL_GOTO_TASK_BUTTON
 from tasks.freebies.assets.assets_freebies_daily_daily import *
 from tasks.freebies.assets.assets_freebies_daily_weekly import  *
@@ -20,7 +19,6 @@ from tasks.organization.assets.assets_organization_replacement import *
 from tasks.organization.assets.assets_organization_boxclaim import *
 from tasks.recruit.assets.assets_recruit import *
 from tasks.ren_zhe_tiao_zhan.assets.assets_ren_zhe_tiao_zhan import *
-
 from tasks.tili.assets.assets_tili_dungeon import *
 from tasks.tili.assets.assets_tili_equipment import *
 from tasks.trail.assets.assets_trail import *
@@ -35,7 +33,6 @@ from tasks.freebies.assets.assets_freebies_mail import *
 from tasks.freebies.assets.assets_freebies_dailyshare import *
 from tasks.freebies.assets.assets_freebies_friendgifts import *
 from tasks.login.assets.assets_login import *
-from tasks.activity.assets.assets_activity import *
 from tasks.base.assets.assets_base_page import *
 from tasks.duel.assets.assets_duel_extended_play import *
 class Page:

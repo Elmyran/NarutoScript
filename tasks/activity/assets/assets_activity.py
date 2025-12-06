@@ -5,36 +5,30 @@ from module.base.button import Button, ButtonWrapper
 
 ACTIVITY_CHECK = ButtonWrapper(
     name='ACTIVITY_CHECK',
-    cn=Button(
-        file='./assets/cn/activity/ACTIVITY_CHECK.png',
-        area=(0, 3, 162, 111),
-        search=(0, 0, 182, 131),
-        color=(98, 97, 76),
-        button=(0, 3, 162, 111),
-    ),
-    share=[
+    cn=[
         Button(
-            file='./assets/share/activity/ACTIVITY_CHECK.png',
+            file='./assets/cn/activity/ACTIVITY_CHECK.png',
             area=(0, 3, 162, 111),
             search=(0, 0, 182, 131),
             color=(98, 97, 76),
             button=(0, 3, 162, 111),
         ),
         Button(
-            file='./assets/share/activity/ACTIVITY_CHECK.2.png',
+            file='./assets/cn/activity/ACTIVITY_CHECK.2.png',
             area=(0, 9, 142, 109),
             search=(0, 0, 162, 129),
             color=(109, 66, 50),
             button=(0, 9, 142, 109),
         ),
         Button(
-            file='./assets/share/activity/ACTIVITY_CHECK.3.png',
-            area=(25, 21, 95, 109),
-            search=(5, 1, 115, 129),
-            color=(101, 71, 57),
-            button=(25, 21, 95, 109),
+            file='./assets/cn/activity/ACTIVITY_CHECK.3.png',
+            area=(7, 6, 159, 110),
+            search=(0, 0, 179, 130),
+            color=(105, 64, 51),
+            button=(7, 6, 159, 110),
         ),
     ],
+    en=None,
 )
 ACTIVITY_DETAIL_AREA = ButtonWrapper(
     name='ACTIVITY_DETAIL_AREA',
