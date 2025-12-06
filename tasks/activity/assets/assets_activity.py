@@ -27,6 +27,13 @@ ACTIVITY_CHECK = ButtonWrapper(
             color=(109, 66, 50),
             button=(0, 9, 142, 109),
         ),
+        Button(
+            file='./assets/share/activity/ACTIVITY_CHECK.3.png',
+            area=(25, 21, 95, 109),
+            search=(5, 1, 115, 129),
+            color=(101, 71, 57),
+            button=(25, 21, 95, 109),
+        ),
     ],
 )
 ACTIVITY_DETAIL_AREA = ButtonWrapper(
