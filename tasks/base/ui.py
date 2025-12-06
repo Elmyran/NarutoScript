@@ -27,7 +27,7 @@ class UI(MainPage):
         """
         if page == page_main:
             return self.is_in_main(interval=interval)
-        return self.appear(page.check_button, interval=interval)
+        return self.appear(page.check_button,similarity=0.7,interval=interval)
 
     def ui_get_current_page(self, skip_first_screenshot=True):
         """
