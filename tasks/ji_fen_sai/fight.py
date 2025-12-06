@@ -19,6 +19,8 @@ class JiFenSaiFight(TaskUI):
                 if not self.is_fight_count_enough():
                     break  
             self.enter_panel()
+            if self.refresh_popup_appear():
+                continue
             enemy_list=self.enemy_recognition()
             enemy=self.enemy_filter(enemy_list)
             if not enemy:
@@ -37,6 +39,11 @@ class JiFenSaiFight(TaskUI):
             if self.appear_then_click(JI_FEN_SAI_FIGHT_END_CONFIRM,interval=2):
                 continue
         return True
+    def refresh_popup_appear(self):
+        if self.appear(ENEMY_REFRESH_SUCCESS):
+            return True
+        return False
+            
     def skip_fight(self):
         if not self.config.JiFenSai_JiFenSaiSkipFight:
             return 
