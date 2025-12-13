@@ -254,51 +254,28 @@ class NemuIpcImpl:
         self.width = 0
         self.height = 0
     
-    def connect(self, on_thread=True):  
-        if self.connect_id > 0:    
-            return True    
-        
-        for attempt in range(RETRY_TRIES):    
-            try:    
-                if on_thread:    
-                    connect_id = self.run_func(    
-                        self.lib.nemu_connect,    
-                        self.nemu_folder, self.instance_id,    
-                        timeout=2.0  
-                    )    
-                else:    
-                    connect_id = self.lib.nemu_connect(self.nemu_folder, self.instance_id)    
-                
-                if connect_id > 0:    
-                    self.connect_id = connect_id    
-                    if attempt > 0:    
-                        logger.info(f'NemuIpc connected successfully on attempt {attempt + 1}')    
-                    return True    
-                
-                # connect_id == 0,IPC 服务未就绪    
-                if attempt < RETRY_TRIES - 1:  
-                    delay = retry_sleep(attempt)
-                    if attempt==RETRY_TRIES - 2:
-                        delay+=RETRY_TRIES  
-                    logger.warning(    
-                        f'NemuIpc connection attempt {attempt + 1}/{RETRY_TRIES} failed, '    
-                        f'retrying in {delay:.1f}s...'    
-                    )
-                    time.sleep(delay)
-                
-                    
-            except JobTimeout:    
-                if attempt < RETRY_TRIES - 1:  
-                    delay = retry_sleep(attempt)  
-                    logger.warning(f'NemuIpc connection timeout, retrying in {delay:.1f}s...')    
-                    time.sleep(delay)
-                else:    
-                    raise NemuIpcError('Connection timeout after retries')    
-        
-        raise NemuIpcError(    
-            f'Connection failed after {RETRY_TRIES} retries. '    
-            f'IPC service may not be available or emulator version < 3.8.13'    
-        )
+    def connect(self, on_thread=True):
+        if self.connect_id > 0:
+            return
+
+        if on_thread:
+            connect_id = self.run_func(
+                self.lib.nemu_connect,
+                self.nemu_folder, self.instance_id
+            )
+        else:
+            connect_id = self.lib.nemu_connect(self.nemu_folder, self.instance_id)
+        if connect_id == 0:
+            raise NemuIpcError(
+                'Connection failed, please check if nemu_folder is correct and emulator is running'
+            )
+
+        self.connect_id = connect_id
+        # logger.info(f'NemuIpc connected: {self.connect_id}')
+    @retry
+    def connect_with_retry(self, on_thread=True):
+        self.connect(on_thread=on_thread)
+
     def disconnect(self):
         if self.connect_id == 0:
             return
@@ -526,11 +503,13 @@ class NemuIpc(Platform):
             logger.info(f'nemu_ipc is not available on MuMuPlayerGlobal, {self.emulator_instance.path}')
             raise RequestHumanTakeover
         try:
-            return NemuIpcImpl(
+            impl = NemuIpcImpl(
                 nemu_folder=self.emulator_instance.emulator.abspath('../'),
                 instance_id=self.emulator_instance.MuMuPlayer12_id,
                 display_id=0
-            ).__enter__()
+            )
+            impl.connect_with_retry()
+            return impl
         except (NemuIpcIncompatible, NemuIpcError, JobTimeout) as e:
             logger.error(e)
             logger.error('Unable to initialize NemuIpc')
