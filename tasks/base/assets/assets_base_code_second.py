@@ -29,10 +29,10 @@ CODE_SECOND_PASSWORD_INPUT_CONFIRM = ButtonWrapper(
     name='CODE_SECOND_PASSWORD_INPUT_CONFIRM',
     cn=Button(
         file='./assets/cn/base/code_second/CODE_SECOND_PASSWORD_INPUT_CONFIRM.png',
-        area=(1215, 650, 1269, 691),
-        search=(1195, 630, 1280, 711),
-        color=(225, 225, 225),
-        button=(1215, 650, 1269, 691),
+        area=(0, 621, 1279, 720),
+        search=(0, 601, 1280, 720),
+        color=(250, 249, 249),
+        button=(0, 621, 1279, 720),
     ),
     en=None,
 )
