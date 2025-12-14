@@ -442,8 +442,9 @@ class UI(MainPage):
             raise RequestHumanTakeover('SecondPassword need to fill')
         for _ in  self.loop():
             CODE_SECOND_PASSWORD_INPUT_CONFIRM.load_search(FULL_SCREEN.area)
-            if self.appear(CODE_SECOND_PASSWORD_INPUT_CONFIRM,similarity=0.5):
+            if self.image_color_count(CODE_SECOND_PASSWORD_INPUT_CONFIRM, color=(255, 255, 255), count=10000, threshold=221):
                 break
+
             if self.appear_then_click(CODE_SECOND_PASSWORD,interval=2):
                 continue
         if not self.code_input(code):
@@ -459,22 +460,8 @@ class UI(MainPage):
                 self.appear_then_click(CODE_SECOND_PASSWORD_CONFIRM,interval=1)
         
     def code_input(self,code):
-        if self.device._scrcpy_alive:  
-            logger.info('Trying scrcpy input')  
-            try:  
-                self.device._scrcpy_control.text(str(code))  
-                return True  
-            except Exception as e:  
-                logger.warning(f'scrcpy failed: {e}')    
-        
-
-        logger.info('Using adb shell input')  
-        try:  
-     
-            self.device.adb_shell(['input', 'text', str(code)])  
-            return True  
-        except Exception as e:  
-            logger.error(f'All input methods failed: {e}')  
-            return False
+        self.device.scrcpy_init()
+        self.device._scrcpy_control.text(code)
+        return True
 
        
