@@ -13,7 +13,7 @@ class StoreDigitCounter(DigitCounter):
         result=result.replace('早','限')
         return super().after_process(result)
 
-class StorePriceDigit(Ocr,Digit,OcrWhiteLetterOnComplexBackground):  
+class StorePriceDigit(Digit,OcrWhiteLetterOnComplexBackground):  
     def after_process(self, result):  
         result=result.replace('A', '')
         result = re.sub(r'^11(000)$', r'1\1', result) 

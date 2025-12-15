@@ -168,7 +168,7 @@
     },
     "JiFenSai": {
       "JiFenSaiSkipFight": true,
-      "JiFenSaiFilter": "PowerLowest"
+      "JiFenSaiFilter": "PowerLowerThanSelfAndScoreLower"
     }
   },
   "Freebies": {

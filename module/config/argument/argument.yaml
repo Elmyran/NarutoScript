@@ -172,7 +172,7 @@ JiFenSai:
     value: true
   JiFenSaiFilter:
     type: select
-    value: 'PowerLowest'
+    value: 'PowerLowerThanSelfAndScoreLower'
     option: [
     'PowerLowest',
     'ScoreHighest',
