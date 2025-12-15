@@ -166,12 +166,12 @@
         "display": "hide"
       }
     },
-    "AccountStorage": {
-      "AccountName": {
-        "type": "stored",
-        "value": {},
-        "display": "hide",
-        "stored": "StoredAccountName"
+    "Password": {
+      "SecondPassword": {
+        "type": "input",
+        "value": "",
+        "valuetype": "str",
+        "display": "hide"
       }
     }
   },
@@ -318,11 +318,6 @@
         "value": {},
         "display": "hide",
         "stored": "StoredSquadRaidFinishCount"
-      },
-      "SecondPassword": {
-        "type": "input",
-        "value": "",
-        "valuetype": "str"
       }
     }
   },
@@ -1235,11 +1230,6 @@
       }
     },
     "PanRen": {
-      "SecondPassword": {
-        "type": "input",
-        "value": "",
-        "valuetype": "str"
-      },
       "NoRewardJoinOrNot": {
         "type": "checkbox",
         "value": false

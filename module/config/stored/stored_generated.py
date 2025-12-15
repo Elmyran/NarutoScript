@@ -45,7 +45,6 @@ from module.config.stored.classes import (
 # ``` python -m module/config/config_updater.py ```
 
 class StoredGenerated:
-    AccountName = StoredAccountName("Restart.AccountStorage.AccountName")
     DuelDaily = StoredDuel("Duel.DuelWeekly.DuelDaily")
     CurrentVictoryCount = StoredDuelCurrentVictory("Duel.DuelWeekly.CurrentVictoryCount")
     ExtendedCurrentScore = StoredDuelExtendedScore("Duel.DuelExtended.ExtendedCurrentScore")

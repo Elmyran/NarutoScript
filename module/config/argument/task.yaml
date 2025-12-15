@@ -15,7 +15,7 @@ Alas:
       - Optimization
     Restart:
       - Scheduler
-      - AccountStorage
+      - Password
 
 # ==================== Daily ====================
 

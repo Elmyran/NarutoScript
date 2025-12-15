@@ -267,6 +267,16 @@
       "close_emulator": "Close Emulator"
     }
   },
+  "Password": {
+    "_info": {
+      "name": "Password._info.name",
+      "help": "Password._info.help"
+    },
+    "SecondPassword": {
+      "name": "Password.SecondPassword.name",
+      "help": "Password.SecondPassword.help"
+    }
+  },
   "Organization": {
     "_info": {
       "name": "Organization._info.name",
@@ -299,10 +309,6 @@
     "SquadRaidFinishedCount": {
       "name": "SquadRaid.SquadRaidFinishedCount.name",
       "help": "SquadRaid.SquadRaidFinishedCount.help"
-    },
-    "SecondPassword": {
-      "name": "SquadRaid.SecondPassword.name",
-      "help": "SquadRaid.SecondPassword.help"
     }
   },
   "SurvivalTrail": {
@@ -784,10 +790,6 @@
     "_info": {
       "name": "PanRen._info.name",
       "help": "PanRen._info.help"
-    },
-    "SecondPassword": {
-      "name": "PanRen.SecondPassword.name",
-      "help": "PanRen.SecondPassword.help"
     },
     "NoRewardJoinOrNot": {
       "name": "PanRen.NoRewardJoinOrNot.name",

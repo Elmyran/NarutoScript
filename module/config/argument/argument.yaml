@@ -89,7 +89,11 @@ Optimization:
     option: [ stay_there, goto_main, close_game, close_emulator ]
 
 # ==================== Daily ====================
-
+Password:
+  SecondPassword:
+    type: input
+    value: ''
+    valuetype: str
 
 
 Organization:
@@ -115,10 +119,7 @@ SquadRaid:
     stored: StoredSquadRaidFinishCount
     value: { }
     display: hide
-  SecondPassword:
-    type: input
-    value: ''
-    valuetype: str
+
 
 SurvivalTrail:
   SurvivalTrialResetTimes:
@@ -516,10 +517,7 @@ CultivationRoad:
     type: checkbox
     value: False
 PanRen:
-  SecondPassword:
-    type: input
-    value: ''
-    valuetype: str
+
   NoRewardJoinOrNot:
     type: checkbox
     value: False

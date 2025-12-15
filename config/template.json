@@ -33,8 +33,8 @@
       "Command": "Restart",
       "ServerUpdate": "05:00"
     },
-    "AccountStorage": {
-      "AccountName": {}
+    "Password": {
+      "SecondPassword": null
     }
   },
   "Duel": {
@@ -75,8 +75,7 @@
       "SquadRaidBenefit": true,
       "SquadQuadrupleReward": false,
       "SquadRaidFight": "SquadSupport",
-      "SquadRaidFinishedCount": {},
-      "SecondPassword": null
+      "SquadRaidFinishedCount": {}
     }
   },
   "Organization": {
@@ -302,7 +301,6 @@
       "ServerUpdate": "05:00"
     },
     "PanRen": {
-      "SecondPassword": null,
       "NoRewardJoinOrNot": false,
       "PanRenFinishCount": {}
     }

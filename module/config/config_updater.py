@@ -610,10 +610,7 @@ class ConfigUpdater:
         if key == 'Alas.Emulator.GameClient' and value == 'cloud_android':
             yield 'Alas.Emulator.PackageName', 'CN-Official'
             yield 'Alas.Optimization.WhenTaskQueueEmpty', 'close_game'
-        if key == 'SquadRaid.SquadRaid.SecondPassword':  
-            yield 'PanRen.PanRen.SecondPassword', value  
-        if key == 'PanRen.PanRen.SecondPassword':  
-            yield 'SquadRaid.SquadRaid.SecondPassword', value
+       
 
 
     def iter_hidden_args(self, data) -> t.Iterator[str]:

@@ -1,8 +1,7 @@
 from module.base.button import ButtonWrapper
 from module.base.decorator import run_once
 from module.base.timer import Timer
-from module.exception import GameNotRunningError, GamePageUnknownError, HandledError,  \
-    RequestHumanTakeover
+from module.exception import GameNotRunningError, GamePageUnknownError, HandledError
 from module.logger import logger
 from module.ocr.ocr import Ocr
 from tasks.base.assets.assets_base_code_second import *
@@ -437,31 +436,6 @@ class UI(MainPage):
                     break
             if 1:
                 clicked = True
-    def handle_second_password(self,code):
-        if code is None:
-            raise RequestHumanTakeover('SecondPassword need to fill')
-        for _ in  self.loop():
-            CODE_SECOND_PASSWORD_INPUT_CONFIRM.load_search(FULL_SCREEN.area)
-            if self.image_color_count(CODE_SECOND_PASSWORD_INPUT_CONFIRM, color=(255, 255, 255), count=10000, threshold=221):
-                break
 
-            if self.appear_then_click(CODE_SECOND_PASSWORD,interval=2):
-                continue
-        if not self.code_input(code):
-            raise RequestHumanTakeover('Second code input failed')
-
-        time=Timer(3,count=6).start()
-        for _ in self.loop():
-            if time.reached():
-                break
-            if self.appear_then_click(CODE_SECOND_PASSWORD_INPUT_CONFIRM,interval=1):
-                continue
-            if self.appear(CODE_SECOND_PASSWORD):
-                self.appear_then_click(CODE_SECOND_PASSWORD_CONFIRM,interval=1)
-        
-    def code_input(self,code):
-        self.device.scrcpy_init()
-        self.device._scrcpy_control.text(code)
-        return True
 
        

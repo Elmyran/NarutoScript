@@ -40,6 +40,9 @@ class GeneratedConfig:
     Optimization_CombatScreenshotInterval = 1.0
     Optimization_WhenTaskQueueEmpty = 'goto_main'  # stay_there, goto_main, close_game, close_emulator
 
+    # Group `Password`
+    Password_SecondPassword = None
+
     # Group `Organization`
     Organization_OrganizationPray = True
 
@@ -48,7 +51,6 @@ class GeneratedConfig:
     SquadRaid_SquadQuadrupleReward = False
     SquadRaid_SquadRaidFight = 'SquadSupport'  # SquadSupport, SquadMatch
     SquadRaid_SquadRaidFinishedCount = {}
-    SquadRaid_SecondPassword = None
 
     # Group `SurvivalTrail`
     SurvivalTrail_SurvivalTrialResetTimes = 0
@@ -144,7 +146,6 @@ class GeneratedConfig:
     CultivationRoad_CultivationFinish = False
 
     # Group `PanRen`
-    PanRen_SecondPassword = None
     PanRen_NoRewardJoinOrNot = False
     PanRen_PanRenFinishCount = {}
 

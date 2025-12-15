@@ -92,7 +92,7 @@
     },
     "PanRen": {
       "name": "叛忍来袭",
-      "help": ""
+      "help": "该任务需要前往异常处理中设置二级密码"
     },
     "Fortress": {
       "name": "本服要塞",
@@ -267,6 +267,16 @@
       "close_emulator": "关闭模拟器"
     }
   },
+  "Password": {
+    "_info": {
+      "name": "密码设置",
+      "help": ""
+    },
+    "SecondPassword": {
+      "name": "二级密码",
+      "help": "未输入会影响部分功能的使用"
+    }
+  },
   "Organization": {
     "_info": {
       "name": "组织活动",
@@ -288,7 +298,7 @@
     },
     "SquadQuadrupleReward": {
       "name": "四倍奖励",
-      "help": ""
+      "help": "需要前往异常处理中设置二级密码"
     },
     "SquadRaidFight": {
       "name": "小队突袭",
@@ -299,10 +309,6 @@
     "SquadRaidFinishedCount": {
       "name": "SquadRaid.SquadRaidFinishedCount.name",
       "help": "SquadRaid.SquadRaidFinishedCount.help"
-    },
-    "SecondPassword": {
-      "name": "二级密码",
-      "help": ""
     }
   },
   "SurvivalTrail": {
@@ -777,17 +783,13 @@
     },
     "CultivationFinish": {
       "name": "20金币完成",
-      "help": ""
+      "help": "需要前往异常处理中设置二级密码"
     }
   },
   "PanRen": {
     "_info": {
       "name": "设置",
       "help": ""
-    },
-    "SecondPassword": {
-      "name": "二级密码",
-      "help": "叛忍结束后会重启游戏"
     },
     "NoRewardJoinOrNot": {
       "name": "无奖励继续参与",
