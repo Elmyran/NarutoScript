@@ -24,6 +24,7 @@ Restart:
       type: input
       value: ''
       valuetype: str
+      display: display
 DataUpdate:
   Scheduler:
     Enable:

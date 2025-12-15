@@ -94,6 +94,8 @@ Password:
     type: input
     value: ''
     valuetype: str
+    display: display
+
 
 
 Organization:
