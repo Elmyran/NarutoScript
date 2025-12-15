@@ -1,7 +1,6 @@
-from module.ocr.ocr import  Digit, DigitCounter,OcrWhiteLetterOnComplexBackground
+from module.ocr.ocr import  Digit, DigitCounter, Ocr,OcrWhiteLetterOnComplexBackground
 import re
 
-from module.ocr.onnxocr.onnx_paddleocr import ONNXPaddleOcr
 class StoreDetailOcr(OcrWhiteLetterOnComplexBackground):
     min_box = (1, 1)
     def after_process(self, result):
@@ -14,7 +13,7 @@ class StoreDigitCounter(DigitCounter):
         result=result.replace('早','限')
         return super().after_process(result)
 
-class StorePriceDigit(ONNXPaddleOcr,Digit,OcrWhiteLetterOnComplexBackground):  
+class StorePriceDigit(Ocr,Digit,OcrWhiteLetterOnComplexBackground):  
     def after_process(self, result):  
         result=result.replace('A', '')
         result = re.sub(r'^11(000)$', r'1\1', result) 

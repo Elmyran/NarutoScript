@@ -1,10 +1,9 @@
 from module.logger import logger
-from module.ocr.ocr import  Digit, OcrResultButton, OcrWhiteLetterOnComplexBackground
+from module.ocr.ocr import  Digit, Ocr, OcrResultButton, OcrWhiteLetterOnComplexBackground
 import cv2
-from module.ocr.onnxocr.onnx_paddleocr import ONNXPaddleOcr
 from pponnxcr.predict_system import BoxedResult
 import re
-class MissionDurationOcr(ONNXPaddleOcr):
+class MissionDurationOcr(Ocr):
     def after_process(self, result):
         """对OCR结果进行修正"""
         result = super().after_process(result)
@@ -35,7 +34,7 @@ class MissionDurationOcr(ONNXPaddleOcr):
     
         logger.attr(name=f'{self.name} matched', text=results)  
         return results
-class MissionDigit(ONNXPaddleOcr,Digit,OcrWhiteLetterOnComplexBackground):  
+class MissionDigit(Ocr,Digit,OcrWhiteLetterOnComplexBackground):  
     
     def filter_detected(self, result: BoxedResult) -> bool:  
         """  
@@ -54,7 +53,7 @@ class MissionDigit(ONNXPaddleOcr,Digit,OcrWhiteLetterOnComplexBackground):
         return Digit.format_result(self, result)  
     
     
-class MissionWhiteLetterOcr(ONNXPaddleOcr,OcrWhiteLetterOnComplexBackground):
+class MissionWhiteLetterOcr(Ocr,OcrWhiteLetterOnComplexBackground):
     def pre_process(self, image):
         image = cv2.resize(image, (2560, 1920))
         

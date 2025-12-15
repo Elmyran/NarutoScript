@@ -1,9 +1,12 @@
+
+from module.base import button
 from module.base.timer import Timer
 from module.logger import logger
 from tasks.base.assets.assets_base_code_second import *
-from tasks.base.assets.assets_base_task_tab import MANUAL_TAB_SEARCH_AREA
+from tasks.base.assets.assets_base_task_tab import MANUAL_TAB_SEARCH_AREA, MANUAL_TAB_SEARCH_AREA_FOR_BACK_GAME
 from tasks.base.page import *
 from tasks.base.task_tab.draglist import TASK_TAB_LIST
+from tasks.base.task_tab.ocr import TaskTabOcr
 from tasks.base.ui import UI
 from tasks.base.task_tab.task_keyword import *
 from module.exception import GameStuckError, RequestHumanTakeover

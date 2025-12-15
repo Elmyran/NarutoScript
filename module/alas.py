@@ -1,17 +1,15 @@
 import threading
 import time
 from datetime import datetime, timedelta
-
 import inflection
 from cached_property import cached_property
-
 from module.base.decorator import del_cached_property
 from module.config.config import AzurLaneConfig, TaskEnd
 from module.config.deep import deep_get, deep_set
 from module.exception import *
 from module.logger import logger, save_error_log
 from module.notify import handle_notify
-from module.ocr.ocr import Ocr
+
 
 
 
@@ -305,11 +303,6 @@ class AzurLaneAutoScript:
                 self.config.task_delay(server_update=True)
                 del_cached_property(self, 'config')
                 continue
-            if self.config.pending_task:
-                from module.ocr.models import OCR_MODEL
-                OCR_MODEL.early_model_init()
-                from module.ocr.onnxmodels import CUSTOM_OCR_MODEL
-                CUSTOM_OCR_MODEL.early_model_init() 
             
             # Run
             logger.info(f'Scheduler: Start task `{task}`')

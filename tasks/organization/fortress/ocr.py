@@ -1,13 +1,12 @@
 from module.base.utils.utils import area_offset, color_similarity_2d, crop, float2str
 from module.logger import logger
-from module.ocr.ocr import  OcrWhiteLetterOnComplexBackground
-from module.ocr.onnxocr.onnx_paddleocr import ONNXPaddleOcr
+from module.ocr.ocr import  Ocr, OcrWhiteLetterOnComplexBackground
 from pponnxcr.predict_system import BoxedResult
 import time
 import re
 import cv2
 import numpy as np
-class FortressOcr(ONNXPaddleOcr,OcrWhiteLetterOnComplexBackground):
+class FortressOcr(Ocr,OcrWhiteLetterOnComplexBackground):
     box_thresh=0.2
     def pre_process(self, image):
         image = cv2.resize(image, (2560, 1920), interpolation=cv2.INTER_CUBIC)

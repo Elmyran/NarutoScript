@@ -1,9 +1,7 @@
+from module.ocr.ocr import Ocr
 
 
-from module.ocr.onnxocr.onnx_paddleocr import ONNXPaddleOcr
-
-
-class TaskTabOcr(ONNXPaddleOcr):
+class TaskTabOcr(Ocr):
     def after_process(self, result):
         result=result.replace('袭','装')
         result=result.replace('秋','秘')

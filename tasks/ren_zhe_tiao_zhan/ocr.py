@@ -1,6 +1,5 @@
 from module.logger import logger
 from module.ocr.ocr import Digit, Ocr
-from module.ocr.onnxocr.onnx_paddleocr import ONNXPaddleOcr
 from pponnxcr.predict_system import BoxedResult
 import re
 import cv2
@@ -16,7 +15,7 @@ class MiJingOcr(Ocr):
         result=result.replace("显","罡")
         result=result.replace("宰","牢")
         return super().after_process(result)
-class MiJingDigit(ONNXPaddleOcr,Digit):
+class MiJingDigit(Ocr,Digit):
     
     def pre_process(self, image):
         image=cv2.resize(image, (800, 600))

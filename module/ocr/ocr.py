@@ -3,7 +3,6 @@ from datetime import timedelta
 
 import numpy as np
 from pponnxcr.predict_system import BoxedResult
-
 import module.config.server as server
 from module.base.button import ButtonWrapper
 from module.base.decorator import cached_property
