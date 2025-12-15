@@ -177,12 +177,6 @@ class TaskUI(UI):
                 return True
             if self.appear_then_click(CODE_SECOND_PASSWORD_CONFIRM,interval=1):
                 continue
-            
 
-
-        
-az=TaskUI('ns',task='Alas')
-az.device.screenshot()
-az.handle_second_password()
 
         
