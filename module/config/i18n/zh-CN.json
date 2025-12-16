@@ -38,16 +38,12 @@
       "name": "小队突袭",
       "help": ""
     },
-    "Organization": {
-      "name": "组织活动",
-      "help": ""
-    },
     "SurvivalTrail": {
       "name": "生存试炼",
       "help": ""
     },
     "TiLi": {
-      "name": "清体力",
+      "name": "体力",
       "help": ""
     },
     "Mission": {
@@ -277,16 +273,6 @@
       "help": "未输入会影响部分功能的使用"
     }
   },
-  "Organization": {
-    "_info": {
-      "name": "组织活动",
-      "help": ""
-    },
-    "OrganizationPray": {
-      "name": "组织祈福",
-      "help": ""
-    }
-  },
   "SquadRaid": {
     "_info": {
       "name": "小队突袭",
@@ -321,7 +307,7 @@
       "help": ""
     }
   },
-  "TiLi": {
+  "TiLiCost": {
     "_info": {
       "name": "清体力",
       "help": ""
@@ -332,7 +318,21 @@
     },
     "DungeonFirst": {
       "name": "优先扫荡精英副本",
+      "help": "需要提前勾选"
+    }
+  },
+  "TiLiPurchase": {
+    "_info": {
+      "name": "买体力",
       "help": ""
+    },
+    "TiLiPurchaseTimes": {
+      "name": "购买次数",
+      "help": "0表示不购买体力，高于上限则购买至上限"
+    },
+    "TiLiPurchaseFinishCount": {
+      "name": "TiLiPurchase.TiLiPurchaseFinishCount.name",
+      "help": "TiLiPurchase.TiLiPurchaseFinishCount.help"
     }
   },
   "DuelWeekly": {
@@ -494,6 +494,14 @@
     "MonthlySignInFinishCount": {
       "name": "Freebies.MonthlySignInFinishCount.name",
       "help": "Freebies.MonthlySignInFinishCount.help"
+    },
+    "OrganizationPray": {
+      "name": "组织祈福",
+      "help": "需要进入一个组织"
+    },
+    "OrganizationPrayFinishCount": {
+      "name": "Freebies.OrganizationPrayFinishCount.name",
+      "help": "Freebies.OrganizationPrayFinishCount.help"
     },
     "ActivityReward": {
       "name": "活跃度奖励",

@@ -140,6 +140,9 @@ class TaskUI(UI):
                 raise GameStuckError('Password Input Timeout, Game Restart Needed')
             if not self.enter_input():
                 continue
+            self.wait_until_stable(CODE_SECOND_PASSWORD_INPUT_CONFIRM,timer=
+                                   Timer(0.5,count=3),
+                                   timeout=Timer(1,count=5))
             self.clear_input()
             self.device._scrcpy_control.set_clipboard(code, paste=True)
             if self.check_input():

@@ -47,6 +47,10 @@ class Freebies(ModuleBase):
             if not res:
                 time = future_time("08:00")  
                 delay_time = nearest_future([delay_time, time])
+        if self.config.Freebies_OrganizationPray:
+            logger.hr('Organization Pray', level=1)
+            from tasks.freebies.organization_pray import OrganizationPray
+            OrganizationPray(config=self.config, device=self.device).handle_Organization_Pray()
         if self.config.Freebies_MonthlySignIn:
             logger.hr('Monthly Sign In', level=1)
             from tasks.freebies.monthly_sign_in import MonthlySignIn

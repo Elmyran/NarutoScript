@@ -4,7 +4,10 @@ from module.logger import logger
 
 class TiLi(ModuleBase):
     def run(self):
-        if self.config.TiLi_DungeonFirst:
+        if self.config.TiLiPurchase_TiLiPurchaseTimes:
+            from tasks.tili.tili_purchase import TiLiPurchase
+
+        if self.config.TiLiCost_DungeonFirst:
             if self.config.stored.Dungeon.is_expired():
                 self.config.stored.Dungeon.clear()
             if not self.config.stored.Dungeon.is_full():

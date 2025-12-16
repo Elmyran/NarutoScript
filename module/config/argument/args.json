@@ -321,39 +321,6 @@
       }
     }
   },
-  "Organization": {
-    "Scheduler": {
-      "Enable": {
-        "type": "checkbox",
-        "value": false,
-        "option": [
-          true,
-          false
-        ]
-      },
-      "NextRun": {
-        "type": "datetime",
-        "value": "2020-01-01 00:00:00",
-        "validate": "datetime"
-      },
-      "Command": {
-        "type": "input",
-        "value": "Organization",
-        "display": "hide"
-      },
-      "ServerUpdate": {
-        "type": "input",
-        "value": "05:00",
-        "display": "hide"
-      }
-    },
-    "Organization": {
-      "OrganizationPray": {
-        "type": "checkbox",
-        "value": true
-      }
-    }
-  },
   "SurvivalTrail": {
     "Scheduler": {
       "Enable": {
@@ -413,7 +380,7 @@
         "display": "hide"
       }
     },
-    "TiLi": {
+    "TiLiCost": {
       "LevelRestrictions": {
         "type": "input",
         "value": 72
@@ -421,6 +388,18 @@
       "DungeonFirst": {
         "type": "checkbox",
         "value": true
+      }
+    },
+    "TiLiPurchase": {
+      "TiLiPurchaseTimes": {
+        "type": "input",
+        "value": 0
+      },
+      "TiLiPurchaseFinishCount": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredTiLiPurchaseCount"
       }
     },
     "TiLiStorage": {
@@ -710,6 +689,16 @@
         "value": {},
         "display": "hide",
         "stored": "StoredMonthlySignInCount"
+      },
+      "OrganizationPray": {
+        "type": "checkbox",
+        "value": true
+      },
+      "OrganizationPrayFinishCount": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredOrganizationPrayCount"
       },
       "ActivityReward": {
         "type": "checkbox",

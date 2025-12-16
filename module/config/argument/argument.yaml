@@ -95,14 +95,6 @@ Password:
     value: ''
     valuetype: str
     display: display
-
-
-
-Organization:
-  OrganizationPray:
-    type: checkbox
-    value:  true
-
 SquadRaid:
   SquadRaidBenefit:
     type: checkbox
@@ -127,13 +119,23 @@ SurvivalTrail:
   SurvivalTrialResetTimes:
     type: input
     value:  0
-TiLi:
+TiLiCost:
   LevelRestrictions:
     type: input
     value:  72
   DungeonFirst:
     type: checkbox
     value: true
+TiLiPurchase:
+  TiLiPurchaseTimes:
+    type: input
+    value:  0
+  TiLiPurchaseFinishCount:
+    stored: StoredTiLiPurchaseCount
+    value: { }
+    display: hide
+  
+
 DuelWeekly:
   DuelWeeklyStatus:
     type: checkbox
@@ -264,6 +266,13 @@ Freebies:
     value: true
   MonthlySignInFinishCount:
     stored: StoredMonthlySignInCount
+    value: {}
+    display: hide
+  OrganizationPray:
+    type: checkbox
+    value:  true
+  OrganizationPrayFinishCount:
+    stored: StoredOrganizationPrayCount
     value: {}
     display: hide
   ActivityReward:

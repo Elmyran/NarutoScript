@@ -78,17 +78,6 @@
       "SquadRaidFinishedCount": {}
     }
   },
-  "Organization": {
-    "Scheduler": {
-      "Enable": false,
-      "NextRun": "2020-01-01 00:00:00",
-      "Command": "Organization",
-      "ServerUpdate": "05:00"
-    },
-    "Organization": {
-      "OrganizationPray": true
-    }
-  },
   "SurvivalTrail": {
     "Scheduler": {
       "Enable": false,
@@ -107,9 +96,13 @@
       "Command": "TiLi",
       "ServerUpdate": "05:00"
     },
-    "TiLi": {
+    "TiLiCost": {
       "LevelRestrictions": 72,
       "DungeonFirst": true
+    },
+    "TiLiPurchase": {
+      "TiLiPurchaseTimes": 0,
+      "TiLiPurchaseFinishCount": {}
     },
     "TiLiStorage": {
       "Dungeon": {}
@@ -193,6 +186,8 @@
       "YiLeLaMianFinishCount": {},
       "MonthlySignIn": true,
       "MonthlySignInFinishCount": {},
+      "OrganizationPray": true,
+      "OrganizationPrayFinishCount": {},
       "ActivityReward": true
     },
     "PrivilegeWeeklyPackage": {

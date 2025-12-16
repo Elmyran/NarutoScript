@@ -33,15 +33,13 @@ Daily:
     SquadRaid:
       - Scheduler
       - SquadRaid
-    Organization:
-      - Scheduler
-      - Organization
     SurvivalTrail:
       - Scheduler
       - SurvivalTrail
     TiLi:
       - Scheduler
-      - TiLi
+      - TiLiCost
+      - TiLiPurchase
       - TiLiStorage
     Mission:
       - Scheduler
@@ -63,7 +61,6 @@ Daily:
       - Freebies
       - PrivilegeWeeklyPackage
       - ZhaoCai
-
     StorePurchase:
       - Scheduler
       - PrivilegeStore
@@ -71,7 +68,6 @@ Daily:
       - SurvivalStore
       - ScoreStore
       - ActivityProgressStorage
-
     BattleOrder:
       - Scheduler
       - BattleOrder

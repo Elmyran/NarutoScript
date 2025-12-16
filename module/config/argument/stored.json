@@ -122,6 +122,19 @@
     "order": 0,
     "color": "#777777"
   },
+  "TiLiPurchaseFinishCount": {
+    "name": "TiLiPurchaseFinishCount",
+    "path": "TiLi.TiLiPurchase.TiLiPurchaseFinishCount",
+    "i18n": "TiLiPurchase.TiLiPurchaseFinishCount.name",
+    "stored": "StoredTiLiPurchaseCount",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 1,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
   "Dungeon": {
     "name": "Dungeon",
     "path": "TiLi.TiLiStorage.Dungeon",
@@ -244,6 +257,19 @@
     "path": "Freebies.Freebies.MonthlySignInFinishCount",
     "i18n": "Freebies.MonthlySignInFinishCount.name",
     "stored": "StoredMonthlySignInCount",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 1,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "OrganizationPrayFinishCount": {
+    "name": "OrganizationPrayFinishCount",
+    "path": "Freebies.Freebies.OrganizationPrayFinishCount",
+    "i18n": "Freebies.OrganizationPrayFinishCount.name",
+    "stored": "StoredOrganizationPrayCount",
     "attrs": {
       "time": "2020-01-01 00:00:00",
       "total": 1,

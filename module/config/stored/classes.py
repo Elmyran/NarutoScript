@@ -413,5 +413,11 @@ class StoredActivityProgressTodayCount(StoredCounter,StoredExpiredAt0500):
 class StoredMiJingTicket(StoredCounter,StoredExpiredAt0500):
     value = 5
     FIXED_TOTAL = 35
+class StoredTiLiPurchaseCount(StoredCounter,StoredExpiredAt0500):
+    value = 0
+    FIXED_TOTAL = 1
+class StoredOrganizationPrayCount(StoredCounter,StoredExpiredAt0500):
+    value = 0
+    FIXED_TOTAL = 1
    
     

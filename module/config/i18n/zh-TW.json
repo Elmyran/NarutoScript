@@ -38,10 +38,6 @@
       "name": "Task.SquadRaid.name",
       "help": "Task.SquadRaid.help"
     },
-    "Organization": {
-      "name": "Task.Organization.name",
-      "help": "Task.Organization.help"
-    },
     "SurvivalTrail": {
       "name": "Task.SurvivalTrail.name",
       "help": "Task.SurvivalTrail.help"
@@ -277,16 +273,6 @@
       "help": "Password.SecondPassword.help"
     }
   },
-  "Organization": {
-    "_info": {
-      "name": "Organization._info.name",
-      "help": "Organization._info.help"
-    },
-    "OrganizationPray": {
-      "name": "Organization.OrganizationPray.name",
-      "help": "Organization.OrganizationPray.help"
-    }
-  },
   "SquadRaid": {
     "_info": {
       "name": "SquadRaid._info.name",
@@ -321,18 +307,32 @@
       "help": "SurvivalTrail.SurvivalTrialResetTimes.help"
     }
   },
-  "TiLi": {
+  "TiLiCost": {
     "_info": {
-      "name": "TiLi._info.name",
-      "help": "TiLi._info.help"
+      "name": "TiLiCost._info.name",
+      "help": "TiLiCost._info.help"
     },
     "LevelRestrictions": {
-      "name": "TiLi.LevelRestrictions.name",
-      "help": "TiLi.LevelRestrictions.help"
+      "name": "TiLiCost.LevelRestrictions.name",
+      "help": "TiLiCost.LevelRestrictions.help"
     },
     "DungeonFirst": {
-      "name": "TiLi.DungeonFirst.name",
-      "help": "TiLi.DungeonFirst.help"
+      "name": "TiLiCost.DungeonFirst.name",
+      "help": "TiLiCost.DungeonFirst.help"
+    }
+  },
+  "TiLiPurchase": {
+    "_info": {
+      "name": "TiLiPurchase._info.name",
+      "help": "TiLiPurchase._info.help"
+    },
+    "TiLiPurchaseTimes": {
+      "name": "TiLiPurchase.TiLiPurchaseTimes.name",
+      "help": "TiLiPurchase.TiLiPurchaseTimes.help"
+    },
+    "TiLiPurchaseFinishCount": {
+      "name": "TiLiPurchase.TiLiPurchaseFinishCount.name",
+      "help": "TiLiPurchase.TiLiPurchaseFinishCount.help"
     }
   },
   "DuelWeekly": {
@@ -494,6 +494,14 @@
     "MonthlySignInFinishCount": {
       "name": "Freebies.MonthlySignInFinishCount.name",
       "help": "Freebies.MonthlySignInFinishCount.help"
+    },
+    "OrganizationPray": {
+      "name": "Freebies.OrganizationPray.name",
+      "help": "Freebies.OrganizationPray.help"
+    },
+    "OrganizationPrayFinishCount": {
+      "name": "Freebies.OrganizationPrayFinishCount.name",
+      "help": "Freebies.OrganizationPrayFinishCount.help"
     },
     "ActivityReward": {
       "name": "Freebies.ActivityReward.name",

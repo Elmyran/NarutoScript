@@ -28,6 +28,7 @@ from module.config.stored.classes import (
     StoredMiJingTicket,
     StoredMissionAccept,
     StoredMonthlySignInCount,
+    StoredOrganizationPrayCount,
     StoredPanRenCount,
     StoredPlanner,
     StoredPlannerOverall,
@@ -35,6 +36,7 @@ from module.config.stored.classes import (
     StoredPrivilegeWeeklyPackageClaimCount,
     StoredSquadRaidFinishCount,
     StoredTiLi,
+    StoredTiLiPurchaseCount,
     StoredTrailblazePower,
     StoredYiLeLaMianClaimCount,
     StoredZhaoCaiFinishCount,
@@ -49,6 +51,7 @@ class StoredGenerated:
     CurrentVictoryCount = StoredDuelCurrentVictory("Duel.DuelWeekly.CurrentVictoryCount")
     ExtendedCurrentScore = StoredDuelExtendedScore("Duel.DuelExtended.ExtendedCurrentScore")
     SquadRaidFinishedCount = StoredSquadRaidFinishCount("SquadRaid.SquadRaid.SquadRaidFinishedCount")
+    TiLiPurchaseFinishCount = StoredTiLiPurchaseCount("TiLi.TiLiPurchase.TiLiPurchaseFinishCount")
     Dungeon = StoredDungeon("TiLi.TiLiStorage.Dungeon")
     MissionAccept = StoredMissionAccept("Mission.MissionStorage.MissionAccept")
     MiJingTicket = StoredMiJingTicket("MiJing.MiJingCount.MiJingTicket")
@@ -60,6 +63,7 @@ class StoredGenerated:
     InformationClubSignInCount = StoredInformationClubSignInCount("Freebies.Freebies.InformationClubSignInCount")
     YiLeLaMianFinishCount = StoredYiLeLaMianClaimCount("Freebies.Freebies.YiLeLaMianFinishCount")
     MonthlySignInFinishCount = StoredMonthlySignInCount("Freebies.Freebies.MonthlySignInFinishCount")
+    OrganizationPrayFinishCount = StoredOrganizationPrayCount("Freebies.Freebies.OrganizationPrayFinishCount")
     PrivilegPackageFinishCount = StoredPrivilegeWeeklyPackageClaimCount("Freebies.PrivilegeWeeklyPackage.PrivilegPackageFinishCount")
     ZhaoCaiFinishCount = StoredZhaoCaiFinishCount("Freebies.ZhaoCai.ZhaoCaiFinishCount")
     PrivilegeStoreFinishCount = StoredPrivilegeStoreFinishCount("StorePurchase.PrivilegeStore.PrivilegeStoreFinishCount")

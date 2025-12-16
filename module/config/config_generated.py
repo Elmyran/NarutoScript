@@ -43,9 +43,6 @@ class GeneratedConfig:
     # Group `Password`
     Password_SecondPassword = None
 
-    # Group `Organization`
-    Organization_OrganizationPray = True
-
     # Group `SquadRaid`
     SquadRaid_SquadRaidBenefit = True
     SquadRaid_SquadQuadrupleReward = False
@@ -55,9 +52,13 @@ class GeneratedConfig:
     # Group `SurvivalTrail`
     SurvivalTrail_SurvivalTrialResetTimes = 0
 
-    # Group `TiLi`
-    TiLi_LevelRestrictions = 72
-    TiLi_DungeonFirst = True
+    # Group `TiLiCost`
+    TiLiCost_LevelRestrictions = 72
+    TiLiCost_DungeonFirst = True
+
+    # Group `TiLiPurchase`
+    TiLiPurchase_TiLiPurchaseTimes = 0
+    TiLiPurchase_TiLiPurchaseFinishCount = {}
 
     # Group `DuelWeekly`
     DuelWeekly_DuelWeeklyStatus = True
@@ -100,6 +101,8 @@ class GeneratedConfig:
     Freebies_YiLeLaMianFinishCount = {}
     Freebies_MonthlySignIn = True
     Freebies_MonthlySignInFinishCount = {}
+    Freebies_OrganizationPray = True
+    Freebies_OrganizationPrayFinishCount = {}
     Freebies_ActivityReward = True
 
     # Group `ZhaoCai`
