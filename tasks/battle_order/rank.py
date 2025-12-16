@@ -44,20 +44,26 @@ class BattleOrderRank(UI):
         self._ensure_game_foreground()
         self._handle_remain_ui()
     def _share_goto_other_app(self):
+        apps=['com.tencent.mobileqq', 'com.tencent.mm']
         time=Timer(30,30).start()
         for _ in self.loop():
             if time.reached():
                 raise GameStuckError('BATTLE_ORDER_RANK_SHARE_TIMEOUT')
-            if self.appear_then_click(BATTLE_ORDER_SHARE_GOTO_QQ,interval=2):
+            if self.appear_then_click(BATTLE_ORDER_SHARE_GOTO_OTHER_APP,interval=2):
                 continue
             BATTLE_ORDER_RANK_GOTO_SHARE.load_search(FULL_SCREEN.area)
             if self.appear_then_click(BATTLE_ORDER_RANK_GOTO_SHARE,interval=1):
                 continue
-            if self.device.app_current() == 'com.tencent.mobileqq':  
-                logger.info('Detected QQ is running, stopping QQ app')  
-                self.device.app_stop(package='com.tencent.mobileqq')  
-                if self._verify_app_stopped('com.tencent.mobileqq'):  
-                    return True  
+            if self.device.app_current() in apps:  
+                logger.info('Detected App is running, stopping app')
+                if self.device.app_current() == apps[0]:
+                    self.device.app_stop(package=apps[0])  
+                    if self._verify_app_stopped(apps[0]):  
+                        return True  
+                elif self.device.app_current() == apps[1]:
+                    self.device.app_stop(package=apps[1])  
+                    if self._verify_app_stopped(apps[1]):  
+                        return True
                 continue
 
        
@@ -81,7 +87,7 @@ class BattleOrderRank(UI):
             if self.ui_page_appear(page_battle_order_rank):
                 break
             if click_interval.reached():
-                self.device.click(BATTLE_ORDER_SHARE_GOTO_QQ)
+                self.device.click(BATTLE_ORDER_SHARE_GOTO_OTHER_APP)
                 click_interval.reset()
 
     def _verify_app_stopped(self, package_name, timeout=2):  
@@ -93,4 +99,3 @@ class BattleOrderRank(UI):
             self.device.screenshot()
         logger.warning(f'Could not verify {package_name} closure')  
         return False
-

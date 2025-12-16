@@ -47,14 +47,23 @@ BATTLE_ORDER_RANK_LIKE_BUTTON = ButtonWrapper(
     ),
     en=None,
 )
-BATTLE_ORDER_SHARE_GOTO_QQ = ButtonWrapper(
-    name='BATTLE_ORDER_SHARE_GOTO_QQ',
-    cn=Button(
-        file='./assets/cn/battle_order/rank/BATTLE_ORDER_SHARE_GOTO_QQ.png',
-        area=(1153, 592, 1210, 662),
-        search=(1133, 572, 1230, 682),
-        color=(99, 80, 77),
-        button=(1153, 592, 1210, 662),
-    ),
+BATTLE_ORDER_SHARE_GOTO_OTHER_APP = ButtonWrapper(
+    name='BATTLE_ORDER_SHARE_GOTO_OTHER_APP',
+    cn=[
+        Button(
+            file='./assets/cn/battle_order/rank/BATTLE_ORDER_SHARE_GOTO_OTHER_APP.png',
+            area=(1158, 587, 1207, 642),
+            search=(1138, 567, 1227, 662),
+            color=(120, 153, 106),
+            button=(1158, 587, 1207, 642),
+        ),
+        Button(
+            file='./assets/cn/battle_order/rank/BATTLE_ORDER_SHARE_GOTO_OTHER_APP.2.png',
+            area=(1153, 592, 1210, 662),
+            search=(1133, 572, 1230, 682),
+            color=(99, 80, 77),
+            button=(1153, 592, 1210, 662),
+        ),
+    ],
     en=None,
 )
