@@ -1,8 +1,9 @@
 import itertools
 
-from pponnxcr.predict_system import BoxedResult
+
 
 from module.base.utils import area_center, area_in_area, area_offset
+from module.ocr.ocr import BoxedResult
 
 
 def area_distance(area1, area2):

@@ -1,6 +1,6 @@
 from module.logger import logger
 from module.ocr.ocr import Digit, Ocr
-from pponnxcr.predict_system import BoxedResult
+
 import re
 import cv2
 

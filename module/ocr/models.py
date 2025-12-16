@@ -1,4 +1,4 @@
-from pponnxcr import TextSystem as TextSystem_
+
 from module.base.decorator import cached_property, del_cached_property, has_cached_property
 from module.exception import ScriptError
 from module.logger import logger
@@ -38,10 +38,10 @@ def model2lang(model: str) -> str:
     return model
 
 
-class TextSystem(TextSystem_):
+class TextSystem(RapidOCR):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.text_recognizer.rec_batch_num = 1
+       
 
 
 class OcrModel:
@@ -78,7 +78,8 @@ class OcrModel:
     @cached_property
     def en(self):
         params={
-        "EngineConfig.onnxruntime.use_gpu": True,
+         "EngineConfig.onnxruntime.use_dml": True,
+        "EngineConfig.enable_cpu_mem_arena": True,
         "Det.engine_type": EngineType.ONNXRUNTIME,
         "Det.lang_type": LangDet.EN,
         "Det.model_type": ModelType.MOBILE,

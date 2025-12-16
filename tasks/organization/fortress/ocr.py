@@ -1,7 +1,7 @@
 from module.base.utils.utils import area_offset, color_similarity_2d, crop, float2str
 from module.logger import logger
-from module.ocr.ocr import  Ocr, OcrWhiteLetterOnComplexBackground
-from pponnxcr.predict_system import BoxedResult
+from module.ocr.ocr import  BoxedResult, Ocr, OcrWhiteLetterOnComplexBackground
+
 import time
 import re
 import cv2
