@@ -1,8 +1,7 @@
-from unittest import skip
 from module.base.timer import Timer
 from module.exception import GameStuckError
 from module.logger.logger import logger
-from module.ocr.ocr import   DigitCounter
+from module.ocr.ocr import   DigitCounter, Ocr
 from tasks.base.page import page_mission
 from tasks.base.taskui import TaskUI
 from tasks.mission.assets.assets_mission import *
@@ -187,3 +186,12 @@ class Mission(TaskUI):
 
     def _task_strategy(self, tasks):
         return tasks
+az=Mission('ns',task='Alas')
+az.device.screenshot()
+task=Task(TASK_1_AREA)
+task.task_parse(az.device.image)
+task=Task(TASK_2_AREA)
+task.task_parse(az.device.image)
+task=Task(TASK_3_AREA)
+task.task_parse(az.device.image)
+print(task)

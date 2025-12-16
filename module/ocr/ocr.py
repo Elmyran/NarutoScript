@@ -1,3 +1,4 @@
+from functools import cmp_to_key
 import time
 from datetime import timedelta
 
@@ -10,8 +11,50 @@ from module.base.utils import *
 from module.exception import ScriptError
 from module.logger import logger
 from module.ocr.keyword import Keyword
-from module.ocr.models import OCR_MODEL, TextSystem
+from module.ocr.models import OCR_MODEL, RapidOCR
 from module.ocr.utils import merge_buttons
+class BoxedResult:
+    def __init__(self, box, text_img, ocr_text, score):
+        self.box = box
+        self.text_img = text_img
+        self.ocr_text = ocr_text
+        self.score = score
+
+    def __str__(self):
+        return 'BoxedResult[%s, %s]' % (self.ocr_text, self.score)
+
+    def __repr__(self):
+        return self.__str__()
+
+
+def sorted_boxes(dt_boxes):
+    return sorted(
+        dt_boxes,
+        key=cmp_to_key(lambda x, y:
+            x[0][0] - y[0][0]
+            if -10 < x[0][1] - y[0][1] < 10 else
+            x[0][1] - y[0][1]
+        )
+    )
+def perspective_crop(img, points):
+    w = round(max(
+        np.linalg.norm(points[0] - points[1]),
+        np.linalg.norm(points[2] - points[3]),
+    ))
+    h = round(max(
+        np.linalg.norm(points[0] - points[3]),
+        np.linalg.norm(points[1] - points[2]),
+    ))
+    return cv2.warpPerspective(
+        img,
+        cv2.getPerspectiveTransform(
+            points,
+            np.float32([[0, 0],[w, 0],[w, h],[0, h]])
+        ),
+        (w, h),
+        borderMode=cv2.BORDER_REPLICATE,
+        flags=cv2.INTER_CUBIC,
+    )
 
 
 class OcrResultButton:
@@ -78,8 +121,8 @@ class Ocr:
         self.name: str = name
 
     @cached_property
-    def model(self) -> TextSystem:
-        return OCR_MODEL.model_ready.get_by_lang('cn')
+    def model(self) -> RapidOCR:
+        return OCR_MODEL.get_by_lang('cn')
 
     def pre_process(self, image):
         """
@@ -121,7 +164,10 @@ class Ocr:
             image = crop(image, self.button.area, copy=False)
         image = self.pre_process(image)
         # ocr
-        result, _ = self.model.ocr_single_line(image)
+        result= self.model(image,use_cls=False)
+        if result:
+            result = result.txts[0]        
+
         # after proces
         result = self._log_change('after', self.after_process, result)
         result = self._log_change('format', self.format_result, result)
@@ -134,7 +180,12 @@ class Ocr:
         start_time = time.time()
         image_list = [self.pre_process(image) for image in image_list]
         # ocr
-        result_list = self.model.ocr_lines(image_list)
+        result_list=[]
+        for image in image_list:
+            result= self.model(image,use_cls=False)
+            if result:
+                result = [result.txts[0],result.scores[0]] 
+                result_list.append(result)
         result_list = [(result, score) for result, score in result_list]
         # after process
         result_list = [(self.after_process(result), score) for result, score in result_list]
@@ -164,7 +215,19 @@ class Ocr:
             image = crop(image, self.button.area, copy=False)
         image = self.pre_process(image)
         # ocr
-        results: list[BoxedResult] = self.model.detect_and_ocr(image)
+        results: list[BoxedResult]=[]
+        output= self.model(image)
+        for i in range(len(output.txts)):
+            box = output.boxes[i]
+            text = output.txts[i]
+            score = output.scores[i]
+            boxed_result = BoxedResult(
+                box=box, 
+                text_img=None, # 如果需要子图，您需要在这里实现裁剪逻辑
+                ocr_text=text, 
+                score=score
+            )
+            results.append(boxed_result)
         # after proces
         for result in results:
             if not direct_ocr:
@@ -464,22 +527,4 @@ class OcrWhiteLetterOnComplexBackground(Ocr):
         boxes = np.array(boxes)
         return boxes
 
-    def detect_and_ocr(self, *args, **kwargs):
-        # Try hard to lower TextSystem.box_thresh
-        backup = self.model.text_detector.box_thresh
-        self.model.text_detector.box_thresh = 0.2
-        # Patch TextDetector
-        text_detector = self.model.text_detector
-
-        def text_detector_with_min_box(*args, **kwargs):
-            dt_boxes, elapse = text_detector(*args, **kwargs)
-            dt_boxes = self.enlarge_boxes(dt_boxes)
-            return dt_boxes, elapse
-
-        self.model.text_detector = text_detector_with_min_box
-        try:
-            result = super().detect_and_ocr(*args, **kwargs)
-        finally:
-            self.model.text_detector.box_thresh = backup
-            self.model.text_detector = text_detector
-        return result
+    
