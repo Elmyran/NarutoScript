@@ -166,7 +166,9 @@ class Ocr:
         # ocr
         result= self.model(image,use_cls=False)
         if result:
-            result = result.txts[0]        
+            result = result.txts[0]
+        else:
+            result = ''        
 
         # after proces
         result = self._log_change('after', self.after_process, result)

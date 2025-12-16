@@ -12,6 +12,7 @@ class TaskTabOcr(Ocr):
         result=result.replace('亚','忍')
         result=result.replace('贝','忍')
         result=result.replace('四','忍')
+        result=result.replace('烫','忍')
         result=result.replace('館','馆')
         result=result.replace('禾头','秘')
         result=result.replace('彩秘','秘')
