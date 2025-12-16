@@ -12,7 +12,7 @@ from module.exception import ScriptError
 from module.logger import logger
 from module.ocr.keyword import Keyword
 from module.ocr.models import OCR_MODEL, RapidOCR
-from module.ocr.utils import merge_buttons
+
 class BoxedResult:
     def __init__(self, box, text_img, ocr_text, score):
         self.box = box
@@ -209,6 +209,7 @@ class Ocr:
         Returns:
 
         """
+        from module.ocr.utils import merge_buttons
         # pre process
         start_time = time.time()
         if not direct_ocr:
@@ -235,6 +236,7 @@ class Ocr:
             result.box = tuple(corner2area(result.box))
 
         results = [result for result in results if self.filter_detected(result)]
+        
         results = merge_buttons(results, thres_x=self.merge_thres_x, thres_y=self.merge_thres_y)
         for result in results:
             result.ocr_text = self.after_process(result.ocr_text)
