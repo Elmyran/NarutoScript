@@ -392,6 +392,25 @@ class Ocr:
 class Digit(Ocr):
     def __init__(self, button: ButtonWrapper, lang='cn', name=None):
         super().__init__(button, lang=lang, name=name)
+    def pre_process(self, image):
+        
+        height, width, _ = image.shape
+        min_size = 640
+        
+        if height < min_size or width < min_size:
+           
+            top = max(0, (min_size - height) // 2)
+            bottom = max(0, min_size - height - top)
+            left = max(0, (min_size - width) // 2)
+            right = max(0, min_size - width - left)
+
+            
+            background_color = [int(x) for x in image[0, 0]]
+
+            image = cv2.copyMakeBorder(
+                image, top, bottom, left, right, cv2.BORDER_CONSTANT, value=background_color
+            )
+        return super().pre_process(image)
     def after_process(self, result):
         result = super().after_process(result)
         # 修正常见的数字识别错误
@@ -418,7 +437,25 @@ class Digit(Ocr):
 class DigitCounter(Ocr):
     def __init__(self, button: ButtonWrapper, lang='cn', name=None):
         super().__init__(button, lang=lang, name=name)
+    def pre_process(self, image):
+        
+        height, width, _ = image.shape
+        min_size = 640
+        
+        if height < min_size or width < min_size:
+           
+            top = max(0, (min_size - height) // 2)
+            bottom = max(0, min_size - height - top)
+            left = max(0, (min_size - width) // 2)
+            right = max(0, min_size - width - left)
 
+            
+            background_color = [int(x) for x in image[0, 0]]
+
+            image = cv2.copyMakeBorder(
+                image, top, bottom, left, right, cv2.BORDER_CONSTANT, value=background_color
+            )
+        return super().pre_process(image)
     @classmethod
     def is_format_matched(cls, result) -> bool:
         return '/' in result
