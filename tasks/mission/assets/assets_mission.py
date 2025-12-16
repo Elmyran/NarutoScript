@@ -370,10 +370,10 @@ TASK_SELECT_REAMIN_TIMES = ButtonWrapper(
     name='TASK_SELECT_REAMIN_TIMES',
     cn=Button(
         file='./assets/cn/mission/TASK_SELECT_REAMIN_TIMES.png',
-        area=(863, 643, 1064, 685),
-        search=(843, 623, 1084, 705),
-        color=(57, 58, 48),
-        button=(863, 643, 1064, 685),
+        area=(870, 641, 1085, 680),
+        search=(850, 621, 1105, 700),
+        color=(59, 60, 49),
+        button=(870, 641, 1085, 680),
     ),
     en=None,
 )

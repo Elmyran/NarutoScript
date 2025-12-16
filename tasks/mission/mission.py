@@ -6,6 +6,7 @@ from tasks.base.page import page_mission
 from tasks.base.taskui import TaskUI
 from tasks.mission.assets.assets_mission import *
 from tasks.mission.mission_keyword import MissionClaimable
+from tasks.mission.mission_ocr import MissionCounter
 from tasks.mission.task import MissionDurationOcr, Task
 class Mission(TaskUI):
     tasks=[]
@@ -188,10 +189,5 @@ class Mission(TaskUI):
         return tasks
 az=Mission('ns',task='Alas')
 az.device.screenshot()
-task=Task(TASK_1_AREA)
-task.task_parse(az.device.image)
-task=Task(TASK_2_AREA)
-task.task_parse(az.device.image)
-task=Task(TASK_3_AREA)
-task.task_parse(az.device.image)
-print(task)
+select=MissionCounter(TASK_SELECT_REAMIN_TIMES)
+current,remain,total=select.ocr_single_line(az.device.image)
