@@ -15,7 +15,7 @@ class MiJingOcr(Ocr):
         result=result.replace("显","罡")
         result=result.replace("宰","牢")
         return super().after_process(result)
-class MiJingDigit(Ocr,Digit):
+class MiJingDigit(Digit):
     
     def pre_process(self, image):
         image=cv2.resize(image, (800, 600))
