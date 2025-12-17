@@ -156,7 +156,7 @@ class Equipment(UI):
         valid_parts = []
         for i, (value, score) in enumerate(results):
             logger.info(f"Part {i + 1}: {value}")
-            if value < self.config.TiLi_LevelRestrictions:
+            if value < self.config.TiLiCost_LevelRestrictions:
                 # 直接使用原始的 Button 对象
                 valid_parts.append(part_areas[i])
         return valid_parts
