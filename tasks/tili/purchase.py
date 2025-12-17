@@ -20,6 +20,7 @@ class TiLiPurchase(TaskUI):
     def handle_purchase(self):
         self.enter_purchase_page()
         self.purchase()
+        self.back_to_main()
     def enter_purchase_page(self):
         for _ in self.loop():
             if self.appear(TILI_PURCHASE_CHECK):
