@@ -58,12 +58,12 @@ class RewardUtils(TaskUI):
 
 class OrganizationPray(RewardUtils):
     def run(self):
-        if self.config.stored..is_expired():
-            self.config.stored.OrganizationPray.clear()
-        if self.config.stored.OrganizationPray.is_full():
+        if self.config.stored.OrganizationPrayFinishCount.is_expired():
+            self.config.stored.OrganizationPrayFinishCount.clear()
+        if self.config.stored.OrganizationPrayFinishCount.is_full():
             return True
         self.handle_Organization_Pray()
-        self.config.stored.OrganizationPray.add()
+        self.config.stored.OrganizationPrayFinishCount.add()
    
 
     def handle_Organization_Pray(self):
