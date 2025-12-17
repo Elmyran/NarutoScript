@@ -220,17 +220,18 @@ class Ocr:
         # ocr
         results: list[BoxedResult]=[]
         output= self.model(image)
-        for i in range(len(output.txts)):
-            box = output.boxes[i]
-            text = output.txts[i]
-            score = output.scores[i]
-            boxed_result = BoxedResult(
-                box=box, 
-                text_img=None, # 如果需要子图，您需要在这里实现裁剪逻辑
-                ocr_text=text, 
-                score=score
-            )
-            results.append(boxed_result)
+        if output.txts:
+            for i in range(len(output.txts)):
+                box = output.boxes[i]
+                text = output.txts[i]
+                score = output.scores[i]
+                boxed_result = BoxedResult(
+                    box=box, 
+                    text_img=None, # 如果需要子图，您需要在这里实现裁剪逻辑
+                    ocr_text=text, 
+                    score=score
+                )
+                results.append(boxed_result)
         # after proces
         for result in results:
             if not direct_ocr:
