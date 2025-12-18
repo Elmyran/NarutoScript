@@ -6,7 +6,6 @@ from tasks.base.assets.assets_base import  TI_LI_REMAIN_COUNTER
 from tasks.base.assets.assets_base_popup import *
 from tasks.base.page import *
 from tasks.base.taskui import TaskUI
-from tasks.base.ui import UI
 from tasks.tili.assets.assets_tili_equipment import *
 from tasks.tili.assets.assets_tili_equipment_area import *
 
