@@ -187,7 +187,3 @@ class Mission(TaskUI):
 
     def _task_strategy(self, tasks):
         return tasks
-az=Mission('ns',task='Alas')
-az.device.screenshot()
-select=MissionCounter(TASK_SELECT_REAMIN_TIMES)
-current,remain,total=select.ocr_single_line(az.device.image)
