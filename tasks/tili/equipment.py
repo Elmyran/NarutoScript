@@ -32,7 +32,7 @@ class Equipment(TaskUI):
             if current<10 :
                 return True
         self.handle_equipment()
-        self.back_to_main()
+        self.ui_goto_main()
         ocr=DigitCounter(TI_LI_REMAIN_COUNTER)
         current,_,_=ocr.ocr_single_line(self.device.image)
         self.config.stored.TiLi.value=current
@@ -200,12 +200,18 @@ class Equipment(TaskUI):
                 continue
             
     def _sweep_run(self):
-        logger.info('Sweep Run')    
+        logger.info('Sweep Run')  
+        click_interval=Timer(0.5).start()
+        count=0  
         for _ in self.loop():
             if self.appear(SWEEP_COMPLETE):
                 break
             if self.appear_then_click(SWEEP_START,interval=1):
                 continue
+            if count<=3 and click_interval.reached():
+                self.device.click(SWEEP_START)
+                count+=1
+                click_interval.reset()
 
 
 

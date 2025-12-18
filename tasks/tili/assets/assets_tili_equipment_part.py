@@ -11,14 +11,14 @@ EQUIPMENT_BOOK = ButtonWrapper(
             area=(140, 380, 222, 446),
             search=(698, 116, 795, 209),
             color=(139, 73, 29),
-            button=(140, 380, 222, 446),
+            button=(142, 390, 223, 413),
         ),
         Button(
             file='./assets/share/tili/equipment/part/EQUIPMENT_BOOK.2.png',
             area=(140, 380, 222, 446),
             search=(698, 116, 795, 209),
             color=(139, 84, 114),
-            button=(140, 380, 222, 446),
+            button=(142, 387, 223, 426),
         ),
     ],
 )
@@ -30,14 +30,14 @@ EQUIPMENT_CAP = ButtonWrapper(
             area=(308, 213, 393, 282),
             search=(698, 116, 795, 209),
             color=(142, 69, 61),
-            button=(308, 213, 393, 282),
+            button=(308, 219, 391, 248),
         ),
         Button(
             file='./assets/share/tili/equipment/part/EQUIPMENT_CAP.2.png',
             area=(308, 213, 393, 282),
             search=(698, 116, 795, 209),
             color=(135, 78, 110),
-            button=(308, 213, 393, 282),
+            button=(310, 223, 391, 253),
         ),
     ],
 )
@@ -48,7 +48,7 @@ EQUIPMENT_KNIFE = ButtonWrapper(
         area=(146, 213, 219, 281),
         search=(698, 116, 795, 209),
         color=(120, 92, 79),
-        button=(146, 213, 219, 281),
+        button=(146, 221, 177, 275),
     ),
 )
 EQUIPMENT_NECKLACE = ButtonWrapper(
@@ -59,14 +59,14 @@ EQUIPMENT_NECKLACE = ButtonWrapper(
             area=(310, 377, 391, 445),
             search=(698, 116, 795, 209),
             color=(175, 74, 43),
-            button=(310, 377, 391, 445),
+            button=(310, 385, 393, 413),
         ),
         Button(
             file='./assets/share/tili/equipment/part/EQUIPMENT_NECKLACE.2.png',
             area=(310, 377, 391, 445),
             search=(698, 116, 795, 209),
             color=(122, 91, 174),
-            button=(310, 377, 391, 445),
+            button=(310, 392, 390, 416),
         ),
     ],
 )
@@ -77,7 +77,7 @@ EQUIPMENT_RING = ButtonWrapper(
         area=(481, 377, 559, 445),
         search=(698, 116, 795, 209),
         color=(138, 88, 25),
-        button=(481, 377, 559, 445),
+        button=(478, 385, 560, 413),
     ),
 )
 EQUIPMENT_SHIRT = ButtonWrapper(
@@ -88,14 +88,14 @@ EQUIPMENT_SHIRT = ButtonWrapper(
             area=(478, 213, 561, 281),
             search=(698, 116, 795, 209),
             color=(168, 68, 72),
-            button=(478, 213, 561, 281),
+            button=(480, 224, 559, 248),
         ),
         Button(
             file='./assets/share/tili/equipment/part/EQUIPMENT_SHIRT.2.png',
             area=(478, 213, 561, 281),
             search=(698, 116, 795, 209),
             color=(170, 145, 181),
-            button=(478, 213, 561, 281),
+            button=(480, 222, 557, 248),
         ),
     ],
 )

@@ -36,50 +36,6 @@ EQUIPMENT_EXIT = ButtonWrapper(
     ),
     en=None,
 )
-EQUIPMENT_PART_AREA = ButtonWrapper(
-    name='EQUIPMENT_PART_AREA',
-    cn=Button(
-        file='./assets/cn/tili/equipment/EQUIPMENT_PART_AREA.png',
-        area=(123, 178, 592, 495),
-        search=(103, 158, 612, 515),
-        color=(114, 86, 47),
-        button=(123, 178, 592, 495),
-    ),
-    en=None,
-)
-EQUIPMENT_PART_DETAIL_AREA = ButtonWrapper(
-    name='EQUIPMENT_PART_DETAIL_AREA',
-    cn=Button(
-        file='./assets/cn/tili/equipment/EQUIPMENT_PART_DETAIL_AREA.png',
-        area=(682, 89, 1256, 594),
-        search=(662, 69, 1276, 614),
-        color=(57, 50, 31),
-        button=(682, 89, 1256, 594),
-    ),
-    en=None,
-)
-EQUIPMENT_PART_DETAIL_RED_DOT = ButtonWrapper(
-    name='EQUIPMENT_PART_DETAIL_RED_DOT',
-    cn=Button(
-        file='./assets/cn/tili/equipment/EQUIPMENT_PART_DETAIL_RED_DOT.png',
-        area=(1215, 527, 1240, 549),
-        search=(1195, 507, 1260, 569),
-        color=(173, 110, 54),
-        button=(1215, 527, 1240, 549),
-    ),
-    en=None,
-)
-EQUIPMENT_PART_RED_DOT = ButtonWrapper(
-    name='EQUIPMENT_PART_RED_DOT',
-    cn=Button(
-        file='./assets/cn/tili/equipment/EQUIPMENT_PART_RED_DOT.png',
-        area=(214, 187, 237, 209),
-        search=(194, 167, 257, 229),
-        color=(127, 90, 63),
-        button=(214, 187, 237, 209),
-    ),
-    en=None,
-)
 EQUIPMENT_PART_STUFF_AREA = ButtonWrapper(
     name='EQUIPMENT_PART_STUFF_AREA',
     cn=Button(
@@ -88,17 +44,6 @@ EQUIPMENT_PART_STUFF_AREA = ButtonWrapper(
         search=(673, 380, 1264, 529),
         color=(70, 59, 38),
         button=(693, 400, 1244, 509),
-    ),
-    en=None,
-)
-EQUIPMENT_PART_UPGRADE = ButtonWrapper(
-    name='EQUIPMENT_PART_UPGRADE',
-    cn=Button(
-        file='./assets/cn/tili/equipment/EQUIPMENT_PART_UPGRADE.png',
-        area=(1100, 270, 1236, 319),
-        search=(1080, 250, 1256, 339),
-        color=(205, 133, 14),
-        button=(1100, 270, 1236, 319),
     ),
     en=None,
 )
@@ -218,17 +163,6 @@ STUFF_EQUIP_BUTTON = ButtonWrapper(
     ],
     en=None,
 )
-STUFF_SINGLE = ButtonWrapper(
-    name='STUFF_SINGLE',
-    cn=Button(
-        file='./assets/cn/tili/equipment/STUFF_SINGLE.png',
-        area=(270, 273, 454, 318),
-        search=(250, 253, 474, 338),
-        color=(131, 131, 124),
-        button=(270, 273, 454, 318),
-    ),
-    en=None,
-)
 STUFF_SYNTHETIC_BUTTON = ButtonWrapper(
     name='STUFF_SYNTHETIC_BUTTON',
     cn=Button(
@@ -262,6 +196,16 @@ SWEEP_CONTINUE = ButtonWrapper(
     ),
     en=None,
 )
+SWEEP_FASTER = ButtonWrapper(
+    name='SWEEP_FASTER',
+    share=Button(
+        file='./assets/share/tili/equipment/SWEEP_FASTER.png',
+        area=(993, 375, 1021, 443),
+        search=(973, 355, 1041, 463),
+        color=(75, 69, 55),
+        button=(993, 375, 1021, 443),
+    ),
+)
 SWEEP_START = ButtonWrapper(
     name='SWEEP_START',
     cn=Button(
@@ -270,37 +214,6 @@ SWEEP_START = ButtonWrapper(
         search=(773, 467, 968, 564),
         color=(203, 137, 17),
         button=(793, 487, 948, 544),
-    ),
-    en=None,
-)
-TI_LI_REMAIN_AFTER_SWEEP = ButtonWrapper(
-    name='TI_LI_REMAIN_AFTER_SWEEP',
-    cn=[
-        Button(
-            file='./assets/cn/tili/equipment/TI_LI_REMAIN_AFTER_SWEEP.png',
-            area=(750, 100, 914, 248),
-            search=(730, 80, 934, 268),
-            color=(95, 89, 77),
-            button=(750, 100, 914, 248),
-        ),
-        Button(
-            file='./assets/cn/tili/equipment/TI_LI_REMAIN_AFTER_SWEEP.2.png',
-            area=(793, 199, 912, 230),
-            search=(773, 179, 932, 250),
-            color=(84, 82, 81),
-            button=(793, 199, 912, 230),
-        ),
-    ],
-    en=None,
-)
-TI_LI_REMAIN_BEFORE_SWEEP = ButtonWrapper(
-    name='TI_LI_REMAIN_BEFORE_SWEEP',
-    cn=Button(
-        file='./assets/cn/tili/equipment/TI_LI_REMAIN_BEFORE_SWEEP.png',
-        area=(749, 191, 894, 233),
-        search=(729, 171, 914, 253),
-        color=(86, 73, 64),
-        button=(749, 191, 894, 233),
     ),
     en=None,
 )
