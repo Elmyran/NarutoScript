@@ -128,12 +128,12 @@ class Equipment(TaskUI):
             if time.reached():
                 raise GameStuckError('Equipment Enter Stuck')
             if self.appear(EQUIPMENT_CHECK):
+                self.wait_until_stable(EQUIPMENT_CHECK, timer=Timer(1, count=3))
                 break
             if self.appear_then_click(MAIN_GOTO_EQUIPMENT):
                 continue
             if self.appear_then_click(MAIN_GOTO_EQUIPMENT_LIST):
                 continue
-         
             if self.appear_then_click(MAIN_GOTO_EQUIPMENT_LIST):
                 continue
     def _get_sweepable_equipment(self):

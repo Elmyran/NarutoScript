@@ -167,7 +167,3 @@ class Fortress(GameControl,TaskUI):
                 idx = (idx + 1) % other_count
         self.device.stuck_record_clear()
         self.device.stuck_timer=original
-
-az=Fortress('ns',task='Alas')
-az.device.screenshot()
-az._fortress_select()

@@ -132,6 +132,7 @@ class Ocr:
         Returns:
             np.ndarray: Shape (width, height)
         """
+
         return image
 
     def after_process(self, result):

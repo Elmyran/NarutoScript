@@ -1,8 +1,4 @@
-from module.base.utils.utils import area_offset, color_similarity_2d, crop, float2str
-from module.logger import logger
-from module.ocr.ocr import  BoxedResult,OcrWhiteLetterOnComplexBackground
-
-import time
+from module.ocr.ocr import  OcrWhiteLetterOnComplexBackground
 import re
 import cv2
 import numpy as np
@@ -39,6 +35,7 @@ class FortressOcr(OcrWhiteLetterOnComplexBackground):
         result=result.replace('菜','草')
         result=result.replace('卓','草')
         result=result.replace('小','川')
+        result=result.replace('山','川')
         result=result.replace('霸','霜')
         result=result.replace('阁','涡')
         result=result.replace('中','鸟')
@@ -47,6 +44,10 @@ class FortressOcr(OcrWhiteLetterOnComplexBackground):
         result=result.replace('子','云')
         result=result.replace('泥','泷')
         result=result.replace('洗','泷')
+        result=result.replace('炭','泷')
+        result=result.replace('发','泷')
+        result=result.replace('医','泷')
+        result=result.replace('陇','泷')
         result = re.sub('^铁.*', '铁之要塞', result)  
         result = re.sub('^田.*', '田之要塞', result)  
         result = re.sub('^土.*', '土之要塞', result)  
