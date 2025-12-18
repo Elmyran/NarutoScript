@@ -27,25 +27,41 @@ EQUIPMENT_ADVANCED_BUTTON = ButtonWrapper(
 )
 EQUIPMENT_BOOK = ButtonWrapper(
     name='EQUIPMENT_BOOK',
-    cn=Button(
-        file='./assets/cn/tili/equipment/EQUIPMENT_BOOK.png',
-        area=(176, 416, 227, 451),
-        search=(156, 396, 247, 471),
-        color=(117, 61, 14),
-        button=(176, 416, 227, 451),
-    ),
-    en=None,
+    share=[
+        Button(
+            file='./assets/share/tili/equipment/EQUIPMENT_BOOK.png',
+            area=(140, 380, 222, 446),
+            search=(120, 360, 242, 466),
+            color=(126, 63, 23),
+            button=(140, 380, 222, 446),
+        ),
+        Button(
+            file='./assets/share/tili/equipment/EQUIPMENT_BOOK.2.png',
+            area=(142, 376, 223, 424),
+            search=(122, 356, 243, 444),
+            color=(128, 66, 29),
+            button=(142, 376, 223, 424),
+        ),
+    ],
 )
 EQUIPMENT_CAP = ButtonWrapper(
     name='EQUIPMENT_CAP',
-    cn=Button(
-        file='./assets/cn/tili/equipment/EQUIPMENT_CAP.png',
-        area=(349, 254, 398, 282),
-        search=(329, 234, 418, 302),
-        color=(119, 56, 15),
-        button=(349, 254, 398, 282),
-    ),
-    en=None,
+    share=[
+        Button(
+            file='./assets/share/tili/equipment/EQUIPMENT_CAP.png',
+            area=(308, 213, 393, 282),
+            search=(288, 193, 413, 302),
+            color=(133, 63, 43),
+            button=(308, 213, 393, 282),
+        ),
+        Button(
+            file='./assets/share/tili/equipment/EQUIPMENT_CAP.2.png',
+            area=(308, 212, 391, 259),
+            search=(288, 192, 411, 279),
+            color=(137, 67, 59),
+            button=(308, 212, 391, 259),
+        ),
+    ],
 )
 EQUIPMENT_CHECK = ButtonWrapper(
     name='EQUIPMENT_CHECK',
@@ -71,25 +87,41 @@ EQUIPMENT_EXIT = ButtonWrapper(
 )
 EQUIPMENT_KNIFE = ButtonWrapper(
     name='EQUIPMENT_KNIFE',
-    cn=Button(
-        file='./assets/cn/tili/equipment/EQUIPMENT_KNIFE.png',
-        area=(177, 254, 223, 284),
-        search=(157, 234, 243, 304),
-        color=(133, 65, 13),
-        button=(177, 254, 223, 284),
-    ),
-    en=None,
+    share=[
+        Button(
+            file='./assets/share/tili/equipment/EQUIPMENT_KNIFE.png',
+            area=(146, 213, 219, 281),
+            search=(126, 193, 239, 301),
+            color=(121, 75, 48),
+            button=(146, 213, 219, 281),
+        ),
+        Button(
+            file='./assets/share/tili/equipment/EQUIPMENT_KNIFE.2.png',
+            area=(143, 213, 217, 257),
+            search=(123, 193, 237, 277),
+            color=(118, 78, 60),
+            button=(143, 213, 217, 257),
+        ),
+    ],
 )
 EQUIPMENT_NECKLACE = ButtonWrapper(
     name='EQUIPMENT_NECKLACE',
-    cn=Button(
-        file='./assets/cn/tili/equipment/EQUIPMENT_NECKLACE.png',
-        area=(348, 422, 397, 451),
-        search=(328, 402, 417, 471),
-        color=(129, 62, 16),
-        button=(348, 422, 397, 451),
-    ),
-    en=None,
+    share=[
+        Button(
+            file='./assets/share/tili/equipment/EQUIPMENT_NECKLACE.png',
+            area=(310, 377, 391, 445),
+            search=(290, 357, 411, 465),
+            color=(155, 68, 36),
+            button=(310, 377, 391, 445),
+        ),
+        Button(
+            file='./assets/share/tili/equipment/EQUIPMENT_NECKLACE.2.png',
+            area=(310, 376, 393, 425),
+            search=(290, 356, 413, 445),
+            color=(162, 70, 42),
+            button=(310, 376, 393, 425),
+        ),
+    ],
 )
 EQUIPMENT_PART_AREA = ButtonWrapper(
     name='EQUIPMENT_PART_AREA',
@@ -181,34 +213,41 @@ EQUIPMENT_PART_UPGRADE = ButtonWrapper(
 )
 EQUIPMENT_RING = ButtonWrapper(
     name='EQUIPMENT_RING',
-    cn=[
+    share=[
         Button(
-            file='./assets/cn/tili/equipment/EQUIPMENT_RING.png',
-            area=(533, 423, 564, 449),
-            search=(513, 403, 584, 469),
-            color=(104, 58, 10),
-            button=(533, 423, 564, 449),
+            file='./assets/share/tili/equipment/EQUIPMENT_RING.png',
+            area=(481, 377, 559, 445),
+            search=(461, 357, 579, 465),
+            color=(138, 80, 22),
+            button=(481, 377, 559, 445),
         ),
         Button(
-            file='./assets/cn/tili/equipment/EQUIPMENT_RING.2.png',
-            area=(501, 393, 565, 450),
-            search=(481, 373, 585, 470),
-            color=(135, 81, 21),
-            button=(501, 393, 565, 450),
+            file='./assets/share/tili/equipment/EQUIPMENT_RING.2.png',
+            area=(478, 377, 560, 424),
+            search=(458, 357, 580, 444),
+            color=(138, 85, 26),
+            button=(478, 377, 560, 424),
         ),
     ],
-    en=None,
 )
 EQUIPMENT_SHIRT = ButtonWrapper(
     name='EQUIPMENT_SHIRT',
-    cn=Button(
-        file='./assets/cn/tili/equipment/EQUIPMENT_SHIRT.png',
-        area=(520, 254, 564, 284),
-        search=(500, 234, 584, 304),
-        color=(126, 61, 21),
-        button=(520, 254, 564, 284),
-    ),
-    en=None,
+    share=[
+        Button(
+            file='./assets/share/tili/equipment/EQUIPMENT_SHIRT.png',
+            area=(478, 213, 561, 281),
+            search=(458, 193, 581, 301),
+            color=(149, 62, 49),
+            button=(478, 213, 561, 281),
+        ),
+        Button(
+            file='./assets/share/tili/equipment/EQUIPMENT_SHIRT.2.png',
+            area=(480, 211, 559, 260),
+            search=(460, 191, 579, 280),
+            color=(158, 63, 61),
+            button=(480, 211, 559, 260),
+        ),
+    ],
 )
 MAIN_GOTO_EQUIPMENT = ButtonWrapper(
     name='MAIN_GOTO_EQUIPMENT',

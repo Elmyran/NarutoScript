@@ -10,6 +10,7 @@ class TaskTabOcr(Ocr):
         result=result.replace('双','忍')
         result=result.replace('驱','忍')
         result=result.replace('亚','忍')
+        result=result.replace('丑','忍')
         result=result.replace('贝','忍')
         result=result.replace('四','忍')
         result=result.replace('烫','忍')
