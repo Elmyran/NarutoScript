@@ -14,55 +14,6 @@ COPPER_COINS_SHORTAGE = ButtonWrapper(
     ),
     en=None,
 )
-EQUIPMENT_ADVANCED_BUTTON = ButtonWrapper(
-    name='EQUIPMENT_ADVANCED_BUTTON',
-    cn=Button(
-        file='./assets/cn/tili/equipment/EQUIPMENT_ADVANCED_BUTTON.png',
-        area=(1100, 526, 1241, 575),
-        search=(1080, 506, 1261, 595),
-        color=(202, 130, 13),
-        button=(1100, 526, 1241, 575),
-    ),
-    en=None,
-)
-EQUIPMENT_BOOK = ButtonWrapper(
-    name='EQUIPMENT_BOOK',
-    share=[
-        Button(
-            file='./assets/share/tili/equipment/EQUIPMENT_BOOK.png',
-            area=(140, 380, 222, 446),
-            search=(120, 360, 242, 466),
-            color=(126, 63, 23),
-            button=(140, 380, 222, 446),
-        ),
-        Button(
-            file='./assets/share/tili/equipment/EQUIPMENT_BOOK.2.png',
-            area=(142, 376, 223, 424),
-            search=(122, 356, 243, 444),
-            color=(128, 66, 29),
-            button=(142, 376, 223, 424),
-        ),
-    ],
-)
-EQUIPMENT_CAP = ButtonWrapper(
-    name='EQUIPMENT_CAP',
-    share=[
-        Button(
-            file='./assets/share/tili/equipment/EQUIPMENT_CAP.png',
-            area=(308, 213, 393, 282),
-            search=(288, 193, 413, 302),
-            color=(133, 63, 43),
-            button=(308, 213, 393, 282),
-        ),
-        Button(
-            file='./assets/share/tili/equipment/EQUIPMENT_CAP.2.png',
-            area=(308, 212, 391, 259),
-            search=(288, 192, 411, 279),
-            color=(137, 67, 59),
-            button=(308, 212, 391, 259),
-        ),
-    ],
-)
 EQUIPMENT_CHECK = ButtonWrapper(
     name='EQUIPMENT_CHECK',
     cn=Button(
@@ -85,44 +36,6 @@ EQUIPMENT_EXIT = ButtonWrapper(
     ),
     en=None,
 )
-EQUIPMENT_KNIFE = ButtonWrapper(
-    name='EQUIPMENT_KNIFE',
-    share=[
-        Button(
-            file='./assets/share/tili/equipment/EQUIPMENT_KNIFE.png',
-            area=(146, 213, 219, 281),
-            search=(126, 193, 239, 301),
-            color=(121, 75, 48),
-            button=(146, 213, 219, 281),
-        ),
-        Button(
-            file='./assets/share/tili/equipment/EQUIPMENT_KNIFE.2.png',
-            area=(143, 213, 217, 257),
-            search=(123, 193, 237, 277),
-            color=(118, 78, 60),
-            button=(143, 213, 217, 257),
-        ),
-    ],
-)
-EQUIPMENT_NECKLACE = ButtonWrapper(
-    name='EQUIPMENT_NECKLACE',
-    share=[
-        Button(
-            file='./assets/share/tili/equipment/EQUIPMENT_NECKLACE.png',
-            area=(310, 377, 391, 445),
-            search=(290, 357, 411, 465),
-            color=(155, 68, 36),
-            button=(310, 377, 391, 445),
-        ),
-        Button(
-            file='./assets/share/tili/equipment/EQUIPMENT_NECKLACE.2.png',
-            area=(310, 376, 393, 425),
-            search=(290, 356, 413, 445),
-            color=(162, 70, 42),
-            button=(310, 376, 393, 425),
-        ),
-    ],
-)
 EQUIPMENT_PART_AREA = ButtonWrapper(
     name='EQUIPMENT_PART_AREA',
     cn=Button(
@@ -131,17 +44,6 @@ EQUIPMENT_PART_AREA = ButtonWrapper(
         search=(103, 158, 612, 515),
         color=(114, 86, 47),
         button=(123, 178, 592, 495),
-    ),
-    en=None,
-)
-EQUIPMENT_PART_DETAIL = ButtonWrapper(
-    name='EQUIPMENT_PART_DETAIL',
-    cn=Button(
-        file='./assets/cn/tili/equipment/EQUIPMENT_PART_DETAIL.png',
-        area=(688, 102, 1239, 264),
-        search=(668, 82, 1259, 284),
-        color=(43, 41, 27),
-        button=(688, 102, 1239, 264),
     ),
     en=None,
 )
@@ -164,17 +66,6 @@ EQUIPMENT_PART_DETAIL_RED_DOT = ButtonWrapper(
         search=(1195, 507, 1260, 569),
         color=(173, 110, 54),
         button=(1215, 527, 1240, 549),
-    ),
-    en=None,
-)
-EQUIPMENT_PART_PROMOTION = ButtonWrapper(
-    name='EQUIPMENT_PART_PROMOTION',
-    cn=Button(
-        file='./assets/cn/tili/equipment/EQUIPMENT_PART_PROMOTION.png',
-        area=(1143, 534, 1195, 569),
-        search=(1123, 514, 1215, 589),
-        color=(195, 148, 30),
-        button=(1143, 534, 1195, 569),
     ),
     en=None,
 )
@@ -211,43 +102,37 @@ EQUIPMENT_PART_UPGRADE = ButtonWrapper(
     ),
     en=None,
 )
-EQUIPMENT_RING = ButtonWrapper(
-    name='EQUIPMENT_RING',
-    share=[
-        Button(
-            file='./assets/share/tili/equipment/EQUIPMENT_RING.png',
-            area=(481, 377, 559, 445),
-            search=(461, 357, 579, 465),
-            color=(138, 80, 22),
-            button=(481, 377, 559, 445),
-        ),
-        Button(
-            file='./assets/share/tili/equipment/EQUIPMENT_RING.2.png',
-            area=(478, 377, 560, 424),
-            search=(458, 357, 580, 444),
-            color=(138, 85, 26),
-            button=(478, 377, 560, 424),
-        ),
-    ],
+EQUIPMENT_POPUP_CLOSE_BUTTON = ButtonWrapper(
+    name='EQUIPMENT_POPUP_CLOSE_BUTTON',
+    cn=Button(
+        file='./assets/cn/tili/equipment/EQUIPMENT_POPUP_CLOSE_BUTTON.png',
+        area=(30, 13, 167, 127),
+        search=(10, 0, 187, 147),
+        color=(148, 89, 31),
+        button=(30, 13, 167, 127),
+    ),
+    en=None,
 )
-EQUIPMENT_SHIRT = ButtonWrapper(
-    name='EQUIPMENT_SHIRT',
-    share=[
-        Button(
-            file='./assets/share/tili/equipment/EQUIPMENT_SHIRT.png',
-            area=(478, 213, 561, 281),
-            search=(458, 193, 581, 301),
-            color=(149, 62, 49),
-            button=(478, 213, 561, 281),
-        ),
-        Button(
-            file='./assets/share/tili/equipment/EQUIPMENT_SHIRT.2.png',
-            area=(480, 211, 559, 260),
-            search=(460, 191, 579, 280),
-            color=(158, 63, 61),
-            button=(480, 211, 559, 260),
-        ),
-    ],
+EQUIPMENT_PROMOTION_BUTTON = ButtonWrapper(
+    name='EQUIPMENT_PROMOTION_BUTTON',
+    cn=Button(
+        file='./assets/cn/tili/equipment/EQUIPMENT_PROMOTION_BUTTON.png',
+        area=(1136, 533, 1204, 568),
+        search=(1116, 513, 1224, 588),
+        color=(208, 157, 23),
+        button=(1136, 533, 1204, 568),
+    ),
+    en=None,
+)
+EQUIPMENT_SELECTED = ButtonWrapper(
+    name='EQUIPMENT_SELECTED',
+    share=Button(
+        file='./assets/share/tili/equipment/EQUIPMENT_SELECTED.png',
+        area=(698, 116, 795, 209),
+        search=(678, 96, 815, 229),
+        color=(97, 65, 39),
+        button=(698, 116, 795, 209),
+    ),
 )
 MAIN_GOTO_EQUIPMENT = ButtonWrapper(
     name='MAIN_GOTO_EQUIPMENT',
@@ -280,107 +165,10 @@ MAIN_GOTO_EQUIPMENT_LIST = ButtonWrapper(
     ],
     en=None,
 )
-STUFF_1 = ButtonWrapper(
-    name='STUFF_1',
+STUFF_AUTO_FILL = ButtonWrapper(
+    name='STUFF_AUTO_FILL',
     cn=Button(
-        file='./assets/cn/tili/equipment/STUFF_1.png',
-        area=(699, 417, 781, 502),
-        search=(679, 397, 801, 522),
-        color=(117, 89, 81),
-        button=(699, 417, 781, 502),
-    ),
-    en=None,
-)
-STUFF_2 = ButtonWrapper(
-    name='STUFF_2',
-    cn=Button(
-        file='./assets/cn/tili/equipment/STUFF_2.png',
-        area=(786, 416, 870, 499),
-        search=(766, 396, 890, 519),
-        color=(131, 82, 54),
-        button=(786, 416, 870, 499),
-    ),
-    en=None,
-)
-STUFF_3 = ButtonWrapper(
-    name='STUFF_3',
-    cn=Button(
-        file='./assets/cn/tili/equipment/STUFF_3.png',
-        area=(880, 419, 960, 500),
-        search=(860, 399, 980, 520),
-        color=(132, 82, 55),
-        button=(880, 419, 960, 500),
-    ),
-    en=None,
-)
-STUFF_4 = ButtonWrapper(
-    name='STUFF_4',
-    cn=Button(
-        file='./assets/cn/tili/equipment/STUFF_4.png',
-        area=(972, 417, 1053, 498),
-        search=(952, 397, 1073, 518),
-        color=(118, 90, 83),
-        button=(972, 417, 1053, 498),
-    ),
-    en=None,
-)
-STUFF_5 = ButtonWrapper(
-    name='STUFF_5',
-    cn=Button(
-        file='./assets/cn/tili/equipment/STUFF_5.png',
-        area=(1062, 417, 1145, 502),
-        search=(1042, 397, 1165, 522),
-        color=(88, 75, 53),
-        button=(1062, 417, 1145, 502),
-    ),
-    en=None,
-)
-STUFF_6 = ButtonWrapper(
-    name='STUFF_6',
-    cn=Button(
-        file='./assets/cn/tili/equipment/STUFF_6.png',
-        area=(1152, 415, 1232, 501),
-        search=(1132, 395, 1252, 521),
-        color=(87, 75, 52),
-        button=(1152, 415, 1232, 501),
-    ),
-    en=None,
-)
-STUFF_CHECK = ButtonWrapper(
-    name='STUFF_CHECK',
-    cn=Button(
-        file='./assets/cn/tili/equipment/STUFF_CHECK.png',
-        area=(674, 178, 846, 219),
-        search=(654, 158, 866, 239),
-        color=(123, 124, 120),
-        button=(674, 178, 846, 219),
-    ),
-    en=None,
-)
-STUFF_EQUIPMENT = ButtonWrapper(
-    name='STUFF_EQUIPMENT',
-    cn=[
-        Button(
-            file='./assets/cn/tili/equipment/STUFF_EQUIPMENT.png',
-            area=(335, 524, 532, 595),
-            search=(315, 504, 552, 615),
-            color=(222, 148, 9),
-            button=(335, 524, 532, 595),
-        ),
-        Button(
-            file='./assets/cn/tili/equipment/STUFF_EQUIPMENT.2.png',
-            area=(541, 527, 738, 596),
-            search=(521, 507, 758, 616),
-            color=(226, 152, 9),
-            button=(541, 527, 738, 596),
-        ),
-    ],
-    en=None,
-)
-STUFF_FILL_ALL = ButtonWrapper(
-    name='STUFF_FILL_ALL',
-    cn=Button(
-        file='./assets/cn/tili/equipment/STUFF_FILL_ALL.png',
+        file='./assets/cn/tili/equipment/STUFF_AUTO_FILL.png',
         area=(1106, 531, 1231, 567),
         search=(1086, 511, 1251, 587),
         color=(215, 161, 22),
@@ -388,59 +176,46 @@ STUFF_FILL_ALL = ButtonWrapper(
     ),
     en=None,
 )
-STUFF_LIST_AREA = ButtonWrapper(
-    name='STUFF_LIST_AREA',
+STUFF_DETAIL_CHECK = ButtonWrapper(
+    name='STUFF_DETAIL_CHECK',
     cn=Button(
-        file='./assets/cn/tili/equipment/STUFF_LIST_AREA.png',
-        area=(696, 413, 1237, 504),
-        search=(676, 393, 1257, 524),
-        color=(81, 62, 33),
-        button=(696, 413, 1237, 504),
+        file='./assets/cn/tili/equipment/STUFF_DETAIL_CHECK.png',
+        area=(674, 178, 846, 219),
+        search=(654, 158, 866, 239),
+        color=(123, 124, 120),
+        button=(674, 178, 846, 219),
     ),
     en=None,
 )
-STUFF_MATERIAL_FULL = ButtonWrapper(
-    name='STUFF_MATERIAL_FULL',
+STUFF_DETAIL_SWEEP_BUTTON = ButtonWrapper(
+    name='STUFF_DETAIL_SWEEP_BUTTON',
     cn=Button(
-        file='./assets/cn/tili/equipment/STUFF_MATERIAL_FULL.png',
-        area=(705, 490, 787, 523),
-        search=(685, 470, 807, 543),
-        color=(70, 69, 67),
-        button=(705, 490, 787, 523),
+        file='./assets/cn/tili/equipment/STUFF_DETAIL_SWEEP_BUTTON.png',
+        area=(337, 526, 534, 593),
+        search=(317, 506, 554, 613),
+        color=(223, 152, 14),
+        button=(337, 526, 534, 593),
     ),
     en=None,
 )
-STUFF_NOT_FULL = ButtonWrapper(
-    name='STUFF_NOT_FULL',
-    cn=Button(
-        file='./assets/cn/tili/equipment/STUFF_NOT_FULL.png',
-        area=(747, 486, 803, 528),
-        search=(727, 466, 823, 548),
-        color=(65, 61, 58),
-        button=(747, 486, 803, 528),
-    ),
-    en=None,
-)
-STUFF_PART_1 = ButtonWrapper(
-    name='STUFF_PART_1',
-    cn=Button(
-        file='./assets/cn/tili/equipment/STUFF_PART_1.png',
-        area=(315, 363, 406, 408),
-        search=(295, 343, 426, 428),
-        color=(157, 127, 111),
-        button=(334, 416, 379, 458),
-    ),
-    en=None,
-)
-STUFF_PART_2 = ButtonWrapper(
-    name='STUFF_PART_2',
-    cn=Button(
-        file='./assets/cn/tili/equipment/STUFF_PART_2.png',
-        area=(477, 367, 570, 406),
-        search=(457, 347, 590, 426),
-        color=(159, 138, 121),
-        button=(498, 412, 542, 461),
-    ),
+STUFF_EQUIP_BUTTON = ButtonWrapper(
+    name='STUFF_EQUIP_BUTTON',
+    cn=[
+        Button(
+            file='./assets/cn/tili/equipment/STUFF_EQUIP_BUTTON.png',
+            area=(335, 524, 532, 595),
+            search=(315, 504, 552, 615),
+            color=(222, 148, 9),
+            button=(335, 524, 532, 595),
+        ),
+        Button(
+            file='./assets/cn/tili/equipment/STUFF_EQUIP_BUTTON.2.png',
+            area=(541, 527, 738, 596),
+            search=(521, 507, 758, 616),
+            color=(226, 152, 9),
+            button=(541, 527, 738, 596),
+        ),
+    ],
     en=None,
 )
 STUFF_SINGLE = ButtonWrapper(
@@ -451,17 +226,6 @@ STUFF_SINGLE = ButtonWrapper(
         search=(250, 253, 474, 338),
         color=(131, 131, 124),
         button=(270, 273, 454, 318),
-    ),
-    en=None,
-)
-STUFF_SWEEP_BUTTON = ButtonWrapper(
-    name='STUFF_SWEEP_BUTTON',
-    cn=Button(
-        file='./assets/cn/tili/equipment/STUFF_SWEEP_BUTTON.png',
-        area=(337, 526, 534, 593),
-        search=(317, 506, 554, 613),
-        color=(223, 152, 14),
-        button=(337, 526, 534, 593),
     ),
     en=None,
 )
@@ -476,14 +240,14 @@ STUFF_SYNTHETIC_BUTTON = ButtonWrapper(
     ),
     en=None,
 )
-SWEEP_AREA = ButtonWrapper(
-    name='SWEEP_AREA',
+SWEEP_COMPLETE = ButtonWrapper(
+    name='SWEEP_COMPLETE',
     cn=Button(
-        file='./assets/cn/tili/equipment/SWEEP_AREA.png',
-        area=(264, 106, 984, 635),
-        search=(244, 86, 1004, 655),
-        color=(65, 57, 42),
-        button=(264, 106, 984, 635),
+        file='./assets/cn/tili/equipment/SWEEP_COMPLETE.png',
+        area=(452, 345, 527, 401),
+        search=(432, 325, 547, 421),
+        color=(187, 110, 7),
+        button=(452, 345, 527, 401),
     ),
     en=None,
 )
@@ -495,50 +259,6 @@ SWEEP_CONTINUE = ButtonWrapper(
         search=(772, 554, 970, 649),
         color=(206, 141, 19),
         button=(792, 574, 950, 629),
-    ),
-    en=None,
-)
-SWEEP_DETAIL = ButtonWrapper(
-    name='SWEEP_DETAIL',
-    cn=Button(
-        file='./assets/cn/tili/equipment/SWEEP_DETAIL.png',
-        area=(909, 191, 961, 236),
-        search=(889, 171, 981, 256),
-        color=(45, 97, 123),
-        button=(909, 191, 961, 236),
-    ),
-    en=None,
-)
-SWEEP_MATERIAL_REMAIN = ButtonWrapper(
-    name='SWEEP_MATERIAL_REMAIN',
-    cn=Button(
-        file='./assets/cn/tili/equipment/SWEEP_MATERIAL_REMAIN.png',
-        area=(760, 492, 855, 529),
-        search=(740, 472, 875, 549),
-        color=(70, 55, 50),
-        button=(760, 492, 855, 529),
-    ),
-    en=None,
-)
-SWEEP_MATERIAL_REMAIN_AREA = ButtonWrapper(
-    name='SWEEP_MATERIAL_REMAIN_AREA',
-    cn=Button(
-        file='./assets/cn/tili/equipment/SWEEP_MATERIAL_REMAIN_AREA.png',
-        area=(378, 366, 918, 567),
-        search=(358, 346, 938, 587),
-        color=(75, 64, 43),
-        button=(378, 366, 918, 567),
-    ),
-    en=None,
-)
-SWEEP_RUNNING = ButtonWrapper(
-    name='SWEEP_RUNNING',
-    cn=Button(
-        file='./assets/cn/tili/equipment/SWEEP_RUNNING.png',
-        area=(273, 366, 355, 422),
-        search=(253, 346, 375, 442),
-        color=(101, 73, 43),
-        button=(884, 332, 993, 387),
     ),
     en=None,
 )

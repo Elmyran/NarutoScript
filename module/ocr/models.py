@@ -69,8 +69,11 @@ class OcrModel:
     def ch(self):
         params={
         "EngineConfig.onnxruntime.use_dml": True,
-
         "EngineConfig.enable_cpu_mem_arena": True,
+        "Det.ocr_version": OCRVersion.PPOCRV4,
+        "Rec.ocr_version": OCRVersion.PPOCRV5
+
+
         
     }
         return RapidOCR(params=params)
