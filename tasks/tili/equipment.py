@@ -165,7 +165,7 @@ class Equipment(TaskUI):
             if click_interval.reached():
                 self.equipment.clear_offset()
                 self.device.click(self.equipment)
-                self.device.click_record_remove(self.equipment)
+
             
     def is_sweep_button_appeared(self):
         ocr=Ocr(STUFF_LIST_AREA)
@@ -189,7 +189,6 @@ class Equipment(TaskUI):
                 break
             if click_interval.reached():
                 self.device.click(self.stuff)
-                self.device.click_record_remove(self.stuff)
                 click_interval.reset()
     def _sweep_enter(self):
         logger.info('Sweep Enter')
@@ -209,7 +208,8 @@ class Equipment(TaskUI):
             if self.appear_then_click(SWEEP_START,interval=1):
                 continue
             if count<=3 and click_interval.reached():
-                self.device.click(SWEEP_START)
+                self.device.click(SWEEP_FASTER)
+                self.device.click_record_remove(SWEEP_FASTER)
                 count+=1
                 click_interval.reset()
 
