@@ -20,6 +20,6 @@ class TiLi(ModuleBase):
                 logger.info('精英副本今日已完成，跳过')
 
         from tasks.tili.equipment import Equipment
-        Equipment(self.config, self.device).handle_equipment()
+        Equipment(self.config, self.device).run()
         self.config.task_delay(minute=360)
         self.config.task_stop()

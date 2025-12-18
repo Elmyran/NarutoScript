@@ -31,7 +31,12 @@ class Equipment(TaskUI):
             self.config.stored.TiLi.value=current
             if current<10 :
                 return True
-        
+        self.handle_equipment()
+        self.back_to_main()
+        ocr=DigitCounter(TI_LI_REMAIN_COUNTER)
+        current,_,_=ocr.ocr_single_line(self.device.image)
+        self.config.stored.TiLi.value=current
+            
     def handle_equipment(self):
         self._equipment_enter()
         for _ in self.loop():
