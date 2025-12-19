@@ -13,6 +13,7 @@ class Enemy:
             self.area = area.area
         elif isinstance(area, tuple):
             self.area = area
+        self.button=None
     def __str__(self):
         return f" 组织: {self.organization},积分:{self.score},小队战力: {self.power}"    
     def  recognition(self,image):
