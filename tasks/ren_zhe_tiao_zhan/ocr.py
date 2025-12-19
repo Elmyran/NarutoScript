@@ -8,6 +8,7 @@ class MiJingOcr(Ocr):
     def after_process(self, result: str) -> str:
         result=result.replace("垂","雷")
         result=result.replace("雸","雷")
+        result=result.replace("靈","雷")
         result=result.replace("淀","境")
         result=result.replace("密","秘")
         result=result.replace("类","炎")
@@ -15,6 +16,7 @@ class MiJingOcr(Ocr):
         result=result.replace("霆霆","雷霆")
         result=result.replace("雪","雷")
         result=result.replace("显","罡")
+        result=result.replace("墨","罡体秘境")
         result=result.replace("宰","牢")
         return super().after_process(result)
 class MiJingDigit(Digit):
