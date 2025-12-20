@@ -213,18 +213,18 @@
     "OrganizationStore": {
       "MeritExchange": true,
       "MeritExchangeFilter": "preset",
-      "CustomMeritExchangeFilter": "GiftBox > Coins > ReincarnationStone > Jade"
+      "CustomMeritExchangeFilter": "组织饰品礼盒 > 铜币 > 轮回石 > 忍玉"
     },
     "SurvivalStore": {
       "SurvivalStoreExchange": true,
       "SurvivalStoreExchangeFilter": "preset",
-      "CustomSurvivalStoreFilter": "TsuchikuraFragment > ReincarnationStone"
+      "CustomSurvivalStoreFilter": "土台碎片 > 轮回石"
     },
     "ScoreStore": {
       "ScoreStoreExchange": true,
       "ScoreStoreChestPurchaseTimes": 1,
       "ScoreStoreExchangeFilter": "preset",
-      "CustomScoreStoreFilter": "AdvancedSummoningScrollFragment > ScoreStoreChest"
+      "CustomScoreStoreFilter": "高级通灵卷轴碎片 > 积分赛宝箱"
     },
     "ActivityProgressStorage": {
       "ActivityProgressToday": {},

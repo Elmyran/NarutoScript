@@ -130,7 +130,7 @@ class TaskUI(UI):
 
         return False
     def handle_second_password(self):
-        code='040225'
+        code=self.config.Password_SecondPassword
         if not code :
             raise RequestHumanTakeover('SecondPassword need to fill')
         self.device.scrcpy_init()
@@ -146,7 +146,7 @@ class TaskUI(UI):
             self.clear_input()
             self.device._scrcpy_control.set_clipboard(code, paste=True)
             if self.check_input():
-               break
+               return True
             
 
         

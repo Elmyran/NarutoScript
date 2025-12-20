@@ -784,7 +784,7 @@
       },
       "CustomMeritExchangeFilter": {
         "type": "textarea",
-        "value": "GiftBox > Coins > ReincarnationStone > Jade"
+        "value": "组织饰品礼盒 > 铜币 > 轮回石 > 忍玉"
       }
     },
     "SurvivalStore": {
@@ -802,7 +802,7 @@
       },
       "CustomSurvivalStoreFilter": {
         "type": "textarea",
-        "value": "TsuchikuraFragment > ReincarnationStone"
+        "value": "土台碎片 > 轮回石"
       }
     },
     "ScoreStore": {
@@ -836,7 +836,7 @@
       },
       "CustomScoreStoreFilter": {
         "type": "textarea",
-        "value": "AdvancedSummoningScrollFragment > ScoreStoreChest"
+        "value": "高级通灵卷轴碎片 > 积分赛宝箱"
       }
     },
     "ActivityProgressStorage": {

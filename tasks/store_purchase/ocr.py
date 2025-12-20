@@ -10,11 +10,13 @@ class StoreDetailOcr(OcrWhiteLetterOnComplexBackground):
             result='高级通灵卷轴碎片'
         return super().after_process(result)
 class StoreDigitCounter(DigitCounter): 
+
     def after_process(self, result):  
         result=result.replace('早','限')
         return super().after_process(result)
 
-class StorePriceDigit(Digit,OcrWhiteLetterOnComplexBackground):  
+class StorePriceDigit(Digit):  
+ 
     def after_process(self, result):  
         result=result.replace('A', '')
         result = re.sub(r'^11(000)$', r'1\1', result) 
@@ -25,8 +27,7 @@ class StorePriceDigit(Digit,OcrWhiteLetterOnComplexBackground):
                 # 乘以10000  
                 result = result.replace(match.group(0), str(num * 10000))
         return result
-    def pre_process(self, img):
-        return OcrWhiteLetterOnComplexBackground.pre_process(self, img)
+    
     
 
     def format_result(self, result):

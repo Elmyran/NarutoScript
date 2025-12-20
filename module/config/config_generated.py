@@ -131,18 +131,18 @@ class GeneratedConfig:
     # Group `OrganizationStore`
     OrganizationStore_MeritExchange = True
     OrganizationStore_MeritExchangeFilter = 'preset'  # preset, custom
-    OrganizationStore_CustomMeritExchangeFilter = 'GiftBox > Coins > ReincarnationStone > Jade'
+    OrganizationStore_CustomMeritExchangeFilter = '组织饰品礼盒 > 铜币 > 轮回石 > 忍玉'
 
     # Group `SurvivalStore`
     SurvivalStore_SurvivalStoreExchange = True
     SurvivalStore_SurvivalStoreExchangeFilter = 'preset'  # preset, custom
-    SurvivalStore_CustomSurvivalStoreFilter = 'TsuchikuraFragment > ReincarnationStone'
+    SurvivalStore_CustomSurvivalStoreFilter = '土台碎片 > 轮回石'
 
     # Group `ScoreStore`
     ScoreStore_ScoreStoreExchange = True
     ScoreStore_ScoreStoreChestPurchaseTimes = 1  # 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
     ScoreStore_ScoreStoreExchangeFilter = 'preset'  # preset, custom
-    ScoreStore_CustomScoreStoreFilter = 'AdvancedSummoningScrollFragment > ScoreStoreChest'
+    ScoreStore_CustomScoreStoreFilter = '高级通灵卷轴碎片 > 积分赛宝箱'
 
     # Group `CultivationRoad`
     CultivationRoad_ClearRedDot = True

@@ -1,17 +1,10 @@
-
-from module.base.button import Button
 from module.base.filter import MultiLangFilter
 import re
-
-
-
-
-from module.logger import logger
 from tasks.store_purchase.assets.assets_store_purchase_score_store import SCORE_MEDAL_AREA, SCORE_STORE_ITEM_SEARCH_AREA
 from tasks.store_purchase.ocr import StoreDetailOcr
-from tasks.store_purchase.score_store.keywords import AdvancedSummoningScrollFragment, ScoreStoreChest
-from tasks.store_purchase.selector import Item, StoreSelector
-from tasks.store_purchase.store_item_draglist import ScoreStoreItemList
+from tasks.store_purchase.score_store.keywords import AdvancedSummoningScrollFragment, ScoreStoreChest, ScoreStoreItem
+from tasks.store_purchase.selector import  StoreSelector
+from tasks.store_purchase.ui.store_item_draglist import ScoreStoreItemList
 
 SCORE_STORE_ATTR='score_store'
 SCORE_STORE_FILTER_PRESET = ('reset')  
@@ -22,72 +15,38 @@ SCORE_STORE_FILTER = MultiLangFilter(
     SCORE_STORE_FILTER_PRESET  
 )
 ScoreStorePreset="""
-AdvancedSummoningScrollFragment > ScoreStoreChest
+高级通灵卷轴碎片 > 积分赛宝箱
 """ 
 class ScoreStoreSelector(StoreSelector):
-    def search(self, keyword):
-        if not ScoreStoreItemList.search_rows(main=self.main,keyword=keyword):
+    def search(self, item):
+        keyword = ScoreStoreItem.find(name=item)
+        if not ScoreStoreItemList.search_rows(main=self,keyword=keyword):
             return False
-        return True
-    def recognition(self,keyword):
         ocr=StoreDetailOcr(SCORE_STORE_ITEM_SEARCH_AREA)
-        buttons=ocr.matched_ocr(image=self.main.device.image,keyword_classes=[keyword])
-        target_button=None
-        lang=self.main.config.LANG
-        if lang=='auto':
-            lang='cn'
-        lang_value = getattr(keyword, lang, None)  
+        buttons=ocr.matched_ocr(image=self.device.image,keyword_classes=[keyword])
         for button in buttons:  
-            if button.text == lang_value:
-                target_button=button
+            if button.matched_keyword == keyword:  
+                self.button = button  
                 break
-        item=self.create_shop_item_from_ocr(target_button)
-        return item
-    
-    def create_shop_item_from_ocr(self,button):  
-        # 1. OCR识别商品名称  
-        
-        if not button:  
-            return None  
-
-        self.calculate_relative_areas(button.area)
-
-        relative_areas = self.relative_areas
-        
-        
-        item_button = Button(  
-            search=button.search,
-            file="temp_click", 
-            area=relative_areas['soldout_check_area'],  
-            color=(),  
-            button=relative_areas['click_area']  
-        )  
-        
-        item = Item(self.main.device.image, item_button)  
-        item.name = button.text 
-        if not item.is_valid:
-            logger.info(f'{item.name} sold out')
-            return 
-        
-        price,current,remain,total = self.ocr_item_price_and_amount(price_area=relative_areas['price_area'],amount_area=relative_areas['amount_area'])  
-        self.ocr_currency(self.relative_areas['currency_area'])
-        currency=self.currency
-        item.price = price
-        if button.matched_keyword is not AdvancedSummoningScrollFragment:
-            afford_amount = int((currency - 1000) / price)
-            afford_amount=max(0,afford_amount)
+        return True
+    def recognition(self):  
+        item = super().recognition()
+        if not item:
+            return None
+        purchased_count = item.total-item.count
+        if self.button.matched_keyword is not AdvancedSummoningScrollFragment:
+            afford_amount = int((item.currency - 1000) / item.price)
+            afford_amount = max(0,afford_amount)
         else :
-            afford_amount = int(currency / price)
+            afford_amount = int(item.currency / item.price)
 
-        if  button.matched_keyword is ScoreStoreChest:
-            preset_max_amount=self.main.config.ScoreStore_ScoreStoreChestPurchaseTimes
-            if current>=preset_max_amount:  
-                return 
-            afford_amount=min(preset_max_amount-current,afford_amount)
-        item.amount=min(remain,afford_amount)
-        item.sold=current
-        item.total=total
-        return item
+        if  self.button.matched_keyword is ScoreStoreChest:
+            preset_max_amount = self.main.config.ScoreStore_ScoreStoreChestPurchaseTimes
+            if purchased_count >= preset_max_amount:  
+                return None
+            afford_amount = min(preset_max_amount - purchased_count , afford_amount)
+        item.count = min(item.count , afford_amount)
+        return item 
     
     def calculate_relative_areas(self, name_area):  
         x1, y1, x2, y2 = name_area   
@@ -104,10 +63,10 @@ class ScoreStoreSelector(StoreSelector):
     def load_filter(self):
         filter_ = SCORE_STORE_FILTER
         string = ""
-        match self.main.config.ScoreStore_ScoreStoreExchangeFilter:
+        match self.config.ScoreStore_ScoreStoreExchangeFilter:
             case 'preset':
                 string=ScoreStorePreset
             case 'custom':
-                string = self.main.config.ScoreStore_CustomScoreStoreFilter
+                string = self.config.ScoreStore_CustomScoreStoreFilter
         filter_.load(string)
         self.filter_=filter_

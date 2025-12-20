@@ -1,14 +1,11 @@
-
-
-from tasks.base.ui import UI
+from tasks.base.taskui import TaskUI
 from tasks.base.page import *
-from tasks.store_purchase.organization_store.keywords import  MeritExchangeItem
-from tasks.store_purchase.store_tab_draglist import StoreTabList, SubsidiaryStoreTabList
-from tasks.store_purchase.store_keyword import PlayStore,OrganizationStore
+from tasks.store_purchase.ui.store_tab_draglist import StoreTabList, SubsidiaryStoreTabList
+from tasks.store_purchase.keyword.store_keyword import PlayStore,OrganizationStore
 from tasks.store_purchase.organization_store.preset import  MeritExchangeSelector
 
 
-class OrganizationStorePurchase(UI):
+class OrganizationStorePurchase(TaskUI,MeritExchangeSelector):
     def run(self):
         if self.config.OrganizationStore_MeritExchange:
             self.handle_organization_store_purchase()
@@ -18,8 +15,19 @@ class OrganizationStorePurchase(UI):
     def merit_exchange(self):
         StoreTabList.search_rows(self,PlayStore)
         SubsidiaryStoreTabList.search_rows(self, OrganizationStore)
-        selector=MeritExchangeSelector(main=self)
-        selector.purchase_items(keyword_class=MeritExchangeItem)
+        self.purchase_items()
+if __name__ == '__main__':
+    from tasks.store_purchase.organization_store.keywords import  Jade
+    az=OrganizationStorePurchase('ns',task='Alas')
+    az.device.screenshot()
+    az.search(Jade)
+    item=az.recognition()
+    az.purchase_single_item(item)
+    #az.purchase_items()
+
+
+
+
 
         
    

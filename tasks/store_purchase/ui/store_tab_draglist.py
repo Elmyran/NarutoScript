@@ -4,7 +4,7 @@ from module.ocr.ocr import Ocr
 from module.ui.draggable_list import DraggableList
 from module.logger import logger
 from tasks.store_purchase.ocr import StoreDetailOcr
-from tasks.store_purchase.store_keyword import StoreKeyword,SubsidiaryStoreKeyword
+from tasks.store_purchase.keyword.store_keyword import StoreKeyword,SubsidiaryStoreKeyword
 class StoreDragList(DraggableList):
     current_keyword=None
     def load_rows(self, main):

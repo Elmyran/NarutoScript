@@ -11,7 +11,7 @@ from tasks.store_purchase.ocr import StoreDetailOcr
 from tasks.store_purchase.organization_store.keywords import MeritExchangeItem
 from tasks.store_purchase.assets.assets_store_purchase_organization_store import ORGANIZATION_STORE_ITEM_SEARCH_AREA, SAFE_DRAG_AREA
 from tasks.store_purchase.score_store.keywords import ScoreStoreItem
-from tasks.store_purchase.store_keyword import ScoreStore
+from tasks.store_purchase.keyword.store_keyword import ScoreStore
 from tasks.store_purchase.survival_store.keywords import SurvivalStoreItem
 from tasks.store_purchase.assets.assets_store_purchase_survival_store import SURVIVAL_STORE_ITEM_SEARCH_AREA, SURVIVAL_STORE_SAFE_DRAG_AREA
 from tasks.store_purchase.assets.assets_store_purchase_score_store import SCORE_STORE_ITEM_SEARCH_AREA, SCORE_STORE_SAFE_DRAG_AREA

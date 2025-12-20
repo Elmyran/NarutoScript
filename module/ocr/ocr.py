@@ -404,9 +404,7 @@ class Digit(Ocr):
             top = max(0, (min_size - height) // 2)
             bottom = max(0, min_size - height - top)
             left = max(0, (min_size - width) // 2)
-            right = max(0, min_size - width - left)
-
-            
+            right = max(0, min_size - width - left)       
             background_color = [int(x) for x in image[0, 0]]
 
             image = cv2.copyMakeBorder(

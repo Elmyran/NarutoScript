@@ -50,7 +50,7 @@ class Freebies(ModuleBase):
         if self.config.Freebies_OrganizationPray:
             logger.hr('Organization Pray', level=1)
             from tasks.freebies.organization_pray import OrganizationPray
-            OrganizationPray(config=self.config, device=self.device).handle_Organization_Pray()
+            OrganizationPray(config=self.config, device=self.device).run()
         if self.config.Freebies_MonthlySignIn:
             logger.hr('Monthly Sign In', level=1)
             from tasks.freebies.monthly_sign_in import MonthlySignIn

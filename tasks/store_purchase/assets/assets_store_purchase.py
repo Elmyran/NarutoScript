@@ -3,6 +3,17 @@ from module.base.button import Button, ButtonWrapper
 # This file was auto-generated, do not modify it manually. To generate:
 # ``` python -m dev_tools.button_extract ```
 
+BUY_AMOUNT_ADD = ButtonWrapper(
+    name='BUY_AMOUNT_ADD',
+    cn=Button(
+        file='./assets/cn/store_purchase/BUY_AMOUNT_ADD.png',
+        area=(803, 360, 844, 401),
+        search=(783, 340, 864, 421),
+        color=(49, 108, 134),
+        button=(803, 360, 844, 401),
+    ),
+    en=None,
+)
 BUY_BUTTON = ButtonWrapper(
     name='BUY_BUTTON',
     cn=Button(
@@ -14,6 +25,17 @@ BUY_BUTTON = ButtonWrapper(
     ),
     en=None,
 )
+BUY_CONFIRM = ButtonWrapper(
+    name='BUY_CONFIRM',
+    cn=Button(
+        file='./assets/cn/store_purchase/BUY_CONFIRM.png',
+        area=(423, 418, 616, 484),
+        search=(403, 398, 636, 504),
+        color=(228, 156, 11),
+        button=(423, 418, 616, 484),
+    ),
+    en=None,
+)
 BUY_REACH_TOP = ButtonWrapper(
     name='BUY_REACH_TOP',
     cn=Button(
@@ -22,6 +44,17 @@ BUY_REACH_TOP = ButtonWrapper(
         search=(516, 316, 765, 396),
         color=(80, 84, 88),
         button=(536, 336, 745, 376),
+    ),
+    en=None,
+)
+BUY_SUCCESS = ButtonWrapper(
+    name='BUY_SUCCESS',
+    cn=Button(
+        file='./assets/cn/store_purchase/BUY_SUCCESS.png',
+        area=(564, 337, 685, 376),
+        search=(544, 317, 705, 396),
+        color=(82, 83, 86),
+        button=(564, 337, 685, 376),
     ),
     en=None,
 )
@@ -44,17 +77,6 @@ PLAY_STORE_SELECTED = ButtonWrapper(
         search=(8, 262, 217, 362),
         color=(154, 75, 48),
         button=(28, 282, 197, 342),
-    ),
-    en=None,
-)
-PURCHASE_POPUP = ButtonWrapper(
-    name='PURCHASE_POPUP',
-    cn=Button(
-        file='./assets/cn/store_purchase/PURCHASE_POPUP.png',
-        area=(746, 357, 792, 406),
-        search=(726, 337, 812, 426),
-        color=(49, 101, 127),
-        button=(746, 357, 792, 406),
     ),
     en=None,
 )
