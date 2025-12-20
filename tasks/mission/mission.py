@@ -82,6 +82,8 @@ class Mission(TaskUI):
                     return True
                 else:
                     return False
+            if self.appear(MISSION_SELECTED_SUCCESS):
+                return False
             if click_interval.reached():
                 self.device.click(task)
                 click_interval.reset()
