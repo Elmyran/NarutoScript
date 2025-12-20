@@ -1,6 +1,6 @@
 from module.base.button import ButtonWrapper, ClickButton
 from module.base.utils.utils import area_offset
-from tasks.mission.assets.assets_mission import ACCEPTED_BUTTON, ACCPET_BUTTON, MISSION_JADE, TASK_BOX_BLUE, TASK_BOX_RED
+from tasks.mission.assets.assets_mission import  ACCPET_BUTTON, MISSION_JADE, TASK_BOX_BLUE, TASK_BOX_RED
 from tasks.mission.mission_ocr import MissionDigit, MissionDurationOcr, MissionWhiteLetterOcr
 from tasks.mission.priority import TaskPriority
 
@@ -49,7 +49,7 @@ class Task:
         MISSION_JADE.load_search(self.area)
         if MISSION_JADE.match_template(image,similarity=0.6):
             jade_area=(  
-            750,  
+            805,  
             self.area[1],        
             850,        
             self.area[3]          

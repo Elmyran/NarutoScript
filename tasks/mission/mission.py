@@ -1,12 +1,12 @@
-from unittest import skip
 from module.base.timer import Timer
 from module.exception import GameStuckError
 from module.logger.logger import logger
-from module.ocr.ocr import   DigitCounter
+from module.ocr.ocr import   DigitCounter, Ocr
 from tasks.base.page import page_mission
 from tasks.base.taskui import TaskUI
 from tasks.mission.assets.assets_mission import *
 from tasks.mission.mission_keyword import MissionClaimable
+from tasks.mission.mission_ocr import MissionCounter
 from tasks.mission.task import MissionDurationOcr, Task
 class Mission(TaskUI):
     tasks=[]
@@ -82,6 +82,8 @@ class Mission(TaskUI):
                     return True
                 else:
                     return False
+            if self.appear(MISSION_SELECTED_SUCCESS):
+                return False
             if click_interval.reached():
                 self.device.click(task)
                 click_interval.reset()

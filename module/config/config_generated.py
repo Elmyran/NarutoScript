@@ -40,22 +40,25 @@ class GeneratedConfig:
     Optimization_CombatScreenshotInterval = 1.0
     Optimization_WhenTaskQueueEmpty = 'goto_main'  # stay_there, goto_main, close_game, close_emulator
 
-    # Group `Organization`
-    Organization_OrganizationPray = True
+    # Group `Password`
+    Password_SecondPassword = None
 
     # Group `SquadRaid`
     SquadRaid_SquadRaidBenefit = True
     SquadRaid_SquadQuadrupleReward = False
     SquadRaid_SquadRaidFight = 'SquadSupport'  # SquadSupport, SquadMatch
     SquadRaid_SquadRaidFinishedCount = {}
-    SquadRaid_SecondPassword = None
 
     # Group `SurvivalTrail`
     SurvivalTrail_SurvivalTrialResetTimes = 0
 
-    # Group `TiLi`
-    TiLi_LevelRestrictions = 72
-    TiLi_DungeonFirst = True
+    # Group `TiLiCost`
+    TiLiCost_LevelRestrictions = 72
+    TiLiCost_DungeonFirst = True
+
+    # Group `TiLiPurchase`
+    TiLiPurchase_TiLiPurchaseTimes = 0
+    TiLiPurchase_TiLiPurchaseFinishCount = {}
 
     # Group `DuelWeekly`
     DuelWeekly_DuelWeeklyStatus = True
@@ -70,7 +73,7 @@ class GeneratedConfig:
 
     # Group `JiFenSai`
     JiFenSai_JiFenSaiSkipFight = True
-    JiFenSai_JiFenSaiFilter = 'PowerLowest'  # PowerLowest, ScoreHighest, PowerLowerThanSelfAndScoreHigher, PowerLowerThanSelfAndScoreLower
+    JiFenSai_JiFenSaiFilter = 'PowerLowerThanSelfAndScoreLower'  # PowerLowest, ScoreHighest, PowerLowerThanSelfAndScoreHigher, PowerLowerThanSelfAndScoreLower
 
     # Group `MiJingType`
     MiJingType_LuoYan = True
@@ -98,6 +101,8 @@ class GeneratedConfig:
     Freebies_YiLeLaMianFinishCount = {}
     Freebies_MonthlySignIn = True
     Freebies_MonthlySignInFinishCount = {}
+    Freebies_OrganizationPray = True
+    Freebies_OrganizationPrayFinishCount = {}
     Freebies_ActivityReward = True
 
     # Group `ZhaoCai`
@@ -126,25 +131,24 @@ class GeneratedConfig:
     # Group `OrganizationStore`
     OrganizationStore_MeritExchange = True
     OrganizationStore_MeritExchangeFilter = 'preset'  # preset, custom
-    OrganizationStore_CustomMeritExchangeFilter = 'GiftBox > Coins > ReincarnationStone > Jade'
+    OrganizationStore_CustomMeritExchangeFilter = '组织饰品礼盒 > 铜币 > 轮回石 > 忍玉'
 
     # Group `SurvivalStore`
     SurvivalStore_SurvivalStoreExchange = True
     SurvivalStore_SurvivalStoreExchangeFilter = 'preset'  # preset, custom
-    SurvivalStore_CustomSurvivalStoreFilter = 'TsuchikuraFragment > ReincarnationStone'
+    SurvivalStore_CustomSurvivalStoreFilter = '土台碎片 > 轮回石'
 
     # Group `ScoreStore`
     ScoreStore_ScoreStoreExchange = True
     ScoreStore_ScoreStoreChestPurchaseTimes = 1  # 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
     ScoreStore_ScoreStoreExchangeFilter = 'preset'  # preset, custom
-    ScoreStore_CustomScoreStoreFilter = 'AdvancedSummoningScrollFragment > ScoreStoreChest'
+    ScoreStore_CustomScoreStoreFilter = '高级通灵卷轴碎片 > 积分赛宝箱'
 
     # Group `CultivationRoad`
     CultivationRoad_ClearRedDot = True
     CultivationRoad_CultivationFinish = False
 
     # Group `PanRen`
-    PanRen_SecondPassword = None
     PanRen_NoRewardJoinOrNot = False
     PanRen_PanRenFinishCount = {}
 

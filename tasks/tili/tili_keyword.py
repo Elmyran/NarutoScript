@@ -17,14 +17,14 @@ NotTurnOn = StuffState(
     es='NotTurnOn',
 
 )
-MopUpKeyword = StuffState(
+SweepKeyword = StuffState(
     id=2,
-    name='MopUp',
+    name='Sweep',
     cn='可扫荡',
     cht='可扫荡',
-    en='MopUp',
+    en='Sweep',
     jp='可扫荡',
-    es='MopUp',
+    es='Sweep',
 
 )
 SyntheticKeyword = StuffState(
@@ -37,6 +37,7 @@ SyntheticKeyword = StuffState(
     es='Synthetic',
 
 )
+
 MaterialNotEnoughKeyword = StuffState(
     id=4,
     name='NotEnough',
@@ -45,5 +46,15 @@ MaterialNotEnoughKeyword = StuffState(
     en='NotEnough',
     jp='还差',
     es='NotEnough',
+
+)
+EquipKeyword = StuffState(
+    id=5,
+    name='Equip',
+    cn='可装备',
+    cht='可装备',
+    en='Equip',
+    jp='可装备',
+    es='Equip',
 
 )

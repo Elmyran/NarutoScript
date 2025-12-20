@@ -146,8 +146,7 @@ class OrganizationPanRen(GameControl,TaskUI):
             if self.appear_then_click(PAN_REN_AUTO_FIGHT_CONFIRM, interval=0):
                 continue
             if self.appear(CODE_SECOND_PASSWORD):
-                code=self.config.PanRen_SecondPassword
-                self.handle_second_password(code)
+                self.handle_second_password()
                 continue
             if self.appear_then_click(PAN_REN_AUTO_FIGHT,interval=1):
                 continue

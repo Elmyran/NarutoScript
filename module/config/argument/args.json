@@ -166,12 +166,12 @@
         "display": "hide"
       }
     },
-    "AccountStorage": {
-      "AccountName": {
-        "type": "stored",
-        "value": {},
-        "display": "hide",
-        "stored": "StoredAccountName"
+    "Password": {
+      "SecondPassword": {
+        "type": "input",
+        "value": "",
+        "valuetype": "str",
+        "display": "display"
       }
     }
   },
@@ -318,44 +318,6 @@
         "value": {},
         "display": "hide",
         "stored": "StoredSquadRaidFinishCount"
-      },
-      "SecondPassword": {
-        "type": "input",
-        "value": "",
-        "valuetype": "str"
-      }
-    }
-  },
-  "Organization": {
-    "Scheduler": {
-      "Enable": {
-        "type": "checkbox",
-        "value": false,
-        "option": [
-          true,
-          false
-        ]
-      },
-      "NextRun": {
-        "type": "datetime",
-        "value": "2020-01-01 00:00:00",
-        "validate": "datetime"
-      },
-      "Command": {
-        "type": "input",
-        "value": "Organization",
-        "display": "hide"
-      },
-      "ServerUpdate": {
-        "type": "input",
-        "value": "05:00",
-        "display": "hide"
-      }
-    },
-    "Organization": {
-      "OrganizationPray": {
-        "type": "checkbox",
-        "value": true
       }
     }
   },
@@ -418,7 +380,7 @@
         "display": "hide"
       }
     },
-    "TiLi": {
+    "TiLiCost": {
       "LevelRestrictions": {
         "type": "input",
         "value": 72
@@ -426,6 +388,18 @@
       "DungeonFirst": {
         "type": "checkbox",
         "value": true
+      }
+    },
+    "TiLiPurchase": {
+      "TiLiPurchaseTimes": {
+        "type": "input",
+        "value": 0
+      },
+      "TiLiPurchaseFinishCount": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredTiLiPurchaseCount"
       }
     },
     "TiLiStorage": {
@@ -609,7 +583,7 @@
       },
       "JiFenSaiFilter": {
         "type": "select",
-        "value": "PowerLowest",
+        "value": "PowerLowerThanSelfAndScoreLower",
         "option": [
           "PowerLowest",
           "ScoreHighest",
@@ -716,6 +690,16 @@
         "display": "hide",
         "stored": "StoredMonthlySignInCount"
       },
+      "OrganizationPray": {
+        "type": "checkbox",
+        "value": true
+      },
+      "OrganizationPrayFinishCount": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredOrganizationPrayCount"
+      },
       "ActivityReward": {
         "type": "checkbox",
         "value": true
@@ -800,7 +784,7 @@
       },
       "CustomMeritExchangeFilter": {
         "type": "textarea",
-        "value": "GiftBox > Coins > ReincarnationStone > Jade"
+        "value": "组织饰品礼盒 > 铜币 > 轮回石 > 忍玉"
       }
     },
     "SurvivalStore": {
@@ -818,7 +802,7 @@
       },
       "CustomSurvivalStoreFilter": {
         "type": "textarea",
-        "value": "TsuchikuraFragment > ReincarnationStone"
+        "value": "土台碎片 > 轮回石"
       }
     },
     "ScoreStore": {
@@ -852,7 +836,7 @@
       },
       "CustomScoreStoreFilter": {
         "type": "textarea",
-        "value": "AdvancedSummoningScrollFragment > ScoreStoreChest"
+        "value": "高级通灵卷轴碎片 > 积分赛宝箱"
       }
     },
     "ActivityProgressStorage": {
@@ -1235,11 +1219,6 @@
       }
     },
     "PanRen": {
-      "SecondPassword": {
-        "type": "input",
-        "value": "",
-        "valuetype": "str"
-      },
       "NoRewardJoinOrNot": {
         "type": "checkbox",
         "value": false

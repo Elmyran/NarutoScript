@@ -38,10 +38,6 @@
       "name": "Task.SquadRaid.name",
       "help": "Task.SquadRaid.help"
     },
-    "Organization": {
-      "name": "Task.Organization.name",
-      "help": "Task.Organization.help"
-    },
     "SurvivalTrail": {
       "name": "Task.SurvivalTrail.name",
       "help": "Task.SurvivalTrail.help"
@@ -267,14 +263,14 @@
       "close_emulator": "Cerrar el emulador"
     }
   },
-  "Organization": {
+  "Password": {
     "_info": {
-      "name": "Organization._info.name",
-      "help": "Organization._info.help"
+      "name": "Password._info.name",
+      "help": "Password._info.help"
     },
-    "OrganizationPray": {
-      "name": "Organization.OrganizationPray.name",
-      "help": "Organization.OrganizationPray.help"
+    "SecondPassword": {
+      "name": "Password.SecondPassword.name",
+      "help": "Password.SecondPassword.help"
     }
   },
   "SquadRaid": {
@@ -299,10 +295,6 @@
     "SquadRaidFinishedCount": {
       "name": "SquadRaid.SquadRaidFinishedCount.name",
       "help": "SquadRaid.SquadRaidFinishedCount.help"
-    },
-    "SecondPassword": {
-      "name": "SquadRaid.SecondPassword.name",
-      "help": "SquadRaid.SecondPassword.help"
     }
   },
   "SurvivalTrail": {
@@ -315,18 +307,32 @@
       "help": "SurvivalTrail.SurvivalTrialResetTimes.help"
     }
   },
-  "TiLi": {
+  "TiLiCost": {
     "_info": {
-      "name": "TiLi._info.name",
-      "help": "TiLi._info.help"
+      "name": "TiLiCost._info.name",
+      "help": "TiLiCost._info.help"
     },
     "LevelRestrictions": {
-      "name": "TiLi.LevelRestrictions.name",
-      "help": "TiLi.LevelRestrictions.help"
+      "name": "TiLiCost.LevelRestrictions.name",
+      "help": "TiLiCost.LevelRestrictions.help"
     },
     "DungeonFirst": {
-      "name": "TiLi.DungeonFirst.name",
-      "help": "TiLi.DungeonFirst.help"
+      "name": "TiLiCost.DungeonFirst.name",
+      "help": "TiLiCost.DungeonFirst.help"
+    }
+  },
+  "TiLiPurchase": {
+    "_info": {
+      "name": "TiLiPurchase._info.name",
+      "help": "TiLiPurchase._info.help"
+    },
+    "TiLiPurchaseTimes": {
+      "name": "TiLiPurchase.TiLiPurchaseTimes.name",
+      "help": "TiLiPurchase.TiLiPurchaseTimes.help"
+    },
+    "TiLiPurchaseFinishCount": {
+      "name": "TiLiPurchase.TiLiPurchaseFinishCount.name",
+      "help": "TiLiPurchase.TiLiPurchaseFinishCount.help"
     }
   },
   "DuelWeekly": {
@@ -488,6 +494,14 @@
     "MonthlySignInFinishCount": {
       "name": "Freebies.MonthlySignInFinishCount.name",
       "help": "Freebies.MonthlySignInFinishCount.help"
+    },
+    "OrganizationPray": {
+      "name": "Freebies.OrganizationPray.name",
+      "help": "Freebies.OrganizationPray.help"
+    },
+    "OrganizationPrayFinishCount": {
+      "name": "Freebies.OrganizationPrayFinishCount.name",
+      "help": "Freebies.OrganizationPrayFinishCount.help"
     },
     "ActivityReward": {
       "name": "Freebies.ActivityReward.name",
@@ -784,10 +798,6 @@
     "_info": {
       "name": "PanRen._info.name",
       "help": "PanRen._info.help"
-    },
-    "SecondPassword": {
-      "name": "PanRen.SecondPassword.name",
-      "help": "PanRen.SecondPassword.help"
     },
     "NoRewardJoinOrNot": {
       "name": "PanRen.NoRewardJoinOrNot.name",

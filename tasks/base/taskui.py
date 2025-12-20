@@ -1,11 +1,13 @@
+
 from module.base.timer import Timer
 from module.logger import logger
-from tasks.base.assets.assets_base_task_tab import MANUAL_TAB_SEARCH_AREA
+from tasks.base.assets.assets_base_code_second import *
+from tasks.base.assets.assets_base_task_tab import MANUAL_TAB_SEARCH_AREA, MANUAL_TAB_SEARCH_AREA_FOR_BACK_GAME
 from tasks.base.page import *
 from tasks.base.task_tab.draglist import TASK_TAB_LIST
 from tasks.base.ui import UI
 from tasks.base.task_tab.task_keyword import *
-
+from module.exception import GameStuckError, RequestHumanTakeover
 Page2Keyword={
 page_survival_trail: SurvivalChallengeKeyword,
 page_cultivation:CultivationPathKeyword,
@@ -127,5 +129,55 @@ class TaskUI(UI):
                 return True
 
         return False
+    def handle_second_password(self):
+        code=self.config.Password_SecondPassword
+        if not code :
+            raise RequestHumanTakeover('SecondPassword need to fill')
+        self.device.scrcpy_init()
+        time=Timer(10,count=10).start()
+        for _ in self.loop():
+            if time.reached():
+                raise GameStuckError('Password Input Timeout, Game Restart Needed')
+            if not self.enter_input():
+                continue
+            self.wait_until_stable(CODE_SECOND_PASSWORD_INPUT_CONFIRM,timer=
+                                   Timer(0.5,count=3),
+                                   timeout=Timer(1,count=5))
+            self.clear_input()
+            self.device._scrcpy_control.set_clipboard(code, paste=True)
+            if self.check_input():
+               return True
+            
 
         
+    def enter_input(self):
+        CODE_SECOND_PASSWORD_INPUT_CONFIRM.load_search(FULL_SCREEN.area)
+        if self.image_color_count(CODE_SECOND_PASSWORD_INPUT_CONFIRM, color=(255, 255, 255), count=10000, threshold=221):
+            return True
+          
+        if self.appear_then_click(CODE_SECOND_PASSWORD,interval=2):
+            return False
+        
+        return False
+    def clear_input(self):
+       for _ in range(10):  
+            self.device._scrcpy_control.keycode(  
+                keycode=67,  
+                action=0  
+            )  
+            self.device._scrcpy_control.keycode(  
+                keycode=67,  
+                action=1  
+            )
+    def check_input(self):
+        for _ in self.loop():
+            if self.appear(CODE_SECOND_PASSOWRD_LOCKED):
+                raise RequestHumanTakeover('SecondPassword Locked, Human Takeover Needed')
+            if self.appear(CODE_SECOND_PASSWORD_ERROR):
+                return False
+            if self.appear(CODE_SECOND_PASSWORD_LENGTH_ERROR):
+                return False
+            if self.appear(CODE_SECOND_PASSWORD_INPUT_SUCCESS):
+                return True
+            if self.appear_then_click(CODE_SECOND_PASSWORD_CONFIRM,interval=1):
+                continue

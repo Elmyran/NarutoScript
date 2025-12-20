@@ -63,8 +63,7 @@ class SquadRaidFight(TaskUI):
         self.device.click_record_remove(SQUAD_RAID_FIGHT_SUCCESS)
         for _ in self.loop():
             if self.appear(CODE_SECOND_PASSWORD):
-                code=self.config.SquadRaid_SecondPassword
-                self.handle_second_password(code)
+                self.handle_second_password()
                 continue
             if self.appear_then_click(SQUAD_RAID_FIGHT_CONFIRM,interval=1):
                 continue
@@ -98,8 +97,7 @@ class SquadRaidFight(TaskUI):
             if self.appear(COMBAT_SUPPORT_SAME_CHARACTER_NOTIFY):
                 SUPPORT_LIST.select_next_support_character(self)
             if self.appear(CODE_SECOND_PASSWORD):
-                code=self.config.SquadRaid_SecondPassword
-                self.handle_second_password(code)
+                self.handle_second_password()
                 continue
             if self.appear_then_click(SQUAD_RAID_FIGHT_CONFIRM,interval=1):
                 continue

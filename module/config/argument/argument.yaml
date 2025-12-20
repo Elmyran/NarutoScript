@@ -89,14 +89,12 @@ Optimization:
     option: [ stay_there, goto_main, close_game, close_emulator ]
 
 # ==================== Daily ====================
-
-
-
-Organization:
-  OrganizationPray:
-    type: checkbox
-    value:  true
-
+Password:
+  SecondPassword:
+    type: input
+    value: ''
+    valuetype: str
+    display: display
 SquadRaid:
   SquadRaidBenefit:
     type: checkbox
@@ -115,22 +113,29 @@ SquadRaid:
     stored: StoredSquadRaidFinishCount
     value: { }
     display: hide
-  SecondPassword:
-    type: input
-    value: ''
-    valuetype: str
+
 
 SurvivalTrail:
   SurvivalTrialResetTimes:
     type: input
     value:  0
-TiLi:
+TiLiCost:
   LevelRestrictions:
     type: input
     value:  72
   DungeonFirst:
     type: checkbox
     value: true
+TiLiPurchase:
+  TiLiPurchaseTimes:
+    type: input
+    value:  0
+  TiLiPurchaseFinishCount:
+    stored: StoredTiLiPurchaseCount
+    value: { }
+    display: hide
+  
+
 DuelWeekly:
   DuelWeeklyStatus:
     type: checkbox
@@ -169,7 +174,7 @@ JiFenSai:
     value: true
   JiFenSaiFilter:
     type: select
-    value: 'PowerLowest'
+    value: 'PowerLowerThanSelfAndScoreLower'
     option: [
     'PowerLowest',
     'ScoreHighest',
@@ -261,6 +266,13 @@ Freebies:
     value: true
   MonthlySignInFinishCount:
     stored: StoredMonthlySignInCount
+    value: {}
+    display: hide
+  OrganizationPray:
+    type: checkbox
+    value:  true
+  OrganizationPrayFinishCount:
+    stored: StoredOrganizationPrayCount
     value: {}
     display: hide
   ActivityReward:
@@ -460,7 +472,7 @@ OrganizationStore:
     ]
   CustomMeritExchangeFilter:
     type: textarea
-    value: 'GiftBox > Coins > ReincarnationStone > Jade'
+    value: '组织饰品礼盒 > 铜币 > 轮回石 > 忍玉'
 SurvivalStore:
   SurvivalStoreExchange:
     type: checkbox
@@ -474,7 +486,7 @@ SurvivalStore:
     ]
   CustomSurvivalStoreFilter:
     type: textarea
-    value: 'TsuchikuraFragment > ReincarnationStone'
+    value: '土台碎片 > 轮回石'
 ScoreStore:
   ScoreStoreExchange:
     type: checkbox
@@ -503,7 +515,7 @@ ScoreStore:
     ]
   CustomScoreStoreFilter:
     type: textarea
-    value: 'AdvancedSummoningScrollFragment > ScoreStoreChest'
+    value: '高级通灵卷轴碎片 > 积分赛宝箱'
 
  
 
@@ -516,10 +528,7 @@ CultivationRoad:
     type: checkbox
     value: False
 PanRen:
-  SecondPassword:
-    type: input
-    value: ''
-    valuetype: str
+
   NoRewardJoinOrNot:
     type: checkbox
     value: False

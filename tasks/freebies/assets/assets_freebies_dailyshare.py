@@ -78,14 +78,23 @@ SHARE_BUTTON = ButtonWrapper(
     ),
     en=None,
 )
-SHARE_GOTO_QQ = ButtonWrapper(
-    name='SHARE_GOTO_QQ',
-    cn=Button(
-        file='./assets/cn/freebies/dailyshare/SHARE_GOTO_QQ.png',
-        area=(1171, 626, 1246, 701),
-        search=(1151, 606, 1266, 720),
-        color=(84, 65, 61),
-        button=(1171, 626, 1246, 701),
-    ),
+SHARE_GOTO_OTHER_APP = ButtonWrapper(
+    name='SHARE_GOTO_OTHER_APP',
+    cn=[
+        Button(
+            file='./assets/cn/freebies/dailyshare/SHARE_GOTO_OTHER_APP.png',
+            area=(1171, 626, 1246, 701),
+            search=(1151, 606, 1266, 720),
+            color=(84, 65, 61),
+            button=(1171, 626, 1246, 701),
+        ),
+        Button(
+            file='./assets/cn/freebies/dailyshare/SHARE_GOTO_OTHER_APP.2.png',
+            area=(1172, 630, 1236, 684),
+            search=(1152, 610, 1256, 704),
+            color=(103, 126, 89),
+            button=(1172, 630, 1236, 684),
+        ),
+    ],
     en=None,
 )

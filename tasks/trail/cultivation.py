@@ -104,7 +104,7 @@ class CultivationRoad(TaskUI):
             if self.appear_then_click(CULTIVATION_MOP_UP_REWARD_CLAIM,interval=1):
                 continue
             if self.appear(CODE_SECOND_PASSWORD):
-                self.handle_second_password(self.config.PanRen_SecondPassword)
+                self.handle_second_password()
                 continue
             if self.match_template_color(CULTIVATION_MOP_UP_BUTTON):
                 break

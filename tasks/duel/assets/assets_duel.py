@@ -62,6 +62,13 @@ DUEL_FIGHT_END = ButtonWrapper(
             color=(135, 55, 40),
             button=(465, 479, 609, 551),
         ),
+        Button(
+            file='./assets/cn/duel/DUEL_FIGHT_END.3.png',
+            area=(494, 495, 575, 537),
+            search=(474, 475, 595, 557),
+            color=(195, 95, 83),
+            button=(494, 495, 575, 537),
+        ),
     ],
     en=None,
 )
@@ -143,6 +150,13 @@ DUEL_ROUND_SWITCH = ButtonWrapper(
             search=(559, 525, 764, 709),
             color=(178, 113, 53),
             button=(579, 545, 744, 689),
+        ),
+        Button(
+            file='./assets/cn/duel/DUEL_ROUND_SWITCH.3.png',
+            area=(588, 535, 683, 645),
+            search=(568, 515, 703, 665),
+            color=(237, 134, 58),
+            button=(588, 535, 683, 645),
         ),
     ],
     en=None,

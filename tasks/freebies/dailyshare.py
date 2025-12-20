@@ -3,7 +3,7 @@ from module.exception import GameStuckError
 from module.logger import logger
 from tasks.base.page import page_main, page_panel
 from tasks.base.taskui import TaskUI
-from tasks.freebies.assets.assets_freebies_dailyshare import SHARE_BUTTON, SHARE_GOTO_QQ
+from tasks.freebies.assets.assets_freebies_dailyshare import SHARE_BUTTON, SHARE_GOTO_OTHER_APP
 
 
 class DailyShare(TaskUI):
@@ -16,13 +16,14 @@ class DailyShare(TaskUI):
         self.config.stored.DailyShareFinishCount.add()
     def _daily_share_flow(self):
         packages = self.device.list_package() 
-        if not 'com.tencent.mobileqq' in packages:  
-           logger.warning('QQ not installed')
+        if not 'com.tencent.mobileqq' in packages or not 'com.tencent.mm' in packages:  
+           logger.warning('QQ or Wechat uninstalled')
            return True
         self._share_goto_other_app()
         self._ensure_game_foreground()
         self._handle_remain_ui()
     def _share_goto_other_app(self):
+        apps=['com.tencent.mobileqq','com.tencent.mm']
         self.device.click_record_clear()
         timeout = Timer(30, count=30).start()  
         self.ui_ensure(page_panel)
@@ -31,14 +32,19 @@ class DailyShare(TaskUI):
                 raise GameStuckError('Share goto other app timeout') 
             if self.appear_then_click(SHARE_BUTTON,interval=1):
                 continue
-            if self.appear(SHARE_GOTO_QQ,interval=2):
-                self.device.click(SHARE_GOTO_QQ)
+            if self.appear(SHARE_GOTO_OTHER_APP,interval=2):
+                self.device.click(SHARE_GOTO_OTHER_APP)
                 continue
-            if self.device.app_current() == 'com.tencent.mobileqq':  
-                logger.info('Detected QQ is running, stopping QQ app')  
-                self.device.app_stop(package='com.tencent.mobileqq')  
-                if self._verify_app_stopped('com.tencent.mobileqq'):  
-                    return True  
+            if self.device.app_current() in apps:  
+                logger.info('Detected App is running, stopping app')  
+                if self.device.app_current() ==apps[0]:
+                    self.device.app_stop(package=apps[0])  
+                    if self._verify_app_stopped(apps[0]):  
+                        return True  
+                elif self.device.app_current() ==apps[1]:
+                    self.device.app_stop(package=apps[1])  
+                    if self._verify_app_stopped(apps[1]):  
+                        return True
                 continue
 
         
@@ -59,7 +65,7 @@ class DailyShare(TaskUI):
                 raise GameStuckError('Handle remain ui timeout') 
             if self.ui_page_appear(page_main):
                 break
-            if self.appear_then_click(SHARE_GOTO_QQ,interval=2):
+            if self.appear_then_click(SHARE_GOTO_OTHER_APP,interval=2):
                 continue
 
     def _verify_app_stopped(self, package_name, timeout=2):  
@@ -71,6 +77,4 @@ class DailyShare(TaskUI):
             self.device.screenshot()
         logger.warning(f'Could not verify {package_name} closure')  
         return False
-
-
 

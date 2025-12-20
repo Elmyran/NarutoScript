@@ -19,6 +19,12 @@ Restart:
       option: [ true, ]
       option_bold: [ true, ]
     ServerUpdate: 05:00
+  Password:
+    SecondPassword:
+      type: input
+      value: ''
+      valuetype: str
+      display: display
 DataUpdate:
   Scheduler:
     Enable:

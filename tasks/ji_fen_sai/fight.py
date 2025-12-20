@@ -40,7 +40,7 @@ class JiFenSaiFight(TaskUI):
                 continue
         return True
     def refresh_popup_appear(self):
-        if self.appear(ENEMY_REFRESH_SUCCESS):
+        if self.appear(ENEMY_REFRESH_SUCCESS,similarity=0.5):
             return True
         return False
             

@@ -38,16 +38,12 @@
       "name": "小队突袭",
       "help": ""
     },
-    "Organization": {
-      "name": "组织活动",
-      "help": ""
-    },
     "SurvivalTrail": {
       "name": "生存试炼",
       "help": ""
     },
     "TiLi": {
-      "name": "清体力",
+      "name": "体力",
       "help": ""
     },
     "Mission": {
@@ -92,7 +88,7 @@
     },
     "PanRen": {
       "name": "叛忍来袭",
-      "help": ""
+      "help": "该任务需要前往异常处理中设置二级密码"
     },
     "Fortress": {
       "name": "本服要塞",
@@ -267,14 +263,14 @@
       "close_emulator": "关闭模拟器"
     }
   },
-  "Organization": {
+  "Password": {
     "_info": {
-      "name": "组织活动",
+      "name": "密码设置",
       "help": ""
     },
-    "OrganizationPray": {
-      "name": "组织祈福",
-      "help": ""
+    "SecondPassword": {
+      "name": "二级密码",
+      "help": "未输入会影响部分功能的使用"
     }
   },
   "SquadRaid": {
@@ -288,7 +284,7 @@
     },
     "SquadQuadrupleReward": {
       "name": "四倍奖励",
-      "help": ""
+      "help": "需要前往异常处理中设置二级密码"
     },
     "SquadRaidFight": {
       "name": "小队突袭",
@@ -299,10 +295,6 @@
     "SquadRaidFinishedCount": {
       "name": "SquadRaid.SquadRaidFinishedCount.name",
       "help": "SquadRaid.SquadRaidFinishedCount.help"
-    },
-    "SecondPassword": {
-      "name": "二级密码",
-      "help": ""
     }
   },
   "SurvivalTrail": {
@@ -315,7 +307,7 @@
       "help": ""
     }
   },
-  "TiLi": {
+  "TiLiCost": {
     "_info": {
       "name": "清体力",
       "help": ""
@@ -326,7 +318,21 @@
     },
     "DungeonFirst": {
       "name": "优先扫荡精英副本",
+      "help": "需要提前勾选"
+    }
+  },
+  "TiLiPurchase": {
+    "_info": {
+      "name": "买体力",
       "help": ""
+    },
+    "TiLiPurchaseTimes": {
+      "name": "购买次数",
+      "help": "0表示不购买体力，高于上限则购买至上限"
+    },
+    "TiLiPurchaseFinishCount": {
+      "name": "TiLiPurchase.TiLiPurchaseFinishCount.name",
+      "help": "TiLiPurchase.TiLiPurchaseFinishCount.help"
     }
   },
   "DuelWeekly": {
@@ -488,6 +494,14 @@
     "MonthlySignInFinishCount": {
       "name": "Freebies.MonthlySignInFinishCount.name",
       "help": "Freebies.MonthlySignInFinishCount.help"
+    },
+    "OrganizationPray": {
+      "name": "组织祈福",
+      "help": "需要进入一个组织"
+    },
+    "OrganizationPrayFinishCount": {
+      "name": "Freebies.OrganizationPrayFinishCount.name",
+      "help": "Freebies.OrganizationPrayFinishCount.help"
     },
     "ActivityReward": {
       "name": "活跃度奖励",
@@ -703,7 +717,7 @@
     },
     "MeritExchangeFilter": {
       "name": "功勋兑换过滤器",
-      "help": "预设 饰品礼盒 > 铜币 > 轮回石 > 忍玉",
+      "help": "预设 组织饰品礼盒 > 铜币 > 轮回石 > 忍玉",
       "preset": "预设",
       "custom": "自定义"
     },
@@ -777,17 +791,13 @@
     },
     "CultivationFinish": {
       "name": "20金币完成",
-      "help": ""
+      "help": "需要前往异常处理中设置二级密码"
     }
   },
   "PanRen": {
     "_info": {
       "name": "设置",
       "help": ""
-    },
-    "SecondPassword": {
-      "name": "二级密码",
-      "help": "叛忍结束后会重启游戏"
     },
     "NoRewardJoinOrNot": {
       "name": "无奖励继续参与",

@@ -1,14 +1,15 @@
-import threading
-from pponnxcr import TextSystem as TextSystem_
+
 from module.base.decorator import cached_property, del_cached_property, has_cached_property
 from module.exception import ScriptError
 from module.logger import logger
 
+
+from rapidocr import EngineType, LangDet, ModelType, OCRVersion, RapidOCR,LangRec
 DIC_LANG_TO_MODEL = {
-    'cn': 'zhs',
+    'cn': 'ch',
     'en': 'en',
-    'jp': 'ja',
-    'tw': 'zht',
+    'jp': 'japan',
+    'tw': 'cht',
 }
 
 
@@ -37,21 +38,21 @@ def model2lang(model: str) -> str:
     return model
 
 
-class TextSystem(TextSystem_):
+class TextSystem(RapidOCR):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.text_recognizer.rec_batch_num = 1
+       
 
 
 class OcrModel:
     _model_init_thread = None
-    def get_by_model(self, model: str) -> TextSystem:
+    def get_by_model(self, model: str) -> RapidOCR:
         try:
             return self.__getattribute__(model)
         except AttributeError:
             raise ScriptError(f'OCR model "{model}" does not exists')
 
-    def get_by_lang(self, lang: str) -> TextSystem:
+    def get_by_lang(self, lang: str) -> RapidOCR:
         try:
             model = lang2model('cn')
             return self.__getattribute__(model)
@@ -59,54 +60,64 @@ class OcrModel:
             raise ScriptError(f'OCR model under lang "{lang}" does not exists')
 
     def resource_release(self):
-        del_cached_property(self, 'zhs')
+        del_cached_property(self, 'ch')
         del_cached_property(self, 'en')
-        del_cached_property(self, 'ja')
-        del_cached_property(self, 'zht')
+        del_cached_property(self, 'japan')
+        del_cached_property(self, 'cht')
 
     @cached_property
-    def zhs(self):
-        return TextSystem('zhs')
+    def ch(self):
+        params={
+        "EngineConfig.onnxruntime.use_dml": True,
+        "EngineConfig.enable_cpu_mem_arena": True,
+        "Det.ocr_version": OCRVersion.PPOCRV4,
+        "Det.engine_type": EngineType.ONNXRUNTIME,
+        "Det.lang_type": LangDet.CH,
+        "Det.unclip_ratio": 1.9,
+        "Det.box_thresh": 0.5,
+        "Global.max_side_len": 2000,
+        "Global.text_score": 0.5,
+        "Det.model_type": ModelType.MOBILE,
+        "Rec.ocr_version": OCRVersion.PPOCRV5
+
+
+        
+    }
+        return RapidOCR(params=params)
 
     @cached_property
     def en(self):
-        return TextSystem('en')
+        params={
+         "EngineConfig.onnxruntime.use_dml": True,
+        "EngineConfig.enable_cpu_mem_arena": True,
+        "Det.engine_type": EngineType.ONNXRUNTIME,
+        "Det.lang_type": LangDet.EN,
+        "Det.model_type": ModelType.MOBILE,
+        "Det.ocr_version": OCRVersion.PPOCRV5
+    }
+        return RapidOCR(params=params)
 
     @cached_property
-    def ja(self):
-        return TextSystem('ja')
+    def japan(self):
+        params={
+        "Det.engine_type": EngineType.ONNXRUNTIME,
+        "Det.lang_type": LangDet.MULTI,
+        "Det.model_type": ModelType.MOBILE,
+        "Det.ocr_version": OCRVersion.PPOCRV4
+    }
+        return RapidOCR(params=params)
 
     @cached_property
-    def zht(self):
-        return TextSystem('zht')
-    def early_model_init(self):  
-      
-        model = lang2model('cn')  
-        if has_cached_property(self, model):  
-            return  
-        logger.info('Early ocr model init')
-        def early_model_init_func():  
-            model = self.get_by_lang('cn') 
-            try:
-                import numpy as np
-                dummy_img = np.zeros((48, 320, 3), dtype=np.uint8)
-                _ = model.__call__(dummy_img)
-                logger.info('Early custom ocr model init success.') 
-            except Exception as e:
-                logger.info('Early custom ocr model init failed.')  
+    def cht(self):
+        params={
+        "Det.engine_type": EngineType.ONNXRUNTIME,
+        "Det.lang_type": LangDet.MULTI,
+        "Det.model_type": ModelType.MOBILE,
+        "Det.ocr_version": OCRVersion.PPOCRV4
+    }
+        return RapidOCR(params=params)
+
   
-        thread = threading.Thread(target=early_model_init_func, daemon=True)  
-        self._model_init_thread = thread  
-        thread.start()  
-  
-    @property  
-    def model_ready(self):  
-       
-        if self._model_init_thread is not None:  
-            self._model_init_thread.join()  
-            self._model_init_thread = None
-            logger.info('Early ocr model init success')  
-        return self
 
 
 OCR_MODEL = OcrModel()

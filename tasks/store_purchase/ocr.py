@@ -1,7 +1,7 @@
-from module.ocr.ocr import  Digit, DigitCounter,OcrWhiteLetterOnComplexBackground
+import cv2
+from module.ocr.ocr import  Digit, DigitCounter, OcrWhiteLetterOnComplexBackground
 import re
 
-from module.ocr.onnxocr.onnx_paddleocr import ONNXPaddleOcr
 class StoreDetailOcr(OcrWhiteLetterOnComplexBackground):
     min_box = (1, 1)
     def after_process(self, result):
@@ -9,12 +9,14 @@ class StoreDetailOcr(OcrWhiteLetterOnComplexBackground):
         if '高级通灵' in result:
             result='高级通灵卷轴碎片'
         return super().after_process(result)
-class StoreDigitCounter(DigitCounter):
+class StoreDigitCounter(DigitCounter): 
+
     def after_process(self, result):  
         result=result.replace('早','限')
         return super().after_process(result)
 
-class StorePriceDigit(ONNXPaddleOcr,Digit,OcrWhiteLetterOnComplexBackground):  
+class StorePriceDigit(Digit):  
+ 
     def after_process(self, result):  
         result=result.replace('A', '')
         result = re.sub(r'^11(000)$', r'1\1', result) 
@@ -25,8 +27,7 @@ class StorePriceDigit(ONNXPaddleOcr,Digit,OcrWhiteLetterOnComplexBackground):
                 # 乘以10000  
                 result = result.replace(match.group(0), str(num * 10000))
         return result
-    def pre_process(self, img):
-        return OcrWhiteLetterOnComplexBackground.pre_process(self, img)
+    
     
 
     def format_result(self, result):

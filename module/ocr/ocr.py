@@ -1,8 +1,8 @@
+from functools import cmp_to_key
 import time
 from datetime import timedelta
 
 import numpy as np
-from pponnxcr.predict_system import BoxedResult
 
 import module.config.server as server
 from module.base.button import ButtonWrapper
@@ -11,8 +11,50 @@ from module.base.utils import *
 from module.exception import ScriptError
 from module.logger import logger
 from module.ocr.keyword import Keyword
-from module.ocr.models import OCR_MODEL, TextSystem
-from module.ocr.utils import merge_buttons
+from module.ocr.models import OCR_MODEL, RapidOCR
+
+class BoxedResult:
+    def __init__(self, box, text_img, ocr_text, score):
+        self.box = box
+        self.text_img = text_img
+        self.ocr_text = ocr_text
+        self.score = score
+
+    def __str__(self):
+        return 'BoxedResult[%s, %s]' % (self.ocr_text, self.score)
+
+    def __repr__(self):
+        return self.__str__()
+
+
+def sorted_boxes(dt_boxes):
+    return sorted(
+        dt_boxes,
+        key=cmp_to_key(lambda x, y:
+            x[0][0] - y[0][0]
+            if -10 < x[0][1] - y[0][1] < 10 else
+            x[0][1] - y[0][1]
+        )
+    )
+def perspective_crop(img, points):
+    w = round(max(
+        np.linalg.norm(points[0] - points[1]),
+        np.linalg.norm(points[2] - points[3]),
+    ))
+    h = round(max(
+        np.linalg.norm(points[0] - points[3]),
+        np.linalg.norm(points[1] - points[2]),
+    ))
+    return cv2.warpPerspective(
+        img,
+        cv2.getPerspectiveTransform(
+            points,
+            np.float32([[0, 0],[w, 0],[w, h],[0, h]])
+        ),
+        (w, h),
+        borderMode=cv2.BORDER_REPLICATE,
+        flags=cv2.INTER_CUBIC,
+    )
 
 
 class OcrResultButton:
@@ -79,8 +121,8 @@ class Ocr:
         self.name: str = name
 
     @cached_property
-    def model(self) -> TextSystem:
-        return OCR_MODEL.model_ready.get_by_lang('cn')
+    def model(self) -> RapidOCR:
+        return OCR_MODEL.get_by_lang('cn')
 
     def pre_process(self, image):
         """
@@ -90,6 +132,7 @@ class Ocr:
         Returns:
             np.ndarray: Shape (width, height)
         """
+
         return image
 
     def after_process(self, result):
@@ -122,7 +165,12 @@ class Ocr:
             image = crop(image, self.button.area, copy=False)
         image = self.pre_process(image)
         # ocr
-        result, _ = self.model.ocr_single_line(image)
+        result= self.model(image,use_cls=False)
+        if result:
+            result = result.txts[0]
+        else:
+            result = ''        
+
         # after proces
         result = self._log_change('after', self.after_process, result)
         result = self._log_change('format', self.format_result, result)
@@ -135,7 +183,12 @@ class Ocr:
         start_time = time.time()
         image_list = [self.pre_process(image) for image in image_list]
         # ocr
-        result_list = self.model.ocr_lines(image_list)
+        result_list=[]
+        for image in image_list:
+            result= self.model(image,use_cls=False)
+            if result:
+                result = [result.txts[0],result.scores[0]] 
+                result_list.append(result)
         result_list = [(result, score) for result, score in result_list]
         # after process
         result_list = [(self.after_process(result), score) for result, score in result_list]
@@ -159,13 +212,27 @@ class Ocr:
         Returns:
 
         """
+        from module.ocr.utils import merge_buttons
         # pre process
         start_time = time.time()
         if not direct_ocr:
             image = crop(image, self.button.area, copy=False)
         image = self.pre_process(image)
         # ocr
-        results: list[BoxedResult] = self.model.detect_and_ocr(image)
+        results: list[BoxedResult]=[]
+        output= self.model(image)
+        if output.txts:
+            for i in range(len(output.txts)):
+                box = output.boxes[i]
+                text = output.txts[i]
+                score = output.scores[i]
+                boxed_result = BoxedResult(
+                    box=box, 
+                    text_img=None, # 如果需要子图，您需要在这里实现裁剪逻辑
+                    ocr_text=text, 
+                    score=score
+                )
+                results.append(boxed_result)
         # after proces
         for result in results:
             if not direct_ocr:
@@ -173,6 +240,7 @@ class Ocr:
             result.box = tuple(corner2area(result.box))
 
         results = [result for result in results if self.filter_detected(result)]
+        
         results = merge_buttons(results, thres_x=self.merge_thres_x, thres_y=self.merge_thres_y)
         for result in results:
             result.ocr_text = self.after_process(result.ocr_text)
@@ -326,6 +394,23 @@ class Ocr:
 class Digit(Ocr):
     def __init__(self, button: ButtonWrapper, lang='cn', name=None):
         super().__init__(button, lang=lang, name=name)
+    def pre_process(self, image):
+        
+        height, width, _ = image.shape
+        min_size = 640
+        
+        if height < min_size or width < min_size:
+           
+            top = max(0, (min_size - height) // 2)
+            bottom = max(0, min_size - height - top)
+            left = max(0, (min_size - width) // 2)
+            right = max(0, min_size - width - left)       
+            background_color = [int(x) for x in image[0, 0]]
+
+            image = cv2.copyMakeBorder(
+                image, top, bottom, left, right, cv2.BORDER_CONSTANT, value=background_color
+            )
+        return super().pre_process(image)
     def after_process(self, result):
         result = super().after_process(result)
         # 修正常见的数字识别错误
@@ -352,7 +437,25 @@ class Digit(Ocr):
 class DigitCounter(Ocr):
     def __init__(self, button: ButtonWrapper, lang='cn', name=None):
         super().__init__(button, lang=lang, name=name)
+    def pre_process(self, image):
+        
+        height, width, _ = image.shape
+        min_size = 640
+        
+        if height < min_size or width < min_size:
+           
+            top = max(0, (min_size - height) // 2)
+            bottom = max(0, min_size - height - top)
+            left = max(0, (min_size - width) // 2)
+            right = max(0, min_size - width - left)
 
+            
+            background_color = [int(x) for x in image[0, 0]]
+
+            image = cv2.copyMakeBorder(
+                image, top, bottom, left, right, cv2.BORDER_CONSTANT, value=background_color
+            )
+        return super().pre_process(image)
     @classmethod
     def is_format_matched(cls, result) -> bool:
         return '/' in result
@@ -465,22 +568,4 @@ class OcrWhiteLetterOnComplexBackground(Ocr):
         boxes = np.array(boxes)
         return boxes
 
-    def detect_and_ocr(self, *args, **kwargs):
-        # Try hard to lower TextSystem.box_thresh
-        backup = self.model.text_detector.box_thresh
-        self.model.text_detector.box_thresh = 0.2
-        # Patch TextDetector
-        text_detector = self.model.text_detector
-
-        def text_detector_with_min_box(*args, **kwargs):
-            dt_boxes, elapse = text_detector(*args, **kwargs)
-            dt_boxes = self.enlarge_boxes(dt_boxes)
-            return dt_boxes, elapse
-
-        self.model.text_detector = text_detector_with_min_box
-        try:
-            result = super().detect_and_ocr(*args, **kwargs)
-        finally:
-            self.model.text_detector.box_thresh = backup
-            self.model.text_detector = text_detector
-        return result
+    

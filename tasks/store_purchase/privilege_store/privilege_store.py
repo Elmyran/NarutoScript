@@ -2,8 +2,8 @@ from tasks.base.ui import UI
 from tasks.base.page import *
 from tasks.store_purchase.assets.assets_store_purchase_privilege_store import DAILY_FREE_COINS, DAILY_FREE_COINS_DONE
 from tasks.store_purchase.privilege_store.switch import SWITCH_PRIVILEGE_STORE_TAB
-from tasks.store_purchase.store_tab_draglist import StoreTabList, SubsidiaryStoreTabList
-from tasks.store_purchase.store_keyword import PrivilegeStore, Store
+from tasks.store_purchase.ui.store_tab_draglist import StoreTabList, SubsidiaryStoreTabList
+from tasks.store_purchase.keyword.store_keyword import PrivilegeStore, Store
 
 class PrivilegeStorePurchase(UI):
     def run(self):

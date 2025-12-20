@@ -70,8 +70,6 @@ def release_resources(next_task=''):
     if not next_task:
         from module.ocr.models import OCR_MODEL
         OCR_MODEL.resource_release()
-        from module.ocr.onnxmodels import CUSTOM_OCR_MODEL
-        CUSTOM_OCR_MODEL.resource_release()
         from module.ocr.yolomodel import YOLO_MODEL
         YOLO_MODEL.resource_release()
 

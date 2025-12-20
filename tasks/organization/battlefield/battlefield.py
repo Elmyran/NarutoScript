@@ -1,3 +1,4 @@
+from datetime import datetime
 from module.base.timer import Timer
 from module.config.utils import get_nearest_weekday_date, get_server_weekday, server_time_offset
 from module.exception import GameStuckError
@@ -12,7 +13,7 @@ from tasks.organization.assets.assets_organization_fortress import ORGANIZATION_
 from tasks.organization.assets.assets_organization_pray import ORGANIZATION_PANEL
 from tasks.organization.battlefield.detecor import CharacterCircleDetector
 from tasks.organization.battlefield.switch import CHARACTER_TAB
-from toolkit.Lib.datetime import datetime
+
 from tasks.organization.battlefield.name_keywords import AccountNameKeyword
 from tasks.duel.assets.assets_duel import DUEL_FIGHT_FAIL, DUEL_IS_IN_FIGHT
 
@@ -138,8 +139,6 @@ class BattleField(TaskUI,CharacterCircleDetector):
                 continue
 
     def _check_state(self):
-        account_name=self.config.stored.AccountName.value
-        AccountNameKeyword.cn=account_name
         OCR=Digit(BATTLE_FIELD_CREDITS)
         ocr_interval=Timer(10)
         empty_detect_interval=Timer(1).start()
