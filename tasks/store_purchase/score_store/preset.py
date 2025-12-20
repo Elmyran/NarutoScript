@@ -41,7 +41,7 @@ class ScoreStoreSelector(StoreSelector):
             afford_amount = int(item.currency / item.price)
 
         if  self.button.matched_keyword is ScoreStoreChest:
-            preset_max_amount = self.main.config.ScoreStore_ScoreStoreChestPurchaseTimes
+            preset_max_amount = self.config.ScoreStore_ScoreStoreChestPurchaseTimes
             if purchased_count >= preset_max_amount:  
                 return None
             afford_amount = min(preset_max_amount - purchased_count , afford_amount)
