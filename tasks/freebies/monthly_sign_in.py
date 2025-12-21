@@ -10,10 +10,10 @@ from tasks.freebies.assets.assets_freebies_yi_le_la_mian import RAMEN_TAB_CHECK
 class MonthlySignInOcr(DigitCounter):
     def after_process(self, result):
         result=result.replace('V','')
-        result = re.sub(r'(\d)30$', r'\1/30', result)
-        result = re.sub(r'(\d)31$', r'\1/31', result)
-        result = re.sub(r'(\d)31$', r'\1/29', result)
-        result = re.sub(r'(\d)31$', r'\1/28', result)
+        result = re.sub(r'当月签到：', '', result)  
+        result = re.sub(r'天$', '', result) 
+        result = re.sub(r'^(\d)(\d{2})$', r'\1/\2', result)  
+        result = re.sub(r'^(\d{2})(\d{2})$', r'\1/\2', result)  
         return result
 
 class MonthlySignIn(UI):
@@ -55,3 +55,5 @@ class MonthlySignIn(UI):
                 continue
             elif remain!=0 and total!=0:
                 break
+if __name__ == '__main__':
+    pass

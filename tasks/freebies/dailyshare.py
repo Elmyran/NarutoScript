@@ -16,7 +16,7 @@ class DailyShare(TaskUI):
         self.config.stored.DailyShareFinishCount.add()
     def _daily_share_flow(self):
         packages = self.device.list_package() 
-        if not 'com.tencent.mobileqq' in packages or not 'com.tencent.mm' in packages:  
+        if not 'com.tencent.mobileqq' in packages and not 'com.tencent.mm' in packages:  
            logger.warning('QQ or Wechat uninstalled')
            return True
         self._share_goto_other_app()
