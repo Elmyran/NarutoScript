@@ -1,8 +1,7 @@
-
-
 from module.base.timer import Timer
 from module.logger.logger import logger
 from module.ocr.ocr import Digit
+from tasks.base.page import page_main
 from tasks.base.assets.assets_base_code_second import CODE_SECOND_PASSWORD
 from tasks.base.assets.assets_base_page import MAIN_GOTO_CHARACTER
 from tasks.base.taskui import TaskUI
@@ -18,6 +17,7 @@ class TiLiPurchase(TaskUI):
         self.handle_purchase()
         self.config.stored.TiLiPurchaseFinishCount.add()
     def handle_purchase(self):
+        self.ui_ensure(page_main)
         self.enter_purchase_page()
         self.purchase()
         self.back_to_main()
@@ -35,6 +35,7 @@ class TiLiPurchase(TaskUI):
         target_times=self.config.TiLiPurchase_TiLiPurchaseTimes
         real_times=min(target_times,remain_total)
         final_times=remain_total-real_times
+        logger.attr('PURCHASE_TARGET',real_times)
         click_interval = Timer(1, count=3).start()  
         for _ in self.loop():
             if self.appear(CODE_SECOND_PASSWORD):
@@ -42,7 +43,8 @@ class TiLiPurchase(TaskUI):
                 click_interval.reset()
                 continue  
             if click_interval.reached():  
-                remain_times = ocr.ocr_single_line(self.device.image)  
+                remain_times = ocr.ocr_single_line(self.device.image)
+                logger.attr('PURCHASE_TIMES',remain_total-remain_times)  
                 if remain_times==final_times:
                     break  
                 self.appear_then_click(TILI_PURCHASE_BUTTON, interval=0)
