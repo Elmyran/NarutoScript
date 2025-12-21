@@ -69,6 +69,17 @@ PREMIUM_RECRUIT_100_BUTTON = ButtonWrapper(
     ),
     en=None,
 )
+PREMIUM_RECRUIT_CANCEL = ButtonWrapper(
+    name='PREMIUM_RECRUIT_CANCEL',
+    cn=Button(
+        file='./assets/cn/recruit/PREMIUM_RECRUIT_CANCEL.png',
+        area=(665, 419, 849, 481),
+        search=(645, 399, 869, 501),
+        color=(230, 164, 11),
+        button=(665, 419, 849, 481),
+    ),
+    en=None,
+)
 PREMIUM_RECRUIT_FREE_BUTTON = ButtonWrapper(
     name='PREMIUM_RECRUIT_FREE_BUTTON',
     cn=[

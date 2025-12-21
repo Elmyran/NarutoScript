@@ -27,11 +27,14 @@ class Recruit(UI):
     def _premium_recruit(self):
         self.ui_ensure(page_recruit)
         RecruitTabList.search_rows(main=self, keyword=AdvancedRecruitment)
-        self.wait_until_stable(PREMIUM_RECRUIT_FREE_DONE,timer=Timer(0.5,3),timeout=Timer(1, count=3))
+        self.wait_until_stable(PREMIUM_RECRUIT_FREE_DONE,timer=Timer(2,5),timeout=Timer(3, count=10))
         wait_recruit_end=True
         for _ in self.loop():
             if wait_recruit_end and self.appear(PREMIUM_RECRUIT_FREE_DONE,similarity=0.7):
                 break
+            if self.appear_then_click(PREMIUM_RECRUIT_CANCEL, interval=1):
+                wait_recruit_end=True
+                continue
             RECRUIT_FREE_CONFIRM.load_search(FREE_BUTTON_CONFIRM_AREA.area)
             if self.appear_then_click(RECRUIT_FREE_CONFIRM,similarity=0.7, interval=1):
                 wait_recruit_end=True
@@ -50,7 +53,7 @@ class Recruit(UI):
     def _normal_recruit(self):
         self.ui_ensure(page_recruit)
         RecruitTabList.search_rows(main=self, keyword=NormalRecruitment)
-        self.wait_until_stable(NORMAL_RECRUIT_FREE_DONE,timer=Timer(0.5,3),timeout=Timer(1, count=3))
+        self.wait_until_stable(NORMAL_RECRUIT_FREE_DONE,timer=Timer(2,5),timeout=Timer(3, count=10))
         wait_recruit_end=True
         for _ in self.loop():
             if wait_recruit_end and self.appear(NORMAL_RECRUIT_FREE_DONE,similarity=0.7):

@@ -8,6 +8,7 @@ from tasks.base.taskui import TaskUI
 from tasks.combat.assets.assets_combat_support import  COMBAT_SUPPORT_SAME_CHARACTER_NOTIFY
 from tasks.combat.support import SUPPORT_LIST
 from tasks.squadraid.assets.assets_squadraid_fight import *
+from tasks.squadraid.ocr import SquadRaidOCR
 
 class SquadRaidFight(TaskUI):
     def run(self):
@@ -37,7 +38,7 @@ class SquadRaidFight(TaskUI):
             self.device.stuck_timer=Timer(60,count=60).start()
         return True
     def have_sufficient_times(self):
-        ocr=DigitCounter(SQUAD_RAID_TIMES_COUNTER)
+        ocr=SquadRaidOCR(SQUAD_RAID_TIMES_COUNTER)
         time=Timer(10,count=20).start()
         for _ in  self.loop():
             if time.reached():
