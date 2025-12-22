@@ -130,7 +130,7 @@ class TaskUI(UI):
 
         return False
     def handle_second_password(self):
-        code=self.config.Password_SecondPassword
+        code = self.config.cross_get("Restart.Password.SecondPassword")  
         if not code :
             raise RequestHumanTakeover('SecondPassword need to fill')
         self.device.scrcpy_init()
