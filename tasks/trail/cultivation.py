@@ -87,7 +87,7 @@ class CultivationRoad(TaskUI):
                 return False
             if self.appear(CULTIVATION_RESET_MOP_UP_FINISH_NOW):
                 break
-            if self.appear(CULTIVATION_CLAIM_CHAO_YING):
+            if self.appear(CULTIVATION_CLAIM_CHAO_YING,similarity=0.7):
                 break
         return True
     def mop_up_finish(self):
@@ -150,4 +150,8 @@ class CultivationRoad(TaskUI):
             if self.appear(CULTIVATION_BOX):
                 self.device.click(CULTIVATION_BOX)
                 continue
+
+if __name__ == '__main__':
+    az=CultivationRoad('ns',task='Alas')
+    az.handle_cultivation_mop_up()
 
