@@ -1,5 +1,6 @@
 from module.base.timer import Timer
 from module.logger import logger
+from tasks.base.assets.assets_base_page import MAIN_GOTO_CHARACTER
 from tasks.base.page import page_mail
 from tasks.base.ui import UI
 from tasks.freebies.assets.assets_freebies_mail import *
@@ -25,7 +26,7 @@ class MailReward(UI):
         self.device.click_record_clear()
         self.ui_ensure(page_mail)
         self._mail_claim()
-        self.ui_goto_main()
+        self.back_to_main()
         self.config.stored.MailRewardFinishCount.add()
 
     def _mail_claim(self):
@@ -43,7 +44,12 @@ class MailReward(UI):
                 break
             if self.appear_then_click(CLAIM_ALL,interval=1):
                 continue
-
+    def back_to_main(self):
+        for _ in self.loop():
+            if self.match_template_color(MAIN_GOTO_CHARACTER):
+                break
+            if self.appear_then_click(MAIL_EXIT,interval=1):
+                continue
 
 
 
