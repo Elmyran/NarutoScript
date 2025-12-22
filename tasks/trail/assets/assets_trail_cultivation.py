@@ -29,10 +29,10 @@ CULTIVATION_CLAIM_CHAO_YING = ButtonWrapper(
     name='CULTIVATION_CLAIM_CHAO_YING',
     cn=Button(
         file='./assets/cn/trail/cultivation/CULTIVATION_CLAIM_CHAO_YING.png',
-        area=(553, 520, 717, 569),
-        search=(533, 500, 737, 589),
-        color=(219, 162, 34),
-        button=(553, 520, 717, 569),
+        area=(581, 530, 690, 561),
+        search=(561, 510, 710, 581),
+        color=(206, 159, 38),
+        button=(581, 530, 690, 561),
     ),
     en=None,
 )

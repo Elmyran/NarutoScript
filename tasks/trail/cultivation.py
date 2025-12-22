@@ -127,10 +127,11 @@ class CultivationRoad(TaskUI):
         
         return self.appear(CULTIVATION_RESET_MOP_UP_FINISH_NOW)
     def reset(self):
+        logger.info("Resetting cultivation...")
         for _ in self.loop():
-            if self.appear(CULTIVATION_RESET_MOP_UP_FINISH_NOW):
+            if self.appear(CULTIVATION_RESET_MOP_UP_FINISH_NOW,similarity=0.7):
                 break
-            if self.appear(CULTIVATION_CLAIM_CHAO_YING):
+            if self.appear(CULTIVATION_CLAIM_CHAO_YING,similarity=0.7):
                 break         
             if self.appear_then_click(CULTIVATION_RESET_CONFIRM,interval=1):
                 continue
@@ -147,3 +148,4 @@ class CultivationRoad(TaskUI):
             if self.appear(CULTIVATION_BOX):
                 self.device.click(CULTIVATION_BOX)
                 continue
+
