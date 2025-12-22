@@ -103,6 +103,8 @@ class CultivationRoad(TaskUI):
                 continue
             if self.appear_then_click(CULTIVATION_MOP_UP_REWARD_CLAIM,interval=1):
                 continue
+            if self.appear_then_click(CULTIVATION_CLAIM_CHAO_YING,interval=1,similarity=0.7):
+                continue
             if self.appear(CODE_SECOND_PASSWORD):
                 self.handle_second_password()
                 continue
