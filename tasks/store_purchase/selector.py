@@ -72,7 +72,7 @@ class StoreSelector:
                     purchase_times+=1
                     pre_currency=currency
                     if purchase_times>=item.count:  
-                        return True
+                        return False
                     continue
                 
         
