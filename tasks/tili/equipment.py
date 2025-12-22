@@ -158,6 +158,7 @@ class Equipment(TaskUI):
         logger.info(f'Switch to {self.equipment}')
         click_interval=Timer(1).start()
         for _ in self.loop():
+            self.equipment.load_search(EQUIPMENT_SELECTED.search)
             if self.appear(self.equipment,similarity=0.4):
                 logger.info(f'{self.equipment} confirm ')
                 break
@@ -211,6 +212,7 @@ class Equipment(TaskUI):
                 self.device.click_record_remove(SWEEP_FASTER)
                 count+=1
                 click_interval.reset()
+
 
 
 

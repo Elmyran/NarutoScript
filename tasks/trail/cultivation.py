@@ -87,7 +87,7 @@ class CultivationRoad(TaskUI):
                 return False
             if self.appear(CULTIVATION_RESET_MOP_UP_FINISH_NOW):
                 break
-            if self.appear(CULTIVATION_CLAIM_CHAO_YING):
+            if self.appear(CULTIVATION_CLAIM_CHAO_YING,similarity=0.7):
                 break
         return True
     def mop_up_finish(self):
@@ -102,6 +102,8 @@ class CultivationRoad(TaskUI):
             if self.appear_then_click(CULTIVATION_RESET_MOP_UP_FINISH_NOW,interval=1):
                 continue
             if self.appear_then_click(CULTIVATION_MOP_UP_REWARD_CLAIM,interval=1):
+                continue
+            if self.appear_then_click(CULTIVATION_CLAIM_CHAO_YING,interval=1,similarity=0.7):
                 continue
             if self.appear(CODE_SECOND_PASSWORD):
                 self.handle_second_password()
@@ -127,10 +129,11 @@ class CultivationRoad(TaskUI):
         
         return self.appear(CULTIVATION_RESET_MOP_UP_FINISH_NOW)
     def reset(self):
+        logger.info("Resetting cultivation...")
         for _ in self.loop():
-            if self.appear(CULTIVATION_RESET_MOP_UP_FINISH_NOW):
+            if self.appear(CULTIVATION_RESET_MOP_UP_FINISH_NOW,similarity=0.7):
                 break
-            if self.appear(CULTIVATION_CLAIM_CHAO_YING):
+            if self.appear(CULTIVATION_CLAIM_CHAO_YING,similarity=0.7):
                 break         
             if self.appear_then_click(CULTIVATION_RESET_CONFIRM,interval=1):
                 continue
@@ -147,3 +150,8 @@ class CultivationRoad(TaskUI):
             if self.appear(CULTIVATION_BOX):
                 self.device.click(CULTIVATION_BOX)
                 continue
+
+if __name__ == '__main__':
+    az=CultivationRoad('ns',task='Alas')
+    az.handle_cultivation_mop_up()
+
