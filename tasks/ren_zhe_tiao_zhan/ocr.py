@@ -15,6 +15,7 @@ class MiJingOcr(Ocr):
         result=result.replace("藩","落")
         result=result.replace("霆霆","雷霆")
         result=result.replace("雪","雷")
+        result=result.replace("空","雷")
         result=result.replace("显","罡")
         result=result.replace("墨","罡体秘境")
         result=result.replace("宰","牢")
