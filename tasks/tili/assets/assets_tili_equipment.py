@@ -217,3 +217,14 @@ SWEEP_START = ButtonWrapper(
     ),
     en=None,
 )
+TILI_SHORTAGE = ButtonWrapper(
+    name='TILI_SHORTAGE',
+    cn=Button(
+        file='./assets/cn/tili/equipment/TILI_SHORTAGE.png',
+        area=(357, 188, 915, 529),
+        search=(337, 168, 935, 549),
+        color=(166, 160, 141),
+        button=(846, 189, 911, 241),
+    ),
+    en=None,
+)

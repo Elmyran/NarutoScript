@@ -114,6 +114,8 @@ class Equipment(TaskUI):
     def _stop_sweep(self):
         if self.appear(SWEEP_CONTINUE):
             return True
+        if self.appear(TI_LI_SHORTAGE):
+            return True
         return False
     def back_to_main(self):
         for _ in self.loop():
@@ -121,6 +123,8 @@ class Equipment(TaskUI):
                 self.wait_until_stable(EQUIPMENT_CHECK, timer=Timer(1, count=3))
                 break
             if self.appear_then_click(EQUIPMENT_POPUP_CLOSE_BUTTON,interval=1):
+                continue
+            if self.appear_then_click(TILI_SHORTAGE,interval=1):
                 continue
             
     def _equipment_enter(self):
@@ -204,7 +208,9 @@ class Equipment(TaskUI):
         click_interval=Timer(0.5).start()
         count=0  
         for _ in self.loop():
-            if self.appear(SWEEP_COMPLETE):
+            if self.appear(SWEEP_COMPLETE,similarity=0.6):
+                break
+            if self.appear(TILI_SHORTAGE,similarity=0.6):
                 break
             if self.appear_then_click(SWEEP_START,interval=1):
                 continue

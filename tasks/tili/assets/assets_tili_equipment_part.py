@@ -13,16 +13,6 @@ BOOK = ButtonWrapper(
         button=(145, 378, 220, 442),
     ),
 )
-BOOK_OCR = ButtonWrapper(
-    name='BOOK_OCR',
-    share=Button(
-        file='./assets/share/tili/equipment/part/BOOK_OCR.png',
-        area=(145, 378, 220, 442),
-        search=(125, 358, 240, 462),
-        color=(127, 64, 24),
-        button=(145, 378, 220, 442),
-    ),
-)
 CAP = ButtonWrapper(
     name='CAP',
     share=Button(
