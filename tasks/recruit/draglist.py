@@ -23,7 +23,7 @@ class RecruitDragList(DraggableList):
             if RecruitTabList.select_row(keyword, main=main):
                 logger.info('Successfully selected '+keyword.cn)
     def is_row_selected(self, button, main):
-        button.area=(button.area[0]-50,button.area[1]-50,button.area[2]+50,button.area[3]+50)
+        button.area=(button.area[0]-20,button.area[1]-20,button.area[2]+20,button.area[3]+20)
         if main.image_color_count(button, color=self.active_color, threshold=240, count=1000):
             return True
         return False

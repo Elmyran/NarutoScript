@@ -144,7 +144,7 @@ class TaskUI(UI):
                                    Timer(0.5,count=3),
                                    timeout=Timer(1,count=5))
             self.clear_input()
-            self.device._scrcpy_control.set_clipboard(code, paste=True)
+            self.device._scrcpy_control.set_clipboard(str(code), paste=True)
             if self.check_input():
                return True
             
