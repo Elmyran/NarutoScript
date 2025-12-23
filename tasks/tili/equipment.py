@@ -1,3 +1,4 @@
+from module.base.button import ClickButton
 from module.base.timer import Timer
 from module.exception import GameStuckError
 from module.logger.logger import logger
@@ -137,13 +138,14 @@ class Equipment(TaskUI):
             if self.appear_then_click(MAIN_GOTO_EQUIPMENT_LIST):
                 continue
     def _get_sweepable_equipment(self):
-        EQUIPMENT=[EQUIPMENT_KNIFE, EQUIPMENT_RING, EQUIPMENT_CAP,
-                      EQUIPMENT_SHIRT, EQUIPMENT_BOOK, EQUIPMENT_NECKLACE]
+        EQUIPMENT=[KNIFE, RING,CAP,
+                      SHIRT, BOOK, NECK]
         limit_level=self.config.TiLiCost_LevelRestrictions
         for equipment in EQUIPMENT:
             if equipment in self.blacklist:
                 continue
-            ocr=Digit(equipment)
+            level_button=ClickButton(equipment.button,name=equipment.name)
+            ocr=Digit(level_button)
             level=ocr.ocr_single_line(self.device.image)
             if level<limit_level:
                 self.equipment=equipment
@@ -158,8 +160,7 @@ class Equipment(TaskUI):
         logger.info(f'Switch to {self.equipment}')
         click_interval=Timer(1).start()
         for _ in self.loop():
-            self.equipment.load_search(EQUIPMENT_SELECTED.search)
-            if self.appear(self.equipment,similarity=0.4):
+            if self.appear(self.equipment):
                 logger.info(f'{self.equipment} confirm ')
                 break
             if click_interval.reached():
@@ -214,5 +215,10 @@ class Equipment(TaskUI):
                 click_interval.reset()
 
 
+if __name__ == '__main__':
+    az=Equipment('ns',task='Alas')
+    az.device.screenshot()
+    az.equipment=SHIRT
+    az.switch_to_equipment()
 
 
