@@ -14,11 +14,21 @@ class MiJingOcr(Ocr):
         result=result.replace("类","炎")
         result=result.replace("藩","落")
         result=result.replace("霆霆","雷霆")
+        result=result.replace("電","雷")
         result=result.replace("雪","雷")
         result=result.replace("空","雷")
         result=result.replace("显","罡")
         result=result.replace("墨","罡体秘境")
         result=result.replace("宰","牢")
+        if '烈'in result or '炎' in result:
+            result='烈炎秘境'
+        if '水' in result or '牢' in result:
+            result='水牢秘境'
+        if '雷' in result or '霆' in result:
+            result='雷霆秘境'
+        if '罡' in result or '体' in result:
+            result='罡体秘境'
+
         return super().after_process(result)
 class MiJingDigit(Digit):
     
