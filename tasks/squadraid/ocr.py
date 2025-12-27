@@ -6,5 +6,6 @@ class SquadRaidOCR(DigitCounter):
         result = result.replace('212', '2/2')
         result = result.replace('112', '1/2')
         result = result.replace('012', '0/2')
-
+        result = result.replace('√', '/')
+ 
         return result
