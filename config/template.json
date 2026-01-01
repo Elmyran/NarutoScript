@@ -215,6 +215,11 @@
       "MeritExchangeFilter": "preset",
       "CustomMeritExchangeFilter": "组织饰品礼盒 > 铜币 > 轮回石 > 忍玉"
     },
+    "SurvivalStore": {
+      "SurvivalStoreExchange": false,
+      "SurvivalStoreExchangeFilter": "preset",
+      "CustomSurvivalStoreFilter": "土台碎片 > 轮回石"
+    },
     "ScoreStore": {
       "ScoreStoreExchange": true,
       "ScoreStoreChestPurchaseTimes": 1,

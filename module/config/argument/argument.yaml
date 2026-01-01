@@ -476,7 +476,8 @@ OrganizationStore:
 SurvivalStore:
   SurvivalStoreExchange:
     type: checkbox
-    value: true
+    value: False
+    display: hide
   SurvivalStoreExchangeFilter:
     type: select
     value: preset

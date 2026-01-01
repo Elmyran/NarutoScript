@@ -134,7 +134,7 @@ class GeneratedConfig:
     OrganizationStore_CustomMeritExchangeFilter = '组织饰品礼盒 > 铜币 > 轮回石 > 忍玉'
 
     # Group `SurvivalStore`
-    SurvivalStore_SurvivalStoreExchange = True
+    SurvivalStore_SurvivalStoreExchange = False
     SurvivalStore_SurvivalStoreExchangeFilter = 'preset'  # preset, custom
     SurvivalStore_CustomSurvivalStoreFilter = '土台碎片 > 轮回石'
 

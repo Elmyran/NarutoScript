@@ -65,6 +65,7 @@ Daily:
       - Scheduler
       - PrivilegeStore
       - OrganizationStore
+      - SurvivalStore
       - ScoreStore
       - ActivityProgressStorage
     BattleOrder:
