@@ -787,6 +787,25 @@
         "value": "组织饰品礼盒 > 铜币 > 轮回石 > 忍玉"
       }
     },
+    "SurvivalStore": {
+      "SurvivalStoreExchange": {
+        "type": "checkbox",
+        "value": false,
+        "display": "hide"
+      },
+      "SurvivalStoreExchangeFilter": {
+        "type": "select",
+        "value": "preset",
+        "option": [
+          "preset",
+          "custom"
+        ]
+      },
+      "CustomSurvivalStoreFilter": {
+        "type": "textarea",
+        "value": "土台碎片 > 轮回石"
+      }
+    },
     "ScoreStore": {
       "ScoreStoreExchange": {
         "type": "checkbox",
