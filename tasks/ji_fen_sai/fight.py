@@ -64,6 +64,7 @@ class JiFenSaiFight(TaskUI):
             if self.appear(ENEMY_REFRESH_SUCCESS):
                 break
             if self.appear_then_click(ENEMY_REFRESH,interval=2):
+                self.device.click_record_remove(ENEMY_REFRESH)
                 continue
         return True
 
