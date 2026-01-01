@@ -3,13 +3,13 @@ from module.exception import GameNotRunningError
 from module.logger import logger
 from module.ocr.keyword import parse_name  
 from tasks.base.page import page_main
-from tasks.base.ui import UI
+from tasks.base.taskui import TaskUI
 from tasks.login.assets.assets_login import *
 from module.ocr.ocr import Ocr
 from tasks.login.popup import GameInPopup
 
 
-class Login(UI,GameInPopup):
+class Login(TaskUI,GameInPopup):
     def _handle_app_login(self):
         """
         Pages:

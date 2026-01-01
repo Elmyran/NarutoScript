@@ -11,5 +11,6 @@ class JiFenSaiOcr(Ocr):
 class JiFenSaiDigitCounter(DigitCounter):
     def after_process(self, result):
         result=result.replace('1V/','11/')
+        result=result.replace('V','1/')
         return super().after_process(result)
     
