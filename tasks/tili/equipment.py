@@ -164,7 +164,7 @@ class Equipment(TaskUI):
         logger.info(f'Switch to {self.equipment}')
         click_interval=Timer(1).start()
         for _ in self.loop():
-            if self.appear(self.equipment):
+            if self.appear(self.equipment,similarity=0.6):
                 logger.info(f'{self.equipment} confirm ')
                 break
             if click_interval.reached():
