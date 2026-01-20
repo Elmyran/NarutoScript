@@ -7,7 +7,7 @@ export async function initAppConfigStore() {
   appStore.setTheme(config?.theme ?? 'light');
   appStore.setLanguage(config?.language ?? 'zh-CN');
   appStore.setRepository(
-    (repositoryValueMap[config?.repository] as 'global' | 'china') ?? 'global',
+    (repositoryValueMap[config?.repository] as 'global' | 'china') ?? 'china',
   );
   appStore.setWebuiUrl(config?.webuiUrl ?? '127.0.0.1:22367');
   appStore.setAlasPath(config?.alasPath ?? '');
