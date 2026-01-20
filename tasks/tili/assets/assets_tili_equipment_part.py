@@ -5,8 +5,6 @@ from module.base.button import Button, ButtonWrapper
 
 BOOK = ButtonWrapper(
     name='BOOK',
-<<<<<<< HEAD
-<<<<<<< HEAD
     share=[
         Button(
             file='./assets/share/tili/equipment/part/BOOK.png',
@@ -118,9 +116,7 @@ SHIRT = ButtonWrapper(
             button=(483, 213, 560, 278),
         ),
     ],
-=======
-=======
->>>>>>> 5acec1a56da4e6b118e27567aae47c2da48dd1a0
+
     share=Button(
         file='./assets/share/tili/equipment/part/BOOK.png',
         area=(715, 146, 764, 199),
@@ -178,8 +174,5 @@ SHIRT = ButtonWrapper(
         color=(153, 62, 55),
         button=(483, 213, 560, 278),
     ),
-<<<<<<< HEAD
->>>>>>> 5acec1a56da4e6b118e27567aae47c2da48dd1a0
-=======
->>>>>>> 5acec1a56da4e6b118e27567aae47c2da48dd1a0
+
 )
