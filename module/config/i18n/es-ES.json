@@ -289,7 +289,6 @@
     "SquadRaidFight": {
       "name": "SquadRaid.SquadRaidFight.name",
       "help": "SquadRaid.SquadRaidFight.help",
-      "SquadSupport": "SquadSupport",
       "SquadMatch": "SquadMatch"
     },
     "SquadRaidFinishedCount": {

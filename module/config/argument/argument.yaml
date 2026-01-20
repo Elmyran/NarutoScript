@@ -104,8 +104,8 @@ SquadRaid:
     value: False
   SquadRaidFight:
     type: select
-    value: SquadSupport
-    option: [SquadSupport,
+    value: SquadMatch
+    option: [
             SquadMatch
     
     ]

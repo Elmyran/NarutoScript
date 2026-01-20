@@ -46,7 +46,7 @@ class GeneratedConfig:
     # Group `SquadRaid`
     SquadRaid_SquadRaidBenefit = True
     SquadRaid_SquadQuadrupleReward = False
-    SquadRaid_SquadRaidFight = 'SquadSupport'  # SquadSupport, SquadMatch
+    SquadRaid_SquadRaidFight = 'SquadMatch'  # SquadMatch
     SquadRaid_SquadRaidFinishedCount = {}
 
     # Group `SurvivalTrail`
