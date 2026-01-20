@@ -1,0 +1,437 @@
+{
+  "TiLi": {
+    "name": "TiLi",
+    "path": "DataUpdate.ItemStorage.TiLi",
+    "i18n": "ItemStorage.TiLi.name",
+    "stored": "StoredTiLi",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 200,
+      "value": 0
+    },
+    "order": 1,
+    "color": "#FF0000"
+  },
+  "Golds": {
+    "name": "Golds",
+    "path": "DataUpdate.ItemStorage.Golds",
+    "i18n": "ItemStorage.Golds.name",
+    "stored": "StoredInt",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "value": 0
+    },
+    "order": 2,
+    "color": "#FFD700"
+  },
+  "Coins": {
+    "name": "Coins",
+    "path": "DataUpdate.ItemStorage.Coins",
+    "i18n": "ItemStorage.Coins.name",
+    "stored": "StoredInt",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "value": 0
+    },
+    "order": 3,
+    "color": "#D2B48C"
+  },
+  "Fame": {
+    "name": "Fame",
+    "path": "DataUpdate.ItemStorage.Fame",
+    "i18n": "ItemStorage.Fame.name",
+    "stored": "StoredInt",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "value": 0
+    },
+    "order": 4,
+    "color": "#32CD32"
+  },
+  "MissionAccept": {
+    "name": "MissionAccept",
+    "path": "Mission.MissionStorage.MissionAccept",
+    "i18n": "MissionStorage.MissionAccept.name",
+    "stored": "StoredMissionAccept",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "task1": "",
+      "task2": "",
+      "task3": "",
+      "task4": "",
+      "task5": "",
+      "task6": "",
+      "task7": "",
+      "task8": "",
+      "task9": "",
+      "total": 9,
+      "value": 0
+    },
+    "order": 6,
+    "color": "#ff6b6b"
+  },
+  "DuelDaily": {
+    "name": "DuelDaily",
+    "path": "Duel.DuelWeekly.DuelDaily",
+    "i18n": "DuelWeekly.DuelDaily.name",
+    "stored": "StoredDuel",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 1,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "CurrentVictoryCount": {
+    "name": "CurrentVictoryCount",
+    "path": "Duel.DuelWeekly.CurrentVictoryCount",
+    "i18n": "DuelWeekly.CurrentVictoryCount.name",
+    "stored": "StoredDuelCurrentVictory",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 0,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "ExtendedCurrentScore": {
+    "name": "ExtendedCurrentScore",
+    "path": "Duel.DuelExtended.ExtendedCurrentScore",
+    "i18n": "DuelExtended.ExtendedCurrentScore.name",
+    "stored": "StoredDuelExtendedScore",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 2100,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "SquadRaidFinishedCount": {
+    "name": "SquadRaidFinishedCount",
+    "path": "SquadRaid.SquadRaid.SquadRaidFinishedCount",
+    "i18n": "SquadRaid.SquadRaidFinishedCount.name",
+    "stored": "StoredSquadRaidFinishCount",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 1,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "TiLiPurchaseFinishCount": {
+    "name": "TiLiPurchaseFinishCount",
+    "path": "TiLi.TiLiPurchase.TiLiPurchaseFinishCount",
+    "i18n": "TiLiPurchase.TiLiPurchaseFinishCount.name",
+    "stored": "StoredTiLiPurchaseCount",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 1,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "Dungeon": {
+    "name": "Dungeon",
+    "path": "TiLi.TiLiStorage.Dungeon",
+    "i18n": "TiLiStorage.Dungeon.name",
+    "stored": "StoredDungeon",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 1,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "MiJingTicket": {
+    "name": "MiJingTicket",
+    "path": "MiJing.MiJingCount.MiJingTicket",
+    "i18n": "MiJingCount.MiJingTicket.name",
+    "stored": "StoredMiJingTicket",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 35,
+      "value": 5
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "MiJingCount": {
+    "name": "MiJingCount",
+    "path": "MiJing.MiJingStorage.MiJingCount",
+    "i18n": "MiJingStorage.MiJingCount.name",
+    "stored": "StoredMiJingCount",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 0,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "FriendGiftsFinishCount": {
+    "name": "FriendGiftsFinishCount",
+    "path": "Freebies.Freebies.FriendGiftsFinishCount",
+    "i18n": "Freebies.FriendGiftsFinishCount.name",
+    "stored": "StoredFriendGiftsFinishCount",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 1,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "DailyShareFinishCount": {
+    "name": "DailyShareFinishCount",
+    "path": "Freebies.Freebies.DailyShareFinishCount",
+    "i18n": "Freebies.DailyShareFinishCount.name",
+    "stored": "StoredDailyShareFinishCount",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 1,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "MailRewardFinishCount": {
+    "name": "MailRewardFinishCount",
+    "path": "Freebies.Freebies.MailRewardFinishCount",
+    "i18n": "Freebies.MailRewardFinishCount.name",
+    "stored": "StoredMailRewardClaimCount",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 1,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "LeaderBoardFinishCount": {
+    "name": "LeaderBoardFinishCount",
+    "path": "Freebies.Freebies.LeaderBoardFinishCount",
+    "i18n": "Freebies.LeaderBoardFinishCount.name",
+    "stored": "StoredLeaderBoardLikeCount",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 1,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "InformationClubSignInCount": {
+    "name": "InformationClubSignInCount",
+    "path": "Freebies.Freebies.InformationClubSignInCount",
+    "i18n": "Freebies.InformationClubSignInCount.name",
+    "stored": "StoredInformationClubSignInCount",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 1,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "YiLeLaMianFinishCount": {
+    "name": "YiLeLaMianFinishCount",
+    "path": "Freebies.Freebies.YiLeLaMianFinishCount",
+    "i18n": "Freebies.YiLeLaMianFinishCount.name",
+    "stored": "StoredYiLeLaMianClaimCount",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 1,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "MonthlySignInFinishCount": {
+    "name": "MonthlySignInFinishCount",
+    "path": "Freebies.Freebies.MonthlySignInFinishCount",
+    "i18n": "Freebies.MonthlySignInFinishCount.name",
+    "stored": "StoredMonthlySignInCount",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 1,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "OrganizationPrayFinishCount": {
+    "name": "OrganizationPrayFinishCount",
+    "path": "Freebies.Freebies.OrganizationPrayFinishCount",
+    "i18n": "Freebies.OrganizationPrayFinishCount.name",
+    "stored": "StoredOrganizationPrayCount",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 1,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "PrivilegPackageFinishCount": {
+    "name": "PrivilegPackageFinishCount",
+    "path": "Freebies.PrivilegeWeeklyPackage.PrivilegPackageFinishCount",
+    "i18n": "PrivilegeWeeklyPackage.PrivilegPackageFinishCount.name",
+    "stored": "StoredPrivilegeWeeklyPackageClaimCount",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 1,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "ZhaoCaiFinishCount": {
+    "name": "ZhaoCaiFinishCount",
+    "path": "Freebies.ZhaoCai.ZhaoCaiFinishCount",
+    "i18n": "ZhaoCai.ZhaoCaiFinishCount.name",
+    "stored": "StoredZhaoCaiFinishCount",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 1,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "PrivilegeStoreFinishCount": {
+    "name": "PrivilegeStoreFinishCount",
+    "path": "StorePurchase.PrivilegeStore.PrivilegeStoreFinishCount",
+    "i18n": "PrivilegeStore.PrivilegeStoreFinishCount.name",
+    "stored": "StoredPrivilegeStoreFinishCount",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 1,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "ActivityProgressToday": {
+    "name": "ActivityProgressToday",
+    "path": "StorePurchase.ActivityProgressStorage.ActivityProgressToday",
+    "i18n": "ActivityProgressStorage.ActivityProgressToday.name",
+    "stored": "StoredActivityProgressToday",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 100,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "ActivityProgressTodayCount": {
+    "name": "ActivityProgressTodayCount",
+    "path": "StorePurchase.ActivityProgressStorage.ActivityProgressTodayCount",
+    "i18n": "ActivityProgressStorage.ActivityProgressTodayCount.name",
+    "stored": "StoredActivityProgressTodayCount",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 1,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "ActivityProgressWeekly": {
+    "name": "ActivityProgressWeekly",
+    "path": "StorePurchase.ActivityProgressStorage.ActivityProgressWeekly",
+    "i18n": "ActivityProgressStorage.ActivityProgressWeekly.name",
+    "stored": "StoredActivityProgressWeekly",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 500,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "ActivityProgressWeeklyCount": {
+    "name": "ActivityProgressWeeklyCount",
+    "path": "StorePurchase.ActivityProgressStorage.ActivityProgressWeeklyCount",
+    "i18n": "ActivityProgressStorage.ActivityProgressWeeklyCount.name",
+    "stored": "StoredActivityProgressWeeklyCount",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 1,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "BattleOrderRank": {
+    "name": "BattleOrderRank",
+    "path": "BattleOrder.BattleOrderStorage.BattleOrderRank",
+    "i18n": "BattleOrderStorage.BattleOrderRank.name",
+    "stored": "StoredBattleOrderRank",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 1,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "BattleOrderActivityProgress": {
+    "name": "BattleOrderActivityProgress",
+    "path": "BattleOrder.BattleOrderStorage.BattleOrderActivityProgress",
+    "i18n": "BattleOrderStorage.BattleOrderActivityProgress.name",
+    "stored": "StoredBattleOrderActivityProgress",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 300,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "BattleOrderTaskProgress": {
+    "name": "BattleOrderTaskProgress",
+    "path": "BattleOrder.BattleOrderStorage.BattleOrderTaskProgress",
+    "i18n": "BattleOrderStorage.BattleOrderTaskProgress.name",
+    "stored": "StoredBattleOrderTaskProgress",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 3500,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "PanRenFinishCount": {
+    "name": "PanRenFinishCount",
+    "path": "PanRen.PanRen.PanRenFinishCount",
+    "i18n": "PanRen.PanRenFinishCount.name",
+    "stored": "StoredPanRenCount",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 2,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "BattleFieldFinishCount": {
+    "name": "BattleFieldFinishCount",
+    "path": "BattleField.BattleField.BattleFieldFinishCount",
+    "i18n": "BattleField.BattleFieldFinishCount.name",
+    "stored": "StoredBattleFieldCount",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 1,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#777777"
+  }
+}

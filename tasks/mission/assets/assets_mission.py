@@ -1,0 +1,390 @@
+from module.base.button import Button, ButtonWrapper
+
+# This file was auto-generated, do not modify it manually. To generate:
+# ``` python -m dev_tools.button_extract ```
+
+ACCEPTED_BUTTON = ButtonWrapper(
+    name='ACCEPTED_BUTTON',
+    cn=Button(
+        file='./assets/cn/mission/ACCEPTED_BUTTON.png',
+        area=(1123, 228, 1222, 297),
+        search=(1103, 208, 1242, 317),
+        color=(50, 21, 28),
+        button=(1123, 228, 1222, 297),
+    ),
+    en=None,
+)
+ACCPET_BUTTON = ButtonWrapper(
+    name='ACCPET_BUTTON',
+    cn=Button(
+        file='./assets/cn/mission/ACCPET_BUTTON.png',
+        area=(1124, 259, 1220, 306),
+        search=(1104, 239, 1240, 326),
+        color=(189, 121, 22),
+        button=(1124, 259, 1220, 306),
+    ),
+    en=None,
+)
+CHARACTER_FIRST = ButtonWrapper(
+    name='CHARACTER_FIRST',
+    cn=Button(
+        file='./assets/cn/mission/CHARACTER_FIRST.png',
+        area=(835, 110, 923, 194),
+        search=(815, 90, 943, 214),
+        color=(188, 159, 102),
+        button=(835, 110, 923, 194),
+    ),
+    en=None,
+)
+CHARACTER_SELECTED = ButtonWrapper(
+    name='CHARACTER_SELECTED',
+    cn=[
+        Button(
+            file='./assets/cn/mission/CHARACTER_SELECTED.png',
+            area=(266, 366, 321, 440),
+            search=(246, 346, 341, 460),
+            color=(191, 151, 52),
+            button=(266, 366, 321, 440),
+        ),
+        Button(
+            file='./assets/cn/mission/CHARACTER_SELECTED.2.png',
+            area=(273, 373, 320, 437),
+            search=(253, 353, 340, 457),
+            color=(106, 54, 82),
+            button=(273, 373, 320, 437),
+        ),
+        Button(
+            file='./assets/cn/mission/CHARACTER_SELECTED.3.png',
+            area=(260, 365, 320, 438),
+            search=(240, 345, 340, 458),
+            color=(56, 52, 59),
+            button=(260, 365, 320, 438),
+        ),
+        Button(
+            file='./assets/cn/mission/CHARACTER_SELECTED.4.png',
+            area=(262, 369, 323, 440),
+            search=(242, 349, 343, 460),
+            color=(93, 80, 18),
+            button=(262, 369, 323, 440),
+        ),
+    ],
+    en=None,
+)
+CHARACTER_SELECTED_AUTO = ButtonWrapper(
+    name='CHARACTER_SELECTED_AUTO',
+    cn=Button(
+        file='./assets/cn/mission/CHARACTER_SELECTED_AUTO.png',
+        area=(884, 562, 1005, 596),
+        search=(864, 542, 1025, 616),
+        color=(101, 72, 10),
+        button=(884, 562, 1005, 596),
+    ),
+    en=None,
+)
+CHARACTER_SELECTED_MANUAL = ButtonWrapper(
+    name='CHARACTER_SELECTED_MANUAL',
+    cn=Button(
+        file='./assets/cn/mission/CHARACTER_SELECTED_MANUAL.png',
+        area=(827, 545, 954, 593),
+        search=(807, 525, 974, 613),
+        color=(42, 23, 7),
+        button=(827, 545, 954, 593),
+    ),
+    en=None,
+)
+CHARACTER_UNSELECTED = ButtonWrapper(
+    name='CHARACTER_UNSELECTED',
+    cn=[
+        Button(
+            file='./assets/cn/mission/CHARACTER_UNSELECTED.png',
+            area=(307, 207, 539, 629),
+            search=(287, 187, 559, 649),
+            color=(141, 100, 29),
+            button=(307, 207, 539, 629),
+        ),
+        Button(
+            file='./assets/cn/mission/CHARACTER_UNSELECTED.2.png',
+            area=(152, 208, 379, 570),
+            search=(132, 188, 399, 590),
+            color=(133, 90, 26),
+            button=(152, 208, 379, 570),
+        ),
+        Button(
+            file='./assets/cn/mission/CHARACTER_UNSELECTED.3.png',
+            area=(476, 212, 695, 570),
+            search=(456, 192, 715, 590),
+            color=(148, 113, 36),
+            button=(476, 212, 695, 570),
+        ),
+    ],
+    en=None,
+)
+MISSION_CHARACTER_GRID = ButtonWrapper(
+    name='MISSION_CHARACTER_GRID',
+    cn=Button(
+        file='./assets/cn/mission/MISSION_CHARACTER_GRID.png',
+        area=(821, 95, 1239, 510),
+        search=(801, 75, 1259, 530),
+        color=(122, 100, 66),
+        button=(821, 95, 1239, 510),
+    ),
+    en=None,
+)
+MISSION_CHECK = ButtonWrapper(
+    name='MISSION_CHECK',
+    cn=Button(
+        file='./assets/cn/mission/MISSION_CHECK.png',
+        area=(189, 141, 401, 378),
+        search=(169, 121, 421, 398),
+        color=(139, 141, 132),
+        button=(189, 141, 401, 378),
+    ),
+    en=None,
+)
+MISSION_JADE = ButtonWrapper(
+    name='MISSION_JADE',
+    cn=[
+        Button(
+            file='./assets/cn/mission/MISSION_JADE.png',
+            area=(765, 340, 820, 411),
+            search=(745, 320, 840, 431),
+            color=(51, 121, 83),
+            button=(765, 340, 820, 411),
+        ),
+        Button(
+            file='./assets/cn/mission/MISSION_JADE.2.png',
+            area=(763, 219, 819, 299),
+            search=(743, 199, 839, 319),
+            color=(74, 135, 103),
+            button=(763, 219, 819, 299),
+        ),
+    ],
+    en=None,
+)
+MISSION_REWARD = ButtonWrapper(
+    name='MISSION_REWARD',
+    cn=[
+        Button(
+            file='./assets/cn/mission/MISSION_REWARD.png',
+            area=(485, 135, 784, 207),
+            search=(465, 115, 804, 227),
+            color=(141, 66, 17),
+            button=(207, 149, 377, 311),
+        ),
+        Button(
+            file='./assets/cn/mission/MISSION_REWARD.2.png',
+            area=(478, 130, 799, 214),
+            search=(458, 110, 819, 234),
+            color=(126, 59, 17),
+            button=(207, 149, 377, 311),
+        ),
+    ],
+    en=None,
+)
+MISSION_REWARD_CLAIM_ALL = ButtonWrapper(
+    name='MISSION_REWARD_CLAIM_ALL',
+    cn=Button(
+        file='./assets/cn/mission/MISSION_REWARD_CLAIM_ALL.png',
+        area=(419, 413, 621, 486),
+        search=(399, 393, 641, 506),
+        color=(213, 143, 14),
+        button=(419, 413, 621, 486),
+    ),
+    en=None,
+)
+MISSION_SELECTED_SUCCESS = ButtonWrapper(
+    name='MISSION_SELECTED_SUCCESS',
+    cn=Button(
+        file='./assets/cn/mission/MISSION_SELECTED_SUCCESS.png',
+        area=(745, 347, 1016, 437),
+        search=(725, 327, 1036, 457),
+        color=(102, 81, 104),
+        button=(745, 347, 1016, 437),
+    ),
+    en=None,
+)
+MISSION_TASK_CLAIMED_LIST = ButtonWrapper(
+    name='MISSION_TASK_CLAIMED_LIST',
+    cn=Button(
+        file='./assets/cn/mission/MISSION_TASK_CLAIMED_LIST.png',
+        area=(552, 127, 1007, 198),
+        search=(532, 107, 1027, 218),
+        color=(74, 73, 65),
+        button=(552, 127, 1007, 198),
+    ),
+    en=None,
+)
+REWARD_CLAIM_DONE = ButtonWrapper(
+    name='REWARD_CLAIM_DONE',
+    cn=Button(
+        file='./assets/cn/mission/REWARD_CLAIM_DONE.png',
+        area=(578, 141, 727, 183),
+        search=(558, 121, 747, 203),
+        color=(76, 68, 76),
+        button=(578, 141, 727, 183),
+    ),
+    en=None,
+)
+TASK_1_AREA = ButtonWrapper(
+    name='TASK_1_AREA',
+    cn=Button(
+        file='./assets/cn/mission/TASK_1_AREA.png',
+        area=(530, 201, 1239, 325),
+        search=(510, 181, 1259, 345),
+        color=(77, 65, 66),
+        button=(530, 201, 1239, 325),
+    ),
+    en=None,
+)
+TASK_2_AREA = ButtonWrapper(
+    name='TASK_2_AREA',
+    cn=Button(
+        file='./assets/cn/mission/TASK_2_AREA.png',
+        area=(527, 318, 1242, 435),
+        search=(507, 298, 1262, 455),
+        color=(87, 57, 64),
+        button=(527, 318, 1242, 435),
+    ),
+    en=None,
+)
+TASK_3_AREA = ButtonWrapper(
+    name='TASK_3_AREA',
+    cn=Button(
+        file='./assets/cn/mission/TASK_3_AREA.png',
+        area=(525, 426, 1239, 550),
+        search=(505, 406, 1259, 570),
+        color=(77, 65, 65),
+        button=(525, 426, 1239, 550),
+    ),
+    en=None,
+)
+TASK_ACCEPT = ButtonWrapper(
+    name='TASK_ACCEPT',
+    cn=Button(
+        file='./assets/cn/mission/TASK_ACCEPT.png',
+        area=(1104, 566, 1245, 714),
+        search=(1084, 546, 1265, 720),
+        color=(151, 119, 69),
+        button=(1104, 566, 1245, 714),
+    ),
+    en=None,
+)
+TASK_ACCPET_BUTTON_AREA = ButtonWrapper(
+    name='TASK_ACCPET_BUTTON_AREA',
+    share=Button(
+        file='./assets/share/mission/TASK_ACCPET_BUTTON_AREA.png',
+        area=(1101, 208, 1238, 546),
+        search=(1081, 188, 1258, 566),
+        color=(102, 69, 49),
+        button=(1101, 208, 1238, 546),
+    ),
+)
+TASK_AREA = ButtonWrapper(
+    name='TASK_AREA',
+    share=Button(
+        file='./assets/share/mission/TASK_AREA.png',
+        area=(518, 199, 594, 549),
+        search=(498, 179, 614, 569),
+        color=(64, 48, 52),
+        button=(518, 199, 594, 549),
+    ),
+)
+TASK_BAR_IS_EMPTY = ButtonWrapper(
+    name='TASK_BAR_IS_EMPTY',
+    cn=Button(
+        file='./assets/cn/mission/TASK_BAR_IS_EMPTY.png',
+        area=(561, 140, 914, 186),
+        search=(541, 120, 934, 206),
+        color=(74, 67, 75),
+        button=(561, 140, 914, 186),
+    ),
+    en=None,
+)
+TASK_BOX_BLUE = ButtonWrapper(
+    name='TASK_BOX_BLUE',
+    cn=Button(
+        file='./assets/cn/mission/TASK_BOX_BLUE.png',
+        area=(925, 338, 1000, 413),
+        search=(905, 318, 1020, 433),
+        color=(92, 82, 71),
+        button=(925, 338, 1000, 413),
+    ),
+    en=None,
+)
+TASK_BOX_GREEN = ButtonWrapper(
+    name='TASK_BOX_GREEN',
+    cn=Button(
+        file='./assets/cn/mission/TASK_BOX_GREEN.png',
+        area=(927, 224, 1000, 302),
+        search=(907, 204, 1020, 322),
+        color=(84, 97, 49),
+        button=(927, 224, 1000, 302),
+    ),
+    en=None,
+)
+TASK_BOX_RED = ButtonWrapper(
+    name='TASK_BOX_RED',
+    cn=Button(
+        file='./assets/cn/mission/TASK_BOX_RED.png',
+        area=(926, 449, 1002, 526),
+        search=(906, 429, 1022, 546),
+        color=(118, 53, 69),
+        button=(926, 449, 1002, 526),
+    ),
+    en=None,
+)
+TASK_REFRESH_FREE = ButtonWrapper(
+    name='TASK_REFRESH_FREE',
+    cn=Button(
+        file='./assets/cn/mission/TASK_REFRESH_FREE.png',
+        area=(1093, 630, 1250, 681),
+        search=(1073, 610, 1270, 701),
+        color=(208, 152, 41),
+        button=(1093, 630, 1250, 681),
+    ),
+    en=None,
+)
+TASK_REFRESH_REMAIN_TIMES = ButtonWrapper(
+    name='TASK_REFRESH_REMAIN_TIMES',
+    cn=Button(
+        file='./assets/cn/mission/TASK_REFRESH_REMAIN_TIMES.png',
+        area=(846, 605, 1078, 649),
+        search=(826, 585, 1098, 669),
+        color=(63, 59, 51),
+        button=(846, 605, 1078, 649),
+    ),
+    en=None,
+)
+TASK_REFRESH_TIMES_SHORTAGE = ButtonWrapper(
+    name='TASK_REFRESH_TIMES_SHORTAGE',
+    cn=Button(
+        file='./assets/cn/mission/TASK_REFRESH_TIMES_SHORTAGE.png',
+        area=(1092, 625, 1248, 680),
+        search=(1072, 605, 1268, 700),
+        color=(197, 135, 31),
+        button=(1092, 625, 1248, 680),
+    ),
+    en=None,
+)
+TASK_SELECT_REAMIN_TIMES = ButtonWrapper(
+    name='TASK_SELECT_REAMIN_TIMES',
+    cn=Button(
+        file='./assets/cn/mission/TASK_SELECT_REAMIN_TIMES.png',
+        area=(870, 641, 1085, 680),
+        search=(850, 621, 1105, 700),
+        color=(59, 60, 49),
+        button=(870, 641, 1085, 680),
+    ),
+    en=None,
+)
+THE_TASKBAR_IS_FULL = ButtonWrapper(
+    name='THE_TASKBAR_IS_FULL',
+    cn=Button(
+        file='./assets/cn/mission/THE_TASKBAR_IS_FULL.png',
+        area=(271, 336, 1001, 386),
+        search=(251, 316, 1021, 406),
+        color=(79, 76, 70),
+        button=(271, 336, 1001, 386),
+    ),
+    en=None,
+)

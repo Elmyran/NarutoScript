@@ -1,0 +1,160 @@
+
+import numpy as np
+import cv2
+import os
+from module.base.utils import image_size
+from module.logger import logger
+from module.base.timer import Timer
+from module.ocr.yolomodel import YOLO_MODEL
+from tasks.ren_zhe_tiao_zhan.joystick import GameControl,JoystickContact
+from tasks.ren_zhe_tiao_zhan.assets.assets_ren_zhe_tiao_zhan import MI_JING_REWARD_CLAIM, MI_JING_REWARD_CLIAM_AREA, MI_JING_SUCCESS, MI_JING_REWARD_EXIT, \
+    MI_JING_REWARD_AREA, MI_JING_FAIL, MI_JING_ROOM_CHECK
+
+os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
+
+CLASS_NAMES = {
+    0: 'self',
+    1: 'enemy',
+}
+MODEL_PATH_CONFIG = r"tasks/ren_zhe_tiao_zhan/best.onnx"
+class AutoBattle(GameControl):
+    def __init__(self, config, device = None, task=None):
+        super().__init__(config, device, task)
+        self.PATHFINDING_PATTERN = [("RIGHT", 5.0), ("STOP", 0.5), ("LEFT", 5.0), ("STOP", 0.5)]
+        self.DIRECTION_ANGLES = {"RIGHT": 90, "UP": 0, "LEFT": -90, "DOWN": 180, "STOP": 0}
+        self.ATTACK_SWEET_SPOT_Y = (-100, 100)
+        self.ATTACK_SWEET_SPOT_X = (-300, 300)
+        self.FACING_BLIND_SPOT_X = (-50, 50)
+        self.TARGET_LOST_BUFFER_DURATION = 2.0
+        self.model = YOLO_MODEL.get_model(MODEL_PATH_CONFIG,classes=CLASS_NAMES)
+        logger.info("--- YOLO model loaded. ---")
+        self.joystick = JoystickContact(self)
+        logger.info("--- Joystick initialized. ---")
+    def _distance(self, p1, p2):
+        return np.sqrt((p1[0] - p2[0]) ** 2 + (p1[1] - p2[1]) ** 2)
+    def run(self):
+        attack_range = 300
+        current_state = 'SEARCHING'
+        pathfinding_step = 0
+        pathfinding_timer = Timer(0)
+        target_lost_timer = Timer(self.TARGET_LOST_BUFFER_DURATION)
+        miss_count = 0
+        MISS_THRESHOLD = 5
+        skip_first_screenshot = True
+        while True:
+            if skip_first_screenshot:
+                skip_first_screenshot = False
+                continue
+            else:
+                self.device.screenshot()
+            self.device.click_record_clear()
+            self.device.stuck_record_clear()
+            img_raw = self.device.image
+            if img_raw is None:
+                continue
+            width, height = image_size(img_raw)
+            if width != 1280 or height != 720:
+                img_raw = cv2.resize(img_raw, (1280, 720), interpolation=cv2.INTER_AREA)
+            self.device.image = img_raw
+
+            MI_JING_REWARD_EXIT.load_search(MI_JING_REWARD_AREA.area)
+            MI_JING_REWARD_CLAIM.load_search(MI_JING_REWARD_CLIAM_AREA.area)
+            if  self.appear(MI_JING_REWARD_EXIT) or self.appear(MI_JING_REWARD_CLAIM):
+                logger.info("--- Battle finished (MI_JING_REWARD_CLAIM or MI_JING_REWARD_EXIT  detected). ---")
+                self.config.stored.MiJingCount.add(1)
+                self.joystick.up()
+                break
+            if self.appear(MI_JING_ROOM_CHECK):
+                break
+            MI_JING_SUCCESS.load_search(MI_JING_REWARD_AREA.area)
+            if self.appear(MI_JING_FAIL) or self.appear(MI_JING_SUCCESS):
+                logger.info("--- Battle finished (MI_JING_FAIL or MI_JING_SUCCESS detected). ---")
+                self.joystick.up()
+                break
+
+            
+            results = self.model.predict(self.device.image, conf=0.5)
+            self_boxes, enemy_boxes = [], []
+            for r in results:
+                # r 是 YoloResult
+                x, y, w, h = r.box
+                c = (x + w/2, y + h/2)  # 中心点坐标
+
+                if r.class_id == 0:  # self
+                    self_boxes.append({'center': c})
+                else:  # enemy
+                    enemy_boxes.append({'center': c})
+            if self_boxes and enemy_boxes:
+                miss_count = 0
+                if current_state != 'COMBAT':
+                    logger.info(f"State: {current_state} -> COMBAT. Target acquired.")
+                    current_state = 'COMBAT'
+                h, w = self.device.image.shape[:2]
+                screen_center = (w / 2, h / 2)
+                s_char = min(self_boxes, key=lambda s: self._distance(s['center'], screen_center))
+                self_center = s_char['center']
+                target_enemy = min(enemy_boxes, key=lambda e: self._distance(self_center, e['center']))
+                enemy_center = target_enemy['center']
+                dist = self._distance(self_center, enemy_center)
+                dx, dy = enemy_center[0] - self_center[0], enemy_center[1] - self_center[1]
+                if dist > attack_range:
+                    angle = np.degrees(np.arctan2(dx, -dy))
+                    self.move_to_direction(angle,0.3)
+                else:
+                    is_in_sweet_spot_x = self.ATTACK_SWEET_SPOT_X[0] < dx < self.ATTACK_SWEET_SPOT_X[1]
+                    is_in_sweet_spot_y = self.ATTACK_SWEET_SPOT_Y[0] < dy < self.ATTACK_SWEET_SPOT_Y[1]
+                    is_in_blind_spot = self.FACING_BLIND_SPOT_X[0] < dx < self.FACING_BLIND_SPOT_X[1]
+                    if is_in_blind_spot and is_in_sweet_spot_y:
+                        self.joystick.up()
+                        if self.execute_skill('SKILL2'):
+                            pass
+                        elif self.execute_skill('SKILL1'):
+                            pass
+                        else:
+                            self.execute_skill('ATTACK')
+                    elif not is_in_sweet_spot_y:
+                        angle = 180 if dy > 0 else 0
+                        self.move_to_direction(angle,0.3)
+                    elif is_in_sweet_spot_x and not is_in_blind_spot:
+                        if np.random.rand() < 0.7:
+                            self.joystick.up()
+                            if self.execute_skill('SKILL2'):
+                                pass
+                            elif self.execute_skill('SKILL1'):
+                                pass
+                            else:
+                                self.execute_skill('ATTACK')
+                        else:
+                            angle = 90 if dx > 0 else -90
+                            self.move_to_direction(angle,0.3)
+                    else:
+                        angle = 90 if dx > 0 else -90
+                        self.move_to_direction(angle,0.3)
+            else:
+                miss_count += 1
+                if current_state == 'COMBAT' and miss_count >= MISS_THRESHOLD:
+                    logger.info("State: COMBAT -> HOLDING. Target lost, waiting before search.")
+                    current_state = 'HOLDING'
+                    target_lost_timer.reset()
+                    self.joystick.up()
+                elif current_state == 'HOLDING':
+                    if target_lost_timer.reached():
+                        logger.info("State: HOLDING -> PATHFINDING. Buffer ended, starting search pattern.")
+                        current_state = 'PATHFINDING'
+                        pathfinding_step = 0
+                        _, duration = self.PATHFINDING_PATTERN[pathfinding_step]
+                        pathfinding_timer = Timer(duration)
+                        pathfinding_timer.reset()
+                elif current_state == 'PATHFINDING':
+                    if pathfinding_timer.reached():
+                        pathfinding_step = (pathfinding_step + 1) % len(self.PATHFINDING_PATTERN)
+                        direction, duration = self.PATHFINDING_PATTERN[pathfinding_step]
+                        pathfinding_timer = Timer(duration)
+                        pathfinding_timer.reset()
+                        logger.info(f"Pathfinding: switching to step {pathfinding_step + 1} ({direction}).")
+                    direction, _ = self.PATHFINDING_PATTERN[pathfinding_step]
+                    if direction == "STOP":
+                        self.joystick.up()
+                    else:
+                        angle = self.DIRECTION_ANGLES.get(direction, 0)
+                        self.move_to_direction(angle,0.3)

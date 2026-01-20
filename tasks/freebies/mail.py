@@ -1,0 +1,64 @@
+from module.base.timer import Timer
+from module.logger import logger
+from tasks.base.assets.assets_base_page import MAIN_GOTO_CHARACTER
+from tasks.base.page import page_mail
+from tasks.base.ui import UI
+from tasks.freebies.assets.assets_freebies_mail import *
+
+
+class MailReward(UI):
+
+    def handle_mail_reward(self):
+        """
+        Claim mails and exit
+
+        Returns:
+            bool: If claimed
+
+        Pages:
+            in: page_menu
+            out: page_menu
+        """
+        if self.config.stored.MailRewardFinishCount.is_expired():
+            self.config.stored.MailRewardFinishCount.clear()
+        if self.config.stored.MailRewardFinishCount.is_full():
+            return True
+        self.device.click_record_clear()
+        self.ui_ensure(page_mail)
+        self._mail_claim()
+        self.back_to_main()
+        self.config.stored.MailRewardFinishCount.add()
+
+    def _mail_claim(self):
+        """
+        Pages:
+            in: CLAIM_ALL
+            out: CLAIM_ALL_DONE
+        """
+        logger.info('Mail claim all')
+        time=Timer(4,count=8).start()
+        for _ in self.loop():
+            if time.reached():
+                break
+            if self.appear(CLAIM_ALL_DONE):
+                break
+            if self.appear_then_click(CLAIM_ALL,interval=1):
+                continue
+    def back_to_main(self):
+        for _ in self.loop():
+            if self.match_template_color(MAIN_GOTO_CHARACTER):
+                break
+            if self.appear_then_click(MAIL_EXIT,interval=1):
+                continue
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,46 @@
+from logging import setLogRecordFactory
+
+from module.exception import GameStuckError
+from tasks.base.page import page_main, page_friend_panel
+from tasks.base.ui import UI
+from tasks.freebies.assets.assets_freebies_friendgifts import MAIN_GOTO_FRIEND_PANEL, GIFTS_GIVE, GIFTS_CLAIM, \
+    GIFTS_CLAIM_CHECK, GIFTS_CLAIM_CONFIRM, FRIEND_PANEL_RED_DOT, GIVE_DONE, FRIEND_PANEL_GOTO_MAIN
+from module.base.timer import Timer
+from module.logger.logger import logger
+
+class FriendGifts(UI):
+    def handle_friend_gifts(self):
+        if self.config.stored.FriendGiftsFinishCount.is_expired():
+            self.config.stored.FriendGiftsFinishCount.clear()
+        if self.config.stored.FriendGiftsFinishCount.is_full():
+            return True
+        self.device.click_record_clear()
+        self.ui_ensure(page_friend_panel)
+        self._friend_gifts_give()
+        self._friend_gifts_claim()
+        self.ui_goto_main()
+        self.config.stored.FriendGiftsFinishCount.add()
+    def _friend_gifts_give(self):
+       time=Timer(8,count=10).start()
+       for _ in self.loop():
+        if time.reached():
+            raise GameStuckError("friend gifts give failed")
+        if self.appear(GIVE_DONE):
+            break
+        if self.appear_then_click(GIFTS_GIVE,interval=1):
+            continue
+    def _friend_gifts_claim(self):
+        time=Timer(8,count=10).start()
+        for _ in self.loop():
+            if time.reached():
+                raise GameStuckError("friend gifts claim failed")
+            if self.appear(GIFTS_CLAIM_CHECK):
+                return True
+            if self.appear_then_click(GIFTS_CLAIM_CONFIRM,interval=1):
+                continue
+            if self.appear_then_click(GIFTS_CLAIM,interval=1):
+                continue
+                
+
+
+

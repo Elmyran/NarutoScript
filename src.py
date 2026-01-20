@@ -1,0 +1,108 @@
+from module.alas import AzurLaneAutoScript
+from module.logger import logger
+
+
+
+class StarRailCopilot(AzurLaneAutoScript):
+    def restart(self):
+        from tasks.login.login import Login
+        Login(self.config, device=self.device).app_restart()
+
+    def start(self):
+        from tasks.login.login import Login
+        Login(self.config, device=self.device).app_start()
+
+    def stop(self):
+        from tasks.login.login import Login
+        Login(self.config, device=self.device).app_stop()
+
+    def goto_main(self):
+        from tasks.login.login import Login
+        from tasks.base.ui import UI
+        if self.device.app_is_running():
+            logger.info('App is already running, goto main page')
+            UI(self.config, device=self.device).ui_goto_main()
+        else:
+            logger.info('App is not running, start app and goto main page')
+            Login(self.config, device=self.device).app_start()
+            UI(self.config, device=self.device).ui_goto_main()
+
+    def error_postprocess(self):
+        # Exit cloud game to reduce extra fee
+        if self.config.is_cloud_game:
+            from tasks.login.login import Login
+            Login(self.config, device=self.device).app_stop()
+
+
+    def data_update(self):
+        from tasks.data_update.data_update import DataUpdate
+        DataUpdate(config=self.config, device=self.device).run()
+
+    def freebies(self):
+        from tasks.freebies.freebies import Freebies
+        Freebies(config=self.config, device=self.device).run()
+
+    def organization(self):
+        from tasks.organization.organization import Organization
+        Organization(config=self.config, device=self.device).run()
+   
+    def squad_raid(self):
+        from tasks.squadraid.squadraid import SquadRaid
+        SquadRaid(config=self.config, device=self.device).run()
+   
+    def feng_rao(self):
+        from tasks.fengrao.fengrao import FengRao
+        FengRao(config=self.config, device=self.device).run()
+    def mission(self):
+        from tasks.mission.mission import Mission
+        Mission(config=self.config,device=self.device).run()
+    def survival_trail(self):
+        from tasks.trail.survival import Survival
+        Survival(config=self.config, device=self.device).run()
+    def cultivation_road(self):
+        from tasks.trail.cultivation import CultivationRoad
+        CultivationRoad(config=self.config, device=self.device).run()
+    def ti_li(self):
+        from tasks.tili.tili import TiLi
+        TiLi(config=self.config, device=self.device).run()
+    def akatsuki(self):
+        from tasks.organization.akatsuki import Akatsuki
+        Akatsuki(config=self.config, device=self.device).run()
+    def duel(self):
+        from tasks.duel.duel import Duel
+        Duel(config=self.config, device=self.device).run()
+    def recruit(self):
+        from tasks.recruit.recruit import Recruit
+        Recruit(config=self.config, device=self.device).run()
+    def battle_order(self):
+        from tasks.battle_order.battle_order import BattleOrder
+        BattleOrder(config=self.config, device=self.device).run()
+    def ding_ci_kao_rou(self):
+        from tasks.activity.ding_ci_kao_rou.ding_ci_kao_rou import DingCiKaoRou
+        DingCiKaoRou(config=self.config, device=self.device).handle_ding_ci_kao_rou()
+    def mi_jing(self):
+        from tasks.ren_zhe_tiao_zhan.ren_zhe_tiao_zhan import RenZheTiaoZhan
+        RenZheTiaoZhan(config=self.config, device=self.device).run()
+    def pan_ren(self):
+        from tasks.organization.pan_ren import OrganizationPanRen
+        OrganizationPanRen(config=self.config, device=self.device).run()
+    def ji_fen_sai(self):
+        from tasks.ji_fen_sai.ji_fen_sai import JiFenSai
+        JiFenSai(config=self.config, device=self.device).run()
+    def fortress(self):
+        from tasks.organization.fortress.fortress import Fortress
+        Fortress(config=self.config, device=self.device).run()
+    def qiu_ri_ji(self):
+        from tasks.activity.qiu_ri_ji.qiu_ri_ji import QiuRiJi
+        QiuRiJi(config=self.config, device=self.device).run()
+    def battle_field(self):
+        from  tasks.organization.battlefield.battlefield import BattleField
+        BattleField(config=self.config,device=self.device).run()
+    def store_purchase(self):
+        from tasks.store_purchase.store_purchase import StorePurchase
+        StorePurchase(config=self.config, device=self.device).run()
+
+
+if __name__ == '__main__':
+    src = StarRailCopilot('ns')
+    src.loop()

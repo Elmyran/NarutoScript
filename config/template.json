@@ -1,0 +1,344 @@
+{
+  "Alas": {
+    "Emulator": {
+      "Serial": "auto",
+      "GameClient": "android",
+      "PackageName": "auto",
+      "GameLanguage": "auto",
+      "ScreenshotMethod": "scrcpy",
+      "ControlMethod": "MaaTouch",
+      "AdbRestart": false
+    },
+    "EmulatorInfo": {
+      "Emulator": "auto",
+      "name": null,
+      "path": null
+    },
+    "Error": {
+      "Restart": "game",
+      "SaveError": true,
+      "ScreenshotLength": 1,
+      "OnePushConfig": "provider: null"
+    },
+    "Optimization": {
+      "ScreenshotInterval": 0.2,
+      "CombatScreenshotInterval": 1.0,
+      "WhenTaskQueueEmpty": "goto_main"
+    }
+  },
+  "Restart": {
+    "Scheduler": {
+      "Enable": true,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "Restart",
+      "ServerUpdate": "05:00"
+    },
+    "Password": {
+      "SecondPassword": null
+    }
+  },
+  "Duel": {
+    "Scheduler": {
+      "Enable": false,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "Duel",
+      "ServerUpdate": "05:00"
+    },
+    "DuelWeekly": {
+      "DuelWeeklyStatus": true,
+      "DuelDaily": {},
+      "CurrentVictoryCount": {},
+      "TargetVictoryNumber": 10
+    },
+    "DuelExtended": {
+      "DuelExtendedStatus": true,
+      "DuelExtendedType": "NoRestrictedBattle",
+      "ExtendedCurrentScore": {}
+    }
+  },
+  "FengRao": {
+    "Scheduler": {
+      "Enable": false,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "FengRao",
+      "ServerUpdate": "05:00"
+    }
+  },
+  "SquadRaid": {
+    "Scheduler": {
+      "Enable": false,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "SquadRaid",
+      "ServerUpdate": "05:00"
+    },
+    "SquadRaid": {
+      "SquadRaidBenefit": true,
+      "SquadQuadrupleReward": false,
+      "SquadRaidFight": "SquadMatch",
+      "SquadRaidFinishedCount": {}
+    }
+  },
+  "SurvivalTrail": {
+    "Scheduler": {
+      "Enable": false,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "SurvivalTrail",
+      "ServerUpdate": "05:00"
+    },
+    "SurvivalTrail": {
+      "SurvivalTrialResetTimes": 0
+    }
+  },
+  "TiLi": {
+    "Scheduler": {
+      "Enable": false,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "TiLi",
+      "ServerUpdate": "05:00"
+    },
+    "TiLiCost": {
+      "LevelRestrictions": 72,
+      "DungeonFirst": true
+    },
+    "TiLiPurchase": {
+      "TiLiPurchaseTimes": 0,
+      "TiLiPurchaseFinishCount": {}
+    },
+    "TiLiStorage": {
+      "Dungeon": {}
+    }
+  },
+  "Mission": {
+    "Scheduler": {
+      "Enable": false,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "Mission",
+      "ServerUpdate": "05:00"
+    },
+    "MissionStorage": {
+      "MissionAccept": {}
+    }
+  },
+  "Recruit": {
+    "Scheduler": {
+      "Enable": false,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "Recruit",
+      "ServerUpdate": "05:00"
+    },
+    "Recruit": {
+      "SkipNormalRecruit": false
+    }
+  },
+  "MiJing": {
+    "Scheduler": {
+      "Enable": false,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "MiJing",
+      "ServerUpdate": "05:00"
+    },
+    "MiJingCount": {
+      "MiJingFightCount": 5,
+      "MiJingTicket": {}
+    },
+    "MiJingType": {
+      "LuoYan": true,
+      "LieYan": true,
+      "ShuiLao": true,
+      "GangTi": true,
+      "LeiTing": true
+    },
+    "MiJingStorage": {
+      "MiJingCount": {}
+    }
+  },
+  "JiFenSai": {
+    "Scheduler": {
+      "Enable": false,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "JiFenSai",
+      "ServerUpdate": "05:00"
+    },
+    "JiFenSai": {
+      "JiFenSaiSkipFight": true,
+      "JiFenSaiFilter": "PowerLowerThanSelfAndScoreLower"
+    }
+  },
+  "Freebies": {
+    "Scheduler": {
+      "Enable": false,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "Freebies",
+      "ServerUpdate": "05:00"
+    },
+    "Freebies": {
+      "FriendGiftsStart": true,
+      "FriendGiftsFinishCount": {},
+      "DailyShareStart": true,
+      "DailyShareFinishCount": {},
+      "MailRewardClaim": true,
+      "MailRewardFinishCount": {},
+      "LeaderBoardclaim": true,
+      "LeaderBoardFinishCount": {},
+      "InformationClubSignIn": true,
+      "InformationClubSignInCount": {},
+      "YiLeLaMianClaim": true,
+      "YiLeLaMianFinishCount": {},
+      "MonthlySignIn": true,
+      "MonthlySignInFinishCount": {},
+      "OrganizationPray": true,
+      "OrganizationPrayFinishCount": {},
+      "ActivityReward": true
+    },
+    "PrivilegeWeeklyPackage": {
+      "PrivilegeWeeklyPackageClaim": true,
+      "PrivilegPackageFinishCount": {}
+    },
+    "ZhaoCai": {
+      "ZhaoCaiFree": true,
+      "ZhaoCaiFinishCount": {}
+    }
+  },
+  "StorePurchase": {
+    "Scheduler": {
+      "Enable": false,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "StorePurchase",
+      "ServerUpdate": "05:00"
+    },
+    "PrivilegeStore": {
+      "PrivilegeStoreFinishCount": {},
+      "DailyFreeCoins": true
+    },
+    "OrganizationStore": {
+      "MeritExchange": true,
+      "MeritExchangeFilter": "preset",
+      "CustomMeritExchangeFilter": "组织饰品礼盒 > 铜币 > 轮回石 > 忍玉"
+    },
+    "SurvivalStore": {
+      "SurvivalStoreExchange": false,
+      "SurvivalStoreExchangeFilter": "preset",
+      "CustomSurvivalStoreFilter": "土台碎片 > 轮回石"
+    },
+    "ScoreStore": {
+      "ScoreStoreExchange": true,
+      "ScoreStoreChestPurchaseTimes": 1,
+      "ScoreStoreExchangeFilter": "preset",
+      "CustomScoreStoreFilter": "高级通灵卷轴碎片 > 积分赛宝箱"
+    },
+    "ActivityProgressStorage": {
+      "ActivityProgressToday": {},
+      "ActivityProgressTodayCount": {},
+      "ActivityProgressWeekly": {},
+      "ActivityProgressWeeklyCount": {}
+    }
+  },
+  "BattleOrder": {
+    "Scheduler": {
+      "Enable": false,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "BattleOrder",
+      "ServerUpdate": "05:00"
+    },
+    "BattleOrder": {
+      "LikeAndShare": true,
+      "SCharacterFragments": "秽土长门",
+      "ACharacterFragments": "青年水门",
+      "CCharacterFragments": "左近右近",
+      "SExperienceCard": "秽土长门",
+      "AExperienceCard": "青年水门"
+    },
+    "BattleOrderStorage": {
+      "BattleOrderRank": {},
+      "BattleOrderActivityProgress": {},
+      "BattleOrderTaskProgress": {}
+    }
+  },
+  "DataUpdate": {
+    "Scheduler": {
+      "Enable": true,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "DataUpdate",
+      "ServerUpdate": "05:00"
+    },
+    "ItemStorage": {
+      "TiLi": {},
+      "Golds": {},
+      "Coins": {},
+      "Fame": {}
+    }
+  },
+  "CultivationRoad": {
+    "Scheduler": {
+      "Enable": false,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "CultivationRoad",
+      "ServerUpdate": "05:00"
+    },
+    "CultivationRoad": {
+      "ClearRedDot": true,
+      "CultivationFinish": false
+    }
+  },
+  "Akatsuki": {
+    "Scheduler": {
+      "Enable": false,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "Akatsuki",
+      "ServerUpdate": "05:00"
+    }
+  },
+  "PanRen": {
+    "Scheduler": {
+      "Enable": false,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "PanRen",
+      "ServerUpdate": "05:00"
+    },
+    "PanRen": {
+      "NoRewardJoinOrNot": false,
+      "PanRenFinishCount": {}
+    }
+  },
+  "Fortress": {
+    "Scheduler": {
+      "Enable": false,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "Fortress",
+      "ServerUpdate": "05:00"
+    },
+    "Fortress": {
+      "FortressSelect": "火之要塞",
+      "FortressTargetScore": 40
+    }
+  },
+  "BattleField": {
+    "Scheduler": {
+      "Enable": false,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "BattleField",
+      "ServerUpdate": "05:00"
+    },
+    "BattleField": {
+      "Type": "天之战场",
+      "BattleFieldFinishCount": {},
+      "BattleFieldTargetScore": 1600
+    }
+  },
+  "DingCiKaoRou": {
+    "Scheduler": {
+      "Enable": false,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "DingCiKaoRou",
+      "ServerUpdate": "05:00"
+    }
+  },
+  "QiuRiJi": {
+    "Scheduler": {
+      "Enable": false,
+      "NextRun": "2020-01-01 00:00:00",
+      "Command": "QiuRiJi",
+      "ServerUpdate": "05:00"
+    }
+  }
+}

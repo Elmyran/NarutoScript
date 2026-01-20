@@ -1,0 +1,1392 @@
+{
+  "Alas": {
+    "Emulator": {
+      "Serial": {
+        "type": "input",
+        "value": "auto",
+        "valuetype": "str"
+      },
+      "GameClient": {
+        "type": "select",
+        "value": "android",
+        "option": [
+          "android"
+        ]
+      },
+      "PackageName": {
+        "type": "select",
+        "value": "auto",
+        "option": [
+          "auto",
+          "CN-Official"
+        ]
+      },
+      "GameLanguage": {
+        "type": "select",
+        "value": "auto",
+        "option": [
+          "auto",
+          "cn"
+        ]
+      },
+      "ScreenshotMethod": {
+        "type": "select",
+        "value": "scrcpy",
+        "option": [
+          "auto",
+          "ADB",
+          "ADB_nc",
+          "uiautomator2",
+          "aScreenCap",
+          "aScreenCap_nc",
+          "DroidCast",
+          "DroidCast_raw",
+          "scrcpy",
+          "nemu_ipc",
+          "ldopengl"
+        ]
+      },
+      "ControlMethod": {
+        "type": "select",
+        "value": "MaaTouch",
+        "option": [
+          "minitouch",
+          "MaaTouch",
+          "ADB",
+          "uiautomator2"
+        ],
+        "display": "hide"
+      },
+      "AdbRestart": {
+        "type": "checkbox",
+        "value": false
+      }
+    },
+    "EmulatorInfo": {
+      "Emulator": {
+        "type": "select",
+        "value": "auto",
+        "option": [
+          "auto",
+          "NoxPlayer",
+          "NoxPlayer64",
+          "BlueStacks4",
+          "BlueStacks5",
+          "BlueStacks4HyperV",
+          "BlueStacks5HyperV",
+          "LDPlayer3",
+          "LDPlayer4",
+          "LDPlayer9",
+          "MuMuPlayer",
+          "MuMuPlayerX",
+          "MuMuPlayer12",
+          "MEmuPlayer"
+        ]
+      },
+      "name": {
+        "type": "textarea",
+        "value": null
+      },
+      "path": {
+        "type": "textarea",
+        "value": null
+      }
+    },
+    "Error": {
+      "Restart": {
+        "type": "select",
+        "value": "game",
+        "option": [
+          "game",
+          "game_emulator"
+        ]
+      },
+      "SaveError": {
+        "type": "checkbox",
+        "value": true
+      },
+      "ScreenshotLength": {
+        "type": "input",
+        "value": 1
+      },
+      "OnePushConfig": {
+        "type": "textarea",
+        "value": "provider: null",
+        "mode": "yaml"
+      }
+    },
+    "Optimization": {
+      "ScreenshotInterval": {
+        "type": "input",
+        "value": 0.2,
+        "display": "hide"
+      },
+      "CombatScreenshotInterval": {
+        "type": "input",
+        "value": 1.0,
+        "display": "hide"
+      },
+      "WhenTaskQueueEmpty": {
+        "type": "select",
+        "value": "goto_main",
+        "option": [
+          "stay_there",
+          "goto_main",
+          "close_game",
+          "close_emulator"
+        ]
+      }
+    }
+  },
+  "Restart": {
+    "Scheduler": {
+      "Enable": {
+        "type": "state",
+        "value": true,
+        "option": [
+          true
+        ],
+        "option_bold": [
+          true
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "Restart",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    },
+    "Password": {
+      "SecondPassword": {
+        "type": "input",
+        "value": "",
+        "valuetype": "str",
+        "display": "display"
+      }
+    }
+  },
+  "Duel": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "Duel",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    },
+    "DuelWeekly": {
+      "DuelWeeklyStatus": {
+        "type": "checkbox",
+        "value": true
+      },
+      "DuelDaily": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredDuel"
+      },
+      "CurrentVictoryCount": {
+        "type": "stored",
+        "value": {},
+        "display": "display",
+        "stored": "StoredDuelCurrentVictory"
+      },
+      "TargetVictoryNumber": {
+        "type": "input",
+        "value": 10
+      }
+    },
+    "DuelExtended": {
+      "DuelExtendedStatus": {
+        "type": "checkbox",
+        "value": true
+      },
+      "DuelExtendedType": {
+        "type": "select",
+        "value": "NoRestrictedBattle",
+        "option": [
+          "NoRestrictedBattle"
+        ]
+      },
+      "ExtendedCurrentScore": {
+        "type": "stored",
+        "value": {},
+        "display": "display",
+        "stored": "StoredDuelExtendedScore"
+      }
+    }
+  },
+  "FengRao": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "FengRao",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    }
+  },
+  "SquadRaid": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "SquadRaid",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    },
+    "SquadRaid": {
+      "SquadRaidBenefit": {
+        "type": "checkbox",
+        "value": true
+      },
+      "SquadQuadrupleReward": {
+        "type": "checkbox",
+        "value": false
+      },
+      "SquadRaidFight": {
+        "type": "select",
+        "value": "SquadMatch",
+        "option": [
+          "SquadMatch"
+        ]
+      },
+      "SquadRaidFinishedCount": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredSquadRaidFinishCount"
+      }
+    }
+  },
+  "SurvivalTrail": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "SurvivalTrail",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    },
+    "SurvivalTrail": {
+      "SurvivalTrialResetTimes": {
+        "type": "input",
+        "value": 0
+      }
+    }
+  },
+  "TiLi": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "TiLi",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    },
+    "TiLiCost": {
+      "LevelRestrictions": {
+        "type": "input",
+        "value": 72
+      },
+      "DungeonFirst": {
+        "type": "checkbox",
+        "value": true
+      }
+    },
+    "TiLiPurchase": {
+      "TiLiPurchaseTimes": {
+        "type": "input",
+        "value": 0
+      },
+      "TiLiPurchaseFinishCount": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredTiLiPurchaseCount"
+      }
+    },
+    "TiLiStorage": {
+      "Dungeon": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredDungeon"
+      }
+    }
+  },
+  "Mission": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "Mission",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    },
+    "MissionStorage": {
+      "MissionAccept": {
+        "type": "stored",
+        "value": {},
+        "display": "display",
+        "stored": "StoredMissionAccept",
+        "order": 6,
+        "color": "#ff6b6b"
+      }
+    }
+  },
+  "Recruit": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "Recruit",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    },
+    "Recruit": {
+      "SkipNormalRecruit": {
+        "type": "checkbox",
+        "value": false
+      }
+    }
+  },
+  "MiJing": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "MiJing",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    },
+    "MiJingCount": {
+      "MiJingFightCount": {
+        "type": "input",
+        "value": 5
+      },
+      "MiJingTicket": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredMiJingTicket"
+      }
+    },
+    "MiJingType": {
+      "LuoYan": {
+        "type": "checkbox",
+        "value": true
+      },
+      "LieYan": {
+        "type": "checkbox",
+        "value": true
+      },
+      "ShuiLao": {
+        "type": "checkbox",
+        "value": true
+      },
+      "GangTi": {
+        "type": "checkbox",
+        "value": true
+      },
+      "LeiTing": {
+        "type": "checkbox",
+        "value": true
+      }
+    },
+    "MiJingStorage": {
+      "MiJingCount": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredMiJingCount"
+      }
+    }
+  },
+  "JiFenSai": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "JiFenSai",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    },
+    "JiFenSai": {
+      "JiFenSaiSkipFight": {
+        "type": "checkbox",
+        "value": true
+      },
+      "JiFenSaiFilter": {
+        "type": "select",
+        "value": "PowerLowerThanSelfAndScoreLower",
+        "option": [
+          "PowerLowest",
+          "ScoreHighest",
+          "PowerLowerThanSelfAndScoreHigher",
+          "PowerLowerThanSelfAndScoreLower"
+        ]
+      }
+    }
+  },
+  "Freebies": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "Freebies",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    },
+    "Freebies": {
+      "FriendGiftsStart": {
+        "type": "checkbox",
+        "value": true
+      },
+      "FriendGiftsFinishCount": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredFriendGiftsFinishCount"
+      },
+      "DailyShareStart": {
+        "type": "checkbox",
+        "value": true
+      },
+      "DailyShareFinishCount": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredDailyShareFinishCount"
+      },
+      "MailRewardClaim": {
+        "type": "checkbox",
+        "value": true
+      },
+      "MailRewardFinishCount": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredMailRewardClaimCount"
+      },
+      "LeaderBoardclaim": {
+        "type": "checkbox",
+        "value": true
+      },
+      "LeaderBoardFinishCount": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredLeaderBoardLikeCount"
+      },
+      "InformationClubSignIn": {
+        "type": "checkbox",
+        "value": true
+      },
+      "InformationClubSignInCount": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredInformationClubSignInCount"
+      },
+      "YiLeLaMianClaim": {
+        "type": "checkbox",
+        "value": true
+      },
+      "YiLeLaMianFinishCount": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredYiLeLaMianClaimCount"
+      },
+      "MonthlySignIn": {
+        "type": "checkbox",
+        "value": true
+      },
+      "MonthlySignInFinishCount": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredMonthlySignInCount"
+      },
+      "OrganizationPray": {
+        "type": "checkbox",
+        "value": true
+      },
+      "OrganizationPrayFinishCount": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredOrganizationPrayCount"
+      },
+      "ActivityReward": {
+        "type": "checkbox",
+        "value": true
+      }
+    },
+    "PrivilegeWeeklyPackage": {
+      "PrivilegeWeeklyPackageClaim": {
+        "type": "checkbox",
+        "value": true
+      },
+      "PrivilegPackageFinishCount": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredPrivilegeWeeklyPackageClaimCount"
+      }
+    },
+    "ZhaoCai": {
+      "ZhaoCaiFree": {
+        "type": "checkbox",
+        "value": true
+      },
+      "ZhaoCaiFinishCount": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredZhaoCaiFinishCount"
+      }
+    }
+  },
+  "StorePurchase": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "StorePurchase",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    },
+    "PrivilegeStore": {
+      "PrivilegeStoreFinishCount": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredPrivilegeStoreFinishCount",
+        "vlaue": {}
+      },
+      "DailyFreeCoins": {
+        "type": "checkbox",
+        "value": true
+      }
+    },
+    "OrganizationStore": {
+      "MeritExchange": {
+        "type": "checkbox",
+        "value": true
+      },
+      "MeritExchangeFilter": {
+        "type": "select",
+        "value": "preset",
+        "option": [
+          "preset",
+          "custom"
+        ]
+      },
+      "CustomMeritExchangeFilter": {
+        "type": "textarea",
+        "value": "组织饰品礼盒 > 铜币 > 轮回石 > 忍玉"
+      }
+    },
+    "SurvivalStore": {
+      "SurvivalStoreExchange": {
+        "type": "checkbox",
+        "value": false,
+        "display": "hide"
+      },
+      "SurvivalStoreExchangeFilter": {
+        "type": "select",
+        "value": "preset",
+        "option": [
+          "preset",
+          "custom"
+        ]
+      },
+      "CustomSurvivalStoreFilter": {
+        "type": "textarea",
+        "value": "土台碎片 > 轮回石"
+      }
+    },
+    "ScoreStore": {
+      "ScoreStoreExchange": {
+        "type": "checkbox",
+        "value": true
+      },
+      "ScoreStoreChestPurchaseTimes": {
+        "type": "select",
+        "value": 1,
+        "option": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "ScoreStoreExchangeFilter": {
+        "type": "select",
+        "value": "preset",
+        "option": [
+          "preset",
+          "custom"
+        ]
+      },
+      "CustomScoreStoreFilter": {
+        "type": "textarea",
+        "value": "高级通灵卷轴碎片 > 积分赛宝箱"
+      }
+    },
+    "ActivityProgressStorage": {
+      "ActivityProgressToday": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredActivityProgressToday"
+      },
+      "ActivityProgressTodayCount": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredActivityProgressTodayCount"
+      },
+      "ActivityProgressWeekly": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredActivityProgressWeekly"
+      },
+      "ActivityProgressWeeklyCount": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredActivityProgressWeeklyCount"
+      }
+    }
+  },
+  "BattleOrder": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "BattleOrder",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    },
+    "BattleOrder": {
+      "LikeAndShare": {
+        "type": "checkbox",
+        "value": true
+      },
+      "SCharacterFragments": {
+        "type": "select",
+        "value": "秽土长门",
+        "option": [
+          "忍战艾",
+          "秽土解斑",
+          "永恒佐助",
+          "忍战樱",
+          "九喇嘛鸣人",
+          "死门凯",
+          "忍战带土",
+          "秽土柱间",
+          "秽土鼬",
+          "仙人兜",
+          "秽土斑",
+          "白面具",
+          "秽土扉间",
+          "百豪纲手",
+          "秽土水门",
+          "秽土日斩",
+          "秽土长门",
+          "斑",
+          "柱间",
+          "四代目雷影",
+          "扉间",
+          "神秘面具男",
+          "须佐能乎鼬",
+          "天道佩恩",
+          "水门",
+          "大蛇丸",
+          "自来也"
+        ]
+      },
+      "ACharacterFragments": {
+        "type": "select",
+        "value": "青年水门",
+        "option": [
+          "桃式显现博人",
+          "忍战宁次",
+          "博人传长十郎",
+          "青年长门",
+          "青年艾",
+          "博人传达鲁伊",
+          "青年水门",
+          "忍战奇拉比",
+          "博人传黑土",
+          "须佐佐助",
+          "秽土迪达拉",
+          "博人传木叶丸",
+          "九尾鸣人",
+          "半蛇斗篷兜",
+          "忍战我爱罗",
+          "晓大蛇丸",
+          "百豪樱",
+          "照美冥",
+          "鹰小队佐助",
+          "奇拉比",
+          "仙人鸣人",
+          "神威卡卡西",
+          "止水",
+          "小南",
+          "迪达拉",
+          "鼬",
+          "凯"
+        ]
+      },
+      "CCharacterFragments": {
+        "type": "select",
+        "value": "左近右近",
+        "option": [
+          "左近右近",
+          "火花",
+          "学员鸣人",
+          "山城青叶",
+          "鬼童丸",
+          "青",
+          "萨克镫",
+          "托斯砧"
+        ]
+      },
+      "SExperienceCard": {
+        "type": "select",
+        "value": "秽土长门",
+        "option": [
+          "忍战艾",
+          "秽土解斑",
+          "永恒佐助",
+          "忍战樱",
+          "九喇嘛鸣人",
+          "死门凯",
+          "忍战带土",
+          "秽土柱间",
+          "秽土鼬",
+          "仙人兜",
+          "秽土斑",
+          "白面具",
+          "秽土扉间",
+          "百豪纲手",
+          "秽土水门",
+          "秽土日斩",
+          "秽土长门",
+          "斑",
+          "柱间",
+          "四代目雷影",
+          "扉间",
+          "神秘面具男",
+          "须佐能乎鼬",
+          "天道佩恩",
+          "水门",
+          "大蛇丸",
+          "自来也"
+        ]
+      },
+      "AExperienceCard": {
+        "type": "select",
+        "value": "青年水门",
+        "option": [
+          "桃式显现博人",
+          "忍战宁次",
+          "博人传长十郎",
+          "青年长门",
+          "青年艾",
+          "博人传达鲁伊",
+          "青年水门",
+          "忍战奇拉比",
+          "博人传黑土",
+          "须佐佐助",
+          "秽土迪达拉",
+          "博人传木叶丸",
+          "九尾鸣人",
+          "半蛇斗篷兜",
+          "忍战我爱罗",
+          "晓大蛇丸",
+          "百豪樱",
+          "照美冥",
+          "鹰小队佐助",
+          "奇拉比",
+          "仙人鸣人",
+          "神威卡卡西",
+          "止水",
+          "小南",
+          "迪达拉",
+          "鼬",
+          "凯"
+        ]
+      }
+    },
+    "BattleOrderStorage": {
+      "BattleOrderRank": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredBattleOrderRank"
+      },
+      "BattleOrderActivityProgress": {
+        "type": "stored",
+        "value": {},
+        "display": "display",
+        "stored": "StoredBattleOrderActivityProgress"
+      },
+      "BattleOrderTaskProgress": {
+        "type": "stored",
+        "value": {},
+        "display": "display",
+        "stored": "StoredBattleOrderTaskProgress"
+      }
+    }
+  },
+  "DataUpdate": {
+    "Scheduler": {
+      "Enable": {
+        "type": "state",
+        "value": true,
+        "option": [
+          true
+        ],
+        "option_bold": [
+          true
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "DataUpdate",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    },
+    "ItemStorage": {
+      "TiLi": {
+        "type": "stored",
+        "value": {},
+        "display": "display",
+        "stored": "StoredTiLi",
+        "order": 1,
+        "color": "#FF0000"
+      },
+      "Golds": {
+        "type": "stored",
+        "value": {},
+        "display": "display",
+        "stored": "StoredInt",
+        "order": 2,
+        "color": "#FFD700"
+      },
+      "Coins": {
+        "type": "stored",
+        "value": {},
+        "display": "display",
+        "stored": "StoredInt",
+        "order": 3,
+        "color": "#D2B48C"
+      },
+      "Fame": {
+        "type": "stored",
+        "value": {},
+        "display": "display",
+        "stored": "StoredInt",
+        "order": 4,
+        "color": "#32CD32"
+      }
+    }
+  },
+  "CultivationRoad": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "CultivationRoad",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    },
+    "CultivationRoad": {
+      "ClearRedDot": {
+        "type": "checkbox",
+        "value": true
+      },
+      "CultivationFinish": {
+        "type": "checkbox",
+        "value": false
+      }
+    }
+  },
+  "Akatsuki": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "Akatsuki",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    }
+  },
+  "PanRen": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "PanRen",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    },
+    "PanRen": {
+      "NoRewardJoinOrNot": {
+        "type": "checkbox",
+        "value": false
+      },
+      "PanRenFinishCount": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredPanRenCount"
+      }
+    }
+  },
+  "Fortress": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "Fortress",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    },
+    "Fortress": {
+      "FortressSelect": {
+        "type": "select",
+        "value": "火之要塞",
+        "option": [
+          "火之要塞",
+          "水之要塞",
+          "雷之要塞",
+          "风之要塞",
+          "土之要塞",
+          "铁之要塞",
+          "田之要塞",
+          "熊之要塞",
+          "汤之要塞",
+          "涡之要塞",
+          "霜之要塞",
+          "雨之要塞",
+          "草之要塞",
+          "川之要塞",
+          "海之要塞",
+          "泷之要塞",
+          "云之要塞",
+          "鸟之要塞"
+        ]
+      },
+      "FortressTargetScore": {
+        "type": "input",
+        "value": 40
+      }
+    }
+  },
+  "BattleField": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "BattleField",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    },
+    "BattleField": {
+      "Type": {
+        "type": "select",
+        "value": "天之战场",
+        "option": [
+          "天之战场",
+          "地之战场"
+        ]
+      },
+      "BattleFieldFinishCount": {
+        "type": "stored",
+        "value": {},
+        "display": "hide",
+        "stored": "StoredBattleFieldCount"
+      },
+      "BattleFieldTargetScore": {
+        "type": "input",
+        "value": 1600
+      }
+    }
+  },
+  "DingCiKaoRou": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "DingCiKaoRou",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    }
+  },
+  "QiuRiJi": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "QiuRiJi",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    }
+  }
+}

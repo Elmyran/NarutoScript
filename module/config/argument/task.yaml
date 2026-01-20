@@ -1,0 +1,120 @@
+# --------------------
+# Define argument group of tasks.
+# --------------------
+
+# ==================== Alas ====================
+
+Alas:
+  menu: 'list'
+  page: 'setting'
+  tasks:
+    Alas:
+      - Emulator
+      - EmulatorInfo
+      - Error
+      - Optimization
+    Restart:
+      - Scheduler
+      - Password
+
+# ==================== Daily ====================
+
+Daily:
+  menu: 'collapse'
+  page: 'setting'
+  tasks:
+    Duel:
+      - Scheduler
+      - DuelWeekly
+      - DuelExtended
+    FengRao:
+      - Scheduler
+      - FengRao
+    SquadRaid:
+      - Scheduler
+      - SquadRaid
+    SurvivalTrail:
+      - Scheduler
+      - SurvivalTrail
+    TiLi:
+      - Scheduler
+      - TiLiCost
+      - TiLiPurchase
+      - TiLiStorage
+    Mission:
+      - Scheduler
+      - MissionStorage
+    Recruit:
+      - Scheduler
+      - Recruit
+    MiJing:
+      - Scheduler
+      - MiJingCount
+      - MiJingType
+      - MiJingStorage
+     
+    JiFenSai:
+      - Scheduler
+      - JiFenSai
+    Freebies:
+      - Scheduler
+      - Freebies
+      - PrivilegeWeeklyPackage
+      - ZhaoCai
+    StorePurchase:
+      - Scheduler
+      - PrivilegeStore
+      - OrganizationStore
+      - SurvivalStore
+      - ScoreStore
+      - ActivityProgressStorage
+    BattleOrder:
+      - Scheduler
+      - BattleOrder
+      - BattleOrderStorage
+    DataUpdate:
+      - Scheduler
+      - ItemStorage
+# ==================== Weekly ====================
+Weekly:
+  menu: 'collapse'
+  page: 'setting'
+  tasks:
+    CultivationRoad:
+      - Scheduler
+      - CultivationRoad
+    Akatsuki:
+      - Scheduler
+      - Akatsuki
+    PanRen:
+      - Scheduler
+      - PanRen
+    Fortress:
+      - Scheduler
+      - Fortress
+    BattleField:
+      - Scheduler
+      - BattleField
+
+
+
+
+
+
+
+# ==================== Activity ====================
+Activity:
+  menu: 'collapse'
+  page: 'setting'
+  tasks:
+    DingCiKaoRou:
+      - Scheduler
+    QiuRiJi:
+      - Scheduler
+
+
+
+# ==================== Tool ====================
+
+
+

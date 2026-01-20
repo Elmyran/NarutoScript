@@ -1,0 +1,1067 @@
+{
+  "Menu": {
+    "Alas": {
+      "name": "NS",
+      "help": ""
+    },
+    "Daily": {
+      "name": "Daily",
+      "help": ""
+    },
+    "Weekly": {
+      "name": "Menu.Weekly.name",
+      "help": "Menu.Weekly.help"
+    },
+    "Activity": {
+      "name": "Menu.Activity.name",
+      "help": "Menu.Activity.help"
+    }
+  },
+  "Task": {
+    "Alas": {
+      "name": "NS Settings",
+      "help": ""
+    },
+    "Restart": {
+      "name": "Error Handling",
+      "help": ""
+    },
+    "Duel": {
+      "name": "Task.Duel.name",
+      "help": "Task.Duel.help"
+    },
+    "FengRao": {
+      "name": "Task.FengRao.name",
+      "help": "Task.FengRao.help"
+    },
+    "SquadRaid": {
+      "name": "Task.SquadRaid.name",
+      "help": "Task.SquadRaid.help"
+    },
+    "SurvivalTrail": {
+      "name": "Task.SurvivalTrail.name",
+      "help": "Task.SurvivalTrail.help"
+    },
+    "TiLi": {
+      "name": "Task.TiLi.name",
+      "help": "Task.TiLi.help"
+    },
+    "Mission": {
+      "name": "Task.Mission.name",
+      "help": "Task.Mission.help"
+    },
+    "Recruit": {
+      "name": "Task.Recruit.name",
+      "help": "Task.Recruit.help"
+    },
+    "MiJing": {
+      "name": "Task.MiJing.name",
+      "help": "Task.MiJing.help"
+    },
+    "JiFenSai": {
+      "name": "Task.JiFenSai.name",
+      "help": "Task.JiFenSai.help"
+    },
+    "Freebies": {
+      "name": "Task.Freebies.name",
+      "help": "Task.Freebies.help"
+    },
+    "StorePurchase": {
+      "name": "Task.StorePurchase.name",
+      "help": "Task.StorePurchase.help"
+    },
+    "BattleOrder": {
+      "name": "Task.BattleOrder.name",
+      "help": "Task.BattleOrder.help"
+    },
+    "DataUpdate": {
+      "name": "Task.DataUpdate.name",
+      "help": "Task.DataUpdate.help"
+    },
+    "CultivationRoad": {
+      "name": "Task.CultivationRoad.name",
+      "help": "Task.CultivationRoad.help"
+    },
+    "Akatsuki": {
+      "name": "Task.Akatsuki.name",
+      "help": "Task.Akatsuki.help"
+    },
+    "PanRen": {
+      "name": "Task.PanRen.name",
+      "help": "Task.PanRen.help"
+    },
+    "Fortress": {
+      "name": "Task.Fortress.name",
+      "help": "Task.Fortress.help"
+    },
+    "BattleField": {
+      "name": "Task.BattleField.name",
+      "help": "Task.BattleField.help"
+    },
+    "DingCiKaoRou": {
+      "name": "Task.DingCiKaoRou.name",
+      "help": "Task.DingCiKaoRou.help"
+    },
+    "QiuRiJi": {
+      "name": "Task.QiuRiJi.name",
+      "help": "Task.QiuRiJi.help"
+    }
+  },
+  "Scheduler": {
+    "_info": {
+      "name": "Scheduler",
+      "help": ""
+    },
+    "Enable": {
+      "name": "Enable Task",
+      "help": "Join this task to scheduler.",
+      "True": "Enabled",
+      "False": "False"
+    },
+    "NextRun": {
+      "name": "Next Run",
+      "help": "Updated automatically after completing the task to set next scheduled run, typically not manually modified\nHowever you can force immediate scheduling if you clear this text field"
+    },
+    "Command": {
+      "name": "Command",
+      "help": ""
+    },
+    "ServerUpdate": {
+      "name": "Server Update",
+      "help": "Series of server refresh time(s) as to when this task will next run, this is automatically converted to respective time zone, generally do not need to modify"
+    }
+  },
+  "Emulator": {
+    "_info": {
+      "name": "Emulator Settings",
+      "help": ""
+    },
+    "Serial": {
+      "name": "Serial",
+      "help": "Common emulator Serial can be queried in the list below\nUse \"auto\" to auto-detect emulators, but if multiple emulators are running or use emulators that do not support auto-detect, \"auto\" cannot be used and serial must be filled in manually\nDefault serial for select emulators:\n- BlueStacks 127.0.0.1:5555\n- BlueStacks4 Hyper-V use \"bluestacks4-hyperv\", \"bluestacks4-hyperv-2\" for multi instance, and so on\n- BlueStacks5 Hyper-V use \"bluestacks5-hyperv\", \"bluestacks5-hyperv-1\" for multi instance, and so on\n- NoxPlayer 127.0.0.1:62001\n- NoxPlayer64bit 127.0.0.1:59865\n- MuMuPlayer/MuMuPlayer X 127.0.0.1:7555\n- MuMuPlayer12 127.0.0.1:16384\n- MemuPlayer 127.0.0.1:21503\n- LDPlayer emulator-5554 or 127.0.0.1:5555\n- WSA use \"wsa-0\" to make the game run in the background, which needs to be controlled or closed by third-party software\nIf there are multiple emulator instances running, the default is reserved for one of them and the others will use different serials to avoid conflicts\nOpen console.bat and run `adb devices` to find them or follow the emulator's official tutorial"
+    },
+    "GameClient": {
+      "name": "Game Client",
+      "help": "When using cloud, you will be automatically queued to log in. Cloud game is available in CN only",
+      "android": "Android client"
+    },
+    "PackageName": {
+      "name": "Game Server",
+      "help": "Can't distinguish different regions of oversea servers, please select the server manually.",
+      "auto": "Auto-detect",
+      "CN-Official": "[CN]-Official"
+    },
+    "GameLanguage": {
+      "name": "In-game Text Language",
+      "help": "Currently, only Simplified Chinese and English are supported. Please set the text language in game to one of them.",
+      "auto": "Auto-detect",
+      "cn": "简体中文"
+    },
+    "ScreenshotMethod": {
+      "name": "Screenshot Method",
+      "help": "When using auto-select, a benchmark will be performed and automatically changed to the fastest screenshot method.\nGeneral speed: DroidCast_raw >> aScreenCap_nc > ADB_nc >>> aScreenCap > uiautomator2 ~= ADB.\nRun Tools - Performance Test to find the fastest method.",
+      "auto": "Auto-select the fastest",
+      "ADB": "ADB ",
+      "ADB_nc": "ADB_nc",
+      "uiautomator2": "uiautomator2",
+      "aScreenCap": "aScreenCap",
+      "aScreenCap_nc": "aScreenCap_nc",
+      "DroidCast": "DroidCast",
+      "DroidCast_raw": "DroidCast_raw",
+      "scrcpy": "scrcpy",
+      "nemu_ipc": "nemu_ipc",
+      "ldopengl": "ldopengl"
+    },
+    "ControlMethod": {
+      "name": "Control Method",
+      "help": "Speed: MaaTouch = minitouch >>> uiautomator2 ~= ADB\nMaaTouch is recommended",
+      "minitouch": "minitouch",
+      "MaaTouch": "MaaTouch",
+      "ADB": "ADB",
+      "uiautomator2": "uiautomator2"
+    },
+    "AdbRestart": {
+      "name": "Try to restart adb when no device found",
+      "help": ""
+    }
+  },
+  "EmulatorInfo": {
+    "_info": {
+      "name": "Emulator Settings",
+      "help": "The following values are auto-filled according to \"Serial\", if you don’t understand, please don't modify them"
+    },
+    "Emulator": {
+      "name": "Emulator Type",
+      "help": "",
+      "auto": "Auto-detect",
+      "NoxPlayer": "Nox Player",
+      "NoxPlayer64": "Nox Player 64bit",
+      "BlueStacks4": "BlueStacks 4",
+      "BlueStacks5": "BlueStacks 5",
+      "BlueStacks4HyperV": "BlueStacks 4 Hyper-V",
+      "BlueStacks5HyperV": "BlueStacks 5 Hyper-V",
+      "LDPlayer3": "LD Player 3",
+      "LDPlayer4": "LD Player 4",
+      "LDPlayer9": "LD Player 9",
+      "MuMuPlayer": "MuMu Player",
+      "MuMuPlayerX": "MuMu Player X",
+      "MuMuPlayer12": "MuMu Player 12",
+      "MEmuPlayer": "MEmu Player"
+    },
+    "name": {
+      "name": "Emulator Instance Name",
+      "help": ""
+    },
+    "path": {
+      "name": "Emulator Installation Path",
+      "help": ""
+    }
+  },
+  "Error": {
+    "_info": {
+      "name": "Debug Settings",
+      "help": ""
+    },
+    "Restart": {
+      "name": "Restart Game on Error",
+      "help": "",
+      "game": "Restart game",
+      "game_emulator": "Restart emulator and game"
+    },
+    "SaveError": {
+      "name": "Record Exception",
+      "help": "Records exception and log into directory for review or sharing"
+    },
+    "ScreenshotLength": {
+      "name": "Record Screenshot(s)",
+      "help": "Number of screenshots saved when exception occurs"
+    },
+    "OnePushConfig": {
+      "name": "Error notify config",
+      "help": "When Alas cannot handle exception, send a message through Onepush. Configuration document: \nhttps://github.com/LmeSzinc/AzurLaneAutoScript/wiki/Onepush-configuration-%5BEN%5D"
+    }
+  },
+  "Optimization": {
+    "_info": {
+      "name": "Optimization Settings",
+      "help": ""
+    },
+    "ScreenshotInterval": {
+      "name": "Take Screenshots Every X Second(s)",
+      "help": "Minimum interval between 2 screenshots, limited in 0.1 ~ 0.3, can help reduce CPU on high-end PCs"
+    },
+    "CombatScreenshotInterval": {
+      "name": "Take Screenshots Every X Second(s) In Combat",
+      "help": "Minimum interval between 2 screenshots, limited in 0.1 ~ 1.0, can help reduce CPU during battle"
+    },
+    "WhenTaskQueueEmpty": {
+      "name": "When Task Queue is Empty",
+      "help": "Close AL when there are no pending tasks, can help reduce CPU",
+      "stay_there": "Stay There",
+      "goto_main": "Goto Main Page",
+      "close_game": "Close Game",
+      "close_emulator": "Close Emulator"
+    }
+  },
+  "Password": {
+    "_info": {
+      "name": "Password._info.name",
+      "help": "Password._info.help"
+    },
+    "SecondPassword": {
+      "name": "Password.SecondPassword.name",
+      "help": "Password.SecondPassword.help"
+    }
+  },
+  "SquadRaid": {
+    "_info": {
+      "name": "SquadRaid._info.name",
+      "help": "SquadRaid._info.help"
+    },
+    "SquadRaidBenefit": {
+      "name": "SquadRaid.SquadRaidBenefit.name",
+      "help": "SquadRaid.SquadRaidBenefit.help"
+    },
+    "SquadQuadrupleReward": {
+      "name": "SquadRaid.SquadQuadrupleReward.name",
+      "help": "SquadRaid.SquadQuadrupleReward.help"
+    },
+    "SquadRaidFight": {
+      "name": "SquadRaid.SquadRaidFight.name",
+      "help": "SquadRaid.SquadRaidFight.help",
+      "SquadMatch": "SquadMatch"
+    },
+    "SquadRaidFinishedCount": {
+      "name": "SquadRaid.SquadRaidFinishedCount.name",
+      "help": "SquadRaid.SquadRaidFinishedCount.help"
+    }
+  },
+  "SurvivalTrail": {
+    "_info": {
+      "name": "SurvivalTrail._info.name",
+      "help": "SurvivalTrail._info.help"
+    },
+    "SurvivalTrialResetTimes": {
+      "name": "SurvivalTrail.SurvivalTrialResetTimes.name",
+      "help": "SurvivalTrail.SurvivalTrialResetTimes.help"
+    }
+  },
+  "TiLiCost": {
+    "_info": {
+      "name": "TiLiCost._info.name",
+      "help": "TiLiCost._info.help"
+    },
+    "LevelRestrictions": {
+      "name": "TiLiCost.LevelRestrictions.name",
+      "help": "TiLiCost.LevelRestrictions.help"
+    },
+    "DungeonFirst": {
+      "name": "TiLiCost.DungeonFirst.name",
+      "help": "TiLiCost.DungeonFirst.help"
+    }
+  },
+  "TiLiPurchase": {
+    "_info": {
+      "name": "TiLiPurchase._info.name",
+      "help": "TiLiPurchase._info.help"
+    },
+    "TiLiPurchaseTimes": {
+      "name": "TiLiPurchase.TiLiPurchaseTimes.name",
+      "help": "TiLiPurchase.TiLiPurchaseTimes.help"
+    },
+    "TiLiPurchaseFinishCount": {
+      "name": "TiLiPurchase.TiLiPurchaseFinishCount.name",
+      "help": "TiLiPurchase.TiLiPurchaseFinishCount.help"
+    }
+  },
+  "DuelWeekly": {
+    "_info": {
+      "name": "DuelWeekly._info.name",
+      "help": "DuelWeekly._info.help"
+    },
+    "DuelWeeklyStatus": {
+      "name": "DuelWeekly.DuelWeeklyStatus.name",
+      "help": "DuelWeekly.DuelWeeklyStatus.help"
+    },
+    "DuelDaily": {
+      "name": "DuelWeekly.DuelDaily.name",
+      "help": "DuelWeekly.DuelDaily.help"
+    },
+    "CurrentVictoryCount": {
+      "name": "DuelWeekly.CurrentVictoryCount.name",
+      "help": "DuelWeekly.CurrentVictoryCount.help"
+    },
+    "TargetVictoryNumber": {
+      "name": "DuelWeekly.TargetVictoryNumber.name",
+      "help": "DuelWeekly.TargetVictoryNumber.help"
+    }
+  },
+  "DuelExtended": {
+    "_info": {
+      "name": "DuelExtended._info.name",
+      "help": "DuelExtended._info.help"
+    },
+    "DuelExtendedStatus": {
+      "name": "DuelExtended.DuelExtendedStatus.name",
+      "help": "DuelExtended.DuelExtendedStatus.help"
+    },
+    "DuelExtendedType": {
+      "name": "DuelExtended.DuelExtendedType.name",
+      "help": "DuelExtended.DuelExtendedType.help",
+      "NoRestrictedBattle": "NoRestrictedBattle"
+    },
+    "ExtendedCurrentScore": {
+      "name": "DuelExtended.ExtendedCurrentScore.name",
+      "help": "DuelExtended.ExtendedCurrentScore.help"
+    }
+  },
+  "JiFenSai": {
+    "_info": {
+      "name": "JiFenSai._info.name",
+      "help": "JiFenSai._info.help"
+    },
+    "JiFenSaiSkipFight": {
+      "name": "JiFenSai.JiFenSaiSkipFight.name",
+      "help": "JiFenSai.JiFenSaiSkipFight.help"
+    },
+    "JiFenSaiFilter": {
+      "name": "JiFenSai.JiFenSaiFilter.name",
+      "help": "JiFenSai.JiFenSaiFilter.help",
+      "PowerLowest": "PowerLowest",
+      "ScoreHighest": "ScoreHighest",
+      "PowerLowerThanSelfAndScoreHigher": "PowerLowerThanSelfAndScoreHigher",
+      "PowerLowerThanSelfAndScoreLower": "PowerLowerThanSelfAndScoreLower"
+    }
+  },
+  "MiJingType": {
+    "_info": {
+      "name": "MiJingType._info.name",
+      "help": "MiJingType._info.help"
+    },
+    "LuoYan": {
+      "name": "MiJingType.LuoYan.name",
+      "help": "MiJingType.LuoYan.help"
+    },
+    "LieYan": {
+      "name": "MiJingType.LieYan.name",
+      "help": "MiJingType.LieYan.help"
+    },
+    "ShuiLao": {
+      "name": "MiJingType.ShuiLao.name",
+      "help": "MiJingType.ShuiLao.help"
+    },
+    "GangTi": {
+      "name": "MiJingType.GangTi.name",
+      "help": "MiJingType.GangTi.help"
+    },
+    "LeiTing": {
+      "name": "MiJingType.LeiTing.name",
+      "help": "MiJingType.LeiTing.help"
+    }
+  },
+  "MiJingCount": {
+    "_info": {
+      "name": "MiJingCount._info.name",
+      "help": "MiJingCount._info.help"
+    },
+    "MiJingFightCount": {
+      "name": "MiJingCount.MiJingFightCount.name",
+      "help": "MiJingCount.MiJingFightCount.help"
+    },
+    "MiJingTicket": {
+      "name": "MiJingCount.MiJingTicket.name",
+      "help": "MiJingCount.MiJingTicket.help"
+    }
+  },
+  "Freebies": {
+    "_info": {
+      "name": "Freebies._info.name",
+      "help": "Freebies._info.help"
+    },
+    "FriendGiftsStart": {
+      "name": "Freebies.FriendGiftsStart.name",
+      "help": "Freebies.FriendGiftsStart.help"
+    },
+    "FriendGiftsFinishCount": {
+      "name": "Freebies.FriendGiftsFinishCount.name",
+      "help": "Freebies.FriendGiftsFinishCount.help"
+    },
+    "DailyShareStart": {
+      "name": "Freebies.DailyShareStart.name",
+      "help": "Freebies.DailyShareStart.help"
+    },
+    "DailyShareFinishCount": {
+      "name": "Freebies.DailyShareFinishCount.name",
+      "help": "Freebies.DailyShareFinishCount.help"
+    },
+    "MailRewardClaim": {
+      "name": "Freebies.MailRewardClaim.name",
+      "help": "Freebies.MailRewardClaim.help"
+    },
+    "MailRewardFinishCount": {
+      "name": "Freebies.MailRewardFinishCount.name",
+      "help": "Freebies.MailRewardFinishCount.help"
+    },
+    "LeaderBoardclaim": {
+      "name": "Freebies.LeaderBoardclaim.name",
+      "help": "Freebies.LeaderBoardclaim.help"
+    },
+    "LeaderBoardFinishCount": {
+      "name": "Freebies.LeaderBoardFinishCount.name",
+      "help": "Freebies.LeaderBoardFinishCount.help"
+    },
+    "InformationClubSignIn": {
+      "name": "Freebies.InformationClubSignIn.name",
+      "help": "Freebies.InformationClubSignIn.help"
+    },
+    "InformationClubSignInCount": {
+      "name": "Freebies.InformationClubSignInCount.name",
+      "help": "Freebies.InformationClubSignInCount.help"
+    },
+    "YiLeLaMianClaim": {
+      "name": "Freebies.YiLeLaMianClaim.name",
+      "help": "Freebies.YiLeLaMianClaim.help"
+    },
+    "YiLeLaMianFinishCount": {
+      "name": "Freebies.YiLeLaMianFinishCount.name",
+      "help": "Freebies.YiLeLaMianFinishCount.help"
+    },
+    "MonthlySignIn": {
+      "name": "Freebies.MonthlySignIn.name",
+      "help": "Freebies.MonthlySignIn.help"
+    },
+    "MonthlySignInFinishCount": {
+      "name": "Freebies.MonthlySignInFinishCount.name",
+      "help": "Freebies.MonthlySignInFinishCount.help"
+    },
+    "OrganizationPray": {
+      "name": "Freebies.OrganizationPray.name",
+      "help": "Freebies.OrganizationPray.help"
+    },
+    "OrganizationPrayFinishCount": {
+      "name": "Freebies.OrganizationPrayFinishCount.name",
+      "help": "Freebies.OrganizationPrayFinishCount.help"
+    },
+    "ActivityReward": {
+      "name": "Freebies.ActivityReward.name",
+      "help": "Freebies.ActivityReward.help"
+    }
+  },
+  "ZhaoCai": {
+    "_info": {
+      "name": "ZhaoCai._info.name",
+      "help": "ZhaoCai._info.help"
+    },
+    "ZhaoCaiFree": {
+      "name": "ZhaoCai.ZhaoCaiFree.name",
+      "help": "ZhaoCai.ZhaoCaiFree.help"
+    },
+    "ZhaoCaiFinishCount": {
+      "name": "ZhaoCai.ZhaoCaiFinishCount.name",
+      "help": "ZhaoCai.ZhaoCaiFinishCount.help"
+    }
+  },
+  "PrivilegeWeeklyPackage": {
+    "_info": {
+      "name": "PrivilegeWeeklyPackage._info.name",
+      "help": "PrivilegeWeeklyPackage._info.help"
+    },
+    "PrivilegeWeeklyPackageClaim": {
+      "name": "PrivilegeWeeklyPackage.PrivilegeWeeklyPackageClaim.name",
+      "help": "PrivilegeWeeklyPackage.PrivilegeWeeklyPackageClaim.help"
+    },
+    "PrivilegPackageFinishCount": {
+      "name": "PrivilegeWeeklyPackage.PrivilegPackageFinishCount.name",
+      "help": "PrivilegeWeeklyPackage.PrivilegPackageFinishCount.help"
+    }
+  },
+  "Recruit": {
+    "_info": {
+      "name": "Recruit._info.name",
+      "help": "Recruit._info.help"
+    },
+    "SkipNormalRecruit": {
+      "name": "Recruit.SkipNormalRecruit.name",
+      "help": "Recruit.SkipNormalRecruit.help"
+    }
+  },
+  "BattleOrder": {
+    "_info": {
+      "name": "BattleOrder._info.name",
+      "help": "BattleOrder._info.help"
+    },
+    "LikeAndShare": {
+      "name": "BattleOrder.LikeAndShare.name",
+      "help": "BattleOrder.LikeAndShare.help"
+    },
+    "SCharacterFragments": {
+      "name": "BattleOrder.SCharacterFragments.name",
+      "help": "BattleOrder.SCharacterFragments.help",
+      "忍战艾": "忍战艾",
+      "秽土解斑": "秽土解斑",
+      "永恒佐助": "永恒佐助",
+      "忍战樱": "忍战樱",
+      "九喇嘛鸣人": "九喇嘛鸣人",
+      "死门凯": "死门凯",
+      "忍战带土": "忍战带土",
+      "秽土柱间": "秽土柱间",
+      "秽土鼬": "秽土鼬",
+      "仙人兜": "仙人兜",
+      "秽土斑": "秽土斑",
+      "白面具": "白面具",
+      "秽土扉间": "秽土扉间",
+      "百豪纲手": "百豪纲手",
+      "秽土水门": "秽土水门",
+      "秽土日斩": "秽土日斩",
+      "秽土长门": "秽土长门",
+      "斑": "斑",
+      "柱间": "柱间",
+      "四代目雷影": "四代目雷影",
+      "扉间": "扉间",
+      "神秘面具男": "神秘面具男",
+      "须佐能乎鼬": "须佐能乎鼬",
+      "天道佩恩": "天道佩恩",
+      "水门": "水门",
+      "大蛇丸": "大蛇丸",
+      "自来也": "自来也"
+    },
+    "ACharacterFragments": {
+      "name": "BattleOrder.ACharacterFragments.name",
+      "help": "BattleOrder.ACharacterFragments.help",
+      "桃式显现博人": "桃式显现博人",
+      "忍战宁次": "忍战宁次",
+      "博人传长十郎": "博人传长十郎",
+      "青年长门": "青年长门",
+      "青年艾": "青年艾",
+      "博人传达鲁伊": "博人传达鲁伊",
+      "青年水门": "青年水门",
+      "忍战奇拉比": "忍战奇拉比",
+      "博人传黑土": "博人传黑土",
+      "须佐佐助": "须佐佐助",
+      "秽土迪达拉": "秽土迪达拉",
+      "博人传木叶丸": "博人传木叶丸",
+      "九尾鸣人": "九尾鸣人",
+      "半蛇斗篷兜": "半蛇斗篷兜",
+      "忍战我爱罗": "忍战我爱罗",
+      "晓大蛇丸": "晓大蛇丸",
+      "百豪樱": "百豪樱",
+      "照美冥": "照美冥",
+      "鹰小队佐助": "鹰小队佐助",
+      "奇拉比": "奇拉比",
+      "仙人鸣人": "仙人鸣人",
+      "神威卡卡西": "神威卡卡西",
+      "止水": "止水",
+      "小南": "小南",
+      "迪达拉": "迪达拉",
+      "鼬": "鼬",
+      "凯": "凯"
+    },
+    "CCharacterFragments": {
+      "name": "BattleOrder.CCharacterFragments.name",
+      "help": "BattleOrder.CCharacterFragments.help",
+      "左近右近": "左近右近",
+      "火花": "火花",
+      "学员鸣人": "学员鸣人",
+      "山城青叶": "山城青叶",
+      "鬼童丸": "鬼童丸",
+      "青": "青",
+      "萨克镫": "萨克镫",
+      "托斯砧": "托斯砧"
+    },
+    "SExperienceCard": {
+      "name": "BattleOrder.SExperienceCard.name",
+      "help": "BattleOrder.SExperienceCard.help",
+      "忍战艾": "忍战艾",
+      "秽土解斑": "秽土解斑",
+      "永恒佐助": "永恒佐助",
+      "忍战樱": "忍战樱",
+      "九喇嘛鸣人": "九喇嘛鸣人",
+      "死门凯": "死门凯",
+      "忍战带土": "忍战带土",
+      "秽土柱间": "秽土柱间",
+      "秽土鼬": "秽土鼬",
+      "仙人兜": "仙人兜",
+      "秽土斑": "秽土斑",
+      "白面具": "白面具",
+      "秽土扉间": "秽土扉间",
+      "百豪纲手": "百豪纲手",
+      "秽土水门": "秽土水门",
+      "秽土日斩": "秽土日斩",
+      "秽土长门": "秽土长门",
+      "斑": "斑",
+      "柱间": "柱间",
+      "四代目雷影": "四代目雷影",
+      "扉间": "扉间",
+      "神秘面具男": "神秘面具男",
+      "须佐能乎鼬": "须佐能乎鼬",
+      "天道佩恩": "天道佩恩",
+      "水门": "水门",
+      "大蛇丸": "大蛇丸",
+      "自来也": "自来也"
+    },
+    "AExperienceCard": {
+      "name": "BattleOrder.AExperienceCard.name",
+      "help": "BattleOrder.AExperienceCard.help",
+      "桃式显现博人": "桃式显现博人",
+      "忍战宁次": "忍战宁次",
+      "博人传长十郎": "博人传长十郎",
+      "青年长门": "青年长门",
+      "青年艾": "青年艾",
+      "博人传达鲁伊": "博人传达鲁伊",
+      "青年水门": "青年水门",
+      "忍战奇拉比": "忍战奇拉比",
+      "博人传黑土": "博人传黑土",
+      "须佐佐助": "须佐佐助",
+      "秽土迪达拉": "秽土迪达拉",
+      "博人传木叶丸": "博人传木叶丸",
+      "九尾鸣人": "九尾鸣人",
+      "半蛇斗篷兜": "半蛇斗篷兜",
+      "忍战我爱罗": "忍战我爱罗",
+      "晓大蛇丸": "晓大蛇丸",
+      "百豪樱": "百豪樱",
+      "照美冥": "照美冥",
+      "鹰小队佐助": "鹰小队佐助",
+      "奇拉比": "奇拉比",
+      "仙人鸣人": "仙人鸣人",
+      "神威卡卡西": "神威卡卡西",
+      "止水": "止水",
+      "小南": "小南",
+      "迪达拉": "迪达拉",
+      "鼬": "鼬",
+      "凯": "凯"
+    }
+  },
+  "PrivilegeStore": {
+    "_info": {
+      "name": "PrivilegeStore._info.name",
+      "help": "PrivilegeStore._info.help"
+    },
+    "PrivilegeStoreFinishCount": {
+      "name": "PrivilegeStore.PrivilegeStoreFinishCount.name",
+      "help": "PrivilegeStore.PrivilegeStoreFinishCount.help"
+    },
+    "DailyFreeCoins": {
+      "name": "PrivilegeStore.DailyFreeCoins.name",
+      "help": "PrivilegeStore.DailyFreeCoins.help"
+    }
+  },
+  "OrganizationStore": {
+    "_info": {
+      "name": "OrganizationStore._info.name",
+      "help": "OrganizationStore._info.help"
+    },
+    "MeritExchange": {
+      "name": "OrganizationStore.MeritExchange.name",
+      "help": "OrganizationStore.MeritExchange.help"
+    },
+    "MeritExchangeFilter": {
+      "name": "OrganizationStore.MeritExchangeFilter.name",
+      "help": "OrganizationStore.MeritExchangeFilter.help",
+      "preset": "preset",
+      "custom": "custom"
+    },
+    "CustomMeritExchangeFilter": {
+      "name": "OrganizationStore.CustomMeritExchangeFilter.name",
+      "help": "OrganizationStore.CustomMeritExchangeFilter.help"
+    }
+  },
+  "SurvivalStore": {
+    "_info": {
+      "name": "SurvivalStore._info.name",
+      "help": "SurvivalStore._info.help"
+    },
+    "SurvivalStoreExchange": {
+      "name": "SurvivalStore.SurvivalStoreExchange.name",
+      "help": "SurvivalStore.SurvivalStoreExchange.help"
+    },
+    "SurvivalStoreExchangeFilter": {
+      "name": "SurvivalStore.SurvivalStoreExchangeFilter.name",
+      "help": "SurvivalStore.SurvivalStoreExchangeFilter.help",
+      "preset": "preset",
+      "custom": "custom"
+    },
+    "CustomSurvivalStoreFilter": {
+      "name": "SurvivalStore.CustomSurvivalStoreFilter.name",
+      "help": "SurvivalStore.CustomSurvivalStoreFilter.help"
+    }
+  },
+  "ScoreStore": {
+    "_info": {
+      "name": "ScoreStore._info.name",
+      "help": "ScoreStore._info.help"
+    },
+    "ScoreStoreExchange": {
+      "name": "ScoreStore.ScoreStoreExchange.name",
+      "help": "ScoreStore.ScoreStoreExchange.help"
+    },
+    "ScoreStoreChestPurchaseTimes": {
+      "name": "ScoreStore.ScoreStoreChestPurchaseTimes.name",
+      "help": "ScoreStore.ScoreStoreChestPurchaseTimes.help",
+      "1": "1",
+      "2": "2",
+      "3": "3",
+      "4": "4",
+      "5": "5",
+      "6": "6",
+      "7": "7",
+      "8": "8",
+      "9": "9",
+      "10": "10"
+    },
+    "ScoreStoreExchangeFilter": {
+      "name": "ScoreStore.ScoreStoreExchangeFilter.name",
+      "help": "ScoreStore.ScoreStoreExchangeFilter.help",
+      "preset": "preset",
+      "custom": "custom"
+    },
+    "CustomScoreStoreFilter": {
+      "name": "ScoreStore.CustomScoreStoreFilter.name",
+      "help": "ScoreStore.CustomScoreStoreFilter.help"
+    }
+  },
+  "CultivationRoad": {
+    "_info": {
+      "name": "CultivationRoad._info.name",
+      "help": "CultivationRoad._info.help"
+    },
+    "ClearRedDot": {
+      "name": "CultivationRoad.ClearRedDot.name",
+      "help": "CultivationRoad.ClearRedDot.help"
+    },
+    "CultivationFinish": {
+      "name": "CultivationRoad.CultivationFinish.name",
+      "help": "CultivationRoad.CultivationFinish.help"
+    }
+  },
+  "PanRen": {
+    "_info": {
+      "name": "PanRen._info.name",
+      "help": "PanRen._info.help"
+    },
+    "NoRewardJoinOrNot": {
+      "name": "PanRen.NoRewardJoinOrNot.name",
+      "help": "PanRen.NoRewardJoinOrNot.help"
+    },
+    "PanRenFinishCount": {
+      "name": "PanRen.PanRenFinishCount.name",
+      "help": "PanRen.PanRenFinishCount.help"
+    }
+  },
+  "BattleField": {
+    "_info": {
+      "name": "BattleField._info.name",
+      "help": "BattleField._info.help"
+    },
+    "Type": {
+      "name": "BattleField.Type.name",
+      "help": "BattleField.Type.help",
+      "天之战场": "天之战场",
+      "地之战场": "地之战场"
+    },
+    "BattleFieldFinishCount": {
+      "name": "BattleField.BattleFieldFinishCount.name",
+      "help": "BattleField.BattleFieldFinishCount.help"
+    },
+    "BattleFieldTargetScore": {
+      "name": "BattleField.BattleFieldTargetScore.name",
+      "help": "BattleField.BattleFieldTargetScore.help"
+    }
+  },
+  "Fortress": {
+    "_info": {
+      "name": "Fortress._info.name",
+      "help": "Fortress._info.help"
+    },
+    "FortressSelect": {
+      "name": "Fortress.FortressSelect.name",
+      "help": "Fortress.FortressSelect.help",
+      "火之要塞": "火之要塞",
+      "水之要塞": "水之要塞",
+      "雷之要塞": "雷之要塞",
+      "风之要塞": "风之要塞",
+      "土之要塞": "土之要塞",
+      "铁之要塞": "铁之要塞",
+      "田之要塞": "田之要塞",
+      "熊之要塞": "熊之要塞",
+      "汤之要塞": "汤之要塞",
+      "涡之要塞": "涡之要塞",
+      "霜之要塞": "霜之要塞",
+      "雨之要塞": "雨之要塞",
+      "草之要塞": "草之要塞",
+      "川之要塞": "川之要塞",
+      "海之要塞": "海之要塞",
+      "泷之要塞": "泷之要塞",
+      "云之要塞": "云之要塞",
+      "鸟之要塞": "鸟之要塞"
+    },
+    "FortressTargetScore": {
+      "name": "Fortress.FortressTargetScore.name",
+      "help": "Fortress.FortressTargetScore.help"
+    }
+  },
+  "ItemStorage": {
+    "_info": {
+      "name": "ItemStorage._info.name",
+      "help": "ItemStorage._info.help"
+    },
+    "TiLi": {
+      "name": "ItemStorage.TiLi.name",
+      "help": "ItemStorage.TiLi.help"
+    },
+    "Golds": {
+      "name": "ItemStorage.Golds.name",
+      "help": "ItemStorage.Golds.help"
+    },
+    "Coins": {
+      "name": "ItemStorage.Coins.name",
+      "help": "ItemStorage.Coins.help"
+    },
+    "Fame": {
+      "name": "ItemStorage.Fame.name",
+      "help": "ItemStorage.Fame.help"
+    }
+  },
+  "TiLiStorage": {
+    "_info": {
+      "name": "TiLiStorage._info.name",
+      "help": "TiLiStorage._info.help"
+    },
+    "Dungeon": {
+      "name": "TiLiStorage.Dungeon.name",
+      "help": "TiLiStorage.Dungeon.help"
+    }
+  },
+  "BattleOrderStorage": {
+    "_info": {
+      "name": "BattleOrderStorage._info.name",
+      "help": "BattleOrderStorage._info.help"
+    },
+    "BattleOrderRank": {
+      "name": "BattleOrderStorage.BattleOrderRank.name",
+      "help": "BattleOrderStorage.BattleOrderRank.help"
+    },
+    "BattleOrderActivityProgress": {
+      "name": "BattleOrderStorage.BattleOrderActivityProgress.name",
+      "help": "BattleOrderStorage.BattleOrderActivityProgress.help"
+    },
+    "BattleOrderTaskProgress": {
+      "name": "BattleOrderStorage.BattleOrderTaskProgress.name",
+      "help": "BattleOrderStorage.BattleOrderTaskProgress.help"
+    }
+  },
+  "MiJingStorage": {
+    "_info": {
+      "name": "MiJingStorage._info.name",
+      "help": "MiJingStorage._info.help"
+    },
+    "MiJingCount": {
+      "name": "MiJingStorage.MiJingCount.name",
+      "help": "MiJingStorage.MiJingCount.help"
+    }
+  },
+  "MissionStorage": {
+    "_info": {
+      "name": "MissionStorage._info.name",
+      "help": "MissionStorage._info.help"
+    },
+    "MissionAccept": {
+      "name": "MissionStorage.MissionAccept.name",
+      "help": "MissionStorage.MissionAccept.help"
+    }
+  },
+  "AccountStorage": {
+    "_info": {
+      "name": "AccountStorage._info.name",
+      "help": "AccountStorage._info.help"
+    },
+    "AccountName": {
+      "name": "AccountStorage.AccountName.name",
+      "help": "AccountStorage.AccountName.help"
+    }
+  },
+  "ActivityProgressStorage": {
+    "_info": {
+      "name": "ActivityProgressStorage._info.name",
+      "help": "ActivityProgressStorage._info.help"
+    },
+    "ActivityProgressToday": {
+      "name": "ActivityProgressStorage.ActivityProgressToday.name",
+      "help": "ActivityProgressStorage.ActivityProgressToday.help"
+    },
+    "ActivityProgressTodayCount": {
+      "name": "ActivityProgressStorage.ActivityProgressTodayCount.name",
+      "help": "ActivityProgressStorage.ActivityProgressTodayCount.help"
+    },
+    "ActivityProgressWeekly": {
+      "name": "ActivityProgressStorage.ActivityProgressWeekly.name",
+      "help": "ActivityProgressStorage.ActivityProgressWeekly.help"
+    },
+    "ActivityProgressWeeklyCount": {
+      "name": "ActivityProgressStorage.ActivityProgressWeeklyCount.name",
+      "help": "ActivityProgressStorage.ActivityProgressWeeklyCount.help"
+    }
+  },
+  "Gui": {
+    "Aside": {
+      "Install": "Install",
+      "Home": "Home",
+      "Develop": "Develop",
+      "Performance": "Perf.",
+      "Setting": "Settings",
+      "AddAlas": "Add"
+    },
+    "Button": {
+      "Start": "Start",
+      "Stop": "Stop",
+      "ScrollON": "Auto Scroll ON",
+      "ScrollOFF": "Auto Scroll OFF",
+      "ClearLog": "Clear Log",
+      "Setting": "Setting",
+      "CheckUpdate": "Check update",
+      "ClickToUpdate": "Click to update",
+      "RetryUpdate": "Retry update",
+      "CancelUpdate": "Cancel update"
+    },
+    "Toast": {
+      "DisableTranslateMode": "Click here to disable translate mode",
+      "ConfigSaved": "Config saved",
+      "AlasIsRunning": "Scheduler is already running",
+      "ClickToUpdate": "New update available, click here to update"
+    },
+    "Status": {
+      "Running": "Running",
+      "Inactive": "Inactive",
+      "Warning": "Warning",
+      "Updating": "Waiting Update"
+    },
+    "MenuAlas": {
+      "Overview": "Overview",
+      "Log": "Logs"
+    },
+    "MenuDevelop": {
+      "HomePage": "Home",
+      "Translate": "Translate",
+      "Update": "Updater",
+      "Remote": "Remote access",
+      "Utils": "Utils"
+    },
+    "Overview": {
+      "Scheduler": "Scheduler",
+      "Log": "Log",
+      "Running": "Running",
+      "Pending": "Pending",
+      "Waiting": "Waiting",
+      "NoTask": "No Task"
+    },
+    "Dashboard": {
+      "NoData": "no data",
+      "TimeError": "time error",
+      "JustNow": "just now",
+      "MinutesAgo": "{time}min ago",
+      "HoursAgo": "{time}h ago",
+      "DaysAgo": "{time}d ago",
+      "LongTimeAgo": "long time ago",
+      "EtaDays": "ETA {time}d"
+    },
+    "AddAlas": {
+      "PopupTitle": "Add new config",
+      "NewName": "New name",
+      "CopyFrom": "Copy from existing config",
+      "Confirm": "Add",
+      "FileExist": "A config with the same name exists, please choose another one",
+      "InvalidChar": "Config name cannot contain any of the following characters: .\\/:*?\"<>|",
+      "InvalidPrefixTemplate": "Config name cannot start with 'template'"
+    },
+    "Update": {
+      "UpToDate": "Latest version",
+      "HaveUpdate": "A new version is available",
+      "UpdateStart": "Start update",
+      "UpdateWait": "Waiting for all alas complete current task",
+      "UpdateRun": "Updating",
+      "UpdateSuccess": "Update succeeded, restarting",
+      "UpdateFailed": "Update failed. Logs can be found in ./log/*_gui.txt",
+      "UpdateChecking": "Checking for updates",
+      "UpdateCancel": "Update canceled, restarting Alas",
+      "UpdateFinish": "Update succeeded, please restart manually",
+      "Local": "Local",
+      "Upstream": "Upstream",
+      "Author": "Author",
+      "Time": "Commit time",
+      "Message": "Commit message",
+      "DisabledWarn": "Updater module is disabled. You need to manually restart Alas to update",
+      "DetailedHistory": "Detailed Commit History"
+    },
+    "Remote": {
+      "Running": "Remote access on",
+      "NotRunning": "Not running, server disconnected or offline",
+      "NotEnable": "Disabled, set webui password in deploy.yaml and enable remote access",
+      "EntryPoint": "Entry point:",
+      "ConfigureHint": "Configuration tutorial:",
+      "SSHNotInstall": "No SSH command in your system. Please refer to the tutorial to download or install one"
+    },
+    "Text": {
+      "InvalidFeedBack": "Invalid format. Example: {0}",
+      "Clear": "Clear"
+    }
+  }
+}

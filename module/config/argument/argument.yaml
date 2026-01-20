@@ -1,0 +1,671 @@
+# --------------------
+# Define arguments.
+# --------------------
+
+# ==================== Alas ====================
+
+Scheduler:
+  Enable:
+    type: checkbox
+    value: false
+    option: [ true, false ]
+  NextRun: 2020-01-01 00:00:00
+  Command: Alas
+  ServerUpdate:
+    value: 05:00
+    display: hide
+Emulator:
+  Serial:
+    value: auto
+    valuetype: str
+  GameClient:
+    value: android
+    option: [ android]
+  PackageName:
+    value: auto
+    option: [ auto, ]
+  GameLanguage:
+    value: auto
+    option: [ auto, cn ]
+  ScreenshotMethod:
+    value: auto
+    option: [
+      auto,
+      ADB,
+      ADB_nc,
+      uiautomator2,
+      aScreenCap,
+      aScreenCap_nc,
+      DroidCast,
+      DroidCast_raw,
+      scrcpy,
+      nemu_ipc,
+      ldopengl,
+    ]
+  ControlMethod:
+    value: ADB
+    option: [ minitouch, MaaTouch,ADB,uiautomator2 ]
+  AdbRestart: false
+EmulatorInfo:
+  Emulator:
+    value: auto
+    option: [
+      auto,
+      NoxPlayer,
+      NoxPlayer64,
+      BlueStacks4,
+      BlueStacks5,
+      BlueStacks4HyperV,
+      BlueStacks5HyperV,
+      LDPlayer3,
+      LDPlayer4,
+      LDPlayer9,
+      MuMuPlayer,
+      MuMuPlayerX,
+      MuMuPlayer12,
+      MEmuPlayer,
+    ]
+  name:
+    value: null
+    type: textarea
+  path:
+    value: null
+    type: textarea
+Error:
+  Restart:
+    value: game
+    option: [ game, game_emulator ]
+  SaveError: true
+  ScreenshotLength: 1
+  OnePushConfig:
+    type: textarea
+    mode: yaml
+    value: 'provider: null'
+Optimization:
+  ScreenshotInterval: 0.3
+  CombatScreenshotInterval: 1.0
+  WhenTaskQueueEmpty:
+    value: goto_main
+    option: [ stay_there, goto_main, close_game, close_emulator ]
+
+# ==================== Daily ====================
+Password:
+  SecondPassword:
+    type: input
+    value: ''
+    valuetype: str
+    display: display
+SquadRaid:
+  SquadRaidBenefit:
+    type: checkbox
+    value: true
+  SquadQuadrupleReward:
+    type: checkbox
+    value: False
+  SquadRaidFight:
+    type: select
+    value: SquadMatch
+    option: [
+            SquadMatch
+    
+    ]
+  SquadRaidFinishedCount:
+    stored: StoredSquadRaidFinishCount
+    value: { }
+    display: hide
+
+
+SurvivalTrail:
+  SurvivalTrialResetTimes:
+    type: input
+    value:  0
+TiLiCost:
+  LevelRestrictions:
+    type: input
+    value:  72
+  DungeonFirst:
+    type: checkbox
+    value: true
+TiLiPurchase:
+  TiLiPurchaseTimes:
+    type: input
+    value:  0
+  TiLiPurchaseFinishCount:
+    stored: StoredTiLiPurchaseCount
+    value: { }
+    display: hide
+  
+
+DuelWeekly:
+  DuelWeeklyStatus:
+    type: checkbox
+    value:  true
+  DuelDaily:
+    stored: StoredDuel
+    value: { }
+    display: hide
+  CurrentVictoryCount:
+    stored: StoredDuelCurrentVictory
+    value: { }
+    display: display
+  TargetVictoryNumber:
+    type: input
+    value: 10
+DuelExtended:
+  DuelExtendedStatus:
+    type: checkbox
+    value: true
+  DuelExtendedType:
+    type: select
+    value: 'NoRestrictedBattle'
+    option: [
+      'NoRestrictedBattle',
+  ]
+  ExtendedCurrentScore:
+    stored: StoredDuelExtendedScore
+    value: { }
+    display: display
+
+
+
+JiFenSai:
+  JiFenSaiSkipFight:
+    type: checkbox
+    value: true
+  JiFenSaiFilter:
+    type: select
+    value: 'PowerLowerThanSelfAndScoreLower'
+    option: [
+    'PowerLowest',
+    'ScoreHighest',
+    'PowerLowerThanSelfAndScoreHigher',
+    'PowerLowerThanSelfAndScoreLower'
+    ]
+
+    
+MiJingType:
+  LuoYan:
+    type: checkbox
+    value: true
+  LieYan:
+    type: checkbox
+    value: true
+  ShuiLao:
+    type: checkbox
+    value: true
+  GangTi:
+    type: checkbox
+    value: true
+  LeiTing:
+    type: checkbox
+    value: true
+MiJingCount:
+  MiJingFightCount:
+    type: input
+    value:  5
+  MiJingTicket:
+    stored: StoredMiJingTicket
+    value: {}
+    display: hide
+
+
+
+
+
+
+
+
+
+
+# ==================== Rewards ====================
+Freebies:
+  FriendGiftsStart:
+      type: checkbox
+      value: true
+  FriendGiftsFinishCount:
+      stored: StoredFriendGiftsFinishCount
+      value: {}
+      display: hide
+  DailyShareStart:
+    type: checkbox
+    value: true
+  DailyShareFinishCount:
+    stored: StoredDailyShareFinishCount
+    value: {}
+    display: hide
+  MailRewardClaim:
+    type: checkbox
+    value: true
+  MailRewardFinishCount:
+    stored: StoredMailRewardClaimCount
+    value: {}
+    display: hide
+  LeaderBoardclaim:
+    type: checkbox
+    value: true
+  LeaderBoardFinishCount:
+    stored: StoredLeaderBoardLikeCount
+    value: {}
+    display: hide
+  InformationClubSignIn:
+    type: checkbox
+    value: true
+  InformationClubSignInCount:
+    stored: StoredInformationClubSignInCount
+    value: {}
+    display: hide
+  YiLeLaMianClaim:
+    type: checkbox
+    value: true
+  YiLeLaMianFinishCount:
+    stored: StoredYiLeLaMianClaimCount
+    value: {}
+    display: hide
+  MonthlySignIn:
+    type: checkbox
+    value: true
+  MonthlySignInFinishCount:
+    stored: StoredMonthlySignInCount
+    value: {}
+    display: hide
+  OrganizationPray:
+    type: checkbox
+    value:  true
+  OrganizationPrayFinishCount:
+    stored: StoredOrganizationPrayCount
+    value: {}
+    display: hide
+  ActivityReward:
+    type: checkbox
+    value: true
+
+ZhaoCai:
+  ZhaoCaiFree:
+    type: checkbox
+    value:  true
+  ZhaoCaiFinishCount:
+    stored: StoredZhaoCaiFinishCount
+    value: {}
+    display: hide
+PrivilegeWeeklyPackage:
+  PrivilegeWeeklyPackageClaim:
+    type: checkbox
+    value: true
+  PrivilegPackageFinishCount:
+    stored: StoredPrivilegeWeeklyPackageClaimCount
+    value: {}
+    display: hide 
+
+
+  
+
+
+  
+Recruit:
+  SkipNormalRecruit:
+    type: checkbox
+    value: False
+BattleOrder:
+  LikeAndShare:
+    type: checkbox
+    value:  true
+  SCharacterFragments:
+    type: select
+    value: '秽土长门'
+    option: [
+    '忍战艾',
+    '秽土解斑',
+    '永恒佐助',
+    '忍战樱',
+    '九喇嘛鸣人',
+    '死门凯',
+    '忍战带土',
+    '秽土柱间',
+    '秽土鼬',
+    '仙人兜',
+    '秽土斑',
+    '白面具',
+    '秽土扉间',
+    '百豪纲手',
+    '秽土水门',
+    '秽土日斩',
+    '秽土长门',
+    '斑',
+    '柱间',
+    '四代目雷影',
+    '扉间',
+    '神秘面具男',
+    '须佐能乎鼬',
+    '天道佩恩',
+    '水门',
+    '大蛇丸',
+    '自来也'
+    ]
+  ACharacterFragments:
+    type: select
+    value: '青年水门'
+    option: [
+    '桃式显现博人',
+    '忍战宁次',
+    '博人传长十郎',
+    '青年长门',
+    '青年艾',
+    '博人传达鲁伊',
+    '青年水门',
+    '忍战奇拉比',
+    '博人传黑土',
+    '须佐佐助',
+    '秽土迪达拉',
+    '博人传木叶丸',
+    '九尾鸣人',
+    '半蛇斗篷兜',
+    '忍战我爱罗',
+    '晓大蛇丸',
+    '百豪樱',
+    '照美冥',
+    '鹰小队佐助',
+    '奇拉比',
+    '仙人鸣人',
+    '神威卡卡西',
+    '止水',
+    '小南',
+    '迪达拉',
+    '鼬',
+    '凯'
+    ]
+  CCharacterFragments:
+    type: select
+    value: '左近右近'
+    option: [
+    '左近右近',
+    '火花',
+    '学员鸣人',
+    '山城青叶',
+    '鬼童丸',
+    '青',
+    '萨克镫',
+    '托斯砧'
+    ]
+  SExperienceCard:
+    type: select
+    value: '秽土长门'
+    option: [
+      '忍战艾',
+      '秽土解斑',
+      '永恒佐助',
+      '忍战樱',
+      '九喇嘛鸣人',
+      '死门凯',
+      '忍战带土',
+      '秽土柱间',
+      '秽土鼬',
+      '仙人兜',
+      '秽土斑',
+      '白面具',
+      '秽土扉间',
+      '百豪纲手',
+      '秽土水门',
+      '秽土日斩',
+      '秽土长门',
+      '斑',
+      '柱间',
+      '四代目雷影',
+      '扉间',
+      '神秘面具男',
+      '须佐能乎鼬',
+      '天道佩恩',
+      '水门',
+      '大蛇丸',
+      '自来也'
+      ]
+  AExperienceCard:  
+    type: select
+    value: '青年水门'
+    option: [
+    '桃式显现博人',
+    '忍战宁次',
+    '博人传长十郎',
+    '青年长门',
+    '青年艾',
+    '博人传达鲁伊',
+    '青年水门',
+    '忍战奇拉比',
+    '博人传黑土',
+    '须佐佐助',
+    '秽土迪达拉',
+    '博人传木叶丸',
+    '九尾鸣人',
+    '半蛇斗篷兜',
+    '忍战我爱罗',
+    '晓大蛇丸',
+    '百豪樱',
+    '照美冥',
+    '鹰小队佐助',
+    '奇拉比',
+    '仙人鸣人',
+    '神威卡卡西',
+    '止水',
+    '小南',
+    '迪达拉',
+    '鼬',
+    '凯'
+    ]
+
+PrivilegeStore:
+  PrivilegeStoreFinishCount:
+    stored: StoredPrivilegeStoreFinishCount
+    vlaue: {}
+    display: hide
+  DailyFreeCoins:
+    type: checkbox
+    value: true
+OrganizationStore:
+  MeritExchange:
+    type: checkbox
+    value: true
+  MeritExchangeFilter:
+    type: select
+    value: preset
+    option: [
+    'preset',
+    'custom'
+    ]
+  CustomMeritExchangeFilter:
+    type: textarea
+    value: '组织饰品礼盒 > 铜币 > 轮回石 > 忍玉'
+SurvivalStore:
+  SurvivalStoreExchange:
+    type: checkbox
+    value: False
+    display: hide
+  SurvivalStoreExchangeFilter:
+    type: select
+    value: preset
+    option: [
+    'preset',
+    'custom'
+    ]
+  CustomSurvivalStoreFilter:
+    type: textarea
+    value: '土台碎片 > 轮回石'
+ScoreStore:
+  ScoreStoreExchange:
+    type: checkbox
+    value: true
+  ScoreStoreChestPurchaseTimes:
+    type: select
+    value: 1
+    option: [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+    ]
+  ScoreStoreExchangeFilter:
+    type: select
+    value: preset
+    option: [
+    'preset',
+    'custom'
+    ]
+  CustomScoreStoreFilter:
+    type: textarea
+    value: '高级通灵卷轴碎片 > 积分赛宝箱'
+
+ 
+
+# ==================== Weekly ====================
+CultivationRoad:
+  ClearRedDot:
+    type: checkbox
+    value:  true
+  CultivationFinish:
+    type: checkbox
+    value: False
+PanRen:
+
+  NoRewardJoinOrNot:
+    type: checkbox
+    value: False
+  PanRenFinishCount:
+    stored: StoredPanRenCount
+    value: {}
+    display: hide
+BattleField:
+  Type:
+    type: select
+    value: '天之战场'
+    option: [
+    '天之战场',
+    '地之战场'
+    ]
+  BattleFieldFinishCount:
+    stored: StoredBattleFieldCount
+    value: {}
+    display: hide
+  BattleFieldTargetScore:
+    type: input
+    value: 1600
+Fortress:
+  FortressSelect:
+    type: select
+    value: '火之要塞'
+    option: [
+  '火之要塞',
+  '水之要塞',
+  '雷之要塞',
+  '风之要塞',
+  '土之要塞',
+  '铁之要塞',
+  '田之要塞',
+  '熊之要塞',
+  '汤之要塞',
+  '涡之要塞',
+  '霜之要塞',
+  '雨之要塞',
+  '草之要塞',
+  '川之要塞',
+  '海之要塞',
+  '泷之要塞',
+  '云之要塞',
+  '鸟之要塞'
+  ]
+  FortressTargetScore:
+    type: input
+    value: 40
+
+
+
+
+# ==================== Storage ====================
+ItemStorage:
+  TiLi:
+    stored: StoredTiLi
+    order: 1
+    color: "#FF0000"
+    display: display
+  Golds:
+    stored: StoredInt
+    order: 2
+    color: "#FFD700"
+    display: display
+  Coins:
+    stored: StoredInt
+    order: 3
+    color: "#D2B48C"
+    display: display
+  Fame:
+    stored: StoredInt
+    order: 4
+    color: "#32CD32"
+    display: display
+
+
+
+TiLiStorage:
+  Dungeon:
+    stored: StoredDungeon
+    value: {}
+    display: hide
+BattleOrderStorage:
+  BattleOrderRank:
+    stored: StoredBattleOrderRank
+    value:  {}
+    display: hide
+  BattleOrderActivityProgress:
+    stored: StoredBattleOrderActivityProgress
+    value: {}
+    display: display
+  BattleOrderTaskProgress:
+    stored: StoredBattleOrderTaskProgress
+    value: {}
+    display: display
+
+
+MiJingStorage:
+  MiJingCount:
+    stored: StoredMiJingCount
+    value: { }
+    display: hide
+MissionStorage:
+  MissionAccept:
+    stored: StoredMissionAccept
+    display: display
+    order: 6
+    color: "#ff6b6b"
+AccountStorage:
+  AccountName:
+    stored: StoredAccountName
+    value: ''
+    display: hide
+ActivityProgressStorage:
+  ActivityProgressToday:
+    stored: StoredActivityProgressToday
+    value: {}
+    display: hide
+  ActivityProgressTodayCount:
+    stored: StoredActivityProgressTodayCount
+    value: {}
+    display: hide
+  ActivityProgressWeekly:
+    stored: StoredActivityProgressWeekly
+    value: {}
+    display: hide
+  ActivityProgressWeeklyCount:
+    stored: StoredActivityProgressWeeklyCount
+    value: {}
+    display: hide
+
+
+# ==================== Activity ====================
+
+
+# ==================== Tool ====================
+
+
