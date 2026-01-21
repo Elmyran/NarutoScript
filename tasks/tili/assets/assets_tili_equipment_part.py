@@ -20,6 +20,13 @@ BOOK = ButtonWrapper(
             color=(105, 111, 116),
             button=(145, 378, 220, 442),
         ),
+        Button(
+            file='./assets/share/tili/equipment/part/BOOK.3.png',
+            area=(710, 145, 751, 178),
+            search=(690, 125, 771, 198),
+            color=(116, 78, 83),
+            button=(145, 378, 220, 442),
+        ),
     ],
 )
 CAP = ButtonWrapper(
@@ -37,6 +44,13 @@ CAP = ButtonWrapper(
             area=(711, 149, 747, 177),
             search=(691, 129, 767, 197),
             color=(140, 150, 165),
+            button=(312, 212, 389, 278),
+        ),
+        Button(
+            file='./assets/share/tili/equipment/part/CAP.3.png',
+            area=(709, 144, 747, 181),
+            search=(689, 124, 767, 201),
+            color=(144, 86, 117),
             button=(312, 212, 389, 278),
         ),
     ],
@@ -58,6 +72,13 @@ KNIFE = ButtonWrapper(
             color=(78, 124, 159),
             button=(140, 214, 221, 278),
         ),
+        Button(
+            file='./assets/share/tili/equipment/part/KNIFE.3.png',
+            area=(712, 145, 741, 181),
+            search=(692, 125, 761, 201),
+            color=(155, 84, 158),
+            button=(140, 214, 221, 278),
+        ),
     ],
 )
 NECK = ButtonWrapper(
@@ -75,6 +96,13 @@ NECK = ButtonWrapper(
             area=(713, 147, 757, 178),
             search=(693, 127, 777, 198),
             color=(91, 132, 128),
+            button=(309, 380, 391, 442),
+        ),
+        Button(
+            file='./assets/share/tili/equipment/part/NECK.3.png',
+            area=(711, 146, 746, 184),
+            search=(691, 126, 766, 204),
+            color=(94, 97, 162),
             button=(309, 380, 391, 442),
         ),
     ],
@@ -96,6 +124,13 @@ RING = ButtonWrapper(
             color=(96, 111, 143),
             button=(483, 380, 556, 442),
         ),
+        Button(
+            file='./assets/share/tili/equipment/part/RING.3.png',
+            area=(711, 143, 742, 180),
+            search=(691, 123, 762, 200),
+            color=(165, 135, 177),
+            button=(483, 380, 556, 442),
+        ),
     ],
 )
 SHIRT = ButtonWrapper(
@@ -113,6 +148,13 @@ SHIRT = ButtonWrapper(
             area=(713, 145, 750, 178),
             search=(693, 125, 770, 198),
             color=(92, 107, 89),
+            button=(483, 213, 560, 278),
+        ),
+        Button(
+            file='./assets/share/tili/equipment/part/SHIRT.3.png',
+            area=(712, 146, 745, 176),
+            search=(692, 126, 765, 196),
+            color=(154, 123, 162),
             button=(483, 213, 560, 278),
         ),
     ],
