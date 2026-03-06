@@ -27,6 +27,13 @@ ACTIVITY_CHECK = ButtonWrapper(
             color=(105, 64, 51),
             button=(7, 6, 159, 110),
         ),
+        Button(
+            file='./assets/cn/activity/ACTIVITY_CHECK.4.png',
+            area=(0, 0, 161, 113),
+            search=(0, 0, 181, 133),
+            color=(90, 91, 92),
+            button=(0, 0, 161, 113),
+        ),
     ],
     en=None,
 )
