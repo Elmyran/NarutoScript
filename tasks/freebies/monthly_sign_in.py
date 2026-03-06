@@ -56,4 +56,6 @@ class MonthlySignIn(UI):
             elif remain!=0 and total!=0:
                 break
 if __name__ == '__main__':
-    pass
+    az=MonthlySignIn('ns',task='Alas')
+    az.device.screenshot()
+    az.handle_monthly_sign_in()
