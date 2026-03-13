@@ -60,20 +60,26 @@ class StoreSelector:
         click_interval=Timer(1).start()
         purchase_times=0
         pre_currency=item.currency
+        same_buy_success=True
         for _ in self.loop():
             if self.appear(BUY_AMOUNT_ADD):
-                logger.info("Detected purchase popup.")
                 break
+            if self.appear(BUY_SUCCESS):
+                if same_buy_success:
+                    continue
+                same_buy_success=True
+                purchase_times += 1
+                logger.info(f"Purchase confirmed ({purchase_times}/{item.count}).")
+                if purchase_times >= item.count:
+                    return False
+                continue
+
+
             if click_interval.reached():
                 self.device.click(item)
+                same_buy_success=False
                 click_interval.reset()
-                currency=self.currency_recognition()
-                if currency!=pre_currency:
-                    purchase_times+=1
-                    pre_currency=currency
-                    if purchase_times>=item.count:  
-                        return False
-                    continue
+                        
                 
         
         for _ in self.loop():
