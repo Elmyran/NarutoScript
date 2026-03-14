@@ -1,9 +1,11 @@
+from locale import currency
+
 from module.base.button import Button, ClickButton
 from module.base.timer import Timer
 from module.logger import logger
 from tasks.base.assets.assets_base_code_second import CODE_SECOND_PASSWORD
 from tasks.base.assets.assets_base_page import  STORE_CHECK
-from tasks.store_purchase.assets.assets_store_purchase import BUY_AMOUNT_ADD, BUY_BUTTON, BUY_CONFIRM, BUY_REACH_TOP, BUY_SUCCESS
+from tasks.store_purchase.assets.assets_store_purchase import BUY_AMOUNT_ADD, BUY_BUTTON, BUY_CONFIRM, BUY_REACH_TOP, BUY_SUCCESS, STORE_CURRENCY_NOT_ENOUGH
 from tasks.store_purchase.item import Item
 from tasks.store_purchase.ocr import  StorePriceDigit
 
@@ -60,24 +62,23 @@ class StoreSelector:
         click_interval=Timer(1).start()
         purchase_times=0
         pre_currency=item.currency
-        same_buy_success=True
         for _ in self.loop():
             if self.appear(BUY_AMOUNT_ADD):
                 break
+            if self.appear(STORE_CURRENCY_NOT_ENOUGH):
+                logger.info(f"Currency not enough to purchase {item.name}")
+                return False
+
             if self.appear(BUY_SUCCESS):
-                if same_buy_success:
-                    continue
-                same_buy_success=True
-                purchase_times += 1
-                logger.info(f"Purchase confirmed ({purchase_times}/{item.count}).")
+                continue
+            if click_interval.reached():
+                currency=self.currency_recognition()
+                if pre_currency < currency:
+                    purchase_times += 1
+                    logger.info(f"Purchase confirmed ({purchase_times}/{item.count}).")
                 if purchase_times >= item.count:
                     return False
-                continue
-
-
-            if click_interval.reached():
                 self.device.click(item)
-                same_buy_success=False
                 click_interval.reset()
                         
                 
