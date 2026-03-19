@@ -73,7 +73,8 @@ class StoreSelector:
                 continue
             if click_interval.reached():
                 currency=self.currency_recognition()
-                if pre_currency < currency:
+                if pre_currency > currency:
+                    pre_currency=currency
                     purchase_times += 1
                     logger.info(f"Purchase confirmed ({purchase_times}/{item.count}).")
                 if purchase_times >= item.count:
