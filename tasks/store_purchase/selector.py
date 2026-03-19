@@ -1,9 +1,11 @@
+from locale import currency
+
 from module.base.button import Button, ClickButton
 from module.base.timer import Timer
 from module.logger import logger
 from tasks.base.assets.assets_base_code_second import CODE_SECOND_PASSWORD
 from tasks.base.assets.assets_base_page import  STORE_CHECK
-from tasks.store_purchase.assets.assets_store_purchase import BUY_AMOUNT_ADD, BUY_BUTTON, BUY_CONFIRM, BUY_REACH_TOP, BUY_SUCCESS
+from tasks.store_purchase.assets.assets_store_purchase import BUY_AMOUNT_ADD, BUY_BUTTON, BUY_CONFIRM, BUY_REACH_TOP, BUY_SUCCESS, STORE_CURRENCY_NOT_ENOUGH
 from tasks.store_purchase.item import Item
 from tasks.store_purchase.ocr import  StorePriceDigit
 
@@ -62,18 +64,24 @@ class StoreSelector:
         pre_currency=item.currency
         for _ in self.loop():
             if self.appear(BUY_AMOUNT_ADD):
-                logger.info("Detected purchase popup.")
                 break
+            if self.appear(STORE_CURRENCY_NOT_ENOUGH):
+                logger.info(f"Currency not enough to purchase {item.name}")
+                return False
+
+            if self.appear(BUY_SUCCESS):
+                continue
             if click_interval.reached():
+                currency=self.currency_recognition()
+                if pre_currency > currency:
+                    pre_currency=currency
+                    purchase_times += 1
+                    logger.info(f"Purchase confirmed ({purchase_times}/{item.count}).")
+                if purchase_times >= item.count:
+                    return False
                 self.device.click(item)
                 click_interval.reset()
-                currency=self.currency_recognition()
-                if currency!=pre_currency:
-                    purchase_times+=1
-                    pre_currency=currency
-                    if purchase_times>=item.count:  
-                        return False
-                    continue
+                        
                 
         
         for _ in self.loop():

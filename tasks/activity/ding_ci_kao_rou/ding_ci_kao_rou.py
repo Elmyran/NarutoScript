@@ -23,6 +23,7 @@ class DingCiKaoRou(UI):
     def _handle_kao_rou(self):
         ocr=Digit(BEEF_1)
         for _ in self.loop():
+            self.device.click_record_clear()
             if self.appear(BEEF_CONFIRM):
                 res=ocr.ocr_single_line(self.device.image)
                 if res!=0:
@@ -32,6 +33,7 @@ class DingCiKaoRou(UI):
 
         ocr=Digit(BEEF_2)
         for _ in self.loop():
+            self.device.click_record_clear()
             if self.appear(BEEF_CONFIRM):
                 res=ocr.ocr_single_line(self.device.image)
                 if res!=0:
@@ -40,6 +42,7 @@ class DingCiKaoRou(UI):
                     break
         ocr=Digit(BEEF_3)
         for _ in self.loop():
+            self.device.click_record_clear()
             if self.appear(BEEF_CONFIRM):
                 logger.info(BEEF_3.area)
                 res=ocr.ocr_single_line(self.device.image)
@@ -52,8 +55,10 @@ class DingCiKaoRou(UI):
         for _ in self.loop():
             if time.reached():
                 return
-            if self.appear_then_click(DING_CI_REWARD_RED_DOT,interval=0):
+            if self.appear(DING_CI_REWARD_CHECK):
                 break
+            if self.appear_then_click(DING_CI_REWARD_RED_DOT,interval=1):
+                continue
         for _ in self.loop():
             if self.appear(DING_CI_REWARD_CLAIM_SUCCESS):
                 break
@@ -67,3 +72,8 @@ class DingCiKaoRou(UI):
 
 
 
+if __name__ == '__main__':
+    az=DingCiKaoRou('ns',task='Alas')
+    az.device.screenshot()
+    print(az.appear(DING_CI_REWARD_RED_DOT))
+    az.device.click(DING_CI_REWARD_RED_DOT)

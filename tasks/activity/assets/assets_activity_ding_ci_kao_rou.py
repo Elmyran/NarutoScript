@@ -69,6 +69,17 @@ DING_CI_REWARD_AREA = ButtonWrapper(
     ),
     en=None,
 )
+DING_CI_REWARD_CHECK = ButtonWrapper(
+    name='DING_CI_REWARD_CHECK',
+    cn=Button(
+        file='./assets/cn/activity/ding_ci_kao_rou/DING_CI_REWARD_CHECK.png',
+        area=(405, 213, 472, 274),
+        search=(385, 193, 492, 294),
+        color=(82, 77, 63),
+        button=(405, 213, 472, 274),
+    ),
+    en=None,
+)
 DING_CI_REWARD_CLAIM_BUTTON = ButtonWrapper(
     name='DING_CI_REWARD_CLAIM_BUTTON',
     cn=Button(
