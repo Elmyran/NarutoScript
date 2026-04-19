@@ -29,10 +29,10 @@ NORMAL_RECRUIT_FREE_BUTTON = ButtonWrapper(
     name='NORMAL_RECRUIT_FREE_BUTTON',
     cn=Button(
         file='./assets/cn/recruit/NORMAL_RECRUIT_FREE_BUTTON.png',
-        area=(735, 559, 834, 597),
-        search=(715, 539, 854, 617),
-        color=(85, 83, 60),
-        button=(735, 559, 834, 597),
+        area=(810, 558, 871, 588),
+        search=(790, 538, 891, 608),
+        color=(89, 85, 68),
+        button=(810, 558, 871, 588),
     ),
     en=None,
 )
@@ -40,10 +40,10 @@ NORMAL_RECRUIT_FREE_DONE = ButtonWrapper(
     name='NORMAL_RECRUIT_FREE_DONE',
     cn=Button(
         file='./assets/cn/recruit/NORMAL_RECRUIT_FREE_DONE.png',
-        area=(733, 559, 960, 602),
-        search=(713, 539, 980, 622),
-        color=(110, 107, 55),
-        button=(733, 559, 960, 602),
+        area=(808, 557, 965, 602),
+        search=(788, 537, 985, 622),
+        color=(118, 113, 59),
+        button=(808, 557, 965, 602),
     ),
     en=None,
 )
@@ -51,10 +51,10 @@ NORMAL_RECRUIT_REMAIN_TIMES = ButtonWrapper(
     name='NORMAL_RECRUIT_REMAIN_TIMES',
     cn=Button(
         file='./assets/cn/recruit/NORMAL_RECRUIT_REMAIN_TIMES.png',
-        area=(733, 609, 959, 632),
-        search=(713, 589, 979, 652),
-        color=(89, 85, 74),
-        button=(733, 609, 959, 632),
+        area=(779, 607, 1002, 631),
+        search=(759, 587, 1022, 651),
+        color=(90, 85, 73),
+        button=(779, 607, 1002, 631),
     ),
     en=None,
 )
