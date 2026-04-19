@@ -39,15 +39,13 @@ def set_lang(lang_: str):
     release_resources()
 
 
-def to_server(package_or_server: str) -> str:
+def to_server(package_or_server: str, before: str = '') -> str:
     """
     Convert package/server to server.
     To unknown packages, consider they are a CN channel servers.
     """
-    # Can't distinguish different regions of oversea servers,
-    # assume it's 'OVERSEA-Asia'
-    if package_or_server == 'com.HoYoverse.hkrpgoversea':
-        return 'OVERSEA-Asia'
+
+
 
     for key, value in VALID_SERVER.items():
         if value == package_or_server:
