@@ -101,10 +101,6 @@
     "DingCiKaoRou": {
       "name": "Task.DingCiKaoRou.name",
       "help": "Task.DingCiKaoRou.help"
-    },
-    "QiuRiJi": {
-      "name": "Task.QiuRiJi.name",
-      "help": "Task.QiuRiJi.help"
     }
   },
   "Scheduler": {
