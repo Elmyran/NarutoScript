@@ -192,27 +192,30 @@ class DeployConfig(ConfigModel):
             return self.filepath(self.RequirementsFile)
 
     def execute(self, command, allow_failure=False, output=True):
-        """
-        Args:
-            command (str):
-            allow_failure (bool):
-            output(bool):
+        import subprocess
+        import os
 
-        Returns:
-            bool: If success.
-                Terminate installation if failed to execute and not allow_failure.
-        """
-        command = command.replace(r"\\", "/").replace("\\", "/").replace('"', '"')
-        if not output:
-            command = command + ' >nul 2>nul'
+        command = command.replace(r"\\", "/").replace("\\", "/")
         logger.info(command)
-        error_code = os.system(command)
-        if error_code:
+
+        env = os.environ.copy()
+        env["GIT_TERMINAL_PROMPT"] = "0"
+        env["GCM_INTERACTIVE"] = "Never"
+        process = subprocess.Popen(
+            command,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            shell=True,
+            env=env
+        )
+        stdout, stderr = process.communicate()
+        if process.returncode != 0:
+            logger.info(stderr.decode(errors="ignore"))
             if allow_failure:
-                logger.info(f"[ allowed failure ], error_code: {error_code}")
+                logger.info(f"[ allowed failure ], error_code: {process.returncode}")
                 return False
             else:
-                logger.info(f"[ failure ], error_code: {error_code}")
+                logger.info(f"[ failure ], error_code: {process.returncode}")
                 self.show_error(command)
                 raise ExecutionError
         else:
