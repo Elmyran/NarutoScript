@@ -18,6 +18,8 @@ class FengRaoFight(Combat):
             scroll=False,
             psychic=False
         )
+        self.feng_rao_exit()
+        
         return True
     def is_feng_rao_have_done(self):
         time=Timer(3, count=5).start()
@@ -34,6 +36,16 @@ class FengRaoFight(Combat):
                 continue
             if self.appear(FENG_RAO_FIGHT_STATUS):
                 break
+    def feng_rao_exit(self):
+        time=Timer(3, count=5).start()
+        for _ in self.loop():
+            if time.reached():
+                self.ui_goto_main()
+                break
+            if self.appear(FENG_RAO_HAVE_DONE):
+                break
+            
+        return True
 
 
 
