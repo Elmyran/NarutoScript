@@ -18,10 +18,10 @@ ZHAO_CAI_CHECK = ButtonWrapper(
     name='ZHAO_CAI_CHECK',
     cn=Button(
         file='./assets/cn/freebies/zhaocai/ZHAO_CAI_CHECK.png',
-        area=(223, 71, 408, 158),
-        search=(203, 51, 428, 178),
-        color=(161, 92, 37),
-        button=(223, 71, 408, 158),
+        area=(158, 90, 329, 152),
+        search=(138, 70, 349, 172),
+        color=(176, 87, 26),
+        button=(158, 90, 329, 152),
     ),
     en=None,
 )
@@ -29,10 +29,10 @@ ZHAO_CAI_FREE = ButtonWrapper(
     name='ZHAO_CAI_FREE',
     cn=Button(
         file='./assets/cn/freebies/zhaocai/ZHAO_CAI_FREE.png',
-        area=(619, 555, 809, 620),
-        search=(599, 535, 829, 640),
-        color=(223, 151, 11),
-        button=(619, 555, 809, 620),
+        area=(741, 533, 926, 594),
+        search=(721, 513, 946, 614),
+        color=(225, 159, 12),
+        button=(741, 533, 926, 594),
     ),
     en=None,
 )
@@ -51,10 +51,10 @@ ZHAO_CAI_PAIED = ButtonWrapper(
     name='ZHAO_CAI_PAIED',
     cn=Button(
         file='./assets/cn/freebies/zhaocai/ZHAO_CAI_PAIED.png',
-        area=(616, 552, 807, 622),
-        search=(596, 532, 827, 642),
-        color=(213, 144, 19),
-        button=(616, 552, 807, 622),
+        area=(743, 534, 814, 592),
+        search=(723, 514, 834, 612),
+        color=(219, 164, 35),
+        button=(743, 534, 814, 592),
     ),
     en=None,
 )

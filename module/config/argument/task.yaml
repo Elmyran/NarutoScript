@@ -109,8 +109,8 @@ Activity:
   tasks:
     DingCiKaoRou:
       - Scheduler
-    QiuRiJi:
-      - Scheduler
+#    QiuRiJi:
+#      - Scheduler
 
 
 

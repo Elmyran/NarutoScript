@@ -55,6 +55,7 @@ class GitManager(DeployConfig):
             proxy='', ssl_verify=True, keep_changes=False
     ):
         logger.hr('Git Init', 1)
+        self.execute(f'"{self.git}" config --global credential.helper ""', allow_failure=True)
         if not self.execute(f'"{self.git}" init', allow_failure=True):
             self.remove('./.git/config')
             self.remove('./.git/index')
