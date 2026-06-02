@@ -14,34 +14,17 @@ from tasks.organization.assets.assets_organization_pan_ren import *
 from tasks.organization.assets.assets_organization_pray import *
 from tasks.ren_zhe_tiao_zhan.joystick import GameControl
 class OrganizationPanRen(GameControl,TaskUI):
-    def _is_forced_run(self):
-        """
-        Check if the user cleared NextRun to force immediate execution.
-        When NextRun is cleared in the web UI, it's reset to the DEFAULT_TIME (2020-01-01),
-        which indicates the user wants to run the task immediately regardless of time windows.
-        """
-        next_run = self.config.cross_get(keys="PanRen.Scheduler.NextRun", default=None)
-        if isinstance(next_run, datetime):
-            return next_run <= DEFAULT_TIME
-        return False
-
     def run(self):
         next_wednesday = get_nearest_weekday_date(2)
         next_saturday = get_nearest_weekday_date(5)
         wednesday_target_time = next_wednesday.replace(hour=21, minute=20, second=0, microsecond=0)
         saturday_target_time = next_saturday.replace(hour=20, minute=15, second=0, microsecond=0)
-        is_forced = self._is_forced_run()
         if self.config.stored.PanRenFinishCount.is_expired():
             self.config.stored.PanRenFinishCount.clear()
-        if not is_forced:
-            if self.config.stored.PanRenFinishCount.is_full():
-                self.config.task_delay(target=[wednesday_target_time, saturday_target_time])
-                self.config.task_stop()
-                return
-            if not self._check_time():
-                self.config.task_delay(target=[wednesday_target_time, saturday_target_time])
-                self.config.task_stop()
-                return
+        if self.config.stored.PanRenFinishCount.is_full():
+            self.config.task_delay(target=[wednesday_target_time, saturday_target_time])
+            self.config.task_stop()
+            return
         if not self.handle_organization_pan_ren():
             return False
         self.config.stored.PanRenFinishCount.add()
