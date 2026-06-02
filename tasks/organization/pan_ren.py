@@ -1,7 +1,7 @@
 
 from datetime import datetime
 from module.base.timer import Timer
-from module.config.utils import DEFAULT_TIME, get_nearest_weekday_date, get_server_weekday, server_time_offset
+from module.config.utils import get_nearest_weekday_date, get_server_weekday, server_time_offset
 from module.exception import GameStuckError
 from module.logger import logger
 from module.ocr.ocr import Digit
