@@ -18,10 +18,10 @@ ORGANIZATION_GOTO_PAN_REN = ButtonWrapper(
     name='ORGANIZATION_GOTO_PAN_REN',
     cn=Button(
         file='./assets/cn/organization/pan_ren/ORGANIZATION_GOTO_PAN_REN.png',
-        area=(442, 200, 530, 514),
-        search=(422, 180, 550, 534),
-        color=(94, 87, 78),
-        button=(442, 200, 530, 514),
+        area=(681, 179, 776, 493),
+        search=(661, 159, 796, 513),
+        color=(90, 85, 79),
+        button=(681, 179, 776, 493),
     ),
     en=None,
 )
