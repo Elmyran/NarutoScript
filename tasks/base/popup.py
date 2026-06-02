@@ -40,7 +40,7 @@ class PopupHandler(ModuleBase):
             return True
         if self.appear_then_click(GAME_MAIN_ANNOUNCEMENT,interval):
             return True
-        if self.match_template_luma(GAME_IN_ADVERTISE,interval=1):
+        if self.match_template_luma(GAME_IN_ADVERTISE,interval=1) and self.is_in_main():
             self.device.click(GAME_IN_ADVERTISE)
             return True
         if self.appear_then_click(DAILY_LOGIN_BONUS,interval):
