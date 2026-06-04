@@ -83,3 +83,4 @@ whichcraft==0.6.1         # via adbutils, uiautomator2
 wrapt==1.15.0             # via -r requirements-in.txt, deprecated
 xmltodict==0.13.0         # via apkutils2
 onnxruntime-directml==1.18.0
+opencv-python~=4.7.0.72
