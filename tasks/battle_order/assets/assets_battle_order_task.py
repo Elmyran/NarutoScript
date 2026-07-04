@@ -69,3 +69,14 @@ BATTLE_ORDER_TASK_UNFINISH = ButtonWrapper(
     ),
     en=None,
 )
+BATTLE_ORDER_WEEKLY_REWARD_CHECK = ButtonWrapper(
+    name='BATTLE_ORDER_WEEKLY_REWARD_CHECK',
+    cn=Button(
+        file='./assets/cn/battle_order/task/BATTLE_ORDER_WEEKLY_REWARD_CHECK.png',
+        area=(507, 185, 537, 217),
+        search=(487, 165, 557, 237),
+        color=(190, 168, 145),
+        button=(507, 185, 537, 217),
+    ),
+    en=None,
+)

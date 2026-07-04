@@ -9,6 +9,7 @@ from module.logger import logger
 
 class BattleOrderWeeklyReward(UI):
     def run(self):
+        self.current_progress = 0
         if self.config.stored.BattleOrderActivityProgress.is_expired():
             self.config.stored.BattleOrderActivityProgress.clear()
         if self.config.stored.BattleOrderActivityProgress.is_full():
@@ -33,13 +34,12 @@ class BattleOrderWeeklyReward(UI):
             BATTLE_ORDER_ACTIVE_POINTS_5_CHECKED,
         ]
         thresholds = [50, 100, 150, 200, 300]
+        # 等待进入周活跃界面 (界面切换有延迟)
+        while 1:
+            if self.appear(BATTLE_ORDER_WEEKLY_REWARD_CHECK):
+                break
 
-        # 从存档恢复上次的领取进度
-        self.current_progress = self.config.stored.BattleOrderActivityProgress.value
-        logger.attr("RestoredProgress", self.current_progress)
-
-        BATTLE_ORDER_WEEKLY_REWARD_CLAIM.load_search(BATTLE_ORDER_WEEKLY_REWARD_AREA.area)
-        # 读取本周活跃度 
+        # 读取本周活跃度
         current_points = self._get_current_activity_points()
         click_timer = Timer(1).start()
 
@@ -48,6 +48,7 @@ class BattleOrderWeeklyReward(UI):
             if self.appear_then_click(BATTLE_ORDER_WEEKLY_REWARD_CLAIM_SUCCESS, interval=0):
                 click_timer.reset()
                 continue
+
             # 检测已领取档位
             self._get_current_progress(checked_buttons, thresholds)
 
@@ -57,15 +58,15 @@ class BattleOrderWeeklyReward(UI):
                 break
 
             if click_timer.reached():
-                # 找出可领取的档位：活跃度达标 且 该档位尚未领取
-                claimable = any(
-                    self.current_progress < t <= current_points
-                    for t in thresholds
-                )
-                if claimable:
-                    self.device.click(BATTLE_ORDER_WEEKLY_REWARD_CLAIM)
-                    click_timer.reset()
-                else:
+                # 找出第一个可领取的档位：活跃度达标 且 该档位尚未领取
+                clicked = False
+                for i, threshold in enumerate(thresholds):
+                    if self.current_progress < threshold <= current_points:
+                        self.device.click(checked_buttons[i])
+                        click_timer.reset()
+                        clicked = True
+                        break
+                if not clicked:
                     # 没有可领取的档位（活跃度不够下一档，或全部领完）
                     logger.info("No claimable reward tier")
                     break
@@ -82,6 +83,8 @@ class BattleOrderWeeklyReward(UI):
         return current_points
 
     def _get_current_progress(self, checked_buttons, thresholds) -> int:
+        if not hasattr(self, 'current_progress'):
+            self.current_progress = 0
         current_progress = 0
         # 从高到低检查每档的 CHECKED 图标，找到已领取的最高档
         for i in range(len(thresholds) - 1, -1, -1):
@@ -94,6 +97,15 @@ class BattleOrderWeeklyReward(UI):
 
 
 if __name__ == '__main__':
+    checked_buttons = [
+            BATTLE_ORDER_ACTIVE_POINTS_1_CHECKED,
+            BATTLE_ORDER_ACTIVE_POINTS_2_CHECKED,
+            BATTLE_ORDER_ACTIVE_POINTS_3_CHECKED,
+            BATTLE_ORDER_ACTIVE_POINTS_4_CHECKED,
+            BATTLE_ORDER_ACTIVE_POINTS_5_CHECKED,
+        ]
+    thresholds = [50, 100, 150, 200, 300]
     az = BattleOrderWeeklyReward('ns', task='Alas')
+    az.device.screenshot()
     az.run()
 
