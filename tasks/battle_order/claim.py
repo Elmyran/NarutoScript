@@ -12,6 +12,12 @@ from tasks.battle_order.ui.switch import BATTLE_ORDER_TAB
 from module.base.button import ClickButton  
 import numpy as np
 class BattleOrderClaim(UI):
+    def run(self):
+        if not self.config.BattleOrder_ClaimReward:
+            return
+        self.handle_battle_order_claim()
+
+        
     def handle_battle_order_claim(self):
         self.device.click_record_clear()
         self.ui_ensure(page_battle_order)

@@ -902,6 +902,10 @@
         "type": "checkbox",
         "value": true
       },
+      "ClaimReward": {
+        "type": "checkbox",
+        "value": false
+      },
       "SCharacterFragments": {
         "type": "select",
         "value": "秽土长门",

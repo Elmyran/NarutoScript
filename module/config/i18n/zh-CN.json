@@ -548,11 +548,15 @@
   },
   "BattleOrder": {
     "_info": {
-      "name": "排行榜",
+      "name": "忍法帖",
       "help": ""
     },
     "LikeAndShare": {
       "name": "排行榜点赞和分享",
+      "help": ""
+    },
+    "ClaimReward": {
+      "name": "领取忍法帖奖励",
       "help": ""
     },
     "SCharacterFragments": {
@@ -894,7 +898,7 @@
   },
   "BattleOrderStorage": {
     "_info": {
-      "name": "忍法帖",
+      "name": "忍法帖进度",
       "help": ""
     },
     "BattleOrderRank": {

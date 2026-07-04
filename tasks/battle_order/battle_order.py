@@ -12,7 +12,7 @@ class BattleOrder(UI):
         from  tasks.battle_order.weekly_reward import BattleOrderWeeklyReward
         BattleOrderWeeklyReward(config=self.config, device=self.device).run()
         from  tasks.battle_order.claim import BattleOrderClaim
-        BattleOrderClaim(config=self.config, device=self.device).handle_battle_order_claim()
+        BattleOrderClaim(config=self.config, device=self.device).run()
         self.config.task_delay(server_update=True)
         self.config.task_stop()
 

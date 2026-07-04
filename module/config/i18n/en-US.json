@@ -555,6 +555,10 @@
       "name": "BattleOrder.LikeAndShare.name",
       "help": "BattleOrder.LikeAndShare.help"
     },
+    "ClaimReward": {
+      "name": "BattleOrder.ClaimReward.name",
+      "help": "BattleOrder.ClaimReward.help"
+    },
     "SCharacterFragments": {
       "name": "BattleOrder.SCharacterFragments.name",
       "help": "BattleOrder.SCharacterFragments.help",

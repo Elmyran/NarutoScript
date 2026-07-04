@@ -243,6 +243,7 @@
     },
     "BattleOrder": {
       "LikeAndShare": true,
+      "ClaimReward": false,
       "SCharacterFragments": "秽土长门",
       "ACharacterFragments": "青年水门",
       "CCharacterFragments": "左近右近",
