@@ -161,6 +161,7 @@
     },
     "JiFenSai": {
       "JiFenSaiSkipFight": true,
+      "JiFenSaiOnlyFightOnce": true,
       "JiFenSaiFilter": "PowerLowerThanSelfAndScoreLower"
     }
   },

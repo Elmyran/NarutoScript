@@ -108,6 +108,9 @@ class EmulatorInstanceBase:
         res = re.search(r'MuMuPlayer(?:Global)?-12.0-(\d+)', self.name)
         if res:
             return int(res.group(1))
+        res = re.search(r'MuMuPlayer(?:Global)?-15.0-(\d+)', self.name)
+        if res:
+            return int(res.group(1))
         res = re.search(r'YXArkNights-12.0-(\d+)', self.name)
         if res:
             return int(res.group(1))
@@ -155,7 +158,8 @@ class EmulatorBase:
     LDPlayer3 = 'LDPlayer3'
     LDPlayer4 = 'LDPlayer4'
     LDPlayer9 = 'LDPlayer9'
-    LDPlayerFamily = [LDPlayer3, LDPlayer4, LDPlayer9]
+    LDPlayer14 = 'LDPlayer14'
+    LDPlayerFamily = [LDPlayer3, LDPlayer4, LDPlayer9, LDPlayer14]
     MuMuPlayer = 'MuMuPlayer'
     MuMuPlayerX = 'MuMuPlayerX'
     MuMuPlayer12 = 'MuMuPlayer12'

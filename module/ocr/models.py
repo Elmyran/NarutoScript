@@ -4,6 +4,7 @@ from module.exception import ScriptError
 from module.logger import logger
 
 
+import onnxruntime as ort
 from rapidocr import EngineType, LangDet, ModelType, OCRVersion, RapidOCR,LangRec
 DIC_LANG_TO_MODEL = {
     'cn': 'ch',
@@ -11,6 +12,15 @@ DIC_LANG_TO_MODEL = {
     'jp': 'japan',
     'tw': 'cht',
 }
+
+
+def _is_dml_available() -> bool:
+    """检测 DirectML 是否可用。"""
+    try:
+        available = ort.get_available_providers()
+        return 'DmlExecutionProvider' in available
+    except Exception:
+        return False
 
 
 def lang2model(lang: str) -> str:
@@ -67,8 +77,10 @@ class OcrModel:
 
     @cached_property
     def ch(self):
+        use_dml = _is_dml_available()
+        logger.info(f'DML available: {use_dml}')
         params={
-        "EngineConfig.onnxruntime.use_dml": True,
+        "EngineConfig.onnxruntime.use_dml": use_dml,
         "EngineConfig.enable_cpu_mem_arena": True,
         "Det.ocr_version": OCRVersion.PPOCRV4,
         "Det.engine_type": EngineType.ONNXRUNTIME,
@@ -87,8 +99,9 @@ class OcrModel:
 
     @cached_property
     def en(self):
+        use_dml = _is_dml_available()
         params={
-         "EngineConfig.onnxruntime.use_dml": True,
+         "EngineConfig.onnxruntime.use_dml": use_dml,
         "EngineConfig.enable_cpu_mem_arena": True,
         "Det.engine_type": EngineType.ONNXRUNTIME,
         "Det.lang_type": LangDet.EN,

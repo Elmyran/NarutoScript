@@ -10,7 +10,7 @@ from functools import wraps
 import uiautomator2 as u2
 from adbutils import AdbClient, AdbDevice, AdbTimeout, ForwardItem, ReverseItem
 from adbutils.errors import AdbError
-
+from module.device.method.remove_warning import remove_shell_warning
 import module.config.server as server_
 from module.base.decorator import Config, cached_property, del_cached_property, run_once
 from module.base.timer import Timer
@@ -21,7 +21,7 @@ from module.device.env import IS_LINUX, IS_MACINTOSH, IS_WINDOWS
 from module.device.method.pool import WORKER_POOL
 from module.device.method.utils import (PackageNotInstalled, RETRY_TRIES, get_serial_pair, handle_adb_error,
                                         handle_unknown_host_service, possible_reasons, random_port, recv_all,
-                                        remove_shell_warning, retry_sleep)
+                                        retry_sleep)
 from module.exception import EmulatorNotRunningError, RequestHumanTakeover
 from module.logger import logger
 

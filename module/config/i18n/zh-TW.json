@@ -199,6 +199,7 @@
       "LDPlayer3": "雷電模擬器3",
       "LDPlayer4": "雷電模擬器4",
       "LDPlayer9": "雷電模擬器9",
+      "LDPlayer14": "雷電模擬器14",
       "MuMuPlayer": "MuMu模擬器",
       "MuMuPlayerX": "MuMu模擬器X",
       "MuMuPlayer12": "MuMu模擬器12",
@@ -379,6 +380,10 @@
     "JiFenSaiSkipFight": {
       "name": "JiFenSai.JiFenSaiSkipFight.name",
       "help": "JiFenSai.JiFenSaiSkipFight.help"
+    },
+    "JiFenSaiOnlyFightOnce": {
+      "name": "JiFenSai.JiFenSaiOnlyFightOnce.name",
+      "help": "JiFenSai.JiFenSaiOnlyFightOnce.help"
     },
     "JiFenSaiFilter": {
       "name": "JiFenSai.JiFenSaiFilter.name",

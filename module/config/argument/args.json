@@ -77,6 +77,7 @@
           "LDPlayer3",
           "LDPlayer4",
           "LDPlayer9",
+          "LDPlayer14",
           "MuMuPlayer",
           "MuMuPlayerX",
           "MuMuPlayer12",
@@ -577,6 +578,10 @@
     },
     "JiFenSai": {
       "JiFenSaiSkipFight": {
+        "type": "checkbox",
+        "value": true
+      },
+      "JiFenSaiOnlyFightOnce": {
         "type": "checkbox",
         "value": true
       },
