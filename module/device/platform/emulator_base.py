@@ -108,6 +108,9 @@ class EmulatorInstanceBase:
         res = re.search(r'MuMuPlayer(?:Global)?-12.0-(\d+)', self.name)
         if res:
             return int(res.group(1))
+        res = re.search(r'MuMuPlayer(?:Global)?-15.0-(\d+)', self.name)
+        if res:
+            return int(res.group(1))
         res = re.search(r'YXArkNights-12.0-(\d+)', self.name)
         if res:
             return int(res.group(1))
