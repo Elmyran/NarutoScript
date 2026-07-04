@@ -39,7 +39,8 @@ class BattleOrderWeeklyReward(UI):
         logger.attr("RestoredProgress", self.current_progress)
 
         BATTLE_ORDER_WEEKLY_REWARD_CLAIM.load_search(BATTLE_ORDER_WEEKLY_REWARD_AREA.area)
-
+        # 读取本周活跃度 
+        current_points = self._get_current_activity_points()
         click_timer = Timer(1).start()
 
         for _ in self.loop():
@@ -47,9 +48,6 @@ class BattleOrderWeeklyReward(UI):
             if self.appear_then_click(BATTLE_ORDER_WEEKLY_REWARD_CLAIM_SUCCESS, interval=0):
                 click_timer.reset()
                 continue
-
-            # 读取本周活跃度 
-            current_points = self._get_current_activity_points()
             # 检测已领取档位
             self._get_current_progress(checked_buttons, thresholds)
 
