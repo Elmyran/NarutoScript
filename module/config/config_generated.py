@@ -73,6 +73,7 @@ class GeneratedConfig:
 
     # Group `JiFenSai`
     JiFenSai_JiFenSaiSkipFight = True
+    JiFenSai_JiFenSaiOnlyFightOnce = True
     JiFenSai_JiFenSaiFilter = 'PowerLowerThanSelfAndScoreLower'  # PowerLowest, ScoreHighest, PowerLowerThanSelfAndScoreHigher, PowerLowerThanSelfAndScoreLower
 
     # Group `MiJingType`

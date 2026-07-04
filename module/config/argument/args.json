@@ -581,6 +581,10 @@
         "type": "checkbox",
         "value": true
       },
+      "JiFenSaiOnlyFightOnce": {
+        "type": "checkbox",
+        "value": true
+      },
       "JiFenSaiFilter": {
         "type": "select",
         "value": "PowerLowerThanSelfAndScoreLower",

@@ -381,6 +381,10 @@
       "name": "跳过战斗",
       "help": ""
     },
+    "JiFenSaiOnlyFightOnce": {
+      "name": "每天只挑战一次",
+      "help": ""
+    },
     "JiFenSaiFilter": {
       "name": "敌人选择策略",
       "help": "积分最多：选择战力低于自己且排名最高的敌人 \n最简单：自动刷新选择战力低于自己且排名最低的敌人 ",

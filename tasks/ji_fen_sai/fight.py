@@ -31,6 +31,9 @@ class JiFenSaiFight(TaskUI):
             self.start_fight(enemy)
             self.skip_fight()
             self.back_to_ji_fen_sai()
+            if self.config.JiFenSai_JiFenSaiOnlyFightOnce:
+                logger.info(f'Fight once mode, exiting')
+                break
         return True
     def back_to_ji_fen_sai(self):
         logger.info(f'Back to Page')

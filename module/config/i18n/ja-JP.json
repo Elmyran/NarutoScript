@@ -381,6 +381,10 @@
       "name": "JiFenSai.JiFenSaiSkipFight.name",
       "help": "JiFenSai.JiFenSaiSkipFight.help"
     },
+    "JiFenSaiOnlyFightOnce": {
+      "name": "JiFenSai.JiFenSaiOnlyFightOnce.name",
+      "help": "JiFenSai.JiFenSaiOnlyFightOnce.help"
+    },
     "JiFenSaiFilter": {
       "name": "JiFenSai.JiFenSaiFilter.name",
       "help": "JiFenSai.JiFenSaiFilter.help",
