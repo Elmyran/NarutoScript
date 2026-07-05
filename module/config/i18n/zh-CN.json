@@ -429,6 +429,10 @@
       "name": "目标场次",
       "help": ""
     },
+    "MiJingBoxClaim": {
+      "name": "秘境宝箱领取",
+      "help": ""
+    },
     "MiJingTicket": {
       "name": "秘境挑战券",
       "help": ""

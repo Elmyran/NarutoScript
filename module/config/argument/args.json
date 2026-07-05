@@ -512,6 +512,10 @@
         "type": "input",
         "value": 5
       },
+      "MiJingBoxClaim": {
+        "type": "checkbox",
+        "value": true
+      },
       "MiJingTicket": {
         "type": "stored",
         "value": {},

@@ -85,6 +85,7 @@ class GeneratedConfig:
 
     # Group `MiJingCount`
     MiJingCount_MiJingFightCount = 5
+    MiJingCount_MiJingBoxClaim = True
     MiJingCount_MiJingTicket = {}
 
     # Group `Freebies`
