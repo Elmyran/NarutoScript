@@ -2,7 +2,9 @@ from module.base.timer import Timer
 from module.ocr.ocr import Digit
 from tasks.base.page import page_battle_order
 from tasks.base.ui import UI
-from tasks.battle_order.assets.assets_battle_order_reward import *
+
+from tasks.battle_order.assets.assets_battle_order_reward import BATTLE_ORDER_ACTIVE_POINTS_1_CHECKED, BATTLE_ORDER_ACTIVE_POINTS_2_CHECKED, BATTLE_ORDER_ACTIVE_POINTS_3_CHECKED, BATTLE_ORDER_ACTIVE_POINTS_4_CHECKED, BATTLE_ORDER_ACTIVE_POINTS_5_CHECKED, BATTLE_ORDER_WEEKLY_REWARD_ACTIVITY_POINTS, BATTLE_ORDER_WEEKLY_REWARD_CLAIM_SUCCESS
+from tasks.battle_order.assets.assets_battle_order_ui import BATTLE_ORDER_WEEKLY_REWARD_CHECK
 from tasks.battle_order.ui.switch import BATTLE_ORDER_TAB
 from module.logger import logger
 
