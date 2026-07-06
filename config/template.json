@@ -139,6 +139,7 @@
     },
     "MiJingCount": {
       "MiJingFightCount": 5,
+      "MiJingBoxClaim": true,
       "MiJingTicket": {}
     },
     "MiJingType": {

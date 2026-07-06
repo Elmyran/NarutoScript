@@ -207,6 +207,9 @@ MiJingCount:
   MiJingFightCount:
     type: input
     value:  5
+  MiJingBoxClaim:
+    type: checkbox
+    value: true
   MiJingTicket:
     stored: StoredMiJingTicket
     value: {}

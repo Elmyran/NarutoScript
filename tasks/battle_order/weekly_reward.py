@@ -2,7 +2,9 @@ from module.base.timer import Timer
 from module.ocr.ocr import Digit
 from tasks.base.page import page_battle_order
 from tasks.base.ui import UI
-from tasks.battle_order.assets.assets_battle_order_reward import *
+
+from tasks.battle_order.assets.assets_battle_order_reward import BATTLE_ORDER_ACTIVE_POINTS_1_CHECKED, BATTLE_ORDER_ACTIVE_POINTS_2_CHECKED, BATTLE_ORDER_ACTIVE_POINTS_3_CHECKED, BATTLE_ORDER_ACTIVE_POINTS_4_CHECKED, BATTLE_ORDER_ACTIVE_POINTS_5_CHECKED, BATTLE_ORDER_WEEKLY_REWARD_ACTIVITY_POINTS, BATTLE_ORDER_WEEKLY_REWARD_CLAIM_SUCCESS
+from tasks.battle_order.assets.assets_battle_order_ui import BATTLE_ORDER_WEEKLY_REWARD_CHECK
 from tasks.battle_order.ui.switch import BATTLE_ORDER_TAB
 from module.logger import logger
 
@@ -35,10 +37,14 @@ class BattleOrderWeeklyReward(UI):
         ]
         thresholds = [50, 100, 150, 200, 300]
         # 等待进入周活跃界面 (界面切换有延迟)
+        switch_timeout=Timer(2).start()
         while 1:
-            if self.appear(BATTLE_ORDER_WEEKLY_REWARD_CHECK):
+            if switch_timeout.reached():
+                logger.warning("Timeout waiting for weekly reward page")
                 break
-
+            if self.appear(BATTLE_ORDER_WEEKLY_REWARD_CHECK,similarity=0.6):
+                logger.info("Weekly reward page loaded")
+                break
         # 读取本周活跃度
         current_points = self._get_current_activity_points()
         click_timer = Timer(1).start()
@@ -76,9 +82,14 @@ class BattleOrderWeeklyReward(UI):
 
     def _get_current_activity_points(self) -> int:
         ocr = Digit(BATTLE_ORDER_WEEKLY_REWARD_ACTIVITY_POINTS)
-        current_points = ocr.ocr_single_line(self.device.image)
-        if current_points:
-            self.config.stored.ActivityProgressWeekly.set(current_points)
+        timeout=Timer(1).start()
+        for _ in self.loop():
+            if timeout.reached():
+                current_points = 0
+            current_points = ocr.ocr_single_line(self.device.image)
+            if current_points:
+                break
+        self.config.stored.ActivityProgressWeekly.set(current_points)        
         logger.attr("ActivityPoints", current_points)
         return current_points
 

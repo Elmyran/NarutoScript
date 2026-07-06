@@ -4,6 +4,8 @@ from tasks.base.page import page_ren_zhe_tiao_zhan
 from tasks.ren_zhe_tiao_zhan.assets.assets_ren_zhe_tiao_zhan_mi_jing_box_claim import *
 class MiJingBoxClaim(GameControl):
     def handle_mi_jing_box_claim(self):
+        if not self.config.MiJingCount_MiJingBoxClaim:
+            return 
         self.ui_ensure(page_ren_zhe_tiao_zhan)
         self._box_check()
         self._box_claim()
