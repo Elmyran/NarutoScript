@@ -80,9 +80,14 @@ class BattleOrderWeeklyReward(UI):
 
     def _get_current_activity_points(self) -> int:
         ocr = Digit(BATTLE_ORDER_WEEKLY_REWARD_ACTIVITY_POINTS)
-        current_points = ocr.ocr_single_line(self.device.image)
-        if current_points:
-            self.config.stored.ActivityProgressWeekly.set(current_points)
+        timeout=Timer(1).start()
+        for _ in self.loop():
+            if timeout.reached():
+                current_points = 0
+            current_points = ocr.ocr_single_line(self.device.image)
+            if current_points:
+                break
+        self.config.stored.ActivityProgressWeekly.set(current_points)        
         logger.attr("ActivityPoints", current_points)
         return current_points
 
