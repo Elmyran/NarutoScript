@@ -35,10 +35,14 @@ class BattleOrderWeeklyReward(UI):
         ]
         thresholds = [50, 100, 150, 200, 300]
         # 等待进入周活跃界面 (界面切换有延迟)
+        switch_timeout=Timer(2).start()
         while 1:
-            if self.appear(BATTLE_ORDER_WEEKLY_REWARD_CHECK):
+            if switch_timeout.reached():
+                logger.warning("Timeout waiting for weekly reward page")
                 break
-
+            if self.appear(BATTLE_ORDER_WEEKLY_REWARD_CHECK,similarity=0.6):
+                logger.info("Weekly reward page loaded")
+                break
         # 读取本周活跃度
         current_points = self._get_current_activity_points()
         click_timer = Timer(1).start()
