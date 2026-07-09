@@ -7,10 +7,10 @@ FRIEND_PANEL_CHECK = ButtonWrapper(
     name='FRIEND_PANEL_CHECK',
     cn=Button(
         file='./assets/cn/freebies/friendgifts/FRIEND_PANEL_CHECK.png',
-        area=(225, 71, 399, 163),
-        search=(205, 51, 419, 183),
-        color=(152, 90, 37),
-        button=(225, 71, 399, 163),
+        area=(147, 74, 311, 139),
+        search=(127, 54, 331, 159),
+        color=(166, 88, 29),
+        button=(147, 74, 311, 139),
     ),
     en=None,
 )
@@ -19,10 +19,10 @@ FRIEND_PANEL_GOTO_MAIN = ButtonWrapper(
     cn=[
         Button(
             file='./assets/cn/freebies/friendgifts/FRIEND_PANEL_GOTO_MAIN.png',
-            area=(1061, 92, 1146, 165),
-            search=(1041, 72, 1166, 185),
-            color=(77, 49, 49),
-            button=(1061, 92, 1146, 165),
+            area=(1155, 80, 1226, 137),
+            search=(1135, 60, 1246, 157),
+            color=(69, 40, 41),
+            button=(1155, 80, 1226, 137),
         ),
         Button(
             file='./assets/cn/freebies/friendgifts/FRIEND_PANEL_GOTO_MAIN.2.png',
@@ -58,10 +58,10 @@ GIFTS_CLAIM = ButtonWrapper(
     name='GIFTS_CLAIM',
     cn=Button(
         file='./assets/cn/freebies/friendgifts/GIFTS_CLAIM.png',
-        area=(508, 571, 665, 619),
-        search=(488, 551, 685, 639),
-        color=(204, 138, 19),
-        button=(508, 571, 665, 619),
+        area=(427, 574, 575, 612),
+        search=(407, 554, 595, 632),
+        color=(210, 158, 23),
+        button=(427, 574, 575, 612),
     ),
     en=None,
 )
@@ -107,10 +107,10 @@ GIFTS_GIVE = ButtonWrapper(
     name='GIFTS_GIVE',
     cn=Button(
         file='./assets/cn/freebies/friendgifts/GIFTS_GIVE.png',
-        area=(334, 570, 492, 617),
-        search=(314, 550, 512, 637),
-        color=(202, 139, 21),
-        button=(334, 570, 492, 617),
+        area=(251, 576, 398, 616),
+        search=(231, 556, 418, 636),
+        color=(211, 155, 22),
+        button=(251, 576, 398, 616),
     ),
     en=None,
 )
