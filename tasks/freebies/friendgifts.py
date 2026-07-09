@@ -43,4 +43,8 @@ class FriendGifts(UI):
                 
 
 
+if __name__ == '__main__':
+    az=FriendGifts('ns',task='Alas')
+    
+    az.handle_friend_gifts()
 
