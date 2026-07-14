@@ -73,34 +73,20 @@ class MiJing(TaskUI):
                 break
         
     def is_going_fight(self):
-        ocr=MiJingOcr(MI_JING_TYPE)
         enable_types=[]
-        unenable_types=['毒风秘境','阴阳秘境']
         if self.config.MiJingType_LuoYan:
-            enable_types.append('落岩秘境')
-        else:
-            unenable_types.append('落岩秘境')
+            enable_types.append(MI_JING_TU)
         if self.config.MiJingType_LeiTing:
-            enable_types.append('雷霆秘境')
-        else:
-            unenable_types.append('雷霆秘境')
+            enable_types.append(MI_JING_LEI)
         if self.config.MiJingType_LieYan:
-            enable_types.append('烈炎秘境')
-        else:
-            unenable_types.append('烈炎秘境')
+            enable_types.append(MI_JING_HUO)
         if self.config.MiJingType_ShuiLao:
-            enable_types.append('水牢秘境')
-        else:
-            unenable_types.append('水牢秘境')
-        if self.config.MiJingType_GangTi:
-            enable_types.append('罡体秘境')
-        else:
-            unenable_types.append('罡体秘境')
-        type=ocr.ocr_single_line(self.device.image)
-        if type in enable_types:
-            return True
-        elif type in unenable_types:
-            return False
+            enable_types.append(MI_JING_SHUI)
+        #if self.config.MiJingType_GangTi:
+        #    enable_types.append('罡体秘境')
+        for type in enable_types:
+            if self.appear(type):
+                return True
         return False
     def enter_mi_jing(self):
         self.device.click_record_clear()

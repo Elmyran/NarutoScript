@@ -63,6 +63,17 @@ MI_JING_FAIL = ButtonWrapper(
     ),
     en=None,
 )
+MI_JING_FENG = ButtonWrapper(
+    name='MI_JING_FENG',
+    cn=Button(
+        file='./assets/cn/ren_zhe_tiao_zhan/MI_JING_FENG.png',
+        area=(593, 25, 648, 55),
+        search=(573, 5, 668, 75),
+        color=(93, 69, 3),
+        button=(593, 25, 648, 55),
+    ),
+    en=None,
+)
 MI_JING_FIGHT_CHECK = ButtonWrapper(
     name='MI_JING_FIGHT_CHECK',
     cn=Button(
@@ -71,6 +82,28 @@ MI_JING_FIGHT_CHECK = ButtonWrapper(
         search=(15, 253, 126, 318),
         color=(101, 64, 60),
         button=(35, 273, 106, 298),
+    ),
+    en=None,
+)
+MI_JING_HUO = ButtonWrapper(
+    name='MI_JING_HUO',
+    cn=Button(
+        file='./assets/cn/ren_zhe_tiao_zhan/MI_JING_HUO.png',
+        area=(590, 27, 646, 55),
+        search=(570, 7, 666, 75),
+        color=(97, 73, 2),
+        button=(590, 27, 646, 55),
+    ),
+    en=None,
+)
+MI_JING_LEI = ButtonWrapper(
+    name='MI_JING_LEI',
+    cn=Button(
+        file='./assets/cn/ren_zhe_tiao_zhan/MI_JING_LEI.png',
+        area=(596, 27, 647, 54),
+        search=(576, 7, 667, 74),
+        color=(128, 99, 2),
+        button=(596, 27, 647, 54),
     ),
     en=None,
 )
@@ -167,6 +200,17 @@ MI_JING_ROOM_START_FIGHT = ButtonWrapper(
     ),
     en=None,
 )
+MI_JING_SHUI = ButtonWrapper(
+    name='MI_JING_SHUI',
+    cn=Button(
+        file='./assets/cn/ren_zhe_tiao_zhan/MI_JING_SHUI.png',
+        area=(592, 24, 646, 53),
+        search=(572, 4, 666, 73),
+        color=(101, 79, 7),
+        button=(592, 24, 646, 53),
+    ),
+    en=None,
+)
 MI_JING_START_CONFIRM = ButtonWrapper(
     name='MI_JING_START_CONFIRM',
     cn=Button(
@@ -208,6 +252,17 @@ MI_JING_TICKET_CHECK = ButtonWrapper(
         search=(435, 609, 518, 692),
         color=(82, 68, 61),
         button=(455, 629, 498, 672),
+    ),
+    en=None,
+)
+MI_JING_TU = ButtonWrapper(
+    name='MI_JING_TU',
+    cn=Button(
+        file='./assets/cn/ren_zhe_tiao_zhan/MI_JING_TU.png',
+        area=(591, 27, 643, 53),
+        search=(571, 7, 663, 73),
+        color=(113, 85, 2),
+        button=(591, 27, 643, 53),
     ),
     en=None,
 )
