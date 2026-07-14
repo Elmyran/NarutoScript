@@ -73,34 +73,38 @@ class MiJing(TaskUI):
                 break
         
     def is_going_fight(self):
-        ocr=MiJingOcr(MI_JING_TYPE)
         enable_types=[]
-        unenable_types=['毒风秘境','阴阳秘境']
+        unenable_types=[]
+        unenable_types.append((MI_JING_FENG, "毒风秘境"))
+        unenable_types.append((MI_JING_YIN_YANG, "阴阳秘境"))
         if self.config.MiJingType_LuoYan:
-            enable_types.append('落岩秘境')
+            enable_types.append((MI_JING_TU, "落岩秘境"))
         else:
-            unenable_types.append('落岩秘境')
+            unenable_types.append((MI_JING_TU, "落岩秘境"))
         if self.config.MiJingType_LeiTing:
-            enable_types.append('雷霆秘境')
+            enable_types.append((MI_JING_LEI, "雷霆秘境"))
         else:
-            unenable_types.append('雷霆秘境')
+            unenable_types.append((MI_JING_LEI, "雷霆秘境"))
         if self.config.MiJingType_LieYan:
-            enable_types.append('烈炎秘境')
+            enable_types.append((MI_JING_HUO, "烈炎秘境"))
         else:
-            unenable_types.append('烈炎秘境')
+            unenable_types.append((MI_JING_HUO, "烈炎秘境"))    
         if self.config.MiJingType_ShuiLao:
-            enable_types.append('水牢秘境')
+            enable_types.append((MI_JING_SHUI, "水牢秘境"))
         else:
-            unenable_types.append('水牢秘境')
+            unenable_types.append((MI_JING_SHUI, "水牢秘境"))
         if self.config.MiJingType_GangTi:
-            enable_types.append('罡体秘境')
+            enable_types.append((MI_JING_GANG, "罡体秘境"))
         else:
-            unenable_types.append('罡体秘境')
-        type=ocr.ocr_single_line(self.device.image)
-        if type in enable_types:
-            return True
-        elif type in unenable_types:
-            return False
+            unenable_types.append((MI_JING_GANG, "罡体秘境"))
+        for asset, name in enable_types:
+            if self.appear(asset):
+                logger.info(f"当前秘境类型: {name}")
+                return True
+        for asset, name in unenable_types:
+            if self.appear(asset):
+                logger.info(f"当前秘境类型: {name}, 退出战斗")
+                return False
         return False
     def enter_mi_jing(self):
         self.device.click_record_clear()

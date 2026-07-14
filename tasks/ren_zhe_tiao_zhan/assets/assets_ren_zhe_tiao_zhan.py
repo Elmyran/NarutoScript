@@ -63,6 +63,17 @@ MI_JING_FAIL = ButtonWrapper(
     ),
     en=None,
 )
+MI_JING_FENG = ButtonWrapper(
+    name='MI_JING_FENG',
+    cn=Button(
+        file='./assets/cn/ren_zhe_tiao_zhan/MI_JING_FENG.png',
+        area=(593, 25, 648, 55),
+        search=(573, 5, 668, 75),
+        color=(93, 69, 3),
+        button=(593, 25, 648, 55),
+    ),
+    en=None,
+)
 MI_JING_FIGHT_CHECK = ButtonWrapper(
     name='MI_JING_FIGHT_CHECK',
     cn=Button(
@@ -71,6 +82,39 @@ MI_JING_FIGHT_CHECK = ButtonWrapper(
         search=(15, 253, 126, 318),
         color=(101, 64, 60),
         button=(35, 273, 106, 298),
+    ),
+    en=None,
+)
+MI_JING_GANG = ButtonWrapper(
+    name='MI_JING_GANG',
+    cn=Button(
+        file='./assets/cn/ren_zhe_tiao_zhan/MI_JING_GANG.png',
+        area=(586, 26, 642, 55),
+        search=(566, 6, 662, 75),
+        color=(104, 78, 4),
+        button=(586, 26, 642, 55),
+    ),
+    en=None,
+)
+MI_JING_HUO = ButtonWrapper(
+    name='MI_JING_HUO',
+    cn=Button(
+        file='./assets/cn/ren_zhe_tiao_zhan/MI_JING_HUO.png',
+        area=(590, 27, 646, 55),
+        search=(570, 7, 666, 75),
+        color=(97, 73, 2),
+        button=(590, 27, 646, 55),
+    ),
+    en=None,
+)
+MI_JING_LEI = ButtonWrapper(
+    name='MI_JING_LEI',
+    cn=Button(
+        file='./assets/cn/ren_zhe_tiao_zhan/MI_JING_LEI.png',
+        area=(596, 27, 647, 54),
+        search=(576, 7, 667, 74),
+        color=(128, 99, 2),
+        button=(596, 27, 647, 54),
     ),
     en=None,
 )
@@ -167,6 +211,17 @@ MI_JING_ROOM_START_FIGHT = ButtonWrapper(
     ),
     en=None,
 )
+MI_JING_SHUI = ButtonWrapper(
+    name='MI_JING_SHUI',
+    cn=Button(
+        file='./assets/cn/ren_zhe_tiao_zhan/MI_JING_SHUI.png',
+        area=(593, 25, 646, 53),
+        search=(573, 5, 666, 73),
+        color=(104, 81, 6),
+        button=(593, 25, 646, 53),
+    ),
+    en=None,
+)
 MI_JING_START_CONFIRM = ButtonWrapper(
     name='MI_JING_START_CONFIRM',
     cn=Button(
@@ -211,6 +266,17 @@ MI_JING_TICKET_CHECK = ButtonWrapper(
     ),
     en=None,
 )
+MI_JING_TU = ButtonWrapper(
+    name='MI_JING_TU',
+    cn=Button(
+        file='./assets/cn/ren_zhe_tiao_zhan/MI_JING_TU.png',
+        area=(591, 27, 643, 53),
+        search=(571, 7, 663, 73),
+        color=(113, 85, 2),
+        button=(591, 27, 643, 53),
+    ),
+    en=None,
+)
 MI_JING_TYPE = ButtonWrapper(
     name='MI_JING_TYPE',
     cn=Button(
@@ -230,6 +296,17 @@ MI_JING_TYPE_CHECK = ButtonWrapper(
         search=(627, 3, 696, 72),
         color=(110, 82, 6),
         button=(647, 23, 676, 52),
+    ),
+    en=None,
+)
+MI_JING_YIN_YANG = ButtonWrapper(
+    name='MI_JING_YIN_YANG',
+    cn=Button(
+        file='./assets/cn/ren_zhe_tiao_zhan/MI_JING_YIN_YANG.png',
+        area=(591, 28, 646, 54),
+        search=(571, 8, 666, 74),
+        color=(112, 85, 2),
+        button=(591, 28, 646, 54),
     ),
     en=None,
 )
