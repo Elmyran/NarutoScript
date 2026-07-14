@@ -74,19 +74,37 @@ class MiJing(TaskUI):
         
     def is_going_fight(self):
         enable_types=[]
+        unenable_types=[]
+        unenable_types.append((MI_JING_FENG, "毒风秘境"))
+        unenable_types.append((MI_JING_YIN_YANG, "阴阳秘境"))
         if self.config.MiJingType_LuoYan:
-            enable_types.append(MI_JING_TU)
+            enable_types.append((MI_JING_TU, "落岩秘境"))
+        else:
+            unenable_types.append((MI_JING_TU, "落岩秘境"))
         if self.config.MiJingType_LeiTing:
-            enable_types.append(MI_JING_LEI)
+            enable_types.append((MI_JING_LEI, "雷霆秘境"))
+        else:
+            unenable_types.append((MI_JING_LEI, "雷霆秘境"))
         if self.config.MiJingType_LieYan:
-            enable_types.append(MI_JING_HUO)
+            enable_types.append((MI_JING_HUO, "烈炎秘境"))
+        else:
+            unenable_types.append((MI_JING_HUO, "烈炎秘境"))    
         if self.config.MiJingType_ShuiLao:
-            enable_types.append(MI_JING_SHUI)
-        #if self.config.MiJingType_GangTi:
-        #    enable_types.append('罡体秘境')
-        for type in enable_types:
-            if self.appear(type):
+            enable_types.append((MI_JING_SHUI, "水牢秘境"))
+        else:
+            unenable_types.append((MI_JING_SHUI, "水牢秘境"))
+        if self.config.MiJingType_GangTi:
+            enable_types.append((MI_JING_GANG, "罡体秘境"))
+        else:
+            unenable_types.append((MI_JING_GANG, "罡体秘境"))
+        for asset, name in enable_types:
+            if self.appear(asset):
+                logger.info(f"当前秘境类型: {name}")
                 return True
+        for asset, name in unenable_types:
+            if self.appear(asset):
+                logger.info(f"当前秘境类型: {name}, 退出战斗")
+                return False
         return False
     def enter_mi_jing(self):
         self.device.click_record_clear()
