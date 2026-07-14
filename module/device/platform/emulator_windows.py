@@ -566,8 +566,15 @@ class EmulatorManager(EmulatorManagerBase):
         Get all emulator instances installed on current computer.
         """
         instances = []
+        seen = set()
         for emulator in self.all_emulators:
-            instances += list(emulator.iter_instances())
+            for instance in emulator.iter_instances():
+                # Deduplicate by (serial, name, path) to avoid duplicates
+                # from multiple .nemu/.vbox files in the same vms folder
+                key = (instance.serial, instance.name, instance.path)
+                if key not in seen:
+                    seen.add(key)
+                    instances.append(instance)
 
         instances: t.List[EmulatorInstance] = sorted(instances, key=lambda x: str(x))
         return instances
