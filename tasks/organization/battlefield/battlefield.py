@@ -13,8 +13,6 @@ from tasks.organization.assets.assets_organization_fortress import ORGANIZATION_
 from tasks.organization.assets.assets_organization_pray import ORGANIZATION_PANEL
 from tasks.organization.battlefield.detecor import CharacterCircleDetector
 from tasks.organization.battlefield.switch import CHARACTER_TAB
-
-from tasks.organization.battlefield.name_keywords import AccountNameKeyword
 from tasks.duel.assets.assets_duel import DUEL_FIGHT_FAIL, DUEL_IS_IN_FIGHT
 
 class BattleField(TaskUI,CharacterCircleDetector):
@@ -39,7 +37,7 @@ class BattleField(TaskUI,CharacterCircleDetector):
             return False
         self.handle_battle_field()
         self.config.task_delay(target=wednesday_9_pm)
-        self.config.task_call('PanRen')
+        self.config.task_call('PanRen', force_call=False)
         self.config.task_stop()
         return True
 
