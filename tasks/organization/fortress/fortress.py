@@ -30,7 +30,7 @@ class Fortress(GameControl,TaskUI):
             return
         self.handle_organization_fortress()
         self.config.task_delay(target=saturday_8pm)
-        self.config.task_call('PanRen')
+        self.config.task_call('PanRen', force_call=False)
         self.config.task_stop()
     def _check_time(self):
         server_weekday = get_server_weekday()
