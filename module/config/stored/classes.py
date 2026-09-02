@@ -148,7 +148,6 @@ class StoredChaoYingDays(StoredBase):
     PERIOD_DAYS = 30  # 超影为月度特权, 面板侧按钮检测无法得知剩余天数, 按满周期记录
 
     def mark_active(self):
-        
         if self.predict_current() <= 0:
             self.value = self.PERIOD_DAYS
 

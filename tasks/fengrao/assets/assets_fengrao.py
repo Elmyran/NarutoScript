@@ -3,6 +3,17 @@ from module.base.button import Button, ButtonWrapper
 # This file was auto-generated, do not modify it manually. To generate:
 # ``` python -m dev_tools.button_extract ```
 
+FENG_RAO_CHAO_YING_CHECK = ButtonWrapper(
+    name='FENG_RAO_CHAO_YING_CHECK',
+    cn=Button(
+        file='./assets/cn/fengrao/FENG_RAO_CHAO_YING_CHECK.png',
+        area=(881, 627, 1096, 678),
+        search=(861, 607, 1116, 698),
+        color=(89, 76, 23),
+        button=(881, 627, 1096, 678),
+    ),
+    en=None,
+)
 FENG_RAO_CHECK = ButtonWrapper(
     name='FENG_RAO_CHECK',
     cn=Button(
@@ -38,13 +49,22 @@ FENG_RAO_FIGHT_STATUS = ButtonWrapper(
 )
 FENG_RAO_FIGHT_SUCCESS = ButtonWrapper(
     name='FENG_RAO_FIGHT_SUCCESS',
-    cn=Button(
-        file='./assets/cn/fengrao/FENG_RAO_FIGHT_SUCCESS.png',
-        area=(448, 656, 861, 702),
-        search=(428, 636, 881, 720),
-        color=(23, 32, 33),
-        button=(448, 656, 861, 702),
-    ),
+    cn=[
+        Button(
+            file='./assets/cn/fengrao/FENG_RAO_FIGHT_SUCCESS.png',
+            area=(448, 656, 861, 702),
+            search=(428, 636, 881, 720),
+            color=(23, 32, 33),
+            button=(448, 656, 861, 702),
+        ),
+        Button(
+            file='./assets/cn/fengrao/FENG_RAO_FIGHT_SUCCESS.2.png',
+            area=(492, 105, 802, 194),
+            search=(472, 85, 822, 214),
+            color=(182, 104, 79),
+            button=(492, 105, 802, 194),
+        ),
+    ],
     en=None,
 )
 FENG_RAO_HAVE_DONE = ButtonWrapper(
@@ -76,6 +96,28 @@ FENG_RAO_RED_DOT = ButtonWrapper(
             button=(326, 332, 370, 403),
         ),
     ],
+    en=None,
+)
+FENG_RAO_SKIP_CONFIRM = ButtonWrapper(
+    name='FENG_RAO_SKIP_CONFIRM',
+    cn=Button(
+        file='./assets/cn/fengrao/FENG_RAO_SKIP_CONFIRM.png',
+        area=(526, 429, 750, 506),
+        search=(506, 409, 770, 526),
+        color=(207, 152, 36),
+        button=(526, 429, 750, 506),
+    ),
+    en=None,
+)
+FENG_RAO_SKIP_FIGHT = ButtonWrapper(
+    name='FENG_RAO_SKIP_FIGHT',
+    cn=Button(
+        file='./assets/cn/fengrao/FENG_RAO_SKIP_FIGHT.png',
+        area=(675, 616, 813, 667),
+        search=(655, 596, 833, 687),
+        color=(214, 147, 15),
+        button=(675, 616, 813, 667),
+    ),
     en=None,
 )
 FENG_RAO_START_FIGHT_BUTTON = ButtonWrapper(
