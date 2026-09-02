@@ -91,6 +91,17 @@ RECOMMENDATION_SELECTED = ButtonWrapper(
     ),
     en=None,
 )
+REWARDS_STORE_SELECTED = ButtonWrapper(
+    name='REWARDS_STORE_SELECTED',
+    cn=Button(
+        file='./assets/cn/store_purchase/REWARDS_STORE_SELECTED.png',
+        area=(48, 516, 171, 548),
+        search=(28, 496, 191, 568),
+        color=(132, 65, 66),
+        button=(48, 516, 171, 548),
+    ),
+    en=None,
+)
 STORE_CURRENCY_NOT_ENOUGH = ButtonWrapper(
     name='STORE_CURRENCY_NOT_ENOUGH',
     cn=Button(

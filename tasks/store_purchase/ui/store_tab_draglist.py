@@ -38,6 +38,10 @@ class StoreDragList(DraggableList):
             LIMITED_TIME_SALE_SELECTED.load_search(check_area)
             if LIMITED_TIME_SALE_SELECTED.match_template(main.device.image,similarity=0.7):
                 return True
+        elif self.current_keyword.name=='RewardsStore':
+            REWARDS_STORE_SELECTED.load_search(check_area)
+            if REWARDS_STORE_SELECTED.match_template(main.device.image,similarity=0.7):
+                return True
         return False
 class SubsidiaryStoreDragList(DraggableList):
     current_keyword=None

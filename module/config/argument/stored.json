@@ -48,6 +48,18 @@
     "order": 4,
     "color": "#32CD32"
   },
+  "ChaoYingDays": {
+    "name": "ChaoYingDays",
+    "path": "DataUpdate.ItemStorage.ChaoYingDays",
+    "i18n": "ItemStorage.ChaoYingDays.name",
+    "stored": "StoredChaoYingDays",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "value": 0
+    },
+    "order": 5,
+    "color": "#0000FF"
+  },
   "MissionAccept": {
     "name": "MissionAccept",
     "path": "Mission.MissionStorage.MissionAccept",

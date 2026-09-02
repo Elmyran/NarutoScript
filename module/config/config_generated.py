@@ -169,6 +169,7 @@ class GeneratedConfig:
     ItemStorage_Golds = {}
     ItemStorage_Coins = {}
     ItemStorage_Fame = {}
+    ItemStorage_ChaoYingDays = {}
 
     # Group `TiLiStorage`
     TiLiStorage_Dungeon = {}
@@ -182,6 +183,7 @@ class GeneratedConfig:
     MiJingStorage_MiJingCount = {}
 
     # Group `MissionStorage`
+    MissionStorage_MissionStrategy = '优先红箱子'  # 优先红箱子, 只拿红箱子
     MissionStorage_MissionAccept = {}
 
     # Group `AccountStorage`
