@@ -82,15 +82,10 @@ class OcrModel:
         params={
         "EngineConfig.onnxruntime.use_dml": use_dml,
         "EngineConfig.enable_cpu_mem_arena": True,
-        "Det.ocr_version": OCRVersion.PPOCRV4,
-        "Det.engine_type": EngineType.ONNXRUNTIME,
-        "Det.lang_type": LangDet.CH,
-        "Det.unclip_ratio": 1.9,
-        "Det.box_thresh": 0.5,
-        "Global.max_side_len": 2000,
-        "Global.text_score": 0.5,
-        "Det.model_type": ModelType.MOBILE,
-        "Rec.ocr_version": OCRVersion.PPOCRV5
+        "Det.model_type": ModelType.TINY,
+        "Rec.model_type": ModelType.MEDIUM,
+        "EngineConfig.onnxruntime.use_dml": use_dml,
+        "EngineConfig.onnxruntime.coreml_ep_cfg.MLComputeUnits": "CPUAndNeuralEngine",
 
 
         
