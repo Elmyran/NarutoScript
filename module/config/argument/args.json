@@ -438,6 +438,14 @@
       }
     },
     "MissionStorage": {
+      "MissionStrategy": {
+        "type": "select",
+        "value": "优先红箱子",
+        "option": [
+          "优先红箱子",
+          "只拿红箱子"
+        ]
+      },
       "MissionAccept": {
         "type": "stored",
         "value": {},
@@ -1138,6 +1146,14 @@
         "stored": "StoredInt",
         "order": 4,
         "color": "#32CD32"
+      },
+      "ChaoYingDays": {
+        "type": "stored",
+        "value": {},
+        "display": "display",
+        "stored": "StoredChaoYingDays",
+        "order": 5,
+        "color": "#0000FF"
       }
     }
   },

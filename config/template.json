@@ -116,6 +116,7 @@
       "ServerUpdate": "05:00"
     },
     "MissionStorage": {
+      "MissionStrategy": "优先红箱子",
       "MissionAccept": {}
     }
   },
@@ -268,7 +269,8 @@
       "TiLi": {},
       "Golds": {},
       "Coins": {},
-      "Fame": {}
+      "Fame": {},
+      "ChaoYingDays": {}
     }
   },
   "CultivationRoad": {
