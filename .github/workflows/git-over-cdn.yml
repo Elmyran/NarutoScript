@@ -33,7 +33,7 @@ jobs:
 
       - name: Build Git over CDN
         run: |
-          python .github/scripts/build_git_over_cdn.py \
+          python .github/scripts/git_over_cdn.py \
             --branch master \
             --history 5 \
             --output dist/git-over-cdn
