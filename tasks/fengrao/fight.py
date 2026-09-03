@@ -1,14 +1,11 @@
 from module.base.timer import Timer
 from module.exception import GameStuckError
-from tasks.base.page import  page_feng_rao
 from tasks.combat.combat import Combat
 from tasks.fengrao.assets.assets_fengrao import FENG_RAO_CHECK, FENG_RAO_FIGHT_SUCCESS, FENG_RAO_START_FIGHT_BUTTON, FENG_RAO_FIGHT_STATUS, FENG_RAO_HAVE_DONE
 
 
 class FengRaoFight(Combat):
     def handle_feng_rao(self):
-        self.device.click_record_clear()
-        self.ui_ensure(page_feng_rao)
         if self.is_feng_rao_have_done():
             return True
         self.start_fight()

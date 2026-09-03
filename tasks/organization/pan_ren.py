@@ -25,10 +25,6 @@ class OrganizationPanRen(GameControl,TaskUI):
             self.config.task_delay(target=[wednesday_target_time, saturday_target_time])
             self.config.task_stop()
             return
-        if not self._check_time():
-            self.config.task_delay(target=[wednesday_target_time, saturday_target_time])
-            self.config.task_stop()
-            return
         if not self.handle_organization_pan_ren():
             return False
         self.config.stored.PanRenFinishCount.add()

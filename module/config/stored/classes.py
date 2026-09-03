@@ -143,6 +143,33 @@ class StoredInt(StoredBase):
         self.value = 0
 
 
+class StoredChaoYingDays(StoredBase):
+    value = 0
+    PERIOD_DAYS = 30  # 超影为月度特权, 面板侧按钮检测无法得知剩余天数, 按满周期记录
+
+    def mark_active(self):
+        if self.predict_current() <= 0:
+            self.value = self.PERIOD_DAYS
+
+    def predict_current(self) -> int:
+        """
+        按每日 05:00 刷新推算当前剩余天数：记录后每过一个刷新点 -1
+        """
+        if self.value <= 0:
+            return 0
+        record = self.time
+        last_update = get_server_last_update('05:00')
+        if record >= last_update:
+            # 本次刷新后记录的（或时间异常），尚未衰减
+            return self.value
+        # 记录后经过了几个 05:00 刷新点
+        elapsed_days = (last_update - record).days + 1
+        return max(self.value - elapsed_days, 0)
+
+    def is_expired(self) -> bool:
+        return self.predict_current() <= 0
+
+
 class StoredCounter(StoredBase):
     value = 0
     total = 0

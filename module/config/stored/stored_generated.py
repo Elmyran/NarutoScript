@@ -10,6 +10,7 @@ from module.config.stored.classes import (
     StoredBattleOrderRank,
     StoredBattleOrderTaskProgress,
     StoredBattlePassLevel,
+    StoredChaoYingDays,
     StoredCounter,
     StoredDailyActivity,
     StoredDailyShareFinishCount,
@@ -78,5 +79,6 @@ class StoredGenerated:
     Golds = StoredInt("DataUpdate.ItemStorage.Golds")
     Coins = StoredInt("DataUpdate.ItemStorage.Coins")
     Fame = StoredInt("DataUpdate.ItemStorage.Fame")
+    ChaoYingDays = StoredChaoYingDays("DataUpdate.ItemStorage.ChaoYingDays")
     PanRenFinishCount = StoredPanRenCount("PanRen.PanRen.PanRenFinishCount")
     BattleFieldFinishCount = StoredBattleFieldCount("BattleField.BattleField.BattleFieldFinishCount")

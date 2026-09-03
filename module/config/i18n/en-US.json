@@ -888,6 +888,10 @@
     "Fame": {
       "name": "ItemStorage.Fame.name",
       "help": "ItemStorage.Fame.help"
+    },
+    "ChaoYingDays": {
+      "name": "ItemStorage.ChaoYingDays.name",
+      "help": "ItemStorage.ChaoYingDays.help"
     }
   },
   "TiLiStorage": {
@@ -932,6 +936,12 @@
     "_info": {
       "name": "MissionStorage._info.name",
       "help": "MissionStorage._info.help"
+    },
+    "MissionStrategy": {
+      "name": "MissionStorage.MissionStrategy.name",
+      "help": "MissionStorage.MissionStrategy.help",
+      "优先红箱子": "优先红箱子",
+      "只拿红箱子": "只拿红箱子"
     },
     "MissionAccept": {
       "name": "MissionStorage.MissionAccept.name",
