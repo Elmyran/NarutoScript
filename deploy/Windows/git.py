@@ -131,10 +131,10 @@ class GitManager(DeployConfig):
     @property
     def goc_client(self):
         client = GitOverCdnClient(
-            url='https://vip.123pan.cn/1815343254/pack/LmeSzinc_StarRailCopilot_master',
+            url='https://narutoscript-update.pages.dev',
             folder=self.root_filepath,
             source='origin',
-            branch='master',
+            branch='dev',
             git=self.git,
         )
         client.logger = logger
