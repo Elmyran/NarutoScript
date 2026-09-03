@@ -3,7 +3,7 @@ Deploy:
     # URL of AzurLaneAutoScript repository
     # [CN user] Use 'cn' to get update from git-over-cdn service
     # [Other] Use 'global' to get update from https://github.com/Elmyran/NarutoScript
-    Repository: https://gitee.com/Elmyran/NarutoScript
+    Repository: cn
     # Branch of Alas
     # [Developer] Use 'dev', 'app', etc, to try new features
     # [Other] Use 'master', the stable branch
@@ -35,9 +35,9 @@ Deploy:
     # [Other] Use you own python, and its version should be 3.7.6 64bit
     PythonExecutable: ./toolkit/python.exe
     # URL of pypi mirror
-    # [CN user] Use 'https://pypi.tuna.tsinghua.edu.cn/simple' for faster and more stable download
+    # [CN user] Use 'https://mirrors.aliyun.com/pypi/simple' for faster and more stable download
     # [Other] Use null
-    PypiMirror: null
+    PypiMirror: https://mirrors.aliyun.com/pypi/simple
     # Install dependencies at startup
     # [In most cases] Use true
     InstallDependencies: true
