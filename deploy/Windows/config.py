@@ -69,7 +69,7 @@ class ConfigModel:
     NoSandbox: bool = True
 
     # Dynamic
-    GitOverCdn: bool = False
+    GitOverCdn: bool = True
 
 
 class DeployConfig(ConfigModel):
@@ -123,7 +123,7 @@ class DeployConfig(ConfigModel):
         """
         # Bypass webui.config.DeployConfig.__setattr__()
         # Don't write these into deploy.yaml
-        #super().__setattr__('GitOverCdn', self.Repository in ['cn'])
+        super().__setattr__('GitOverCdn', self.Repository in ['cn'])
         if self.Repository in ['cn']:
             super().__setattr__('Repository', 'https://gitee.com/Elmyran/NarutoScript')
         elif self.Repository in ['global']:
