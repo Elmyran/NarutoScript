@@ -69,7 +69,7 @@ class ScrcpyCore(Connection):
             socket.timeout:
         """
         logger.hr('Scrcpy server start')
-        commands = ScrcpyOptions.command_v120(jar_path=self.config.SCRCPY_FILEPATH_REMOTE)
+        commands = ScrcpyOptions.command_v27(jar_path=self.config.SCRCPY_FILEPATH_REMOTE)
         self._scrcpy_server_stream: AdbConnection = self.adb.shell(
             commands,
             stream=True,
@@ -127,8 +127,21 @@ class ScrcpyCore(Connection):
             logger.attr('Scrcpy Device', device_name)
         else:
             raise ScrcpyError('Did not receive Device Name')
-        ret = self._scrcpy_video_socket.recv(4)
-        self._scrcpy_resolution = struct.unpack(">HH", ret)
+
+        def recv_n(n):
+            data = b''
+            while len(data) < n:
+                chunk = self._scrcpy_video_socket.recv(n - len(data))
+                if not chunk:
+                    raise ScrcpyError('Video socket closed when fetching device info')
+                data += chunk
+            return data
+
+        # Server >= 2.x sends: 4 bytes codec id (b'h264') + 4 bytes width + 4 bytes height (u32)
+        codec_id = recv_n(4)
+        width, height = struct.unpack('>II', recv_n(8))
+        self._scrcpy_resolution = (width, height)
+        logger.attr('Scrcpy Codec', codec_id.decode('utf-8', errors='ignore'))
         logger.attr('Scrcpy Resolution', self._scrcpy_resolution)
 
         self._scrcpy_video_socket.setblocking(False)
