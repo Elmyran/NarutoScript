@@ -134,7 +134,7 @@ class GitManager(DeployConfig):
             url='https://narutoscript-update.pages.dev',
             folder=self.root_filepath,
             source='origin',
-            branch='dev',
+            branch='master',
             git=self.git,
         )
         client.logger = logger
