@@ -1,0 +1,63 @@
+name: Git over CDN - Cloudflare
+
+on:
+  push:
+    branches:
+      - dev
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  deployments: write
+
+concurrency:
+  group: git-over-cdn-pages
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: dev
+
+      - name: Check Git
+        run: |
+          git --version
+          echo "Current branch:"
+          git branch --show-current
+          echo "Current commit:"
+          git rev-parse HEAD
+
+      - name: Check files
+        run: |
+          echo "===== Scripts ====="
+          find .github/scripts -maxdepth 2 -type f -print
+          echo "==================="
+
+      - name: Build Git over CDN
+        run: |
+          python .github/scripts/git_over_cdn.py \
+            --branch dev \
+            --history 5 \
+            --output dist/git-over-cdn
+
+      - name: Show generated files
+        run: |
+          echo "===== Generated files ====="
+          find dist/git-over-cdn -type f -printf '%p %s bytes\n'
+          echo "=========================="
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: >
+            pages deploy dist/git-over-cdn
+            --project-name=narutoscript-update
