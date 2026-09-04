@@ -1,9 +1,9 @@
 from tasks.base.page import page_feng_rao
-from tasks.base.ui import UI
+from tasks.base.taskui import TaskUI
 from tasks.fengrao.assets.assets_fengrao import FENG_RAO_CHAO_YING_CHECK, FENG_RAO_FIGHT_SUCCESS, FENG_RAO_HAVE_DONE, FENG_RAO_SKIP_CONFIRM, FENG_RAO_SKIP_FIGHT
 from tasks.fengrao.fight import FengRaoFight
 
-class FengRao(UI):
+class FengRao(TaskUI):
     def run(self):
         self.device.click_record_clear()
         self.ui_ensure(page_feng_rao)
@@ -18,7 +18,7 @@ class FengRao(UI):
         for _ in self.loop():
             if self.appear(FENG_RAO_HAVE_DONE):
                 break
-            if self.appear_then_click(FENG_RAO_FIGHT_SUCCESS,interval=1):
+            if self.appear_then_click(FENG_RAO_FIGHT_SUCCESS,interval=2):
                 continue
             if self.appear_then_click(FENG_RAO_SKIP_CONFIRM,interval=1):
                 continue
