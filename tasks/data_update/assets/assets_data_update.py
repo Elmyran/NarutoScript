@@ -7,49 +7,49 @@ DATA_COINS = ButtonWrapper(
     name='DATA_COINS',
     share=Button(
         file='./assets/share/data_update/DATA_COINS.png',
-        area=(612, 24, 740, 61),
-        search=(592, 4, 760, 81),
-        color=(119, 113, 121),
-        button=(612, 24, 740, 61),
+        area=(640, 28, 738, 61),
+        search=(620, 8, 758, 81),
+        color=(106, 111, 127),
+        button=(640, 28, 738, 61),
     ),
 )
 DATA_FAME = ButtonWrapper(
     name='DATA_FAME',
     share=Button(
         file='./assets/share/data_update/DATA_FAME.png',
-        area=(897, 93, 1037, 133),
-        search=(877, 73, 1057, 153),
-        color=(52, 58, 42),
-        button=(897, 93, 1037, 133),
+        area=(930, 97, 1037, 133),
+        search=(910, 77, 1057, 153),
+        color=(44, 44, 43),
+        button=(930, 97, 1037, 133),
     ),
 )
 DATA_GOLD = ButtonWrapper(
     name='DATA_GOLD',
     share=Button(
         file='./assets/share/data_update/DATA_GOLD.png',
-        area=(824, 20, 963, 59),
-        search=(804, 0, 983, 79),
-        color=(105, 120, 131),
-        button=(824, 20, 963, 59),
+        area=(861, 27, 958, 59),
+        search=(841, 7, 978, 79),
+        color=(90, 104, 123),
+        button=(861, 27, 958, 59),
     ),
 )
 DATA_RECRUITMENT_TICKETS = ButtonWrapper(
     name='DATA_RECRUITMENT_TICKETS',
     share=Button(
         file='./assets/share/data_update/DATA_RECRUITMENT_TICKETS.png',
-        area=(1031, 19, 1108, 56),
-        search=(1011, 0, 1128, 76),
-        color=(90, 100, 100),
-        button=(1031, 19, 1108, 56),
+        area=(993, 20, 1079, 52),
+        search=(973, 0, 1099, 72),
+        color=(39, 48, 63),
+        button=(993, 20, 1079, 52),
     ),
 )
 DATA_TI_LI = ButtonWrapper(
     name='DATA_TI_LI',
     share=Button(
         file='./assets/share/data_update/DATA_TI_LI.png',
-        area=(373, 18, 523, 64),
-        search=(353, 0, 543, 84),
-        color=(116, 130, 149),
-        button=(373, 18, 523, 64),
+        area=(421, 27, 518, 60),
+        search=(401, 7, 538, 80),
+        color=(106, 109, 125),
+        button=(421, 27, 518, 60),
     ),
 )

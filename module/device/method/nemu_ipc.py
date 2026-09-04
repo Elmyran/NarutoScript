@@ -48,16 +48,6 @@ class CaptureStd:
         self.stdout = b''
         self.stderr = b''
 
-    def _redirect_stdout(self, to):
-        sys.stdout.close()
-        os.dup2(to, self.fdout)
-        sys.stdout = os.fdopen(self.fdout, 'w')
-
-    def _redirect_stderr(self, to):
-        sys.stderr.close()
-        os.dup2(to, self.fderr)
-        sys.stderr = os.fdopen(self.fderr, 'w')
-
     def __enter__(self):
         self.fdout = sys.stdout.fileno()
         self.fderr = sys.stderr.fileno()
@@ -65,23 +55,29 @@ class CaptureStd:
         self.reader_err, self.writer_err = os.pipe()
         self.old_stdout = os.dup(self.fdout)
         self.old_stderr = os.dup(self.fderr)
-
-        file_out = os.fdopen(self.writer_out, 'w')
-        file_err = os.fdopen(self.writer_err, 'w')
-        self._redirect_stdout(to=file_out.fileno())
-        self._redirect_stderr(to=file_err.fileno())
+        # 只重定向文件描述符, 不替换也不关闭 sys.stdout/sys.stderr 对象
+        # rapidocr 等第三方 logger 在导入时捕获了原始流对象, 关闭会导致其日志报 I/O operation on closed file
+        sys.stdout.flush()
+        sys.stderr.flush()
+        os.dup2(self.writer_out, self.fdout)
+        os.dup2(self.writer_err, self.fderr)
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        self._redirect_stdout(to=self.old_stdout)
-        self._redirect_stderr(to=self.old_stderr)
-        os.close(self.old_stdout)
-        os.close(self.old_stderr)
-
+        # 冲刷捕获期间积压在 Python 缓冲区的内容到管道
+        sys.stdout.flush()
+        sys.stderr.flush()
+        # 关闭管道写端 fd, 并恢复原 fd, 使 recvall 能读到 EOF
+        os.close(self.writer_out)
+        os.close(self.writer_err)
+        os.dup2(self.old_stdout, self.fdout)
+        os.dup2(self.old_stderr, self.fderr)
         self.stdout = self.recvall(self.reader_out)
         self.stderr = self.recvall(self.reader_err)
         os.close(self.reader_out)
         os.close(self.reader_err)
+        os.close(self.old_stdout)
+        os.close(self.old_stderr)
 
     @staticmethod
     def recvall(reader, length=1024) -> bytes:

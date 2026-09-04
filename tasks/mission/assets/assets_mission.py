@@ -225,39 +225,6 @@ REWARD_CLAIM_DONE = ButtonWrapper(
     ),
     en=None,
 )
-TASK_1_AREA = ButtonWrapper(
-    name='TASK_1_AREA',
-    cn=Button(
-        file='./assets/cn/mission/TASK_1_AREA.png',
-        area=(530, 201, 1239, 325),
-        search=(510, 181, 1259, 345),
-        color=(77, 65, 66),
-        button=(530, 201, 1239, 325),
-    ),
-    en=None,
-)
-TASK_2_AREA = ButtonWrapper(
-    name='TASK_2_AREA',
-    cn=Button(
-        file='./assets/cn/mission/TASK_2_AREA.png',
-        area=(527, 318, 1242, 435),
-        search=(507, 298, 1262, 455),
-        color=(87, 57, 64),
-        button=(527, 318, 1242, 435),
-    ),
-    en=None,
-)
-TASK_3_AREA = ButtonWrapper(
-    name='TASK_3_AREA',
-    cn=Button(
-        file='./assets/cn/mission/TASK_3_AREA.png',
-        area=(525, 426, 1239, 550),
-        search=(505, 406, 1259, 570),
-        color=(77, 65, 65),
-        button=(525, 426, 1239, 550),
-    ),
-    en=None,
-)
 TASK_ACCEPT = ButtonWrapper(
     name='TASK_ACCEPT',
     cn=Button(
