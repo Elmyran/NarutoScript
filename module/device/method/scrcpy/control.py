@@ -170,11 +170,13 @@ class ControlSender:
                     break
             s.setblocking(True)
 
-            # Read package
-            package = struct.pack(">B", const.TYPE_GET_CLIPBOARD)
+            # Read package, copy_key = COPY_KEY_NONE
+            package = struct.pack(">BB", const.TYPE_GET_CLIPBOARD, 0)
             s.send(package)
             (code,) = struct.unpack(">B", s.recv(1))
-            assert code == 0
+            assert code == const.TYPE_CLIPBOARD
+            # server >= 1.22 responses with an 8-byte sequence before content
+            s.recv(8)
             (length,) = struct.unpack(">i", s.recv(4))
 
             return s.recv(length).decode("utf-8")
@@ -189,7 +191,9 @@ class ControlSender:
             paste: paste now
         """
         buffer = text.encode("utf-8")
-        return struct.pack(">?i", paste, len(buffer)) + buffer
+        # server >= 1.22 prepends an 8-byte sequence before paste flag,
+        # sequence 0 means no ack response is required
+        return struct.pack(">q?i", 0, paste, len(buffer)) + buffer
 
     @inject(const.TYPE_SET_SCREEN_POWER_MODE)
     def set_screen_power_mode(self, mode: int = const.POWER_MODE_NORMAL) -> bytes:
