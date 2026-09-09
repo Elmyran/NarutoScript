@@ -5,9 +5,10 @@ from module.ocr.ocr import DigitCounter
 from tasks.base.page import page_mission
 from tasks.base.taskui import TaskUI
 from tasks.mission.assets.assets_mission import *
+from tasks.mission.assets.assets_mission_task import TASK_1_AREA, TASK_1_JADE, TASK_1_NAME, TASK_1_TIME, TASK_2_AREA, TASK_2_JADE, TASK_2_NAME, TASK_2_TIME, TASK_3_AREA, TASK_3_JADE, TASK_3_NAME, TASK_3_TIME
 from tasks.mission.mission_keyword import MissionClaimable
-from tasks.mission.mission_strategy import STRATEGIES, NormalAcceptStrategy, RedBoxFirstStrategy, RedBoxOnlyStrategy, StrategyAction
-from tasks.mission.task import MissionDurationOcr, Task
+from tasks.mission.mission_strategy import  NormalAcceptStrategy, RedBoxFirstStrategy, RedBoxOnlyStrategy, StrategyAction
+from tasks.mission.task import Task
 
 
 class Mission(TaskUI):
@@ -67,7 +68,7 @@ class Mission(TaskUI):
     # ============================== 领取奖励 ==============================
 
     def _mission_reward_claim(self):
-        ocr = MissionDurationOcr(MISSION_TASK_CLAIMED_LIST, lang='cn')
+        ocr = MissionDurationOcr(MISSION_TASK_CLAIMED_LIST)
         res = ocr.matched_ocr(self.device.image, MissionClaimable)
         if not res:
             return
@@ -230,14 +231,13 @@ class Mission(TaskUI):
     def _scan_tasks(self):
         """扫描三个任务位, 识别有效任务。"""
         tasks = []
-        skip_first_screenshot = True
-        for area in (TASK_1_AREA, TASK_2_AREA, TASK_3_AREA):
-            if skip_first_screenshot:
-                skip_first_screenshot = False
-            else:
-                self.device.screenshot()
+        for area, name, time, jade in zip(
+                (TASK_1_AREA, TASK_2_AREA, TASK_3_AREA),
+                (TASK_1_NAME, TASK_2_NAME, TASK_3_NAME),
+                (TASK_1_TIME, TASK_2_TIME, TASK_3_TIME),
+                (TASK_1_JADE, TASK_2_JADE, TASK_3_JADE)):
             task = Task(area)
-            task.task_parse(self.device.image)
+            task.task_parse(self.device.screenshot(), name, time, jade)
             if task.valid:
                 tasks.append(task)
         if not tasks:
@@ -251,4 +251,4 @@ if __name__ == '__main__':
     mission = Mission(config='ns', device='127.0.0.1:16384',task='Alas')
     mission.device.screenshot()
     mission.strategy = mission._select_strategy()
-    mission._accept_tasks()
+    mission._scan_tasks()

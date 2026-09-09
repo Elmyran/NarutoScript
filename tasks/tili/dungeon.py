@@ -11,7 +11,7 @@ class Dungeon(TaskUI):
         self.device.click_record_clear()
         self.device.stuck_record_clear()
         self.ui_ensure(page_main)
-        ocr=DigitCounter(TI_LI_REMAIN_COUNTER,lang='cn')
+        ocr=DigitCounter(TI_LI_REMAIN_COUNTER)
         current,remain,total=ocr.ocr_single_line(self.device.image)
         if current>=0 and total==200:
             self.config.stored.TiLi.value=current

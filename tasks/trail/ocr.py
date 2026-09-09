@@ -10,15 +10,12 @@ class CultivationDuration(Duration):
         # 27:0959 -> 27:09:59    
         result = re.sub(r'(\d{1,2}):(\d{2})(\d{2})', r'\1:\2:\3', result)    
           
-        # 转换为标准格式    
-        if self.lang == 'cn':    
-            result = re.sub(r'(\d+):(\d+):(\d+)', r'\1小时\2分钟\3秒', result)    
-        else:    
-            result = re.sub(r'(\d+):(\d+):(\d+)', r'\1h\2m\3s', result)    
-          
-        return result  
+        # 转换为标准格式
+        result = re.sub(r'(\d+):(\d+):(\d+)', r'\1小时\2分钟\3秒', result)
+
+        return result
     def format_result(self, result: str) -> datetime:
-        matched = self.timedelta_regex(self.lang).search(result)
+        matched = self.timedelta_regex().search(result)
         hours = self._sanitize_number(matched.group('hours'))
         minutes = self._sanitize_number(matched.group('minutes'))
         seconds = self._sanitize_number(matched.group('seconds'))
