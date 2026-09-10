@@ -16,38 +16,19 @@ class Enemy:
         self.button=None
     def __str__(self):
         return f" 组织: {self.organization},积分:{self.score},小队战力: {self.power}"    
-    def  recognition(self,image):
+    def  recognition(self,image,power,organization,score):
         #button
         JI_FEN_SAI_FIGHT_START_BUTTON.load_search(self.area)
         if JI_FEN_SAI_FIGHT_START_BUTTON.match_template(image):
             self.button=JI_FEN_SAI_FIGHT_START_BUTTON.button
         #power
-        power_area=(840,
-                    self.area[1]+67,
-                    940,
-                    self.area[3]
-                    )
-        button=ClickButton(area=power_area,name='POWER')
-        ocr=Digit(button)
+        ocr=Digit(power)
         self.power=ocr.ocr_single_line(image)
         #organization
-        organization_area=(555,
-                           self.area[1]+34,
-                           700,
-                           self.area[3]-40
-
-        )
-        button=ClickButton(area=organization_area,name='ORGANIZATION')
-        ocr=Ocr(button)
+        ocr=Ocr(organization)
         self.organization=ocr.ocr_single_line(image)
         #score
-        score_area=(630,
-                    self.area[1]+66,
-                    690,
-                    self.area[3]
-                    )
-        button=ClickButton(area=score_area,name='SCORE')
-        ocr=Digit(button)
+        ocr=Digit(score)
         self.score=ocr.ocr_single_line(image)
         
 

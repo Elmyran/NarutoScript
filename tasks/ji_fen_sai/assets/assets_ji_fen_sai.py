@@ -3,50 +3,6 @@ from module.base.button import Button, ButtonWrapper
 # This file was auto-generated, do not modify it manually. To generate:
 # ``` python -m dev_tools.button_extract ```
 
-ENEMY_1 = ButtonWrapper(
-    name='ENEMY_1',
-    cn=Button(
-        file='./assets/cn/ji_fen_sai/ENEMY_1.png',
-        area=(500, 166, 1109, 270),
-        search=(480, 146, 1129, 290),
-        color=(117, 125, 85),
-        button=(500, 166, 1109, 270),
-    ),
-    en=None,
-)
-ENEMY_2 = ButtonWrapper(
-    name='ENEMY_2',
-    cn=Button(
-        file='./assets/cn/ji_fen_sai/ENEMY_2.png',
-        area=(501, 283, 1107, 388),
-        search=(481, 263, 1127, 408),
-        color=(122, 131, 88),
-        button=(501, 283, 1107, 388),
-    ),
-    en=None,
-)
-ENEMY_3 = ButtonWrapper(
-    name='ENEMY_3',
-    cn=Button(
-        file='./assets/cn/ji_fen_sai/ENEMY_3.png',
-        area=(500, 401, 1107, 505),
-        search=(480, 381, 1127, 525),
-        color=(118, 129, 89),
-        button=(500, 401, 1107, 505),
-    ),
-    en=None,
-)
-ENEMY_4 = ButtonWrapper(
-    name='ENEMY_4',
-    cn=Button(
-        file='./assets/cn/ji_fen_sai/ENEMY_4.png',
-        area=(500, 519, 1105, 623),
-        search=(480, 499, 1125, 643),
-        color=(129, 136, 90),
-        button=(500, 519, 1105, 623),
-    ),
-    en=None,
-)
 ENEMY_REFRESH = ButtonWrapper(
     name='ENEMY_REFRESH',
     cn=Button(
