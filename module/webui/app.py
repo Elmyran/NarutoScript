@@ -31,6 +31,7 @@ from pywebio.output import (
     put_table,
     put_text,
     put_warning,
+    set_scope,
     toast,
     use_scope,
 )
@@ -139,10 +140,11 @@ class AlasGUI(Frame):
             ],
             onclick=[self.ui_develop],
         ),
-        put_scope("aside_instance",[
-            put_scope(f"alas-instance-{i}",[])
+        # Create instance rows as nested scopes in one shot (no later put_scope of same ids)
+        put_scope("aside_instance", [
+            put_scope(f"alas-instance-{i}", [])
             for i, _ in enumerate(alas_instance())
-        ])
+        ], scope="aside")
         self.set_aside_status()
         put_icon_buttons(
             Icon.ADD,
@@ -159,12 +161,14 @@ class AlasGUI(Frame):
     @use_scope("aside_instance")
     def set_aside_status(self) -> None:
         flag = True
+
         def update(name, seq):
+            # Only fill existing scopes — never put_scope here (avoids duplicate id)
             with use_scope(f"alas-instance-{seq}", clear=True):
                 icon_html = Icon.RUN
                 rendered_state = ProcessManager.get_manager(inst).state
                 if rendered_state == 1 and self.af_flag:
-                    icon_html = icon_html[:31] + ' anim-rotate' + icon_html[31:]
+                    icon_html = icon_html[:31] + " anim-rotate" + icon_html[31:]
                 put_icon_buttons(
                     icon_html,
                     buttons=[{"label": name, "value": name, "color": "aside"}],
@@ -173,25 +177,23 @@ class AlasGUI(Frame):
             return rendered_state
 
         if not len(self.rendered_cache) or self.load_home:
-            # Reload when add/delete new instance | first start app.py | go to HomePage (HomePage load call force reload)
+            # Reload when add/delete new instance | first start | HomePage
             flag = False
-            self.inst_cache.clear()
             self.inst_cache = alas_instance()
         if flag:
             for index, inst in enumerate(self.inst_cache):
-                # Check for state change
                 state = ProcessManager.get_manager(inst).state
                 if state != self.rendered_cache[index]:
                     self.rendered_cache[index] = update(inst, index)
                     flag = False
         else:
+            # Do NOT clear("aside_instance"): that removes nested scopes set_aside just created.
+            # Just refill each child via use_scope.
             self.rendered_cache.clear()
-            clear("aside_instance")
             for index, inst in enumerate(self.inst_cache):
                 self.rendered_cache.append(update(inst, index))
             self.load_home = False
         if not flag:
-            # Redraw lost focus, now focus on aside button
             aside_name = get_localstorage("aside")
             self.active_button("aside", aside_name)
 
@@ -1148,8 +1150,10 @@ class AlasGUI(Frame):
 
         instances = self._manage_instances()
 
-        # Panel header: big title left + add button right (same pattern as scheduler-bar)
-        put_scope("manage_panel", [
+        # set_scope(if_exist=clear): reuse existing panel or create once; never put_scope same id
+        set_scope("manage_panel", container_scope="content", if_exist="clear")
+
+        with use_scope("manage_panel"):
             put_row(
                 [
                     put_text(t("Gui.ManageAlas.TabList")).style(
@@ -1166,34 +1170,34 @@ class AlasGUI(Frame):
                     ),
                 ],
                 size="1fr auto",
-            ),
-            put_html('<hr class="hr-group">'),
-        ])
+            )
+            put_html('<hr class="hr-group">')
 
-        if not instances:
-            put_text(t("Gui.ManageAlas.ListEmpty"), scope="manage_panel").style("--arg-help--")
-            put_text(t("Gui.ManageAlas.DeleteRunningTip"), scope="manage_panel").style("--arg-help--")
-            return
+            if not instances:
+                put_text(t("Gui.ManageAlas.ListEmpty")).style("--arg-help--")
+                put_text(t("Gui.ManageAlas.DeleteRunningTip")).style("--arg-help--")
+                return
 
-        put_scope("config_list", [], scope="manage_panel")
-        with use_scope("config_list", clear=True):
-            for name in instances:
-                put_row(
-                    [
-                        put_text(name).style(
-                            "flex:1;min-width:0;font-size:.875rem;"
-                            "line-height:1.25rem;overflow-wrap:anywhere;margin:0;"
-                        ),
-                        put_button(
-                            label=t("Gui.ManageAlas.Delete"),
-                            onclick=partial(self._manage_ask_delete, name),
-                            color="danger",
-                        ),
-                    ],
-                    size="1fr auto",
-                ).style("--cfg-row-flex--")
+            # Nested list: create once under panel, refill via use_scope
+            set_scope("config_list", container_scope="manage_panel", if_exist="clear")
+            with use_scope("config_list"):
+                for name in instances:
+                    put_row(
+                        [
+                            put_text(name).style(
+                                "flex:1;min-width:0;font-size:.875rem;"
+                                "line-height:1.25rem;overflow-wrap:anywhere;margin:0;"
+                            ),
+                            put_button(
+                                label=t("Gui.ManageAlas.Delete"),
+                                onclick=partial(self._manage_ask_delete, name),
+                                color="danger",
+                            ),
+                        ],
+                        size="1fr auto",
+                    ).style("--cfg-row-flex--")
 
-        put_text(t("Gui.ManageAlas.DeleteRunningTip"), scope="manage_panel").style("--arg-help--")
+            put_text(t("Gui.ManageAlas.DeleteRunningTip")).style("--arg-help--")
 
     def ui_add_alas(self) -> None:
         """Original add-config popup, opened from Manage > 配置列表."""
@@ -1356,12 +1360,13 @@ class AlasGUI(Frame):
                         t("Gui.ManageAlas.ImportFailed", names=", ".join(errors))
                     )
 
-        put_scope("manage_panel", [
+        set_scope("manage_panel", container_scope="content", if_exist="clear")
+        with use_scope("manage_panel"):
             put_text(t("Gui.ManageAlas.TabImport")).style(
                 "font-size:1.25rem;margin:auto .5rem auto;"
-            ),
-            put_html('<hr class="hr-group">'),
-            put_text(t("Gui.ManageAlas.ImportHint")).style("--arg-help--"),
+            )
+            put_html('<hr class="hr-group">')
+            put_text(t("Gui.ManageAlas.ImportHint")).style("--arg-help--")
             put_row(
                 [
                     put_file_upload(
@@ -1375,17 +1380,14 @@ class AlasGUI(Frame):
                         onclick=do_import,
                         color="on",
                     ).style(
-                        # Offset for the label above the file input so the button
-                        # lines up with the browse control, not the label
                         "margin:1.55rem .25rem 0 .5rem;width:auto;flex-shrink:0;"
                         "white-space:nowrap;font-size:.8125rem;padding:.25rem .75rem;"
                         "line-height:1.25rem;"
                     ),
                 ],
                 size="1fr auto",
-            ),
-            put_scope("import_result"),
-        ])
+            )
+            set_scope("import_result", container_scope="manage_panel", if_exist="clear")
 
     def show(self) -> None:
         self._show()
@@ -1471,6 +1473,27 @@ class AlasGUI(Frame):
         run_js(
             """
         reload = 1;
+        window.__nsLastAlive = Date.now();
+        // Heartbeat: if UI stops receiving any WebIO traffic for a long time, force reload
+        (function () {
+            if (window.__nsAliveTimer) return;
+            window.__nsAliveTimer = setInterval(function () {
+                if (typeof reload === 'undefined' || reload !== 1) return;
+                var sess = WebIO && WebIO._state && WebIO._state.CurrentSession;
+                // Mark alive on any outgoing/incoming if possible; fall back to DOM presence
+                var hasRoot = !!document.getElementById('pywebio-scope-ROOT');
+                var hasContent = !!document.getElementById('pywebio-scope-content');
+                // White-screen / hung session: root missing, or content empty for a long time
+                var contentEmpty = hasContent && document.getElementById('pywebio-scope-content').children.length === 0;
+                var now = Date.now();
+                if (!hasRoot || (contentEmpty && now - (window.__nsLastAlive || 0) > 90000)) {
+                    if (now - (window.__nsLastReload || 0) > 30000) {
+                        window.__nsLastReload = now;
+                        location.reload();
+                    }
+                }
+            }, 15000);
+        })();
         WebIO._state.CurrentSession.on_session_close(
             ()=>{
                 setTimeout(
