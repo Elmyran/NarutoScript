@@ -220,8 +220,15 @@ class AzurLaneConfig(ConfigUpdater, ManualConfig, GeneratedConfig, ConfigWatcher
             else:
                 waiting.append(func)
 
+        priority = deep_get(
+            self.data, keys="Alas.TaskPriority.Priority", default=""
+        )
+        priority = str(priority or "").strip()
+        if not priority:
+            priority = self.SCHEDULER_PRIORITY
+
         f = Filter(regex=r"(.*)", attr=["command"])
-        f.load(self.SCHEDULER_PRIORITY)
+        f.load(priority)
         if pending:
             pending = f.apply(pending)
         if waiting:

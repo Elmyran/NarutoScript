@@ -115,6 +115,20 @@ pre.rich-traceback-code {
     border: 1px solid lightgrey;
 }
 
+.sortable-item.sortable-dragging {
+    background-color: #fff;
+    color: #212529;
+}
+
+.sortable-placeholder {
+    background-color: rgba(128, 128, 128, .06);
+    border-color: rgba(128, 128, 128, .35);
+}
+
+.sortable-item.sortable-moved {
+    background-color: rgba(128, 128, 128, .12);
+}
+
 #pywebio-scope-daemon-overview [id^="pywebio-scope-group_"] {
     border: 0;
 }

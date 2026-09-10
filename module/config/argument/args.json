@@ -137,6 +137,34 @@
           "close_emulator"
         ]
       }
+    },
+    "TaskPriority": {
+      "Priority": {
+        "type": "sortable",
+        "value": "Restart>BattleField>Fortress>PanRen>CultivationRoad>Akatsuki>SquadRaid>FengRao>SurvivalTrail>JiFenSai>Recruit>DingCiKaoRou>StorePurchase>Duel>MiJing>Mission>Freebies>BattleOrder>TiLi>DataUpdate",
+        "option": [
+          "Restart",
+          "BattleField",
+          "Fortress",
+          "PanRen",
+          "CultivationRoad",
+          "Akatsuki",
+          "SquadRaid",
+          "FengRao",
+          "SurvivalTrail",
+          "JiFenSai",
+          "Recruit",
+          "DingCiKaoRou",
+          "StorePurchase",
+          "Duel",
+          "MiJing",
+          "Mission",
+          "Freebies",
+          "BattleOrder",
+          "TiLi",
+          "DataUpdate"
+        ]
+      }
     }
   },
   "Restart": {

@@ -368,7 +368,7 @@ def filepath_icon(filename):
 
 
 def add_css(filepath):
-    with open(filepath, "r") as f:
+    with open(filepath, "r", encoding="utf-8") as f:
         css = f.read().replace("\n", "")
         run_js(f"""$('head').append('<style>{css}</style>')""")
 

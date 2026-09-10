@@ -260,6 +260,37 @@
       "close_emulator": "close_emulator"
     }
   },
+  "TaskPriority": {
+    "_info": {
+      "name": "TaskPriority._info.name",
+      "help": "TaskPriority._info.help"
+    },
+    "Priority": {
+      "name": "TaskPriority.Priority.name",
+      "help": "TaskPriority.Priority.help",
+      "Reset": "デフォルト順に戻す",
+      "Restart": "Restart",
+      "BattleField": "BattleField",
+      "Fortress": "Fortress",
+      "PanRen": "PanRen",
+      "CultivationRoad": "CultivationRoad",
+      "Akatsuki": "Akatsuki",
+      "SquadRaid": "SquadRaid",
+      "FengRao": "FengRao",
+      "SurvivalTrail": "SurvivalTrail",
+      "JiFenSai": "JiFenSai",
+      "Recruit": "Recruit",
+      "DingCiKaoRou": "DingCiKaoRou",
+      "StorePurchase": "StorePurchase",
+      "Duel": "Duel",
+      "MiJing": "MiJing",
+      "Mission": "Mission",
+      "Freebies": "Freebies",
+      "BattleOrder": "BattleOrder",
+      "TiLi": "TiLi",
+      "DataUpdate": "DataUpdate"
+    }
+  },
   "Password": {
     "_info": {
       "name": "Password._info.name",
@@ -1004,6 +1035,7 @@
     "Toast": {
       "DisableTranslateMode": "クリックして翻訳モードを中止します",
       "ConfigSaved": "コンフィグ設定は保存されました",
+      "PriorityReset": "デフォルトのタスク優先度に戻しました",
       "AlasIsRunning": "スケジューラーはもう実行しています",
       "ClickToUpdate": "新しいアップデータがあります。クリックしてアップデータ"
     },

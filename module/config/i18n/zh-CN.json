@@ -260,6 +260,37 @@
       "close_emulator": "关闭模拟器"
     }
   },
+  "TaskPriority": {
+    "_info": {
+      "name": "任务优先级",
+      "help": "越靠上的任务优先级越高。多个待执行任务同时就绪时，优先运行靠前的任务"
+    },
+    "Priority": {
+      "name": "拖拽调整任务顺序",
+      "help": "拖拽行或使用 ↑↓ 调整顺序。越靠前优先级越高；修改后会自动保存",
+      "Reset": "重置默认顺序",
+      "Restart": "Restart",
+      "BattleField": "BattleField",
+      "Fortress": "Fortress",
+      "PanRen": "PanRen",
+      "CultivationRoad": "CultivationRoad",
+      "Akatsuki": "Akatsuki",
+      "SquadRaid": "SquadRaid",
+      "FengRao": "FengRao",
+      "SurvivalTrail": "SurvivalTrail",
+      "JiFenSai": "JiFenSai",
+      "Recruit": "Recruit",
+      "DingCiKaoRou": "DingCiKaoRou",
+      "StorePurchase": "StorePurchase",
+      "Duel": "Duel",
+      "MiJing": "MiJing",
+      "Mission": "Mission",
+      "Freebies": "Freebies",
+      "BattleOrder": "BattleOrder",
+      "TiLi": "TiLi",
+      "DataUpdate": "DataUpdate"
+    }
+  },
   "Password": {
     "_info": {
       "name": "密码设置",
@@ -1004,6 +1035,7 @@
     "Toast": {
       "DisableTranslateMode": "点击这里关闭翻译模式",
       "ConfigSaved": "设置已保存",
+      "PriorityReset": "已恢复默认任务优先级",
       "AlasIsRunning": "调度器已在运行中",
       "ClickToUpdate": "有更新可用，点击这里进行更新"
     },

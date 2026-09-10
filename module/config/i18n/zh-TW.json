@@ -260,6 +260,37 @@
       "close_emulator": "關閉模擬器"
     }
   },
+  "TaskPriority": {
+    "_info": {
+      "name": "TaskPriority._info.name",
+      "help": "TaskPriority._info.help"
+    },
+    "Priority": {
+      "name": "TaskPriority.Priority.name",
+      "help": "TaskPriority.Priority.help",
+      "Reset": "重設預設順序",
+      "Restart": "Restart",
+      "BattleField": "BattleField",
+      "Fortress": "Fortress",
+      "PanRen": "PanRen",
+      "CultivationRoad": "CultivationRoad",
+      "Akatsuki": "Akatsuki",
+      "SquadRaid": "SquadRaid",
+      "FengRao": "FengRao",
+      "SurvivalTrail": "SurvivalTrail",
+      "JiFenSai": "JiFenSai",
+      "Recruit": "Recruit",
+      "DingCiKaoRou": "DingCiKaoRou",
+      "StorePurchase": "StorePurchase",
+      "Duel": "Duel",
+      "MiJing": "MiJing",
+      "Mission": "Mission",
+      "Freebies": "Freebies",
+      "BattleOrder": "BattleOrder",
+      "TiLi": "TiLi",
+      "DataUpdate": "DataUpdate"
+    }
+  },
   "Password": {
     "_info": {
       "name": "Password._info.name",
@@ -1004,6 +1035,7 @@
     "Toast": {
       "DisableTranslateMode": "點擊這裡關閉翻譯模式",
       "ConfigSaved": "設定已儲存",
+      "PriorityReset": "已還原預設任務優先順序",
       "AlasIsRunning": "調度器已在執行中",
       "ClickToUpdate": "有更新可用，點擊這裡進行更新"
     },

@@ -260,6 +260,37 @@
       "close_emulator": "Close Emulator"
     }
   },
+  "TaskPriority": {
+    "_info": {
+      "name": "Task Priority",
+      "help": "Tasks higher in the list run first when multiple pending tasks are ready"
+    },
+    "Priority": {
+      "name": "Drag to reorder tasks",
+      "help": "Drag rows or use ↑↓ to change order. Higher items have higher priority. Changes are saved automatically",
+      "Reset": "Reset to default order",
+      "Restart": "Restart",
+      "BattleField": "BattleField",
+      "Fortress": "Fortress",
+      "PanRen": "PanRen",
+      "CultivationRoad": "CultivationRoad",
+      "Akatsuki": "Akatsuki",
+      "SquadRaid": "SquadRaid",
+      "FengRao": "FengRao",
+      "SurvivalTrail": "SurvivalTrail",
+      "JiFenSai": "JiFenSai",
+      "Recruit": "Recruit",
+      "DingCiKaoRou": "DingCiKaoRou",
+      "StorePurchase": "StorePurchase",
+      "Duel": "Duel",
+      "MiJing": "MiJing",
+      "Mission": "Mission",
+      "Freebies": "Freebies",
+      "BattleOrder": "BattleOrder",
+      "TiLi": "TiLi",
+      "DataUpdate": "DataUpdate"
+    }
+  },
   "Password": {
     "_info": {
       "name": "Password._info.name",
@@ -1004,6 +1035,7 @@
     "Toast": {
       "DisableTranslateMode": "Click here to disable translate mode",
       "ConfigSaved": "Config saved",
+      "PriorityReset": "Default task priority restored",
       "AlasIsRunning": "Scheduler is already running",
       "ClickToUpdate": "New update available, click here to update"
     },

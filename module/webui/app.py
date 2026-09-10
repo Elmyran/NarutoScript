@@ -1237,6 +1237,282 @@ class AlasGUI(Frame):
         """
         )
 
+        # Delegated handlers for sortable priority lists
+        # put_html(<script>) is stripped by jQuery, so bind once here
+        # Drag: take the row out of flow (position:fixed), follow pointer with
+        # transform (no CSS transition), leave a placeholder for reordering.
+        run_js(
+            r"""
+        if (!window.__nsSortableBound) {
+            window.__nsSortableBound = true;
+
+            function nsSortableItems(list) {
+                return Array.prototype.slice.call(list.querySelectorAll('.sortable-item'));
+            }
+            function nsSortableSync(list) {
+                if (!list) return;
+                var input = document.querySelector('input[name="' + list.id.replace('sortable-list-', '') + '"]');
+                if (!input) return;
+                var values = nsSortableItems(list).map(function (el) {
+                    return el.getAttribute('data-value');
+                });
+                var next = values.join('>');
+                if (input.value !== next) {
+                    input.value = next;
+                    input.dispatchEvent(new Event('change', { bubbles: true }));
+                    input.dispatchEvent(new Event('input', { bubbles: true }));
+                }
+            }
+            function nsSortableFlip(list, mutate, highlightEls) {
+                var items = Array.prototype.slice.call(list.children).filter(function (el) {
+                    if (!el.classList) return false;
+                    // Never animate the row currently under the pointer
+                    if (el.classList.contains('sortable-dragging')) return false;
+                    return el.classList.contains('sortable-item') ||
+                        el.classList.contains('sortable-placeholder');
+                });
+                var firstTops = new Map();
+                items.forEach(function (el) {
+                    firstTops.set(el, el.getBoundingClientRect().top);
+                });
+                mutate();
+                // Double rAF: paint the inverted state once, then play
+                items.forEach(function (el) {
+                    var first = firstTops.get(el);
+                    if (first === undefined) return;
+                    var dy = first - el.getBoundingClientRect().top;
+                    if (!dy) return;
+                    el.style.transition = 'none';
+                    el.style.transform = 'translate3d(0,' + dy + 'px,0)';
+                    requestAnimationFrame(function () {
+                        requestAnimationFrame(function () {
+                            if (!el.isConnected) return;
+                            el.style.transition = 'transform 200ms cubic-bezier(0.2, 0.7, 0.3, 1)';
+                            el.style.transform = 'translate3d(0,0,0)';
+                        });
+                    });
+                });
+                if (highlightEls && highlightEls.length) {
+                    highlightEls.forEach(function (el) {
+                        if (!el || !el.classList) return;
+                        el.classList.add('sortable-moved');
+                        setTimeout(function () {
+                            el.classList.remove('sortable-moved');
+                        }, 280);
+                    });
+                }
+            }
+            function nsSortableMove(list, value, delta) {
+                if (!list) return;
+                var items = nsSortableItems(list);
+                var index = -1;
+                for (var i = 0; i < items.length; i++) {
+                    if (items[i].getAttribute('data-value') === value) { index = i; break; }
+                }
+                var target = index + delta;
+                if (index < 0 || target < 0 || target >= items.length) return;
+                var current = items[index];
+                var other = items[target];
+                // Animate BOTH rows so the swap is readable
+                nsSortableFlip(list, function () {
+                    if (delta < 0) {
+                        list.insertBefore(current, other);
+                    } else {
+                        list.insertBefore(other, current);
+                    }
+                }, [current, other]);
+                nsSortableSync(list);
+            }
+            function nsSortableReset(list, order) {
+                if (!list || !order || !order.length) return;
+                var byValue = {};
+                nsSortableItems(list).forEach(function (el) {
+                    byValue[el.getAttribute('data-value')] = el;
+                });
+                var moved = [];
+                nsSortableFlip(list, function () {
+                    order.forEach(function (value) {
+                        var el = byValue[value];
+                        if (el) {
+                            list.appendChild(el);
+                            delete byValue[value];
+                            moved.push(el);
+                        }
+                    });
+                    Object.keys(byValue).forEach(function (value) {
+                        list.appendChild(byValue[value]);
+                        moved.push(byValue[value]);
+                    });
+                }, moved);
+                nsSortableSync(list);
+            }
+
+            window.nsSortableReset = nsSortableReset;
+            window.nsSortableSync = nsSortableSync;
+
+            document.addEventListener('click', function (e) {
+                var btn = e.target.closest ? e.target.closest('.sortable-up, .sortable-down') : null;
+                if (!btn) return;
+                e.preventDefault();
+                var list = btn.closest('.sortable-list');
+                var delta = btn.classList.contains('sortable-up') ? -1 : 1;
+                nsSortableMove(list, btn.getAttribute('data-value'), delta);
+            });
+
+            // --- pointer drag ---
+            var drag = null;
+            var rafPending = false;
+            var lastClientX = 0;
+            var lastClientY = 0;
+
+            function nsClearDrag() {
+                if (!drag) return;
+                var d = drag;
+                drag = null;
+                rafPending = false;
+                if (d.ph && d.ph.parentNode) {
+                    d.ph.parentNode.removeChild(d.ph);
+                }
+                if (d.el) {
+                    d.el.classList.remove('sortable-dragging');
+                    d.el.style.transform = '';
+                    d.el.style.width = '';
+                    d.el.style.height = '';
+                }
+                try {
+                    document.documentElement.releasePointerCapture(d.pointerId);
+                } catch (err) {}
+                document.body.classList.remove('sortable-body-dragging');
+            }
+
+            function nsPlaceCard(clientX, clientY) {
+                if (!drag || !drag.el) return;
+                var x = clientX - drag.grabX;
+                var y = clientY - drag.grabY;
+                drag.el.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0)';
+            }
+
+            function nsMaybeReorder() {
+                if (!drag || !drag.active || !drag.ph) return;
+                var list = drag.list;
+                if (!list) return;
+
+                var mid = lastClientY;
+                var items = Array.prototype.slice.call(list.children).filter(function (el) {
+                    if (el === drag.ph || el === drag.el) return false;
+                    return el.classList.contains('sortable-item') ||
+                        el.classList.contains('sortable-placeholder');
+                });
+                if (!items.length) {
+                    if (drag.ph.nextSibling !== null) list.appendChild(drag.ph);
+                    return;
+                }
+
+                var insertBefore = null;
+                for (var i = 0; i < items.length; i++) {
+                    var rect = items[i].getBoundingClientRect();
+                    if (mid < rect.top + rect.height * 0.5) {
+                        insertBefore = items[i];
+                        break;
+                    }
+                }
+
+                if (!insertBefore) {
+                    if (!drag.ph.nextSibling) return;
+                    nsSortableFlip(list, function () {
+                        list.insertBefore(drag.ph, null);
+                    }, null);
+                    return;
+                }
+                if (drag.ph.nextSibling === insertBefore) return;
+                nsSortableFlip(list, function () {
+                    list.insertBefore(drag.ph, insertBefore);
+                }, null);
+            }
+
+            function nsOnDragMove(e) {
+                if (!drag) return;
+                if (e.pointerId !== undefined && drag.pointerId !== undefined && e.pointerId !== drag.pointerId) return;
+                lastClientX = e.clientX;
+                lastClientY = e.clientY;
+                if (!drag.active) {
+                    var dx = e.clientX - drag.startClientX;
+                    var dy = e.clientY - drag.startClientY;
+                    if (dx * dx + dy * dy < 9) return;
+                    drag.active = true;
+                    drag.el.classList.add('sortable-dragging');
+                    document.body.classList.add('sortable-body-dragging');
+                }
+                // Follow pointer every event - no transition on the card
+                nsPlaceCard(e.clientX, e.clientY);
+                if (rafPending) return;
+                rafPending = true;
+                requestAnimationFrame(function () {
+                    rafPending = false;
+                    if (drag && drag.active) nsMaybeReorder();
+                });
+            }
+
+            function nsEndDrag(e) {
+                if (!drag) return;
+                if (e && e.pointerId !== undefined && drag.pointerId !== undefined && e.pointerId !== drag.pointerId) return;
+                var wasActive = drag.active;
+                var list = drag.list;
+                var el = drag.el;
+                var ph = drag.ph;
+                if (wasActive && ph && el && ph.parentNode) {
+                    ph.parentNode.insertBefore(el, ph);
+                }
+                nsClearDrag();
+                if (wasActive && list) nsSortableSync(list);
+            }
+
+            document.addEventListener('pointerdown', function (e) {
+                if (drag) return;
+                if (e.button !== 0 && e.pointerType === 'mouse') return;
+                var item = e.target.closest ? e.target.closest('.sortable-item') : null;
+                if (!item) return;
+                if (e.target.closest('.sortable-btn')) return;
+                var list = item.closest('.sortable-list');
+                if (!list) return;
+                if (!item.querySelector('.sortable-handle')) return;
+
+                e.preventDefault();
+
+                var rect = item.getBoundingClientRect();
+                var ph = document.createElement('li');
+                ph.className = 'sortable-placeholder';
+                ph.style.height = rect.height + 'px';
+
+                item.parentNode.insertBefore(ph, item);
+                item.style.width = rect.width + 'px';
+                item.style.height = rect.height + 'px';
+                item.style.transform = 'translate3d(' + rect.left + 'px,' + rect.top + 'px,0)';
+
+                drag = {
+                    el: item,
+                    ph: ph,
+                    list: list,
+                    grabX: e.clientX - rect.left,
+                    grabY: e.clientY - rect.top,
+                    startClientX: e.clientX,
+                    startClientY: e.clientY,
+                    active: false,
+                    pointerId: e.pointerId
+                };
+                try {
+                    document.documentElement.setPointerCapture(e.pointerId);
+                } catch (err) {}
+            });
+
+            document.addEventListener('pointermove', nsOnDragMove);
+            document.addEventListener('pointerup', nsEndDrag);
+            document.addEventListener('pointercancel', nsEndDrag);
+            window.addEventListener('blur', function () { if (drag) nsEndDrag(null); });
+        }
+        """
+        )
+
         aside = get_localstorage("aside")
         self.show()
 

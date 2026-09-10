@@ -260,6 +260,37 @@
       "close_emulator": "Cerrar el emulador"
     }
   },
+  "TaskPriority": {
+    "_info": {
+      "name": "TaskPriority._info.name",
+      "help": "TaskPriority._info.help"
+    },
+    "Priority": {
+      "name": "TaskPriority.Priority.name",
+      "help": "TaskPriority.Priority.help",
+      "Reset": "Restablecer orden predeterminado",
+      "Restart": "Restart",
+      "BattleField": "BattleField",
+      "Fortress": "Fortress",
+      "PanRen": "PanRen",
+      "CultivationRoad": "CultivationRoad",
+      "Akatsuki": "Akatsuki",
+      "SquadRaid": "SquadRaid",
+      "FengRao": "FengRao",
+      "SurvivalTrail": "SurvivalTrail",
+      "JiFenSai": "JiFenSai",
+      "Recruit": "Recruit",
+      "DingCiKaoRou": "DingCiKaoRou",
+      "StorePurchase": "StorePurchase",
+      "Duel": "Duel",
+      "MiJing": "MiJing",
+      "Mission": "Mission",
+      "Freebies": "Freebies",
+      "BattleOrder": "BattleOrder",
+      "TiLi": "TiLi",
+      "DataUpdate": "DataUpdate"
+    }
+  },
   "Password": {
     "_info": {
       "name": "Password._info.name",
@@ -1004,6 +1035,7 @@
     "Toast": {
       "DisableTranslateMode": "Click aquí para deshabilitar el modo traducido",
       "ConfigSaved": "Configuración guardada",
+      "PriorityReset": "Prioridad de tareas predeterminada restaurada",
       "AlasIsRunning": "El planificador ya se está ejecutando",
       "ClickToUpdate": "Nueva actualización disponible, haz click aquí para actualizar"
     },
