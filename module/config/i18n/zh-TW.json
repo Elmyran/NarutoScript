@@ -257,7 +257,9 @@
       "stay_there": "停在原處",
       "goto_main": "前往主界面",
       "close_game": "關閉遊戲",
-      "close_emulator": "關閉模擬器"
+      "close_emulator": "關閉模擬器",
+      "close_emulator_and_ns": "關閉模擬器和NS",
+      "shutdown_pc": "關機"
     }
   },
   "TaskPriority": {

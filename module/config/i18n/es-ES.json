@@ -257,7 +257,9 @@
       "stay_there": "Quedarse en el sitio",
       "goto_main": "Ir al lugar principal",
       "close_game": "Cerrar el juego",
-      "close_emulator": "Cerrar el emulador"
+      "close_emulator": "Cerrar el emulador",
+      "close_emulator_and_ns": "Cerrar el emulador y NS",
+      "shutdown_pc": "Apagar el PC"
     }
   },
   "TaskPriority": {
