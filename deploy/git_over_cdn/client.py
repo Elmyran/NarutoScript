@@ -70,8 +70,25 @@ class GitOverCdnClient:
 
     @cached_property
     def current_commit(self) -> str:
+        """
+        Installed working-tree commit (HEAD).
+
+        Must NOT use origin/<branch> refs: those can already equal the remote
+        while the working tree is still on another branch (e.g. master).
+        Comparing refs made GitOverCdn report "uptodate" forever after
+        switching Branch in deploy.yaml.
+        """
+        try:
+            commit = self.git_command('rev-parse', 'HEAD').strip()
+            res = re.search(r'([0-9a-f]{40})', commit)
+            if res:
+                commit = res.group(1)
+                self.logger.attr('CurrentCommit', commit)
+                return commit
+        except Exception as e:
+            self.logger.error(f'Failed to get HEAD commit: {e}')
+
         for file in [
-            f'./refs/remotes/{self.source}/{self.branch}',
             f'./refs/heads/{self.branch}',
             'ORIG_HEAD',
         ]:
