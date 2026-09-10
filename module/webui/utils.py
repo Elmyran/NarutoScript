@@ -474,6 +474,22 @@ def re_fullmatch(pattern, string):
     return re.fullmatch(pattern=pattern, string=string)
 
 
+def readable_number(value):
+    """
+    Convert a large number to a readable string with 万/亿 units,
+    e.g. 1000000 -> 100万, 12345600 -> 1234.6万, 150000000 -> 1.5亿
+    Non-numeric values are returned as-is (str).
+    """
+    if isinstance(value, (int, float)) and not isinstance(value, bool):
+        if value >= 100000000:
+            v = value / 100000000
+            return f"{v:.1f}亿" if v % 1 else f"{int(v)}亿"
+        if value >= 10000:
+            v = value / 10000
+            return f"{v:.1f}万" if v % 1 else f"{int(v)}万"
+    return str(value)
+
+
 def get_next_time(t: datetime.time):
     now = datetime.datetime.today().time()
     second = (

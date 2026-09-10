@@ -20,6 +20,7 @@ from module.webui.utils import (
     LIGHT_TERMINAL_THEME,
     LOG_CODE_FORMAT,
     Switch,
+    readable_number,
 )
 
 if TYPE_CHECKING:
@@ -333,7 +334,7 @@ def product_stored_row(key, value):
         # calyx, relic
         # 3 (relic)
         return [
-            put_text(value).style("--dashboard-value--"),
+            put_text(readable_number(value)).style("--dashboard-value--"),
             put_text(f" ({key})").style("--dashboard-time--"),
         ]
 
@@ -351,19 +352,19 @@ def put_arg_stored(kwargs: T_Output_Kwargs) -> Output:
     if value != "" and total != "":
         # 0 / 100
         rows = [put_scope(f"dashboard-value-{name}", [
-            put_text(value).style("--dashboard-value--"),
+            put_text(readable_number(value)).style("--dashboard-value--"),
             put_text(f" / {total}").style("--dashboard-time--"),
         ])]
     elif value != "" and comment != "":
         # 88% <1.2d
         rows = [put_scope(f"dashboard-value-{name}", [
-            put_text(value).style("--dashboard-value--"),
+            put_text(readable_number(value)).style("--dashboard-value--"),
             put_text(f" {comment}").style("--dashboard-time--"),
         ])]
     elif value != "":
         # 100
         rows = [put_scope(f"dashboard-value-{name}", [
-            put_text(value).style("--dashboard-value--")
+            put_text(readable_number(value)).style("--dashboard-value--")
         ])]
     else:
         # No Data

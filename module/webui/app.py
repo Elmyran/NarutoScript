@@ -76,6 +76,7 @@ from module.webui.utils import (
     login,
     parse_pin_value,
     raise_exception,
+    readable_number,
     re_fullmatch,
     to_pin_value,
 )
@@ -396,17 +397,17 @@ class AlasGUI(Frame):
         def set_value(dic):
             if "total" in dic.get("attrs", []) and config.get("total") is not None:
                 return [
-                    put_text(config.get("value", nodata)).style("--dashboard-value--"),
+                    put_text(readable_number(config.get("value", nodata))).style("--dashboard-value--"),
                     put_text(f' / {config.get("total", "")}').style("--dashboard-time--"),
                 ]
             elif "comment" in dic.get("attrs", []) and config.get("comment") is not None:
                 return [
-                    put_text(config.get("value", nodata)).style("--dashboard-value--"),
+                    put_text(readable_number(config.get("value", nodata))).style("--dashboard-value--"),
                     put_text(f' {config.get("comment", "")}').style("--dashboard-time--"),
                 ]
             else:
                 return [
-                    put_text(config.get("value", nodata)).style("--dashboard-value--"),
+                    put_text(readable_number(config.get("value", nodata))).style("--dashboard-value--"),
                 ]
 
         with use_scope(f"dashboard-row-{arg}", clear=True):
