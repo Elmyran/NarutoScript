@@ -166,7 +166,7 @@ class AlasGUI(Frame):
             # Only fill existing scopes — never put_scope here (avoids duplicate id)
             with use_scope(f"alas-instance-{seq}", clear=True):
                 icon_html = Icon.RUN
-                rendered_state = ProcessManager.get_manager(inst).state
+                rendered_state = ProcessManager.get_manager(name).state
                 if rendered_state == 1 and self.af_flag:
                     icon_html = icon_html[:31] + " anim-rotate" + icon_html[31:]
                 put_icon_buttons(
@@ -605,75 +605,91 @@ class AlasGUI(Frame):
             logger.exception(e)
 
     def alas_update_overview_task(self) -> None:
+        """Refresh overview lists/dashboard. Must never kill the caller task."""
         if not self.visible:
             return
-        self.alas_config.load()
-        self.alas_config.get_next_task()
+        if not hasattr(self, "alas") or not hasattr(self, "alas_config"):
+            return
 
-        alive = self.alas.alive
-        if len(self.alas_config.pending_task) >= 1:
-            if self.alas.alive:
-                running = self.alas_config.pending_task[:1]
-                pending = self.alas_config.pending_task[1:]
+        try:
+            self.alas_config.load()
+            self.alas_config.get_next_task()
+
+            alive = self.alas.alive
+            if len(self.alas_config.pending_task) >= 1:
+                if alive:
+                    running = self.alas_config.pending_task[:1]
+                    pending = self.alas_config.pending_task[1:]
+                else:
+                    running = []
+                    pending = self.alas_config.pending_task[:]
             else:
                 running = []
-                pending = self.alas_config.pending_task[:]
-        else:
-            running = []
-            pending = []
-        waiting = self.alas_config.waiting_task
+                pending = []
+            waiting = self.alas_config.waiting_task
 
-        def put_task(func: Function):
-            with use_scope(f"overview-task_{func.command}"):
-                put_column(
-                    [
-                        put_text(t(f"Task.{func.command}.name")).style("--arg-title--"),
-                        put_text(str(func.next_run)).style("--arg-help--"),
-                    ],
-                    size="auto auto",
-                )
-                put_button(
-                    label=t("Gui.Button.Setting"),
-                    onclick=lambda: self.alas_set_group(func.command),
-                    color="off",
-                )
+            def put_task_list(scope_name: str, tasks: list):
+                # Snapshot content so we can skip no-op redraws
+                snap = [
+                    (f.command, str(f.next_run), f.enable)
+                    for f in (tasks or [])
+                ]
+                cache_key = f"overview-tasks-{scope_name}"
+                if not self.scope_expired_then_add(cache_key, snap):
+                    return
+                clear(scope_name)
+                with use_scope(scope_name):
+                    if not tasks:
+                        put_text(t("Gui.Overview.NoTask")).style(
+                            "--overview-notask-text--"
+                        )
+                        return
+                    for func in tasks:
+                        # Direct children of running/pending/waiting_tasks — no nested put_scope
+                        put_row(
+                            [
+                                put_column(
+                                    [
+                                        put_text(t(f"Task.{func.command}.name")).style(
+                                            "--arg-title--"
+                                        ),
+                                        put_text(str(func.next_run)).style(
+                                            "--arg-help--"
+                                        ),
+                                    ],
+                                    size="auto auto",
+                                ),
+                                put_button(
+                                    label=t("Gui.Button.Setting"),
+                                    onclick=partial(self.alas_set_group, func.command),
+                                    color="off",
+                                ),
+                            ],
+                            size="1fr auto",
+                        ).style("--overview-task-card--")
 
-        if self.scope_expired_then_add("pending_task", [
-            alive,
-            self.alas_config.pending_task
-        ]):
-            clear("running_tasks")
-            clear("pending_tasks")
-            clear("waiting_tasks")
-            with use_scope("running_tasks"):
-                if running:
-                    for task in running:
-                        put_task(task)
-                else:
-                    put_text(t("Gui.Overview.NoTask")).style("--overview-notask-text--")
-            with use_scope("pending_tasks"):
-                if pending:
-                    for task in pending:
-                        put_task(task)
-                else:
-                    put_text(t("Gui.Overview.NoTask")).style("--overview-notask-text--")
-            with use_scope("waiting_tasks"):
-                if waiting:
-                    for task in waiting:
-                        put_task(task)
-                else:
-                    put_text(t("Gui.Overview.NoTask")).style("--overview-notask-text--")
+            put_task_list("running_tasks", running)
+            put_task_list("pending_tasks", pending)
+            put_task_list("waiting_tasks", waiting)
 
-        for arg, arg_dict in self.ALAS_STORED.items():
-            # Skip order=0
-            if not arg_dict.get("order", 0):
-                continue
-            path = arg_dict["path"]
-            if self.scope_expired_then_add(f"dashboard-time-value-{arg}", [
-                deep_get(self.alas_config.data, keys=f"{path}.value"),
-                lang.readable_time(deep_get(self.alas_config.data, keys=f"{path}.time")),
-            ]):
-                self.set_dashboard(arg, arg_dict, deep_get(self.alas_config.data, keys=path, default={}))
+            for arg, arg_dict in self.ALAS_STORED.items():
+                if not arg_dict.get("order", 0):
+                    continue
+                path = arg_dict["path"]
+                if self.scope_expired_then_add(f"dashboard-time-value-{arg}", [
+                    deep_get(self.alas_config.data, keys=f"{path}.value"),
+                    lang.readable_time(
+                        deep_get(self.alas_config.data, keys=f"{path}.time")
+                    ),
+                ]):
+                    self.set_dashboard(
+                        arg,
+                        arg_dict,
+                        deep_get(self.alas_config.data, keys=path, default={}),
+                    )
+        except Exception as e:
+            # Keep the periodic task alive; log and retry next tick
+            logger.exception(e)
 
     @use_scope("content", clear=True)
     def alas_daemon_overview(self, task: str) -> None:

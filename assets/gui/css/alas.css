@@ -506,7 +506,8 @@ pre.rich-traceback-code {
 
 }
 
-[id^="pywebio-scope-overview-task_"] {
+[id^="pywebio-scope-overview-task_"],
+*[style*="--overview-task-card--"] {
     display: grid;
     grid-auto-flow: column;
     grid-template-columns: 1fr auto;
