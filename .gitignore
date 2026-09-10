@@ -26,6 +26,7 @@ resources/
 v8_context_snapshot.bin
 snapshot_blob.bin
 vk_swiftshader_icd.json
+/docs
 
 # Created by .ignore support plugin (hsz.mobi)
 
