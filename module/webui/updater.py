@@ -68,18 +68,25 @@ class Updater(DeployConfig, GitManager, PipManager):
 
     def _check_update(self) -> bool:
         self.state = "checking"
+        # Re-read deploy.yaml so Branch/Repository edits apply without full restart
+        self.read()
 
         if State.deploy_config.GitOverCdn:
             status = self.goc_client.get_status()
-            if status == "uptodate":
-                logger.info(f"No update")
-                return False
-            elif status == "behind":
+            logger.info(
+                f"GitOverCdn branch={self.Branch} "
+                f"url={self.goc_client.url} status={status}"
+            )
+            if status == "behind":
                 logger.info(f"New update available")
                 return True
-            else:
-                # failed, should fallback to `git pull`
+            elif status == "failed":
+                # CDN unavailable — fall through to git
                 pass
+            else:
+                # uptodate according to CDN for the configured branch
+                logger.info(f"No update (GitOverCdn)")
+                return False
 
         source = "origin"
         for _ in range(3):

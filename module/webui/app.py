@@ -852,6 +852,8 @@ class AlasGUI(Frame):
 
         def update_table():
             with use_scope("updater_info", clear=True):
+                # Pick up deploy.yaml Branch changes without restart
+                updater.read()
                 local_commit = updater.get_commit(short_sha1=True)
                 upstream_commit = updater.get_commit(
                     f"origin/{updater.Branch}", short_sha1=True
