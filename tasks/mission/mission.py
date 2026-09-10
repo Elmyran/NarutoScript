@@ -9,6 +9,7 @@ from tasks.mission.assets.assets_mission_task import TASK_1_AREA, TASK_1_JADE, T
 from tasks.mission.mission_keyword import MissionClaimable
 from tasks.mission.mission_strategy import  NormalAcceptStrategy, RedBoxFirstStrategy, RedBoxOnlyStrategy, StrategyAction
 from tasks.mission.task import Task
+from tasks.base.ui import ClickButton
 
 
 class Mission(TaskUI):
@@ -135,7 +136,6 @@ class Mission(TaskUI):
         """接取单个任务, 分两个阶段。
 
         注意 MISSION_CHECK 是任务面板本身的页面标识(page_mission), 裸面板上始终可见,
-        不能作为"接取成功"的单一信号, 必须等角色弹窗元素消失后面板重新可见才算完成。
 
         Args:
             task (Task): 待接取的任务
@@ -143,51 +143,31 @@ class Mission(TaskUI):
         Returns:
             bool: 是否接取成功
         """
-        timeout = Timer(60, count=60).start()
-        click_interval = Timer(1).start()
-        # 阶段1: 任务面板上点击任务卡, 直到角色选择弹窗打开
+        task_button=ClickButton(task.button)
+        self.ui_click(click_button=task_button,check_button=TASK_ACCEPT)
+        if self.appear(CHARACTER_SELECTED_AUTO):
+            self.ui_click(
+                click_button=CHARACTER_SELECTED_AUTO,
+                check_button=CHARACTER_SELECTED,
+                direct_match=True,
+                similarity=0.85,
+            )
+        else:
+            character_first_button = ClickButton(CHARACTER_FIRST.button)
+            self.ui_click(
+                click_button=character_first_button,
+                check_button=CHARACTER_SELECTED,
+                direct_match=True,
+                similarity=0.85,
+            )
         for _ in self.loop():
-            if timeout.reached():
-                raise GameStuckError('Mission accept task stuck')
-            if self.appear(MISSION_SELECTED_SUCCESS):
-                # 任务已被接取过, 不可再接
-                return False
-            if CHARACTER_UNSELECTED.match_template(self.device.image, similarity=0.6, direct_match=True):
-                break
-            if click_interval.reached():
-                self.device.click(task)
-                click_interval.reset()
-        # 阶段2: 弹窗内选择角色(优先自动选择)并确认接取
-        first_interval = Timer(2).start()
-        auto_interval = Timer(1).start()
-        for _ in self.loop():
-            if timeout.reached():
-                raise GameStuckError('Mission accept task stuck')
-            if THE_TASKBAR_IS_FULL.match_template(self.device.image):
-                logger.info('Taskbar is full')
-                return False
-            selected = CHARACTER_SELECTED.match_template(self.device.image, similarity=0.6, direct_match=True)
-            unselected = CHARACTER_UNSELECTED.match_template(self.device.image, similarity=0.6, direct_match=True)
-            if selected:
-                if self.appear_then_click(TASK_ACCEPT, interval=1):
-                    continue
-            if not selected and not unselected and self.appear(MISSION_CHECK):
-                # 弹窗元素消失且回到任务面板, 接取完成
-                logger.info('Mission check appeared')
+            if self.appear(MISSION_CHECK):
                 return True
-            if unselected:
-                # 角色未选中: 自动选择按钮可用则点自动, 否则点第一个角色
-                if self.appear(CHARACTER_SELECTED_AUTO):
-                    if auto_interval.reached():
-                        self.device.click(CHARACTER_SELECTED_AUTO)
-                        auto_interval.reset()
-                        continue
-                else:
-                    if first_interval.reached():
-                        self.device.click(CHARACTER_FIRST)
-                        first_interval.reset()
-                        continue
-        return False
+            if THE_TASKBAR_IS_FULL.match_template(self.device.image):
+                logger.info('任务栏已满')
+                return False
+            if self.appear_then_click(TASK_ACCEPT,interval=1):
+                continue
 
     # ============================== 任务刷新 ==============================
 
@@ -251,4 +231,6 @@ if __name__ == '__main__':
     mission = Mission(config='ns', device='127.0.0.1:16384',task='Alas')
     mission.device.screenshot()
     mission.strategy = mission._select_strategy()
-    mission._scan_tasks()
+    #mission._scan_tasks()
+    #mission.ui_click(click_button=CHARACTER_SELECTED_AUTO,check_button=CHARACTER_SELECTED,direct_match=True)
+    mission._accept_tasks()

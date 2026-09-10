@@ -1,5 +1,5 @@
 from module.base.button import ButtonWrapper
-from module.ocr.ocr import Ocr, RecOCR
+from module.ocr.ocr import RecOCR,OcrWhiteLetterOnComplexBackground
 from tasks.mission.assets.assets_mission import  ACCPET_BUTTON, MISSION_JADE, TASK_BOX_BLUE, TASK_BOX_RED
 from tasks.mission.mission_ocr import MissionOcr
 from tasks.mission.priority import TaskPriority
@@ -31,7 +31,7 @@ class Task:
             jade: 魂玉数量素材
         """
         #name: 任务名竖排, 切字逐字识别
-        ocr=RecOCR(name)
+        ocr=OcrWhiteLetterOnComplexBackground(name)
         self.name=ocr.ocr_single_line(image, vertical=True)
         #button
         ACCPET_BUTTON.load_search(self.area)
@@ -47,7 +47,7 @@ class Task:
         MISSION_JADE.load_search(self.area)
         if MISSION_JADE.match_template(image,similarity=0.6):
             ocr=MissionOcr(jade)
-            self.jade=ocr.ocr_single_line(image)
+            self.jade=self.jade_parse(ocr.ocr_single_line(image))
         #priority
         TASK_BOX_RED.load_search(self.area)
         TASK_BOX_BLUE.load_search(self.area)
@@ -66,3 +66,9 @@ class Task:
         minutes = int(minute_match.group(1)) if minute_match else 0
 
         return hours * 60 + minutes
+
+    def jade_parse(self, jade: str) -> int:
+        """解析魂玉数量字符串为整数, 识别失败时返回0"""
+        import re
+        match = re.search(r'\d+', jade)
+        return int(match.group()) if match else 0

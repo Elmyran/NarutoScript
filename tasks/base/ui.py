@@ -1,4 +1,4 @@
-from module.base.button import ButtonWrapper
+from module.base.button import ButtonWrapper,ClickButton
 from module.base.decorator import run_once
 from module.base.timer import Timer
 from module.exception import GameNotRunningError, GamePageUnknownError, HandledError
@@ -248,33 +248,39 @@ class UI(MainPage):
             appear_button=None,
             additional=None,
             retry_wait=5,
+            direct_match=False,
+            similarity=0.85,
             skip_first_screenshot=True,
     ):
         """
         Args:
-            click_button (ButtonWrapper):
+            click_button (ButtonWrapper | object):
             check_button (ButtonWrapper, callable, list[ButtonWrapper], tuple[ButtonWrapper]):
             appear_button (ButtonWrapper, callable, list[ButtonWrapper], tuple[ButtonWrapper]):
             additional (callable):
             retry_wait (int, float):
+            direct_match (bool): 
+            similarity (float, float):
             skip_first_screenshot (bool):
         """
         if appear_button is None:
             appear_button = click_button
         logger.info(f'UI click: {appear_button} -> {check_button}')
 
-        def process_appear(button):
+        def process_appear(button, direct_match=False, similarity=0.85):
             if isinstance(button, ButtonWrapper):
-                return self.appear(button)
+                return button.match_template(self.device.image, similarity=similarity, direct_match=direct_match)
             elif callable(button):
                 return button()
+            elif isinstance(button,ClickButton):
+                return True
             elif isinstance(button, (list, tuple)):
                 for b in button:
-                    if self.appear(b):
+                    if b.match_template(self.device.image, similarity=similarity, direct_match=direct_match):
                         return True
                 return False
             else:
-                return self.appear(button)
+                return button.match_template(self.device.image, direct_match=direct_match)
 
         click_timer = Timer(retry_wait, count=retry_wait // 0.5)
         while 1:
@@ -284,7 +290,7 @@ class UI(MainPage):
                 self.device.screenshot()
 
             # End
-            if process_appear(check_button):
+            if process_appear(check_button, direct_match, similarity):
                 break
 
             # Click
@@ -296,7 +302,7 @@ class UI(MainPage):
             if additional is not None:
                 if additional():
                     continue
-
+                    
     def is_in_main(self, interval=0):
         self.device.stuck_record_add(MAIN_GOTO_CHARACTER)
 
