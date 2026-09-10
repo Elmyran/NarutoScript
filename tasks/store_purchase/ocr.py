@@ -1,8 +1,7 @@
-import cv2
-from module.ocr.ocr import  Digit, DigitCounter, OcrWhiteLetterOnComplexBackground
+from module.ocr.ocr import  Digit, DigitCounter
 import re
 
-class StoreDetailOcr(OcrWhiteLetterOnComplexBackground):
+class StoreDetailOcr(Ocr):
     min_box = (1, 1)
     def after_process(self, result):
         result=result.replace('砖', '卷')
