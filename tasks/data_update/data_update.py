@@ -1,12 +1,11 @@
 from module.base.timer import Timer
 from module.base.utils import crop
 from module.logger import logger
-from module.ocr.ocr import  Digit, DigitCounter
+from module.ocr.ocr import  Digit, DigitCounter,OcrWhiteLetterOnComplexBackground
 from tasks.base.page import page_main, page_recruit, page_store, page_tong_ling
 from tasks.base.ui import UI
 from tasks.data_update.assets.assets_data_update import DATA_COINS, DATA_GOLD, DATA_RECRUITMENT_TICKETS, \
     DATA_FAME, DATA_TI_LI
-from tasks.data_update.ocr import DataDigit
 from tasks.store_purchase.assets.assets_store_purchase_reward_store import CHAO_YING_DAYS_BASE, CHAO_YING_DAYS_CHECK, CHAO_YING_DAYS_CLICK_BUTTON, CHAO_YING_DAYS_LIMITED, CHAO_YING_DAYS_PREMIUM
 from tasks.store_purchase.keyword.store_keyword import ChaoYingService, RewardsStore
 from tasks.store_purchase.ui.store_tab_draglist import StoreTabList, SubsidiaryStoreTabList
@@ -23,34 +22,14 @@ class DataUpdate(UI):
 
     def _coins_and_gold(self):
         self.ui_ensure(page_main)
-        coins_ocr=DataDigit(DATA_COINS)
-        gold_ocr=Digit(DATA_GOLD)
+        coins_ocr=OcrWhiteLetterOnComplexBackground(DATA_COINS)
+        gold_ocr=OcrWhiteLetterOnComplexBackground(DATA_GOLD)
         ti_li_ocr=DigitCounter(DATA_TI_LI)
-        coins_flag=False
-        gold_flag=False
-        ti_li_flag=False
-        ti_li=0
-        gold=0
-        coins=0
-        time=Timer(5,count=10).start()
-        for _ in self.loop():
-            if time.reached():
-                logger.warning('get ti_li or coins or gold failed')
-                break
-            if coins_flag and gold_flag and ti_li_flag:
-                break
-            if not coins_flag:
-                coins=coins_ocr.ocr_single_line(self.device.image)
-                if coins>0:
-                    coins_flag=True
-            if not gold_flag:
-                gold=gold_ocr.ocr_single_line(self.device.image)
-                if gold>0:
-                    gold_flag=True
-            if not ti_li_flag:
-                ti_li,remain,total=ti_li_ocr.ocr_single_line(self.device.image)
-                if  ti_li>0 and total==200:
-                    ti_li_flag=True
+
+        coins=coins_ocr.ocr_single_line(self.device.image)
+        gold=gold_ocr.ocr_single_line(self.device.image)
+        ti_li,remain,total=ti_li_ocr.ocr_single_line(self.device.image)
+        
         with self.config.multi_set():
             self.config.stored.TiLi.value=ti_li
             self.config.stored.Coins.value=coins
@@ -58,16 +37,8 @@ class DataUpdate(UI):
  
     def _fame(self):
         self.ui_ensure(page_tong_ling)
-        fame=DataDigit(DATA_FAME)
-        time=Timer(5,count=10).start()
-        fames=0
-        for _ in self.loop():
-            if time.reached():
-                logger.warning('get fame failed')
-                break
-            fames=fame.ocr_single_line(self.device.image)
-            if fames > 0:
-                break
+        fame=OcrWhiteLetterOnComplexBackground(DATA_FAME)
+        fames=fame.ocr_single_line(self.device.image)
         self.config.stored.Fame.value=fames
     def _mission(self):
         with self.config.multi_set():
@@ -85,14 +56,7 @@ class DataUpdate(UI):
         self.ui_ensure(page_store)
         StoreTabList.search_rows(main=self,keyword=RewardsStore)
         SubsidiaryStoreTabList.search_rows(self, ChaoYingService)
-        click_interval=Timer(2).start()
-        for _ in self.loop():
-            if self.appear(CHAO_YING_DAYS_CHECK):
-                break
-            if click_interval.reached():
-                self.device.click(CHAO_YING_DAYS_CLICK_BUTTON)
-                click_interval.reset()
-                continue
+        self.ui_click(click_button=CHAO_YING_DAYS_CLICK_BUTTON,check_button=CHAO_YING_DAYS_CHECK)
         ocr=Digit(CHAO_YING_DAYS_CHECK)
         areas = [CHAO_YING_DAYS_PREMIUM, CHAO_YING_DAYS_BASE, CHAO_YING_DAYS_LIMITED]  # 几个 ButtonWrapper
         images = [crop(self.device.image, a.area) for a in areas]
@@ -102,7 +66,7 @@ class DataUpdate(UI):
         logger.info(f'ChaoYing total days: {total_days}')
 if __name__ == '__main__':
     data=DataUpdate(config='ns', device='127.0.0.1:16384',task='Alas')
-    data._chao_ying_days()
+    data.run()
 
 
 
