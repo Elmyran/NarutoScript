@@ -67,6 +67,7 @@ class JiFenSaiFight(TaskUI):
         count,_,_=ocr.ocr_single_line(self.device.image)
         if count==0:
             return False 
+        self.device.click_record_remove(ENEMY_REFRESH)
         self.ui_click(click_button=ENEMY_REFRESH,check_button=ENEMY_REFRESH_SUCCESS)
         return True
 
@@ -129,7 +130,7 @@ class JiFenSaiFight(TaskUI):
             
 
     def is_fight_count_enough(self):
-        ocr=JiFenSaiDigitCounter(JI_FEN_SAI_FIGHT_COUNT)
+        ocr=DigitCounter(JI_FEN_SAI_FIGHT_COUNT)
         times,_,_=ocr.ocr_single_line(self.device.image)
         if times>0:
             return True

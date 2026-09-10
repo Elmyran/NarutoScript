@@ -1,5 +1,5 @@
 
-from module.logger.logger import logger
+
 from module.base.timer import Timer
 from module.ocr.ocr import DigitCounter
 from tasks.base.page import page_battle_order
@@ -33,17 +33,10 @@ class BattleOrderWeeklyTask(UI):
                 self.device.click(BATTLE_ORDER_TASK_REWARD_CLAIM)
                 claim_time.reset()
                 continue
-            
-        ocr_time=Timer(1,3).start()
-        progress=0
+        
         ocr=DigitCounter(BATTLE_ORDER_TASK_PROGRESS)
-        for _ in self.loop():
-            if ocr_time.reached():
-                break
-            current,remain,total=ocr.ocr_single_line(self.device.image)
-            if total!=0:
-                progress=current
-                break
+        progress,remain,total=ocr.ocr_single_line(self.device.image)
+      
         self.config.stored.BattleOrderTaskProgress.value=progress
 
 

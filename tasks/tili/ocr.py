@@ -11,7 +11,6 @@ class TiLiOcr(OcrWhiteLetterOnComplexBackground,DigitCounter):
         return image
     def after_process(self, result):
         result = super().after_process(result)
-        logger.info(f"Raw OCR result: '{result}'")
         result = re.sub(r'获取途径', '', result)  
         result = re.sub(r'双途径', '', result)  
         result = re.sub(r'[：:]', '', result) 
