@@ -1,4 +1,4 @@
-from module.ocr.ocr import  Digit, DigitCounter
+from module.ocr.ocr import  Ocr,Digit, DigitCounter
 import re
 
 class StoreDetailOcr(Ocr):
