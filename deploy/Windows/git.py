@@ -128,13 +128,21 @@ class GitManager(DeployConfig):
         self.execute(f'"{self.git}" --no-pager log --no-merges -1')
         Progress.GitShowVersion()
 
+    # CDN update channels — one Cloudflare Pages project per release branch
+    GOC_URLS = {
+        "master": "https://narutoscript-update.pages.dev",
+        "dev": "https://narutoscript-update-dev.pages.dev",
+    }
+
     @property
     def goc_client(self):
+        branch = self.Branch or "master"
+        url = self.GOC_URLS.get(branch, self.GOC_URLS["master"])
         client = GitOverCdnClient(
-            url='https://narutoscript-update.pages.dev',
+            url=url,
             folder=self.root_filepath,
-            source='origin',
-            branch='master',
+            source="origin",
+            branch=branch,
             git=self.git,
         )
         client.logger = logger
@@ -148,7 +156,9 @@ class GitManager(DeployConfig):
             Progress.GitShowVersion()
             return
 
-        if self.GitOverCdn:
+        # Only branches with a published CDN channel use git-over-cdn;
+        # others fall through to normal git pull.
+        if self.GitOverCdn and (self.Branch or "master") in self.GOC_URLS:
             if self.goc_client.update(keep_changes=self.KeepLocalChanges):
                 return
 
