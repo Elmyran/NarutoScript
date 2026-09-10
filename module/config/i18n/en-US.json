@@ -1020,7 +1020,8 @@
       "Develop": "Develop",
       "Performance": "Perf.",
       "Setting": "Settings",
-      "AddAlas": "Add"
+      "AddAlas": "Add",
+      "ManageAlas": "Manage"
     },
     "Button": {
       "Start": "Start",
@@ -1084,6 +1085,30 @@
       "FileExist": "A config with the same name exists, please choose another one",
       "InvalidChar": "Config name cannot contain any of the following characters: .\\/:*?\"<>|",
       "InvalidPrefixTemplate": "Config name cannot start with 'template'"
+    },
+    "ManageAlas": {
+      "PopupTitle": "Manage Configs",
+      "Hint": "Add, delete configs, or import old config files here",
+      "TabList": "Configs",
+      "TabAdd": "New Config",
+      "TabImport": "Import",
+      "ListTitle": "Existing configs",
+      "ListEmpty": "No configs yet, add or import one",
+      "Delete": "Delete",
+      "DeleteConfirm": "Delete config \"{name}\"? This cannot be undone.",
+      "DeleteYes": "Delete",
+      "DeleteNo": "Cancel",
+      "DeleteSuccess": "Deleted config {name}",
+      "DeleteFailed": "Delete failed",
+      "DeleteRunningTip": "Deleting a running config will stop it first",
+      "AddSuccess": "Added config {name}",
+      "ImportTitle": "Import old config files",
+      "ImportHint": "Supports .json only, will rename on conflict",
+      "ImportFile": "Choose config files",
+      "Import": "Import",
+      "ImportEmpty": "Please choose config files to import",
+      "ImportSuccess": "Imported: {names}",
+      "ImportFailed": "Import failed: {names}"
     },
     "Update": {
       "UpToDate": "Latest version",

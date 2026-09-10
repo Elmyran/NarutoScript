@@ -1,11 +1,16 @@
 import argparse
+import html
+import json
+import os
 import queue
+import re
 import threading
 import time
 from datetime import datetime
 from functools import partial
 from typing import Dict, List, Optional
 
+import yaml
 from pywebio import config as webconfig
 from pywebio.output import (
     Output,
@@ -59,7 +64,7 @@ from module.webui.fake import (
 from module.webui.fastapi import asgi_app
 from module.webui.lang import _t, t
 from module.webui.patch import fix_py37_subprocess_communicate, patch_executor,patch_mimetype
-from module.webui.pin import put_input, put_select
+from module.webui.pin import put_file_upload, put_input, put_select
 from module.webui.process_manager import ProcessManager
 from module.webui.remote_access import RemoteAccess
 from module.webui.setting import State
@@ -142,9 +147,9 @@ class AlasGUI(Frame):
         put_icon_buttons(
             Icon.ADD,
             buttons=[
-                {"label": t("Gui.Aside.AddAlas"), "value": "AddAlas", "color": "aside"}
+                {"label": t("Gui.Aside.ManageAlas"), "value": "ManageAlas", "color": "aside"}
             ],
-            onclick=[self.ui_add_alas],
+            onclick=[self.ui_manage_alas],
         ),
 
         current_date = datetime.now().date()
@@ -1086,7 +1091,112 @@ class AlasGUI(Frame):
         self.initial()
         self.alas_set_menu()
 
+    def ui_manage_alas(self) -> None:
+        """Full-page manage view: menu (list / import) + content, like Home/Develop."""
+        self.init_aside(name="ManageAlas")
+        self.alas_name = ""
+        if hasattr(self, "alas"):
+            del self.alas
+        self.set_title(t("Gui.Aside.ManageAlas"))
+        self.state_switch.switch()
+        self.manage_set_menu()
+        self.manage_show_list()
+
+    @use_scope("menu", clear=True)
+    def manage_set_menu(self) -> None:
+        self.init_menu(collapse_menu=False, name="ManageAlas")
+        put_buttons(
+            [
+                {
+                    "label": t("Gui.ManageAlas.TabList"),
+                    "value": "ConfigList",
+                    "color": "menu",
+                }
+            ],
+            onclick=[lambda: self.manage_show_list()],
+        ).style("--menu-ConfigList--")
+        put_buttons(
+            [
+                {
+                    "label": t("Gui.ManageAlas.TabImport"),
+                    "value": "ImportConfig",
+                    "color": "menu",
+                }
+            ],
+            onclick=[lambda: self.manage_show_import()],
+        ).style("--menu-ImportConfig--")
+
+    def _manage_instances(self):
+        out = []
+        for n in alas_instance():
+            if not n or n.lower().startswith("template"):
+                continue
+            if os.path.exists(filepath_config(n, get_config_mod(n))):
+                out.append(n)
+        return out
+
+    def _manage_refresh_aside(self) -> None:
+        # Force full aside redraw after add/delete/import
+        self.load_home = True
+        self.set_aside()
+        self.active_button("aside", "ManageAlas")
+
+    @use_scope("content", clear=True)
+    def manage_show_list(self) -> None:
+        self.init_menu(collapse_menu=False, name="ConfigList")
+        self.set_title(t("Gui.ManageAlas.TabList"))
+
+        instances = self._manage_instances()
+
+        # Panel header: big title left + add button right (same pattern as scheduler-bar)
+        put_scope("manage_panel", [
+            put_row(
+                [
+                    put_text(t("Gui.ManageAlas.TabList")).style(
+                        "font-size:1.25rem;margin:auto .5rem auto;"
+                    ),
+                    put_button(
+                        label=t("Gui.ManageAlas.TabAdd"),
+                        onclick=self.ui_add_alas,
+                        color="on",
+                    ).style(
+                        "margin:0 .25rem .375rem 0;width:auto;flex-shrink:0;"
+                        "white-space:nowrap;font-size:.8125rem;padding:.25rem .75rem;"
+                        "line-height:1.25rem;"
+                    ),
+                ],
+                size="1fr auto",
+            ),
+            put_html('<hr class="hr-group">'),
+        ])
+
+        if not instances:
+            put_text(t("Gui.ManageAlas.ListEmpty"), scope="manage_panel").style("--arg-help--")
+            put_text(t("Gui.ManageAlas.DeleteRunningTip"), scope="manage_panel").style("--arg-help--")
+            return
+
+        put_scope("config_list", [], scope="manage_panel")
+        with use_scope("config_list", clear=True):
+            for name in instances:
+                put_row(
+                    [
+                        put_text(name).style(
+                            "flex:1;min-width:0;font-size:.875rem;"
+                            "line-height:1.25rem;overflow-wrap:anywhere;margin:0;"
+                        ),
+                        put_button(
+                            label=t("Gui.ManageAlas.Delete"),
+                            onclick=partial(self._manage_ask_delete, name),
+                            color="danger",
+                        ),
+                    ],
+                    size="1fr auto",
+                ).style("--cfg-row-flex--")
+
+        put_text(t("Gui.ManageAlas.DeleteRunningTip"), scope="manage_panel").style("--arg-help--")
+
     def ui_add_alas(self) -> None:
+        """Original add-config popup, opened from Manage > 配置列表."""
         with popup(t("Gui.AddAlas.PopupTitle")) as s:
 
             def get_unused_name():
@@ -1117,9 +1227,10 @@ class AlasGUI(Frame):
 
                 r = load_config(origin).read_file(origin)
                 State.config_updater.write_file(name, r, get_config_mod(origin))
-                self.set_aside()
-                self.active_button("aside", self.alas_name)
                 close_popup()
+                self._manage_refresh_aside()
+                self.manage_show_list()
+                toast(t("Gui.ManageAlas.AddSuccess", name=name), color="success")
 
             def put(name=None, origin=None):
                 put_input(
@@ -1138,6 +1249,143 @@ class AlasGUI(Frame):
                 put_button(label=t("Gui.AddAlas.Confirm"), onclick=add, scope=s)
 
             put()
+
+    def _manage_ask_delete(self, name: str) -> None:
+        with popup(t("Gui.ManageAlas.Delete")) as s:
+            put_warning(t("Gui.ManageAlas.DeleteConfirm", name=name), scope=s)
+            put_buttons(
+                [
+                    {"label": t("Gui.ManageAlas.DeleteYes"), "value": "yes", "color": "danger"},
+                    {"label": t("Gui.ManageAlas.DeleteNo"), "value": "no", "color": "secondary"},
+                ],
+                onclick=[
+                    lambda: self._manage_delete(name),
+                    lambda: close_popup(),
+                ],
+                scope=s,
+            )
+
+    def _manage_delete(self, name: str) -> None:
+        close_popup()
+        if not name or name.lower().startswith("template"):
+            toast(t("Gui.AddAlas.InvalidPrefixTemplate"), color="error")
+            return
+
+        try:
+            manager = ProcessManager.get_manager(name)
+            if manager.alive:
+                manager.stop()
+            ProcessManager._processes.pop(name, None)
+            path = filepath_config(name, get_config_mod(name))
+            if os.path.exists(path):
+                os.remove(path)
+            if self.alas_name == name:
+                self.alas_name = ""
+                if hasattr(self, "alas"):
+                    del self.alas
+            self._manage_refresh_aside()
+            self.manage_show_list()
+            toast(t("Gui.ManageAlas.DeleteSuccess", name=name), color="success")
+        except Exception as e:
+            logger.exception(e)
+            toast(f"{t('Gui.ManageAlas.DeleteFailed')}: {e}", color="error")
+
+    @use_scope("content", clear=True)
+    def manage_show_import(self) -> None:
+        self.init_menu(collapse_menu=False, name="ImportConfig")
+        self.set_title(t("Gui.ManageAlas.TabImport"))
+
+        def do_import():
+            try:
+                files = pin["ImportAlas_file"]
+            except KeyError:
+                files = None
+            if not files:
+                clear("import_result")
+                put_error(t("Gui.ManageAlas.ImportEmpty"), scope="import_result")
+                return
+            if isinstance(files, dict):
+                files = [files]
+
+            imported, errors = [], []
+            for f in files:
+                filename = f.get("filename") or ""
+                content = f.get("content") or b""
+                if not filename or not content:
+                    errors.append(filename or "?")
+                    continue
+
+                base = os.path.splitext(os.path.basename(filename))[0]
+                if not filename.lower().endswith(".json"):
+                    errors.append(filename)
+                    continue
+                if not base or base.lower().startswith("template"):
+                    errors.append(filename)
+                    continue
+                if set(base) & set(".\\/:*?\"'<>|"):
+                    errors.append(filename)
+                    continue
+
+                name = base
+                existing = self._manage_instances() + alas_instance()
+                if name in existing:
+                    i = 2
+                    while f"{name}{i}" in existing:
+                        i += 1
+                    name = f"{name}{i}"
+
+                try:
+                    data = json.loads(content.decode("utf-8"))
+                    if not isinstance(data, dict):
+                        raise ValueError("Invalid config content")
+                    State.config_updater.write_file(name, data, "alas")
+                    imported.append(name)
+                except Exception as e:
+                    logger.exception(e)
+                    errors.append(f"{filename}: {e}")
+
+            self._manage_refresh_aside()
+            clear("import_result")
+            with use_scope("import_result"):
+                if imported:
+                    put_text(
+                        t("Gui.ManageAlas.ImportSuccess", names=", ".join(imported))
+                    ).style("color:#00b42a;")
+                if errors:
+                    put_error(
+                        t("Gui.ManageAlas.ImportFailed", names=", ".join(errors))
+                    )
+
+        put_scope("manage_panel", [
+            put_text(t("Gui.ManageAlas.TabImport")).style(
+                "font-size:1.25rem;margin:auto .5rem auto;"
+            ),
+            put_html('<hr class="hr-group">'),
+            put_text(t("Gui.ManageAlas.ImportHint")).style("--arg-help--"),
+            put_row(
+                [
+                    put_file_upload(
+                        name="ImportAlas_file",
+                        label=t("Gui.ManageAlas.ImportFile"),
+                        accept=[".json"],
+                        multiple=True,
+                    ),
+                    put_button(
+                        label=t("Gui.ManageAlas.Import"),
+                        onclick=do_import,
+                        color="on",
+                    ).style(
+                        # Offset for the label above the file input so the button
+                        # lines up with the browse control, not the label
+                        "margin:1.55rem .25rem 0 .5rem;width:auto;flex-shrink:0;"
+                        "white-space:nowrap;font-size:.8125rem;padding:.25rem .75rem;"
+                        "line-height:1.25rem;"
+                    ),
+                ],
+                size="1fr auto",
+            ),
+            put_scope("import_result"),
+        ])
 
     def show(self) -> None:
         self._show()
@@ -1573,7 +1821,9 @@ class AlasGUI(Frame):
         self.task_handler.start()
 
         # Return to previous page
-        if aside not in ["Home", None]:
+        if aside == "ManageAlas":
+            self.ui_manage_alas()
+        elif aside not in ["Home", None]:
             self.ui_alas(aside)
 
 

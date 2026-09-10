@@ -1020,7 +1020,8 @@
       "Develop": "Desarrollo",
       "Performance": "Rendimiento",
       "Setting": "Ajustes",
-      "AddAlas": "Añadir"
+      "AddAlas": "Añadir",
+      "ManageAlas": "Gestionar"
     },
     "Button": {
       "Start": "Iniciar",
@@ -1084,6 +1085,30 @@
       "FileExist": "Ya existe uan configuración con ese nombre, elige otro por favor.",
       "InvalidChar": "El nombre de la configuración no puede tener los siguientes caracteres: .\\/:*?\"<>|",
       "InvalidPrefixTemplate": "El nombre de la configuración no puede empezar por 'template'"
+    },
+    "ManageAlas": {
+      "PopupTitle": "Gestionar configuraciones",
+      "Hint": "Añade, elimina configs o importa archivos de configuración antiguos",
+      "TabList": "Configs",
+      "TabAdd": "Añadir",
+      "TabImport": "Importar",
+      "ListTitle": "Configuraciones existentes",
+      "ListEmpty": "Aún no hay configs, añade o importa una",
+      "Delete": "Eliminar",
+      "DeleteConfirm": "¿Eliminar la configuración \"{name}\"? Esto no se puede deshacer.",
+      "DeleteYes": "Eliminar",
+      "DeleteNo": "Cancelar",
+      "DeleteSuccess": "Configuración {name} eliminada",
+      "DeleteFailed": "Error al eliminar",
+      "DeleteRunningTip": "Eliminar una config en ejecución la detendrá primero",
+      "AddSuccess": "Configuración {name} añadida",
+      "ImportTitle": "Importar configuraciones antiguas",
+      "ImportHint": "Solo .json, se renombrará en conflicto",
+      "ImportFile": "Elegir archivos de configuración",
+      "Import": "Importar",
+      "ImportEmpty": "Elige primero los archivos a importar",
+      "ImportSuccess": "Importado: {names}",
+      "ImportFailed": "Error al importar: {names}"
     },
     "Update": {
       "UpToDate": "Última versión",

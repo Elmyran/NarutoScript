@@ -766,3 +766,88 @@ body.sortable-body-dragging * {
 .sortable-btn:active {
     background-color: rgba(128, 128, 128, .18);
 }
+
+/* Manage config panel — same white card as other content areas */
+#pywebio-scope-manage_panel {
+    background-color: white;
+    border: 1px solid lightgrey;
+    border-radius: .375rem;
+    padding: .5rem .75rem .75rem;
+    margin-top: .25rem;
+    box-sizing: border-box;
+}
+
+/* Breathe between field label and the file input inside the manage panel */
+#pywebio-scope-manage_panel .form-group {
+    margin-bottom: .5rem !important;
+}
+
+#pywebio-scope-manage_panel .form-group > label,
+#pywebio-scope-manage_panel .form-group > .form-label,
+#pywebio-scope-manage_panel .form-group > div:first-child {
+    margin-bottom: .4rem;
+    display: block;
+}
+
+#pywebio-scope-manage_panel .form-control {
+    margin-top: 0;
+}
+
+/* Manage config list rows — hide delete until hover, slide from right */
+#pywebio-scope-config_list {
+    border: 1px solid rgba(128, 128, 128, .35);
+    border-radius: .375rem;
+    overflow: hidden;
+    width: 100%;
+    box-sizing: border-box;
+    margin: .375rem 0 .5rem;
+    background-color: transparent;
+}
+
+/* Marker: put_row(...).style("--cfg-row-flex--") */
+*[style*="--cfg-row-flex--"] {
+    position: relative;
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    gap: .5rem;
+    width: 100%;
+    margin: 0 !important;
+    padding: .45rem .65rem;
+    min-height: 2.25rem;
+    box-sizing: border-box;
+    border-bottom: 1px solid rgba(128, 128, 128, .18);
+    overflow: hidden;
+    background-color: transparent;
+    transition: background-color 120ms ease;
+}
+
+*[style*="--cfg-row-flex--"]:last-child {
+    border-bottom: 0;
+}
+
+*[style*="--cfg-row-flex--"]:hover {
+    background-color: rgba(128, 128, 128, .08);
+}
+
+/* pywebio puts button inside a col wrapper; target .btn under the row */
+*[style*="--cfg-row-flex--"] .btn {
+    margin: 0 !important;
+    width: auto !important;
+    flex-shrink: 0;
+    white-space: nowrap;
+    font-size: .8125rem !important;
+    padding: .25rem .75rem !important;
+    line-height: 1.25rem !important;
+    transform: translateX(110%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 180ms ease, opacity 180ms ease;
+}
+
+*[style*="--cfg-row-flex--"]:hover .btn,
+*[style*="--cfg-row-flex--"]:focus-within .btn {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+}

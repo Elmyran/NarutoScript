@@ -173,3 +173,13 @@ pre.rich-traceback-code {
 *[style*="--dashboard-time--"] {
     color: #adb5bd;
 }
+
+#pywebio-scope-manage_panel {
+    background-color: #2f3136;
+    border: 1px solid #21262d;
+}
+
+#pywebio-scope-config_list {
+    background-color: #2f3136;
+    border-color: #21262d;
+}
