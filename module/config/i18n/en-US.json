@@ -257,7 +257,40 @@
       "stay_there": "Stay There",
       "goto_main": "Goto Main Page",
       "close_game": "Close Game",
-      "close_emulator": "Close Emulator"
+      "close_emulator": "Close Emulator",
+      "close_emulator_and_ns": "Close Emulator and NS",
+      "shutdown_pc": "Shut Down PC"
+    }
+  },
+  "TaskPriority": {
+    "_info": {
+      "name": "Task Priority",
+      "help": "Tasks higher in the list run first when multiple pending tasks are ready"
+    },
+    "Priority": {
+      "name": "Drag to reorder tasks",
+      "help": "Drag rows or use ↑↓ to change order. Higher items have higher priority. Changes are saved automatically",
+      "Reset": "Reset to default order",
+      "Restart": "Restart",
+      "BattleField": "BattleField",
+      "Fortress": "Fortress",
+      "PanRen": "PanRen",
+      "CultivationRoad": "CultivationRoad",
+      "Akatsuki": "Akatsuki",
+      "SquadRaid": "SquadRaid",
+      "FengRao": "FengRao",
+      "SurvivalTrail": "SurvivalTrail",
+      "JiFenSai": "JiFenSai",
+      "Recruit": "Recruit",
+      "DingCiKaoRou": "DingCiKaoRou",
+      "StorePurchase": "StorePurchase",
+      "Duel": "Duel",
+      "MiJing": "MiJing",
+      "Mission": "Mission",
+      "Freebies": "Freebies",
+      "BattleOrder": "BattleOrder",
+      "TiLi": "TiLi",
+      "DataUpdate": "DataUpdate"
     }
   },
   "Password": {
@@ -987,7 +1020,8 @@
       "Develop": "Develop",
       "Performance": "Perf.",
       "Setting": "Settings",
-      "AddAlas": "Add"
+      "AddAlas": "Add",
+      "ManageAlas": "Manage"
     },
     "Button": {
       "Start": "Start",
@@ -1004,6 +1038,7 @@
     "Toast": {
       "DisableTranslateMode": "Click here to disable translate mode",
       "ConfigSaved": "Config saved",
+      "PriorityReset": "Default task priority restored",
       "AlasIsRunning": "Scheduler is already running",
       "ClickToUpdate": "New update available, click here to update"
     },
@@ -1050,6 +1085,30 @@
       "FileExist": "A config with the same name exists, please choose another one",
       "InvalidChar": "Config name cannot contain any of the following characters: .\\/:*?\"<>|",
       "InvalidPrefixTemplate": "Config name cannot start with 'template'"
+    },
+    "ManageAlas": {
+      "PopupTitle": "Manage Configs",
+      "Hint": "Add, delete configs, or import old config files here",
+      "TabList": "Configs",
+      "TabAdd": "New Config",
+      "TabImport": "Import",
+      "ListTitle": "Existing configs",
+      "ListEmpty": "No configs yet, add or import one",
+      "Delete": "Delete",
+      "DeleteConfirm": "Delete config \"{name}\"? This cannot be undone.",
+      "DeleteYes": "Delete",
+      "DeleteNo": "Cancel",
+      "DeleteSuccess": "Deleted config {name}",
+      "DeleteFailed": "Delete failed",
+      "DeleteRunningTip": "Deleting a running config will stop it first",
+      "AddSuccess": "Added config {name}",
+      "ImportTitle": "Import old config files",
+      "ImportHint": "Supports .json only, will rename on conflict",
+      "ImportFile": "Choose config files",
+      "Import": "Import",
+      "ImportEmpty": "Please choose config files to import",
+      "ImportSuccess": "Imported: {names}",
+      "ImportFailed": "Import failed: {names}"
     },
     "Update": {
       "UpToDate": "Latest version",

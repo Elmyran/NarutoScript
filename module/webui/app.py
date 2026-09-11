@@ -1,11 +1,16 @@
 import argparse
+import html
+import json
+import os
 import queue
+import re
 import threading
 import time
 from datetime import datetime
 from functools import partial
 from typing import Dict, List, Optional
 
+import yaml
 from pywebio import config as webconfig
 from pywebio.output import (
     Output,
@@ -26,6 +31,7 @@ from pywebio.output import (
     put_table,
     put_text,
     put_warning,
+    set_scope,
     toast,
     use_scope,
 )
@@ -59,7 +65,7 @@ from module.webui.fake import (
 from module.webui.fastapi import asgi_app
 from module.webui.lang import _t, t
 from module.webui.patch import fix_py37_subprocess_communicate, patch_executor,patch_mimetype
-from module.webui.pin import put_input, put_select
+from module.webui.pin import put_file_upload, put_input, put_select
 from module.webui.process_manager import ProcessManager
 from module.webui.remote_access import RemoteAccess
 from module.webui.setting import State
@@ -76,6 +82,7 @@ from module.webui.utils import (
     login,
     parse_pin_value,
     raise_exception,
+    readable_number,
     re_fullmatch,
     to_pin_value,
 )
@@ -133,17 +140,18 @@ class AlasGUI(Frame):
             ],
             onclick=[self.ui_develop],
         ),
-        put_scope("aside_instance",[
-            put_scope(f"alas-instance-{i}",[])
+        # Create instance rows as nested scopes in one shot (no later put_scope of same ids)
+        put_scope("aside_instance", [
+            put_scope(f"alas-instance-{i}", [])
             for i, _ in enumerate(alas_instance())
-        ])
+        ], scope="aside")
         self.set_aside_status()
         put_icon_buttons(
             Icon.ADD,
             buttons=[
-                {"label": t("Gui.Aside.AddAlas"), "value": "AddAlas", "color": "aside"}
+                {"label": t("Gui.Aside.ManageAlas"), "value": "ManageAlas", "color": "aside"}
             ],
-            onclick=[self.ui_add_alas],
+            onclick=[self.ui_manage_alas],
         ),
 
         current_date = datetime.now().date()
@@ -153,12 +161,14 @@ class AlasGUI(Frame):
     @use_scope("aside_instance")
     def set_aside_status(self) -> None:
         flag = True
+
         def update(name, seq):
+            # Only fill existing scopes — never put_scope here (avoids duplicate id)
             with use_scope(f"alas-instance-{seq}", clear=True):
                 icon_html = Icon.RUN
-                rendered_state = ProcessManager.get_manager(inst).state
+                rendered_state = ProcessManager.get_manager(name).state
                 if rendered_state == 1 and self.af_flag:
-                    icon_html = icon_html[:31] + ' anim-rotate' + icon_html[31:]
+                    icon_html = icon_html[:31] + " anim-rotate" + icon_html[31:]
                 put_icon_buttons(
                     icon_html,
                     buttons=[{"label": name, "value": name, "color": "aside"}],
@@ -167,25 +177,23 @@ class AlasGUI(Frame):
             return rendered_state
 
         if not len(self.rendered_cache) or self.load_home:
-            # Reload when add/delete new instance | first start app.py | go to HomePage (HomePage load call force reload)
+            # Reload when add/delete new instance | first start | HomePage
             flag = False
-            self.inst_cache.clear()
             self.inst_cache = alas_instance()
         if flag:
             for index, inst in enumerate(self.inst_cache):
-                # Check for state change
                 state = ProcessManager.get_manager(inst).state
                 if state != self.rendered_cache[index]:
                     self.rendered_cache[index] = update(inst, index)
                     flag = False
         else:
+            # Do NOT clear("aside_instance"): that removes nested scopes set_aside just created.
+            # Just refill each child via use_scope.
             self.rendered_cache.clear()
-            clear("aside_instance")
             for index, inst in enumerate(self.inst_cache):
                 self.rendered_cache.append(update(inst, index))
             self.load_home = False
         if not flag:
-            # Redraw lost focus, now focus on aside button
             aside_name = get_localstorage("aside")
             self.active_button("aside", aside_name)
 
@@ -396,17 +404,17 @@ class AlasGUI(Frame):
         def set_value(dic):
             if "total" in dic.get("attrs", []) and config.get("total") is not None:
                 return [
-                    put_text(config.get("value", nodata)).style("--dashboard-value--"),
+                    put_text(readable_number(config.get("value", nodata))).style("--dashboard-value--"),
                     put_text(f' / {config.get("total", "")}').style("--dashboard-time--"),
                 ]
             elif "comment" in dic.get("attrs", []) and config.get("comment") is not None:
                 return [
-                    put_text(config.get("value", nodata)).style("--dashboard-value--"),
+                    put_text(readable_number(config.get("value", nodata))).style("--dashboard-value--"),
                     put_text(f' {config.get("comment", "")}').style("--dashboard-time--"),
                 ]
             else:
                 return [
-                    put_text(config.get("value", nodata)).style("--dashboard-value--"),
+                    put_text(readable_number(config.get("value", nodata))).style("--dashboard-value--"),
                 ]
 
         with use_scope(f"dashboard-row-{arg}", clear=True):
@@ -597,75 +605,91 @@ class AlasGUI(Frame):
             logger.exception(e)
 
     def alas_update_overview_task(self) -> None:
+        """Refresh overview lists/dashboard. Must never kill the caller task."""
         if not self.visible:
             return
-        self.alas_config.load()
-        self.alas_config.get_next_task()
+        if not hasattr(self, "alas") or not hasattr(self, "alas_config"):
+            return
 
-        alive = self.alas.alive
-        if len(self.alas_config.pending_task) >= 1:
-            if self.alas.alive:
-                running = self.alas_config.pending_task[:1]
-                pending = self.alas_config.pending_task[1:]
+        try:
+            self.alas_config.load()
+            self.alas_config.get_next_task()
+
+            alive = self.alas.alive
+            if len(self.alas_config.pending_task) >= 1:
+                if alive:
+                    running = self.alas_config.pending_task[:1]
+                    pending = self.alas_config.pending_task[1:]
+                else:
+                    running = []
+                    pending = self.alas_config.pending_task[:]
             else:
                 running = []
-                pending = self.alas_config.pending_task[:]
-        else:
-            running = []
-            pending = []
-        waiting = self.alas_config.waiting_task
+                pending = []
+            waiting = self.alas_config.waiting_task
 
-        def put_task(func: Function):
-            with use_scope(f"overview-task_{func.command}"):
-                put_column(
-                    [
-                        put_text(t(f"Task.{func.command}.name")).style("--arg-title--"),
-                        put_text(str(func.next_run)).style("--arg-help--"),
-                    ],
-                    size="auto auto",
-                )
-                put_button(
-                    label=t("Gui.Button.Setting"),
-                    onclick=lambda: self.alas_set_group(func.command),
-                    color="off",
-                )
+            def put_task_list(scope_name: str, tasks: list):
+                # Snapshot content so we can skip no-op redraws
+                snap = [
+                    (f.command, str(f.next_run), f.enable)
+                    for f in (tasks or [])
+                ]
+                cache_key = f"overview-tasks-{scope_name}"
+                if not self.scope_expired_then_add(cache_key, snap):
+                    return
+                clear(scope_name)
+                with use_scope(scope_name):
+                    if not tasks:
+                        put_text(t("Gui.Overview.NoTask")).style(
+                            "--overview-notask-text--"
+                        )
+                        return
+                    for func in tasks:
+                        # Direct children of running/pending/waiting_tasks — no nested put_scope
+                        put_row(
+                            [
+                                put_column(
+                                    [
+                                        put_text(t(f"Task.{func.command}.name")).style(
+                                            "--arg-title--"
+                                        ),
+                                        put_text(str(func.next_run)).style(
+                                            "--arg-help--"
+                                        ),
+                                    ],
+                                    size="auto auto",
+                                ),
+                                put_button(
+                                    label=t("Gui.Button.Setting"),
+                                    onclick=partial(self.alas_set_group, func.command),
+                                    color="off",
+                                ),
+                            ],
+                            size="1fr auto",
+                        ).style("--overview-task-card--")
 
-        if self.scope_expired_then_add("pending_task", [
-            alive,
-            self.alas_config.pending_task
-        ]):
-            clear("running_tasks")
-            clear("pending_tasks")
-            clear("waiting_tasks")
-            with use_scope("running_tasks"):
-                if running:
-                    for task in running:
-                        put_task(task)
-                else:
-                    put_text(t("Gui.Overview.NoTask")).style("--overview-notask-text--")
-            with use_scope("pending_tasks"):
-                if pending:
-                    for task in pending:
-                        put_task(task)
-                else:
-                    put_text(t("Gui.Overview.NoTask")).style("--overview-notask-text--")
-            with use_scope("waiting_tasks"):
-                if waiting:
-                    for task in waiting:
-                        put_task(task)
-                else:
-                    put_text(t("Gui.Overview.NoTask")).style("--overview-notask-text--")
+            put_task_list("running_tasks", running)
+            put_task_list("pending_tasks", pending)
+            put_task_list("waiting_tasks", waiting)
 
-        for arg, arg_dict in self.ALAS_STORED.items():
-            # Skip order=0
-            if not arg_dict.get("order", 0):
-                continue
-            path = arg_dict["path"]
-            if self.scope_expired_then_add(f"dashboard-time-value-{arg}", [
-                deep_get(self.alas_config.data, keys=f"{path}.value"),
-                lang.readable_time(deep_get(self.alas_config.data, keys=f"{path}.time")),
-            ]):
-                self.set_dashboard(arg, arg_dict, deep_get(self.alas_config.data, keys=path, default={}))
+            for arg, arg_dict in self.ALAS_STORED.items():
+                if not arg_dict.get("order", 0):
+                    continue
+                path = arg_dict["path"]
+                if self.scope_expired_then_add(f"dashboard-time-value-{arg}", [
+                    deep_get(self.alas_config.data, keys=f"{path}.value"),
+                    lang.readable_time(
+                        deep_get(self.alas_config.data, keys=f"{path}.time")
+                    ),
+                ]):
+                    self.set_dashboard(
+                        arg,
+                        arg_dict,
+                        deep_get(self.alas_config.data, keys=path, default={}),
+                    )
+        except Exception as e:
+            # Keep the periodic task alive; log and retry next tick
+            logger.exception(e)
 
     @use_scope("content", clear=True)
     def alas_daemon_overview(self, task: str) -> None:
@@ -829,9 +853,7 @@ class AlasGUI(Frame):
         def update_table():
             with use_scope("updater_info", clear=True):
                 local_commit = updater.get_commit(short_sha1=True)
-                upstream_commit = updater.get_commit(
-                    f"origin/{updater.Branch}", short_sha1=True
-                )
+                upstream_commit = updater.get_upstream_commit(short_sha1=True)
                 put_table(
                     [
                         [t("Gui.Update.Local"), *local_commit],
@@ -847,9 +869,7 @@ class AlasGUI(Frame):
                 )
             with use_scope("updater_detail", clear=True):
                 put_text(t("Gui.Update.DetailedHistory"))
-                history = updater.get_commit(
-                    f"origin/{updater.Branch}", n=20, short_sha1=True
-                )
+                history = updater.get_upstream_history(n=20, short_sha1=True)
                 put_table(
                     [commit for commit in history],
                     header=[
@@ -979,7 +999,6 @@ class AlasGUI(Frame):
         self.task_handler.add(updater_switch.g(), delay=0.5, pending_delete=True)
 
         updater.check_update()
-
     @use_scope("content", clear=True)
     def dev_utils(self) -> None:
         self.init_menu(name="Utils")
@@ -1085,7 +1104,114 @@ class AlasGUI(Frame):
         self.initial()
         self.alas_set_menu()
 
+    def ui_manage_alas(self) -> None:
+        """Full-page manage view: menu (list / import) + content, like Home/Develop."""
+        self.init_aside(name="ManageAlas")
+        self.alas_name = ""
+        if hasattr(self, "alas"):
+            del self.alas
+        self.set_title(t("Gui.Aside.ManageAlas"))
+        self.state_switch.switch()
+        self.manage_set_menu()
+        self.manage_show_list()
+
+    @use_scope("menu", clear=True)
+    def manage_set_menu(self) -> None:
+        self.init_menu(collapse_menu=False, name="ManageAlas")
+        put_buttons(
+            [
+                {
+                    "label": t("Gui.ManageAlas.TabList"),
+                    "value": "ConfigList",
+                    "color": "menu",
+                }
+            ],
+            onclick=[lambda: self.manage_show_list()],
+        ).style("--menu-ConfigList--")
+        put_buttons(
+            [
+                {
+                    "label": t("Gui.ManageAlas.TabImport"),
+                    "value": "ImportConfig",
+                    "color": "menu",
+                }
+            ],
+            onclick=[lambda: self.manage_show_import()],
+        ).style("--menu-ImportConfig--")
+
+    def _manage_instances(self):
+        out = []
+        for n in alas_instance():
+            if not n or n.lower().startswith("template"):
+                continue
+            if os.path.exists(filepath_config(n, get_config_mod(n))):
+                out.append(n)
+        return out
+
+    def _manage_refresh_aside(self) -> None:
+        # Force full aside redraw after add/delete/import
+        self.load_home = True
+        self.set_aside()
+        self.active_button("aside", "ManageAlas")
+
+    @use_scope("content", clear=True)
+    def manage_show_list(self) -> None:
+        self.init_menu(collapse_menu=False, name="ConfigList")
+        self.set_title(t("Gui.ManageAlas.TabList"))
+
+        instances = self._manage_instances()
+
+        # set_scope(if_exist=clear): reuse existing panel or create once; never put_scope same id
+        set_scope("manage_panel", container_scope="content", if_exist="clear")
+
+        with use_scope("manage_panel"):
+            put_row(
+                [
+                    put_text(t("Gui.ManageAlas.TabList")).style(
+                        "font-size:1.25rem;margin:auto .5rem auto;"
+                    ),
+                    put_button(
+                        label=t("Gui.ManageAlas.TabAdd"),
+                        onclick=self.ui_add_alas,
+                        color="on",
+                    ).style(
+                        "margin:0 .25rem .375rem 0;width:auto;flex-shrink:0;"
+                        "white-space:nowrap;font-size:.8125rem;padding:.25rem .75rem;"
+                        "line-height:1.25rem;"
+                    ),
+                ],
+                size="1fr auto",
+            )
+            put_html('<hr class="hr-group">')
+
+            if not instances:
+                put_text(t("Gui.ManageAlas.ListEmpty")).style("--arg-help--")
+                put_text(t("Gui.ManageAlas.DeleteRunningTip")).style("--arg-help--")
+                return
+
+            # Nested list: create once under panel, refill via use_scope
+            set_scope("config_list", container_scope="manage_panel", if_exist="clear")
+            with use_scope("config_list"):
+                for name in instances:
+                    put_row(
+                        [
+                            put_text(name).style(
+                                "flex:1;min-width:0;font-size:.875rem;"
+                                "line-height:1.25rem;overflow-wrap:anywhere;margin:0;"
+                            ),
+                            put_button(
+                                label=t("Gui.ManageAlas.Delete"),
+                                onclick=partial(self._manage_ask_delete, name),
+                                color="danger",
+                            ),
+                        ],
+                        size="1fr auto",
+                    ).style("--cfg-row-flex--")
+
+            put_text(t("Gui.ManageAlas.DeleteRunningTip")).style("--arg-help--")
+
     def ui_add_alas(self) -> None:
+        """Original add-config popup, opened from Manage > 配置列表."""
         with popup(t("Gui.AddAlas.PopupTitle")) as s:
 
             def get_unused_name():
@@ -1116,9 +1242,10 @@ class AlasGUI(Frame):
 
                 r = load_config(origin).read_file(origin)
                 State.config_updater.write_file(name, r, get_config_mod(origin))
-                self.set_aside()
-                self.active_button("aside", self.alas_name)
                 close_popup()
+                self._manage_refresh_aside()
+                self.manage_show_list()
+                toast(t("Gui.ManageAlas.AddSuccess", name=name), color="success")
 
             def put(name=None, origin=None):
                 put_input(
@@ -1137,6 +1264,141 @@ class AlasGUI(Frame):
                 put_button(label=t("Gui.AddAlas.Confirm"), onclick=add, scope=s)
 
             put()
+
+    def _manage_ask_delete(self, name: str) -> None:
+        with popup(t("Gui.ManageAlas.Delete")) as s:
+            put_warning(t("Gui.ManageAlas.DeleteConfirm", name=name), scope=s)
+            put_buttons(
+                [
+                    {"label": t("Gui.ManageAlas.DeleteYes"), "value": "yes", "color": "danger"},
+                    {"label": t("Gui.ManageAlas.DeleteNo"), "value": "no", "color": "secondary"},
+                ],
+                onclick=[
+                    lambda: self._manage_delete(name),
+                    lambda: close_popup(),
+                ],
+                scope=s,
+            )
+
+    def _manage_delete(self, name: str) -> None:
+        close_popup()
+        if not name or name.lower().startswith("template"):
+            toast(t("Gui.AddAlas.InvalidPrefixTemplate"), color="error")
+            return
+
+        try:
+            manager = ProcessManager.get_manager(name)
+            if manager.alive:
+                manager.stop()
+            ProcessManager._processes.pop(name, None)
+            path = filepath_config(name, get_config_mod(name))
+            if os.path.exists(path):
+                os.remove(path)
+            if self.alas_name == name:
+                self.alas_name = ""
+                if hasattr(self, "alas"):
+                    del self.alas
+            self._manage_refresh_aside()
+            self.manage_show_list()
+            toast(t("Gui.ManageAlas.DeleteSuccess", name=name), color="success")
+        except Exception as e:
+            logger.exception(e)
+            toast(f"{t('Gui.ManageAlas.DeleteFailed')}: {e}", color="error")
+
+    @use_scope("content", clear=True)
+    def manage_show_import(self) -> None:
+        self.init_menu(collapse_menu=False, name="ImportConfig")
+        self.set_title(t("Gui.ManageAlas.TabImport"))
+
+        def do_import():
+            try:
+                files = pin["ImportAlas_file"]
+            except KeyError:
+                files = None
+            if not files:
+                clear("import_result")
+                put_error(t("Gui.ManageAlas.ImportEmpty"), scope="import_result")
+                return
+            if isinstance(files, dict):
+                files = [files]
+
+            imported, errors = [], []
+            for f in files:
+                filename = f.get("filename") or ""
+                content = f.get("content") or b""
+                if not filename or not content:
+                    errors.append(filename or "?")
+                    continue
+
+                base = os.path.splitext(os.path.basename(filename))[0]
+                if not filename.lower().endswith(".json"):
+                    errors.append(filename)
+                    continue
+                if not base or base.lower().startswith("template"):
+                    errors.append(filename)
+                    continue
+                if set(base) & set(".\\/:*?\"'<>|"):
+                    errors.append(filename)
+                    continue
+
+                name = base
+                existing = self._manage_instances() + alas_instance()
+                if name in existing:
+                    i = 2
+                    while f"{name}{i}" in existing:
+                        i += 1
+                    name = f"{name}{i}"
+
+                try:
+                    data = json.loads(content.decode("utf-8"))
+                    if not isinstance(data, dict):
+                        raise ValueError("Invalid config content")
+                    State.config_updater.write_file(name, data, "alas")
+                    imported.append(name)
+                except Exception as e:
+                    logger.exception(e)
+                    errors.append(f"{filename}: {e}")
+
+            self._manage_refresh_aside()
+            clear("import_result")
+            with use_scope("import_result"):
+                if imported:
+                    put_text(
+                        t("Gui.ManageAlas.ImportSuccess", names=", ".join(imported))
+                    ).style("color:#00b42a;")
+                if errors:
+                    put_error(
+                        t("Gui.ManageAlas.ImportFailed", names=", ".join(errors))
+                    )
+
+        set_scope("manage_panel", container_scope="content", if_exist="clear")
+        with use_scope("manage_panel"):
+            put_text(t("Gui.ManageAlas.TabImport")).style(
+                "font-size:1.25rem;margin:auto .5rem auto;"
+            )
+            put_html('<hr class="hr-group">')
+            put_text(t("Gui.ManageAlas.ImportHint")).style("--arg-help--")
+            put_row(
+                [
+                    put_file_upload(
+                        name="ImportAlas_file",
+                        label=t("Gui.ManageAlas.ImportFile"),
+                        accept=[".json"],
+                        multiple=True,
+                    ),
+                    put_button(
+                        label=t("Gui.ManageAlas.Import"),
+                        onclick=do_import,
+                        color="on",
+                    ).style(
+                        "margin:1.55rem .25rem 0 .5rem;width:auto;flex-shrink:0;"
+                        "white-space:nowrap;font-size:.8125rem;padding:.25rem .75rem;"
+                        "line-height:1.25rem;"
+                    ),
+                ],
+                size="1fr auto",
+            )
+            set_scope("import_result", container_scope="manage_panel", if_exist="clear")
 
     def show(self) -> None:
         self._show()
@@ -1222,6 +1484,27 @@ class AlasGUI(Frame):
         run_js(
             """
         reload = 1;
+        window.__nsLastAlive = Date.now();
+        // Heartbeat: if UI stops receiving any WebIO traffic for a long time, force reload
+        (function () {
+            if (window.__nsAliveTimer) return;
+            window.__nsAliveTimer = setInterval(function () {
+                if (typeof reload === 'undefined' || reload !== 1) return;
+                var sess = WebIO && WebIO._state && WebIO._state.CurrentSession;
+                // Mark alive on any outgoing/incoming if possible; fall back to DOM presence
+                var hasRoot = !!document.getElementById('pywebio-scope-ROOT');
+                var hasContent = !!document.getElementById('pywebio-scope-content');
+                // White-screen / hung session: root missing, or content empty for a long time
+                var contentEmpty = hasContent && document.getElementById('pywebio-scope-content').children.length === 0;
+                var now = Date.now();
+                if (!hasRoot || (contentEmpty && now - (window.__nsLastAlive || 0) > 90000)) {
+                    if (now - (window.__nsLastReload || 0) > 30000) {
+                        window.__nsLastReload = now;
+                        location.reload();
+                    }
+                }
+            }, 15000);
+        })();
         WebIO._state.CurrentSession.on_session_close(
             ()=>{
                 setTimeout(
@@ -1233,6 +1516,282 @@ class AlasGUI(Frame):
                 )
             }
         );
+        """
+        )
+
+        # Delegated handlers for sortable priority lists
+        # put_html(<script>) is stripped by jQuery, so bind once here
+        # Drag: take the row out of flow (position:fixed), follow pointer with
+        # transform (no CSS transition), leave a placeholder for reordering.
+        run_js(
+            r"""
+        if (!window.__nsSortableBound) {
+            window.__nsSortableBound = true;
+
+            function nsSortableItems(list) {
+                return Array.prototype.slice.call(list.querySelectorAll('.sortable-item'));
+            }
+            function nsSortableSync(list) {
+                if (!list) return;
+                var input = document.querySelector('input[name="' + list.id.replace('sortable-list-', '') + '"]');
+                if (!input) return;
+                var values = nsSortableItems(list).map(function (el) {
+                    return el.getAttribute('data-value');
+                });
+                var next = values.join('>');
+                if (input.value !== next) {
+                    input.value = next;
+                    input.dispatchEvent(new Event('change', { bubbles: true }));
+                    input.dispatchEvent(new Event('input', { bubbles: true }));
+                }
+            }
+            function nsSortableFlip(list, mutate, highlightEls) {
+                var items = Array.prototype.slice.call(list.children).filter(function (el) {
+                    if (!el.classList) return false;
+                    // Never animate the row currently under the pointer
+                    if (el.classList.contains('sortable-dragging')) return false;
+                    return el.classList.contains('sortable-item') ||
+                        el.classList.contains('sortable-placeholder');
+                });
+                var firstTops = new Map();
+                items.forEach(function (el) {
+                    firstTops.set(el, el.getBoundingClientRect().top);
+                });
+                mutate();
+                // Double rAF: paint the inverted state once, then play
+                items.forEach(function (el) {
+                    var first = firstTops.get(el);
+                    if (first === undefined) return;
+                    var dy = first - el.getBoundingClientRect().top;
+                    if (!dy) return;
+                    el.style.transition = 'none';
+                    el.style.transform = 'translate3d(0,' + dy + 'px,0)';
+                    requestAnimationFrame(function () {
+                        requestAnimationFrame(function () {
+                            if (!el.isConnected) return;
+                            el.style.transition = 'transform 200ms cubic-bezier(0.2, 0.7, 0.3, 1)';
+                            el.style.transform = 'translate3d(0,0,0)';
+                        });
+                    });
+                });
+                if (highlightEls && highlightEls.length) {
+                    highlightEls.forEach(function (el) {
+                        if (!el || !el.classList) return;
+                        el.classList.add('sortable-moved');
+                        setTimeout(function () {
+                            el.classList.remove('sortable-moved');
+                        }, 280);
+                    });
+                }
+            }
+            function nsSortableMove(list, value, delta) {
+                if (!list) return;
+                var items = nsSortableItems(list);
+                var index = -1;
+                for (var i = 0; i < items.length; i++) {
+                    if (items[i].getAttribute('data-value') === value) { index = i; break; }
+                }
+                var target = index + delta;
+                if (index < 0 || target < 0 || target >= items.length) return;
+                var current = items[index];
+                var other = items[target];
+                // Animate BOTH rows so the swap is readable
+                nsSortableFlip(list, function () {
+                    if (delta < 0) {
+                        list.insertBefore(current, other);
+                    } else {
+                        list.insertBefore(other, current);
+                    }
+                }, [current, other]);
+                nsSortableSync(list);
+            }
+            function nsSortableReset(list, order) {
+                if (!list || !order || !order.length) return;
+                var byValue = {};
+                nsSortableItems(list).forEach(function (el) {
+                    byValue[el.getAttribute('data-value')] = el;
+                });
+                var moved = [];
+                nsSortableFlip(list, function () {
+                    order.forEach(function (value) {
+                        var el = byValue[value];
+                        if (el) {
+                            list.appendChild(el);
+                            delete byValue[value];
+                            moved.push(el);
+                        }
+                    });
+                    Object.keys(byValue).forEach(function (value) {
+                        list.appendChild(byValue[value]);
+                        moved.push(byValue[value]);
+                    });
+                }, moved);
+                nsSortableSync(list);
+            }
+
+            window.nsSortableReset = nsSortableReset;
+            window.nsSortableSync = nsSortableSync;
+
+            document.addEventListener('click', function (e) {
+                var btn = e.target.closest ? e.target.closest('.sortable-up, .sortable-down') : null;
+                if (!btn) return;
+                e.preventDefault();
+                var list = btn.closest('.sortable-list');
+                var delta = btn.classList.contains('sortable-up') ? -1 : 1;
+                nsSortableMove(list, btn.getAttribute('data-value'), delta);
+            });
+
+            // --- pointer drag ---
+            var drag = null;
+            var rafPending = false;
+            var lastClientX = 0;
+            var lastClientY = 0;
+
+            function nsClearDrag() {
+                if (!drag) return;
+                var d = drag;
+                drag = null;
+                rafPending = false;
+                if (d.ph && d.ph.parentNode) {
+                    d.ph.parentNode.removeChild(d.ph);
+                }
+                if (d.el) {
+                    d.el.classList.remove('sortable-dragging');
+                    d.el.style.transform = '';
+                    d.el.style.width = '';
+                    d.el.style.height = '';
+                }
+                try {
+                    document.documentElement.releasePointerCapture(d.pointerId);
+                } catch (err) {}
+                document.body.classList.remove('sortable-body-dragging');
+            }
+
+            function nsPlaceCard(clientX, clientY) {
+                if (!drag || !drag.el) return;
+                var x = clientX - drag.grabX;
+                var y = clientY - drag.grabY;
+                drag.el.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0)';
+            }
+
+            function nsMaybeReorder() {
+                if (!drag || !drag.active || !drag.ph) return;
+                var list = drag.list;
+                if (!list) return;
+
+                var mid = lastClientY;
+                var items = Array.prototype.slice.call(list.children).filter(function (el) {
+                    if (el === drag.ph || el === drag.el) return false;
+                    return el.classList.contains('sortable-item') ||
+                        el.classList.contains('sortable-placeholder');
+                });
+                if (!items.length) {
+                    if (drag.ph.nextSibling !== null) list.appendChild(drag.ph);
+                    return;
+                }
+
+                var insertBefore = null;
+                for (var i = 0; i < items.length; i++) {
+                    var rect = items[i].getBoundingClientRect();
+                    if (mid < rect.top + rect.height * 0.5) {
+                        insertBefore = items[i];
+                        break;
+                    }
+                }
+
+                if (!insertBefore) {
+                    if (!drag.ph.nextSibling) return;
+                    nsSortableFlip(list, function () {
+                        list.insertBefore(drag.ph, null);
+                    }, null);
+                    return;
+                }
+                if (drag.ph.nextSibling === insertBefore) return;
+                nsSortableFlip(list, function () {
+                    list.insertBefore(drag.ph, insertBefore);
+                }, null);
+            }
+
+            function nsOnDragMove(e) {
+                if (!drag) return;
+                if (e.pointerId !== undefined && drag.pointerId !== undefined && e.pointerId !== drag.pointerId) return;
+                lastClientX = e.clientX;
+                lastClientY = e.clientY;
+                if (!drag.active) {
+                    var dx = e.clientX - drag.startClientX;
+                    var dy = e.clientY - drag.startClientY;
+                    if (dx * dx + dy * dy < 9) return;
+                    drag.active = true;
+                    drag.el.classList.add('sortable-dragging');
+                    document.body.classList.add('sortable-body-dragging');
+                }
+                // Follow pointer every event - no transition on the card
+                nsPlaceCard(e.clientX, e.clientY);
+                if (rafPending) return;
+                rafPending = true;
+                requestAnimationFrame(function () {
+                    rafPending = false;
+                    if (drag && drag.active) nsMaybeReorder();
+                });
+            }
+
+            function nsEndDrag(e) {
+                if (!drag) return;
+                if (e && e.pointerId !== undefined && drag.pointerId !== undefined && e.pointerId !== drag.pointerId) return;
+                var wasActive = drag.active;
+                var list = drag.list;
+                var el = drag.el;
+                var ph = drag.ph;
+                if (wasActive && ph && el && ph.parentNode) {
+                    ph.parentNode.insertBefore(el, ph);
+                }
+                nsClearDrag();
+                if (wasActive && list) nsSortableSync(list);
+            }
+
+            document.addEventListener('pointerdown', function (e) {
+                if (drag) return;
+                if (e.button !== 0 && e.pointerType === 'mouse') return;
+                var item = e.target.closest ? e.target.closest('.sortable-item') : null;
+                if (!item) return;
+                if (e.target.closest('.sortable-btn')) return;
+                var list = item.closest('.sortable-list');
+                if (!list) return;
+                if (!item.querySelector('.sortable-handle')) return;
+
+                e.preventDefault();
+
+                var rect = item.getBoundingClientRect();
+                var ph = document.createElement('li');
+                ph.className = 'sortable-placeholder';
+                ph.style.height = rect.height + 'px';
+
+                item.parentNode.insertBefore(ph, item);
+                item.style.width = rect.width + 'px';
+                item.style.height = rect.height + 'px';
+                item.style.transform = 'translate3d(' + rect.left + 'px,' + rect.top + 'px,0)';
+
+                drag = {
+                    el: item,
+                    ph: ph,
+                    list: list,
+                    grabX: e.clientX - rect.left,
+                    grabY: e.clientY - rect.top,
+                    startClientX: e.clientX,
+                    startClientY: e.clientY,
+                    active: false,
+                    pointerId: e.pointerId
+                };
+                try {
+                    document.documentElement.setPointerCapture(e.pointerId);
+                } catch (err) {}
+            });
+
+            document.addEventListener('pointermove', nsOnDragMove);
+            document.addEventListener('pointerup', nsEndDrag);
+            document.addEventListener('pointercancel', nsEndDrag);
+            window.addEventListener('blur', function () { if (drag) nsEndDrag(null); });
+        }
         """
         )
 
@@ -1296,7 +1855,9 @@ class AlasGUI(Frame):
         self.task_handler.start()
 
         # Return to previous page
-        if aside not in ["Home", None]:
+        if aside == "ManageAlas":
+            self.ui_manage_alas()
+        elif aside not in ["Home", None]:
             self.ui_alas(aside)
 
 

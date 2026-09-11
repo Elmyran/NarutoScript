@@ -48,7 +48,7 @@ class Survival(TaskUI):
         return True
     def _survival_reset(self):
         logger.hr('Reset',level=2)
-        ocr=Digit(SURVIVAL_MOP_UP_TIMES,lang='cn')
+        ocr=Digit(SURVIVAL_MOP_UP_TIMES)
         times=ocr.ocr_single_line(self.device.image)
         if times==0:
             self.config.SurvivalTrail_SurvivalTrialResetTimes=times

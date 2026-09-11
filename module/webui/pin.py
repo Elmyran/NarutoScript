@@ -47,3 +47,16 @@ def put_checkbox(name, options=None, *, label='', inline=None, value=None, help_
     single_input_return = checkbox(name=name, options=options, label=label, inline=inline, value=value,
                                    help_text=help_text, **other_html_attrs)
     return _pin_output(single_input_return, scope, position)
+
+
+def put_file_upload(name, *, label='', accept=None, placeholder='Choose file', multiple=False,
+                    max_size=0, max_total_size=0, required=None, help_text=None,
+                    scope=None, position=OutputPosition.BOTTOM, **other_html_attrs) -> Output:
+    """Output a file upload widget. Refer to: `pywebio.input.file_upload()`"""
+    from pywebio.input import file_upload
+    check_dom_name_value(name, 'pin `name`')
+    single_input_return = file_upload(
+        name=name, label=label, accept=accept, placeholder=placeholder, multiple=multiple,
+        max_size=max_size, max_total_size=max_total_size, required=required,
+        help_text=help_text, **other_html_attrs)
+    return _pin_output(single_input_return, scope, position)

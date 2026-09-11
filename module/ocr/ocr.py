@@ -2,9 +2,9 @@ from functools import cmp_to_key
 import time
 from datetime import timedelta
 
+import cv2
 import numpy as np
 
-import module.config.server as server
 from module.base.button import ButtonWrapper
 from module.base.decorator import cached_property
 from module.base.utils import *
@@ -104,25 +104,21 @@ class Ocr:
     merge_thres_x = 0
     merge_thres_y = 0
 
-    def __init__(self, button: ButtonWrapper, lang='cn', name=None):
+    def __init__(self, button: ButtonWrapper, name=None):
         """
         Args:
             button:
-            lang: If None, use in-game language
             name: If None, use button.name
         """
-        if lang is None:
-            lang = server.lang
         if name is None:
             name = button.name
 
         self.button: ButtonWrapper = button
-        self.lang: str = lang
         self.name: str = name
 
     @cached_property
     def model(self) -> RapidOCR:
-        return OCR_MODEL.get_by_lang('cn')
+        return OCR_MODEL.ch
 
     def pre_process(self, image):
         """
@@ -133,7 +129,11 @@ class Ocr:
             np.ndarray: Shape (width, height)
         """
 
+       
+      
         return image
+
+        
 
     def after_process(self, result):
         """
@@ -158,6 +158,10 @@ class Ocr:
             logger.attr(f'{self.name} {attr}', f'{before} -> {after}')
         return after
 
+    def _call_model(self, image):
+        """调用识别模型, RecOCR 覆写此方法以附加参数。"""
+        return self.model(image)
+
     def ocr_single_line(self, image, direct_ocr=False):
         # pre process
         start_time = time.time()
@@ -165,11 +169,11 @@ class Ocr:
             image = crop(image, self.button.area, copy=False)
         image = self.pre_process(image)
         # ocr
-        result= self.model(image,use_cls=False)
-        if result:
-            result = result.txts[0]
+        result = self._call_model(image)
+        if result and result.txts:
+            result = ''.join(result.txts)
         else:
-            result = ''        
+            result = ''
 
         # after proces
         result = self._log_change('after', self.after_process, result)
@@ -185,9 +189,9 @@ class Ocr:
         # ocr
         result_list=[]
         for image in image_list:
-            result= self.model(image,use_cls=False)
-            if result:
-                result = [result.txts[0],result.scores[0]] 
+            result = self._call_model(image)
+            if result and result.txts:
+                result = [''.join(result.txts), min(result.scores)]
                 result_list.append(result)
         result_list = [(result, score) for result, score in result_list]
         # after process
@@ -220,7 +224,7 @@ class Ocr:
         image = self.pre_process(image)
         # ocr
         results: list[BoxedResult]=[]
-        output= self.model(image)
+        output = self._call_model(image)
         if output.txts:
             for i in range(len(output.txts)):
                 box = output.boxes[i]
@@ -391,25 +395,37 @@ class Ocr:
         return results
 
 
-class Digit(Ocr):
-    def __init__(self, button: ButtonWrapper, lang='cn', name=None):
-        super().__init__(button, lang=lang, name=name)
+class RecOCR(Ocr):
+
+
+  
+
+    
+
+    def ocr_single_line(self, image, direct_ocr=False, vertical=False):
+        if vertical:
+            if not direct_ocr:
+                image = crop(image, self.button.area, copy=False)
+            image = cv2.rotate(image, cv2.ROTATE_90_COUNTERCLOCKWISE)
+            direct_ocr = True
+        return super().ocr_single_line(image, direct_ocr)
+
+    @cached_property
+    def model(self) -> RapidOCR:
+        """
+        使用缓存属性加载OCR模型
+        返回:
+            RapidOCR: 加载好的OCR模型实例
+        """
+        return OCR_MODEL.rec
+
+    def _call_model(self, image):
+        return self.model(image)
+
+
+class Digit(RecOCR):
     def pre_process(self, image):
 
-        height, width, _ = image.shape
-        min_size = 640
-        
-        if height < min_size or width < min_size:
-           
-            top = max(0, (min_size - height) // 2)
-            bottom = max(0, min_size - height - top)
-            left = max(0, (min_size - width) // 2)
-            right = max(0, min_size - width - left)       
-            background_color = [int(x) for x in image[0, 0]]
-
-            image = cv2.copyMakeBorder(
-                image, top, bottom, left, right, cv2.BORDER_CONSTANT, value=background_color
-            )
         return super().pre_process(image)
     def after_process(self, result):
         result = super().after_process(result)
@@ -434,27 +450,8 @@ class Digit(Ocr):
             return 0
 
 
-class DigitCounter(Ocr):
-    def __init__(self, button: ButtonWrapper, lang='cn', name=None):
-        super().__init__(button, lang=lang, name=name)
+class DigitCounter(RecOCR):
     def pre_process(self, image):
-        
-        height, width, _ = image.shape
-        min_size = 640
-        
-        if height < min_size or width < min_size:
-           
-            top = max(0, (min_size - height) // 2)
-            bottom = max(0, min_size - height - top)
-            left = max(0, (min_size - width) // 2)
-            right = max(0, min_size - width - left)
-
-            
-            background_color = [int(x) for x in image[0, 0]]
-
-            image = cv2.copyMakeBorder(
-                image, top, bottom, left, right, cv2.BORDER_CONSTANT, value=background_color
-            )
         return super().pre_process(image)
     @classmethod
     def is_format_matched(cls, result) -> bool:
@@ -481,23 +478,15 @@ class DigitCounter(Ocr):
             return 0, 0, 0
 
 
-class Duration(Ocr):
+class Duration(RecOCR):
     @classmethod
-    def timedelta_regex(cls, lang):
-        regex_str = {
-            'cn': r'^(?P<prefix>.*?)'
-                  r'((?P<days>\d{1,2})\s*天\s*)?'
-                  r'((?P<hours>\d{1,2})\s*小时\s*)?'
-                  r'((?P<minutes>\d{1,2})\s*分钟\s*)?'
-                  r'((?P<seconds>\d{1,2})\s*秒)?'
-                  r'(?P<suffix>[^天时钟秒]*?)$',
-            'en': r'^(?P<prefix>.*?)'
-                  r'((?P<days>\d{1,2})\s*d\s*)?'
-                  r'((?P<hours>\d{1,2})\s*h\s*)?'
-                  r'((?P<minutes>\d{1,2})\s*m\s*)?'
-                  r'((?P<seconds>\d{1,2})\s*s)?'
-                  r'(?P<suffix>[^dhms]*?)$'
-        }[lang]
+    def timedelta_regex(cls):
+        regex_str = (r'^(?P<prefix>.*?)'
+                     r'((?P<days>\d{1,2})\s*天\s*)?'
+                     r'((?P<hours>\d{1,2})\s*小时\s*)?'
+                     r'((?P<minutes>\d{1,2})\s*分钟\s*)?'
+                     r'((?P<seconds>\d{1,2})\s*秒)?'
+                     r'(?P<suffix>[^天时钟秒]*?)$')
         return re.compile(regex_str)
 
     def after_process(self, result):
@@ -513,7 +502,7 @@ class Duration(Ocr):
         Returns:
             timedelta:
         """
-        matched = self.timedelta_regex(self.lang).search(result)
+        matched = self.timedelta_regex().search(result)
         if not matched:
             return timedelta()
         days = self._sanitize_number(matched.group('days'))
@@ -529,10 +518,11 @@ class Duration(Ocr):
         return int(number)
 
 
-class OcrWhiteLetterOnComplexBackground(Ocr):
+class OcrWhiteLetterOnComplexBackground(RecOCR):
     white_preprocess = True
     # 0.6 by default, 0.2 for lower
-    box_thresh = 0.2
+    box_thresh = 0.6
+    white_threshold = 150
     # (x, y) Enlarge detected boxes to `min_boxes`
     # So standalone digits can be better detected
     # Note that min_box should be 4px larger than the actual letter
@@ -540,7 +530,7 @@ class OcrWhiteLetterOnComplexBackground(Ocr):
 
     def pre_process(self, image):
         if self.white_preprocess:
-            image = extract_white_letters(image, threshold=255)
+            image = extract_white_letters(image, threshold=self.white_threshold)
             image = cv2.merge([image, image, image])
         return image
 

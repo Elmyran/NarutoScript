@@ -257,7 +257,40 @@
       "stay_there": "stay_there",
       "goto_main": "goto_main",
       "close_game": "close_game",
-      "close_emulator": "close_emulator"
+      "close_emulator": "close_emulator",
+      "close_emulator_and_ns": "close_emulator_and_ns",
+      "shutdown_pc": "shutdown_pc"
+    }
+  },
+  "TaskPriority": {
+    "_info": {
+      "name": "TaskPriority._info.name",
+      "help": "TaskPriority._info.help"
+    },
+    "Priority": {
+      "name": "TaskPriority.Priority.name",
+      "help": "TaskPriority.Priority.help",
+      "Reset": "デフォルト順に戻す",
+      "Restart": "Restart",
+      "BattleField": "BattleField",
+      "Fortress": "Fortress",
+      "PanRen": "PanRen",
+      "CultivationRoad": "CultivationRoad",
+      "Akatsuki": "Akatsuki",
+      "SquadRaid": "SquadRaid",
+      "FengRao": "FengRao",
+      "SurvivalTrail": "SurvivalTrail",
+      "JiFenSai": "JiFenSai",
+      "Recruit": "Recruit",
+      "DingCiKaoRou": "DingCiKaoRou",
+      "StorePurchase": "StorePurchase",
+      "Duel": "Duel",
+      "MiJing": "MiJing",
+      "Mission": "Mission",
+      "Freebies": "Freebies",
+      "BattleOrder": "BattleOrder",
+      "TiLi": "TiLi",
+      "DataUpdate": "DataUpdate"
     }
   },
   "Password": {
@@ -987,7 +1020,8 @@
       "Develop": "開発",
       "Performance": "機能",
       "Setting": "設定",
-      "AddAlas": "追加"
+      "AddAlas": "追加",
+      "ManageAlas": "管理"
     },
     "Button": {
       "Start": "実行",
@@ -1004,6 +1038,7 @@
     "Toast": {
       "DisableTranslateMode": "クリックして翻訳モードを中止します",
       "ConfigSaved": "コンフィグ設定は保存されました",
+      "PriorityReset": "デフォルトのタスク優先度に戻しました",
       "AlasIsRunning": "スケジューラーはもう実行しています",
       "ClickToUpdate": "新しいアップデータがあります。クリックしてアップデータ"
     },
@@ -1050,6 +1085,30 @@
       "FileExist": "既存コンフィグと同じネーミングとなっていますから別名前を入力してください",
       "InvalidChar": "コンフィグ名には下記の文字を含めることはできません：.\\/:*?\"<>|",
       "InvalidPrefixTemplate": "設定ファイル名は temlpate で始めることはできません"
+    },
+    "ManageAlas": {
+      "PopupTitle": "コンフィグ管理",
+      "Hint": "コンフィグの追加・削除、旧コンフィグのインポートができます",
+      "TabList": "一覧",
+      "TabAdd": "追加",
+      "TabImport": "インポート",
+      "ListTitle": "既存コンフィグ",
+      "ListEmpty": "コンフィグがありません。追加またはインポートしてください",
+      "Delete": "削除",
+      "DeleteConfirm": "コンフィグ「{name}」を削除しますか？元に戻せません。",
+      "DeleteYes": "削除",
+      "DeleteNo": "キャンセル",
+      "DeleteSuccess": "コンフィグ {name} を削除しました",
+      "DeleteFailed": "削除に失敗しました",
+      "DeleteRunningTip": "実行中のコンフィグを削除すると先に停止します",
+      "AddSuccess": "コンフィグ {name} を追加しました",
+      "ImportTitle": "旧コンフィグをインポート",
+      "ImportHint": ".json のみ対応。同名の場合は自動的にリネームします",
+      "ImportFile": "設定ファイルを選択",
+      "Import": "インポート",
+      "ImportEmpty": "インポートする設定ファイルを選択してください",
+      "ImportSuccess": "インポート成功：{names}",
+      "ImportFailed": "インポート失敗：{names}"
     },
     "Update": {
       "UpToDate": "今Alasは最新バージョンです",

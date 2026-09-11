@@ -1,13 +1,16 @@
 from module.base.timer import Timer
 from module.exception import RequestHumanTakeover
 from module.logger import logger
-from module.ocr.ocr import Digit
+from module.ocr.ocr import Digit,DigitCounter
 from tasks.base.assets.assets_base_page import JI_FEN_SAI_CHECK
 from tasks.base.taskui import TaskUI
 from tasks.base.page import page_ji_fen_sai
-from tasks.ji_fen_sai.assets.assets_ji_fen_sai import ENEMY_1, ENEMY_2, ENEMY_3, ENEMY_4, ENEMY_REFRESH, ENEMY_REFRESH_COUNT, ENEMY_REFRESH_SUCCESS, JI_FEN_SAI_FIGHT_COUNT, JI_FEN_SAI_FIGHT_END_CONFIRM, JI_FEN_SAI_FIGHT_PANEL_CHECK, JI_FEN_SAI_FIGHT_START_BUTTON, JI_FEN_SAI_GOTO_FIGHT_PANEL, JI_FEN_SAI_IS_IN_FIGHT, JI_FEN_SAI_SKIP_FIGHT_BUTTON, TEAM_POWER_SELF
+from tasks.ji_fen_sai.assets.assets_ji_fen_sai import ENEMY_REFRESH, ENEMY_REFRESH_COUNT, ENEMY_REFRESH_SUCCESS, JI_FEN_SAI_FIGHT_COUNT, JI_FEN_SAI_FIGHT_END_CONFIRM, JI_FEN_SAI_FIGHT_PANEL_CHECK, JI_FEN_SAI_FIGHT_START_BUTTON, JI_FEN_SAI_GOTO_FIGHT_PANEL, JI_FEN_SAI_IS_IN_FIGHT, JI_FEN_SAI_SKIP_FIGHT_BUTTON, TEAM_POWER_SELF
+from tasks.ji_fen_sai.assets.assets_ji_fen_sai_enemy import ENEMY_1, ENEMY_2, ENEMY_3, ENEMY_4, \
+        ENEMY_1_POWER, ENEMY_2_POWER, ENEMY_3_POWER, ENEMY_4_POWER, \
+        ENEMY_1_ORGANIZATION, ENEMY_2_ORGANIZATION, ENEMY_3_ORGANIZATION, ENEMY_4_ORGANIZATION, \
+        ENEMY_1_SCORE, ENEMY_2_SCORE, ENEMY_3_SCORE, ENEMY_4_SCORE
 from tasks.ji_fen_sai.enemy import Enemy
-from tasks.ji_fen_sai.ocr import JiFenSaiDigitCounter
 class JiFenSaiFight(TaskUI):
     def run(self):
         self.device.click_record_clear()
@@ -32,7 +35,8 @@ class JiFenSaiFight(TaskUI):
             self.skip_fight()
             self.back_to_ji_fen_sai()
             if self.config.JiFenSai_JiFenSaiOnlyFightOnce:
-                logger.info(f'Fight once mode, exiting')
+                logger.info(f'仅挑战一次')
+                logger.info(f'正在退出')
                 break
         return True
     def back_to_ji_fen_sai(self):
@@ -58,21 +62,17 @@ class JiFenSaiFight(TaskUI):
                 self.device.click(JI_FEN_SAI_SKIP_FIGHT_BUTTON)
                 continue
     def refresh_enemy(self):
-        logger.info(f'Refresh enemy')
-        ocr=JiFenSaiDigitCounter(ENEMY_REFRESH_COUNT)
+        logger.info(f'刷新')
+        ocr=DigitCounter(ENEMY_REFRESH_COUNT)
         count,_,_=ocr.ocr_single_line(self.device.image)
         if count==0:
             return False 
-        for _ in self.loop():
-            if self.appear(ENEMY_REFRESH_SUCCESS):
-                break
-            if self.appear_then_click(ENEMY_REFRESH,interval=2):
-                self.device.click_record_remove(ENEMY_REFRESH)
-                continue
+        self.device.click_record_remove(ENEMY_REFRESH)
+        self.ui_click(click_button=ENEMY_REFRESH,check_button=ENEMY_REFRESH_SUCCESS)
         return True
 
     def start_fight(self,enemy):
-        logger.info(f'Start fight:{enemy}')
+        logger.info(f'挑战:{enemy}')
         click_interval=Timer(1,count=3).start()
         for _ in self.loop():
             if self.appear(JI_FEN_SAI_IS_IN_FIGHT):
@@ -105,11 +105,14 @@ class JiFenSaiFight(TaskUI):
                 return None 
         return list[-1]
     def enemy_recognition(self):
-        enemy_area=[ENEMY_1,ENEMY_2,ENEMY_3,ENEMY_4]
         enemy_list=[]
-        for area in enemy_area:
+        for area, power, organization, score in zip(
+                (ENEMY_1, ENEMY_2, ENEMY_3, ENEMY_4),
+                (ENEMY_1_POWER, ENEMY_2_POWER, ENEMY_3_POWER, ENEMY_4_POWER),
+                (ENEMY_1_ORGANIZATION, ENEMY_2_ORGANIZATION, ENEMY_3_ORGANIZATION, ENEMY_4_ORGANIZATION),
+                (ENEMY_1_SCORE, ENEMY_2_SCORE, ENEMY_3_SCORE, ENEMY_4_SCORE)   ):
             enemy=Enemy(area)
-            enemy.recognition(self.device.image)
+            enemy.recognition(self.device.image, power, organization, score)
             if enemy.button:
                 enemy_list.append(enemy)
         return enemy_list
@@ -127,9 +130,13 @@ class JiFenSaiFight(TaskUI):
             
 
     def is_fight_count_enough(self):
-        
-        ocr=JiFenSaiDigitCounter(JI_FEN_SAI_FIGHT_COUNT)
+        ocr=DigitCounter(JI_FEN_SAI_FIGHT_COUNT)
         times,_,_=ocr.ocr_single_line(self.device.image)
         if times>0:
             return True
         return False
+if __name__ == '__main__':
+    ns=JiFenSaiFight('ns',task='Alas')
+    ns.device.screenshot()
+    ns.enemy_recognition()
+    

@@ -1,4 +1,4 @@
-from module.base.button import ButtonWrapper
+from module.base.button import ButtonWrapper,ClickButton
 from module.base.decorator import run_once
 from module.base.timer import Timer
 from module.exception import GameNotRunningError, GamePageUnknownError, HandledError
@@ -302,7 +302,7 @@ class UI(MainPage):
             if additional is not None:
                 if additional():
                     continue
-
+                    
     def is_in_main(self, interval=0):
         self.device.stuck_record_add(MAIN_GOTO_CHARACTER)
 

@@ -257,7 +257,40 @@
       "stay_there": "停在原處",
       "goto_main": "前往主界面",
       "close_game": "關閉遊戲",
-      "close_emulator": "關閉模擬器"
+      "close_emulator": "關閉模擬器",
+      "close_emulator_and_ns": "關閉模擬器和NS",
+      "shutdown_pc": "關機"
+    }
+  },
+  "TaskPriority": {
+    "_info": {
+      "name": "TaskPriority._info.name",
+      "help": "TaskPriority._info.help"
+    },
+    "Priority": {
+      "name": "TaskPriority.Priority.name",
+      "help": "TaskPriority.Priority.help",
+      "Reset": "重設預設順序",
+      "Restart": "Restart",
+      "BattleField": "BattleField",
+      "Fortress": "Fortress",
+      "PanRen": "PanRen",
+      "CultivationRoad": "CultivationRoad",
+      "Akatsuki": "Akatsuki",
+      "SquadRaid": "SquadRaid",
+      "FengRao": "FengRao",
+      "SurvivalTrail": "SurvivalTrail",
+      "JiFenSai": "JiFenSai",
+      "Recruit": "Recruit",
+      "DingCiKaoRou": "DingCiKaoRou",
+      "StorePurchase": "StorePurchase",
+      "Duel": "Duel",
+      "MiJing": "MiJing",
+      "Mission": "Mission",
+      "Freebies": "Freebies",
+      "BattleOrder": "BattleOrder",
+      "TiLi": "TiLi",
+      "DataUpdate": "DataUpdate"
     }
   },
   "Password": {
@@ -987,7 +1020,8 @@
       "Develop": "開發",
       "Performance": "性能",
       "Setting": "設定",
-      "AddAlas": "新增"
+      "AddAlas": "新增",
+      "ManageAlas": "管理"
     },
     "Button": {
       "Start": "啟動",
@@ -1004,6 +1038,7 @@
     "Toast": {
       "DisableTranslateMode": "點擊這裡關閉翻譯模式",
       "ConfigSaved": "設定已儲存",
+      "PriorityReset": "已還原預設任務優先順序",
       "AlasIsRunning": "調度器已在執行中",
       "ClickToUpdate": "有更新可用，點擊這裡進行更新"
     },
@@ -1050,6 +1085,30 @@
       "FileExist": "存在同名的設定檔案，請重新命名",
       "InvalidChar": "設定檔案名不可以包含下列任意字元：.\\/:*?\"<>|",
       "InvalidPrefixTemplate": "設定檔案名不能以 template 開頭"
+    },
+    "ManageAlas": {
+      "PopupTitle": "設定管理",
+      "Hint": "可在此新增、刪除設定，或匯入舊的設定檔案",
+      "TabList": "設定列表",
+      "TabAdd": "新增設定",
+      "TabImport": "匯入設定",
+      "ListTitle": "已有設定",
+      "ListEmpty": "暫無設定，請先新增或匯入",
+      "Delete": "刪除",
+      "DeleteConfirm": "確認刪除設定「{name}」？刪除後無法復原。",
+      "DeleteYes": "確認刪除",
+      "DeleteNo": "取消",
+      "DeleteSuccess": "已刪除設定 {name}",
+      "DeleteFailed": "刪除失敗",
+      "DeleteRunningTip": "刪除執行中的設定會先停止其進程",
+      "AddSuccess": "已新增設定 {name}",
+      "ImportTitle": "匯入舊設定檔案",
+      "ImportHint": "僅支援 .json 設定檔案，同名時自動重新命名",
+      "ImportFile": "選擇設定檔案",
+      "Import": "匯入",
+      "ImportEmpty": "請先選擇要匯入的設定檔案",
+      "ImportSuccess": "匯入成功：{names}",
+      "ImportFailed": "匯入失敗：{names}"
     },
     "Update": {
       "UpToDate": "已是最新版本",

@@ -87,7 +87,33 @@ Optimization:
   CombatScreenshotInterval: 1.0
   WhenTaskQueueEmpty:
     value: goto_main
-    option: [ stay_there, goto_main, close_game, close_emulator ]
+    option: [ stay_there, goto_main, close_game, close_emulator, close_emulator_and_ns, shutdown_pc ]
+TaskPriority:
+  Priority:
+    type: sortable
+    value: 'Restart>BattleField>Fortress>PanRen>CultivationRoad>Akatsuki>SquadRaid>FengRao>SurvivalTrail>JiFenSai>Recruit>DingCiKaoRou>StorePurchase>Duel>MiJing>Mission>Freebies>BattleOrder>TiLi>DataUpdate'
+    option: [
+      Restart,
+      BattleField,
+      Fortress,
+      PanRen,
+      CultivationRoad,
+      Akatsuki,
+      SquadRaid,
+      FengRao,
+      SurvivalTrail,
+      JiFenSai,
+      Recruit,
+      DingCiKaoRou,
+      StorePurchase,
+      Duel,
+      MiJing,
+      Mission,
+      Freebies,
+      BattleOrder,
+      TiLi,
+      DataUpdate,
+    ]
 
 # ==================== Daily ====================
 Password:

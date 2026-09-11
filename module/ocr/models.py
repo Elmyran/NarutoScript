@@ -1,17 +1,19 @@
 
-from module.base.decorator import cached_property, del_cached_property, has_cached_property
-from module.exception import ScriptError
+import os
+
+from module.base.decorator import cached_property, del_cached_property
 from module.logger import logger
 
 
 import onnxruntime as ort
-from rapidocr import EngineType, LangDet, ModelType, OCRVersion, RapidOCR,LangRec
-DIC_LANG_TO_MODEL = {
-    'cn': 'ch',
-    'en': 'en',
-    'jp': 'japan',
-    'tw': 'cht',
-}
+from rapidocr import EngineType, ModelType, RapidOCR
+
+
+# 以本文件位置定位模型目录, 与运行时工作目录无关
+_MODEL_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), 'models'))
+ppocrv6_small_det_onnx = os.path.join(_MODEL_DIR, 'ppocrv6_small_det.onnx')
+ppocrv6_small_rec_onnx = os.path.join(_MODEL_DIR, 'ppocrv6_small_rec.onnx')
+ppocrv6_small_rec_keys_path = os.path.join(_MODEL_DIR, 'dict.txt')
 
 
 def _is_dml_available() -> bool:
@@ -23,109 +25,38 @@ def _is_dml_available() -> bool:
         return False
 
 
-def lang2model(lang: str) -> str:
-    """
-    Args:
-        lang: In-game language name, defined in VALID_LANG
-
-    Returns:
-        str: Model name, defined in pponnxcr.utility
-    """
-    return DIC_LANG_TO_MODEL.get(lang, lang)
-
-
-def model2lang(model: str) -> str:
-    """
-    Args:
-        model: Model name, defined in pponnxcr.utility
-
-    Returns:
-        str: In-game language name, defined in VALID_LANG
-    """
-    for k, v in DIC_LANG_TO_MODEL.items():
-        if model == v:
-            return k
-    return model
-
-
-class TextSystem(RapidOCR):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-       
-
-
 class OcrModel:
-    _model_init_thread = None
-    def get_by_model(self, model: str) -> RapidOCR:
-        try:
-            return self.__getattribute__(model)
-        except AttributeError:
-            raise ScriptError(f'OCR model "{model}" does not exists')
-
-    def get_by_lang(self, lang: str) -> RapidOCR:
-        try:
-            model = lang2model('cn')
-            return self.__getattribute__(model)
-        except AttributeError:
-            raise ScriptError(f'OCR model under lang "{lang}" does not exists')
-
     def resource_release(self):
         del_cached_property(self, 'ch')
-        del_cached_property(self, 'en')
-        del_cached_property(self, 'japan')
-        del_cached_property(self, 'cht')
+        del_cached_property(self, 'rec')
 
     @cached_property
     def ch(self):
         use_dml = _is_dml_available()
         logger.info(f'DML available: {use_dml}')
-        params={
-        "EngineConfig.onnxruntime.use_dml": use_dml,
-        "EngineConfig.enable_cpu_mem_arena": True,
-        "Det.model_type": ModelType.TINY,
-        "Rec.model_type": ModelType.MEDIUM,
-        "EngineConfig.onnxruntime.use_dml": use_dml,
-        "EngineConfig.onnxruntime.coreml_ep_cfg.MLComputeUnits": "CPUAndNeuralEngine",
-
-
-        
-    }
-        return RapidOCR(params=params)
+        return RapidOCR(params={
+            "Global.min_side_len": 1,
+            "EngineConfig.onnxruntime.use_dml": use_dml,
+            "Det.model_type": ModelType.MEDIUM,
+            "Rec.model_path": ppocrv6_small_rec_onnx,
+            "Rec.rec_keys_path": ppocrv6_small_rec_keys_path,
+            "Det.engine_type": EngineType.ONNXRUNTIME,
+            "Rec.engine_type": EngineType.ONNXRUNTIME,
+        })
 
     @cached_property
-    def en(self):
+    def rec(self):
         use_dml = _is_dml_available()
-        params={
-         "EngineConfig.onnxruntime.use_dml": use_dml,
-        "EngineConfig.enable_cpu_mem_arena": True,
-        "Det.engine_type": EngineType.ONNXRUNTIME,
-        "Det.lang_type": LangDet.EN,
-        "Det.model_type": ModelType.MOBILE,
-        "Det.ocr_version": OCRVersion.PPOCRV5
-    }
-        return RapidOCR(params=params)
+        logger.info(f'DML available: {use_dml}')
+        return RapidOCR(params={
+            'Global.use_det': False,
+            'Global.use_cls': False,
+            "Global.min_side_len": 1,
+            "EngineConfig.onnxruntime.use_dml": use_dml,
+            "Rec.model_path": ppocrv6_small_rec_onnx,
+            "Rec.rec_keys_path": ppocrv6_small_rec_keys_path,
+            "Rec.engine_type": EngineType.ONNXRUNTIME,
+        })
 
-    @cached_property
-    def japan(self):
-        params={
-        "Det.engine_type": EngineType.ONNXRUNTIME,
-        "Det.lang_type": LangDet.MULTI,
-        "Det.model_type": ModelType.MOBILE,
-        "Det.ocr_version": OCRVersion.PPOCRV4
-    }
-        return RapidOCR(params=params)
-
-    @cached_property
-    def cht(self):
-        params={
-        "Det.engine_type": EngineType.ONNXRUNTIME,
-        "Det.lang_type": LangDet.MULTI,
-        "Det.model_type": ModelType.MOBILE,
-        "Det.ocr_version": OCRVersion.PPOCRV4
-    }
-        return RapidOCR(params=params)
-
-  
-
-
+ 
 OCR_MODEL = OcrModel()

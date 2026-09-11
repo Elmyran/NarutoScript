@@ -1,4 +1,5 @@
 from module.ocr.ocr import DigitCounter
+from module.base.button import ClickButton
 from tasks.freebies.assets.assets_freebies_monthly_sign_in import *
 from tasks.activity.draglist import ACTIVITY_TAB_LIST
 from tasks.activity.activity_keyword import  MeiYueQianDaoKeyword
@@ -43,18 +44,13 @@ class MonthlySignIn(UI):
                 continue
     def _monthly_title_claim(self):
         ocr=MonthlySignInOcr(SIGN_IN_PROGRESS)
-        click_interval=Timer(1).start()
-        for _ in self.loop():
-            if self.appear(MONTHLY_SIGN_IN_TITLE_HAVE_CLAIM):
-                break
-            current,remain,total=ocr.ocr_single_line(self.device.image)
-            if remain==0 and total!=0:
-                if click_interval.reached():
-                    self.device.click(SIGN_IN_PROGRESS)
-                    click_interval.reset()
-                continue
-            elif remain!=0 and total!=0:
-                break
+        current,remain,total=ocr.ocr_single_line(self.device.image)
+        if current!=total:
+            return
+        title_button=ClickButton(SIGN_IN_PROGRESS.button)
+        self.ui_click(title_button,check_button=MONTHLY_SIGN_IN_TITLE_HAVE_CLAIM)
+
+                
 if __name__ == '__main__':
     az=MonthlySignIn('ns',task='Alas')
     az.device.screenshot()

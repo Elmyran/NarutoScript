@@ -181,8 +181,11 @@ def parse_value(value, data):
     Returns:
 
     """
-    if isinstance(value, str) and value.isdigit() and value.startswith('0') and len(value) > 1:  
-        return value 
+    if isinstance(value, str) and value.isdigit() and value.startswith('0') and len(value) > 1:
+        return value
+    # sortable stores a full ordered string (A>B>C), not a single option key
+    if data.get('type') == 'sortable':
+        return value
     if 'option' in data:
         if value not in data['option']:
             return data['value']

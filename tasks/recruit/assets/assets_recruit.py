@@ -58,6 +58,17 @@ NORMAL_RECRUIT_REMAIN_TIMES = ButtonWrapper(
     ),
     en=None,
 )
+NORMAL_RECRUIT_REMAIN_TIMES_100_BUTTON_STATUS = ButtonWrapper(
+    name='NORMAL_RECRUIT_REMAIN_TIMES_100_BUTTON_STATUS',
+    cn=Button(
+        file='./assets/cn/recruit/NORMAL_RECRUIT_REMAIN_TIMES_100_BUTTON_STATUS.png',
+        area=(629, 610, 851, 631),
+        search=(609, 590, 871, 651),
+        color=(89, 84, 69),
+        button=(629, 610, 851, 631),
+    ),
+    en=None,
+)
 PREMIUM_RECRUIT_100_BUTTON = ButtonWrapper(
     name='PREMIUM_RECRUIT_100_BUTTON',
     cn=Button(

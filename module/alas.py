@@ -1,3 +1,6 @@
+import logging
+import subprocess
+import sys
 import threading
 import time
 from datetime import datetime, timedelta
@@ -188,6 +191,39 @@ class AzurLaneAutoScript:
             if self.config.should_reload():
                 return False
 
+    def _safe_exit(self, code=0):
+        """
+        Exit worker process after flushing logs.
+        GUI reads logs from multiprocessing.Queue fed by a daemon thread;
+        flush handlers and wait briefly so the last lines reach the parent.
+        """
+        try:
+            logging.shutdown()
+        except Exception:
+            pass
+        time.sleep(0.5)
+        sys.exit(code)
+
+    def _shutdown_ns_client(self):
+        """Kill parent ns.exe so the Electron client exits with its process tree."""
+        try:
+            import psutil
+
+            p = psutil.Process().parent()
+            while p is not None:
+                if (p.name() or "").lower() in ("ns.exe", "ns"):
+                    logger.info(f"Shutdown NS: taskkill pid={p.pid}")
+                    subprocess.Popen(["taskkill", "/PID", str(p.pid), "/T", "/F"])
+                    break
+                try:
+                    p = p.parent()
+                except (psutil.Error, Exception):
+                    break
+        except Exception as e:
+            logger.warning(f"Failed to shutdown NS client: {e}")
+
+        self._safe_exit(0)
+
     def get_next_task(self):
         """
         Returns:
@@ -259,6 +295,43 @@ class AzurLaneAutoScript:
                         del_cached_property(self, 'config')
                         del_cached_property(self, 'device')
                         continue
+                elif method == 'close_emulator_and_ns':
+                    logger.info('Close emulator and NS during wait')
+                    self.run('stop')
+                    release_resources()
+                    self.device.release_during_wait()
+                    try:
+                        self.device.emulator_stop()
+                        logger.info('Emulator stopped successfully')
+                    except Exception as e:
+                        logger.warning(f'Failed to stop emulator: {e}')
+                    logger.info(f"[{self.config_name}] exited. Reason: Finish\n")
+                    # Also tear down Electron + webui, not just this worker
+                    self._shutdown_ns_client()
+                elif method == 'shutdown_pc':
+                    logger.info('Shutdown PC during wait')
+                    self.run('stop')
+                    release_resources()
+                    self.device.release_during_wait()
+                    try:
+                        self.device.emulator_stop()
+                        logger.info('Emulator stopped successfully')
+                    except Exception as e:
+                        logger.warning(f'Failed to stop emulator: {e}')
+                    delay = 30
+                    logger.info(f'Shutdown PC in {delay} seconds, cancel with `shutdown /a`')
+                    try:
+                        if sys.platform == 'win32':
+                            subprocess.run(['shutdown', '/s', '/t', str(delay), '/d', '0:0',
+                                            '/c', f'Ns <{self.config_name}>: shutdown when task queue empty'],
+                                           check=False)
+                        else:
+                            subprocess.run(['shutdown', '-h', f'+{max(1, delay // 60)}'],
+                                           check=False)
+                    except Exception as e:
+                        logger.warning(f'Failed to shutdown PC: {e}')
+                    logger.info(f"[{self.config_name}] exited. Reason: Finish\n")
+                    self._safe_exit(0)
                 else:
                     logger.warning(f'Invalid Optimization_WhenTaskQueueEmpty: {method}, fallback to stay_there')
                     release_resources()

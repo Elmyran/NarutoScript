@@ -12,7 +12,12 @@ MAX_PACK_BYTES = 24 * 1024 * 1024
 
 
 def run_git(*args):
-    return subprocess.check_output(["git", *args], text=True).strip()
+    return subprocess.check_output(
+        ["git", *args],
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+    ).strip()
 
 
 def fmt_bytes(n):
@@ -92,8 +97,25 @@ def main():
     commits = run_git("rev-list", "--first-parent", f"--max-count={args.history + 1}", args.branch).splitlines()
     old_commits = [commit for commit in commits if commit != latest]
 
+    # Full commit metadata so clients can display the upstream tip in the UI
+    # without needing a pack download first.
+    latest_meta = run_git(
+        "log",
+        "-1",
+        latest,
+        "--pretty=format:%H%n%an%n%aI%n%s",
+    ).splitlines()
     (output / "latest.json").write_text(
-        json.dumps({"commit": latest}, indent=2) + "\n",
+        json.dumps(
+            {
+                "commit": latest,
+                "author": latest_meta[1] if len(latest_meta) > 1 else "",
+                "date": latest_meta[2] if len(latest_meta) > 2 else "",
+                "message": latest_meta[3] if len(latest_meta) > 3 else "",
+            },
+            indent=2,
+        )
+        + "\n",
         encoding="utf-8",
     )
 

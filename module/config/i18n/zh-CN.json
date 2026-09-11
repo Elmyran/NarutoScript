@@ -257,7 +257,40 @@
       "stay_there": "停在原处",
       "goto_main": "前往主界面",
       "close_game": "关闭游戏",
-      "close_emulator": "关闭模拟器"
+      "close_emulator": "关闭模拟器",
+      "close_emulator_and_ns": "关闭模拟器和NS",
+      "shutdown_pc": "关机"
+    }
+  },
+  "TaskPriority": {
+    "_info": {
+      "name": "任务优先级",
+      "help": "越靠上的任务优先级越高。多个待执行任务同时就绪时，优先运行靠前的任务"
+    },
+    "Priority": {
+      "name": "拖拽调整任务顺序",
+      "help": "拖拽行或使用 ↑↓ 调整顺序。越靠前优先级越高；修改后会自动保存",
+      "Reset": "重置默认顺序",
+      "Restart": "Restart",
+      "BattleField": "BattleField",
+      "Fortress": "Fortress",
+      "PanRen": "PanRen",
+      "CultivationRoad": "CultivationRoad",
+      "Akatsuki": "Akatsuki",
+      "SquadRaid": "SquadRaid",
+      "FengRao": "FengRao",
+      "SurvivalTrail": "SurvivalTrail",
+      "JiFenSai": "JiFenSai",
+      "Recruit": "Recruit",
+      "DingCiKaoRou": "DingCiKaoRou",
+      "StorePurchase": "StorePurchase",
+      "Duel": "Duel",
+      "MiJing": "MiJing",
+      "Mission": "Mission",
+      "Freebies": "Freebies",
+      "BattleOrder": "BattleOrder",
+      "TiLi": "TiLi",
+      "DataUpdate": "DataUpdate"
     }
   },
   "Password": {
@@ -987,7 +1020,8 @@
       "Develop": "开发",
       "Performance": "性能",
       "Setting": "设置",
-      "AddAlas": "新增"
+      "AddAlas": "新增",
+      "ManageAlas": "管理"
     },
     "Button": {
       "Start": "启动",
@@ -1004,6 +1038,7 @@
     "Toast": {
       "DisableTranslateMode": "点击这里关闭翻译模式",
       "ConfigSaved": "设置已保存",
+      "PriorityReset": "已恢复默认任务优先级",
       "AlasIsRunning": "调度器已在运行中",
       "ClickToUpdate": "有更新可用，点击这里进行更新"
     },
@@ -1050,6 +1085,30 @@
       "FileExist": "存在同名的配置文件，请重新输入一个",
       "InvalidChar": "配置文件名不能包含下列任何字符：.\\/:*?\"<>|",
       "InvalidPrefixTemplate": "配置文件名不能以 template 开头"
+    },
+    "ManageAlas": {
+      "PopupTitle": "配置管理",
+      "Hint": "可在此添加、删除配置，或导入旧的配置文件",
+      "TabList": "配置列表",
+      "TabAdd": "新增配置",
+      "TabImport": "导入配置",
+      "ListTitle": "已有配置",
+      "ListEmpty": "暂无配置，请先添加或导入",
+      "Delete": "删除",
+      "DeleteConfirm": "确认删除配置「{name}」？删除后无法恢复。",
+      "DeleteYes": "确认删除",
+      "DeleteNo": "取消",
+      "DeleteSuccess": "已删除配置 {name}",
+      "DeleteFailed": "删除失败",
+      "DeleteRunningTip": "删除运行中的配置会先停止其进程",
+      "AddSuccess": "已添加配置 {name}",
+      "ImportTitle": "导入旧配置文件",
+      "ImportHint": "仅支持 .json 配置文件，同名时自动重命名",
+      "ImportFile": "选择配置文件",
+      "Import": "导入",
+      "ImportEmpty": "请先选择要导入的配置文件",
+      "ImportSuccess": "导入成功：{names}",
+      "ImportFailed": "导入失败：{names}"
     },
     "Update": {
       "UpToDate": "已是最新版本",

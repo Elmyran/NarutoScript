@@ -70,8 +70,25 @@ class GitOverCdnClient:
 
     @cached_property
     def current_commit(self) -> str:
+        """
+        Installed working-tree commit (HEAD).
+
+        Must NOT use origin/<branch> refs: those can already equal the remote
+        while the working tree is still on another branch (e.g. master).
+        Comparing refs made GitOverCdn report "uptodate" forever after
+        switching Branch in deploy.yaml.
+        """
+        try:
+            commit = self.git_command('rev-parse', 'HEAD').strip()
+            res = re.search(r'([0-9a-f]{40})', commit)
+            if res:
+                commit = res.group(1)
+                self.logger.attr('CurrentCommit', commit)
+                return commit
+        except Exception as e:
+            self.logger.error(f'Failed to get HEAD commit: {e}')
+
         for file in [
-            f'./refs/remotes/{self.source}/{self.branch}',
             f'./refs/heads/{self.branch}',
             'ORIG_HEAD',
         ]:
@@ -99,30 +116,42 @@ class GitOverCdnClient:
         return session
 
     @cached_property
-    def latest_commit(self) -> str:
+    def latest_info(self) -> dict:
+        """
+        latest.json from the CDN channel.
+
+        Older channels only have {"commit": ...}; newer ones also include
+        author/date/message so the WebUI can show the upstream tip without
+        needing a local pack download first.
+        """
         try:
             url = self.urlpath('/latest.json')
             self.logger.info(f'Fetch url: {url}')
             resp = self.session.get(url, timeout=3)
         except Exception as e:
             self.logger.error(f'Failed to get remote commit: {e}')
-            return ''
+            return {}
 
         if resp.status_code == 200:
             try:
                 info = json.loads(resp.text)
-                commit = info['commit']
-                self.logger.attr('LatestCommit', commit)
-                return commit
+                if not info.get('commit'):
+                    self.logger.error(f'Failed to get remote commit, key "commit" is not found: {resp.text}')
+                    return {}
+                return info
             except json.JSONDecodeError:
                 self.logger.error(f'Failed to get remote commit, response is not a json: {resp.text}')
-                return ''
-            except KeyError:
-                self.logger.error(f'Failed to get remote commit, key "commit" is not found: {resp.text}')
-                return ''
+                return {}
         else:
             self.logger.error(f'Failed to get remote commit, status={resp.status_code}, text={resp.text}')
-            return ''
+            return {}
+
+    @cached_property
+    def latest_commit(self) -> str:
+        commit = self.latest_info.get('commit', '')
+        if commit:
+            self.logger.attr('LatestCommit', commit)
+        return commit
 
     def download_pack(self):
         try:
@@ -242,7 +271,8 @@ class GitOverCdnClient:
             keep_changes:
 
         Returns:
-            bool: If repo is up-to-date
+            bool: True if CDN update handled the tree (or already latest);
+                  False to fall back to normal git pull.
         """
         _ = self.current_commit
         _ = self.latest_commit
@@ -253,9 +283,11 @@ class GitOverCdnClient:
             self.logger.error('Failed to get latest commit')
             return False
         if self.current_commit == self.latest_commit:
-            self.logger.info('Already up to date')
-            self.git_reset(keep_changes=keep_changes)
-            return True
+            # HEAD already matches CDN — do not reset to origin/<branch>
+            # (stale tracking ref). Return False so git_install still runs
+            # git pull and can pick up commits newer than the CDN.
+            self.logger.info('HEAD matches CDN, skip CDN reset (use git if needed)')
+            return False
 
         if not self.download_pack():
             return False

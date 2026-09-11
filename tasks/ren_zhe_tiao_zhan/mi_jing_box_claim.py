@@ -9,7 +9,6 @@ class MiJingBoxClaim(GameControl):
         self.ui_ensure(page_ren_zhe_tiao_zhan)
         self._box_check()
         self._box_claim()
-        self.ui_goto_main()
     def _box_claim(self):
         time=Timer(2,count=4).start()
         for _ in self.loop():

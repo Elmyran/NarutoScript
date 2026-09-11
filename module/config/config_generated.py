@@ -38,7 +38,10 @@ class GeneratedConfig:
     # Group `Optimization`
     Optimization_ScreenshotInterval = 0.3
     Optimization_CombatScreenshotInterval = 1.0
-    Optimization_WhenTaskQueueEmpty = 'goto_main'  # stay_there, goto_main, close_game, close_emulator
+    Optimization_WhenTaskQueueEmpty = 'goto_main'  # stay_there, goto_main, close_game, close_emulator, close_emulator_and_ns, shutdown_pc
+
+    # Group `TaskPriority`
+    TaskPriority_Priority = 'Restart>BattleField>Fortress>PanRen>CultivationRoad>Akatsuki>SquadRaid>FengRao>SurvivalTrail>JiFenSai>Recruit>DingCiKaoRou>StorePurchase>Duel>MiJing>Mission>Freebies>BattleOrder>TiLi>DataUpdate'  # Restart, BattleField, Fortress, PanRen, CultivationRoad, Akatsuki, SquadRaid, FengRao, SurvivalTrail, JiFenSai, Recruit, DingCiKaoRou, StorePurchase, Duel, MiJing, Mission, Freebies, BattleOrder, TiLi, DataUpdate
 
     # Group `Password`
     Password_SecondPassword = None

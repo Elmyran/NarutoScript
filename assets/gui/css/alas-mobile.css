@@ -24,6 +24,12 @@
     grid-template-rows: auto auto;
 }
 
+[id^="pywebio-scope-arg_container-sortable-"] {
+    grid-auto-flow: row;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+}
+
 [id^="pywebio-scope-arg_container-checkbox-"] {
     grid-auto-flow: column;
     grid-template-columns: 1fr 8rem;
