@@ -860,11 +860,10 @@ class AlasGUI(Frame):
                 )
 
                 local_commit = updater.get_commit(short_sha1=True)
-                local_full = updater.get_commit()
-                local_sha = local_full[0] or ""
 
-                # Prefer CDN tip as "Upstream": detection uses CDN, not gitee
-                # origin/dev. Those two remotes can disagree.
+                # Prefer CDN tip whenever GitOverCdn has it.
+                # `git fetch origin` can rewrite origin/<branch> back to gitee's
+                # older tip and hide the CDN-synced commit after an update.
                 cdn_sha = ""
                 if State.deploy_config.GitOverCdn:
                     try:
@@ -872,14 +871,15 @@ class AlasGUI(Frame):
                     except Exception:
                         cdn_sha = ""
 
-                upstream_rev = f"origin/{updater.Branch}"
-                if cdn_sha and local_sha and cdn_sha != local_sha:
+                if cdn_sha:
                     upstream_rev = cdn_sha
+                else:
+                    upstream_rev = f"origin/{updater.Branch}"
 
                 upstream_commit = updater.get_commit(upstream_rev, short_sha1=True)
                 if not upstream_commit[0]:
                     # CDN commit not in local object DB yet — still show the sha
-                    show_sha = (cdn_sha or upstream_rev)[:7] if cdn_sha else upstream_rev
+                    show_sha = upstream_rev[:7] if cdn_sha else upstream_rev
                     upstream_commit = (show_sha, "-", "-", "Cloudflare CDN")
 
                 put_table(
