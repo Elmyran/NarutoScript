@@ -2,6 +2,7 @@
 from module.base.utils import crop
 from module.logger import logger
 from module.ocr.ocr import  Digit, DigitCounter
+from module.base.timer import Timer
 from tasks.data_update.ocr import DataDigit
 from tasks.base.page import page_main,  page_store, page_tong_ling
 from tasks.base.ui import UI
