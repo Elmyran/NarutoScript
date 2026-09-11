@@ -204,6 +204,68 @@ class AzurLaneAutoScript:
         time.sleep(0.5)
         sys.exit(code)
 
+    def _shutdown_ns_client(self):
+        """
+        Close the whole NS desktop app (Electron + webui), not only this worker.
+
+        Worker processes are children of the webui Python process, which is a
+        child of Electron. sys.exit() in a worker leaves both parents alive,
+        so "close emulator and NS" used to only stop the emulator.
+        """
+        try:
+            import psutil
+
+            me = psutil.Process()
+            parent = me.parent()
+            chain = []
+            p = parent
+            while p is not None:
+                chain.append(p)
+                try:
+                    p = p.parent()
+                except (psutil.Error, Exception):
+                    break
+
+            electron = None
+            webui = parent
+            for proc in chain:
+                try:
+                    name = proc.name().lower()
+                except psutil.Error:
+                    continue
+                if "electron" in name or name in ("node.exe", "node"):
+                    electron = proc
+                    break
+
+            if electron is not None:
+                logger.info(f"Shutdown NS: killing Electron pid={electron.pid}")
+                try:
+                    children = electron.children(recursive=True)
+                except psutil.Error:
+                    children = []
+                for child in children:
+                    if child.pid == me.pid:
+                        continue
+                    try:
+                        logger.info(f"Shutdown NS: kill child {child.name()} pid={child.pid}")
+                        child.kill()
+                    except psutil.Error:
+                        pass
+                try:
+                    electron.kill()
+                except psutil.Error:
+                    pass
+            elif webui is not None:
+                logger.info(f"Shutdown NS: killing webui pid={webui.pid}")
+                try:
+                    webui.kill()
+                except psutil.Error:
+                    pass
+        except Exception as e:
+            logger.warning(f"Failed to shutdown NS client: {e}")
+
+        self._safe_exit(0)
+
     def get_next_task(self):
         """
         Returns:
@@ -286,7 +348,8 @@ class AzurLaneAutoScript:
                     except Exception as e:
                         logger.warning(f'Failed to stop emulator: {e}')
                     logger.info(f"[{self.config_name}] exited. Reason: Finish\n")
-                    self._safe_exit(0)
+                    # Also tear down Electron + webui, not just this worker
+                    self._shutdown_ns_client()
                 elif method == 'shutdown_pc':
                     logger.info('Shutdown PC during wait')
                     self.run('stop')
