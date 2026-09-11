@@ -1,15 +1,12 @@
 import copy
-import html as html_mod
 import json
 import random
-import re
 import string
 from typing import TYPE_CHECKING, Any, Callable, Dict, Generator, List, Optional, Union
 
 from pywebio.exceptions import SessionException
 from pywebio.io_ctrl import Output
 from pywebio.output import *
-from pywebio.pin import pin
 from pywebio.session import eval_js, local, run_js
 from rich.console import ConsoleRenderable
 
@@ -581,159 +578,6 @@ def put_arg_storage(kwargs: T_Output_Kwargs) -> Optional[Output]:
     )
 
 
-def put_arg_sortable(kwargs: T_Output_Kwargs) -> Output:
-    name: str = kwargs["name"]
-    value: str = str(kwargs.get("value") or "")
-    options: List[str] = kwargs.get("options") or []
-    options_label: List[str] = kwargs.get("options_label") or []
-    disabled: bool = kwargs.pop("disabled", False)
-    _ = kwargs.pop("invalid_feedback", None)
-
-    if not options:
-        return put_scope(
-            f"arg_container-sortable-{name}",
-            [get_title_help(kwargs), put_text("").style("--arg-help--")],
-        )
-
-    # Mirror Filter.load: strip whitespace and normalize fullwidth ">"
-    order = [
-        x
-        for x in re.sub(r"[＞﹥›˃ᐳ❯]", ">", re.sub(r"[ \t\r\n]", "", value)).split(">")
-        if x
-    ]
-    # Prefer Task.*.name when option labels fall back to raw keys
-    labels = []
-    for index, opt in enumerate(options):
-        label = t(f"Task.{opt}.name")
-        if label == f"Task.{opt}.name":
-            if (
-                index < len(options_label)
-                and options_label[index]
-                not in (None, "", f"TaskPriority.Priority.{opt}")
-            ):
-                label = options_label[index]
-            else:
-                label = opt
-        labels.append(label)
-
-    ordered = []
-    seen = set()
-    for task in order:
-        if task in options and task not in seen:
-            ordered.append(task)
-            seen.add(task)
-    for opt in options:
-        if opt not in seen:
-            ordered.append(opt)
-            seen.add(opt)
-
-    items = []
-    for task in ordered:
-        label = html_mod.escape(str(labels[options.index(task)]))
-        esc_task = html_mod.escape(str(task))
-        handle_html = (
-            "" if disabled else '<span class="sortable-handle">⋮⋮</span>'
-        )
-        up_html = (
-            ""
-            if disabled
-            else (
-                f'<button type="button" class="sortable-btn sortable-up" '
-                f'data-value="{esc_task}" aria-label="up">↑</button>'
-            )
-        )
-        down_html = (
-            ""
-            if disabled
-            else (
-                f'<button type="button" class="sortable-btn sortable-down" '
-                f'data-value="{esc_task}" aria-label="down">↓</button>'
-            )
-        )
-        items.append(
-            f'<li class="sortable-item" draggable="false" '
-            f'data-value="{esc_task}">'
-            f"{handle_html}"
-            f'<span class="sortable-label">{label}</span>'
-            f'<span class="sortable-actions">{up_html}{down_html}</span>'
-            f"</li>"
-        )
-
-    stored_value = ">".join(ordered)
-    default_value = ">".join(str(x) for x in options)
-    list_id = f"sortable-list-{name}"
-    list_html = (
-        f'<ul class="sortable-list" id="{html_mod.escape(list_id)}" '
-        f'data-default="{html_mod.escape(default_value)}">'
-        f'{"".join(items)}</ul>'
-    )
-
-    def reset_callback():
-        # Reorder DOM to the original option order, then let the pin input
-        # drive the existing config watcher (same path as drag/up-down).
-        js_order = json.dumps([str(x) for x in options])
-        run_js(
-            f"""
-            (function () {{
-                var list = document.getElementById({json.dumps(list_id)});
-                if (!list || typeof window.nsSortableReset !== 'function') return;
-                window.nsSortableReset(list, {js_order});
-            }})();
-            """
-        )
-        pin[name] = default_value
-        toast(
-            t("Gui.Toast.PriorityReset"),
-            duration=1,
-            position="right",
-            color="success",
-        )
-
-    title: str = kwargs.get("title") or ""
-    help_text: str = kwargs.get("help") or ""
-    if help_text:
-        title_col = put_column(
-            [
-                put_text(title).style("--arg-title--"),
-                put_text(help_text).style("--arg-help--"),
-            ],
-            size="auto auto",
-        )
-    else:
-        title_col = put_text(title).style("--arg-title--")
-
-    rows: List[Output] = []
-    if disabled:
-        rows.append(title_col)
-    else:
-        reset_btn = put_button(
-            label=t("TaskPriority.Priority.Reset"),
-            onclick=reset_callback,
-            color="off",
-        ).style(
-            "margin:0;width:auto;flex-shrink:0;white-space:nowrap;"
-            "font-size:.8125rem;padding:.25rem .75rem;line-height:1.25rem;"
-        )
-        rows.append(
-            put_row([title_col, reset_btn], size="1fr auto").style(
-                "display:flex;align-items:flex-start;justify-content:space-between;"
-                "gap:.75rem;width:100%;"
-            )
-        )
-    rows.append(put_html(list_html))
-    # Hidden pin input so config watcher saves order changes
-    rows.append(
-        put_input(
-            name=name,
-            type="text",
-            value=stored_value,
-            label="",
-        ).style("--sortable-hidden-input--")
-    )
-
-    return put_scope(f"arg_container-sortable-{name}", rows)
-
-
 _widget_type_to_func: Dict[str, Callable] = {
     "input": put_arg_input,
     "lock": put_arg_input,
@@ -745,7 +589,6 @@ _widget_type_to_func: Dict[str, Callable] = {
     "state": put_arg_state,
     "stored": put_arg_stored,
     "planner": put_arg_planner,
-    "sortable": put_arg_sortable,
 }
 
 
@@ -769,8 +612,6 @@ def type_to_html(type_: str) -> str:
         return "select"
     if type_ in ["textarea", "storage"]:
         return "textarea"
-    if type_ == "sortable":
-        return "input"
     return type_
 
 
