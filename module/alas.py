@@ -205,62 +205,20 @@ class AzurLaneAutoScript:
         sys.exit(code)
 
     def _shutdown_ns_client(self):
-        """
-        Close the whole NS desktop app (Electron + webui), not only this worker.
-
-        Worker processes are children of the webui Python process, which is a
-        child of Electron. sys.exit() in a worker leaves both parents alive,
-        so "close emulator and NS" used to only stop the emulator.
-        """
+        """Kill parent ns.exe so the Electron client exits with its process tree."""
         try:
             import psutil
 
-            me = psutil.Process()
-            parent = me.parent()
-            chain = []
-            p = parent
+            p = psutil.Process().parent()
             while p is not None:
-                chain.append(p)
+                if (p.name() or "").lower() in ("ns.exe", "ns"):
+                    logger.info(f"Shutdown NS: taskkill pid={p.pid}")
+                    subprocess.Popen(["taskkill", "/PID", str(p.pid), "/T", "/F"])
+                    break
                 try:
                     p = p.parent()
                 except (psutil.Error, Exception):
                     break
-
-            electron = None
-            webui = parent
-            for proc in chain:
-                try:
-                    name = proc.name().lower()
-                except psutil.Error:
-                    continue
-                if "electron" in name or name in ("node.exe", "node"):
-                    electron = proc
-                    break
-
-            if electron is not None:
-                logger.info(f"Shutdown NS: killing Electron pid={electron.pid}")
-                try:
-                    children = electron.children(recursive=True)
-                except psutil.Error:
-                    children = []
-                for child in children:
-                    if child.pid == me.pid:
-                        continue
-                    try:
-                        logger.info(f"Shutdown NS: kill child {child.name()} pid={child.pid}")
-                        child.kill()
-                    except psutil.Error:
-                        pass
-                try:
-                    electron.kill()
-                except psutil.Error:
-                    pass
-            elif webui is not None:
-                logger.info(f"Shutdown NS: killing webui pid={webui.pid}")
-                try:
-                    webui.kill()
-                except psutil.Error:
-                    pass
         except Exception as e:
             logger.warning(f"Failed to shutdown NS client: {e}")
 
