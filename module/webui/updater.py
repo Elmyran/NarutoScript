@@ -66,16 +66,47 @@ class Updater(DeployConfig, GitManager, PipManager):
         else:
             return logs
 
+    def get_upstream_commit(self, short_sha1=False) -> Tuple:
+        """
+        Upstream tip for the WebUI table.
+
+        With GitOverCdn, origin/<branch> can still be the local commit until a
+        pack has been applied. Prefer the CDN latest.json metadata so the
+        Upstream row is the real remote tip even before update.
+        """
+        if State.deploy_config.GitOverCdn and (self.Branch or "master") in self.GOC_URLS:
+            info = self.goc_client.latest_info or {}
+            commit = info.get("commit") or ""
+            if commit:
+                sha = commit[:8] if short_sha1 else commit
+                return sha, info.get("author"), info.get("date"), info.get("message")
+        return self.get_commit(f"origin/{self.Branch}", short_sha1=short_sha1)
+
+    def get_upstream_history(self, n=20, short_sha1=False) -> List[Tuple]:
+        return self.get_commit(
+            f"origin/{self.Branch}", n=n, short_sha1=short_sha1
+        ) or []
+
     def _check_update(self) -> bool:
         self.state = "checking"
 
         if State.deploy_config.GitOverCdn:
-            status = self.goc_client.get_status()
+            client = self.goc_client
+            status = client.get_status()
             if status == "uptodate":
                 logger.info(f"No update")
                 return False
             elif status == "behind":
                 logger.info(f"New update available")
+                # Point origin/<branch> at the CDN tip so the WebUI update table
+                # shows the real upstream commit (not a copy of local HEAD).
+                # Prefetch pack first so `git log origin/<branch>` can resolve
+                # author/message; do not reset HEAD — apply is still update().
+                try:
+                    if client.download_pack():
+                        client.update_refs()
+                except Exception as e:
+                    logger.warning(f"Failed to sync origin/{self.Branch} for display: {e}")
                 return True
             else:
                 # failed, should fallback to `git pull`

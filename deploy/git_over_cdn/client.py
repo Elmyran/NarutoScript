@@ -116,30 +116,42 @@ class GitOverCdnClient:
         return session
 
     @cached_property
-    def latest_commit(self) -> str:
+    def latest_info(self) -> dict:
+        """
+        latest.json from the CDN channel.
+
+        Older channels only have {"commit": ...}; newer ones also include
+        author/date/message so the WebUI can show the upstream tip without
+        needing a local pack download first.
+        """
         try:
             url = self.urlpath('/latest.json')
             self.logger.info(f'Fetch url: {url}')
             resp = self.session.get(url, timeout=3)
         except Exception as e:
             self.logger.error(f'Failed to get remote commit: {e}')
-            return ''
+            return {}
 
         if resp.status_code == 200:
             try:
                 info = json.loads(resp.text)
-                commit = info['commit']
-                self.logger.attr('LatestCommit', commit)
-                return commit
+                if not info.get('commit'):
+                    self.logger.error(f'Failed to get remote commit, key "commit" is not found: {resp.text}')
+                    return {}
+                return info
             except json.JSONDecodeError:
                 self.logger.error(f'Failed to get remote commit, response is not a json: {resp.text}')
-                return ''
-            except KeyError:
-                self.logger.error(f'Failed to get remote commit, key "commit" is not found: {resp.text}')
-                return ''
+                return {}
         else:
             self.logger.error(f'Failed to get remote commit, status={resp.status_code}, text={resp.text}')
-            return ''
+            return {}
+
+    @cached_property
+    def latest_commit(self) -> str:
+        commit = self.latest_info.get('commit', '')
+        if commit:
+            self.logger.attr('LatestCommit', commit)
+        return commit
 
     def download_pack(self):
         try:
