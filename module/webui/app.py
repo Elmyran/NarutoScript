@@ -852,18 +852,36 @@ class AlasGUI(Frame):
 
         def update_table():
             with use_scope("updater_info", clear=True):
-                # Pick up deploy.yaml Branch changes without restart
                 updater.read()
-                # Refresh origin/<branch> so "Upstream" is the real remote tip,
-                # not a stale local ref (GitOverCdn check does not git fetch).
+                # Refresh origin/<branch> for history / git-fallback display
                 updater.execute(
                     f'"{updater.git}" fetch origin {updater.Branch}',
                     allow_failure=True,
                 )
+
                 local_commit = updater.get_commit(short_sha1=True)
-                upstream_commit = updater.get_commit(
-                    f"origin/{updater.Branch}", short_sha1=True
-                )
+                local_full = updater.get_commit()
+                local_sha = local_full[0] or ""
+
+                # Prefer CDN tip as "Upstream": detection uses CDN, not gitee
+                # origin/dev. Those two remotes can disagree.
+                cdn_sha = ""
+                if State.deploy_config.GitOverCdn:
+                    try:
+                        cdn_sha = updater.goc_client.latest_commit or ""
+                    except Exception:
+                        cdn_sha = ""
+
+                upstream_rev = f"origin/{updater.Branch}"
+                if cdn_sha and local_sha and cdn_sha != local_sha:
+                    upstream_rev = cdn_sha
+
+                upstream_commit = updater.get_commit(upstream_rev, short_sha1=True)
+                if not upstream_commit[0]:
+                    # CDN commit not in local object DB yet — still show the sha
+                    show_sha = (cdn_sha or upstream_rev)[:7] if cdn_sha else upstream_rev
+                    upstream_commit = (show_sha, "-", "-", "Cloudflare CDN")
+
                 put_table(
                     [
                         [t("Gui.Update.Local"), *local_commit],
@@ -882,6 +900,10 @@ class AlasGUI(Frame):
                 history = updater.get_commit(
                     f"origin/{updater.Branch}", n=20, short_sha1=True
                 )
+                if not history or not history[0]:
+                    history = []
+                elif not isinstance(history[0], (list, tuple)):
+                    history = [history]
                 put_table(
                     [commit for commit in history],
                     header=[
