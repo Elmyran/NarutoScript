@@ -16,13 +16,22 @@ CHAO_YING_DAYS_BASE = ButtonWrapper(
 )
 CHAO_YING_DAYS_CHECK = ButtonWrapper(
     name='CHAO_YING_DAYS_CHECK',
-    cn=Button(
-        file='./assets/cn/store_purchase/reward_store/CHAO_YING_DAYS_CHECK.png',
-        area=(333, 569, 660, 595),
-        search=(313, 549, 680, 615),
-        color=(67, 67, 70),
-        button=(333, 569, 660, 595),
-    ),
+    cn=[
+        Button(
+            file='./assets/cn/store_purchase/reward_store/CHAO_YING_DAYS_CHECK.png',
+            area=(333, 569, 660, 595),
+            search=(313, 549, 680, 615),
+            color=(67, 67, 70),
+            button=(333, 569, 660, 595),
+        ),
+        Button(
+            file='./assets/cn/store_purchase/reward_store/CHAO_YING_DAYS_CHECK.2.png',
+            area=(334, 573, 695, 599),
+            search=(314, 553, 715, 619),
+            color=(75, 76, 78),
+            button=(334, 573, 695, 599),
+        ),
+    ],
     en=None,
 )
 CHAO_YING_DAYS_CLICK_BUTTON = ButtonWrapper(
