@@ -2,8 +2,6 @@
 from module.base.utils import crop
 from module.logger import logger
 from module.ocr.ocr import  Digit, DigitCounter,OcrWhiteLetterOnComplexBackground
-from module.base.timer import Timer
-from tasks.data_update.ocr import DataDigit
 from tasks.base.page import page_main,  page_store, page_tong_ling
 from tasks.base.ui import UI
 from tasks.data_update.assets.assets_data_update import DATA_COINS, DATA_GOLD, DATA_FAME, DATA_TI_LI
