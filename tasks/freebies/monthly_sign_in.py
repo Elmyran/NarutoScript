@@ -1,4 +1,5 @@
 from module.ocr.ocr import DigitCounter
+from module.base.button import ClickButton
 from tasks.freebies.assets.assets_freebies_monthly_sign_in import *
 from tasks.activity.draglist import ACTIVITY_TAB_LIST
 from tasks.activity.activity_keyword import  MeiYueQianDaoKeyword
