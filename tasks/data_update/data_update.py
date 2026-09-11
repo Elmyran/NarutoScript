@@ -74,11 +74,11 @@ class DataUpdate(UI):
     def _chao_ying_days(self):
         stored = self.config.stored.ChaoYingDays
         remain = stored.predict_current()
-        #if remain > 0:
+        if remain > 0:
             # 未到期：只按刷新点衰减计数，不进游戏识别
-        #    stored.value = remain
-        #    logger.info(f'ChaoYing days tick: {remain}')
-        #    return
+            stored.value = remain
+            logger.info(f'ChaoYing days tick: {remain}')
+            return
         # 已到期（或首次无记录）：进游戏重新识别
         self.ui_ensure(page_store)
         StoreTabList.search_rows(main=self,keyword=RewardsStore)
