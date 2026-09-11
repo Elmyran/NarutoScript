@@ -1,16 +1,14 @@
-from module.base.timer import Timer
+
 from module.base.utils import crop
 from module.logger import logger
 from module.ocr.ocr import  Digit, DigitCounter
-from tasks.base.page import page_main, page_recruit, page_store, page_tong_ling
+from tasks.base.page import page_main,  page_store, page_tong_ling
 from tasks.base.ui import UI
-from tasks.data_update.assets.assets_data_update import DATA_COINS, DATA_GOLD, DATA_RECRUITMENT_TICKETS, \
-    DATA_FAME, DATA_TI_LI
-from tasks.data_update.ocr import DataDigit
+from tasks.data_update.assets.assets_data_update import DATA_COINS, DATA_GOLD, DATA_FAME, DATA_TI_LI
 from tasks.store_purchase.assets.assets_store_purchase_reward_store import CHAO_YING_DAYS_BASE, CHAO_YING_DAYS_CHECK, CHAO_YING_DAYS_CLICK_BUTTON, CHAO_YING_DAYS_LIMITED, CHAO_YING_DAYS_PREMIUM
 from tasks.store_purchase.keyword.store_keyword import ChaoYingService, RewardsStore
 from tasks.store_purchase.ui.store_tab_draglist import StoreTabList, SubsidiaryStoreTabList
-
+from module.base.button import ClickButton
 
 class DataUpdate(UI):
     def run(self):
@@ -76,23 +74,17 @@ class DataUpdate(UI):
     def _chao_ying_days(self):
         stored = self.config.stored.ChaoYingDays
         remain = stored.predict_current()
-        if remain > 0:
+        #if remain > 0:
             # 未到期：只按刷新点衰减计数，不进游戏识别
-            stored.value = remain
-            logger.info(f'ChaoYing days tick: {remain}')
-            return
+        #    stored.value = remain
+        #    logger.info(f'ChaoYing days tick: {remain}')
+        #    return
         # 已到期（或首次无记录）：进游戏重新识别
         self.ui_ensure(page_store)
         StoreTabList.search_rows(main=self,keyword=RewardsStore)
         SubsidiaryStoreTabList.search_rows(self, ChaoYingService)
-        click_interval=Timer(2).start()
-        for _ in self.loop():
-            if self.appear(CHAO_YING_DAYS_CHECK):
-                break
-            if click_interval.reached():
-                self.device.click(CHAO_YING_DAYS_CLICK_BUTTON)
-                click_interval.reset()
-                continue
+        click_button=ClickButton(CHAO_YING_DAYS_CLICK_BUTTON.button)
+        self.ui_click(click_button=click_button,check_button=CHAO_YING_DAYS_CHECK,direct_match=True)
         ocr=Digit(CHAO_YING_DAYS_CHECK)
         areas = [CHAO_YING_DAYS_PREMIUM, CHAO_YING_DAYS_BASE, CHAO_YING_DAYS_LIMITED]  # 几个 ButtonWrapper
         images = [crop(self.device.image, a.area) for a in areas]
@@ -102,8 +94,10 @@ class DataUpdate(UI):
         logger.info(f'ChaoYing total days: {total_days}')
 if __name__ == '__main__':
     data=DataUpdate(config='ns', device='127.0.0.1:16384',task='Alas')
-    data._chao_ying_days()
-
+    data.device.screenshot()
+    #data._chao_ying_days()
+    res=CHAO_YING_DAYS_CHECK.match_template(data.device.image,similarity=0.8,direct_match=True)
+    print(res)
 
 
 
