@@ -2,6 +2,8 @@
 from module.base.utils import crop
 from module.logger import logger
 from module.ocr.ocr import  Digit, DigitCounter,OcrWhiteLetterOnComplexBackground
+from module.base.timer import Timer
+from tasks.data_update.ocr import DataDigit
 from tasks.base.page import page_main,  page_store, page_tong_ling
 from tasks.base.ui import UI
 from tasks.data_update.assets.assets_data_update import DATA_COINS, DATA_GOLD, DATA_FAME, DATA_TI_LI
@@ -46,11 +48,11 @@ class DataUpdate(UI):
     def _chao_ying_days(self):
         stored = self.config.stored.ChaoYingDays
         remain = stored.predict_current()
-        #if remain > 0:
+        if remain > 0:
             # 未到期：只按刷新点衰减计数，不进游戏识别
-        #    stored.value = remain
-        #    logger.info(f'ChaoYing days tick: {remain}')
-        #    return
+            stored.value = remain
+            logger.info(f'ChaoYing days tick: {remain}')
+            return
         # 已到期（或首次无记录）：进游戏重新识别
         self.ui_ensure(page_store)
         StoreTabList.search_rows(main=self,keyword=RewardsStore)
