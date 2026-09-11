@@ -241,7 +241,7 @@ class UI(MainPage):
                     self.device.click(button)
                 retry.reset()
 
-     def ui_click(
+    def ui_click(
             self,
             click_button,
             check_button,
