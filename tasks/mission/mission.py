@@ -1,7 +1,6 @@
 from module.base.timer import Timer
-from module.exception import GameStuckError
 from module.logger.logger import logger
-from module.ocr.ocr import DigitCounter
+from module.ocr.ocr import DigitCounter,Ocr
 from tasks.base.page import page_mission
 from tasks.base.taskui import TaskUI
 from tasks.mission.assets.assets_mission import *
@@ -69,7 +68,7 @@ class Mission(TaskUI):
     # ============================== 领取奖励 ==============================
 
     def _mission_reward_claim(self):
-        ocr = MissionDurationOcr(MISSION_TASK_CLAIMED_LIST)
+        ocr = Ocr(MISSION_TASK_CLAIMED_LIST)
         res = ocr.matched_ocr(self.device.image, MissionClaimable)
         if not res:
             return
