@@ -852,36 +852,10 @@ class AlasGUI(Frame):
 
         def update_table():
             with use_scope("updater_info", clear=True):
-                updater.read()
-                # Refresh origin/<branch> for history / git-fallback display
-                updater.execute(
-                    f'"{updater.git}" fetch origin {updater.Branch}',
-                    allow_failure=True,
-                )
-
                 local_commit = updater.get_commit(short_sha1=True)
-
-                # Prefer CDN tip whenever GitOverCdn has it.
-                # `git fetch origin` can rewrite origin/<branch> back to gitee's
-                # older tip and hide the CDN-synced commit after an update.
-                cdn_sha = ""
-                if State.deploy_config.GitOverCdn:
-                    try:
-                        cdn_sha = updater.goc_client.latest_commit or ""
-                    except Exception:
-                        cdn_sha = ""
-
-                if cdn_sha:
-                    upstream_rev = cdn_sha
-                else:
-                    upstream_rev = f"origin/{updater.Branch}"
-
-                upstream_commit = updater.get_commit(upstream_rev, short_sha1=True)
-                if not upstream_commit[0]:
-                    # CDN commit not in local object DB yet — still show the sha
-                    show_sha = upstream_rev[:7] if cdn_sha else upstream_rev
-                    upstream_commit = (show_sha, "-", "-", "Cloudflare CDN")
-
+                upstream_commit = updater.get_commit(
+                    f"origin/{updater.Branch}", short_sha1=True
+                )
                 put_table(
                     [
                         [t("Gui.Update.Local"), *local_commit],
@@ -900,10 +874,6 @@ class AlasGUI(Frame):
                 history = updater.get_commit(
                     f"origin/{updater.Branch}", n=20, short_sha1=True
                 )
-                if not history or not history[0]:
-                    history = []
-                elif not isinstance(history[0], (list, tuple)):
-                    history = [history]
                 put_table(
                     [commit for commit in history],
                     header=[
@@ -1033,7 +1003,6 @@ class AlasGUI(Frame):
         self.task_handler.add(updater_switch.g(), delay=0.5, pending_delete=True)
 
         updater.check_update()
-
     @use_scope("content", clear=True)
     def dev_utils(self) -> None:
         self.init_menu(name="Utils")
