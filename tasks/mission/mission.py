@@ -110,6 +110,7 @@ class Mission(TaskUI):
         """
         self.tasks = []
         select = DigitCounter(TASK_SELECT_REAMIN_TIMES)
+        should_stop = False
 
         for _ in self.loop():
             current, remain, total = select.ocr_single_line(self.device.image)
@@ -117,16 +118,23 @@ class Mission(TaskUI):
             if remain == total:
                 break
             tasks = self._task_strategy(self._scan_tasks())
-            action, task = self.strategy.decide(tasks, self.tasks, self._task_refreshable())
+            action, selected = self.strategy.decide(tasks, self.tasks, self._task_refreshable())
             if action == StrategyAction.STOP:
                 break
             if action == StrategyAction.REFRESH:
                 if not self._task_refresh():
                     break
                 continue
-            if not self._accept_one(task):
+            # selected 是策略返回的任务列表, 依次接取
+            for task in selected:
+                if not self._accept_one(task):
+                    should_stop = True
+                    break
+                logger.info(task)
+                self.tasks.append(task.time)
+                
+            if should_stop:
                 break
-            self.tasks.append(task.time)
         with self.config.multi_set():
             self.config.stored.MissionAccept.write_missions(self.tasks)
             self.config.stored.MissionAccept.set(self.value)
@@ -186,23 +194,20 @@ class Mission(TaskUI):
             bool: 是否刷新成功(剩余免费次数减少)
         """
         if self.appear(TASK_REFRESH_TIMES_SHORTAGE):
-            logger.info('Free refresh count shortage')
+            logger.info('免费刷新次数耗尽，无法免费刷新')
             return False
-
-        refresh = DigitCounter(TASK_REFRESH_REMAIN_TIMES)
+        refresh = DigitCounter(TASK_REFRESH_REMAIN_TIMES,name='每日刷新次数')
         pre, _, _ = refresh.ocr_single_line(self.device.image)
-        click_interval = Timer(2)
         for _ in self.loop():
             if self.appear(TASK_REFRESH_TIMES_SHORTAGE):
-                logger.info('Free refresh count shortage')
-                return False
-            if click_interval.reached():
-                self.device.click(TASK_REFRESH_FREE)
-                click_interval.reset()
-            current, _, _ = refresh.ocr_single_line(self.device.image)
-            if current < pre:
-                logger.info('Mission task refreshed')
+                logger.info('刷新成功，次数耗尽，无法免费刷新')
                 return True
+            if self.appear_then_click(TASK_REFRESH_FREE,interval=2):
+                self.wait_until_stable(TASK_1_AREA)
+                after, _, _ = refresh.ocr_single_line(self.device.image)
+                if after < pre:
+                    logger.info(f'刷新成功，当前剩余次数{after}')
+                    return True
         return False
 
     # ============================== 任务扫描 ==============================
@@ -229,7 +234,8 @@ class Mission(TaskUI):
 if __name__ == '__main__':
     mission = Mission(config='ns', device='127.0.0.1:16384',task='Alas')
     mission.device.screenshot()
-    mission.strategy = mission._select_strategy()
+    #mission.strategy = mission._select_strategy()
     #mission._scan_tasks()
     #mission.ui_click(click_button=CHARACTER_SELECTED_AUTO,check_button=CHARACTER_SELECTED,direct_match=True)
-    mission._accept_tasks()
+    #mission._accept_tasks()
+    

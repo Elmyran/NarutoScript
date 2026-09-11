@@ -16,6 +16,11 @@ class MissionStrategy:
         tasks          当前面板上的有效任务, 已按优先级排序
         accepted_times 本次运行已接取任务的时长(分钟)列表
         can_refresh    当前是否还有免费刷新次数(仅查询按钮状态, 不点击)
+
+    Returns:
+        StrategyAction, list[Task]|None:
+            ACCEPT 时返回要接取的任务列表;
+            REFRESH/STOP 返回 None
     """
     def decide(self, tasks, accepted_times, can_refresh):
         raise NotImplementedError
@@ -26,26 +31,28 @@ class NormalAcceptStrategy(MissionStrategy):
     def decide(self, tasks, accepted_times, can_refresh):
         if not tasks:
             return StrategyAction.STOP, None
-        return StrategyAction.ACCEPT, tasks[0]
+        return StrategyAction.ACCEPT, tasks
 
 
 class RedBoxFirstStrategy(MissionStrategy):
-    """特权玩家: 红箱优先; 无红箱则免费刷新; 刷新耗尽后按优先级接取其他任务, 直到接满。"""
+    """超影玩家: 红箱优先; 无红箱则免费刷新; 刷新耗尽后按优先级接取其他任务, 直到接满。"""
     def decide(self, tasks, accepted_times, can_refresh):
-        if tasks and tasks[0].priority == TaskPriority.RED:
-            return StrategyAction.ACCEPT, tasks[0]
+        red_tasks = [t for t in tasks if t.priority == TaskPriority.RED]
+        if red_tasks:
+            return StrategyAction.ACCEPT, red_tasks
         if can_refresh:
             return StrategyAction.REFRESH, None
         if tasks:
-            return StrategyAction.ACCEPT, tasks[0]
+            return StrategyAction.ACCEPT, [tasks]
         return StrategyAction.STOP, None
 
 
 class RedBoxOnlyStrategy(MissionStrategy):
     """特权玩家: 只接红箱; 无红箱则免费刷新; 刷新耗尽即停止, 不接其他任务(不要求接满)。"""
     def decide(self, tasks, accepted_times, can_refresh):
-        if tasks and tasks[0].priority == TaskPriority.RED:
-            return StrategyAction.ACCEPT, tasks[0]
+        red_tasks = [t for t in tasks if t.priority == TaskPriority.RED]
+        if red_tasks:
+            return StrategyAction.ACCEPT, red_tasks
         if can_refresh:
             return StrategyAction.REFRESH, None
         return StrategyAction.STOP, None

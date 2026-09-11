@@ -31,7 +31,7 @@ class Task:
             jade: 魂玉数量素材
         """
         #name: 任务名竖排, 切字逐字识别
-        ocr=OcrWhiteLetterOnComplexBackground(name)
+        ocr=OcrWhiteLetterOnComplexBackground(name,name='任务名')
         self.name=ocr.ocr_single_line(image, vertical=True)
         #button
         ACCPET_BUTTON.load_search(self.area)
@@ -41,12 +41,12 @@ class Task:
             self.valid=False
             return
         #time
-        ocr=RecOCR(time)
+        ocr=RecOCR(time,name='时限')
         self.time=self.time_parse(ocr.ocr_single_line(image))
         #jade
         MISSION_JADE.load_search(self.area)
         if MISSION_JADE.match_template(image,similarity=0.6):
-            ocr=MissionOcr(jade)
+            ocr=MissionOcr(jade,name='魂玉')
             self.jade=self.jade_parse(ocr.ocr_single_line(image))
         #priority
         TASK_BOX_RED.load_search(self.area)
