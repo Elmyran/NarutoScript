@@ -259,7 +259,8 @@ class GitOverCdnClient:
             keep_changes:
 
         Returns:
-            bool: If repo is up-to-date
+            bool: True if CDN update handled the tree (or already latest);
+                  False to fall back to normal git pull.
         """
         _ = self.current_commit
         _ = self.latest_commit
@@ -270,9 +271,11 @@ class GitOverCdnClient:
             self.logger.error('Failed to get latest commit')
             return False
         if self.current_commit == self.latest_commit:
-            self.logger.info('Already up to date')
-            self.git_reset(keep_changes=keep_changes)
-            return True
+            # HEAD already matches CDN — do not reset to origin/<branch>
+            # (stale tracking ref). Return False so git_install still runs
+            # git pull and can pick up commits newer than the CDN.
+            self.logger.info('HEAD matches CDN, skip CDN reset (use git if needed)')
+            return False
 
         if not self.download_pack():
             return False

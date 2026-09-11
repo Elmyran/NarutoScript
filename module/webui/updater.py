@@ -80,13 +80,12 @@ class Updater(DeployConfig, GitManager, PipManager):
             if status == "behind":
                 logger.info(f"New update available")
                 return True
-            elif status == "failed":
-                # CDN unavailable — fall through to git
-                pass
+            # failed OR uptodate(CDN==HEAD): still consult git remote.
+            # CDN may lag behind git, or packs may miss HEAD's history.
+            if status == "failed":
+                logger.info("GitOverCdn failed, falling back to git")
             else:
-                # uptodate according to CDN for the configured branch
-                logger.info(f"No update (GitOverCdn)")
-                return False
+                logger.info("GitOverCdn matches HEAD, also checking git remote")
 
         source = "origin"
         for _ in range(3):

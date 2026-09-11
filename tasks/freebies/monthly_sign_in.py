@@ -47,7 +47,7 @@ class MonthlySignIn(UI):
         current,remain,total=ocr.ocr_single_line(self.device.image)
         if current==total:
             return
-        title_button=ClickButton(SIGN_IN_PROGRESS)
+        title_button=ClickButton(SIGN_IN_PROGRESS.button)
         self.ui_click(title_button,check_button=MONTHLY_SIGN_IN_TITLE_HAVE_CLAIM)
 
                 
