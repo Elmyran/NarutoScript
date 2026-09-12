@@ -43,7 +43,7 @@ class RedBoxFirstStrategy(MissionStrategy):
         if can_refresh:
             return StrategyAction.REFRESH, None
         if tasks:
-            return StrategyAction.ACCEPT, [tasks]
+            return StrategyAction.ACCEPT, tasks
         return StrategyAction.STOP, None
 
 

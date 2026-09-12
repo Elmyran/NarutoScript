@@ -37,7 +37,7 @@ class OcrModel:
         return RapidOCR(params={
             "Global.min_side_len": 1,
             "EngineConfig.onnxruntime.use_dml": use_dml,
-            "Det.model_type": ModelType.MEDIUM,
+            "Det.model_path": ppocrv6_small_det_onnx,
             "Rec.model_path": ppocrv6_small_rec_onnx,
             "Rec.rec_keys_path": ppocrv6_small_rec_keys_path,
             "Det.engine_type": EngineType.ONNXRUNTIME,
