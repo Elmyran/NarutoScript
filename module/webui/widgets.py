@@ -707,7 +707,7 @@ def put_arg_sortable(kwargs: T_Output_Kwargs) -> Output:
         rows.append(title_col)
     else:
         reset_btn = put_button(
-            label=t("TaskPriority.Priority.Reset"),
+            label=t("Gui.Sortable.Reset"),
             onclick=reset_callback,
             color="off",
         ).style(

@@ -8,6 +8,7 @@ Aside:
   Performance:
   Setting:
   AddAlas:
+  ManageAlas:
 
 Button:
   Start:
@@ -26,6 +27,10 @@ Toast:
   ConfigSaved:
   AlasIsRunning:
   ClickToUpdate:
+  PriorityReset:
+
+Sortable:
+  Reset:
 
 Status:
   Running:
@@ -72,6 +77,30 @@ AddAlas:
   FileExist:
   InvalidChar:
   InvalidPrefixTemplate:
+
+ManageAlas:
+  PopupTitle:
+  Hint:
+  TabList:
+  TabAdd:
+  TabImport:
+  ListTitle:
+  ListEmpty:
+  Delete:
+  DeleteConfirm:
+  DeleteYes:
+  DeleteNo:
+  DeleteSuccess:
+  DeleteFailed:
+  DeleteRunningTip:
+  AddSuccess:
+  ImportTitle:
+  ImportHint:
+  ImportFile:
+  Import:
+  ImportEmpty:
+  ImportSuccess:
+  ImportFailed:
 
 Update:
   UpToDate:

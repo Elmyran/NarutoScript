@@ -270,7 +270,6 @@
     "Priority": {
       "name": "TaskPriority.Priority.name",
       "help": "TaskPriority.Priority.help",
-      "Reset": "重設預設順序",
       "Restart": "Restart",
       "BattleField": "BattleField",
       "Fortress": "Fortress",
@@ -1038,9 +1037,12 @@
     "Toast": {
       "DisableTranslateMode": "點擊這裡關閉翻譯模式",
       "ConfigSaved": "設定已儲存",
-      "PriorityReset": "已還原預設任務優先順序",
       "AlasIsRunning": "調度器已在執行中",
-      "ClickToUpdate": "有更新可用，點擊這裡進行更新"
+      "ClickToUpdate": "有更新可用，點擊這裡進行更新",
+      "PriorityReset": "已還原預設任務優先順序"
+    },
+    "Sortable": {
+      "Reset": "重設預設順序"
     },
     "Status": {
       "Running": "執行中",

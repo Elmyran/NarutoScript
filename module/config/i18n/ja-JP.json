@@ -270,7 +270,6 @@
     "Priority": {
       "name": "TaskPriority.Priority.name",
       "help": "TaskPriority.Priority.help",
-      "Reset": "デフォルト順に戻す",
       "Restart": "Restart",
       "BattleField": "BattleField",
       "Fortress": "Fortress",
@@ -1038,9 +1037,12 @@
     "Toast": {
       "DisableTranslateMode": "クリックして翻訳モードを中止します",
       "ConfigSaved": "コンフィグ設定は保存されました",
-      "PriorityReset": "デフォルトのタスク優先度に戻しました",
       "AlasIsRunning": "スケジューラーはもう実行しています",
-      "ClickToUpdate": "新しいアップデータがあります。クリックしてアップデータ"
+      "ClickToUpdate": "新しいアップデータがあります。クリックしてアップデータ",
+      "PriorityReset": "デフォルトのタスク優先度に戻しました"
+    },
+    "Sortable": {
+      "Reset": "デフォルト順に戻す"
     },
     "Status": {
       "Running": "実行中",

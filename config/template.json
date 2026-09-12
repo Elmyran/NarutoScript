@@ -24,6 +24,9 @@
       "ScreenshotInterval": 0.2,
       "CombatScreenshotInterval": 1.0,
       "WhenTaskQueueEmpty": "goto_main"
+    },
+    "TaskPriority": {
+      "Priority": "Restart>BattleField>Fortress>PanRen>CultivationRoad>Akatsuki>SquadRaid>FengRao>SurvivalTrail>JiFenSai>Recruit>DingCiKaoRou>StorePurchase>Duel>MiJing>Mission>Freebies>BattleOrder>TiLi>DataUpdate"
     }
   },
   "Restart": {

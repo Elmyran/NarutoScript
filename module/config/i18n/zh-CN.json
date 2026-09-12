@@ -270,7 +270,6 @@
     "Priority": {
       "name": "拖拽调整任务顺序",
       "help": "拖拽行或使用 ↑↓ 调整顺序。越靠前优先级越高；修改后会自动保存",
-      "Reset": "重置默认顺序",
       "Restart": "Restart",
       "BattleField": "BattleField",
       "Fortress": "Fortress",
@@ -1038,9 +1037,12 @@
     "Toast": {
       "DisableTranslateMode": "点击这里关闭翻译模式",
       "ConfigSaved": "设置已保存",
-      "PriorityReset": "已恢复默认任务优先级",
       "AlasIsRunning": "调度器已在运行中",
-      "ClickToUpdate": "有更新可用，点击这里进行更新"
+      "ClickToUpdate": "有更新可用，点击这里进行更新",
+      "PriorityReset": "已恢复默认任务优先级"
+    },
+    "Sortable": {
+      "Reset": "重置默认顺序"
     },
     "Status": {
       "Running": "运行中",

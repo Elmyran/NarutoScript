@@ -270,7 +270,6 @@
     "Priority": {
       "name": "TaskPriority.Priority.name",
       "help": "TaskPriority.Priority.help",
-      "Reset": "Restablecer orden predeterminado",
       "Restart": "Restart",
       "BattleField": "BattleField",
       "Fortress": "Fortress",
@@ -1038,9 +1037,12 @@
     "Toast": {
       "DisableTranslateMode": "Click aquí para deshabilitar el modo traducido",
       "ConfigSaved": "Configuración guardada",
-      "PriorityReset": "Prioridad de tareas predeterminada restaurada",
       "AlasIsRunning": "El planificador ya se está ejecutando",
-      "ClickToUpdate": "Nueva actualización disponible, haz click aquí para actualizar"
+      "ClickToUpdate": "Nueva actualización disponible, haz click aquí para actualizar",
+      "PriorityReset": "Prioridad de tareas predeterminada restaurada"
+    },
+    "Sortable": {
+      "Reset": "Restablecer orden predeterminado"
     },
     "Status": {
       "Running": "En ejecución",

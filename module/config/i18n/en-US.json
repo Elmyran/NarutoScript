@@ -270,7 +270,6 @@
     "Priority": {
       "name": "Drag to reorder tasks",
       "help": "Drag rows or use ↑↓ to change order. Higher items have higher priority. Changes are saved automatically",
-      "Reset": "Reset to default order",
       "Restart": "Restart",
       "BattleField": "BattleField",
       "Fortress": "Fortress",
@@ -1038,9 +1037,12 @@
     "Toast": {
       "DisableTranslateMode": "Click here to disable translate mode",
       "ConfigSaved": "Config saved",
-      "PriorityReset": "Default task priority restored",
       "AlasIsRunning": "Scheduler is already running",
-      "ClickToUpdate": "New update available, click here to update"
+      "ClickToUpdate": "New update available, click here to update",
+      "PriorityReset": "Default task priority restored"
+    },
+    "Sortable": {
+      "Reset": "Reset to default order"
     },
     "Status": {
       "Running": "Running",
