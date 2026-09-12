@@ -44,12 +44,16 @@ class Equipment(TaskUI):
             if not self.has_equipment_below_level_limit():
                 return True
             self.switch_to_equipment()
-            self.synthetic()
-            self.promote()
+            if not self.synthetic():
+                self.back_to_main()
+                self.blacklist.append(self.equipment)
+                continue
+            if not self.promote():
+                self.blacklist.append(self.equipment)
+                continue
             if not self.is_sweep_button_appeared():
                 self.blacklist.append(self.equipment)
                 continue
-            self._stuff_detail_enter()
             self._sweep_enter()
             self._sweep_run()
             if self._stop_sweep():
@@ -62,23 +66,23 @@ class Equipment(TaskUI):
         
     def promote(self):
         if self.appear(EQUIPMENT_PROMOTION_BUTTON):
-            logger.info('Find  promote button ')
+            logger.info('发现进阶按钮 ')
             for _ in self.loop():
                 if self.appear(STUFF_AUTO_FILL):
                     break
                 if self.appear(COPPER_COINS_SHORTAGE):
                     self.back_to_main()
-                    break
+                    return False
                 if self.appear_then_click(EQUIPMENT_PROMOTION_BUTTON):
                     continue
-
+        return True
             
     def synthetic(self):
         ocr=Ocr(STUFF_LIST_AREA)
         timeout=Timer(2,count=5).start()
         for _ in self.loop():
             if timeout.reached():
-                logger.info('No stuff synthetic')   
+                logger.info('没有可合成的装备')   
                 break
             appear=ocr.matched_ocr(self.device.image,[SyntheticKeyword,EquipKeyword])
             if appear:
@@ -94,19 +98,23 @@ class Equipment(TaskUI):
             self.stuff=appear[0]
             self._stuff_detail_enter()
             if self._synthetic_and_equip():
-                self.back_to_main()
                 break
+            else:
+                return False
+        return True
 
     def _synthetic_and_equip(self):
         for _ in self.loop():
             if self.appear(EQUIPMENT_CHECK):
                 break
             if self.appear(COPPER_COINS_SHORTAGE):
-                return True
+                logger.info('合成失败，铜币不足')
+                return False
             if self.appear_then_click(STUFF_SYNTHETIC_BUTTON,interval=1):
                 continue
             if self.appear_then_click(STUFF_EQUIP_BUTTON,interval=1):
                 continue
+        return True
     def has_equipment_below_level_limit(self):
         if self.equipment and self.level:
             return True
@@ -148,8 +156,10 @@ class Equipment(TaskUI):
         for equipment in EQUIPMENT:
             if equipment in self.blacklist:
                 continue
-            level_button=ClickButton(equipment.button,name=equipment.name)
-            ocr=Digit(level_button)
+            button=ClickButton(equipment.button,name=equipment.name)
+            self.ui_click(click_button=button,check_button=equipment)
+
+            ocr=Digit(LEVEL_CHECK)
             level=ocr.ocr_single_line(self.device.image)
             if level<limit_level:
                 self.equipment=equipment
@@ -161,16 +171,10 @@ class Equipment(TaskUI):
 
 
     def switch_to_equipment(self):
-        logger.info(f'Switch to {self.equipment}')
-        click_interval=Timer(1).start()
-        for _ in self.loop():
-            if self.appear(self.equipment,similarity=0.6):
-                logger.info(f'{self.equipment} confirm ')
-                break
-            if click_interval.reached():
-                self.equipment.clear_offset()
-                self.device.click(self.equipment)
-
+        logger.info(f'切换到 {self.equipment}')
+        button=ClickButton(self.equipment.button,name=self.equipment.name)
+        self.ui_click(click_button=button,check_button=self.equipment)
+   
             
     def is_sweep_button_appeared(self):
         ocr=Ocr(STUFF_LIST_AREA)
@@ -182,27 +186,12 @@ class Equipment(TaskUI):
             if appear:
                 self.stuff=appear[0]
                 return True
-    def _stuff_detail_enter(self):
-        logger.info('Stuff Detail Enter')
-        click_interval=Timer(1).start()
-        for _ in self.loop():
-            if self.appear(STUFF_DETAIL_CHECK):
-                break
-            if self.appear(STUFF_DETAIL_SWEEP_BUTTON):
-                break
-            if self.appear(STUFF_SYNTHETIC_BUTTON):
-                break
-            if click_interval.reached():
-                self.device.click(self.stuff)
-                click_interval.reset()
     def _sweep_enter(self):
-        logger.info('Sweep Enter')
-        for _ in self.loop():
-            if self.appear(SWEEP_START):
-                break
-            if self.appear_then_click(STUFF_DETAIL_SWEEP_BUTTON,interval=1):
-                continue
-            
+        logger.info('Stuff Detail Enter')
+        stuff_button=ClickButton(self.stuff.button,name=self.stuff.name)
+        self.ui_click(click_button=stuff_button,check_button=STUFF_DETAIL_CHECK)
+        self.ui_click(click_button=STUFF_DETAIL_SWEEP_BUTTON,check_button=SWEEP_START)
+        self.ui_click(click_button=AUTO_STOP_UNSELECTED,check_button=AUTO_STOP_SELECTED)   
     def _sweep_run(self):
         logger.info('Sweep Run')  
         click_interval=Timer(0.5).start()

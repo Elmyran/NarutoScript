@@ -3,6 +3,26 @@ from module.base.button import Button, ButtonWrapper
 # This file was auto-generated, do not modify it manually. To generate:
 # ``` python -m dev_tools.button_extract ```
 
+AUTO_STOP_SELECTED = ButtonWrapper(
+    name='AUTO_STOP_SELECTED',
+    share=Button(
+        file='./assets/share/tili/equipment/AUTO_STOP_SELECTED.png',
+        area=(726, 505, 758, 540),
+        search=(706, 485, 778, 560),
+        color=(73, 114, 78),
+        button=(726, 505, 758, 540),
+    ),
+)
+AUTO_STOP_UNSELECTED = ButtonWrapper(
+    name='AUTO_STOP_UNSELECTED',
+    share=Button(
+        file='./assets/share/tili/equipment/AUTO_STOP_UNSELECTED.png',
+        area=(726, 505, 759, 539),
+        search=(706, 485, 779, 559),
+        color=(90, 84, 66),
+        button=(726, 505, 759, 539),
+    ),
+)
 COPPER_COINS_SHORTAGE = ButtonWrapper(
     name='COPPER_COINS_SHORTAGE',
     cn=Button(
@@ -77,6 +97,16 @@ EQUIPMENT_SELECTED = ButtonWrapper(
         search=(678, 96, 815, 229),
         color=(97, 65, 39),
         button=(698, 116, 795, 209),
+    ),
+)
+LEVEL_CHECK = ButtonWrapper(
+    name='LEVEL_CHECK',
+    share=Button(
+        file='./assets/share/tili/equipment/LEVEL_CHECK.png',
+        area=(798, 118, 1048, 162),
+        search=(778, 98, 1068, 182),
+        color=(54, 39, 11),
+        button=(798, 118, 1048, 162),
     ),
 )
 MAIN_GOTO_EQUIPMENT = ButtonWrapper(
