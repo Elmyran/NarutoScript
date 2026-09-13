@@ -96,7 +96,8 @@ class Equipment(TaskUI):
             else:
                 continue                
             self.stuff=appear[0]
-            self._stuff_detail_enter()
+            stuff_button=ClickButton(self.stuff.button,name=self.stuff.name)
+            self.ui_click(click_button=stuff_button,check_button=STUFF_DETAIL_CHECK)
             if self._synthetic_and_equip():
                 break
             else:
