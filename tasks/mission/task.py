@@ -51,7 +51,7 @@ class Task:
         #priority
         TASK_BOX_RED.load_search(self.area)
         TASK_BOX_BLUE.load_search(self.area)
-        if TASK_BOX_RED.match_template(image,similarity=0.7):
+        if TASK_BOX_RED.match_template(image,similarity=0.6):
             self.priority=TaskPriority.RED
             logger.info(f"优先级: {self.priority}")
         elif TASK_BOX_BLUE.match_template(image,similarity=0.7):
