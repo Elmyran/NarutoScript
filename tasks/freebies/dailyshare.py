@@ -3,8 +3,8 @@ from module.exception import GameStuckError
 from module.logger import logger
 from tasks.base.page import page_main, page_panel
 from tasks.base.taskui import TaskUI
-from tasks.freebies.assets.assets_freebies_dailyshare import SHARE_BUTTON, SHARE_GOTO_OTHER_APP, TITLE_CONFIRM, TITLE_NEXT
-
+from tasks.freebies.assets.assets_freebies_dailyshare import SHARE_BUTTON, SHARE_GOTO_OTHER_APP, TITLE_CONFIRM, TITLE_NEXT, MAIN_GOTO_PANEL
+from module.base.button import ClickButton
 
 class DailyShare(TaskUI):
     def handle_daily_share(self):
@@ -31,7 +31,7 @@ class DailyShare(TaskUI):
             if self.appear_then_click(TITLE_NEXT,interval=1):
                 return True
             return False
-        panel=ClickButton(AIN_GOTO_PANEL.button)
+        panel=ClickButton(MAIN_GOTO_PANEL.button)
         self.ui_click(click_button=panel,check_button=SHARE_BUTTON,additional=title)
         
             
