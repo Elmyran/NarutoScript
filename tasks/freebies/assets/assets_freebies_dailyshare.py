@@ -98,3 +98,25 @@ SHARE_GOTO_OTHER_APP = ButtonWrapper(
     ],
     en=None,
 )
+TITLE_CONFIRM = ButtonWrapper(
+    name='TITLE_CONFIRM',
+    cn=Button(
+        file='./assets/cn/freebies/dailyshare/TITLE_CONFIRM.png',
+        area=(322, 635, 518, 702),
+        search=(302, 615, 538, 720),
+        color=(32, 116, 146),
+        button=(322, 635, 518, 702),
+    ),
+    en=None,
+)
+TITLE_NEXT = ButtonWrapper(
+    name='TITLE_NEXT',
+    cn=Button(
+        file='./assets/cn/freebies/dailyshare/TITLE_NEXT.png',
+        area=(540, 634, 734, 698),
+        search=(520, 614, 754, 718),
+        color=(28, 117, 147),
+        button=(540, 634, 734, 698),
+    ),
+    en=None,
+)
