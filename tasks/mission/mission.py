@@ -151,13 +151,14 @@ class Mission(TaskUI):
             bool: 是否接取成功
         """
         task_button=ClickButton(task.button)
-        self.ui_click(click_button=task_button,check_button=TASK_ACCEPT)
+        self.ui_click(click_button=task_button,check_button=TASK_ACCEPT,retry_wait=2)
         if self.appear(CHARACTER_SELECTED_AUTO):
             self.ui_click(
                 click_button=CHARACTER_SELECTED_AUTO,
                 check_button=CHARACTER_SELECTED,
                 direct_match=True,
                 similarity=0.85,
+                retry_wait=3,
             )
         else:
             character_first_button = ClickButton(CHARACTER_FIRST.button)
@@ -166,6 +167,7 @@ class Mission(TaskUI):
                 check_button=CHARACTER_SELECTED,
                 direct_match=True,
                 similarity=0.85,
+                retry_wait=3,
             )
         for _ in self.loop():
             if self.appear(MISSION_CHECK):
