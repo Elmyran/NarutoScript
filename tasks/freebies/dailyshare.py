@@ -3,7 +3,7 @@ from module.exception import GameStuckError
 from module.logger import logger
 from tasks.base.page import page_main, page_panel
 from tasks.base.taskui import TaskUI
-from tasks.freebies.assets.assets_freebies_dailyshare import SHARE_BUTTON, SHARE_GOTO_OTHER_APP
+from tasks.freebies.assets.assets_freebies_dailyshare import SHARE_BUTTON, SHARE_GOTO_OTHER_APP, TITLE_CONFIRM, TITLE_NEXT
 
 
 class DailyShare(TaskUI):
@@ -19,17 +19,30 @@ class DailyShare(TaskUI):
         if not 'com.tencent.mobileqq' in packages and not 'com.tencent.mm' in packages:  
            logger.warning('QQ or Wechat uninstalled')
            return True
+        self.enter_panel()
         self._share_goto_other_app()
         self._ensure_game_foreground()
         self._handle_remain_ui()
+    def enter_panel(self):
+        self.ui_ensure(page_main)
+        for _ in self.loop():
+            if self.ui_page_appear(page_panel):
+                break
+            if self.appear_then_click(TITLE_CONFIRM,interval=1):
+                continue
+            if self.appear_then_click(TITLE_NEXT,interval=1):
+                continue
     def _share_goto_other_app(self):
         apps=['com.tencent.mobileqq','com.tencent.mm']
         self.device.click_record_clear()
         timeout = Timer(30, count=30).start()  
-        self.ui_ensure(page_panel)
         for _ in self.loop():
             if timeout.reached():  
                 raise GameStuckError('Share goto other app timeout') 
+            if self.appear_then_click(TITLE_CONFIRM,interval=1):
+                continue
+            if self.appear_then_click(TITLE_NEXT,interval=1):
+                continue
             if self.appear_then_click(SHARE_BUTTON,interval=1):
                 continue
             if self.appear(SHARE_GOTO_OTHER_APP,interval=2):
