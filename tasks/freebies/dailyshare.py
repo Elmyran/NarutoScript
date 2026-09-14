@@ -25,13 +25,16 @@ class DailyShare(TaskUI):
         self._handle_remain_ui()
     def enter_panel(self):
         self.ui_ensure(page_main)
-        for _ in self.loop():
-            if self.ui_page_appear(page_panel):
-                break
+        def title():
             if self.appear_then_click(TITLE_CONFIRM,interval=1):
-                continue
+                return True
             if self.appear_then_click(TITLE_NEXT,interval=1):
-                continue
+                return True
+            return False
+        panel=ClickButton(AIN_GOTO_PANEL.button)
+        self.ui_click(click_button=panel,check_button=SHARE_BUTTON,additional=title)
+        
+            
     def _share_goto_other_app(self):
         apps=['com.tencent.mobileqq','com.tencent.mm']
         self.device.click_record_clear()

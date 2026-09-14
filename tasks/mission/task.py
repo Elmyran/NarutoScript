@@ -3,7 +3,7 @@ from module.ocr.ocr import RecOCR,OcrWhiteLetterOnComplexBackground
 from tasks.mission.assets.assets_mission import  ACCPET_BUTTON, MISSION_JADE, TASK_BOX_BLUE, TASK_BOX_RED
 from tasks.mission.mission_ocr import MissionOcr
 from tasks.mission.priority import TaskPriority
-
+from module.logger.logger import logger
 
 class Task:
     name:str=""
