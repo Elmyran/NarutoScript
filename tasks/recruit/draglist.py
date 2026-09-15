@@ -23,11 +23,14 @@ class RecruitDragList(DraggableList):
             if RecruitTabList.select_row(keyword, main=main):
                 logger.info('Successfully selected '+keyword.cn)
     def is_row_selected(self, button, main):
-        button.area=(button.area[0]-20,button.area[1]-20,button.area[2]+20,button.area[3]+20)
-        if main.image_color_count(button, color=self.active_color, threshold=240, count=1000):
-            return True
+        if self.current_keyword.name=='AdvancedRecruitment':
+            if PREMIUM_RECRUIT_CHECK.match_template(main.device.image,similarity=0.7):
+                return True
+        elif self.current_keyword.name=='NormalRecruitment':
+            if NORMAL_RECRUIT_CHECK.match_template(main.device.image,similarity=0.7):
+                return True
         return False
-
+       
         
    
 RecruitTabList= RecruitDragList(
