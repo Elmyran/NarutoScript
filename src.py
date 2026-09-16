@@ -95,6 +95,9 @@ class StarRailCopilot(AzurLaneAutoScript):
     def qiu_ri_ji(self):
         from tasks.activity.qiu_ri_ji.qiu_ri_ji import QiuRiJi
         QiuRiJi(config=self.config, device=self.device).run()
+    def wei_shou_xun_zong(self):
+        from tasks.activity.wei_shou_xun_zong.wei_shou_xun_zong import WeiShouXunZong
+        WeiShouXunZong(config=self.config, device=self.device).run()
     def battle_field(self):
         from  tasks.organization.battlefield.battlefield import BattleField
         BattleField(config=self.config,device=self.device).run()

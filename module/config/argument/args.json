@@ -143,7 +143,7 @@
     "TaskPriority": {
       "Priority": {
         "type": "sortable",
-        "value": "Restart>BattleField>Fortress>PanRen>CultivationRoad>Akatsuki>SquadRaid>FengRao>SurvivalTrail>JiFenSai>Recruit>DingCiKaoRou>StorePurchase>Duel>MiJing>Mission>Freebies>BattleOrder>TiLi>DataUpdate",
+        "value": "Restart>BattleField>Fortress>PanRen>CultivationRoad>Akatsuki>SquadRaid>FengRao>SurvivalTrail>JiFenSai>Recruit>StorePurchase>Duel>MiJing>Mission>Freebies>BattleOrder>DingCiKaoRou>WeiShouXunZong>TiLi>DataUpdate",
         "option": [
           "Restart",
           "BattleField",
@@ -156,13 +156,14 @@
           "SurvivalTrail",
           "JiFenSai",
           "Recruit",
-          "DingCiKaoRou",
           "StorePurchase",
           "Duel",
           "MiJing",
           "Mission",
           "Freebies",
           "BattleOrder",
+          "DingCiKaoRou",
+          "WeiShouXunZong",
           "TiLi",
           "DataUpdate"
         ]
@@ -1412,6 +1413,33 @@
       "Command": {
         "type": "input",
         "value": "DingCiKaoRou",
+        "display": "hide"
+      },
+      "ServerUpdate": {
+        "type": "input",
+        "value": "05:00",
+        "display": "hide"
+      }
+    }
+  },
+  "WeiShouXunZong": {
+    "Scheduler": {
+      "Enable": {
+        "type": "checkbox",
+        "value": false,
+        "option": [
+          true,
+          false
+        ]
+      },
+      "NextRun": {
+        "type": "datetime",
+        "value": "2020-01-01 00:00:00",
+        "validate": "datetime"
+      },
+      "Command": {
+        "type": "input",
+        "value": "WeiShouXunZong",
         "display": "hide"
       },
       "ServerUpdate": {

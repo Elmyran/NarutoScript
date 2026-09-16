@@ -101,6 +101,10 @@
     "DingCiKaoRou": {
       "name": "Task.DingCiKaoRou.name",
       "help": "Task.DingCiKaoRou.help"
+    },
+    "WeiShouXunZong": {
+      "name": "Task.WeiShouXunZong.name",
+      "help": "Task.WeiShouXunZong.help"
     }
   },
   "Scheduler": {
@@ -281,13 +285,14 @@
       "SurvivalTrail": "SurvivalTrail",
       "JiFenSai": "JiFenSai",
       "Recruit": "Recruit",
-      "DingCiKaoRou": "DingCiKaoRou",
       "StorePurchase": "StorePurchase",
       "Duel": "Duel",
       "MiJing": "MiJing",
       "Mission": "Mission",
       "Freebies": "Freebies",
       "BattleOrder": "BattleOrder",
+      "DingCiKaoRou": "DingCiKaoRou",
+      "WeiShouXunZong": "WeiShouXunZong",
       "TiLi": "TiLi",
       "DataUpdate": "DataUpdate"
     }

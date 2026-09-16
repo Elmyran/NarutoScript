@@ -21,14 +21,14 @@ YiLeWaiMaiKeyword = ActivityTab(
     es='Ichiraku a Domicilio'
 )
 
-RenZheTeHuiKeyword = ActivityTab(
+WeiShouXunZongKeyword = ActivityTab(
     id=1,
-    name='RenZheTeHuiKeyword',
-    cn='忍者特惠',
-    cht='忍者特惠',
-    en='Ninja Special Offer',
-    jp='忍者特別セール',
-    es='Oferta Especial Ninja'
+    name='WeiShouXunZongKeyword',
+    cn='尾兽寻踪',
+    cht='尾兽寻踪',
+    en='Tail Searcher',
+    jp='尾兽追跡',
+    es='Tail Searcher'
 )
 
 DingCiKaoRouKeyword = ActivityTab(

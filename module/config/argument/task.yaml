@@ -110,6 +110,8 @@ Activity:
   tasks:
     DingCiKaoRou:
       - Scheduler
+    WeiShouXunZong:
+      - Scheduler
 #    QiuRiJi:
 #      - Scheduler
 

@@ -17,18 +17,17 @@ class ManualConfig:
     > Akatsuki 
     > SquadRaid
     > FengRao
-    > Organization
     > SurvivalTrail
     > JiFenSai
     > Recruit
-    > DingCiKaoRou
-    > QiuRiJi 
     > StorePurchase
     > Duel
     > MiJing
     > Mission
     > Freebies
     > BattleOrder
+    > DingCiKaoRou
+    > WeiShouXunZong
     > TiLi
     > DataUpdate
     """
