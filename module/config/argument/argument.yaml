@@ -91,7 +91,7 @@ Optimization:
 TaskPriority:
   Priority:
     type: sortable
-    value: 'Restart>BattleField>Fortress>PanRen>CultivationRoad>Akatsuki>SquadRaid>FengRao>SurvivalTrail>JiFenSai>Recruit>DingCiKaoRou>StorePurchase>Duel>MiJing>Mission>Freebies>BattleOrder>TiLi>DataUpdate'
+    value: 'Restart>BattleField>Fortress>PanRen>CultivationRoad>Akatsuki>SquadRaid>FengRao>SurvivalTrail>JiFenSai>Recruit>StorePurchase>Duel>MiJing>Mission>Freebies>BattleOrder>DingCiKaoRou>WeiShouXunZong>TiLi>DataUpdate'
     option: [
       Restart,
       BattleField,
@@ -104,13 +104,14 @@ TaskPriority:
       SurvivalTrail,
       JiFenSai,
       Recruit,
-      DingCiKaoRou,
       StorePurchase,
       Duel,
       MiJing,
       Mission,
       Freebies,
       BattleOrder,
+      DingCiKaoRou,
+      WeiShouXunZong,
       TiLi,
       DataUpdate,
     ]

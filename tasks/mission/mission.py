@@ -171,6 +171,7 @@ class Mission(TaskUI):
             )
         for _ in self.loop():
             if self.appear(MISSION_CHECK):
+                self.wait_until_stable(TASK_1_AREA)
                 return True
             if THE_TASKBAR_IS_FULL.match_template(self.device.image):
                 logger.info('任务栏已满')

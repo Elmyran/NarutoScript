@@ -37,6 +37,90 @@ def gui_lang_to_ingame_lang(lang: str) -> str:
     return DICT_GUI_TO_INGAME.get(lang, 'en')
 
 
+def sync_scheduler_priority():
+    """
+    将代码中的任务优先级同步到 argument.yaml。
+
+    ManualConfig.SCHEDULER_PRIORITY 是任务优先级顺序的唯一数据源,
+    argument.yaml 中 TaskPriority.Priority 的 value/option 是它的派生视图。
+    每次运行 config_updater 时自动重写这两个字段, 新增任务只需在
+    SCHEDULER_PRIORITY 中声明, 不再需要手动同步 argument.yaml。
+
+    使用文本级替换, 保留 argument.yaml 的注释与格式。
+    """
+    import re
+
+    from deploy.Windows.atomic import atomic_read_text, atomic_write
+    from module.config.config_manual import ManualConfig
+
+    # 与 Filter.load 相同的规范化: 去掉所有空白后按 '>' 分割
+    tasks = [x for x in re.sub(r'[ \t\r\n]', '', str(ManualConfig.SCHEDULER_PRIORITY)).split('>') if x]
+    if not tasks:
+        raise RuntimeError('SCHEDULER_PRIORITY is empty')
+
+    file = filepath_argument('argument')
+    text = atomic_read_text(file)
+
+    # 定位顶层 TaskPriority 段, 段结束于下一个顶格字符
+    section_start = text.index('TaskPriority:')
+    end = re.search(r'(?m)^(?=\S)', text[section_start + len('TaskPriority:'):])
+    section_end = section_start + len('TaskPriority:') + end.start() if end else len(text)
+    section = text[section_start:section_end]
+
+    # value: 'A>B>C'
+    section_new, count = re.subn(
+        r"(?m)^(?P<indent>[ \t]*)value:[ \t]*'[^']*'[ \t]*$",
+        lambda m: f"{m.group('indent')}value: {'>'.join(tasks)!r}",
+        section, count=1,
+    )
+    if count != 1:
+        raise RuntimeError(f'TaskPriority.Priority.value not found in {file}')
+
+    # option: [ A, B, C ]
+    section_new, count = re.subn(
+        r'(?ms)^(?P<indent>[ \t]*)option:[ \t]*\[.*?^[ \t]*\]',
+        lambda m: f"{m.group('indent')}option: [\n"
+                  + ''.join(f"{m.group('indent')}  {task},\n" for task in tasks)
+                  + f"{m.group('indent')}]",
+        section_new, count=1,
+    )
+    if count != 1:
+        raise RuntimeError(f'TaskPriority.Priority.option not found in {file}')
+
+    if section_new != section:
+        atomic_write(file, text[:section_start] + section_new + text[section_end:])
+        print(f'sync: {file} TaskPriority.Priority <- SCHEDULER_PRIORITY ({len(tasks)} tasks)')
+
+
+def merge_sortable_value(value, default):
+    """
+    将 default 顺序中缺失的项补进排序值, 已有项保持原有顺序不变。
+
+    用于排序类字段(sortable), 如任务优先级: 列表同时是调度白名单,
+    不在列表里的任务不会被调度。旧 config 中缺失的项(例如新增任务)
+    在加载时自动按 default 的相对顺序补入, 不必手动更新每份 config。
+    """
+    import re
+
+    def parse(text):
+        # 与 Filter.load 相同的规范化: 去掉所有空白后按 '>' 分割
+        return [x for x in re.sub(r'[ \t\r\n]', '', str(text or '')).split('>') if x]
+
+    default = parse(default)
+    merged = parse(value)
+    for index, task in enumerate(default):
+        if task in merged:
+            continue
+        # 插到 default 中它后面第一个已存在项之前, 保持相对顺序
+        anchor = next((t for t in default[index + 1:] if t in merged), None)
+        if anchor is not None:
+            merged.insert(merged.index(anchor), task)
+        else:
+            merged.append(task)
+
+    return '>'.join(merged)
+
+
 def get_generator():
     from module.base.code_generator import CodeGenerator
     return CodeGenerator()
@@ -471,6 +555,7 @@ class ConfigGenerator:
 
     @timer
     def generate(self):
+        sync_scheduler_priority()
         _ = self.args
         _ = self.menu
         _ = self.stored
@@ -531,6 +616,9 @@ class ConfigUpdater:
             if is_template or value is None or value == '' \
                     or typ in type_lock or (display == 'hide' and typ not in type_stored):
                 value = data['value']
+            elif typ == 'sortable':
+                # 列表即白名单, 旧 config 缺失的项(新增任务)自动补入
+                value = merge_sortable_value(value, data['value'])
             value = parse_value(value, data=data)
             deep_set(new, keys=keys, value=value)
 

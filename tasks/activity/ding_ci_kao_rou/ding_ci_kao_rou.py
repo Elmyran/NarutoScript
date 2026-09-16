@@ -16,7 +16,6 @@ class DingCiKaoRou(UI):
         ACTIVITY_TAB_LIST.search_rows(main=self,keyword=DingCiKaoRouKeyword)
         self._handle_kao_rou()
         self._handle_reward_claim()
-        self.ui_goto_main()
         self.config.task_delay(server_update=True)
         self.config.task_stop()
 
