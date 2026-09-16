@@ -4,8 +4,10 @@ from tasks.activity.assets.assets_activity_wei_shou_xun_zong_claim import CLAIMA
 from tasks.base.page import page_activity
 from tasks.activity.draglist import ACTIVITY_TAB_LIST
 from tasks.base.ui import UI
+from module.logger import logger
 class WeiShouXunZong(UI):
     def run(self):
+        logger.hr("尾兽寻踪",level=1)
         self.device.click_record_clear()
         self.ui_ensure(page_activity)
         ACTIVITY_TAB_LIST.search_rows(main=self,keyword=WeiShouXunZongKeyword)

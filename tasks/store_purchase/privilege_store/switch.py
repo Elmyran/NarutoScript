@@ -8,8 +8,8 @@ class PrivilegeStoreSwitch(Switch):
 
     def add_state(self, state, check_button, click_button=None):
         # Load search
-        if check_button is not None:
-            check_button.load_search(self.SEARCH_BUTTON.area)
+        #if check_button is not None:
+        #    check_button.load_search(self.SEARCH_BUTTON.area)
         if click_button is not None:
             click_button.load_search(self.SEARCH_BUTTON.area)
         return super().add_state(state, check_button, click_button)

@@ -5,13 +5,22 @@ from module.base.button import Button, ButtonWrapper
 
 PRIVILEGE_CHARACTER_CHECK = ButtonWrapper(
     name='PRIVILEGE_CHARACTER_CHECK',
-    cn=Button(
-        file='./assets/cn/store_purchase/privilege_store/ui/PRIVILEGE_CHARACTER_CHECK.png',
-        area=(312, 82, 462, 135),
-        search=(292, 62, 482, 155),
-        color=(166, 151, 108),
-        button=(312, 82, 462, 135),
-    ),
+    cn=[
+        Button(
+            file='./assets/cn/store_purchase/privilege_store/ui/PRIVILEGE_CHARACTER_CHECK.png',
+            area=(1075, 659, 1219, 708),
+            search=(1055, 639, 1239, 720),
+            color=(212, 153, 20),
+            button=(1075, 659, 1219, 708),
+        ),
+        Button(
+            file='./assets/cn/store_purchase/privilege_store/ui/PRIVILEGE_CHARACTER_CHECK.2.png',
+            area=(312, 82, 462, 135),
+            search=(292, 62, 482, 155),
+            color=(166, 151, 108),
+            button=(312, 82, 462, 135),
+        ),
+    ],
     en=None,
 )
 PRIVILEGE_CHARACTER_CLICK = ButtonWrapper(
@@ -71,13 +80,22 @@ PRIVILEGE_PURCHASE_CLICK = ButtonWrapper(
 )
 PRIVILEGE_SCORE_CHECK = ButtonWrapper(
     name='PRIVILEGE_SCORE_CHECK',
-    cn=Button(
-        file='./assets/cn/store_purchase/privilege_store/ui/PRIVILEGE_SCORE_CHECK.png',
-        area=(621, 84, 758, 134),
-        search=(601, 64, 778, 154),
-        color=(169, 156, 115),
-        button=(621, 84, 758, 134),
-    ),
+    cn=[
+        Button(
+            file='./assets/cn/store_purchase/privilege_store/ui/PRIVILEGE_SCORE_CHECK.png',
+            area=(942, 672, 1057, 695),
+            search=(922, 652, 1077, 715),
+            color=(109, 90, 9),
+            button=(942, 672, 1057, 695),
+        ),
+        Button(
+            file='./assets/cn/store_purchase/privilege_store/ui/PRIVILEGE_SCORE_CHECK.2.png',
+            area=(621, 84, 758, 134),
+            search=(601, 64, 778, 154),
+            color=(169, 156, 115),
+            button=(621, 84, 758, 134),
+        ),
+    ],
     en=None,
 )
 PRIVILEGE_SCORE_CLICK = ButtonWrapper(
