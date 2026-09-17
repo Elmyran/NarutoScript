@@ -45,7 +45,7 @@ def flash_window(hwnd, flash=True):
 
 class PlatformWindows(PlatformBase, EmulatorManager):
     @classmethod
-    def execute(cls, command):
+    def execute(cls, command, wait=False, timeout=30):
         """
         Args:
             command (str):
@@ -55,9 +55,43 @@ class PlatformWindows(PlatformBase, EmulatorManager):
         """
         command = command.replace(r"\\", "/").replace("\\", "/").replace('"', '"')
         logger.info(f'Execute: {command}')
-        # `close_fds` only work on Windows
-        # `start_new_session` to avoid emulator getting tree-killed when Alas gets killed
-        return subprocess.Popen(command, close_fds=True, start_new_session=True)
+        if wait:
+            # 同步执行，等待命令完成
+            # 用于需要确保命令执行完毕的场景（如MuMu12的shutdown_player）
+            try:
+                result = subprocess.run(
+                    command,
+                    shell=True,
+                    timeout=timeout,
+                    close_fds=True,
+                    creationflags=subprocess.CREATE_NO_WINDOW
+                )
+                logger.info(f'[设备-Windows] 命令完成，返回码: {result.returncode}')
+                return result
+            except subprocess.TimeoutExpired:
+                logger.warning(f'[设备-Windows] 命令超时 {timeout} 秒')
+                return None
+        else:
+            # 异步执行，不等待完成
+            # 通过 `cmd /c start` 启动进程，使其脱离 Alas 进程树。
+            # 之前使用的 `start_new_session=True` 在 Windows 上仅等同于
+            # `CREATE_NEW_PROCESS_GROUP`，不会改变父子进程关系，
+            # `taskkill /T` 仍会终止子进程，导致关闭 Alas 时模拟器被一并关闭。
+            # 使用 `cmd /c start` 后，cmd.exe 会立即退出，
+            # 目标进程的父进程变为已退出的 cmd.exe，从而脱离 Alas 进程树。
+            proc = subprocess.Popen(
+                f'start "" /b {command}',
+                shell=True,
+                close_fds=True,
+                creationflags=subprocess.CREATE_NO_WINDOW,
+            )
+            # 等待 cmd.exe 退出，确保目标进程已脱离 Alas 进程树
+            try:
+                proc.wait(timeout=5)
+            except subprocess.TimeoutExpired:
+                logger.warning(f'[设备-Windows] 启动命令未在 5 秒内退出: {command}')
+            return proc
+
 
     @classmethod
     def kill_process_by_regex(cls, regex: str) -> int:
@@ -164,7 +198,11 @@ class PlatformWindows(PlatformBase, EmulatorManager):
             # MuMuManager.exe api -v 1 shutdown_player
             if instance.MuMuPlayer12_id is None:
                 logger.warning(f'Cannot get MuMu instance index from name {instance.name}')
-            self.execute(f'"{Emulator.single_to_console(exe)}" api -v {instance.MuMuPlayer12_id} shutdown_player')
+            self.execute(
+                f'"{Emulator.single_to_console(exe)}" api -v {instance.MuMuPlayer12_id} shutdown_player',
+                wait=True,
+                timeout=30
+            )
         elif instance == Emulator.LDPlayerFamily:
             # ldconsole.exe quit --index 0
             self.execute(f'"{Emulator.single_to_console(exe)}" quit --index {instance.LDPlayer_id}')
