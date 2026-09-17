@@ -41,7 +41,7 @@ class GeneratedConfig:
     Optimization_WhenTaskQueueEmpty = 'goto_main'  # stay_there, goto_main, close_game, close_emulator, close_emulator_and_ns, shutdown_pc
 
     # Group `TaskPriority`
-    TaskPriority_Priority = 'Restart>BattleField>Fortress>PanRen>CultivationRoad>Akatsuki>SquadRaid>FengRao>SurvivalTrail>JiFenSai>Recruit>StorePurchase>Duel>MiJing>Mission>Freebies>BattleOrder>DingCiKaoRou>WeiShouXunZong>TiLi>DataUpdate'  # Restart, BattleField, Fortress, PanRen, CultivationRoad, Akatsuki, SquadRaid, FengRao, SurvivalTrail, JiFenSai, Recruit, StorePurchase, Duel, MiJing, Mission, Freebies, BattleOrder, DingCiKaoRou, WeiShouXunZong, TiLi, DataUpdate
+    TaskPriority_Priority = 'Restart>BattleField>Fortress>PanRen>CultivationRoad>ZhuiJiXiaoZuZhi>SquadRaid>FengRao>SurvivalTrail>JiFenSai>Recruit>StorePurchase>Duel>MiJing>Mission>Freebies>BattleOrder>DingCiKaoRou>WeiShouXunZong>TiLi>DataUpdate'  # Restart, BattleField, Fortress, PanRen, CultivationRoad, ZhuiJiXiaoZuZhi, SquadRaid, FengRao, SurvivalTrail, JiFenSai, Recruit, StorePurchase, Duel, MiJing, Mission, Freebies, BattleOrder, DingCiKaoRou, WeiShouXunZong, TiLi, DataUpdate
 
     # Group `Password`
     Password_SecondPassword = None

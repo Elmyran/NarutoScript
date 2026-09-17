@@ -82,9 +82,9 @@
       "name": "Task.CultivationRoad.name",
       "help": "Task.CultivationRoad.help"
     },
-    "Akatsuki": {
-      "name": "Task.Akatsuki.name",
-      "help": "Task.Akatsuki.help"
+    "ZhuiJiXiaoZuZhi": {
+      "name": "Task.ZhuiJiXiaoZuZhi.name",
+      "help": "Task.ZhuiJiXiaoZuZhi.help"
     },
     "PanRen": {
       "name": "Task.PanRen.name",
@@ -279,7 +279,7 @@
       "Fortress": "Fortress",
       "PanRen": "PanRen",
       "CultivationRoad": "CultivationRoad",
-      "Akatsuki": "Akatsuki",
+      "ZhuiJiXiaoZuZhi": "ZhuiJiXiaoZuZhi",
       "SquadRaid": "SquadRaid",
       "FengRao": "FengRao",
       "SurvivalTrail": "SurvivalTrail",
