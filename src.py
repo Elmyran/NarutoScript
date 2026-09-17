@@ -65,9 +65,9 @@ class StarRailCopilot(AzurLaneAutoScript):
     def ti_li(self):
         from tasks.tili.tili import TiLi
         TiLi(config=self.config, device=self.device).run()
-    def akatsuki(self):
-        from tasks.organization.akatsuki import Akatsuki
-        Akatsuki(config=self.config, device=self.device).run()
+    def zhui_ji_xiao_zu_zhi(self):
+        from tasks.organization.zhui_ji_xiao_zu_zhi import ZhuiJiXiaoZuZhi
+        ZhuiJiXiaoZuZhi(config=self.config, device=self.device).run()
     def duel(self):
         from tasks.duel.duel import Duel
         Duel(config=self.config, device=self.device).run()

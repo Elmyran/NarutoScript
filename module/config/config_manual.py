@@ -14,7 +14,7 @@ class ManualConfig:
     > Fortress 
     > PanRen
     > CultivationRoad 
-    > Akatsuki 
+    > ZhuiJiXiaoZuZhi
     > SquadRaid
     > FengRao
     > SurvivalTrail

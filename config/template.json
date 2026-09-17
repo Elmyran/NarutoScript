@@ -26,7 +26,7 @@
       "WhenTaskQueueEmpty": "goto_main"
     },
     "TaskPriority": {
-      "Priority": "Restart>BattleField>Fortress>PanRen>CultivationRoad>Akatsuki>SquadRaid>FengRao>SurvivalTrail>JiFenSai>Recruit>StorePurchase>Duel>MiJing>Mission>Freebies>BattleOrder>DingCiKaoRou>WeiShouXunZong>TiLi>DataUpdate"
+      "Priority": "Restart>BattleField>Fortress>PanRen>CultivationRoad>ZhuiJiXiaoZuZhi>SquadRaid>FengRao>SurvivalTrail>JiFenSai>Recruit>StorePurchase>Duel>MiJing>Mission>Freebies>BattleOrder>DingCiKaoRou>WeiShouXunZong>TiLi>DataUpdate"
     }
   },
   "Restart": {
@@ -288,11 +288,11 @@
       "CultivationFinish": false
     }
   },
-  "Akatsuki": {
+  "ZhuiJiXiaoZuZhi": {
     "Scheduler": {
       "Enable": false,
       "NextRun": "2020-01-01 00:00:00",
-      "Command": "Akatsuki",
+      "Command": "ZhuiJiXiaoZuZhi",
       "ServerUpdate": "05:00"
     }
   },

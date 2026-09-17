@@ -7,10 +7,10 @@ AKATSUKI_CHECK = ButtonWrapper(
     name='AKATSUKI_CHECK',
     cn=Button(
         file='./assets/cn/organization/akatsuki/AKATSUKI_CHECK.png',
-        area=(62, 21, 487, 137),
-        search=(42, 1, 507, 157),
-        color=(171, 106, 55),
-        button=(62, 21, 487, 137),
+        area=(1223, 341, 1247, 419),
+        search=(1203, 321, 1267, 439),
+        color=(74, 71, 70),
+        button=(1223, 341, 1247, 419),
     ),
     en=None,
 )
@@ -55,17 +55,6 @@ AKATSUKI_REWARD_CHECK = ButtonWrapper(
         search=(105, 32, 371, 186),
         color=(153, 90, 34),
         button=(1058, 99, 1137, 167),
-    ),
-    en=None,
-)
-AKATSUKI_REWARD_RED_DOT = ButtonWrapper(
-    name='AKATSUKI_REWARD_RED_DOT',
-    cn=Button(
-        file='./assets/cn/organization/akatsuki/AKATSUKI_REWARD_RED_DOT.png',
-        area=(514, 594, 555, 643),
-        search=(494, 574, 575, 663),
-        color=(87, 63, 41),
-        button=(514, 594, 555, 643),
     ),
     en=None,
 )
@@ -132,14 +121,25 @@ REWARD_CLAIM_BUTTON = ButtonWrapper(
     ],
     en=None,
 )
-REWARD_CLAIM_PANEL = ButtonWrapper(
-    name='REWARD_CLAIM_PANEL',
+REWARD_DRAG_END = ButtonWrapper(
+    name='REWARD_DRAG_END',
     cn=Button(
-        file='./assets/cn/organization/akatsuki/REWARD_CLAIM_PANEL.png',
-        area=(324, 173, 1125, 642),
-        search=(304, 153, 1145, 662),
-        color=(105, 118, 102),
-        button=(324, 173, 1125, 642),
+        file='./assets/cn/organization/akatsuki/REWARD_DRAG_END.png',
+        area=(358, 304, 451, 341),
+        search=(338, 284, 471, 361),
+        color=(75, 101, 100),
+        button=(358, 304, 451, 341),
+    ),
+    en=None,
+)
+REWARD_DRAG_START = ButtonWrapper(
+    name='REWARD_DRAG_START',
+    cn=Button(
+        file='./assets/cn/organization/akatsuki/REWARD_DRAG_START.png',
+        area=(365, 531, 461, 579),
+        search=(345, 511, 481, 599),
+        color=(88, 145, 124),
+        button=(365, 531, 461, 579),
     ),
     en=None,
 )
