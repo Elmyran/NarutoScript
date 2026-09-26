@@ -80,7 +80,16 @@ class EmulatorManager(AlasManager):
 
         async def _connect(serial):
             try:
-                await asyncio.create_subprocess_exec(self.adb, 'connect', serial)
+                # Wait for adb to finish. An un-awaited Process object is garbage
+                # collected together with its asyncio transport while the OS handle
+                # is already closed, which prints
+                #   Exception ignored in: BaseSubprocessTransport.__del__
+                #   OSError: [WinError 6] 句柄无效
+                # when the installer process exits. Waiting also makes the device
+                # list returned below accurate (it used to be read right after the
+                # connects were spawned, before they completed).
+                proc = await asyncio.create_subprocess_exec(self.adb, 'connect', serial)
+                await proc.wait()
             except Exception as e:
                 logger.info(e)
 

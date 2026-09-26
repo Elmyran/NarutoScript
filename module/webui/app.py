@@ -123,6 +123,10 @@ class AlasGUI(Frame):
         self.alas_mod = "alas"
         self.alas_config = AzurLaneConfig("template")
         self.alas_config_hidden = set()
+        # config-watcher pins are registered once per session (see _init_alas_config_watcher)
+        self._watcher_ready = False
+        # dashboard rows already filled since the last overview rebuild
+        self.dashboard_built = set()
         self.initial()
         # rendered state cache
         self.rendered_cache = []
@@ -427,6 +431,36 @@ class AlasGUI(Frame):
         nodata = t("Gui.Dashboard.NoData")
         attrs = arg_dict.get("attrs") or []
         value_text = readable_number(config.get("value", nodata))
+        time_text = f"{name} - {lang.readable_time(config.get('time', ''))}"
+
+        def value_outputs():
+            # Fixed order: value first, then suffix (total / comment)
+            outs = [put_text(value_text).style("--dashboard-value--")]
+            if "total" in attrs and config.get("total") is not None:
+                outs.append(put_text(f' / {config.get("total", "")}').style("--dashboard-time--"))
+            elif "comment" in attrs and config.get("comment") is not None:
+                outs.append(put_text(f' {config.get("comment", "")}').style("--dashboard-time--"))
+            return outs
+
+        if arg not in self.dashboard_built:
+            # First fill of this row: `alas_overview` already created the empty
+            # row scope, so write the whole subtree with two messages instead of
+            # the ~14 that the nested use_scope() path below costs (measured with
+            # dev_tools/ui_probe.py: 84 -> 12 messages for 6 metrics).
+            self.dashboard_built.add(arg)
+            row = f"dashboard-row-{arg}"
+            put_html(f'<div><div class="dashboard-icon" style="background-color:{color}"></div>',
+                     scope=row)
+            put_scope(
+                f"dashboard-content-{arg}",
+                [
+                    put_scope(f"dashboard-value-{arg}", value_outputs()),
+                    put_scope(f"dashboard-time-{arg}",
+                              [put_text(time_text).style("--dashboard-time--")]),
+                ],
+                scope=row,
+            )
+            return
 
         with use_scope(f"dashboard-row-{arg}", clear=True):
             put_html(f'<div><div class="dashboard-icon" style="background-color:{color}"></div>')
@@ -434,15 +468,10 @@ class AlasGUI(Frame):
             with use_scope(f"dashboard-content-{arg}"):
                 ensure_scope(f"dashboard-value-{arg}")
                 with use_scope(f"dashboard-value-{arg}", clear=True):
-                    # Fixed order: value first, then suffix (total / comment)
-                    put_text(value_text).style("--dashboard-value--")
-                    if "total" in attrs and config.get("total") is not None:
-                        put_text(f' / {config.get("total", "")}').style("--dashboard-time--")
-                    elif "comment" in attrs and config.get("comment") is not None:
-                        put_text(f' {config.get("comment", "")}').style("--dashboard-time--")
+                    value_outputs()
                 ensure_scope(f"dashboard-time-{arg}")
                 with use_scope(f"dashboard-time-{arg}", clear=True):
-                    put_text(f"{name} - {lang.readable_time(config.get('time', ''))}").style("--dashboard-time--")
+                    put_text(time_text).style("--dashboard-time--")
 
     @locked_page
     @use_scope("content", clear=True)
@@ -503,6 +532,7 @@ class AlasGUI(Frame):
                 put_html('<hr class="hr-group">')
                 ensure_scope("dashboard")
                 with use_scope("dashboard"):
+                    self.dashboard_built = set()
                     for arg in self.ALAS_STORED.keys():
                         if deep_get(self.ALAS_STORED, keys=[arg, "order"], default=0):
                             ensure_scope(f"dashboard-row-{arg}")
@@ -531,6 +561,14 @@ class AlasGUI(Frame):
         self.task_handler.add(log.put_log(self.alas), 0.25, True)
 
     def _init_alas_config_watcher(self) -> None:
+        # Pins are keyed by config path and do not depend on which instance is
+        # open, so registering them again on every instance switch only spams the
+        # client: 126 pin_onchange messages per click, ~40% of the whole render
+        # (measured with dev_tools/ui_probe.py). Register once per session.
+        if getattr(self, "_watcher_ready", False):
+            return
+        self._watcher_ready = True
+
         def put_queue(path, value):
             self.modified_config_queue.put({"name": path, "value": value})
 
@@ -1037,9 +1075,10 @@ class AlasGUI(Frame):
                     )
                     put_text(f"state: {state}", scope="updater_state")
 
-            # nav_lock released — now do the slow git/network table refresh
+            # nav_lock released — do the slow git/network table refresh off the
+            # task queue so clicks stay responsive
             if refresh_table:
-                update_table()
+                self.run_in_thread(update_table)
 
         updater_switch = Switch(
             status=u, get_state=lambda: updater.state, name="updater"
@@ -1052,8 +1091,9 @@ class AlasGUI(Frame):
         def _one_shot_update():
             th = yield
             try:
-                update_table()
-                updater.check_update()
+                # git log + CDN requests (with retries) must not run on the task
+                # queue, otherwise every other page/task stalls behind them.
+                self.run_in_thread(lambda: (update_table(), updater.check_update()))
             except Exception as e:
                 logger.exception(e)
             finally:
@@ -1228,6 +1268,36 @@ class AlasGUI(Frame):
         self.load_home = True
         self.set_aside()
         self.active_button("aside", "ManageAlas")
+
+    @staticmethod
+    def run_in_thread(func) -> None:
+        """Run slow/blocking work off the shared task queue.
+
+        `TaskHandler` runs every periodic task on one thread, so a git or network
+        call there freezes all page renders and other refresh tasks (this is what
+        made the remote page show nothing and then auto-reload). The worker may
+        still write UI, so it must be registered with pywebio first.
+        """
+        thread = threading.Thread(target=func, daemon=True, name="ns-worker")
+        register_thread(thread)
+        thread.start()
+
+    def create_default_config(self) -> None:
+        """Materialise the default instance on a fresh install.
+
+        `alas_instance()` falls back to a phantom 'ns' when ./config holds no
+        instance file, so the sidebar offered an instance that could not be
+        opened, 配置管理 listed nothing and ./config had no ns.json. Create it from
+        the template — the same copy the "add instance" popup performs.
+        """
+        if self._manage_instances():
+            return
+        try:
+            data = load_config('template').read_file('template')
+            State.config_updater.write_file('ns', data, get_config_mod('template'))
+            logger.info('Created default config ./config/ns.json from template')
+        except Exception as e:
+            logger.exception(e)
 
     @locked_page
     @use_scope("content", clear=True)
@@ -1610,15 +1680,16 @@ class AlasGUI(Frame):
                     if (sess && sess.closed) closed = true;
                 } catch (e) {}
 
-                // Liveness is decided by the *server*: the Python heartbeat task
+                // Liveness is decided by the *server*: a dedicated Python thread
                 // stamps window.__nsSrvAlive every 15s while the session can still
-                // execute JS. Only a silent server (60s) means a hung/dead session.
+                // execute JS. Only a silent server (90s: 6 missed beats) means a
+                // hung/dead session.
                 //
                 // Do NOT go back to guessing from the DOM: the old check
                 // ("#pywebio-scope-content is empty and >90s since page load",
                 // with __nsLastAlive never refreshed) made a perfectly healthy but
                 // idle page reload itself every ~90s.
-                var srvStale = (now - (window.__nsSrvAlive || 0)) > 60000;
+                var srvStale = (now - (window.__nsSrvAlive || 0)) > 90000;
                 if (!hasRoot || closed || srvStale) {
                     if (now - (window.__nsLastReload || 0) > 30000) {
                         window.__nsLastReload = now;
@@ -1913,6 +1984,9 @@ class AlasGUI(Frame):
         """
         )
 
+        # fresh install: the sidebar falls back to a phantom 'ns', make it real
+        self.create_default_config()
+
         aside = get_localstorage("aside")
         self.show()
 
@@ -1966,16 +2040,24 @@ class AlasGUI(Frame):
             name="update_state",
         )
 
-        def heartbeat():
-            """Tell the client the session can still execute JS.
+        # Heartbeat on its OWN thread. It must not share the task queue: that
+        # queue is single-threaded, so one slow task (git/network on the update
+        # page) stalls the heartbeat too and the client reloads a perfectly
+        # healthy page after 60s of silence.
+        def heartbeat_loop():
+            while self.alive:
+                try:
+                    run_js("window.__nsSrvAlive = Date.now();")
+                except Exception:
+                    pass
+                time.sleep(15)
 
-            The client reloads only when this stops arriving, which distinguishes a
-            hung session from a healthy idle page (see the JS block in run()).
-            """
-            run_js('window.__nsSrvAlive = Date.now();')
+        _heartbeat = threading.Thread(target=heartbeat_loop, daemon=True,
+                                      name="ns-heartbeat")
+        register_thread(_heartbeat)
+        _heartbeat.start()
 
         self.task_handler.add(self.state_switch.g(), 2)
-        self.task_handler.add(heartbeat, 15)
         self.task_handler.add(self.set_aside_status, 2)
         self.task_handler.add(visibility_state_switch.g(), 15)
         self.task_handler.add(update_switch.g(), 1)
