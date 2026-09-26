@@ -1677,7 +1677,14 @@ class AlasGUI(Frame):
                 var closed = false;
                 try {
                     if (sess && sess.ws && sess.ws.readyState === 3) closed = true;
-                    if (sess && sess.closed) closed = true;
+                    // pywebio exposes closed() as a METHOD: `if (sess.closed)`
+                    // tested the function object itself, which is always truthy,
+                    // so this fired on every tick and the page reloaded itself
+                    // roughly every 30 seconds.
+                    if (sess) {
+                        var c = sess.closed;
+                        if (typeof c === 'function' ? c.call(sess) : c === true) closed = true;
+                    }
                 } catch (e) {}
 
                 // Liveness is decided by the *server*: a dedicated Python thread
