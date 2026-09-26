@@ -131,15 +131,22 @@ class AlasGUI(Frame):
         self.af_flag = False
         self.aside_ready = False
         self.aside_inst_count = -1
+        self.aside_inst_list = []
 
     @use_scope("aside", create_scope=True)
     def set_aside(self) -> None:
-        # Reuse shell on later visits — only rebuild when instance list length changes
+        # Reuse the shell on later visits — rebuild only when the instance list
+        # (names included) changes.
         instances = alas_instance()
-        if not getattr(self, "aside_ready", False) or len(instances) != getattr(self, "aside_inst_count", -1):
+        changed = (
+            not getattr(self, "aside_ready", False)
+            or instances != getattr(self, "aside_inst_list", None)
+        )
+        if changed:
             clear("aside")
             self.aside_ready = True
             self.aside_inst_count = len(instances)
+            self.aside_inst_list = list(instances)
 
             put_icon_buttons(
                 Icon.DEVELOP,
@@ -164,7 +171,10 @@ class AlasGUI(Frame):
             if current_date.month == 4 and current_date.day == 1:
                 self.af_flag = True
 
-        self.load_home = True
+        # Full instance repaint only when the list changed; otherwise
+        # set_aside_status() just repaints instances whose state changed.
+        if changed:
+            self.load_home = True
         self.set_aside_status()
 
     def set_aside_status(self) -> None:
@@ -173,9 +183,11 @@ class AlasGUI(Frame):
             flag = True
 
             def update(name, seq):
-                # Create-or-reuse under aside_instance — never a bare put_scope
+                # Create-or-reuse under aside_instance — never a bare put_scope.
+                # create_scope=False: a missing scope must never be created in
+                # whatever scope the background thread happens to be in (ROOT).
                 ensure_scope(f"alas-instance-{seq}", container_scope="aside_instance")
-                with use_scope(f"alas-instance-{seq}", clear=True):
+                with use_scope(f"alas-instance-{seq}", clear=True, create_scope=False):
                     icon_html = Icon.RUN
                     rendered_state = ProcessManager.get_manager(name).state
                     if rendered_state == 1 and self.af_flag:
@@ -413,30 +425,21 @@ class AlasGUI(Frame):
             name = arg
         color = arg_dict.get("color", "#777777")
         nodata = t("Gui.Dashboard.NoData")
-
-        def set_value(dic):
-            if "total" in dic.get("attrs", []) and config.get("total") is not None:
-                return [
-                    put_text(readable_number(config.get("value", nodata))).style("--dashboard-value--"),
-                    put_text(f' / {config.get("total", "")}').style("--dashboard-time--"),
-                ]
-            elif "comment" in dic.get("attrs", []) and config.get("comment") is not None:
-                return [
-                    put_text(readable_number(config.get("value", nodata))).style("--dashboard-value--"),
-                    put_text(f' {config.get("comment", "")}').style("--dashboard-time--"),
-                ]
-            else:
-                return [
-                    put_text(readable_number(config.get("value", nodata))).style("--dashboard-value--"),
-                ]
+        attrs = arg_dict.get("attrs") or []
+        value_text = readable_number(config.get("value", nodata))
 
         with use_scope(f"dashboard-row-{arg}", clear=True):
-            put_html(f'<div><div class="dashboard-icon" style="background-color:{color}"></div>'),
+            put_html(f'<div><div class="dashboard-icon" style="background-color:{color}"></div>')
             ensure_scope(f"dashboard-content-{arg}")
             with use_scope(f"dashboard-content-{arg}"):
                 ensure_scope(f"dashboard-value-{arg}")
                 with use_scope(f"dashboard-value-{arg}", clear=True):
-                    set_value(arg_dict)
+                    # Fixed order: value first, then suffix (total / comment)
+                    put_text(value_text).style("--dashboard-value--")
+                    if "total" in attrs and config.get("total") is not None:
+                        put_text(f' / {config.get("total", "")}').style("--dashboard-time--")
+                    elif "comment" in attrs and config.get("comment") is not None:
+                        put_text(f' {config.get("comment", "")}').style("--dashboard-time--")
                 ensure_scope(f"dashboard-time-{arg}")
                 with use_scope(f"dashboard-time-{arg}", clear=True):
                     put_text(f"{name} - {lang.readable_time(config.get('time', ''))}").style("--dashboard-time--")
@@ -850,23 +853,48 @@ class AlasGUI(Frame):
         if State.restart_event is None:
             put_warning(t("Gui.Update.DisabledWarn"))
 
-        ensure_scope("updater_loading")
-        ensure_scope("updater_state")
-        ensure_scope("updater_btn")
-        ensure_scope("updater_info")
-        ensure_scope("updater_detail")
+        put_row(
+            content=[put_scope("updater_loading"), None, put_scope("updater_state")],
+            size="auto .25rem 1fr",
+        )
+        put_scope("updater_btn")
+        put_scope("updater_info")
+        put_scope("updater_detail")
+
+        def _commit_cells(commit):
+            """Normalize one commit record — git output can be empty or malformed."""
+            if isinstance(commit, (list, tuple)):
+                cells = list(commit)
+            elif commit:
+                cells = [commit]
+            else:
+                cells = []
+            cells = [str(c) if c not in (None, "") else "-" for c in cells[:4]]
+            cells += ["-"] * (4 - len(cells))
+            return cells
+
+        def _commit_row(label, commit):
+            return [label, *_commit_cells(commit)]
 
         def update_table():
+            # Slow git/network work stays OUTSIDE nav_lock so that switching
+            # pages is never blocked by git; only the DOM writes are serialized.
+            try:
+                local_commit = updater.get_commit(short_sha1=True)
+                upstream_commit = updater.get_upstream_commit(short_sha1=True)
+                history = updater.get_upstream_history(n=20, short_sha1=True) or []
+            except Exception as e:
+                logger.exception(e)
+                local_commit, upstream_commit, history = None, None, []
+
             with self.nav_lock:
                 if self.page != "Update":
                     return
                 with use_scope("updater_info", clear=True):
-                    local_commit = updater.get_commit(short_sha1=True)
-                    upstream_commit = updater.get_upstream_commit(short_sha1=True)
                     put_table(
                         [
-                            [t("Gui.Update.Local"), *local_commit],
-                            [t("Gui.Update.Upstream"), *upstream_commit],
+                            _commit_row(t("Gui.Update.Local"), local_commit),
+                            _commit_row(t("Gui.Update.Upstream"), upstream_commit),
                         ],
                         header=[
                             "",
@@ -878,20 +906,26 @@ class AlasGUI(Frame):
                     )
                 with use_scope("updater_detail", clear=True):
                     put_text(t("Gui.Update.DetailedHistory"))
-                    history = updater.get_upstream_history(n=20, short_sha1=True)
-                    put_table(
-                        [commit for commit in history],
-                        header=[
-                            "SHA1",
-                            t("Gui.Update.Author"),
-                            t("Gui.Update.Time"),
-                            t("Gui.Update.Message"),
-                        ],
-                    )
+                    rows = [_commit_cells(commit) for commit in history]
+                    if rows:
+                        put_table(
+                            rows,
+                            header=[
+                                "SHA1",
+                                t("Gui.Update.Author"),
+                                t("Gui.Update.Time"),
+                                t("Gui.Update.Message"),
+                            ],
+                        )
+                    else:
+                        put_text("-")
 
         def u(state):
             if state == -1:
                 return
+            # The commit table is refreshed only after nav_lock is released,
+            # so git/network latency never blocks page switches.
+            refresh_table = False
             with self.nav_lock:
                 if self.page != "Update":
                     return
@@ -909,7 +943,7 @@ class AlasGUI(Frame):
                         color="info",
                         scope="updater_btn",
                     )
-                    update_table()
+                    refresh_table = True
                 elif state == 1:
                     put_loading("grow", "success", "updater_loading").style(
                         "--loading-grow--"
@@ -921,7 +955,7 @@ class AlasGUI(Frame):
                         color="success",
                         scope="updater_btn",
                     )
-                    update_table()
+                    refresh_table = True
                 elif state == "checking":
                     put_loading("border", "primary", "updater_loading").style(
                         "--loading-border--"
@@ -977,13 +1011,13 @@ class AlasGUI(Frame):
                         "--loading-grow--"
                     )
                     put_text(t("Gui.Update.UpdateSuccess"), scope="updater_state")
-                    update_table()
+                    refresh_table = True
                 elif state == "finish":
                     put_loading("grow", "success", "updater_loading").style(
                         "--loading-grow--"
                     )
                     put_text(t("Gui.Update.UpdateFinish"), scope="updater_state")
-                    update_table()
+                    refresh_table = True
                 elif state == "cancel":
                     put_loading("border", "danger", "updater_loading").style(
                         "--loading-border--"
@@ -1003,6 +1037,10 @@ class AlasGUI(Frame):
                     )
                     put_text(f"state: {state}", scope="updater_state")
 
+            # nav_lock released — now do the slow git/network table refresh
+            if refresh_table:
+                update_table()
+
         updater_switch = Switch(
             status=u, get_state=lambda: updater.state, name="updater"
         )
@@ -1016,8 +1054,13 @@ class AlasGUI(Frame):
             try:
                 update_table()
                 updater.check_update()
+            except Exception as e:
+                logger.exception(e)
             finally:
                 th.remove_current_task()
+            # Stay suspended on purpose: falling off the end would raise
+            # StopIteration inside TaskHandler.loop and log a bogus traceback.
+            yield
 
         _oneshot = _one_shot_update()
         _oneshot.__name__ = "dev_update_oneshot"
@@ -1045,9 +1088,11 @@ class AlasGUI(Frame):
     def dev_remote(self) -> None:
         self.init_menu(name="Remote")
         self.set_title(t("Gui.MenuDevelop.Remote"))
-        ensure_scope("remote_loading")
-        ensure_scope("remote_state")
-        ensure_scope("remote_info")
+        put_row(
+            content=[put_scope("remote_loading"), None, put_scope("remote_state")],
+            size="auto .25rem 1fr",
+        )
+        put_scope("remote_info")
 
         def u(state):
             if state == -1:
@@ -1436,7 +1481,9 @@ class AlasGUI(Frame):
     def show(self) -> None:
         # Rebuild shell only on first paint; later Home clicks just swap regions
         self.ensure_shell()
-        self.load_home = True
+        # Do not force load_home here: set_aside() already repaints the whole
+        # instance list when it changed, so an unchanged list keeps the sidebar
+        # flicker-free (set_aside_status only repaints changed states).
         self.set_aside()
         self.init_aside(name="Home")
         self.dev_set_menu()

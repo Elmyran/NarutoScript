@@ -1,6 +1,7 @@
 import {app, BrowserWindow} from 'electron';
 import './security-restrictions';
 import {createApp} from '/@/createApp';
+import {killAllPyShells} from '/@/pyshell';
 import logger from '/@/logger';
 import {dpiScaling} from '/@/config';
 
@@ -57,10 +58,35 @@ if (!dpiScaling) {
 // app.setAppLogsPath(join(app.getAppPath(), '/AlasAppError'));
 
 /**
- * Shout down background process if all windows was closed
+ * Shut down background python processes if all windows was closed
+ * or the app is quitting (X button / Alt+F4 / tray / update relaunch).
  */
+let pythonCleaned = false;
+async function cleanupPython() {
+  if (pythonCleaned) return;
+  pythonCleaned = true;
+  try {
+    logger.info('-----cleanupPython-----');
+    await killAllPyShells();
+  } catch (e) {
+    logger.error('cleanupPython:' + e);
+  }
+}
+
+app.on('before-quit', event => {
+  if (!pythonCleaned) {
+    event.preventDefault();
+    cleanupPython().finally(() => {
+      app.quit();
+    });
+    return;
+  }
+});
+
 app.on('window-all-closed', () => {
-  app.quit();
+  cleanupPython().finally(() => {
+    app.quit();
+  });
 });
 
 /**

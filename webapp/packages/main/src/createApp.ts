@@ -33,12 +33,14 @@ export const createApp = async () => {
     },
     {
       label: 'Exit',
-      click: function () {
-        coreService.curService?.kill(() => {
-          logger.info('kill coreService');
-        });
+      click: async function () {
+        logger.info('-----tray exit-----');
+        try {
+          await coreService.killAsync();
+        } catch (e) {
+          logger.error('tray exit killAsync:' + e);
+        }
         app.quit();
-        process.exit(0);
       },
     },
   ]);

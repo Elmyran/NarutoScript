@@ -56,7 +56,14 @@ class Updater(DeployConfig, GitManager, PipManager):
         )
 
         if not log:
-            return None, None, None, None
+            # n == 1 returns one commit tuple, n > 1 returns a list of tuples.
+            # Returning a 4-tuple for n > 1 used to reach `put_table` as
+            # [None, None, None, None] and raise
+            # "TypeError: 'NoneType' object is not iterable", which killed the
+            # updater refresh task for the rest of the session.
+            if n == 1:
+                return None, None, None, None
+            return []
 
         logs = log.split("\n")
         logs = list(map(lambda log: tuple(log.split("---")), logs))

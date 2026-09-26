@@ -352,7 +352,16 @@ def get_generator(func: Callable):
     def _g():
         yield
         while True:
-            yield func()
+            try:
+                r = func()
+            except Exception as e:
+                # An exception raised by func() used to escape the generator,
+                # which silently ended the task for the rest of the session
+                # (TaskHandler.loop then removes it). Keep the task alive and
+                # report the failure instead.
+                logger.exception(e)
+                r = -1
+            yield r
 
     g = _g()
     g.__name__ = func.__name__

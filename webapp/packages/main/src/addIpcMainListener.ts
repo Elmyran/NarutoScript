@@ -21,8 +21,13 @@ export const addIpcMainListener = async (mainWindow: BrowserWindow, coreService:
   ipcMain.on('window-maximize', function () {
     mainWindow?.isMaximized() ? mainWindow?.restore() : mainWindow?.maximize();
   });
-  ipcMain.on('window-close', function () {
-    coreService?.kill();
+  ipcMain.on('window-close', async function () {
+    logger.info('-----window-close-----');
+    try {
+      await coreService?.killAsync();
+    } catch (e) {
+      logger.error('window-close killAsync:' + e);
+    }
     mainWindow?.close();
     app.exit(0);
   });

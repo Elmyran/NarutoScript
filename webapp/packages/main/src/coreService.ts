@@ -1,4 +1,5 @@
 import type {PyShell} from '/@/pyshell';
+import {killAllPyShells} from '/@/pyshell';
 import {createAlas, createInstaller} from '/@/serviceLogic';
 import {ALAS_LOG} from '@common/constant/eventNames';
 import {BrowserWindow} from 'electron';
@@ -80,7 +81,20 @@ export class CoreService {
   }
 
   kill(callback?: () => void) {
-    this.curService?.kill(callback || this.cb);
+    this.killAsync().finally(() => {
+      try {
+        (callback || this.cb)();
+      } catch (e) {
+        logger.error('coreService.kill callback:' + e);
+      }
+    });
+  }
+
+  /** Kill installer + webui + any other live python trees, then resolve. */
+  async killAsync(): Promise<void> {
+    logger.info('-----coreService.killAsync-----');
+    this.currentService = null;
+    await killAllPyShells();
   }
 
   cb() {
