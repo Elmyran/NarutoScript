@@ -19,10 +19,10 @@ class GameInPopup(ModuleBase):
             if timer.reached() and self.match_template_color(MAIN_GOTO_CHARACTER):
                 return True
 
-            if self.appear_then_click(GAME_MAIN_ANNOUNCEMENT,interval=1):
+            if self.appear_then_click(GAME_MAIN_ANNOUNCEMENT,interval=1,similarity=0.6):
                 timer.reset()
                 continue
-            if self.match_template_luma(GAME_IN_ADVERTISE,interval=1):
+            if self.match_template_luma(GAME_IN_ADVERTISE,interval=1,similarity=0.6):
                 self.device.click(GAME_IN_ADVERTISE)
                 timer.reset()
                 continue
