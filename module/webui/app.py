@@ -1566,6 +1566,8 @@ class AlasGUI(Frame):
             """
         reload = 1;
         window.__nsLastAlive = Date.now();
+        // stamped by the Python heartbeat task below while the session is alive
+        window.__nsSrvAlive = Date.now();
         (function () {
             if (window.__nsAliveTimer) return;
 
@@ -1599,9 +1601,6 @@ class AlasGUI(Frame):
                 if (typeof reload === 'undefined' || reload !== 1) return;
                 var now = Date.now();
                 var hasRoot = !!document.getElementById('pywebio-scope-ROOT');
-                var contentEl = document.getElementById('pywebio-scope-content');
-                var hasContent = !!contentEl;
-                var contentEmpty = hasContent && contentEl.children.length === 0;
 
                 // Session closed / socket dead after sleep
                 var sess = (typeof WebIO !== 'undefined') && WebIO._state && WebIO._state.CurrentSession;
@@ -1611,10 +1610,16 @@ class AlasGUI(Frame):
                     if (sess && sess.closed) closed = true;
                 } catch (e) {}
 
-                // White-screen / hung session.
-                // stale alone must NOT force reload (idle UI can be quiet for minutes).
-                var stale = (now - (window.__nsLastAlive || 0)) > 180000;
-                if (!hasRoot || closed || (contentEmpty && stale)) {
+                // Liveness is decided by the *server*: the Python heartbeat task
+                // stamps window.__nsSrvAlive every 15s while the session can still
+                // execute JS. Only a silent server (60s) means a hung/dead session.
+                //
+                // Do NOT go back to guessing from the DOM: the old check
+                // ("#pywebio-scope-content is empty and >90s since page load",
+                // with __nsLastAlive never refreshed) made a perfectly healthy but
+                // idle page reload itself every ~90s.
+                var srvStale = (now - (window.__nsSrvAlive || 0)) > 60000;
+                if (!hasRoot || closed || srvStale) {
                     if (now - (window.__nsLastReload || 0) > 30000) {
                         window.__nsLastReload = now;
                         location.reload();
@@ -1961,7 +1966,16 @@ class AlasGUI(Frame):
             name="update_state",
         )
 
+        def heartbeat():
+            """Tell the client the session can still execute JS.
+
+            The client reloads only when this stops arriving, which distinguishes a
+            hung session from a healthy idle page (see the JS block in run()).
+            """
+            run_js('window.__nsSrvAlive = Date.now();')
+
         self.task_handler.add(self.state_switch.g(), 2)
+        self.task_handler.add(heartbeat, 15)
         self.task_handler.add(self.set_aside_status, 2)
         self.task_handler.add(visibility_state_switch.g(), 15)
         self.task_handler.add(update_switch.g(), 1)
