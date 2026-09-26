@@ -57,7 +57,7 @@ from module.config.utils import (
     read_file,
 )
 from module.logger import logger
-from module.webui.base import Frame
+from module.webui.base import Frame, ensure_scope, locked_page
 from module.webui.fake import (
     get_config_mod,
     load_config,
@@ -129,75 +129,84 @@ class AlasGUI(Frame):
         self.inst_cache = []
         self.load_home = False
         self.af_flag = False
+        self.aside_ready = False
+        self.aside_inst_count = -1
 
-    @use_scope("aside", clear=True)
+    @use_scope("aside", create_scope=True)
     def set_aside(self) -> None:
-        # TODO: update put_icon_buttons()
-        put_icon_buttons(
-            Icon.DEVELOP,
-            buttons=[
-                {"label": t("Gui.Aside.Home"), "value": "Home", "color": "aside"}
-            ],
-            onclick=[self.ui_develop],
-        ),
-        # Create instance rows as nested scopes in one shot (no later put_scope of same ids)
-        put_scope("aside_instance", [
-            put_scope(f"alas-instance-{i}", [])
-            for i, _ in enumerate(alas_instance())
-        ], scope="aside")
+        # Reuse shell on later visits — only rebuild when instance list length changes
+        instances = alas_instance()
+        if not getattr(self, "aside_ready", False) or len(instances) != getattr(self, "aside_inst_count", -1):
+            clear("aside")
+            self.aside_ready = True
+            self.aside_inst_count = len(instances)
+
+            put_icon_buttons(
+                Icon.DEVELOP,
+                buttons=[
+                    {"label": t("Gui.Aside.Home"), "value": "Home", "color": "aside"}
+                ],
+                onclick=[self.ui_develop],
+            )
+            ensure_scope("aside_instance", container_scope="aside")
+            with use_scope("aside_instance"):
+                for i, _ in enumerate(instances):
+                    ensure_scope(f"alas-instance-{i}")
+            put_icon_buttons(
+                Icon.ADD,
+                buttons=[
+                    {"label": t("Gui.Aside.ManageAlas"), "value": "ManageAlas", "color": "aside"}
+                ],
+                onclick=[self.ui_manage_alas],
+            )
+
+            current_date = datetime.now().date()
+            if current_date.month == 4 and current_date.day == 1:
+                self.af_flag = True
+
+        self.load_home = True
         self.set_aside_status()
-        put_icon_buttons(
-            Icon.ADD,
-            buttons=[
-                {"label": t("Gui.Aside.ManageAlas"), "value": "ManageAlas", "color": "aside"}
-            ],
-            onclick=[self.ui_manage_alas],
-        ),
 
-        current_date = datetime.now().date()
-        if current_date.month == 4 and current_date.day == 1:
-            self.af_flag = True
-
-    @use_scope("aside_instance")
     def set_aside_status(self) -> None:
-        flag = True
+        # Serialize against enter_nav so we never paint into a half-rebuilt shell
+        with self.nav_lock:
+            flag = True
 
-        def update(name, seq):
-            # Only fill existing scopes — never put_scope here (avoids duplicate id)
-            with use_scope(f"alas-instance-{seq}", clear=True):
-                icon_html = Icon.RUN
-                rendered_state = ProcessManager.get_manager(name).state
-                if rendered_state == 1 and self.af_flag:
-                    icon_html = icon_html[:31] + " anim-rotate" + icon_html[31:]
-                put_icon_buttons(
-                    icon_html,
-                    buttons=[{"label": name, "value": name, "color": "aside"}],
-                    onclick=self.ui_alas,
-                )
-            return rendered_state
+            def update(name, seq):
+                # Create-or-reuse under aside_instance — never a bare put_scope
+                ensure_scope(f"alas-instance-{seq}", container_scope="aside_instance")
+                with use_scope(f"alas-instance-{seq}", clear=True):
+                    icon_html = Icon.RUN
+                    rendered_state = ProcessManager.get_manager(name).state
+                    if rendered_state == 1 and self.af_flag:
+                        icon_html = icon_html[:31] + " anim-rotate" + icon_html[31:]
+                    put_icon_buttons(
+                        icon_html,
+                        buttons=[{"label": name, "value": name, "color": "aside"}],
+                        onclick=self.ui_alas,
+                    )
+                return rendered_state
 
-        if not len(self.rendered_cache) or self.load_home:
-            # Reload when add/delete new instance | first start | HomePage
-            flag = False
-            self.inst_cache = alas_instance()
-        if flag:
-            for index, inst in enumerate(self.inst_cache):
-                state = ProcessManager.get_manager(inst).state
-                if state != self.rendered_cache[index]:
-                    self.rendered_cache[index] = update(inst, index)
-                    flag = False
-        else:
-            # Do NOT clear("aside_instance"): that removes nested scopes set_aside just created.
-            # Just refill each child via use_scope.
-            self.rendered_cache.clear()
-            for index, inst in enumerate(self.inst_cache):
-                self.rendered_cache.append(update(inst, index))
-            self.load_home = False
-        if not flag:
-            aside_name = get_localstorage("aside")
-            self.active_button("aside", aside_name)
+            if not len(self.rendered_cache) or self.load_home:
+                # Reload when add/delete new instance | first start | HomePage
+                flag = False
+                self.inst_cache = alas_instance()
+            if flag:
+                for index, inst in enumerate(self.inst_cache):
+                    state = ProcessManager.get_manager(inst).state
+                    if state != self.rendered_cache[index]:
+                        self.rendered_cache[index] = update(inst, index)
+                        flag = False
+            else:
+                self.rendered_cache.clear()
+                for index, inst in enumerate(self.inst_cache):
+                    self.rendered_cache.append(update(inst, index))
+                self.load_home = False
+            if not flag:
+                aside_name = get_localstorage("aside")
+                self.active_button("aside", aside_name)
 
-        return
+            return
 
     @use_scope("header_status")
     def set_status(self, state: int) -> None:
@@ -284,6 +293,7 @@ class AlasGUI(Frame):
 
         self.alas_overview()
 
+    @locked_page
     @use_scope("content", clear=True)
     def alas_set_group(self, task: str) -> None:
         """
@@ -292,15 +302,17 @@ class AlasGUI(Frame):
         self.init_menu(name=task)
         self.set_title(t(f"Task.{task}.name"))
 
-        put_scope("_groups", [put_none(), put_scope("groups"), put_scope("navigator")])
+        ensure_scope("_groups", container_scope="content")
+        with use_scope("_groups"):
+            put_none()
+            ensure_scope("groups")
+            ensure_scope("navigator")
 
         task_help: str = t(f"Task.{task}.help")
         if task_help:
-            put_scope(
-                "group__info",
-                scope="groups",
-                content=[put_text(task_help).style("font-size: 1rem")],
-            )
+            ensure_scope("group__info", container_scope="groups")
+            with use_scope("group__info", clear=True):
+                put_text(task_help).style("font-size: 1rem")
 
         config = self.alas_config.read_file(self.alas_name)
         self.alas_config_hidden = self.alas_config.get_hidden_args(config)
@@ -367,7 +379,8 @@ class AlasGUI(Frame):
         if not output_list:
             return 0
 
-        with use_scope(f"group_{group_name}"):
+        ensure_scope(f"group_{group_name}", container_scope="groups")
+        with use_scope(f"group_{group_name}", clear=True):
             put_text(t(f"{group_name}._info.name"))
             group_help = t(f"{group_name}._info.help")
             if group_help != "":
@@ -419,54 +432,48 @@ class AlasGUI(Frame):
 
         with use_scope(f"dashboard-row-{arg}", clear=True):
             put_html(f'<div><div class="dashboard-icon" style="background-color:{color}"></div>'),
-            put_scope(f"dashboard-content-{arg}", [
-                put_scope(f"dashboard-value-{arg}", set_value(arg_dict)),
-                put_scope(f"dashboard-time-{arg}", [
-                    put_text(f"{name} - {lang.readable_time(config.get('time', ''))}").style("--dashboard-time--"),
-                ])
-            ])
+            ensure_scope(f"dashboard-content-{arg}")
+            with use_scope(f"dashboard-content-{arg}"):
+                ensure_scope(f"dashboard-value-{arg}")
+                with use_scope(f"dashboard-value-{arg}", clear=True):
+                    set_value(arg_dict)
+                ensure_scope(f"dashboard-time-{arg}")
+                with use_scope(f"dashboard-time-{arg}", clear=True):
+                    put_text(f"{name} - {lang.readable_time(config.get('time', ''))}").style("--dashboard-time--")
 
+    @locked_page
     @use_scope("content", clear=True)
     def alas_overview(self) -> None:
         self.init_menu(name="Overview")
         self.set_title(t(f"Gui.MenuAlas.Overview"))
 
-        put_scope("overview", [put_scope("schedulers"), put_scope("logs")])
+        ensure_scope("overview", container_scope="content")
+        with use_scope("overview"):
+            ensure_scope("schedulers")
+            ensure_scope("logs")
 
         with use_scope("schedulers"):
-            put_scope(
-                "scheduler-bar",
-                [
-                    put_text(t("Gui.Overview.Scheduler")).style(
-                        "font-size: 1.25rem; margin: auto .5rem auto;"
-                    ),
-                    put_scope("scheduler_btn"),
-                ],
-            )
-            put_scope(
-                "running",
-                [
-                    put_text(t("Gui.Overview.Running")),
-                    put_html('<hr class="hr-group">'),
-                    put_scope("running_tasks"),
-                ],
-            )
-            put_scope(
-                "pending",
-                [
-                    put_text(t("Gui.Overview.Pending")),
-                    put_html('<hr class="hr-group">'),
-                    put_scope("pending_tasks"),
-                ],
-            )
-            put_scope(
-                "waiting",
-                [
-                    put_text(t("Gui.Overview.Waiting")),
-                    put_html('<hr class="hr-group">'),
-                    put_scope("waiting_tasks"),
-                ],
-            )
+            ensure_scope("scheduler-bar")
+            with use_scope("scheduler-bar"):
+                put_text(t("Gui.Overview.Scheduler")).style(
+                    "font-size: 1.25rem; margin: auto .5rem auto;"
+                )
+                ensure_scope("scheduler_btn")
+            ensure_scope("running")
+            with use_scope("running"):
+                put_text(t("Gui.Overview.Running"))
+                put_html('<hr class="hr-group">')
+                ensure_scope("running_tasks")
+            ensure_scope("pending")
+            with use_scope("pending"):
+                put_text(t("Gui.Overview.Pending"))
+                put_html('<hr class="hr-group">')
+                ensure_scope("pending_tasks")
+            ensure_scope("waiting")
+            with use_scope("waiting"):
+                put_text(t("Gui.Overview.Waiting"))
+                put_html('<hr class="hr-group">')
+                ensure_scope("waiting_tasks")
 
         switch_scheduler = BinarySwitchButton(
             label_on=t("Gui.Button.Stop"),
@@ -482,22 +489,25 @@ class AlasGUI(Frame):
         log = RichLog("log")
 
         with use_scope("logs"):
-            put_scope("log-bar", [
-                put_scope("log-title", [
-                    put_text(t("Gui.Overview.Log")).style("font-size: 1.25rem; margin: auto .5rem auto;"),
-                    put_scope("log-title-btns", [
-                        put_scope("log_scroll_btn"),
-                    ]),
-                ]),
-                put_html('<hr class="hr-group">'),
-                put_scope("dashboard", [
-                    # Empty dashboard, values will be updated in alas_update_overview_task()
-                    put_scope(f"dashboard-row-{arg}", [])
-                    for arg in self.ALAS_STORED.keys() if deep_get(self.ALAS_STORED, keys=[arg, "order"], default=0)
-                    # Empty content to left-align last row
-                ] + [put_html("<i></i>")] * min(len(self.ALAS_STORED), 4))
-            ])
-            put_scope("log", [put_html("")])
+            ensure_scope("log-bar")
+            with use_scope("log-bar"):
+                ensure_scope("log-title")
+                with use_scope("log-title"):
+                    put_text(t("Gui.Overview.Log")).style("font-size: 1.25rem; margin: auto .5rem auto;")
+                    ensure_scope("log-title-btns")
+                    with use_scope("log-title-btns"):
+                        ensure_scope("log_scroll_btn")
+                put_html('<hr class="hr-group">')
+                ensure_scope("dashboard")
+                with use_scope("dashboard"):
+                    for arg in self.ALAS_STORED.keys():
+                        if deep_get(self.ALAS_STORED, keys=[arg, "order"], default=0):
+                            ensure_scope(f"dashboard-row-{arg}")
+                    for _ in range(min(len(self.ALAS_STORED), 4)):
+                        put_html("<i></i>")
+            ensure_scope("log")
+            with use_scope("log", clear=True):
+                put_html("")
 
         log.console.width = log.get_width()
 
@@ -606,91 +616,96 @@ class AlasGUI(Frame):
 
     def alas_update_overview_task(self) -> None:
         """Refresh overview lists/dashboard. Must never kill the caller task."""
-        if not self.visible:
+        if not self.visible or self.page != "Overview":
             return
         if not hasattr(self, "alas") or not hasattr(self, "alas_config"):
             return
 
         try:
-            self.alas_config.load()
-            self.alas_config.get_next_task()
+            # Serialize with page switches; re-check after lock
+            with self.nav_lock:
+                if self.page != "Overview":
+                    return
+                self.alas_config.load()
+                self.alas_config.get_next_task()
 
-            alive = self.alas.alive
-            if len(self.alas_config.pending_task) >= 1:
-                if alive:
-                    running = self.alas_config.pending_task[:1]
-                    pending = self.alas_config.pending_task[1:]
+                alive = self.alas.alive
+                if len(self.alas_config.pending_task) >= 1:
+                    if alive:
+                        running = self.alas_config.pending_task[:1]
+                        pending = self.alas_config.pending_task[1:]
+                    else:
+                        running = []
+                        pending = self.alas_config.pending_task[:]
                 else:
                     running = []
-                    pending = self.alas_config.pending_task[:]
-            else:
-                running = []
-                pending = []
-            waiting = self.alas_config.waiting_task
+                    pending = []
+                waiting = self.alas_config.waiting_task
 
-            def put_task_list(scope_name: str, tasks: list):
-                # Snapshot content so we can skip no-op redraws
-                snap = [
-                    (f.command, str(f.next_run), f.enable)
-                    for f in (tasks or [])
-                ]
-                cache_key = f"overview-tasks-{scope_name}"
-                if not self.scope_expired_then_add(cache_key, snap):
-                    return
-                clear(scope_name)
-                with use_scope(scope_name):
-                    if not tasks:
-                        put_text(t("Gui.Overview.NoTask")).style(
-                            "--overview-notask-text--"
-                        )
+                def put_task_list(scope_name: str, tasks: list):
+                    # Snapshot content so we can skip no-op redraws
+                    snap = [
+                        (f.command, str(f.next_run), f.enable)
+                        for f in (tasks or [])
+                    ]
+                    cache_key = f"overview-tasks-{scope_name}"
+                    if not self.scope_expired_then_add(cache_key, snap):
                         return
-                    for func in tasks:
-                        # Direct children of running/pending/waiting_tasks — no nested put_scope
-                        put_row(
-                            [
-                                put_column(
-                                    [
-                                        put_text(t(f"Task.{func.command}.name")).style(
-                                            "--arg-title--"
-                                        ),
-                                        put_text(str(func.next_run)).style(
-                                            "--arg-help--"
-                                        ),
-                                    ],
-                                    size="auto auto",
-                                ),
-                                put_button(
-                                    label=t("Gui.Button.Setting"),
-                                    onclick=partial(self.alas_set_group, func.command),
-                                    color="off",
-                                ),
-                            ],
-                            size="1fr auto",
-                        ).style("--overview-task-card--")
+                    clear(scope_name)
+                    with use_scope(scope_name):
+                        if not tasks:
+                            put_text(t("Gui.Overview.NoTask")).style(
+                                "--overview-notask-text--"
+                            )
+                            return
+                        for func in tasks:
+                            # Direct children of running/pending/waiting_tasks — no nested put_scope
+                            put_row(
+                                [
+                                    put_column(
+                                        [
+                                            put_text(t(f"Task.{func.command}.name")).style(
+                                                "--arg-title--"
+                                            ),
+                                            put_text(str(func.next_run)).style(
+                                                "--arg-help--"
+                                            ),
+                                        ],
+                                        size="auto auto",
+                                    ),
+                                    put_button(
+                                        label=t("Gui.Button.Setting"),
+                                        onclick=partial(self.alas_set_group, func.command),
+                                        color="off",
+                                    ),
+                                ],
+                                size="1fr auto",
+                            ).style("--overview-task-card--")
 
-            put_task_list("running_tasks", running)
-            put_task_list("pending_tasks", pending)
-            put_task_list("waiting_tasks", waiting)
+                put_task_list("running_tasks", running)
+                put_task_list("pending_tasks", pending)
+                put_task_list("waiting_tasks", waiting)
 
-            for arg, arg_dict in self.ALAS_STORED.items():
-                if not arg_dict.get("order", 0):
-                    continue
-                path = arg_dict["path"]
-                if self.scope_expired_then_add(f"dashboard-time-value-{arg}", [
-                    deep_get(self.alas_config.data, keys=f"{path}.value"),
-                    lang.readable_time(
-                        deep_get(self.alas_config.data, keys=f"{path}.time")
-                    ),
-                ]):
-                    self.set_dashboard(
-                        arg,
-                        arg_dict,
-                        deep_get(self.alas_config.data, keys=path, default={}),
-                    )
+                for arg, arg_dict in self.ALAS_STORED.items():
+                    if not arg_dict.get("order", 0):
+                        continue
+                    path = arg_dict["path"]
+                    if self.scope_expired_then_add(f"dashboard-time-value-{arg}", [
+                        deep_get(self.alas_config.data, keys=f"{path}.value"),
+                        lang.readable_time(
+                            deep_get(self.alas_config.data, keys=f"{path}.time")
+                        ),
+                    ]):
+                        self.set_dashboard(
+                            arg,
+                            arg_dict,
+                            deep_get(self.alas_config.data, keys=path, default={}),
+                        )
         except Exception as e:
             # Keep the periodic task alive; log and retry next tick
             logger.exception(e)
 
+    @locked_page
     @use_scope("content", clear=True)
     def alas_daemon_overview(self, task: str) -> None:
         self.init_menu(name=task)
@@ -698,35 +713,29 @@ class AlasGUI(Frame):
 
         log = RichLog("log")
 
+        ensure_scope("daemon-overview", container_scope="content")
         if self.is_mobile:
-            put_scope(
-                "daemon-overview",
-                [
-                    put_scope("scheduler-bar"),
-                    put_scope("groups"),
-                    put_scope("daemon-log-bar"),
-                    put_scope("log", [put_html("")]),
-                ],
-            )
+            with use_scope("daemon-overview", clear=True):
+                ensure_scope("scheduler-bar")
+                ensure_scope("groups")
+                ensure_scope("daemon-log-bar")
+                ensure_scope("log")
+                with use_scope("log", clear=True):
+                    put_html("")
         else:
-            put_scope(
-                "daemon-overview",
-                [
-                    put_none(),
-                    put_scope(
-                        "_daemon",
-                        [
-                            put_scope(
-                                "_daemon_upper",
-                                [put_scope("scheduler-bar"), put_scope("daemon-log-bar")],
-                            ),
-                            put_scope("groups"),
-                            put_scope("log", [put_html("")]),
-                        ],
-                    ),
-                    put_none(),
-                ],
-            )
+            with use_scope("daemon-overview", clear=True):
+                put_none()
+                ensure_scope("_daemon")
+                with use_scope("_daemon"):
+                    ensure_scope("_daemon_upper")
+                    with use_scope("_daemon_upper"):
+                        ensure_scope("scheduler-bar")
+                        ensure_scope("daemon-log-bar")
+                    ensure_scope("groups")
+                    ensure_scope("log")
+                    with use_scope("log", clear=True):
+                        put_html("")
+                put_none()
 
         log.console.width = log.get_width()
 
@@ -734,7 +743,7 @@ class AlasGUI(Frame):
             put_text(t("Gui.Overview.Scheduler")).style(
                 "font-size: 1.25rem; margin: auto .5rem auto;"
             )
-            put_scope("scheduler_btn")
+            ensure_scope("scheduler_btn")
 
         switch_scheduler = BinarySwitchButton(
             label_on=t("Gui.Button.Stop"),
@@ -748,16 +757,14 @@ class AlasGUI(Frame):
         )
 
         with use_scope("daemon-log-bar"):
+            ensure_scope("log-title")
             with use_scope("log-title"):
                 put_text(t("Gui.Overview.Log")).style(
                     "font-size: 1.25rem; margin: auto .5rem auto;"
                 )
-                put_scope(
-                    "log-bar-btns",
-                    [
-                        put_scope("log_scroll_btn"),
-                    ],
-                )
+                ensure_scope("log-bar-btns")
+                with use_scope("log-bar-btns"):
+                    ensure_scope("log_scroll_btn")
 
         switch_log_scroll = BinarySwitchButton(
             label_on=t("Gui.Button.ScrollON"),
@@ -834,6 +841,7 @@ class AlasGUI(Frame):
         lang.TRANSLATE_MODE = True
         self.show()
 
+    @locked_page
     @use_scope("content", clear=True)
     def dev_update(self) -> None:
         self.init_menu(name="Update")
@@ -842,163 +850,180 @@ class AlasGUI(Frame):
         if State.restart_event is None:
             put_warning(t("Gui.Update.DisabledWarn"))
 
-        put_row(
-            content=[put_scope("updater_loading"), None, put_scope("updater_state")],
-            size="auto .25rem 1fr",
-        )
-
-        put_scope("updater_btn")
-        put_scope("updater_info")
+        ensure_scope("updater_loading")
+        ensure_scope("updater_state")
+        ensure_scope("updater_btn")
+        ensure_scope("updater_info")
+        ensure_scope("updater_detail")
 
         def update_table():
-            with use_scope("updater_info", clear=True):
-                local_commit = updater.get_commit(short_sha1=True)
-                upstream_commit = updater.get_upstream_commit(short_sha1=True)
-                put_table(
-                    [
-                        [t("Gui.Update.Local"), *local_commit],
-                        [t("Gui.Update.Upstream"), *upstream_commit],
-                    ],
-                    header=[
-                        "",
-                        "SHA1",
-                        t("Gui.Update.Author"),
-                        t("Gui.Update.Time"),
-                        t("Gui.Update.Message"),
-                    ],
-                )
-            with use_scope("updater_detail", clear=True):
-                put_text(t("Gui.Update.DetailedHistory"))
-                history = updater.get_upstream_history(n=20, short_sha1=True)
-                put_table(
-                    [commit for commit in history],
-                    header=[
-                        "SHA1",
-                        t("Gui.Update.Author"),
-                        t("Gui.Update.Time"),
-                        t("Gui.Update.Message"),
-                    ],
-                )
+            with self.nav_lock:
+                if self.page != "Update":
+                    return
+                with use_scope("updater_info", clear=True):
+                    local_commit = updater.get_commit(short_sha1=True)
+                    upstream_commit = updater.get_upstream_commit(short_sha1=True)
+                    put_table(
+                        [
+                            [t("Gui.Update.Local"), *local_commit],
+                            [t("Gui.Update.Upstream"), *upstream_commit],
+                        ],
+                        header=[
+                            "",
+                            "SHA1",
+                            t("Gui.Update.Author"),
+                            t("Gui.Update.Time"),
+                            t("Gui.Update.Message"),
+                        ],
+                    )
+                with use_scope("updater_detail", clear=True):
+                    put_text(t("Gui.Update.DetailedHistory"))
+                    history = updater.get_upstream_history(n=20, short_sha1=True)
+                    put_table(
+                        [commit for commit in history],
+                        header=[
+                            "SHA1",
+                            t("Gui.Update.Author"),
+                            t("Gui.Update.Time"),
+                            t("Gui.Update.Message"),
+                        ],
+                    )
 
         def u(state):
             if state == -1:
                 return
-            clear("updater_loading")
-            clear("updater_state")
-            clear("updater_btn")
-            if state == 0:
-                put_loading("border", "secondary", "updater_loading").style(
-                    "--loading-border-fill--"
-                )
-                put_text(t("Gui.Update.UpToDate"), scope="updater_state")
-                put_button(
-                    t("Gui.Button.CheckUpdate"),
-                    onclick=updater.check_update,
-                    color="info",
-                    scope="updater_btn",
-                )
-                update_table()
-            elif state == 1:
-                put_loading("grow", "success", "updater_loading").style(
-                    "--loading-grow--"
-                )
-                put_text(t("Gui.Update.HaveUpdate"), scope="updater_state")
-                put_button(
-                    t("Gui.Button.ClickToUpdate"),
-                    onclick=updater.run_update,
-                    color="success",
-                    scope="updater_btn",
-                )
-                update_table()
-            elif state == "checking":
-                put_loading("border", "primary", "updater_loading").style(
-                    "--loading-border--"
-                )
-                put_text(t("Gui.Update.UpdateChecking"), scope="updater_state")
-            elif state == "failed":
-                put_loading("grow", "danger", "updater_loading").style(
-                    "--loading-grow--"
-                )
-                put_text(t("Gui.Update.UpdateFailed"), scope="updater_state")
-                put_button(
-                    t("Gui.Button.RetryUpdate"),
-                    onclick=updater.run_update,
-                    color="primary",
-                    scope="updater_btn",
-                )
-            elif state == "start":
-                put_loading("border", "primary", "updater_loading").style(
-                    "--loading-border--"
-                )
-                put_text(t("Gui.Update.UpdateStart"), scope="updater_state")
-                put_button(
-                    t("Gui.Button.CancelUpdate"),
-                    onclick=updater.cancel,
-                    color="danger",
-                    scope="updater_btn",
-                )
-            elif state == "wait":
-                put_loading("border", "primary", "updater_loading").style(
-                    "--loading-border--"
-                )
-                put_text(t("Gui.Update.UpdateWait"), scope="updater_state")
-                put_button(
-                    t("Gui.Button.CancelUpdate"),
-                    onclick=updater.cancel,
-                    color="danger",
-                    scope="updater_btn",
-                )
-            elif state == "run update":
-                put_loading("border", "primary", "updater_loading").style(
-                    "--loading-border--"
-                )
-                put_text(t("Gui.Update.UpdateRun"), scope="updater_state")
-                put_button(
-                    t("Gui.Button.CancelUpdate"),
-                    onclick=updater.cancel,
-                    color="danger",
-                    scope="updater_btn",
-                    disabled=True,
-                )
-            elif state == "reload":
-                put_loading("grow", "success", "updater_loading").style(
-                    "--loading-grow--"
-                )
-                put_text(t("Gui.Update.UpdateSuccess"), scope="updater_state")
-                update_table()
-            elif state == "finish":
-                put_loading("grow", "success", "updater_loading").style(
-                    "--loading-grow--"
-                )
-                put_text(t("Gui.Update.UpdateFinish"), scope="updater_state")
-                update_table()
-            elif state == "cancel":
-                put_loading("border", "danger", "updater_loading").style(
-                    "--loading-border--"
-                )
-                put_text(t("Gui.Update.UpdateCancel"), scope="updater_state")
-                put_button(
-                    t("Gui.Button.CancelUpdate"),
-                    onclick=updater.cancel,
-                    color="danger",
-                    scope="updater_btn",
-                    disabled=True,
-                )
-            else:
-                put_text(
-                    "Something went wrong, please contact develops",
-                    scope="updater_state",
-                )
-                put_text(f"state: {state}", scope="updater_state")
+            with self.nav_lock:
+                if self.page != "Update":
+                    return
+                clear("updater_loading")
+                clear("updater_state")
+                clear("updater_btn")
+                if state == 0:
+                    put_loading("border", "secondary", "updater_loading").style(
+                        "--loading-border-fill--"
+                    )
+                    put_text(t("Gui.Update.UpToDate"), scope="updater_state")
+                    put_button(
+                        t("Gui.Button.CheckUpdate"),
+                        onclick=updater.check_update,
+                        color="info",
+                        scope="updater_btn",
+                    )
+                    update_table()
+                elif state == 1:
+                    put_loading("grow", "success", "updater_loading").style(
+                        "--loading-grow--"
+                    )
+                    put_text(t("Gui.Update.HaveUpdate"), scope="updater_state")
+                    put_button(
+                        t("Gui.Button.ClickToUpdate"),
+                        onclick=updater.run_update,
+                        color="success",
+                        scope="updater_btn",
+                    )
+                    update_table()
+                elif state == "checking":
+                    put_loading("border", "primary", "updater_loading").style(
+                        "--loading-border--"
+                    )
+                    put_text(t("Gui.Update.UpdateChecking"), scope="updater_state")
+                elif state == "failed":
+                    put_loading("grow", "danger", "updater_loading").style(
+                        "--loading-grow--"
+                    )
+                    put_text(t("Gui.Update.UpdateFailed"), scope="updater_state")
+                    put_button(
+                        t("Gui.Button.RetryUpdate"),
+                        onclick=updater.run_update,
+                        color="primary",
+                        scope="updater_btn",
+                    )
+                elif state == "start":
+                    put_loading("border", "primary", "updater_loading").style(
+                        "--loading-border--"
+                    )
+                    put_text(t("Gui.Update.UpdateStart"), scope="updater_state")
+                    put_button(
+                        t("Gui.Button.CancelUpdate"),
+                        onclick=updater.cancel,
+                        color="danger",
+                        scope="updater_btn",
+                    )
+                elif state == "wait":
+                    put_loading("border", "primary", "updater_loading").style(
+                        "--loading-border--"
+                    )
+                    put_text(t("Gui.Update.UpdateWait"), scope="updater_state")
+                    put_button(
+                        t("Gui.Button.CancelUpdate"),
+                        onclick=updater.cancel,
+                        color="danger",
+                        scope="updater_btn",
+                    )
+                elif state == "run update":
+                    put_loading("border", "primary", "updater_loading").style(
+                        "--loading-border--"
+                    )
+                    put_text(t("Gui.Update.UpdateRun"), scope="updater_state")
+                    put_button(
+                        t("Gui.Button.CancelUpdate"),
+                        onclick=updater.cancel,
+                        color="danger",
+                        scope="updater_btn",
+                        disabled=True,
+                    )
+                elif state == "reload":
+                    put_loading("grow", "success", "updater_loading").style(
+                        "--loading-grow--"
+                    )
+                    put_text(t("Gui.Update.UpdateSuccess"), scope="updater_state")
+                    update_table()
+                elif state == "finish":
+                    put_loading("grow", "success", "updater_loading").style(
+                        "--loading-grow--"
+                    )
+                    put_text(t("Gui.Update.UpdateFinish"), scope="updater_state")
+                    update_table()
+                elif state == "cancel":
+                    put_loading("border", "danger", "updater_loading").style(
+                        "--loading-border--"
+                    )
+                    put_text(t("Gui.Update.UpdateCancel"), scope="updater_state")
+                    put_button(
+                        t("Gui.Button.CancelUpdate"),
+                        onclick=updater.cancel,
+                        color="danger",
+                        scope="updater_btn",
+                        disabled=True,
+                    )
+                else:
+                    put_text(
+                        "Something went wrong, please contact develops",
+                        scope="updater_state",
+                    )
+                    put_text(f"state: {state}", scope="updater_state")
 
         updater_switch = Switch(
             status=u, get_state=lambda: updater.state, name="updater"
         )
 
-        update_table()
         self.task_handler.add(updater_switch.g(), delay=0.5, pending_delete=True)
 
-        updater.check_update()
+        # One-shot: TaskHandler.add(callable) would loop forever via get_generator.
+        # Run git/network once, then drop the task so it cannot stampede.
+        def _one_shot_update():
+            th = yield
+            try:
+                update_table()
+                updater.check_update()
+            finally:
+                th.remove_current_task()
+
+        _oneshot = _one_shot_update()
+        _oneshot.__name__ = "dev_update_oneshot"
+        self.task_handler.add(_oneshot, delay=0.1, pending_delete=True)
+
+    @locked_page
     @use_scope("content", clear=True)
     def dev_utils(self) -> None:
         self.init_menu(name="Utils")
@@ -1015,62 +1040,64 @@ class AlasGUI(Frame):
 
         put_button(label="Force restart", onclick=_force_restart)
 
+    @locked_page
     @use_scope("content", clear=True)
     def dev_remote(self) -> None:
         self.init_menu(name="Remote")
         self.set_title(t("Gui.MenuDevelop.Remote"))
-        put_row(
-            content=[put_scope("remote_loading"), None, put_scope("remote_state")],
-            size="auto .25rem 1fr",
-        )
-        put_scope("remote_info")
+        ensure_scope("remote_loading")
+        ensure_scope("remote_state")
+        ensure_scope("remote_info")
 
         def u(state):
             if state == -1:
                 return
-            clear("remote_loading")
-            clear("remote_state")
-            clear("remote_info")
-            if state in (1, 2):
-                put_loading("grow", "success", "remote_loading").style(
-                    "--loading-grow--"
-                )
-                put_text(t("Gui.Remote.Running"), scope="remote_state")
-                put_text(t("Gui.Remote.EntryPoint"), scope="remote_info")
-                entrypoint = RemoteAccess.get_entry_point()
-                if entrypoint:
-                    if State.electron:  # Prevent click into url in electron client
-                        put_text(entrypoint, scope="remote_info").style(
-                            "text-decoration-line: underline"
-                        )
-                    else:
-                        put_link(name=entrypoint, url=entrypoint, scope="remote_info")
-                else:
-                    put_text("Loading...", scope="remote_info")
-            elif state in (0, 3):
-                put_loading("border", "secondary", "remote_loading").style(
-                    "--loading-border-fill--"
-                )
-                if (
-                        State.deploy_config.EnableRemoteAccess
-                        and State.deploy_config.Password
-                ):
-                    put_text(t("Gui.Remote.NotRunning"), scope="remote_state")
-                else:
-                    put_text(t("Gui.Remote.NotEnable"), scope="remote_state")
-                put_text(t("Gui.Remote.ConfigureHint"), scope="remote_info")
-                url = "http://app.azurlane.cloud" + (
-                    "" if State.deploy_config.Language.startswith("zh") else "/en.html"
-                )
-                put_html(
-                    f'<a href="{url}" target="_blank">{url}</a>', scope="remote_info"
-                )
-                if state == 3:
-                    put_warning(
-                        t("Gui.Remote.SSHNotInstall"),
-                        closable=False,
-                        scope="remote_info",
+            with self.nav_lock:
+                if self.page != "Remote":
+                    return
+                clear("remote_loading")
+                clear("remote_state")
+                clear("remote_info")
+                if state in (1, 2):
+                    put_loading("grow", "success", "remote_loading").style(
+                        "--loading-grow--"
                     )
+                    put_text(t("Gui.Remote.Running"), scope="remote_state")
+                    put_text(t("Gui.Remote.EntryPoint"), scope="remote_info")
+                    entrypoint = RemoteAccess.get_entry_point()
+                    if entrypoint:
+                        if State.electron:  # Prevent click into url in electron client
+                            put_text(entrypoint, scope="remote_info").style(
+                                "text-decoration-line: underline"
+                            )
+                        else:
+                            put_link(name=entrypoint, url=entrypoint, scope="remote_info")
+                    else:
+                        put_text("Loading...", scope="remote_info")
+                elif state in (0, 3):
+                    put_loading("border", "secondary", "remote_loading").style(
+                        "--loading-border-fill--"
+                    )
+                    if (
+                            State.deploy_config.EnableRemoteAccess
+                            and State.deploy_config.Password
+                    ):
+                        put_text(t("Gui.Remote.NotRunning"), scope="remote_state")
+                    else:
+                        put_text(t("Gui.Remote.NotEnable"), scope="remote_state")
+                    put_text(t("Gui.Remote.ConfigureHint"), scope="remote_info")
+                    url = "http://app.azurlane.cloud" + (
+                        "" if State.deploy_config.Language.startswith("zh") else "/en.html"
+                    )
+                    put_html(
+                        f'<a href="{url}" target="_blank">{url}</a>', scope="remote_info"
+                    )
+                    if state == 3:
+                        put_warning(
+                            t("Gui.Remote.SSHNotInstall"),
+                            closable=False,
+                            scope="remote_info",
+                        )
 
         remote_switch = Switch(
             status=u, get_state=RemoteAccess.get_state, name="remote"
@@ -1078,6 +1105,7 @@ class AlasGUI(Frame):
 
         self.task_handler.add(remote_switch.g(), delay=1, pending_delete=True)
 
+    @locked_page
     def ui_develop(self) -> None:
         if not self.is_mobile:
             self.show()
@@ -1090,6 +1118,7 @@ class AlasGUI(Frame):
             del self.alas
         self.state_switch.switch()
 
+    @locked_page
     def ui_alas(self, config_name: str) -> None:
         if config_name == self.alas_name:
             self.expand_menu()
@@ -1104,6 +1133,7 @@ class AlasGUI(Frame):
         self.initial()
         self.alas_set_menu()
 
+    @locked_page
     def ui_manage_alas(self) -> None:
         """Full-page manage view: menu (list / import) + content, like Home/Develop."""
         self.init_aside(name="ManageAlas")
@@ -1154,6 +1184,7 @@ class AlasGUI(Frame):
         self.set_aside()
         self.active_button("aside", "ManageAlas")
 
+    @locked_page
     @use_scope("content", clear=True)
     def manage_show_list(self) -> None:
         self.init_menu(collapse_menu=False, name="ConfigList")
@@ -1305,6 +1336,7 @@ class AlasGUI(Frame):
             logger.exception(e)
             toast(f"{t('Gui.ManageAlas.DeleteFailed')}: {e}", color="error")
 
+    @locked_page
     @use_scope("content", clear=True)
     def manage_show_import(self) -> None:
         self.init_menu(collapse_menu=False, name="ImportConfig")
@@ -1400,8 +1432,10 @@ class AlasGUI(Frame):
             )
             set_scope("import_result", container_scope="manage_panel", if_exist="clear")
 
+    @locked_page
     def show(self) -> None:
-        self._show()
+        # Rebuild shell only on first paint; later Home clicks just swap regions
+        self.ensure_shell()
         self.load_home = True
         self.set_aside()
         self.init_aside(name="Home")
@@ -1420,7 +1454,7 @@ class AlasGUI(Frame):
             self.set_theme(t)
             run_js("location.reload()")
 
-        with use_scope("content"):
+        with use_scope("content", clear=True):
             put_text("Select your language / 选择语言").style("text-align: center")
             put_buttons(
                 [
@@ -1485,19 +1519,55 @@ class AlasGUI(Frame):
             """
         reload = 1;
         window.__nsLastAlive = Date.now();
-        // Heartbeat: if UI stops receiving any WebIO traffic for a long time, force reload
         (function () {
             if (window.__nsAliveTimer) return;
+
+            // Track any WebIO/WS traffic so sleep-wake half-open sessions are detected
+            function nsTouch() { window.__nsLastAlive = Date.now(); }
+            if (!window.__nsAlivePatched) {
+                window.__nsAlivePatched = true;
+                try {
+                    var OrigWS = window.WebSocket;
+                    window.WebSocket = function (url, protocols) {
+                        // Must use `new` — WebSocket throws if called without it
+                        var ws = (protocols === undefined)
+                            ? new OrigWS(url)
+                            : new OrigWS(url, protocols);
+                        ws.addEventListener('message', nsTouch);
+                        ws.addEventListener('open', nsTouch);
+                        return ws;
+                    };
+                    window.WebSocket.prototype = OrigWS.prototype;
+                    window.WebSocket.CONNECTING = OrigWS.CONNECTING;
+                    window.WebSocket.OPEN = OrigWS.OPEN;
+                    window.WebSocket.CLOSING = OrigWS.CLOSING;
+                    window.WebSocket.CLOSED = OrigWS.CLOSED;
+                } catch (e) {}
+                document.addEventListener('visibilitychange', function () {
+                    if (document.visibilityState === 'visible') nsTouch();
+                });
+            }
+
             window.__nsAliveTimer = setInterval(function () {
                 if (typeof reload === 'undefined' || reload !== 1) return;
-                var sess = WebIO && WebIO._state && WebIO._state.CurrentSession;
-                // Mark alive on any outgoing/incoming if possible; fall back to DOM presence
-                var hasRoot = !!document.getElementById('pywebio-scope-ROOT');
-                var hasContent = !!document.getElementById('pywebio-scope-content');
-                // White-screen / hung session: root missing, or content empty for a long time
-                var contentEmpty = hasContent && document.getElementById('pywebio-scope-content').children.length === 0;
                 var now = Date.now();
-                if (!hasRoot || (contentEmpty && now - (window.__nsLastAlive || 0) > 90000)) {
+                var hasRoot = !!document.getElementById('pywebio-scope-ROOT');
+                var contentEl = document.getElementById('pywebio-scope-content');
+                var hasContent = !!contentEl;
+                var contentEmpty = hasContent && contentEl.children.length === 0;
+
+                // Session closed / socket dead after sleep
+                var sess = (typeof WebIO !== 'undefined') && WebIO._state && WebIO._state.CurrentSession;
+                var closed = false;
+                try {
+                    if (sess && sess.ws && sess.ws.readyState === 3) closed = true;
+                    if (sess && sess.closed) closed = true;
+                } catch (e) {}
+
+                // White-screen / hung session.
+                // stale alone must NOT force reload (idle UI can be quiet for minutes).
+                var stale = (now - (window.__nsLastAlive || 0)) > 180000;
+                if (!hasRoot || closed || (contentEmpty && stale)) {
                     if (now - (window.__nsLastReload || 0) > 30000) {
                         window.__nsLastReload = now;
                         location.reload();
@@ -1505,17 +1575,13 @@ class AlasGUI(Frame):
                 }
             }, 15000);
         })();
-        WebIO._state.CurrentSession.on_session_close(
-            ()=>{
-                setTimeout(
-                    ()=>{
-                        if (reload == 1){
-                            location.reload();
-                        }
-                    }, 4000
-                )
-            }
-        );
+        try {
+            WebIO._state.CurrentSession.on_session_close(function () {
+                setTimeout(function () {
+                    if (reload == 1) location.reload();
+                }, 4000);
+            });
+        } catch (e) {}
         """
         )
 

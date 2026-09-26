@@ -1,4 +1,4 @@
-import {app, BrowserWindow, globalShortcut, nativeTheme} from 'electron';
+import {app, BrowserWindow, globalShortcut, nativeTheme, powerMonitor} from 'electron';
 import {join} from 'node:path';
 import {URL} from 'node:url';
 import {ThemeObj} from '@common/constant/theme';
@@ -18,6 +18,7 @@ export const createMainWindow = async () => {
       sandbox: false, // Sandbox disabled because the demo of preload script depend on the Node.js api
       webviewTag: false, // The webview tag is not recommended. Consider alternatives like an iframe or Electron's BrowserView. @see https://www.electronjs.org/docs/latest/api/webview-tag#warning
       preload: join(app.getAppPath(), 'packages/preload/dist/index.cjs'),
+      backgroundThrottling: false,
     },
   });
 
@@ -27,6 +28,31 @@ export const createMainWindow = async () => {
     logger.error('------------preload-error------------');
     logger.error(`preloadPath:${preloadPath}`);
     logger.error(`error:${error}`);
+  });
+
+  // Recover from a crashed/unresponsive renderer (common after long sleep)
+  browserWindow.webContents.on('render-process-gone', (_event, details) => {
+    logger.error(`render-process-gone: ${details.reason}`);
+    if (details.reason !== 'clean-exit' && !browserWindow.isDestroyed()) {
+      browserWindow.webContents.reload();
+    }
+  });
+
+  // After OS sleep/resume Chromium may leave a blank white frame — force repaint
+  powerMonitor.on('resume', () => {
+    logger.info('-----powerMonitor resume-----');
+    if (browserWindow.isDestroyed()) return;
+    try {
+      browserWindow.webContents.invalidate();
+    } catch (e) {
+      logger.error(`invalidate failed: ${e}`);
+    }
+    // Fallback if the frame is still stale
+    setTimeout(() => {
+      if (!browserWindow.isDestroyed()) {
+        browserWindow.webContents.invalidate();
+      }
+    }, 500);
   });
 
   browserWindow.webContents.on('console-message', (event, level, message, line, sourceId) => {

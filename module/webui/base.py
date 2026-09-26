@@ -1,10 +1,30 @@
+import contextlib
+import threading
+from functools import wraps
 from typing import Any, Dict
 
-from pywebio.output import clear, put_html, put_scope, put_text, use_scope
+from pywebio.output import clear, put_html, put_text, set_scope, use_scope
 from pywebio.session import defer_call, info, run_js
 
 from module.webui.utils import Icon, WebIOTaskHandler, set_localstorage
 from module.webui.widgets import type_to_html
+
+
+def ensure_scope(name: str, container_scope: str = None) -> str:
+    """Create-or-reuse a named scope without duplicating DOM ids."""
+    set_scope(name, container_scope=container_scope, if_exist="clear")
+    return name
+
+
+def locked_page(fn):
+    """Serialize page switches. Must wrap outside @use_scope so the whole render is exclusive."""
+
+    @wraps(fn)
+    def wrapper(self, *args, **kwargs):
+        with self.enter_nav():
+            return fn(self, *args, **kwargs)
+
+    return wrapper
 
 
 class Base:
@@ -19,11 +39,28 @@ class Base:
         # Record scopes to reduce data transfer to frontend
         # Key: scope name, value: last update time
         self.scope: Dict[str, Any] = {}
+        # Serialize page switches so concurrent clicks cannot interleave put_scope
+        self.nav_lock = threading.RLock()
+        # Bumped on every navigation; background tasks bail out when stale
+        self.nav_gen = 0
+        # True after shell (header/aside/menu/content) exists; avoids full rebuild
+        self.shell_ready = False
         defer_call(self.stop)
 
     def stop(self) -> None:
         self.alive = False
         self.task_handler.stop()
+
+    @contextlib.contextmanager
+    def enter_nav(self):
+        """Exclusive section for page switching. Increments nav generation."""
+        with self.nav_lock:
+            self.nav_gen += 1
+            gen = self.nav_gen
+            yield gen
+
+    def nav_is_current(self, gen: int) -> bool:
+        return self.alive and gen == self.nav_gen
 
     def scope_clear(self):
         self.scope = {}
@@ -84,26 +121,27 @@ class Frame(Base):
         if name:
             self.active_button("menu", name)
 
+    def ensure_shell(self) -> None:
+        """Build header/aside/menu/content once; later switches only replace regions."""
+        if self.shell_ready:
+            return
+        self._show()
+        self.shell_ready = True
+
     @staticmethod
     @use_scope("ROOT", clear=True)
     def _show() -> None:
-        put_scope(
-            "header",
-            [
-                put_html(Icon.ALAS).style("--header-icon--"),
-                put_text("NS").style("--header-text--"),
-                put_scope("header_status"),
-                put_scope("header_title"),
-            ],
-        )
-        put_scope(
-            "contents",
-            [
-                put_scope("aside"),
-                put_scope("menu"),
-                put_scope("content"),
-            ],
-        )
+        ensure_scope("header")
+        with use_scope("header"):
+            put_html(Icon.ALAS).style("--header-icon--")
+            put_text("NS").style("--header-text--")
+            ensure_scope("header_status")
+            ensure_scope("header_title")
+        ensure_scope("contents")
+        with use_scope("contents"):
+            ensure_scope("aside")
+            ensure_scope("menu")
+            ensure_scope("content")
 
     @staticmethod
     @use_scope("header_title", clear=True)

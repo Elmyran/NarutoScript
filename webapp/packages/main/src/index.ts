@@ -33,10 +33,12 @@ if (!isSingleInstance) {
  * Disable Hardware Acceleration to save more system resources.
  * Also `in-process-gpu` to avoid creating a gpu process which may `exited unexpectedly`
  * See https://github.com/electron/electron/issues/30966
+ *
+ * Note: keep the software rasterizer. After sleep/resume the GPU path is dead
+ * and without it Chromium paints a blank white window.
  */
 app.disableHardwareAcceleration();
 app.commandLine.appendSwitch('disable-gpu');
-app.commandLine.appendSwitch('disable-software-rasterizer');
 app.commandLine.appendSwitch('disable-gpu-compositing');
 app.commandLine.appendSwitch('disable-gpu-rasterization');
 app.commandLine.appendSwitch('disable-gpu-sandbox');
